@@ -1,11 +1,48 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "postgresql" // or another database provider like "mysql", "sqlite", "sqlserver"
+  url      = env("DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+// User model
+model User {
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  password      String
+  name          String?
+  roles         Role           @relation(references: [id], fields: [roleId])
+  payments      Payment[]
+  subscriptions Subscription[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  roleId        Int
+}
+
+// Role model
+model Role {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  User User[]
+}
+
+// Payment model
+model Payment {
+  id     Int      @id @default(autoincrement())
+  userId Int
+  amount Float
+  date   DateTime @default(now())
+  user   User     @relation(fields: [userId], references: [id])
+}
+
+// Subscription model
+model Subscription {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  startDate DateTime @default(now())
+  endDate   DateTime
+  status    String // Example: "active", "cancelled", "paused"
+  user      User     @relation(fields: [userId], references: [id])
 }
