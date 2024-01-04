@@ -15,7 +15,8 @@
     "next-auth": "^4.24.5",
     "next-i18next": "^15.1.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "stripe": "^14.11.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.6",
