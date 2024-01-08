@@ -1,16 +1,16 @@
 import React from 'react';
 import { useFeatureFlag } from "@/hooks/useFeatureFlag"
+import Sidebar from '@/components/navigation/Sidebar';
 
 export default function Dashboard() {
     const isNewDashboardEnabled = useFeatureFlag('newDashboard');
 
     return (
-        <div>
-            {isNewDashboardEnabled ? (
-                <p>Welcome to the New Dashboard!</p>
-            ) : (
-                <p>Welcome to the Old Dashboard.</p>
-            )}
+        <div className="flex">
+            <Sidebar />
+            <div className="flex-1 p-4">
+                {/* Dashboard content goes here */}
+            </div>
         </div>
     );
 }
