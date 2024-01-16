@@ -1,7 +1,7 @@
 'use client'
 import { signIn, useSession } from "next-auth/react";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
 import InputField from "@/components/input/InputField";
@@ -11,9 +11,14 @@ const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required(),
 })
+
+type FormValues = {
+    email: string;
+    password: string;
+}
 export default function SignInPage() {
     const { data: session } = useSession();
-    const { register, handleSubmit, formState: { errors } } = useForm(
+    const { register, handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema),
         }
@@ -33,24 +38,42 @@ export default function SignInPage() {
         console.log(data);
     };
     return (
-        <div className="flex justify-center w-full h-full">
-
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-md">
-                <InputField
-                    label="Email"
-                    type="email"
-                    {...register("email", { required: "Email is required", pattern: /^\S+@\S+$/i })}
-                    error={errors.email?.message}
+        <div className="flex justify-center w-full h-screen items-center ">
+            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg  w-1/3 shadow-md p-8  m-auto flex flex-col gap-8">
+                <h1 className="text-3xl font-bold text-center">Login</h1>
+                <Controller
+                    control={control}
+                    name="email"
+                    render={({ field: { onChange, value } }) => (
+                        <InputField
+                            label="Email"
+                            type="email"
+                            id="email"
+                            name="email"
+                            onChange={onChange}
+                            value={value}
+                            error={errors.email?.message}
+                        />
+                    )}
                 />
-                <InputField
-                    label="Password"
-                    type="password"
-                    {...register("password", { required: "Password is required", minLength: 6 })}
-                    error={errors.password?.message}
+                <Controller
+                    control={control}
+                    name="password"
+                    render={({ field: { onChange, value } }) => (
+                        <InputField
+                            label="Password"
+                            type="password"
+                            id="password"
+                            name="password"
+                            onChange={onChange}
+                            value={value}
+                            error={errors.password?.message}
+                        />
+                    )}
                 />
-
-                <Button variant="primary" type="submit">Sign In</Button>
-
+                <div className="flex justify-center">
+                    <Button variant="primary" type="submit" classname="w-full">Sign In</Button>
+                </div>
             </form>
         </div>
 

@@ -6,14 +6,15 @@ interface ButtonProps {
     children: React.ReactNode;
     onClick?: () => void;
     type?: "button" | "reset" | "submit" | undefined;
+    classname: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ variant = 'primary', children, onClick, type }) => {
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', children, onClick, type, classname }) => {
     const baseStyle = 'btn';
     const variantStyle = variant === 'primary' ? 'btn-primary' : 'btn-secondary';
 
     return (
-        <button className={`${baseStyle} ${variantStyle}`} onClick={onClick} type={type}>
+        <button className={`${baseStyle} ${variantStyle} ${classname}`} onClick={onClick} type={type}>
             {children}
         </button>
     );
