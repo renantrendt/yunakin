@@ -16,9 +16,9 @@ type FormValues = {
     email: string;
     password: string;
 }
-export default function SignInPage() {
+export default function LoginPage() {
     const { data: session } = useSession();
-    const { register, handleSubmit, control, formState: { errors } } = useForm<FormValues>(
+    const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema),
         }
