@@ -23,10 +23,10 @@ const Sidebar: React.FC = () => {
                 {sidebarLinks.map((link) => (
                     <li key={link.label}>
                         <Link href={link.path}>
-                            <a>
+                            <p>
                                 <Image src={link.iconSrc} alt={`${link.label} icon`} width={24} height={24} />
                                 {link.label}
-                            </a>
+                            </p>
                         </Link>
                     </li>
                 ))}

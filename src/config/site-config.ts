@@ -1,0 +1,33 @@
+const siteUrls = {
+    home: "/",
+    dashboard: "/dashboard",
+    login: "/login",
+    logout: "/logout",
+    register: "/register",
+    forgotPassword: "/forgot-password",
+    resetPassword: "/reset-password",
+    profile: "/profile",
+    settings: "/settings",
+    notFound: "/404",
+    serverError: "/500",
+    unauthorized: "/401",
+    forbidden: "/403",
+    contactUs: "/contact-us",
+    aboutUs: "/about-us",
+    privacyPolicy: "/privacy-policy",
+    termsAndConditions: "/terms-and-conditions",
+    faq: "/faq",
+    blog: "/blog",
+    blogDetail: "/blog/:slug",
+    category: "/category/:slug",
+    tag: "/tag/:slug",
+    search: "/search",
+    cart: "/cart",
+    checkout: "/checkout",
+    orderSuccess: "/order-success",
+    orders: "/orders",
+    orderDetail: "/orders/:id",
+}
+
+
+export default siteUrls;
