@@ -21,7 +21,7 @@ export default function RootLayout({
     logPageView();
   }, [])
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <body className={inter.className}>
         <SessionProvider session={session} >
           {children}
