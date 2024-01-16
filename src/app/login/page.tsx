@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import InputField from "@/components/input/InputField";
 import { Input } from "postcss";
 import Button from "@/components/button/Button";
+import GoogleButton from "@/components/googlebutton/GoogleButton";
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required(),
@@ -71,9 +72,19 @@ export default function LoginPage() {
                         />
                     )}
                 />
-                <div className="flex justify-center">
-                    <Button variant="primary" type="submit" classname="w-full">Sign In</Button>
+                <div>
+
+                    <div className="flex justify-center">
+                        <Button variant="primary" type="submit" classname="w-full">Sign In</Button>
+                    </div>
+                    <div className="relative flex  items-center py-3">
+                        <div className="flex-grow border-t border-gray-400"></div>
+                        <span className="flex-shrink mx-4 text-gray-400">Or</span>
+                        <div className="flex-grow border-t border-gray-400"></div>
+                    </div>
+                    <GoogleButton onClick={() => { signIn('google') }} />
                 </div>
+
             </form>
         </div>
 
