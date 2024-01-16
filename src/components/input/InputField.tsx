@@ -6,11 +6,12 @@ interface InputFieldProps {
     name: string;
     type?: 'text' | 'email' | 'password';
     placeholder?: string;
-    value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    error?: string;
+    additionalProps?: any;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', placeholder, value, onChange }) => {
+const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', placeholder, onChange, error, additionalProps }) => {
     return (
         <div className="form-control">
             <label className="label">
@@ -21,9 +22,10 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', pla
                 placeholder={placeholder}
                 className="input input-bordered"
                 name={name}
-                value={value}
                 onChange={onChange}
+                {...additionalProps}
             />
+            {error && <p className='text-red-300'>{error}</p>}
         </div>
     );
 };

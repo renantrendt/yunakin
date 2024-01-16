@@ -1,13 +1,16 @@
+'use client';
 import Link from "next/link";
 import Image from "next/image";
+import Button from "../button/Button";
 
-
+import { useRouter } from 'next/navigation'
 export default function Navbar({ }: {}) {
+    const router = useRouter()
     return (
-        <div className="drawer">
-            <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col">
-                <div className="navbar bg-neutral text-neutral-content">
+        <div className="drawer w-full">
+            <input id="navbar-drawer" type="checkbox" className="drawer-toggle lg:hidden" />
+            <div className="drawer-content flex flex-col lg:flex-row ">
+                <div className="navbar bg-neutral text-neutral-content flex justify-between w-full">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="navbar-drawer" className="btn btn-square btn-ghost">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -18,13 +21,13 @@ export default function Navbar({ }: {}) {
                         </label>
                     </div>
                     <Link
-                        className="btn btn-ghost normal-case text-xl"
+                        className="btn btn-ghost normal-case text-xl flex gap-4"
                         href="/"
                     >
-                        <Image src="/images/logo.svg" alt="Too Long Logo" width="40" height="40"></Image>
+                        <Image src="/images/saas-icon.webp" alt="Too Long Logo" width="40" height="40"></Image>
                         Company Name
                     </Link>
-                    <div className='hidden lg:block space-x-2'>
+                    <div className=' space-x-2 flex'>
                         <Link
                             className="btn normal-case text-xl"
                             href='/'
@@ -36,31 +39,18 @@ export default function Navbar({ }: {}) {
                             href='/'
                         >
                             Link 2
+                        </Link>
+                        <Link
+                            className="btn normal-case text-xl"
+                            href='/'
+                        >
+                            Link 3
                         </Link>
                     </div>
+                    <div>
+                        <Button onClick={() => { router.push("/signin") }}>Sign Up</Button>
+                    </div>
                 </div>
-            </div>
-            <div className="drawer-side z-50">
-                <label htmlFor="navbar-drawer" className="drawer-overlay"></label>
-                <ul className=" p-4 w-80 h-full bg-base-200">
-                    <li>
-                        <Link
-                            className="btn normal-case text-xl"
-                            href='/'
-                        >
-                            Link 1
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            className="btn normal-case text-xl"
-                            href='/'
-                        >
-                            Link 2
-                        </Link>
-                    </li>
-
-                </ul>
             </div>
         </div>
     )

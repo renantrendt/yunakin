@@ -1,6 +1,10 @@
 // utils/sendEmail.ts
 import sgMail from '@sendgrid/mail';
 
+if (!process.env.SENDGRID_API_KEY) {
+    throw new Error('Missing SENDGRID_API_KEY environment variable');
+}
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export const sendEmail = async ({
@@ -25,7 +29,7 @@ export const sendEmail = async ({
     try {
         await sgMail.send(msg);
         return { success: true };
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
 
         if (error.response) {

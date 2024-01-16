@@ -1,5 +1,6 @@
 // app/api/verify-email.ts
 import { sendEmail } from "@/utils/sendEmail";
+import { NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
     if (req.method !== 'POST') {
