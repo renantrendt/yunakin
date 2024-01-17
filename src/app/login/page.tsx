@@ -60,7 +60,7 @@ export default function LoginPage() {
     }
     return (
         <div className="flex justify-center w-full h-screen items-center ">
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg  w-1/3 shadow-md p-8  m-auto flex flex-col gap-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg w-11/12 md:w-1/3 shadow-md p-8  m-auto flex flex-col gap-8">
                 <h1 className="text-3xl font-bold text-center">Login</h1>
                 <Controller
                     control={control}
