@@ -11,6 +11,7 @@ import customToast from '@/components/toast/customToast'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
+import LoadingIcon from '@/assets/icons/LoadingIcon'
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required()
@@ -23,6 +24,7 @@ interface FormValues {
 export default function LoginPage() {
     const { data: session } = useSession()
     const router = useRouter()
+    const [loading, setIsLoading] = React.useState(false)
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
@@ -37,7 +39,7 @@ export default function LoginPage() {
 
     const onSubmit = async (data: any) => {
         // Handle sign up logic here
-        console.log(data)
+        setIsLoading(true)
         try {
             const result = await signIn('credentials', {
                 email: data.email,
@@ -56,6 +58,9 @@ export default function LoginPage() {
             }
         } catch (error) {
             console.error(error)
+
+        } finally {
+            setIsLoading(false)
         }
     }
     return (
@@ -95,7 +100,8 @@ export default function LoginPage() {
                 <div>
 
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full">Sign In</Button>
+                        <Button variant="primary" type="submit" classname="w-full">
+                            {loading ? <div className='text-white'><LoadingIcon />  </div> : null} Sign In</Button>
                         <div>
                             Don&apos;t have an account ? <Link href={siteUrls.register} className="text-primary">Register</Link>
                         </div>

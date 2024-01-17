@@ -1,15 +1,15 @@
 'use client'
+import platformConfig from '@/config/app-config'
 import siteUrls from '@/config/site-config'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
-import { platform } from 'os'
 import React from 'react'
 
 const DashboardNavbar = (): JSX.Element => {
-  return (
-        <div className="navbar bg-base-100">
-            <div className="flex-1">
-                <Link href={siteUrls.dashboard} className="btn btn-ghost text-xl">{platform.name}</Link>
+    return (
+        <div className="navbar flex-1 bg-base-100 w-full">
+            <div className="navbar-start">
+                <Link href={siteUrls.dashboard} className="btn btn-ghost text-xl">{platformConfig.name}</Link>
             </div>
             <div className="flex-none gap-2">
                 <div className="form-control">
@@ -34,7 +34,7 @@ const DashboardNavbar = (): JSX.Element => {
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default DashboardNavbar

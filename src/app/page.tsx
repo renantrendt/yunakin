@@ -8,7 +8,7 @@ import Pricing from '@/components/pricing/pricing'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col  p-2">
+    <main className="flex min-h-screen flex-col  mx-auto p-2 md:px-24">
       <Navbar />
       <Hero />
       <Pricing />

@@ -8,9 +8,11 @@ export default function Dashboard(): JSX.Element {
     const _ = useFeatureFlag('newDashboard')
 
     return (
-        <div className="flex">
-            <Sidebar />
-            <DashboardNavbar />
+        <div className="flex w-full min-w-full">
+            <div className='flex   w-full flex-col md:flex-row-reverse justify-start items-start'>
+                <DashboardNavbar />
+                <Sidebar />
+            </div>
         </div>
     )
 }
