@@ -31,6 +31,7 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
       }
     })
   } catch (error: any) {
+    console.error(error)
     return new NextResponse(
       JSON.stringify({
         status: 'error',

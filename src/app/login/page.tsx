@@ -8,7 +8,7 @@ import InputField from '@/components/input/InputField'
 import Button from '@/components/button/Button'
 import GoogleButton from '@/components/googlebutton/GoogleButton'
 import customToast from '@/components/toast/customToast'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 const schema = yup.object({
@@ -31,7 +31,7 @@ export default function LoginPage() {
 
     if (session) {
         return (
-            redirect('/dashboard')
+            router.push('/dashboard')
         )
     }
 
@@ -44,7 +44,11 @@ export default function LoginPage() {
                 password: data.password,
                 redirect: false
             })
-            console.log(result)
+
+            if (result?.status === 200) {
+                router.push('/dashboard')
+
+            }
             if (result?.error) {
                 customToast.error(result.error)
             } else {
