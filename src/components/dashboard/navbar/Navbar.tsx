@@ -1,5 +1,6 @@
 'use client'
 import siteUrls from '@/config/site-config'
+import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { platform } from 'os'
 import React from 'react'
@@ -28,7 +29,7 @@ const DashboardNavbar = () => {
                             </Link>
                         </li>
                         <li><Link href={siteUrls.settings}>Settings</Link></li>
-                        <li><Link href={siteUrls.logout}>Logout</Link></li>
+                        <li><Link href={"#"} onClick={() => signOut()}>Logout</Link></li>
                     </ul>
                 </div>
             </div>

@@ -9,7 +9,7 @@ import { Input } from "postcss";
 import Button from "@/components/button/Button";
 import GoogleButton from "@/components/googlebutton/GoogleButton";
 import customToast from "@/components/toast/customToast";
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { toast } from "react-toastify";
 const schema = yup.object({
     email: yup.string().email().required(),
@@ -31,9 +31,7 @@ export default function LoginPage() {
 
     if (session) {
         return (
-            <div>
-                <p>You are already signed in.</p>
-            </div>
+            redirect("/dashboard")
         );
     }
 
