@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { SessionProvider } from 'next-auth/react'
 import { initGA, logPageView } from '@/utils/ga-analytics'
 import Providers from '@/lib/providers/providers'
-
+import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ['latin'] })
 
 

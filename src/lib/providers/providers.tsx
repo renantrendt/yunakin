@@ -6,9 +6,7 @@ import ToastProvider from "@/lib/providers/toast.provider";
 const Providers = ({ children }: { children: React.ReactNode }) => {
     return (
         <SessionProvider>
-            <Auth>
-                <ToastProvider>{children}</ToastProvider>
-            </Auth>
+            <ToastProvider>{children}</ToastProvider>
         </SessionProvider>
     );
 };

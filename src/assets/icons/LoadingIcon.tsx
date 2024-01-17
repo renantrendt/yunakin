@@ -1,7 +1,7 @@
 // icon:loading | Ant Design Icons https://ant.design/components/icon/ | Ant Design
 import * as React from "react";
 
-function LoadingIcon(props) {
+function LoadingIcon(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg
             viewBox="0 0 24 24"

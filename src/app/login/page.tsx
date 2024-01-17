@@ -8,6 +8,9 @@ import InputField from "@/components/input/InputField";
 import { Input } from "postcss";
 import Button from "@/components/button/Button";
 import GoogleButton from "@/components/googlebutton/GoogleButton";
+import customToast from "@/components/toast/customToast";
+import { useRouter } from 'next/navigation'
+import { toast } from "react-toastify";
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required(),
@@ -19,6 +22,7 @@ type FormValues = {
 }
 export default function LoginPage() {
     const { data: session } = useSession();
+    const router = useRouter();
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema),
@@ -33,10 +37,25 @@ export default function LoginPage() {
         );
     }
 
-    const onSubmit = (data: any) => {
+    const onSubmit = async (data: any) => {
         // Handle sign up logic here
-        alert(data);
-        console.log(data);
+        console.log(data)
+        try {
+            const result = await signIn("credentials", {
+                email: data.email,
+                password: data.password,
+                redirect: false,
+            });
+            console.log(result);
+            if (result?.error) {
+                customToast.error(result.error);
+            } else {
+                router.push("/dashboard");
+            }
+        } catch (error) {
+            console.error(error)
+        }
+
     };
     return (
         <div className="flex justify-center w-full h-screen items-center ">
