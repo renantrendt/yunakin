@@ -4,6 +4,7 @@ import './globals.css'
 import { useEffect } from 'react'
 import { SessionProvider } from 'next-auth/react'
 import { initGA, logPageView } from '@/utils/ga-analytics'
+import Providers from '@/lib/providers/providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,9 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light">
       <body className={inter.className}>
-        <SessionProvider session={session} >
+        <Providers>
           {children}
-        </SessionProvider>
+        </Providers>
       </body>
     </html>
   )

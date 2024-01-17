@@ -82,7 +82,7 @@ export default function LoginPage() {
                         <span className="flex-shrink mx-4 text-gray-400">Or</span>
                         <div className="flex-grow border-t border-gray-400"></div>
                     </div>
-                    <GoogleButton onClick={() => { signIn('google') }} />
+                    <GoogleButton onClick={() => { signIn('google', { callbackUrl: "/dashboard" }) }} />
                 </div>
 
             </form>
