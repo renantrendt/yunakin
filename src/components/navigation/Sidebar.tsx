@@ -1,26 +1,25 @@
 // components/Sidebar.tsx
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import DashboardIcon from '@/assets/icons/DashboardIcon';
-import UserIcon from '@/assets/icons/UserIcon';
-import SettingsIcon from '@/assets/icons/SettingsIcon';
+import React from 'react'
+import Link from 'next/link'
+import DashboardIcon from '@/assets/icons/DashboardIcon'
+import UserIcon from '@/assets/icons/UserIcon'
+import SettingsIcon from '@/assets/icons/SettingsIcon'
 
 interface SidebarLink {
-    label: string;
-    path: string;
-    iconSrc: React.ReactNode; // Path to your icon images
+  label: string
+  path: string
+  iconSrc: React.ReactNode // Path to your icon images
 }
 
 const sidebarLinks: SidebarLink[] = [
-    { label: 'Dashboard', path: '/dashboard', iconSrc: <DashboardIcon /> },
-    { label: 'Users', path: '/users', iconSrc: <UserIcon /> },
-    { label: 'Settings', path: '/settings', iconSrc: <SettingsIcon /> },
-    // Add other necessary links here
-];
+  { label: 'Dashboard', path: '/dashboard', iconSrc: <DashboardIcon /> },
+  { label: 'Users', path: '/users', iconSrc: <UserIcon /> },
+  { label: 'Settings', path: '/settings', iconSrc: <SettingsIcon /> }
+  // Add other necessary links here
+]
 
 const Sidebar: React.FC = () => {
-    return (
+  return (
         <div className="sidebar bg-base-100 w-64 pt-32">
             <ul className="menu p-4 overflow-y-auto w-64">
                 {sidebarLinks.map((link) => (
@@ -38,7 +37,7 @@ const Sidebar: React.FC = () => {
                 ))}
             </ul>
         </div>
-    );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

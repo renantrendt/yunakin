@@ -1,10 +1,11 @@
-export default function PricingProduct({ name, description, price, features }: {
-    name: string,
-    description: string,
-    price: number,
-    features: string[]
+import React from 'react'
+export default function PricingProduct ({ name, description, price, features }: {
+  name: string
+  description: string
+  price: number
+  features: string[]
 }) {
-    return (
+  return (
         <div className="card bg-base-100 shadow-xl h-full p-5">
             <div className="card-body">
                 <h3 className="mb-4 text-2xl font-semibold">{name}</h3>
@@ -20,7 +21,7 @@ export default function PricingProduct({ name, description, price, features }: {
                 <ul role="list" className="mb-8 space-y-4 text-left">
                     {
                         features.map((feature, index) => {
-                            return (
+                          return (
                                 <li className="flex items-center space-x-3" key={feature + '-' + index}>
                                     <svg className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
                                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +30,7 @@ export default function PricingProduct({ name, description, price, features }: {
                                     </svg>
                                     <span><b className='text-lg'></b> {feature} </span>
                                 </li>
-                            )
+                          )
                         })
                     }
                 </ul>
@@ -43,5 +44,5 @@ export default function PricingProduct({ name, description, price, features }: {
                 </div>
             </div>
         </div>
-    )
+  )
 }

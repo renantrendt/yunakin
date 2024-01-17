@@ -1,12 +1,12 @@
 // utils/stripe.ts
-import Stripe from 'stripe';
+import Stripe from 'stripe'
 
 if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error('Missing Stripe secret key');
+  throw new Error('Missing Stripe secret key')
 }
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: '2023-10-16',
-});
+  apiVersion: '2023-10-16'
+})
 
-export default stripe;
+export default stripe

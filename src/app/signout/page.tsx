@@ -1,19 +1,19 @@
-import { signOut, useSession } from "next-auth/react";
-import React from "react";
+import { signOut, useSession } from 'next-auth/react'
+import React from 'react'
 
-export default function SignOutPage() {
-    const { data: session } = useSession();
-    if (!session) {
-        return (
+export default function SignOutPage () {
+  const { data: session } = useSession()
+  if (!session) {
+    return (
             <div>
                 <p>You are not signed in.</p>
             </div>
-        );
-    }
-    return (
+    )
+  }
+  return (
         <div>
             <p>Welcome, {session.user?.email}</p>
-            <button onClick={() => signOut()}>Sign out</button>
+            <button onClick={async () => { await signOut() }}>Sign out</button>
         </div>
-    );
+  )
 }

@@ -1,5 +1,5 @@
 const platformConfig = {
-    "name": "Sleek AI",
+  name: 'Sleek AI'
 }
 
-export default platformConfig;
+export default platformConfig
