@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import React from 'react'
 
-export default function Hero () {
-  return (
+export default function Hero() {
+    return (
         <section
             className="my-20 flex flex-col md:flex-row justify-center items-center text-center md:text-left">
             <div className="w-full md:w-7/12 md:mr-8">
@@ -28,5 +28,5 @@ export default function Hero () {
             </div>
         </section>
 
-  )
+    )
 }

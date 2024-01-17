@@ -1,58 +1,57 @@
 'use client'
-import { signIn, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import InputField from '@/components/input/InputField'
-import { Input } from 'postcss'
 import Button from '@/components/button/Button'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import customToast from '@/components/toast/customToast'
 import { useRouter } from 'next/navigation'
 const schema = yup.object({
-  email: yup.string().email().required(),
-  password: yup.string().min(6).required(),
-  name: yup.string().required()
+    email: yup.string().email().required(),
+    password: yup.string().min(6).required(),
+    name: yup.string().required()
 })
 
 interface FormValues {
-  email: string
-  password: string
-  name: string
+    email: string
+    password: string
+    name: string
 }
-export default function RegisterPage () {
-  const { data: session } = useSession()
-  const router = useRouter()
-  const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
-    {
-      resolver: yupResolver(schema)
-    }
-  )
+export default function RegisterPage() {
+    const { data: session } = useSession()
+    const router = useRouter()
+    const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
+        {
+            resolver: yupResolver(schema)
+        }
+    )
 
-  if (session) {
-    return (
+    if (session) {
+        return (
             <div>
                 <p>You are already signed in.</p>
             </div>
-    )
-  }
-
-  const onSubmit = async (data: any) => {
-    const register = await fetch('/api/auth/register', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    })
-
-    if (register.status === 200) {
-      // router.push(`/auth/verify-request?email=${values.email}`);
-      router.push('/login')
-    } else {
-      customToast.error('Something went wrong')
+        )
     }
-  }
-  return (
+
+    const onSubmit = async (data: any) => {
+        const register = await fetch('/api/auth/register', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+
+        if (register.status === 200) {
+            // router.push(`/auth/verify-request?email=${values.email}`);
+            router.push('/login')
+        } else {
+            customToast.error('Something went wrong')
+        }
+    }
+    return (
         <div className="flex justify-center w-full h-screen items-center ">
             <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg  w-1/3 shadow-md p-8  m-auto flex flex-col gap-8">
                 <h1 className="text-3xl font-bold text-center">Register</h1>
@@ -110,5 +109,5 @@ export default function RegisterPage () {
             </form>
         </div>
 
-  )
+    )
 }

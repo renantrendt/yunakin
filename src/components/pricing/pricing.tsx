@@ -1,7 +1,7 @@
 import PricingProduct from './pricing-product'
-
-export default function Pricing () {
-  return (
+import React from 'react'
+export default function Pricing() {
+    return (
         <div className='my-20 w-full'>
             <h1 className='text-4xl font-bold text-center mb-5'>Pricing</h1>
             <section className='grid grid-cols-1 lg:grid-cols-3 gap-4 flex justify-center'>
@@ -25,5 +25,5 @@ export default function Pricing () {
                 />
             </section>
         </div>
-  )
+    )
 }

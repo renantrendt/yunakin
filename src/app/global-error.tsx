@@ -1,13 +1,12 @@
 "use client";
 
 import Error from "next/error";
-import { useEffect } from "react";
-
-export default function GlobalError({ error }) {
+import React from "react";
+export default function GlobalError() {
   return (
     <html>
       <body>
-        <Error />
+        <Error statusCode={500} />
       </body>
     </html>
   );

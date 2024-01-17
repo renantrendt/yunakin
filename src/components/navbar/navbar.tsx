@@ -5,9 +5,9 @@ import Button from '../button/Button'
 import React from 'react'
 
 import { useRouter } from 'next/navigation'
-export default function Navbar ({ }: {}) {
-  const router = useRouter()
-  return (
+export default function Navbar() {
+    const router = useRouter()
+    return (
         <div className="drawer w-full">
             <input id="navbar-drawer" type="checkbox" className="drawer-toggle lg:hidden" />
             <div className="drawer-content flex flex-col lg:flex-row ">
@@ -54,5 +54,5 @@ export default function Navbar ({ }: {}) {
                 </div>
             </div>
         </div>
-  )
+    )
 }
