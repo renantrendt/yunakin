@@ -2,7 +2,7 @@
 import { sendEmail } from "@/utils/sendEmail";
 import { NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
+export async function POST(req: NextRequest) {
     if (req.method !== 'POST') {
         return new Response('Method Not Allowed', { status: 405 });
     }
