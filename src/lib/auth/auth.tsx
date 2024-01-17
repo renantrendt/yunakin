@@ -12,7 +12,7 @@ const Auth = ({ children }: AuthProps) => {
     const router = useRouter()
     if (status == 'loading') {
         return (
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center w-32 h-32 text-white m-auto items-center">
                 <LoadingIcon />{' '}
             </div>
         )

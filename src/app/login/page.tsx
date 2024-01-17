@@ -101,7 +101,7 @@ export default function LoginPage() {
 
                     <div className="flex justify-center flex-col gap-4">
                         <Button variant="primary" type="submit" classname="w-full">
-                            {loading ? <div className='text-white'><LoadingIcon />  </div> : null} Sign In</Button>
+                            {loading ? <div className='h-6 w-6'><LoadingIcon /> </div> : null} Sign In</Button>
                         <div>
                             Don&apos;t have an account ? <Link href={siteUrls.register} className="text-primary">Register</Link>
                         </div>
