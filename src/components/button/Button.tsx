@@ -6,7 +6,7 @@ interface ButtonProps {
     children: React.ReactNode;
     onClick?: () => void;
     type?: "button" | "reset" | "submit" | undefined;
-    classname: string;
+    classname?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({ variant = 'primary', children, onClick, type, classname }) => {

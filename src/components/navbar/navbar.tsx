@@ -48,7 +48,7 @@ export default function Navbar({ }: {}) {
                         </Link>
                     </div>
                     <div>
-                        <Button onClick={() => { router.push("/signin") }}>Sign Up</Button>
+                        <Button onClick={() => { router.push("/login") }}>To App</Button>
                     </div>
                 </div>
             </div>
