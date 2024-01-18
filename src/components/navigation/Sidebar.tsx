@@ -1,38 +1,43 @@
 // components/Sidebar.tsx
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import React from 'react'
+import Link from 'next/link'
+import DashboardIcon from '@/assets/icons/DashboardIcon'
+import UserIcon from '@/assets/icons/UserIcon'
+import SettingsIcon from '@/assets/icons/SettingsIcon'
 
 interface SidebarLink {
-    label: string;
-    path: string;
-    iconSrc: string; // Path to your icon images
+    label: string
+    path: string
+    iconSrc: React.ReactNode // Path to your icon images
 }
 
 const sidebarLinks: SidebarLink[] = [
-    { label: 'Dashboard', path: '/dashboard', iconSrc: '/icons/dashboard.png' },
-    { label: 'Users', path: '/users', iconSrc: '/icons/users.png' },
-    { label: 'Settings', path: '/settings', iconSrc: '/icons/settings.png' },
+    { label: 'Dashboard', path: '/dashboard', iconSrc: <DashboardIcon /> },
+    { label: 'Users', path: '/users', iconSrc: <UserIcon /> },
+    { label: 'Settings', path: '/settings', iconSrc: <SettingsIcon /> }
     // Add other necessary links here
-];
+]
 
 const Sidebar: React.FC = () => {
     return (
-        <div className="sidebar bg-base-100 w-64">
+        <div className="sidebar bg-base-100 w-64 pt-16">
             <ul className="menu p-4 overflow-y-auto w-64">
                 {sidebarLinks.map((link) => (
-                    <li key={link.label}>
+                    <li key={link.label} >
                         <Link href={link.path}>
-                            <p>
-                                <Image src={link.iconSrc} alt={`${link.label} icon`} width={24} height={24} />
-                                {link.label}
-                            </p>
+                            <div className='flex gap-2'>
+                                {link.iconSrc}
+                                <p>
+                                    {link.label}
+
+                                </p>
+                            </div>
                         </Link>
                     </li>
                 ))}
             </ul>
         </div>
-    );
-};
+    )
+}
 
-export default Sidebar;
+export default Sidebar

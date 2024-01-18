@@ -1,46 +1,71 @@
 'use client'
-import { signIn, useSession } from "next-auth/react";
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from 'yup';
-import InputField from "@/components/input/InputField";
-import { Input } from "postcss";
-import Button from "@/components/button/Button";
-import GoogleButton from "@/components/googlebutton/GoogleButton";
+import { signIn, useSession } from 'next-auth/react'
+import React from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import InputField from '@/components/input/InputField'
+import Button from '@/components/button/Button'
+import GoogleButton from '@/components/googlebutton/GoogleButton'
+import customToast from '@/components/toast/customToast'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import siteUrls from '@/config/site-config'
+import LoadingIcon from '@/assets/icons/LoadingIcon'
 const schema = yup.object({
     email: yup.string().email().required(),
-    password: yup.string().min(6).required(),
+    password: yup.string().min(6).required()
 })
 
-type FormValues = {
-    email: string;
-    password: string;
+interface FormValues {
+    email: string
+    password: string
 }
 export default function LoginPage() {
-    const { data: session } = useSession();
+    const { data: session } = useSession()
+    const router = useRouter()
+    const [loading, setIsLoading] = React.useState(false)
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
-            resolver: yupResolver(schema),
+            resolver: yupResolver(schema)
         }
-    );
+    )
 
     if (session) {
         return (
-            <div>
-                <p>You are already signed in.</p>
-            </div>
-        );
+            router.push('/dashboard')
+        )
     }
 
-    const onSubmit = (data: any) => {
+    const onSubmit = async (data: any) => {
         // Handle sign up logic here
-        alert(data);
-        console.log(data);
-    };
+        setIsLoading(true)
+        try {
+            const result = await signIn('credentials', {
+                email: data.email,
+                password: data.password,
+                redirect: false
+            })
+
+            if (result?.status === 200) {
+                router.push('/dashboard')
+
+            }
+            if (result?.error) {
+                customToast.error(result.error)
+            } else {
+                router.push('/dashboard')
+            }
+        } catch (error) {
+            console.error(error)
+
+        } finally {
+            setIsLoading(false)
+        }
+    }
     return (
         <div className="flex justify-center w-full h-screen items-center ">
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg  w-1/3 shadow-md p-8  m-auto flex flex-col gap-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg w-11/12 md:w-1/3 shadow-md p-8  m-auto flex flex-col gap-8">
                 <h1 className="text-3xl font-bold text-center">Login</h1>
                 <Controller
                     control={control}
@@ -74,19 +99,23 @@ export default function LoginPage() {
                 />
                 <div>
 
-                    <div className="flex justify-center">
-                        <Button variant="primary" type="submit" classname="w-full">Sign In</Button>
+                    <div className="flex justify-center flex-col gap-4">
+                        <Button variant="primary" type="submit" classname="w-full">
+                            {loading ? <div className='h-6 w-6'><LoadingIcon /> </div> : null} Sign In</Button>
+                        <div>
+                            Don&apos;t have an account ? <Link href={siteUrls.register} className="text-primary">Register</Link>
+                        </div>
                     </div>
                     <div className="relative flex  items-center py-3">
                         <div className="flex-grow border-t border-gray-400"></div>
                         <span className="flex-shrink mx-4 text-gray-400">Or</span>
                         <div className="flex-grow border-t border-gray-400"></div>
                     </div>
-                    <GoogleButton onClick={() => { signIn('google') }} />
+                    <GoogleButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} />
                 </div>
 
             </form>
         </div>
 
-    );
+    )
 }

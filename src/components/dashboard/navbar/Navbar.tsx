@@ -1,14 +1,15 @@
 'use client'
+import platformConfig from '@/config/app-config'
 import siteUrls from '@/config/site-config'
+import { signOut } from 'next-auth/react'
 import Link from 'next/link'
-import { platform } from 'os'
 import React from 'react'
 
-const DashboardNavbar = () => {
+const DashboardNavbar = (): JSX.Element => {
     return (
-        <div className="navbar bg-base-100">
-            <div className="flex-1">
-                <Link href={siteUrls.dashboard} className="btn btn-ghost text-xl">{platform.name}</Link>
+        <div className="navbar flex-1 bg-base-100 w-full">
+            <div className="navbar-start">
+                <Link href={siteUrls.dashboard} className="btn btn-ghost text-xl">{platformConfig.name}</Link>
             </div>
             <div className="flex-none gap-2">
                 <div className="form-control">
@@ -22,13 +23,13 @@ const DashboardNavbar = () => {
                     </div>
                     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                         <li>
-                            <Link href={"/profile"} className="justify-between">
+                            <Link href={'/profile'} className="justify-between">
                                 Profile
                                 <span className="badge">New</span>
                             </Link>
                         </li>
                         <li><Link href={siteUrls.settings}>Settings</Link></li>
-                        <li><Link href={siteUrls.logout}>Logout</Link></li>
+                        <li><Link href={'#'} onClick={async () => { await signOut() }}>Logout</Link></li>
                     </ul>
                 </div>
             </div>

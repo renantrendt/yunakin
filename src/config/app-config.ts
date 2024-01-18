@@ -1,5 +1,5 @@
 const platformConfig = {
-    "name": "Sleek AI",
+  name: 'NextSaaSStack'
 }
 
-export default platformConfig;
+export default platformConfig

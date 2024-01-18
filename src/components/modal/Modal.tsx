@@ -1,17 +1,17 @@
 // components/Modal.tsx
-import React from 'react';
+import React from 'react'
 
 interface ModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    title: string;
-    children: React.ReactNode;
+  isOpen: boolean
+  onClose: () => void
+  title: string
+  children: React.ReactNode
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
-    if (!isOpen) return null;
+  if (!isOpen) return null
 
-    return (
+  return (
         <div className="modal modal-open">
             <div className="modal-box">
                 <h3 className="font-bold text-lg">{title}</h3>
@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
                 </div>
             </div>
         </div>
-    );
-};
+  )
+}
 
-export default Modal;
+export default Modal

@@ -1,5 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
+import RockerLaunchIcon from '@/assets/icons/RockerLaunchIcon'
+import Link from 'next/link'
+import React from 'react'
 
 export default function Hero() {
     return (
@@ -20,11 +21,7 @@ export default function Hero() {
             </div>
             <div
                 className="relative w-full md:w-5/12 flex flex-col justify-start items-center gap-16 md:gap-24">
-                <Image src='/images/hero-img.png'
-                    width="400" height="400"
-                    className="rounded-xl"
-                    alt="Supalaunch"
-                ></Image>
+                <RockerLaunchIcon />
             </div>
         </section>
 

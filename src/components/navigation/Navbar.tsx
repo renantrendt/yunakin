@@ -1,13 +1,13 @@
 // components/navigation/Navbar.tsx
-import Link from 'next/link';
-import React from 'react';
+import Link from 'next/link'
+import React from 'react'
 
 const Navbar: React.FC = () => {
-    return (
+  return (
         <nav className="navbar bg-base-100">
             <div className="navbar-start">
                 <Link href="/">
-                    <a className="btn btn-ghost normal-case text-xl">YourBrand</a>
+                    <a className="btn btn-ghost normal-case text-xl"></a>
                 </Link>
             </div>
             <div className="navbar-end">
@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
                 </Link>
             </div>
         </nav>
-    );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

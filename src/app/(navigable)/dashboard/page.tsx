@@ -1,19 +1,18 @@
-import React from 'react';
-import { useFeatureFlag } from "@/hooks/useFeatureFlag"
-import Sidebar from '@/components/navigation/Sidebar';
-import DashboardNavbar from '@/components/dashboard/navbar/Navbar';
+import React from 'react'
+import { useFeatureFlag } from '@/hooks/useFeatureFlag'
+import Sidebar from '@/components/navigation/Sidebar'
+import DashboardNavbar from '@/components/dashboard/navbar/Navbar'
 
-export default function Dashboard() {
-    const isNewDashboardEnabled = useFeatureFlag('newDashboard');
+export default function Dashboard(): JSX.Element {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const _ = useFeatureFlag('newDashboard')
 
     return (
-        <div className="flex">
-            <Sidebar />
-            <DashboardNavbar />
-            <div className="flex-1 p-4">
-                {/* Dashboard content goes here */}
-                <h1>Hi</h1>
+        <div className="flex w-full min-w-full">
+            <div className='flex   w-full flex-col md:flex-row-reverse justify-start items-start'>
+                <DashboardNavbar />
+                <Sidebar />
             </div>
         </div>
-    );
+    )
 }

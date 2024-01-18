@@ -1,7 +1,7 @@
-import Link from "next/link";
-
-export default function Footer() {
-    return (
+import Link from 'next/link'
+import React from 'react'
+export default function Footer (): JSX.Element {
+  return (
         <footer className="footer max-w-6xl mx-auto p-10 text-base-content">
             <nav>
                 <header className="footer-title">Services</header>
@@ -36,5 +36,5 @@ export default function Footer() {
                 </fieldset>
             </form>
         </footer>
-    )
+  )
 }

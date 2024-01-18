@@ -1,6 +1,5 @@
-import PricingProduct from "./pricing-product";
-
-
+import PricingProduct from './pricing-product'
+import React from 'react'
 export default function Pricing() {
     return (
         <div className='my-20 w-full'>
