@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const NotFoundPage = () => {
@@ -8,9 +9,9 @@ const NotFoundPage = () => {
                 <span className="text-center font-bold my-10 opacity-30">
                     MDI (npm i @mdi/font) reuqired for all icons
 
-                    <a href="https://egoistdeveloper.github.io/twcss-to-sass-playground/" target="_blank" className="text-blue-600">
+                    <Link href="https://egoistdeveloper.github.io/twcss-to-sass-playground/" target="_blank" className="text-blue-600">
                         Convetert to SASS
-                    </a>
+                    </Link>
                 </span>
 
                 <div className="flex flex-col items-center">
