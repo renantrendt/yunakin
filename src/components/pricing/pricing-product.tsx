@@ -1,11 +1,48 @@
+'use client'
+import { CheckoutSubscriptionBody } from '@/app/api/checkout-session/route'
+import LoadingIcon from '@/assets/icons/LoadingIcon';
+import { loadStripe } from "@stripe/stripe-js";
 import React from 'react'
-export default function PricingProduct ({ name, description, price, features }: {
-  name: string
-  description: string
-  price: number
-  features: string[]
+import Stripe from 'stripe';
+export default function PricingProduct({ name, description, price, features }: {
+    name: string
+    description: string
+    price: number
+    features: string[]
 }) {
-  return (
+
+    const [loading, setLoading] = React.useState(false)
+    const handleClick = async () => {
+        // step 1: load stripe
+        const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
+        const stripe = await loadStripe(STRIPE_PK);
+
+        // step 2: define the data for monthly subscription
+        const body: CheckoutSubscriptionBody = {
+            interval: "month",
+            amount: price * 100,
+            plan: "Monthly",
+            planDescription: `Subscribe for $${price} per month`,
+        };
+
+        setLoading(true)
+        // step 3: make a post fetch api call to /checkout-session handler
+        const result = await fetch("/api/checkout-session", {
+            method: "post",
+            body: JSON.stringify(body, null),
+            headers: {
+                "content-type": "application/json",
+            },
+        });
+
+        // step 4: get the data and redirect to checkout using the sessionId
+        const data = (await result.json()) as Stripe.Checkout.Session;
+        const sessionId = data.id!;
+        stripe?.redirectToCheckout({ sessionId });
+        setLoading(false)
+
+    };
+    return (
         <div className="card bg-base-100 shadow-xl h-full p-5">
             <div className="card-body">
                 <h3 className="mb-4 text-2xl font-semibold">{name}</h3>
@@ -21,7 +58,7 @@ export default function PricingProduct ({ name, description, price, features }: 
                 <ul role="list" className="mb-8 space-y-4 text-left">
                     {
                         features.map((feature, index) => {
-                          return (
+                            return (
                                 <li className="flex items-center space-x-3" key={feature + '-' + index}>
                                     <svg className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
                                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +67,7 @@ export default function PricingProduct ({ name, description, price, features }: 
                                     </svg>
                                     <span><b className='text-lg'></b> {feature} </span>
                                 </li>
-                          )
+                            )
                         })
                     }
                 </ul>
@@ -38,11 +75,12 @@ export default function PricingProduct ({ name, description, price, features }: 
                 <div className="card-actions justify-center">
                     <button
                         className="btn btn-primary"
+                        onClick={handleClick}
                     >
-                        Start
+                        {loading ? <div className='h-6 w-6'><LoadingIcon /> </div> : null} Start
                     </button>
                 </div>
             </div>
         </div>
-  )
+    )
 }
