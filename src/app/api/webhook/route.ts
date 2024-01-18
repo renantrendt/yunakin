@@ -1,14 +1,9 @@
 import stripe from "@/utils/stripe";
-import { sign } from "crypto";
 import { NextResponse } from "next/server";
-import Stripe from "stripe";
 
-interface StripeWebookPayload {
 
-}
 export async function POST(request: Request) {
     let event = (await request.json()) as any;
-    const origin = request.headers.get("origin") || "http://localhost:3000";
     // Replace this endpoint secret with your endpoint's unique secret
     // If you are testing with the CLI, find the secret by running 'stripe listen'
     // If you are using an endpoint defined with the API or dashboard, look in your webhook settings
