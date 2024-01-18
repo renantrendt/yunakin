@@ -17,6 +17,7 @@
     "bcryptjs": "^2.4.3",
     "daisyui": "^4.5.0",
     "formik": "^2.4.5",
+    "framer-motion": "^10.18.0",
     "jsonwebtoken": "^9.0.2",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
