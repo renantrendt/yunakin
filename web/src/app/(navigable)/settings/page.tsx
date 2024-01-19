@@ -1,8 +1,8 @@
 "use client";
+import React from "react";
 import Button from "@/components/button/Button";
 import InputField from "@/components/input/InputField";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Image from "next/image";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -18,11 +18,12 @@ interface FormValues {
     phoneNumber: string;
 }
 export default function SettingsPage() {
-    const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
+    const { control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(validationSchema)
         }
     )
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = async (data: any) => {
     }
     return (
