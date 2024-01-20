@@ -17,7 +17,7 @@ const FAQ = () => {
         <div className='container px-4 flex flex-col md:flex-row justify-around items-center md:items-start  w-full m-auto py-16 h-[50vh]'>
             <div className='text flex flex-1 flex-col justify-center items-center md:items-start md:justify-start h-full mb-8 md:mb-0 '>
                 <h5 className='text-primary'>FAQ</h5>
-                <h1 className='font-bold text-3xl text-center md:text-left  md:text-4xl'>Frequently Asked Questions</h1>
+                <h1 className='font-bold text-3xl text-center md:text-left  md:text-4xl dark:text-white'>Frequently Asked Questions</h1>
             </div>
             <div className='faq-list flex-1 flex flex-col gap-8  max-w-md md:max-w-full  '>
                 {faqItems.map((item, index) => (
