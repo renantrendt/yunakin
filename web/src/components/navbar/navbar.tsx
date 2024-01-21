@@ -26,7 +26,7 @@ export default function Navbar() {
                         <li><Link href={siteUrls.features}>Features</Link></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">NextStackSaaS</a>
+                <Link className="btn btn-ghost text-xl" href='/'>NextStackSaaS</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

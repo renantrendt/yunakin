@@ -19,7 +19,7 @@ const siteUrls = {
     privacyPolicy: '/privacy-policy',
     termsAndConditions: '/terms-and-conditions',
     faq: '/faq',
-    blog: '/blog',
+    blog: '/blogs',
     blogDetail: '/blog/:slug',
     category: '/category/:slug',
     tag: '/tag/:slug',

@@ -1,6 +1,7 @@
 "use client"
 import PageHeader from '@/components/blog/PageHeader';
 import { fetchStrapiAPI } from '@/utils/strapi';
+import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react'
 
 interface Meta {
@@ -122,18 +123,19 @@ const BlogPage = () => {
     }, [fetchData]);
 
     return (
-        <div>
+        <div className='mb-24'>
             <PageHeader heading="Our Blog" text="Checkout Something Cool" />
             <div className='grid grid-cols-12 justify-items-center w-full mx-auto gap-y-12'>
 
                 {blogs.map((blog, index) => (
-                    <div className="card w-full  max-w-lg bg-base-100 shadow-xl col-span-4">
+                    <Link className="card w-full  max-w-lg bg-base-100 shadow-xl col-span-4 hover:scale-110 hover:cursor-pointer 
+                    transition duration-150" href={`/blogs/${blog.title.replaceAll(" ", "-")}`}>
                         <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-                        <div className="card-body pb-0">
+                        <div className="card-body pb-4">
                             <h2 className="card-title">{blog.title}</h2>
                             <p>{blog.description}</p>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
 
