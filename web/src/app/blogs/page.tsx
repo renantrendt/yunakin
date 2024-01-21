@@ -79,8 +79,11 @@ const blogs = [
 ]
 
 const BlogPage = () => {
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [meta, setMeta] = useState<Meta | undefined>();
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [data, setData] = useState<any>([]);
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isLoading, setLoading] = useState(true);
     const fetchData = useCallback(async (start: number, limit: number) => {
         setLoading(true);
@@ -128,7 +131,7 @@ const BlogPage = () => {
             <div className='grid grid-cols-12 justify-items-center w-full mx-auto gap-y-12'>
 
                 {blogs.map((blog, index) => (
-                    <Link className="card w-full  max-w-lg bg-base-100 shadow-xl col-span-4 hover:scale-110 hover:cursor-pointer 
+                    <Link key={index} className="card w-full  max-w-lg bg-base-100 shadow-xl col-span-4 hover:scale-110 hover:cursor-pointer 
                     transition duration-150" href={`/blogs/${blog.title.replaceAll(" ", "-")}`}>
                         <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
                         <div className="card-body pb-4">
