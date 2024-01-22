@@ -128,10 +128,10 @@ const BlogPage = () => {
     return (
         <div className='mb-24'>
             <PageHeader heading="Our Blog" text="Checkout Something Cool" />
-            <div className='grid grid-cols-12 justify-items-center w-full mx-auto gap-y-12'>
+            <div className='grid grid-cols-12 justify-items-center w-full gap-x-4 px-4 mx-auto gap-y-12'>
 
                 {blogs.map((blog, index) => (
-                    <Link key={index} className="card w-full  max-w-lg bg-base-100 shadow-xl col-span-4 hover:scale-110 hover:cursor-pointer 
+                    <Link key={index} className="card w-full  max-w-lg bg-base-100 shadow-xl col-span-12  md:col-span-6 lg:col-span-4 hover:scale-110 hover:cursor-pointer 
                     transition duration-150" href={`/blogs/${blog.title.replaceAll(" ", "-")}`}>
                         <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
                         <div className="card-body pb-4">
