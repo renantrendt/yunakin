@@ -10,6 +10,7 @@ const blog = {
     "authorImageUrl": "https://example.com/images/authors/samantha-lee.jpg",
     "blogImageUrl": "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
 };
+//eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SlugPage = ({ params }: { params: { slug: string } }) => {
     const router = useRouter()
     return (
