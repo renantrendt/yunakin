@@ -1,8 +1,8 @@
 "use client"
+import React from 'react'
 import { useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation';
-import { root } from 'postcss';
 export default function CheckoutPage() {
     const pathname = usePathname();
     const router = useRouter()
