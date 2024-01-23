@@ -1,7 +1,22 @@
 name: CI/CD Pipeline
 
 on: [push, pull_request]
-
+env:
+  GOOGLE_ANALYTICS_ID: your-google-analytics-id
+  SENDGRID_API_KEY: SG...
+  GOOGLE_CLIENT_ID: 592455481995-cgnvp80af1efu9pk1jo1s2bnh4b6lmmg.apps.googleusercontent.com
+  GOOGLE_CLIENT_SECRET: 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
+  DATABASE_URL: postgres://postgres.wiazdxtrtjtvumtixrqj:Goo@millano23@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+  DIRECT_URL: postgres://postgres:Goo@millano23@db.wiazdxtrtjtvumtixrqj.supabase.co:5432/postgres?pgbouncer=true
+  POSTGRES_PASSWORD: password123
+  POSTGRES_USER: admin
+  POSTGRES_DB: nextstackksaas
+  NEXTAUTH_URL: http://localhost:3000
+  NEXTAUTH_SECRET: uVzDguFec5XA67CIVAtivxfcpD53eHAyV21OCcgWtCU=
+  NEXTAUTH_JWT_SECRET: uVzDguFec5XA67CIVAtivxfcpD53eHAyV21OCcgWtCU=
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: sk_test_51OZUfiDikzGwEbQeSvORw9s0ohghLE6uxjeG3PD3OoDVFhZ06bKcbVKleEr7gBdk0RrpkokyHtqtHh1B7ZGIKSYC00436mbd0h
+  STRIPE_SECRET_KEY: sk_test_51OZUfiDikzGwEbQe9B7EoMdZ7z1FYnvCtk65XNYVUwcADvue89cmuzn4YqOEX8CYcXP4Cm0FimFOV3awy2wLl9aC00o5UiMreO
+  RESEND_API_KEY: Resdfasdf
 jobs:
   build:
     runs-on: ubuntu-latest
