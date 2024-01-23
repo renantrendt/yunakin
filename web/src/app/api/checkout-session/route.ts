@@ -18,8 +18,8 @@ export async function POST(req: Request) {
 
     // if user is logged in, redirect to thank you page, otherwise redirect to signup page.
     const success_url = !body.customerId
-        ? `${origin}/signup?session_id={CHECKOUT_SESSION_ID}`
-        : `${origin}/thankyou?session_id={CHECKOUT_SESSION_ID}`;
+        ? `${origin}/checkout?session_id={CHECKOUT_SESSION_ID}&success=true`
+        : `${origin}/checkout?session_id={CHECKOUT_SESSION_ID}&success=true`;
 
     try {
         const session = await stripe.checkout.sessions.create({
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
                 },
             ],
             success_url: success_url,
-            cancel_url: `${origin}?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${origin}/checkout?canceled=true&session_id={CHECKOUT_SESSION_ID}`,
         });
         return NextResponse.json(session);
     } catch (error) {

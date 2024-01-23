@@ -6,8 +6,6 @@ import { initGA, logPageView } from '@/utils/ga-analytics'
 import Providers from '@/lib/providers/providers'
 import 'react-toastify/dist/ReactToastify.css'
 import React from 'react'
-import Navbar from '@/components/navbar/navbar'
-import Footer from '@/components/footer/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
@@ -26,9 +24,7 @@ export default function RootLayout({
     <html lang="en" data-theme="light">
       <body className={inter.className}>
         <Providers>
-          <Navbar />
           {children}
-          <Footer />
         </Providers>
       </body>
     </html>
