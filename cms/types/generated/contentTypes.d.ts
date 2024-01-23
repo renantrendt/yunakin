@@ -792,6 +792,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'oneToOne',
       'api::category.category'
     >;
+    imageURL: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
