@@ -13,9 +13,12 @@ interface Meta {
 }
 
 const BlogPage = () => {
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [meta, setMeta] = useState<Meta | undefined>();
     const [data, setData] = useState<any>([]);
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isLoading, setLoading] = useState(true);
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [blogs, setBlogs] = useState<any[]>([]);
 
     const fetchData = useCallback(async (start: number, limit: number) => {
