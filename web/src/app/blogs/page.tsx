@@ -31,7 +31,7 @@ const BlogPage = () => {
                 populate: {
                     cover: { fields: ["url"] },
                     category: { populate: "*" },
-                    authorsBio: {
+                    author: {
                         populate: "*",
                     },
                 },
