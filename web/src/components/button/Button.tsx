@@ -10,13 +10,13 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ variant = 'primary', children, onClick, type, classname }) => {
-  const baseStyle = 'btn'
+  const baseStyle = 'btn text-white'
   const variantStyle = variant === 'primary' ? 'btn-primary' : 'btn-secondary'
 
   return (
-        <button className={`${baseStyle} ${variantStyle} ${classname}`} onClick={onClick} type={type}>
-            {children}
-        </button>
+    <button className={`${baseStyle} ${variantStyle} ${classname}`} onClick={onClick} type={type}>
+      {children}
+    </button>
   )
 }
 

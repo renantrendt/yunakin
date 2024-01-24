@@ -48,8 +48,12 @@ const features = [
 export default function Pricing() {
     return (
         <div className='my-20 w-full'>
-            <h1 className='text-4xl font-bold text-center mb-5'>Pricing</h1>
-            <section className='grid grid-cols-1 lg:grid-cols-3 gap-4 flex justify-center'>
+            <div className=' flex flex-col justify-center items-center gap-5 mb-8'>
+                <h1 className='text-5xl font-bold text-center mb-2'>Enable the best experience</h1>
+                <h3 className='text-xl  mb-20 max-w-xl text-center'>Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.</h3>
+            </div>
+
+            <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8 px-4 md:px-0 '>
                 <PricingProduct
                     name={'Pro'}
                     description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
@@ -59,15 +63,16 @@ export default function Pricing() {
                 />
                 <PricingProduct
                     name={'Personal'}
-                    description={'Description'}
+                    description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
                     price={119}
                     plan={Plans.BUSINESS}
 
                     features={features}
+                    recommended={true}
                 />
                 <PricingProduct
                     name={'Startup'}
-                    description={'Description'}
+                    description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
                     price={200}
                     plan={Plans.ADVANCED}
                     features={features}

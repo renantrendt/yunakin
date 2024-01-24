@@ -5,11 +5,16 @@ import { loadStripe } from "@stripe/stripe-js";
 import React from 'react'
 import Stripe from 'stripe';
 import { Plans } from './pricing';
-export default function PricingProduct({ name, description, price, features }: {
+import Button from '../button/Button';
+import TickIcon from '@/assets/icons/TickIcon';
+import CrossIcon from '@/assets/icons/CrossIcon';
+export default function PricingProduct({ name, description, price, features, plan, recommended }: {
     name: string
     description: string
     price: number
     features: { name: string, plans: Plans[] }[]
+    plan: Plans
+    recommended?: boolean
 }) {
 
     const [loading, setLoading] = React.useState(false)
@@ -45,13 +50,16 @@ export default function PricingProduct({ name, description, price, features }: {
     };
     return (
         <div className="card bg-base-100 shadow-xl rounded-[32px] h-full p-5">
+            {recommended && (
+                <div className='rounded-[40px] shadow-md text-blue-500 px-6 py-2  bg-white w-fit absolute top-[-20px] left-[32%]  '>Recommended</div>
+            )}
             <div className="card-body">
                 <div className='flex  flex-col items-center justify-center mb-8'>
                     <h3 className="mb-6 text-4xl font-bold">{name}</h3>
                     <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">{description}</p>
                 </div>
 
-                <div className="flex justify-center items-center ">
+                <div className="flex justify-center items-center py-10 ">
                     <span className="mr-2 text-5xl font-extrabold">
                         {price}$
                     </span>
@@ -61,24 +69,17 @@ export default function PricingProduct({ name, description, price, features }: {
                 </div>
 
                 <div className="card-actions justify-center">
-                    <button
-                        className="btn btn-primary"
-                        onClick={handleClick}
-                    >
+                    <Button classname='w-full mb-8'>
                         {loading ? <div className='h-6 w-6'><LoadingIcon /> </div> : null} Start
-                    </button>
+                    </Button>
                 </div>
                 <ul role="list" className="mb-8 space-y-4 text-left">
                     {
                         features.map((feature, index) => {
                             return (
-                                <li className="flex items-center space-x-3" key={feature + '-' + index}>
-                                    <svg className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
-                                    </svg>
-                                    <span><b className='text-lg'></b> {feature.name} </span>
+                                <li className="flex items-center space-x-3 py-3 px-2" key={feature + '-' + index}>
+                                    {feature.plans.includes(plan) ? <TickIcon /> : <CrossIcon />}
+                                    <span><b className='text-lg'></b> {feature.name}</span>
                                 </li>
                             )
                         })
