@@ -2,7 +2,6 @@
 'use client'
 import React from 'react'
 import Hero from '@/components/hero/Hero'
-import Pricing from '@/components/pricing/pricing'
 import FAQ from '@/components/faq/FAQ'
 import Testimonial from '@/components/testimonial/Testimonial'
 

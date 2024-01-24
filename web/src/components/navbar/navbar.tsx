@@ -8,7 +8,7 @@ import siteUrls from '@/config/site-config'
 export default function Navbar() {
     const router = useRouter()
     return (
-        <div className="navbar ">
+        <div className="navbar p-2 md:px-24 ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div role="button" className="btn btn-ghost lg:hidden">
