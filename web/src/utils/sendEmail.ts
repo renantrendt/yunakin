@@ -21,7 +21,7 @@ export const sendEmail = async ({
       subject: subject,
       react: WelcomeEmailTemplate({ firstName: name }) as React.ReactElement,
     });
-    return { success: true }
+    return { success: true, data: data }
   } catch (error: any) {
     console.error(error)
 
