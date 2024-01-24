@@ -1,33 +1,26 @@
 // utils/sendEmail.ts
-import sgMail from '@sendgrid/mail'
+import { WelcomeEmailTemplate } from '@/components/template/email/WelcomeEmailTemplate';
+import { Resend } from 'resend';
 
-if (!process.env.SENDGRID_API_KEY) {
-  throw new Error('Missing SENDGRID_API_KEY environment variable')
-}
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendEmail = async ({
   to,
+  name,
   subject,
-  text,
-  html
 }: {
   to: string
+  name: string
   subject: string
-  text: string
-  html: string
 }) => {
-  const msg = {
-    to,
-    from: 'your-email@example.com', // Replace with your verified sender email address
-    subject,
-    text,
-    html
-  }
 
   try {
-    await sgMail.send(msg)
+    const data = await resend.emails.send({
+      from: 'Fortan <fortan@sleekvid.com>',
+      to: [to],
+      subject: subject,
+      react: WelcomeEmailTemplate({ firstName: name }) as React.ReactElement,
+    });
     return { success: true }
   } catch (error: any) {
     console.error(error)

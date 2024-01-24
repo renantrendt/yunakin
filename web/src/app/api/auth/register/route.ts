@@ -1,5 +1,6 @@
 // import { sendEmail } from "@/lib/mailer";
 import { prisma } from '@/lib/prisma'
+import { sendEmail } from '@/utils/sendEmail'
 import { hash } from 'bcryptjs'
 import { NextResponse } from 'next/server'
 
@@ -22,7 +23,12 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
       }
     })
 
-    // await sendEmail("verifyEmail", user.email, user.id);
+
+    await sendEmail({
+      to: user.email,
+      name: user.name,
+      subject: 'Registration Confirmation',
+    });
 
     return NextResponse.json({
       user: {
