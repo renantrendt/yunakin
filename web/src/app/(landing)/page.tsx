@@ -11,7 +11,6 @@ export default function Home() {
     <main className="flex min-h-screen flex-col  mx-auto p-2 md:px-24">
       <Hero />
       <Testimonial />
-      <Pricing />
       <FAQ />
     </main>
   )

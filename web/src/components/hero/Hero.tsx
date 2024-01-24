@@ -5,7 +5,7 @@ import React from 'react'
 export default function Hero() {
     return (
         <section
-            className="my-20 flex flex-col md:flex-row justify-center items-center text-center md:text-left">
+            className="my-20 flex flex-col md:flex-row justify-center  items-center text-center md:text-left">
             <div className="w-full md:w-7/12 md:mr-8">
                 <h1 className="text-5xl font-bold">The most <span
                     className='text-primary'>important text</span> on the page</h1>

@@ -13,7 +13,7 @@ interface FaqItemProps {
 
 const FaqItem = ({ question, answer, isOpen, onClick }: FaqItemProps) => {
     return (
-        <div className='container border-t-[1px]  border-b-black w-full'>
+        <div className='container  bg-white '>
             <motion.div
                 initial={false}
                 animate={{
@@ -26,6 +26,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }: FaqItemProps) => {
                     alignItems: "center",
                     cursor: "pointer",
                 }}
+                className='w-full py-4 px-6'
             >
                 <h3 className='word-break'>{question}</h3>
                 {isOpen ? <div ><MinusIcon /> </div> : <div><PlusIcon /></div>}
@@ -38,15 +39,16 @@ const FaqItem = ({ question, answer, isOpen, onClick }: FaqItemProps) => {
                         animate="open"
                         exit="collapsed"
                         variants={{
-                            open: { opacity: 1, height: "initial" },
-                            collapsed: { opacity: 0, height: 0 },
+                            open: { height: "initial" },
+                            collapsed: { height: 0 },
                         }}
-                        transition={{ duration: 0.4 }}
+                        transition={{ duration: 0.15 }}
 
                     >
-                        <div className='pt-4'>
+                        <div
+                            className='bg-[#FAFAFA]  py-4 px-6'
+                        >
                             {answer}
-
                         </div>
                     </motion.section>
                 )}
