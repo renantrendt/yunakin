@@ -15,13 +15,13 @@ export const sendEmail = async ({
 }) => {
 
   try {
-    const data = await resend.emails.send({
-      from: 'Fortan <fortan@sleekvid.com>',
-      to: [to],
-      subject: subject,
-      react: WelcomeEmailTemplate({ firstName: name }) as React.ReactElement,
-    });
-    return { success: true, data: data }
+    // const data = await resend.emails.send({
+    //   from: 'Fortan <fortan@sleekvid.com>',
+    //   to: [to],
+    //   subject: subject,
+    //   react: WelcomeEmailTemplate({ confirmationEmailLink: "https://dev.sleekvid.com", name: name }) as React.ReactElement,
+    // });
+    return { success: true }
   } catch (error: any) {
     console.error(error)
 
