@@ -13,7 +13,7 @@ interface FaqItemProps {
 
 const FaqItem = ({ question, answer, isOpen, onClick }: FaqItemProps) => {
     return (
-        <div className='container  bg-white '>
+        <div className='container  bg-white rounded-md shadow-sm '>
             <motion.div
                 initial={false}
                 animate={{
