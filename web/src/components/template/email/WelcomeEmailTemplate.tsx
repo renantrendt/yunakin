@@ -1,12 +1,14 @@
 import {
     Body,
     Button,
+    Column,
     Container,
     Head,
     Html,
     Img,
     Link,
     Preview,
+    Row,
     Section,
     Text,
 } from "@react-email/components";
@@ -20,9 +22,9 @@ interface VerificationEmailProps {
 
 }
 
-const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "";
+const baseUrl = process.env.NEXT_URL
+    ? process.env.NEXT_URL
+    : "http://localhost:3000";
 
 export const VerificationEmail = ({
     name,
@@ -36,22 +38,25 @@ export const VerificationEmail = ({
             <Head />
             <Preview>{previewText}</Preview>
             <Tailwind>
-                <Body className="bg-white my-auto mx-auto font-sans px-2">
-                    <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] max-w-[465px]">
+                <Body className="bg-white font-sans px-2 ">
+                    <Container className="  my-[40px] mx-auto    max-w-[665px]">
                         <Section className="mt-[32px]">
                             <Img
-                                src={`${baseUrl}/static/vercel-logo.png`}
-                                width="40"
-                                height="37"
+                                src={`${baseUrl}/images/logo.png`}
+                                width="150"
+                                height="120"
                                 alt="CodePilot"
-                                className="my-0 mx-auto"
+                                className="my-0 "
                             />
                         </Section>
                         <Text className="text-black text-2xl font-bold leading-[24px]">
                             Hi {name},
                         </Text>
                         <Text className="text-black text-[14px] leading-[24px]">
-                            You recently created an account and requested that the confirmation email is resend. Click the button below to confirm the account,
+                            You recently created an account and requested that the confirmation email is resend.
+                        </Text>
+                        <Text>
+                            Click the button below to confirm the account,
                         </Text>
                         <Section className="text-left mt-[32px] mb-[32px]">
                             <Button
@@ -78,9 +83,52 @@ export const VerificationEmail = ({
                                 {organizationName} team
                             </Text>
                         </Section>
-                        <Section className="text-left mt-[32px] mb-[32px] p-4 border-black border-2 rounded-md">
+                        <Section className="text-left mt-[32px] mb-[32px] p-4  border-gray-300 rounded-md  border border-solid">
                             <Text>
                                 P.S. We also love hearing from you and helping you with any issues you have. Please reply to this email if you want to ask a question or just say hi.
+                            </Text>
+                        </Section>
+                    </Container>
+                    <Container className="bg-[#FAFAFA] !w-full min-w-full">
+                        <Section className="mt-4">
+                            <Img
+                                src={`${baseUrl}/images/logo.png`}
+                                width="150"
+                                height="60"
+                                alt="CodePilot"
+                                className="my-0  mx-auto"
+                            />
+                        </Section>
+                        <Section className="max-w-[665px] mt-4 text-center">
+                            <Row className="my-4  ">
+                                <Column>
+                                    Facebook
+                                </Column>
+                                <Column>
+                                    Twitter
+                                </Column>
+                                <Column>
+                                    Instagram
+                                </Column>
+                            </Row>
+                            <Row>
+                                <Column>
+                                    Privacy Policy
+                                </Column>
+                                <Column>
+                                    Terms & Conditions
+                                </Column>
+                                <Column>
+                                    Cookies
+                                </Column>
+                            </Row>
+                            <Text className="text-center">
+                                © 2021, Company Inc. All right reserved.
+                            </Text>
+                            <Text>
+                                Company Inc. <br />
+                                Magjistralja Prishtine - Lipjan <br />
+                                Prishtine, Kosovo <br />
                             </Text>
                         </Section>
                     </Container>
