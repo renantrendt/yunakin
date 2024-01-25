@@ -10,7 +10,7 @@ export default function Hero() {
                 <h1 className="text-5xl font-bold max-w-2xl">Create high-converting funnels in just 60 minutes</h1>
                 <p className="text-xl py-6 max-w-2xl">
                     Generate a steady flow of customers or talents with lightning-fast and easy-to-build Perspective Funnels. No design or programming skills required.                </p>
-                <div className='flex justify-start gap-8'>
+                <div className='flex justify-center md:justify-start gap-8'>
                     <Button
                         variant='primary'
                     >
