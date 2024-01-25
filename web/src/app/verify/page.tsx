@@ -1,6 +1,5 @@
 'use client'
 import customToast from '@/components/toast/customToast'
-import { signIn } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
@@ -37,7 +36,6 @@ const VerifyPage = () => {
 
             } catch (error) {
                 console.error(error)
-            } finally {
             }
         })()
     }, []);

@@ -20,7 +20,8 @@ const Auth = ({ children }: AuthProps) => {
         )
     }
     if (status == 'unauthenticated') {
-        return router.replace('/login')
+        router.replace('/login')
+        return <></>
     }
     return <div>{children}</div>
 }

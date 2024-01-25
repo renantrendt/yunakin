@@ -2,22 +2,18 @@ import {
     Body,
     Button,
     Container,
-    Column,
     Head,
-    Heading,
-    Hr,
     Html,
     Img,
     Link,
     Preview,
-    Row,
     Section,
     Text,
 } from "@react-email/components";
 import { Tailwind } from "@react-email/tailwind";
 import * as React from "react";
 
-interface VercelInviteUserEmailProps {
+interface VerificationEmailProps {
     name?: string;
     organizationName?: string;
     confirmationEmail?: string;
@@ -32,7 +28,7 @@ export const VerificationEmail = ({
     name,
     confirmationEmail,
     organizationName
-}: VercelInviteUserEmailProps) => {
+}: VerificationEmailProps) => {
     const previewText = `Confirm registration on ${organizationName}`;
 
     return (
@@ -98,6 +94,6 @@ VerificationEmail.PreviewProps = {
     name: "Fortan",
     confirmationEmail: "https://codepilot.dev/confirm/1234567890",
     organizationName: "CodePilot",
-} as VercelInviteUserEmailProps;
+} as VerificationEmailProps;
 
 export default VerificationEmail;

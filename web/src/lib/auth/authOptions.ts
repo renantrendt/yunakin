@@ -5,7 +5,7 @@ import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import jwt from 'jsonwebtoken'
 import GoogleProvider from 'next-auth/providers/google'
-import { sendEmail, sendVerificationEmail } from '@/utils/sendEmail'
+import { sendVerificationEmail } from '@/utils/sendEmail'
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -91,7 +91,7 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     callbacks: {
-        signIn: async ({ user, account, profile }) => {
+        signIn: async ({ account, profile }) => {
             if (account?.provider === "google") {
                 if (!profile) {
                     throw new Error("No profile found");

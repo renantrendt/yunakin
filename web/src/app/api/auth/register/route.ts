@@ -1,6 +1,6 @@
 // import { sendEmail } from "@/lib/mailer";
 import { prisma } from '@/lib/prisma'
-import { sendEmail, sendVerificationEmail } from '@/utils/sendEmail'
+import { sendVerificationEmail } from '@/utils/sendEmail'
 import { hash } from 'bcryptjs'
 import { NextResponse } from 'next/server'
 
