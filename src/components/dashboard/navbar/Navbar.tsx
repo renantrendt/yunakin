@@ -6,6 +6,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const DashboardNavbar = (): JSX.Element => {
+    const session = useSession()
     return (
         <div className="navbar flex-1 bg-base-100 w-full">
             <div className="navbar-start">

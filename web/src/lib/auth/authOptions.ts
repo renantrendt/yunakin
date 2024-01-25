@@ -5,6 +5,7 @@ import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import jwt from 'jsonwebtoken'
 import GoogleProvider from 'next-auth/providers/google'
+import { sendEmail, sendVerificationEmail } from '@/utils/sendEmail'
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -84,11 +85,48 @@ export const authOptions: NextAuthOptions = {
         }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
         })
     ],
     callbacks: {
-        session: ({ session, token }) => {
+        signIn: async ({ user, account, profile }) => {
+            if (account?.provider === "google") {
+                if (!profile) {
+                    throw new Error("No profile found");
+                }
+                let user = await prisma.user.findUnique({
+                    where: { email: profile?.email },
+                });
+
+                if (user) {
+                    if (user.provider !== "google") {
+                        throw new Error("An account with this email already exists");
+                    }
+                    else {
+                        return true;
+                    }
+                } else {
+                    user = await prisma.user.create({
+                        data: {
+                            name: profile.name as string,
+                            email: profile.email as string,
+                            avatar: (profile as any).picture as string,
+                            verified: (profile as any).email_verified,
+                            provider: "google"
+                        }
+                    })
+                    if (!user.verified) {
+                        await sendVerificationEmail({ to: user.email, name: user.name, subject: 'Verify Email', token: user.verifyToken as string });
+                    }
+                    return true;
+                }
+            }
+            return true;
+        },
+        session: async ({ session, token }) => {
+            const user = await prisma.user.findUnique({
+
+            });
             return {
                 ...session,
                 user: {

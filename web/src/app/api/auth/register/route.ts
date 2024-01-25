@@ -19,7 +19,8 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
         name,
         email: email.toLowerCase(),
         password: hashed_password,
-        verified: false
+        verified: false,
+        provider: 'credentials',
       }
     })
 
