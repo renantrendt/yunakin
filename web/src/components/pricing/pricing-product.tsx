@@ -25,10 +25,7 @@ export default function PricingProduct({ name, description, price, features, pla
 
         // step 2: define the data for monthly subscription
         const body: CheckoutSubscriptionBody = {
-            interval: "month",
-            amount: price * 100,
-            plan: "Monthly",
-            planDescription: `Subscribe for $${price} per month`,
+            price_id: plan === Plans.PRO ? process.env.NEXT_PUBLIC_STRIPE_PRO_PLAN_ID! : plan === Plans.BUSINESS ? process.env.NEXT_PUBLIC_STRIPE_BUSINESS_PLAN_ID! : process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID!,
         };
 
         setLoading(true)
@@ -61,7 +58,7 @@ export default function PricingProduct({ name, description, price, features, pla
 
                 <div className="flex justify-center items-center py-10 ">
                     <span className="mr-2 text-5xl font-extrabold">
-                        {price}$
+                        {price}€
                     </span>
                     <span>
                         /month

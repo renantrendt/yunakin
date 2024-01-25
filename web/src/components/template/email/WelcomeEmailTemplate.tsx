@@ -1,52 +1,145 @@
-import * as React from 'react';
-import { Html } from '@react-email/html';
-import { Button } from '@react-email/button';
-interface WelcomeEmailTemplateProps {
-    name: string;
-    confirmationEmailLink: string;
+import {
+    Body,
+    Button,
+    Column,
+    Container,
+    Head,
+    Html,
+    Img,
+    Link,
+    Preview,
+    Row,
+    Section,
+    Text,
+} from "@react-email/components";
+import { Tailwind } from "@react-email/tailwind";
+import * as React from "react";
+
+interface VerificationEmailProps {
+    name?: string;
+    organizationName?: string;
+    confirmationEmail?: string;
+
 }
 
-export const WelcomeEmailTemplate: React.FC<Readonly<WelcomeEmailTemplateProps>> = ({
+const baseUrl = process.env.NEXT_URL
+
+export const VerificationEmail = ({
     name,
-}) => (
-    <div className="flex min-h-screen flex-col w-full">
-        <div className="container pt-24 flex flex-col justify-start   mx-auto p-2 md:px-24 items-start bg-white">
-            <Link className="btn btn-ghost text-xl" href='/'>NextStackSaaS</Link>
-            <h1 className='font-bold text-3xl pt-8'>Hi {name}</h1>
-            <p>You recently created an account and requested that the confirmation email is resend</p><p>Click the button below to confirm the account,</p>
-            <Button classname='my-8'>Confirm your  Email</Button>
-            <div className='max-w-lg'>
-                <p>If you did not create an account please ignore this email or reply to let us know.</p>
+    confirmationEmail,
+    organizationName
+}: VerificationEmailProps) => {
+    const previewText = `Confirm registration on ${organizationName}`;
 
-                <p>Thanks, \n</p>
-                <p>NextstackSaaS team</p>
-            </div>
+    return (
+        <Html>
+            <Head />
+            <Preview>{previewText}</Preview>
+            <Tailwind>
+                <Body className="bg-white font-sans px-2 ">
+                    <Container className="  my-[40px] mx-auto    max-w-[665px]">
+                        <Section className="mt-[32px]">
+                            <Img
+                                src={`${baseUrl}/images/logo.png`}
+                                width="150"
+                                height="120"
+                                alt="CodePilot"
+                                className="my-0 "
+                            />
+                        </Section>
+                        <Text className="text-black text-2xl font-bold leading-[24px]">
+                            Hi {name},
+                        </Text>
+                        <Text className="text-black text-[14px] leading-[24px]">
+                            You recently created an account and requested that the confirmation email is resend.
+                        </Text>
+                        <Text>
+                            Click the button below to confirm the account,
+                        </Text>
+                        <Section className="text-left mt-[32px] mb-[32px]">
+                            <Button
+                                className="bg-[#2F80ED] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
+                                href={confirmationEmail}
+                            >
+                                Confirm your Email
+                            </Button>
+                        </Section>
+                        <Text className="text-black text-[14px] leading-[24px]">
+                            or copy and paste this URL into your browser:{" "}
+                            <Link href={confirmationEmail} className="text-blue-600 no-underline">
+                                {confirmationEmail}
+                            </Link>
+                        </Text>
+                        <Section className="text-left mt-[32px] mb-[32px]">
+                            <Text>
+                                If you did not create an account please ignore this email or reply to let us know.
+                            </Text>
+                            <Text>
+                                Thanks,
+                            </Text>
+                            <Text>
+                                {organizationName} team
+                            </Text>
+                        </Section>
+                        <Section className="text-left mt-[32px] mb-[32px] p-4  border-gray-300 rounded-md  border border-solid">
+                            <Text>
+                                P.S. We also love hearing from you and helping you with any issues you have. Please reply to this email if you want to ask a question or just say hi.
+                            </Text>
+                        </Section>
+                    </Container>
+                    <Container className="bg-[#FAFAFA] !w-full min-w-full">
+                        <Section className="mt-4">
+                            <Img
+                                src={`${baseUrl}/images/logo.png`}
+                                width="150"
+                                height="60"
+                                alt="CodePilot"
+                                className="my-0  mx-auto"
+                            />
+                        </Section>
+                        <Section className="max-w-[665px] mt-4 text-center">
+                            <Row className="my-4  ">
+                                <Column>
+                                    Facebook
+                                </Column>
+                                <Column>
+                                    Twitter
+                                </Column>
+                                <Column>
+                                    Instagram
+                                </Column>
+                            </Row>
+                            <Row>
+                                <Column>
+                                    Privacy Policy
+                                </Column>
+                                <Column>
+                                    Terms & Conditions
+                                </Column>
+                                <Column>
+                                    Cookies
+                                </Column>
+                            </Row>
+                            <Text className="text-center">
+                                © 2021, Company Inc. All right reserved.
+                            </Text>
+                            <Text>
+                                Company Inc. <br />
+                                Magjistralja Prishtine - Lipjan <br />
+                                Prishtine, Kosovo <br />
+                            </Text>
+                        </Section>
+                    </Container>
+                </Body>
+            </Tailwind>
+        </Html>
+    );
+};
 
+VerificationEmail.PreviewProps = {
+    name: "Fortan",
+    confirmationEmail: "https://codepilot.dev/confirm/1234567890",
+    organizationName: "CodePilot",
+} as VerificationEmailProps;
 
-            <div className='border-1 border-black'>
-                P.S. We also love hearing from you and helping you with any issues you have. Please reply to this email if you want to ask a question or just say hi.
-            </div>
-        </div>
-        <div className="email-footer flex-1 w-full  bg-[#FAFAFA] flex justify-center items-center">
-            <div className='max-w-xl flex flex-col gap-4'>
-                <div role="button" className="btn btn-ghost lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                </div>
-                <div className="socials flex justify-between items-center ">
-                    <p>Facebook</p>
-                    <p>Twitter</p>
-                    <p>Instagram</p>
-                </div>
-                <div className="terms flex justify-between items-center gap-8 ">
-                    <p>Privacy Policy</p>
-                    <p>Terms & Conditions</p>
-                    <p>Cookies</p>
-                </div>
-                <div className="location ">
-                    <p>© 2021, Company Inc. All right reserved.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-);
+export default VerificationEmail;

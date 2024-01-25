@@ -57,14 +57,14 @@ export default function Pricing() {
                 <PricingProduct
                     name={'Pro'}
                     description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
-                    price={50}
+                    price={29.99}
                     plan={Plans.PRO}
                     features={features}
                 />
                 <PricingProduct
                     name={'Personal'}
                     description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
-                    price={119}
+                    price={59.99}
                     plan={Plans.BUSINESS}
 
                     features={features}
@@ -73,7 +73,7 @@ export default function Pricing() {
                 <PricingProduct
                     name={'Startup'}
                     description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
-                    price={200}
+                    price={79.99}
                     plan={Plans.ADVANCED}
                     features={features}
                 />

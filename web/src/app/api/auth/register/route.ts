@@ -1,6 +1,6 @@
 // import { sendEmail } from "@/lib/mailer";
 import { prisma } from '@/lib/prisma'
-import { sendEmail } from '@/utils/sendEmail'
+import { sendVerificationEmail } from '@/utils/sendEmail'
 import { hash } from 'bcryptjs'
 import { NextResponse } from 'next/server'
 
@@ -19,17 +19,18 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
         name,
         email: email.toLowerCase(),
         password: hashed_password,
-        verified: false
+        verified: false,
+        provider: 'credentials',
       }
     })
 
 
-    await sendEmail({
+    await sendVerificationEmail({
       to: user.email,
       name: user.name,
-      subject: 'Registration Confirmation',
+      subject: 'Confirm Account',
+      token: user.verifyToken as string
     });
-
     return NextResponse.json({
       user: {
         name: user.name,
