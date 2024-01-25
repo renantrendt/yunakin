@@ -15,15 +15,13 @@ const Auth = ({ children }: AuthProps) => {
             <div className="flex w-full h-full m-auto justify-center bg-neutral text-black items-center">
                 <div className='w-4 h-4'>
                     <LoadingIcon />{' '}
-
                 </div>
             </div>
         )
     }
     if (status == 'unauthenticated') {
-        router.replace('/login')
+        return router.replace('/login')
     }
-
     return <div>{children}</div>
 }
 

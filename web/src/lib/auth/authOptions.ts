@@ -28,8 +28,6 @@ export const authOptions: NextAuthOptions = {
                 if (!credentials?.email || !credentials.password) {
                     return null
                 }
-                console.log('here')
-
                 console.log(await hash(credentials.password, 12))
                 const user = (await prisma.user.findUnique({
                     where: {
@@ -45,7 +43,10 @@ export const authOptions: NextAuthOptions = {
                 if (!user) {
                     throw { message: 'No user found with this email', statusCode: 400 }
                 }
-                if (!user || !(await compare(credentials.password, user.password))) {
+                if (user.provider !== "credentials") {
+                    throw { message: 'A user with this email with other provider is already registered', statusCode: 400 }
+                }
+                if (!user || !(await compare(credentials.password, user.password as string))) {
                     throw { message: 'Email or password is incorrect', statusCode: 401 }
                 }
 
@@ -125,15 +126,19 @@ export const authOptions: NextAuthOptions = {
         },
         session: async ({ session, token }) => {
             const user = await prisma.user.findUnique({
-
+                where: { email: token.email as string },
+                select: {
+                    id: true,
+                    email: true,
+                    name: true,
+                    avatar: true,
+                }
             });
             return {
                 ...session,
                 user: {
                     ...session.user,
-                    id: token.id,
-                    role: token.role,
-                    randomKey: token.randomKey
+                    ...user
                 },
                 accessToken: token
             }
