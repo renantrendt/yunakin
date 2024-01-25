@@ -24,7 +24,7 @@ const Cta = () => {
 
             <div className="flex flex-col md:flex-row justify-start items-start gap-6 ">
                 {reasons.map((reason) => (
-                    <div className="Frame10 w-96 h-56 rounded-lg shadow border border-neutral-200 flex-col justify-center items-center gap-4 inline-flex">
+                    <div key={reason.metric} className="Frame10 w-96 h-56 rounded-lg shadow border border-neutral-200 flex-col justify-center items-center gap-4 inline-flex">
                         <div className="X text-center text-stone-950 text-6xl font-black font-['Inter'] leading-10">{reason.metric}</div>
                         <div className="FasterImplementation text-center text-neutral-600 text-xl font-light font-['Inter'] leading-loose">{reason.descriptin}</div>
                     </div>
