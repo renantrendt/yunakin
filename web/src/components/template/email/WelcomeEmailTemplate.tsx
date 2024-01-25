@@ -23,8 +23,6 @@ interface VerificationEmailProps {
 }
 
 const baseUrl = process.env.NEXT_URL
-    ? process.env.NEXT_URL
-    : "http://localhost:3000";
 
 export const VerificationEmail = ({
     name,

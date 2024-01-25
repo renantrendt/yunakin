@@ -25,7 +25,7 @@ export const sendVerificationEmail = async ({
       from: 'Fortan <fortan@codepilot.dev>',
       to: [to],
       subject: subject,
-      react: VerificationEmail({ confirmationEmail: `http://localhost:3000/verify?token=${token}`, name: name, organizationName: "CodePilot" }) as React.ReactElement,
+      react: VerificationEmail({ confirmationEmail: `${process.env.NEXT_URL}/verify?token=${token}`, name: name, organizationName: "CodePilot" }) as React.ReactElement,
     });
     return { success: true, data: data }
   } catch (error: any) {
