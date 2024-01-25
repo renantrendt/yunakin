@@ -15,7 +15,8 @@ export const authOptions: NextAuthOptions = {
 
     providers: [
         CredentialsProvider({
-            name: 'Sign in',
+            id: 'credentials',
+            name: 'password',
             credentials: {
                 email: {
                     label: 'Email',
@@ -58,7 +59,7 @@ export const authOptions: NextAuthOptions = {
             }
         }),
         CredentialsProvider({
-            id: 'emailVerification',
+            id: 'verify',
             credentials: {
                 token: { type: 'text' }
             },
@@ -73,7 +74,7 @@ export const authOptions: NextAuthOptions = {
                 })
 
                 if (!user) {
-                    throw new Error('Ungültiger oder abgelaufener Verifizierungslink')
+                    throw new Error('Error on verifying user')
                 }
 
                 await prisma.user.update({
