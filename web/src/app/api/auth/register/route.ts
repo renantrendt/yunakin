@@ -28,7 +28,7 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
     await sendVerificationEmail({
       to: user.email,
       name: user.name,
-      subject: 'Welcome to Fortan',
+      subject: 'Confirm Account',
       token: user.verifyToken as string
     });
     return NextResponse.json({

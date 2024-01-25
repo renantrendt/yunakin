@@ -16,7 +16,7 @@ model User {
   email       String   @unique
   name        String
   password    String?
-  verifyToken String?
+  verifyToken String   @default(uuid())
   verified    Boolean
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

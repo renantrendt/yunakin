@@ -100,4 +100,4 @@ VerificationEmail.PreviewProps = {
     organizationName: "CodePilot",
 } as VercelInviteUserEmailProps;
 
-export default VercelInviteUserEmail;
+export default VerificationEmail;
