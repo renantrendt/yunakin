@@ -1,6 +1,6 @@
 // import { sendEmail } from "@/lib/mailer";
 import { prisma } from '@/lib/prisma'
-import { sendEmail } from '@/utils/sendEmail'
+import { sendEmail, sendVerificationEmail } from '@/utils/sendEmail'
 import { hash } from 'bcryptjs'
 import { NextResponse } from 'next/server'
 
@@ -25,12 +25,12 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
     })
 
 
-    await sendEmail({
+    await sendVerificationEmail({
       to: user.email,
       name: user.name,
-      subject: 'Registration Confirmation',
+      subject: 'Welcome to Fortan',
+      token: user.verifyToken as string
     });
-
     return NextResponse.json({
       user: {
         name: user.name,

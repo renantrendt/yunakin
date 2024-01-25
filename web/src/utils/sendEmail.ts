@@ -1,5 +1,5 @@
 // utils/sendEmail.ts
-import { WelcomeEmailTemplate } from '@/components/template/email/WelcomeEmailTemplate';
+import { VerificationEmail } from '@/components/template/email/WelcomeEmailTemplate';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -48,12 +48,12 @@ export const sendVerificationEmail = async ({
 }) => {
 
   try {
-    // const data = await resend.emails.send({
-    //   from: 'Fortan <fortan@sleekvid.com>',
-    //   to: [to],
-    //   subject: subject,
-    //   react: WelcomeEmailTemplate({ confirmationEmailLink: "https://dev.sleekvid.com", name: name }) as React.ReactElement,
-    // });
+    const data = await resend.emails.send({
+      from: 'Fortan <fortan@codepilot.dev>',
+      to: [to],
+      subject: subject,
+      react: VerificationEmail({ confirmationEmail: `http://localhost:3000/verify?token=${token}`, name: name }) as React.ReactElement,
+    });
     return { success: true }
   } catch (error: any) {
     console.error(error)
