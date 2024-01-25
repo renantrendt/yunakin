@@ -5,10 +5,7 @@ import Stripe from "stripe";
 
 // data needed for checkout
 export interface CheckoutSubscriptionBody {
-    plan: string;
-    planDescription: string;
-    amount: number;
-    interval: "month" | "year";
+    price_id: string;
     customerId?: string;
 }
 
@@ -29,19 +26,9 @@ export async function POST(req: Request) {
             line_items: [
                 // generate inline price and product
                 {
-                    price_data: {
-                        currency: "usd",
-                        recurring: {
-                            interval: body.interval,
-                        },
-                        unit_amount: body.amount,
-                        product_data: {
-                            name: body.plan,
-                            description: body.planDescription,
-                        },
-                    },
-                    quantity: 1,
-                },
+                    price: body.price_id,
+                    quantity: 1
+                }
             ],
             success_url: success_url,
             cancel_url: `${origin}/checkout?canceled=true&session_id={CHECKOUT_SESSION_ID}`,

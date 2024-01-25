@@ -70,7 +70,7 @@ const BlogPage = () => {
                 {data && data.map((blog: any, index: any) => (
                     <Link key={index} className="card w-full  max-w-lg bg-base-100 h-96 shadow-xl col-span-12  md:col-span-6 lg:col-span-4 hover:scale-110 hover:cursor-pointer 
                     transition duration-150" href={`/blogs/${blog.attributes.title.replaceAll(" ", "-")}`}>
-                        <figure className='relative hidden'><Image src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${blog.attributes.imageURL.data?.attributes.url ?? ""}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
+                        <figure className='relative hidden'><Image src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${blog.attributes.imageURL.data?.attributes.url ?? ""}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
                         <div className="card-body pb-4">
                             <h2 className="card-title">{blog.attributes.title}</h2>
                             <p>{blog.attributes.description[0].children[0].text}</p>

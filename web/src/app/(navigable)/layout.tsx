@@ -1,5 +1,5 @@
 'use client'
-import DashboardNavbar from '@/components/dashboard/navbar/Navbar'
+import DashboardNavbar from '@/components/dashboard/navbar/navbar'
 import Sidebar from '@/components/navigation/Sidebar'
 import AuthProvider from '@/lib/providers/auth-provider'
 import React from 'react'
