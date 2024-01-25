@@ -27,7 +27,7 @@ const FAQ = () => {
                 <h1 className='text-5xl  font-bold mb-5'>FAQ</h1>
                 <h4 className='text-center text-xl '>Frequently Asked Questions</h4>
             </div>
-            <div className='faq-list flex flex-col justify-start gap-8  max-w-lg md:max-w-11/12  '>
+            <div className='faq-list flex flex-col justify-start gap-5  max-w-lg md:max-w-11/12  '>
                 {faqItems.map((item, index) => (
                     <FaqItem key={index} question={item.question} answer={item.answer} isOpen={index == showAnswer} onClick={() => setShowAnswer(index == showAnswer ? null : index)} />
                 ))}
