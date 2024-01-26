@@ -3,7 +3,6 @@ import BackIcon from '@/assets/icons/BackIcon'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { fetchStrapiAPI } from '@/utils/strapi';
-import ReactMarkdown from "react-markdown";
 import Markdown from 'react-markdown';
 
 
@@ -78,7 +77,7 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
                         </div>
                     </div>
                     <div className="image w-full flex justify-center mt-4 md:mt-16">
-                        <img src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${data.imageURL}`} width={1080} height={480} alt="meaningful image" />
+                        <img src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${data.imageURL}`} className='w-full rounded-lg max-h-[456px]' alt="meaningful image" />
                     </div>
                     <div className="content mx-auto max-w-2xl my-8 md:my-16  ">
                         <Markdown >{data.description}</Markdown>

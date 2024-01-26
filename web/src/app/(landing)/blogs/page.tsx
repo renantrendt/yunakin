@@ -45,7 +45,6 @@ const BlogPage = () => {
         setLoading(true);
         try {
             const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-            const path = `/articles`;
             const categorypath = '/categories';
 
             const urlParamsObject = {
@@ -115,9 +114,9 @@ const BlogPage = () => {
 
     return (
         <div className='mb-24'>
-            <PageHeader heading="Our Blog" text="Checkout Something Cool" />
+            <PageHeader />
             {data && data.map((category: BlogsViewModel, index: any) => (
-                <div className='category px-4 ' key={index}>
+                <div className='category px-4 mb-20 ' key={index}>
                     <div className="  ml-5 px-5 py-1.5 bg-gray-200 rounded-3xl border justify-start items-start gap-2.5 inline-flex">
                         <div className=" text-center text-neutral-600 text-sm font-semibold font-['Inter'] uppercase tracking-wide">{category.name}</div>
                     </div>
