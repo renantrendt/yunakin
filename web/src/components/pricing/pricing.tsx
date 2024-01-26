@@ -47,8 +47,8 @@ const features = [
 ]
 export default function Pricing() {
     return (
-        <div className='my-20 w-full'>
-            <div className=' flex flex-col justify-center items-center gap-5 mb-8'>
+        <div className='my-20 w-full '>
+            <div className=' flex flex-col justify-center items-center gap-5 mb-8 dark:text-white'>
                 <h1 className='text-5xl font-bold text-center mb-2'>Enable the best experience</h1>
                 <h3 className='text-xl  mb-20 max-w-xl text-center'>Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.</h3>
             </div>

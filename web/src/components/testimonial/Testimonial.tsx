@@ -26,13 +26,13 @@ const Testimonial = () => {
 
 
     return (
-        <div className='my-20 w-full'>
+        <div className='my-20 w-full dark:text-white'>
             <h1 className='text-4xl font-bold text-center mb-2'>Testimonials</h1>
             <h3 className='text-2xl text-center mb-20'>Read what people say about us</h3>
-            <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6  justify-center '>
+            <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 justify-center '>
                 {testimonials.map((testimonial, index) => (
-                    <div key={index} className='card    h-full p-5 '>
-                        <div className='card-body flex justify-center items-center shadow-lg'>
+                    <div key={index} className='card dark:bg-gray-700    h-full p-5  shadow-lg'>
+                        <div className='card-body flex   border-justify-center items-center '>
                             <p className='max-w-[316px] text-center mb-8'>{testimonial.content}</p>
                             <Image src={testimonial.avatar} alt={testimonial.name} width={100} height={100} className='rounded-full' />
                             <h4 className='text-lg font-bold'>{testimonial.name}</h4>

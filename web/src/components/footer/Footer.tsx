@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 export default function Footer(): JSX.Element {
     return (
-        <footer className="footer  mx-auto px-10 h-[50vh] text-base-content w-full bg-white pt-24 pb-10">
+        <footer className="footer  mx-auto px-10 h-[50vh] text-base-content w-full bg-white dark:bg-gray-700 dark:text-white pt-24 pb-10">
             <nav>
                 <header className="footer-title">Services</header>
                 <Link href='/' className="link link-hover">Branding</Link>

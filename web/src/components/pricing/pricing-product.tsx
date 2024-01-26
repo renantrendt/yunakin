@@ -48,16 +48,16 @@ export default function PricingProduct({ name, description, price, features, pla
     return (
         <div className="card bg-base-100 shadow-xl rounded-[32px] h-full p-5">
             {recommended && (
-                <div className='rounded-[40px] shadow-md text-blue-500 px-6 py-2  bg-white w-fit absolute top-[-20px] left-[32%]  '>Recommended</div>
+                <div className='rounded-[40px] shadow-md text-blue-500 px-6 py-2  bg-white dark:bg-gray-800 dark:text-white w-fit absolute top-[-20px] left-[32%]  '>Recommended</div>
             )}
             <div className="card-body">
-                <div className='flex  flex-col items-center justify-center mb-8'>
-                    <h3 className="mb-6 text-4xl font-bold">{name}</h3>
-                    <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">{description}</p>
+                <div className='flex  flex-col items-center justify-center mb-8 '>
+                    <h3 className="mb-6 text-4xl font-bold dark:text-white">{name}</h3>
+                    <p className="font-light text-gray-500 sm:text-lg dark:text-white">{description}</p>
                 </div>
 
-                <div className="flex justify-center items-center py-10 ">
-                    <span className="mr-2 text-5xl font-extrabold">
+                <div className="flex justify-center items-center py-10 dark:text-white ">
+                    <span className="mr-2 text-5xl font-extrabold ">
                         {price}€
                     </span>
                     <span>
@@ -74,7 +74,7 @@ export default function PricingProduct({ name, description, price, features, pla
                     {
                         features.map((feature, index) => {
                             return (
-                                <li className="flex items-center space-x-3 py-3 px-2" key={feature + '-' + index}>
+                                <li className="flex items-center space-x-3 py-3 px-2 dark:text-white" key={feature + '-' + index}>
                                     {feature.plans.includes(plan) ? <TickIcon /> : <CrossIcon />}
                                     <span><b className='text-lg'></b> {feature.name}</span>
                                 </li>

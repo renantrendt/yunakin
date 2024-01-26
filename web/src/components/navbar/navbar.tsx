@@ -5,10 +5,11 @@ import React from 'react'
 
 import { useRouter } from 'next/navigation'
 import siteUrls from '@/config/site-config'
+import { ThemeSwitcher } from '../theme/ThemeSwitcher'
 export default function Navbar() {
     const router = useRouter()
     return (
-        <div className="navbar p-2 md:px-24 ">
+        <div className="navbar p-2 md:px-24 dark:text-white">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div role="button" className="btn btn-ghost lg:hidden">
@@ -47,6 +48,7 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end">
+                <ThemeSwitcher />
                 <Button classname="btn btn-primary" onClick={() => router.push('/login')}>To App</Button>
             </div>
         </div>

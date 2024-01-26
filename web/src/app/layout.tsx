@@ -21,8 +21,8 @@ export default function RootLayout({
     logPageView()
   }, [])
   return (
-    <html lang="en" data-theme="light">
-      <body className={inter.className}>
+    <html lang="en" >
+      <body className={`${inter.className} `}>
         <Providers>
           {children}
         </Providers>

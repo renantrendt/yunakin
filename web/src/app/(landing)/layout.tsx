@@ -4,7 +4,7 @@ import React from 'react'
 
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className='bg-[#FAFAFA] w-full'>
+        <div className='bg-[#FAFAFA] dark:bg-gray-800 w-full'>
             <Navbar />
             {children}
             <Footer />
