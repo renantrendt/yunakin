@@ -2,7 +2,7 @@ import { useTheme } from 'next-themes';
 import React from 'react'
 
 const ClientThemeProvider = ({ children }: { children: React.ReactNode }) => {
-    const { theme, setTheme } = useTheme();
+    const { theme } = useTheme();
     return (
         <div data-theme={theme}>
             {children}
