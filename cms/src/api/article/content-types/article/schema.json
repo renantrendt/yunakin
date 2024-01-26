@@ -38,6 +38,10 @@
         "videos",
         "audios"
       ]
+    },
+    "slug": {
+      "type": "string",
+      "required": true
     }
   }
 }

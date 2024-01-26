@@ -22,6 +22,7 @@ interface BlogsViewModel {
             description: any;
             publishedAt: string;
             imageURL: string;
+            slug: string;
             author: {
                 name: string;
                 avatar: string;
@@ -38,7 +39,6 @@ const BlogPage = () => {
     //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isLoading, setLoading] = useState(true);
     //eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [blogs, setBlogs] = useState<any[]>([]);
 
     const fetchData = useCallback(async (start: number, limit: number) => {
         setLoading(true);
@@ -47,20 +47,6 @@ const BlogPage = () => {
             const path = `/articles`;
             const categorypath = '/categories';
 
-            // const urlParamsObject = {
-            //     sort: { createdAt: "desc" },
-            //     populate: {
-            //         imageURL: { fields: ["url"] },
-            //         category: { populate: "*" },
-            //         author: {
-            //             populate: "*",
-            //         },
-            //     },
-            //     pagination: {
-            //         start: start,
-            //         limit: limit,
-            //     },
-            // };
             const urlParamsObject = {
                 sort: { createdAt: "desc" },
                 populate: {
@@ -92,6 +78,7 @@ const BlogPage = () => {
                             title: article.attributes.title,
                             description: article.attributes.description,
                             publishedAt: article.attributes.publishedAt,
+                            slug: article.attributes.slug,
                             imageURL: article.attributes.imageURL.data.attributes.url ?? "",
                             author: {
                                 id: article.attributes.author.data.id,
@@ -135,7 +122,7 @@ const BlogPage = () => {
                     <div className='grid grid-cols-12 justify-items-center w-full gap-x-4 mx-auto gap-y-12 pt-6'>
                         {category.articles.map((article, index: any) => (
                             <Link key={index} className="card w-full  max-w-lg bg-base-100 h-96  col-span-12  md:col-span-6 lg:col-span-4 hover:scale-105 hover:cursor-pointer 
-                               transition duration-150 rounded-lg shadow-sm" href={`/blogs/${article.title.replaceAll(" ", "-")}`}>
+                               transition duration-150 rounded-lg shadow-sm" href={`/blogs/${article.slug}`}>
                                 <figure className='relative hidden'><Image src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
                                 <div className="card-body pb-4">
                                     <h2 className="card-title">{article.title}</h2>

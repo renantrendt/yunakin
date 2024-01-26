@@ -793,6 +793,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'api::category.category'
     >;
     imageURL: Attribute.Media & Attribute.Required;
+    slug: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
