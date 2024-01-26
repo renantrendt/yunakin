@@ -781,7 +781,6 @@ export interface ApiArticleArticle extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    description: Attribute.Blocks;
     author: Attribute.Relation<
       'api::article.article',
       'oneToOne',
@@ -793,6 +792,9 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'api::category.category'
     >;
     imageURL: Attribute.Media & Attribute.Required;
+    slug: Attribute.String & Attribute.Required;
+    description: Attribute.RichText;
+    short_description: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -817,13 +819,14 @@ export interface ApiAuthorAuthor extends Schema.CollectionType {
     singularName: 'author';
     pluralName: 'authors';
     displayName: 'Author';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String;
-    avatar: Attribute.Media;
+    avatar: Attribute.Media & Attribute.Required;
     email: Attribute.String;
     articles: Attribute.Relation<
       'api::author.author',

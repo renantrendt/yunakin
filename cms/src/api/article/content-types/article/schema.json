@@ -15,9 +15,6 @@
     "title": {
       "type": "string"
     },
-    "description": {
-      "type": "blocks"
-    },
     "author": {
       "type": "relation",
       "relation": "oneToOne",
@@ -38,6 +35,16 @@
         "videos",
         "audios"
       ]
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "short_description": {
+      "type": "string"
     }
   }
 }

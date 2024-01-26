@@ -38,7 +38,8 @@ export const authOptions: NextAuthOptions = {
                         id: true,
                         email: true,
                         name: true,
-                        password: true
+                        password: true,
+                        provider: true
                     }
                 })) as User
                 if (!user) {
@@ -56,33 +57,6 @@ export const authOptions: NextAuthOptions = {
                     email: user.email,
                     name: user.name
                 }
-            }
-        }),
-        CredentialsProvider({
-            id: 'verify',
-            credentials: {
-                token: { type: 'text' }
-            },
-            authorize: async (
-                credentials: Record<'token', string> | undefined,
-            ): Promise<User | null> => {
-                if (!credentials) {
-                    throw new Error('Ungültige Anmeldedaten')
-                }
-                const user = await prisma.user.findFirst({
-                    where: { verifyToken: credentials.token }
-                })
-
-                if (!user) {
-                    throw new Error('Error on verifying user')
-                }
-
-                await prisma.user.update({
-                    where: { id: user.id },
-                    data: { verifyToken: undefined }
-                })
-                return user
-
             }
         }),
         GoogleProvider({
