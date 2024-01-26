@@ -3,7 +3,7 @@ import customToast from '@/components/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect } from 'react'
 
-const ErrorPage = ({ }) => {
+const ErrorPage = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     useEffect(() => {
