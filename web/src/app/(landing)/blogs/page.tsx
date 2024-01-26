@@ -22,6 +22,7 @@ interface BlogsViewModel {
             description: any;
             publishedAt: string;
             imageURL: string;
+            short_description: string;
             slug: string;
             author: {
                 name: string;
@@ -77,6 +78,7 @@ const BlogPage = () => {
                             id: article.id,
                             title: article.attributes.title,
                             description: article.attributes.description,
+                            short_description: article.attributes.short_description,
                             publishedAt: article.attributes.publishedAt,
                             slug: article.attributes.slug,
                             imageURL: article.attributes.imageURL.data.attributes.url ?? "",
@@ -126,7 +128,7 @@ const BlogPage = () => {
                                 <figure className='relative hidden'><Image src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
                                 <div className="card-body pb-4">
                                     <h2 className="card-title">{article.title}</h2>
-                                    <p>{article.description[0].children[0].text}</p>
+                                    <p>{article.short_description}</p>
                                     <div className='flex  items-center justify-start mt-4'>
                                         <div className='avatar'>
                                             <div className="w-10 rounded-full ">

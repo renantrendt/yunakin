@@ -3,14 +3,10 @@ import BackIcon from '@/assets/icons/BackIcon'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { fetchStrapiAPI } from '@/utils/strapi';
-const blog = {
-    "title": "The Future of Renewable Energy: Innovations and Challenges",
-    "description": "An in-depth look at the cutting-edge innovations driving the future of renewable energy. Explore the potential solutions to the challenges facing the adoption of solar, wind, and other renewable energy sources. Lorem ipsum dolor sit amet consectetur adipisicing elit.Consectetur magni libero itaque cum tenetur modi omnis dolorum, odit enim quidem voluptatem veniam alias quibusdam error recusandae blanditiis natus facere accusantium sequi laudantium at fugiat aut ratione.Quos unde repudiandae esse officia architecto reiciendis necessitatibus consectetur quo itaque rerum quibusdam perspiciatis quidem enim tempora dolor animi magnam delectus, sit sapiente odit iste maxime minima et numquam? Incidunt vel quo repellat doloremque?",
-    "lastUpdated": "2024-01-18",
-    "authorName": "Samantha Lee",
-    "authorImageUrl": "https://example.com/images/authors/samantha-lee.jpg",
-    "blogImageUrl": "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-};
+import ReactMarkdown from "react-markdown";
+import Markdown from 'react-markdown';
+
+
 
 interface SingleBlogViewModel {
     title: string;
@@ -62,30 +58,6 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
                     }
                 }
                 setData(mappedData);
-                // const mappedData = [
-                //     ...responseData.data.map((item: any) => ({
-                //         id: item.id,
-                //         name: item.attributes.name,
-                //         slug: item.attributes.slug,
-                //         articles: item.attributes.articles.data.map((article: any) => {
-                //             return {
-                //                 id: article.id,
-                //                 title: article.attributes.title,
-                //                 description: article.attributes.description,
-                //                 publishedAt: article.attributes.publishedAt,
-                //                 slug: article.attributes.slug,
-                //                 imageURL: article.attributes.imageURL.data.attributes.url ?? "",
-                //                 author: {
-                //                     id: article.attributes.author.data.id,
-                //                     name: article.attributes.author.data.attributes.name,
-                //                     avatar: article.attributes.author.data.attributes.avatar.data.attributes.url ?? "",
-                //                 }
-                //             }
-                //         }),
-                //     })),
-                // ] as SingleBlogViewModel;
-
-                console.log(responseData)
 
             } catch (error) {
                 console.error(error);
@@ -108,8 +80,8 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
                     <div className="image w-full flex justify-center mt-4 md:mt-16">
                         <img src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${data.imageURL}`} width={1080} height={480} alt="meaningful image" />
                     </div>
-                    <div className="content mx-auto max-w-xl my-8 md:my-16  ">
-                        <p className='text-center'>{JSON.stringify(data.description)}</p>
+                    <div className="content mx-auto max-w-2xl my-8 md:my-16  ">
+                        <Markdown >{data.description}</Markdown>
                     </div>
                 </>
             )}

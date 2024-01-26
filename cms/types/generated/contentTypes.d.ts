@@ -781,7 +781,6 @@ export interface ApiArticleArticle extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    description: Attribute.Blocks;
     author: Attribute.Relation<
       'api::article.article',
       'oneToOne',
@@ -794,6 +793,8 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     >;
     imageURL: Attribute.Media & Attribute.Required;
     slug: Attribute.String & Attribute.Required;
+    description: Attribute.RichText;
+    short_description: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

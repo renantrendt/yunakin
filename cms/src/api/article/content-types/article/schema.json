@@ -15,9 +15,6 @@
     "title": {
       "type": "string"
     },
-    "description": {
-      "type": "blocks"
-    },
     "author": {
       "type": "relation",
       "relation": "oneToOne",
@@ -42,6 +39,12 @@
     "slug": {
       "type": "string",
       "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "short_description": {
+      "type": "string"
     }
   }
 }
