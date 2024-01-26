@@ -1,6 +1,7 @@
 const siteUrls = {
     home: '/',
     dashboard: '/dashboard',
+    docs: "https://docs.codepilot.dev",
     login: '/login',
     logout: '/logout',
     register: '/register',

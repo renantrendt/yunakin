@@ -33,10 +33,15 @@ export default function Navbar() {
                     <li><Link href={siteUrls.pricing}>Pricing</Link></li>
                     <li>
                         <Link href={siteUrls.blog}>Blog</Link>
+
                         {/* <ul className="p-2">
                                 <li><a>Submenu 1</a></li>
                                 <li><a>Submenu 2</a></li>
                             </ul> */}
+                    </li>
+                    <li>
+                        <Link href={siteUrls.docs}>Docs</Link>
+
                     </li>
                     <li><Link href={siteUrls.features}>Features</Link></li>
                 </ul>
