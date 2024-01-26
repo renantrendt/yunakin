@@ -9,7 +9,7 @@ import { ThemeSwitcher } from '../theme/ThemeSwitcher'
 export default function Navbar() {
     const router = useRouter()
     return (
-        <div className="navbar p-2 md:px-24 dark:text-white">
+        <div className="navbar p-2 md:px-28 pt-14 dark:text-white">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div role="button" className="btn btn-ghost lg:hidden">
@@ -27,7 +27,7 @@ export default function Navbar() {
                         <li><Link href={siteUrls.features}>Features</Link></li>
                     </ul>
                 </div>
-                <Link className="btn btn-ghost text-xl" href='/'>NextStackSaaS</Link>
+                <Link className=" text-xl" href='/'>NextStackSaaS</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -47,9 +47,9 @@ export default function Navbar() {
                     <li><Link href={siteUrls.features}>Features</Link></li>
                 </ul>
             </div>
-            <div className="navbar-end">
-                <ThemeSwitcher />
+            <div className="navbar-end flex gap-4">
                 <Button classname="btn btn-primary" onClick={() => router.push('/login')}>To App</Button>
+                <ThemeSwitcher />
             </div>
         </div>
     )

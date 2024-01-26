@@ -22,9 +22,9 @@ const Cta = () => {
                 <h3 className='text-xl  mb-20 max-w-xl text-center'>Traditional websites and landing pages are neither interactive nor personalized. These sites also load slowly and are not optimized for the mobile world</h3>
             </div>
 
-            <div className="flex flex-col md:flex-row justify-start items-start gap-6 dark:text-white  ">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 dark:text-white  w-full ">
                 {reasons.map((reason) => (
-                    <div key={reason.metric} className="Frame10 w-96 h-56 rounded-lg shadow border border-neutral-200 flex-col justify-center items-center gap-4 inline-flex">
+                    <div key={reason.metric} className=" w-full h-56 rounded-lg shadow border border-neutral-200 flex-col justify-center items-center gap-4 inline-flex">
                         <div className="X text-center text-stone-950 dark:text-white  text-6xl font-black font-['Inter'] leading-10">{reason.metric}</div>
                         <div className="FasterImplementation text-center text-neutral-600 dark:text-white text-xl font-light font-['Inter'] leading-loose">{reason.descriptin}</div>
                     </div>

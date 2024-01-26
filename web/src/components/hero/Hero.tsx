@@ -5,8 +5,8 @@ import Button from '../button/Button'
 export default function Hero() {
     return (
         <section
-            className="my-20 flex flex-col md:flex-row justify-center px-5  items-center text-center md:text-left dark:text-white">
-            <div className="w-full md:w-7/12 md:mr-8">
+            className="my-20 flex flex-col md:flex-row justify-center items-center text-center md:text-left dark:text-white">
+            <div className="w-full ">
                 <h1 className="text-5xl font-bold max-w-2xl">Create high-converting funnels in just 60 minutes</h1>
                 <p className="text-xl py-6 max-w-2xl">
                     Generate a steady flow of customers or talents with lightning-fast and easy-to-build Perspective Funnels. No design or programming skills required.                </p>
@@ -27,7 +27,7 @@ export default function Hero() {
 
             </div>
             <div
-                className="relative w-full md:w-6/12 flex flex-col justify-start items-center md:gap-24">
+                className="relative w-full  flex justify-end ">
                 <RockerLaunchIcon />
             </div>
         </section>
