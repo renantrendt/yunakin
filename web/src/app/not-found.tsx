@@ -2,10 +2,10 @@ import React from 'react'
 
 const NotFoundPage = () => {
     return (
-        <div className="flex items-center justify-center min-h-screen bg-white py-48">
+        <div className="flex items-center justify-center min-h-screen dark:bg-gray-800 bg-white py-48">
             <div className="flex flex-col">
                 <div className="flex flex-col items-center">
-                    <div className="text-black font-bold text-5xl md:text-[200px] underline  decoration-8 underline-offset-0	    	">
+                    <div className="text-black text-black dark:text-white font-bold text-5xl md:text-[200px] underline  decoration-8 underline-offset-0	    	">
                         404
                     </div>
 

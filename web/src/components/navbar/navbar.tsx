@@ -9,7 +9,7 @@ import { ThemeSwitcher } from '../theme/ThemeSwitcher'
 export default function Navbar() {
     const router = useRouter()
     return (
-        <div className="navbar p-2 md:px-28 pt-14 dark:text-white">
+        <div className="navbar p-2 md:px-28 pt-14 text-black dark:text-white">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div role="button" className="btn btn-ghost lg:hidden">

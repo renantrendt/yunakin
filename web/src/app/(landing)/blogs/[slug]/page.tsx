@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { fetchStrapiAPI } from '@/utils/strapi';
 import Markdown from 'react-markdown';
-
+import remarkGfm from 'remark-gfm';
+import Image from 'next/image';
 
 
 interface SingleBlogViewModel {
@@ -20,7 +21,7 @@ interface SingleBlogViewModel {
 //eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SlugPage = ({ params }: { params: { slug: string } }) => {
     const router = useRouter()
-    const [data, setData] = useState<any>([]);
+    const [data, setData] = useState<any>(null);
 
     useEffect(() => {
 
@@ -65,7 +66,7 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
 
     }, []);
     return (
-        <div className='mx-auto w-full px-4  md:px-44 '>
+        <div className='mx-auto w-full px-4  md:px-44 text-black dark:text-white '>
             {data && (
                 <>
                     <div className='grid grid-cols-12 mt-16 '>
@@ -76,11 +77,18 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
                             <h1 className='text-3xl font-bold max-w-sm lg:max-w-lg text-center'>{data.title}</h1>
                         </div>
                     </div>
-                    <div className="image w-full flex justify-center mt-4 md:mt-16">
-                        <img src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${data.imageURL}`} className='w-full rounded-lg max-h-[456px]' alt="meaningful image" />
+                    <div className="image flex justify-center mt-4 md:mt-16 relative w-full h-96 rounded-md">
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${data.imageURL}`} layout="fill"
+                            objectFit="cover"
+                            alt='image'
+                            className='rounded-lg'
+                        />
                     </div>
-                    <div className="content mx-auto max-w-2xl my-8 md:my-16  ">
-                        <Markdown >{data.description}</Markdown>
+                    <div className="content mx-auto max-w-3xl my-8 md:my-16  ">
+                        <Markdown remarkPlugins={[remarkGfm]} className={'prose'} >
+                            {data.description}
+                        </Markdown>
                     </div>
                 </>
             )}

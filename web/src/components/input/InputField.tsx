@@ -15,21 +15,21 @@ interface InputFieldProps {
 
 const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', placeholder, onChange, error, id, ...additionalProps }) => {
   return (
-        <div className="form-control">
-            <label className="label">
-                <span className="label-text">{label}</span>
-            </label>
-            <input
-                type={type}
-                placeholder={placeholder}
-                className="input input-bordered"
-                name={name}
-                id={id}
-                onChange={onChange}
-                {...additionalProps}
-            />
-            {error && <p className='text-red-300'>{error}</p>}
-        </div>
+    <div className="form-control text-white">
+      <label className="label">
+        <span className="label-text">{label}</span>
+      </label>
+      <input
+        type={type}
+        placeholder={placeholder}
+        className="input input-bordered input-primary "
+        name={name}
+        id={id}
+        onChange={onChange}
+        {...additionalProps}
+      />
+      {error && <p className='text-red-300'>{error}</p>}
+    </div>
   )
 }
 

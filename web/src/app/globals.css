@@ -22,3 +22,15 @@ body {
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
 }
+
+.prose * {
+  color: black;
+}
+
+.prose pre {
+  background-color: gray;
+}
+
+html.dark .prose * {
+  color: white;
+}

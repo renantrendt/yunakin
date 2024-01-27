@@ -5,7 +5,7 @@ import Button from '../button/Button'
 export default function Hero() {
     return (
         <section
-            className="my-20 flex flex-col md:flex-row justify-center items-center text-center md:text-left dark:text-white">
+            className="my-20 flex flex-col md:flex-row justify-center items-center text-center md:text-left text-black dark:text-white">
             <div className="w-full ">
                 <h1 className="text-5xl font-bold max-w-2xl">Create high-converting funnels in just 60 minutes</h1>
                 <p className="text-xl py-6 max-w-2xl">

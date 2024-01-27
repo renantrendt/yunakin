@@ -16,7 +16,7 @@ const reasons = [
 ]
 const Cta = () => {
     return (
-        <div className="my-20 w-full flex-col justify-center items-center gap-20 inline-flex dark:text-white">
+        <div className="my-20 w-full flex-col justify-center items-center gap-20 inline-flex text-black dark:text-white">
             <div className=' flex flex-col justify-center items-center gap-5 mb-8'>
                 <h1 className='text-5xl font-bold text-center mb-2'>Why you need a Mobile Funnel?</h1>
                 <h3 className='text-xl  mb-20 max-w-xl text-center'>Traditional websites and landing pages are neither interactive nor personalized. These sites also load slowly and are not optimized for the mobile world</h3>

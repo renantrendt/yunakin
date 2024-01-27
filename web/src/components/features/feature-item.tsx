@@ -9,7 +9,7 @@ interface FeatureItemProps {
 const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureItemProps) => {
 
     return (
-        <div className={`flex justify-center md:justify-between flex-col md:flex-row  gap-8 md:gap-16 w-full items-center dark:text-white   ${direction === "ltr" ? "" : "flex-col-reverse md:flex-row-reverse"}`}>
+        <div className={`flex justify-center md:justify-between flex-col md:flex-row  gap-8 md:gap-16 w-full items-center text-black dark:text-white   ${direction === "ltr" ? "" : "flex-col-reverse md:flex-row-reverse"}`}>
             <div className="flex-col  justify-start items-start gap-8 inline-flex">
                 <div className="flex-col justify-start items-start gap-5 flex">
                     <div className="FastEditing  text-stone-950  dark:text-white text-5xl font-black  leading-10">{title}</div>

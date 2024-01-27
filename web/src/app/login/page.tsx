@@ -65,8 +65,8 @@ export default function LoginPage() {
     }
     return (
         <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg w-11/12 md:w-1/3 shadow-md dark:bg-gray-800 p-8  m-auto flex flex-col gap-8">
-                <h1 className="text-3xl font-bold text-center">Login</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg w-11/12 md:w-1/3 shadow-md dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-8">
+                <h1 className="text-3xl font-bold text-center text-black dark:text-white">Login</h1>
                 <Controller
                     control={control}
                     name="email"
@@ -102,7 +102,7 @@ export default function LoginPage() {
                     <div className="flex justify-center flex-col gap-4">
                         <Button variant="primary" type="submit" classname="w-full">
                             {loading ? <div className='h-6 w-6'><LoadingIcon /> </div> : null} Sign In</Button>
-                        <div>
+                        <div className='text-black dark:text-white'>
                             Don&apos;t have an account ? <Link href={siteUrls.register} className="text-primary">Register</Link>
                         </div>
                     </div>

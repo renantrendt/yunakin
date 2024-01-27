@@ -7,14 +7,14 @@ interface GoogleButtonProps {
 
 const GoogleButton = ({ onClick }: GoogleButtonProps) => {
   return (
-        <button
-            className="flex justify-center gap-4 p-3 w-full    border-sleek-gray border-2 rounded-lg bg-primary text-primary-content"
-            onClick={onClick}
-            type="button"
-        >
-            <GoogleCircleIcon />
-            <p>Sign In with Google </p>
-        </button>
+    <button
+      className="flex justify-center gap-4 p-3 w-full    border-sleek-gray border-2 rounded-lg bg-primary  text-black dark:text-white"
+      onClick={onClick}
+      type="button"
+    >
+      <GoogleCircleIcon className='text-orange-300' />
+      <p>Sign In with Google </p>
+    </button>
   )
 }
 

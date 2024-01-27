@@ -28,7 +28,7 @@ const features = [
 const Features = () => {
     return (
 
-        <section className='my-20  flex flex-col gap-44 w-full px-5 md:px-0 dark:text-white'>
+        <section className='my-20  flex flex-col gap-44 w-full px-5 md:px-0 text-black dark:text-white'>
             {features.map((feature, index) => (
                 <FeatureItem
                     key={index}
