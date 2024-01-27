@@ -113,17 +113,17 @@ const BlogPage = () => {
 
 
     return (
-        <div className='mb-24'>
+        <div className='mb-24 px-4 md:px-28'>
             <PageHeader />
             {data && data.map((category: BlogsViewModel, index: any) => (
-                <div className='category px-4 mb-20 ' key={index}>
-                    <div className="  ml-5 px-5 py-1.5 bg-gray-200 rounded-3xl border justify-start items-start gap-2.5 inline-flex">
+                <div className='category mb-20 ' key={index}>
+                    <div className="  px-5 py-1.5 bg-gray-200 rounded-3xl border justify-start items-start gap-2.5 inline-flex">
                         <div className=" text-center text-neutral-600 text-sm font-semibold font-['Inter'] uppercase tracking-wide">{category.name}</div>
                     </div>
                     <div className='grid grid-cols-12 justify-items-center w-full gap-x-4 mx-auto gap-y-12 pt-6'>
                         {category.articles.map((article, index: any) => (
-                            <Link key={index} className="card w-full  max-w-lg bg-base-100 h-96  col-span-12  md:col-span-6 lg:col-span-4 hover:scale-105 hover:cursor-pointer 
-                               transition duration-150 rounded-lg shadow-sm" href={`/blogs/${article.slug}`}>
+                            <Link key={index} className="card w-full dark:text-white  max-w-lg bg-base-100 dark:bg-gray-700 h-96  col-span-12  md:col-span-6 lg:col-span-4  hover:cursor-pointer 
+                              rounded-lg shadow-sm" href={`/blogs/${article.slug}`}>
                                 <figure className='relative hidden'><Image src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
                                 <div className="card-body pb-4">
                                     <h2 className="card-title">{article.title}</h2>

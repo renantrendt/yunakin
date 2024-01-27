@@ -69,11 +69,11 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
         <div className='mx-auto w-full px-4  md:px-44 text-black dark:text-white '>
             {data && (
                 <>
-                    <div className='grid grid-cols-12 mt-16 '>
+                    <div className='flex mt-16 relative '>
                         <div className=' absolute w-8 h-8 items-center flex justify-center hover:cursor-pointer rounded-full hover:bg-gray-100' onClick={() => { router.back() }}>
                             <BackIcon />
                         </div>
-                        <div className="col-span-12 flex justify-center">
+                        <div className="flex flex-1 justify-center">
                             <h1 className='text-3xl font-bold max-w-sm lg:max-w-lg text-center'>{data.title}</h1>
                         </div>
                     </div>
