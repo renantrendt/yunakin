@@ -1,5 +1,6 @@
 'use client'
 import customToast from '@/components/toast/customToast'
+import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
@@ -7,10 +8,14 @@ import React, { useEffect } from 'react'
 const VerifyPage = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
+    const { data: session } = useSession()
     useEffect(() => {
         (async function () {
             const queryParams = new URLSearchParams(searchParams);
             const token = queryParams.get('token')
+            if (!session?.user) {
+                return router.push(`/login?callbackUrl=${encodeURIComponent(`verify?token=${token}`)}`)
+            }
             try {
                 const result = await fetch('/api/auth/verify', {
                     method: 'POST',
@@ -27,7 +32,7 @@ const VerifyPage = () => {
                         customToast.success('Email verified, redirecting to dashboard')
                         setTimeout(() => {
                             router.push('/dashboard')
-                        }, 10000)
+                        }, 1000)
                     }
                 } else {
                     customToast.error('Something went wrong')

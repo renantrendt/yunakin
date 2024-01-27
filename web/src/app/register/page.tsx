@@ -46,6 +46,7 @@ export default function RegisterPage() {
 
         if (register.status === 200) {
             // router.push(`/auth/verify-request?email=${values.email}`);
+            customToast.success('Registration successful, a confirmation email has been sent to your email address.')
             router.push('/login')
         } else {
             customToast.error('Something went wrong')

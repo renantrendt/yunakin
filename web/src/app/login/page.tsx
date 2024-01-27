@@ -8,7 +8,7 @@ import InputField from '@/components/input/InputField'
 import Button from '@/components/button/Button'
 import GoogleButton from '@/components/googlebutton/GoogleButton'
 import customToast from '@/components/toast/customToast'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import LoadingIcon from '@/assets/icons/LoadingIcon'
@@ -25,13 +25,15 @@ export default function LoginPage() {
     const { data: session } = useSession()
     const router = useRouter()
     const [loading, setIsLoading] = React.useState(false)
+    const searchParams = useSearchParams()
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
         }
     )
 
-    if (session) {
+
+    if (session && new URLSearchParams(searchParams).get('callbackUrl') === null) {
         return (
             router.push('/dashboard')
         )
@@ -46,15 +48,18 @@ export default function LoginPage() {
                 password: data.password,
                 redirect: false
             })
-
-            if (result?.status === 200) {
-                router.push('/dashboard')
-
-            }
             if (result?.error) {
                 customToast.error(result.error)
             } else {
-                router.push('/dashboard')
+                const queryParams = new URLSearchParams(searchParams);
+                alert(queryParams.get('callbackUrl'))
+                if (queryParams.get('callbackUrl') !== null) {
+                    alert("asdf")
+                    return router.push(queryParams.get('callbackUrl') as string)
+                } else {
+                    alert('ketu')
+                    return router.push('/dashboard')
+                }
             }
         } catch (error) {
             console.error(error)
