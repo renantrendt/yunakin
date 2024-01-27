@@ -13,8 +13,11 @@ const VerifyPage = () => {
         (async function () {
             const queryParams = new URLSearchParams(searchParams);
             const token = queryParams.get('token')
+            if (!token) {
+                throw new Error('Token not found')
+            }
             if (!session?.user) {
-                return router.push(`/login?callbackUrl=${encodeURIComponent(`verify?token=${token}`)}`)
+                return router.push(`/login?token=${encodeURIComponent(token)}`)
             }
             try {
                 const result = await fetch('/api/auth/verify', {

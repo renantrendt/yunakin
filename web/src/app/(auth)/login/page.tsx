@@ -52,12 +52,29 @@ export default function LoginPage() {
                 customToast.error(result.error)
             } else {
                 const queryParams = new URLSearchParams(searchParams);
-                alert(queryParams.get('callbackUrl'))
-                if (queryParams.get('callbackUrl') !== null) {
-                    alert("asdf")
-                    return router.push(queryParams.get('callbackUrl') as string)
+                const token = queryParams.get('token')
+                if (token !== null) {
+                    const result = await fetch('/api/auth/verify', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            token
+                        })
+                    })
+                    if (result?.status === 200) {
+                        const data = await result.json() as any
+                        if (data?.error) {
+                            customToast.error(data.error)
+                        } else {
+                            customToast.success('Email verified, redirecting to dashboard')
+                            setTimeout(() => {
+                                router.push('/dashboard')
+                            }, 1000)
+                        }
+                    } else {
+                        customToast.error('Something went wrong')
+                        return router.push('/')
+                    }
                 } else {
-                    alert('ketu')
                     return router.push('/dashboard')
                 }
             }
@@ -107,6 +124,9 @@ export default function LoginPage() {
                     <div className="flex justify-center flex-col gap-4">
                         <Button variant="primary" type="submit" classname="w-full">
                             {loading ? <div className='h-6 w-6'><LoadingIcon /> </div> : null} Sign In</Button>
+                        <div className='text-black dark:text-white'>
+                            <Link href={siteUrls.forgotPassword} className="text-primary">Forgot Password?</Link>
+                        </div>
                         <div className='text-black dark:text-white'>
                             Don&apos;t have an account ? <Link href={siteUrls.register} className="text-primary">Register</Link>
                         </div>

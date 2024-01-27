@@ -5,7 +5,7 @@ import DashboardIcon from '@/assets/icons/DashboardIcon'
 import UserIcon from '@/assets/icons/UserIcon'
 import SettingsIcon from '@/assets/icons/SettingsIcon'
 import siteUrls from '@/config/site-config'
-import platformConfig from '@/config/app-config'
+import Image from 'next/image'
 
 interface SidebarLink {
     label: string
@@ -23,8 +23,10 @@ const sidebarLinks: SidebarLink[] = [
 const Sidebar: React.FC = () => {
     return (
         <>
-            <div className=" flex items-center justify-between gap-2 px-6 py-6 lg:py-6  ">
-                <Link href={siteUrls.dashboard} className="btn btn-ghost text-xl">{platformConfig.name}</Link>
+            <div className=" flex items-center justify-between gap-2 px-6 pt-8 pb-4 lg:py-6  ">
+                <Link href={siteUrls.dashboard} className="btn btn-ghost text-xl">
+                    <Image src="/images/logo.png" alt="logo" width={150} height={50} />
+                </Link>
                 {/* <Button className='block lg:hidden' >Show</Button> */}
             </div>
             <div className="sidebar no-scrollbar overflow-y-auto  h-[500px">

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import siteUrls from '@/config/site-config'
 import { ThemeSwitcher } from '../theme/ThemeSwitcher'
 import HamburgerIcon from '@/assets/icons/HamburgerIcon'
+import Image from 'next/image'
 export default function Navbar() {
     const router = useRouter()
     return (
@@ -28,7 +29,9 @@ export default function Navbar() {
                         <li><Link href={siteUrls.features}>Features</Link></li>
                     </ul>
                 </div>
-                <Link className=" text-xl" href='/'>NextStackSaaS</Link>
+                <Link href={siteUrls.home}>
+                    <Image src="/images/logo.png" alt="logo" width={150} height={50} />
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

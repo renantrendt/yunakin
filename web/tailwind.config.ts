@@ -20,11 +20,11 @@ const config: Config = {
   daisyui: {
     themes: [{
       light: {
-        primary: "#2F80ED",
+        primary: "#9463FB",
       }
     }, {
       dark: {
-        primary: "#2F80ED",
+        primary: "#9463FB",
       }
     }],
 
