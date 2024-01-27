@@ -2,7 +2,6 @@
 import { prisma } from '@/lib/prisma'
 import { sendResetPasswordEmail } from '@/utils/sendEmail'
 import { hash } from 'bcryptjs'
-import { getServerSession } from 'next-auth'
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request): Promise<NextResponse<unknown>> {
