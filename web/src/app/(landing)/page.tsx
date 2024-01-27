@@ -9,7 +9,7 @@ import Cta from '@/components/cta/cta'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col  mx-auto p-2 md:px-28">
+    <main className="flex min-h-screen flex-col  mx-auto px-4 md:px-28">
       <Hero />
       <Cta />
       <Features />
