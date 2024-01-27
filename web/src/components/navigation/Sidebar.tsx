@@ -4,6 +4,8 @@ import Link from 'next/link'
 import DashboardIcon from '@/assets/icons/DashboardIcon'
 import UserIcon from '@/assets/icons/UserIcon'
 import SettingsIcon from '@/assets/icons/SettingsIcon'
+import siteUrls from '@/config/site-config'
+import platformConfig from '@/config/app-config'
 
 interface SidebarLink {
     label: string
@@ -20,23 +22,29 @@ const sidebarLinks: SidebarLink[] = [
 
 const Sidebar: React.FC = () => {
     return (
-        <div className="sidebar bg-base-100 w-64 pt-16">
-            <ul className="menu p-4 overflow-y-auto w-64">
-                {sidebarLinks.map((link) => (
-                    <li key={link.label} >
-                        <Link href={link.path}>
-                            <div className='flex gap-2'>
-                                {link.iconSrc}
-                                <p>
-                                    {link.label}
+        <>
+            <div className=" flex items-center justify-between gap-2 px-6 py-6 lg:py-6  ">
+                <Link href={siteUrls.dashboard} className="btn btn-ghost text-xl">{platformConfig.name}</Link>
+                {/* <Button className='block lg:hidden' >Show</Button> */}
+            </div>
+            <div className="sidebar no-scrollbar overflow-y-auto  h-[500px">
+                <ul className="menu  w-64">
+                    {sidebarLinks.map((link) => (
+                        <li key={link.label} className=' dark:hover:bg-gray-600 hover:bg-gray-200  rounded-md my-1'>
+                            <Link href={link.path}>
+                                <div className='flex gap-2'>
+                                    {link.iconSrc}
+                                    <p>
+                                        {link.label}
+                                    </p>
+                                </div>
+                            </Link >
+                        </li >
+                    ))}
+                </ul >
+            </div >
+        </>
 
-                                </p>
-                            </div>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </div>
     )
 }
 

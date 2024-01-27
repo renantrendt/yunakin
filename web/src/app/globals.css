@@ -34,3 +34,8 @@ body {
 html.dark .prose * {
   color: white;
 }
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

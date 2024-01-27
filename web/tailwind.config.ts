@@ -22,7 +22,11 @@ const config: Config = {
       light: {
         primary: "#2F80ED",
       }
-    }, "dark"],
+    }, {
+      dark: {
+        primary: "#2F80ED",
+      }
+    }],
 
   }
 }

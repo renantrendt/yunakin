@@ -7,17 +7,16 @@ import React from 'react'
 const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
     <AuthProvider>
-      <div className='grid w-full  grid-cols-12'>
-        <div className='grid-cols-4 col-span-2'>
+      <div className='flex h-screen  text-black dark:text-white'>
+        <aside className=' z-30 flex h-screen  text-white overflow-y-hidden w-72.5 flex-col bg-black darK:bg-gray-700'>
           <Sidebar />
-        </div>
-        <div className='flex flex-col justify-start col-span-10'>
+        </aside>
+        <div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>
           <DashboardNavbar />
-          <main className='pt-8 mx-auto '>
+          <main className='mx-auto max-w-screen-2xl w-full h-screen bg-white dark:bg-gray-600 p-4 md:p-6 2xl:p-10 '>
             {children}
           </main>
         </div>
-
       </div>
     </AuthProvider>
   )
