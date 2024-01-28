@@ -19,7 +19,7 @@ const BarChart = () => {
     }
 
     return (
-        <Chart options={state.options} series={state.series} type="bar" width={500} height={320} />
+        <Chart options={state.options} series={state.series} type="bar" height={320} />
     )
 }
 
