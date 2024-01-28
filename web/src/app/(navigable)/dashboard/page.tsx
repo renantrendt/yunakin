@@ -7,7 +7,7 @@ export default function Dashboard(): JSX.Element {
     const _ = useFeatureFlag('newDashboard')
 
     return (
-        <div> <h1>Dashboard</h1>
+        <div> <h1 className='text-2xl'>Dashboard</h1>
             <ChartContainer />
         </div>
     )

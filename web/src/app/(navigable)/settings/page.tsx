@@ -18,12 +18,28 @@ interface FormValues {
     name: string;
     phoneNumber: string;
 }
+
+const tabs = [
+    {
+        name: "Profile",
+        component: <div>Profile</div>
+    },
+    {
+        name: "Account",
+        component: <div>Account</div>
+    },
+    {
+        name: "Subscription",
+        component: <div><Pricing showDescription={false} /></div>
+    }
+]
 export default function SettingsPage() {
     const { control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(validationSchema)
         }
     )
+    const [tab, setTab] = React.useState(tabs[0]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = async (data: any) => {
     }
@@ -31,13 +47,13 @@ export default function SettingsPage() {
         <div>
             <div className="flex justify-start w-full">
                 <div role="tablist" className="tabs tabs-boxed">
-                    <a role="tab" className="tab">Profile</a>
-                    <a role="tab" className="tab tab-active">Account</a>
-                    <a role="tab" className="tab">Subscription</a>
+                    {tabs.map((t, index) => {
+                        return <div className={`tab ${t.name == tab.name ? "tab-active" : ""}`} key={index} role="tab" aria-selected={t.name === tab.name} onClick={() => setTab(t)}>{t.name}</div>
+                    })}
                 </div>
             </div>
-            <div className="pricing">
-                <Pricing />
+            <div className="pricing min-h-screen" >
+                {tab.component}
             </div>
 
             {/* <Access /> */}
