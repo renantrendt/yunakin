@@ -1,5 +1,5 @@
-import { Plans } from '@/components/pricing/pricing'
-import PricingProduct from '@/components/pricing/pricing-product'
+import { Plans } from '@/components/section/pricing/pricing'
+import PricingProduct from '@/components/section/pricing/pricing-product'
 import React from 'react'
 
 const subscription = () => {

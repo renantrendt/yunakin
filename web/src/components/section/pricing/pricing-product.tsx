@@ -4,12 +4,12 @@ import LoadingIcon from '@/assets/icons/LoadingIcon';
 import React from 'react'
 import Stripe from 'stripe';
 import { Plans } from './pricing';
-import Button from '../button/Button';
+import Button from '../../atomic/button/Button';
 import TickIcon from '@/assets/icons/TickIcon';
 import CrossIcon from '@/assets/icons/CrossIcon';
-import Modal from '../modal/Modal';
+import Modal from '../../atomic/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
-import customToast from '../toast/customToast';
+import customToast from '../../atomic/toast/customToast';
 export default function PricingProduct({ name, description, price, features, plan, recommended }: {
     name: string
     description: string

@@ -3,7 +3,7 @@ import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import Pricing from "@/components/pricing/pricing";
+import Pricing from "@/components/section/pricing/pricing";
 import AccountSsttings from "@/components/dashboard/settings/account/Account";
 
 const validationSchema = yup.object({

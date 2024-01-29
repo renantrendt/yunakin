@@ -1,6 +1,6 @@
 import RockerLaunchIcon from '@/assets/icons/RockerLaunchIcon'
 import React from 'react'
-import Button from '../button/Button'
+import Button from '../atomic/button/Button'
 
 export default function Hero() {
     return (

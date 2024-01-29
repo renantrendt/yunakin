@@ -2,10 +2,10 @@
 'use client'
 import React from 'react'
 import Hero from '@/components/hero/Hero'
-import FAQ from '@/components/faq/FAQ'
-import Testimonial from '@/components/testimonial/Testimonial'
+import FAQ from '@/components/section/faq/FAQ'
+import Testimonial from '@/components/section/testimonial/Testimonial'
 import Features from '@/components/features/features'
-import Cta from '@/components/cta/cta'
+import Cta from '@/components/section/cta/cta'
 import TrustedBy from '@/components/landing/trustedBy'
 
 export default function Home() {

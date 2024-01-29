@@ -1,6 +1,6 @@
 'use client'
-import FAQ from '@/components/faq/FAQ'
-import Pricing from '@/components/pricing/pricing'
+import FAQ from '@/components/section/faq/FAQ'
+import Pricing from '@/components/section/pricing/pricing'
 import React from 'react'
 
 const PricingPage = () => {

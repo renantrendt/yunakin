@@ -1,6 +1,6 @@
 "use client";
 import React from 'react'
-import Modal from "@/components/modal/Modal";
+import Modal from "@/components/atomic/modal/Modal";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

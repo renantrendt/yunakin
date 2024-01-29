@@ -1,11 +1,11 @@
 'use client'
 import Link from 'next/link'
-import Button from '../button/Button'
+import Button from '../../atomic/button/Button'
 import React from 'react'
 
 import { useRouter } from 'next/navigation'
 import siteUrls from '@/config/site-config'
-import { ThemeSwitcher } from '../theme/ThemeSwitcher'
+import { ThemeSwitcher } from '../../atomic/theme/ThemeSwitcher'
 import HamburgerIcon from '@/assets/icons/HamburgerIcon'
 import Image from 'next/image'
 export default function Navbar() {
