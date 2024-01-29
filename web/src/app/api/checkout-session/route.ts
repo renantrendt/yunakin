@@ -33,8 +33,10 @@ export async function POST(req: Request) {
                     quantity: 1
                 }
             ],
-            metadata: {
-                userId: data?.user?.id ?? "",
+            subscription_data: {
+                metadata: {
+                    userId: data?.user?.id ?? "",
+                },
             },
             return_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}`,
         });

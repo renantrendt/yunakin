@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import Button from '@/components/button/Button'
 import LoadingIcon from '@/assets/icons/LoadingIcon'
 import customToast from '@/components/toast/customToast'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import PasswordInputField from '@/components/input/PasswordInputField'
 const schema = yup.object({
     password: yup.string().min(6).required()
@@ -18,6 +18,8 @@ interface FormValues {
 export default function ForgotPasswordPage() {
     const [loading, setIsLoading] = React.useState(false)
     const router = useRouter()
+    const searchParams = useSearchParams()
+
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
@@ -30,13 +32,15 @@ export default function ForgotPasswordPage() {
         setIsLoading(true)
         try {
             // send API call to send email with token
+            const queryParams = new URLSearchParams(searchParams);
+            const token = queryParams.get('token')
             const response = await fetch('/api/auth/reset-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    token: data.token,
+                    token: token,
                     password: data.password,
                 })
             })

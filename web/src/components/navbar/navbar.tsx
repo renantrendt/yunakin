@@ -11,7 +11,7 @@ import Image from 'next/image'
 export default function Navbar() {
     const router = useRouter()
     return (
-        <div className="navbar p-2 md:px-28 pt-7 md:pt-14 text-black dark:text-white">
+        <div className="navbar p-2 md:px-28 pt-7 md:pt-14 text-black dark:text-white max-w-8xl">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -30,7 +30,7 @@ export default function Navbar() {
                     </ul>
                 </div>
                 <Link href={siteUrls.home}>
-                    <Image src="/images/logo.png" alt="logo" width={150} height={50} />
+                    <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">

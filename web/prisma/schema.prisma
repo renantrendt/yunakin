@@ -41,8 +41,8 @@ model Subscription {
   userId               String
   priceId              String
   status               String
-  team                 Team      @relation(fields: [teamId], references: [id])
-  teamId               String
+  team                 Team?     @relation(fields: [teamId], references: [id])
+  teamId               String?
   startDate            DateTime
   endDate              DateTime
   createdAt            DateTime  @default(now())
