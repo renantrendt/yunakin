@@ -57,7 +57,7 @@ export default function RegisterPage() {
     }
     return (
         <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800  ">
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg  w-11/12 dark:bg-gray-700 rounded-xl    shadow-lg p-8  m-auto flex flex-col gap-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 rounded-xl    shadow-lg p-8  m-auto flex flex-col gap-8">
                 <h1 className="text-3xl font-bold text-center  text-black dark:text-white">Register</h1>
                 <Controller
                     control={control}
