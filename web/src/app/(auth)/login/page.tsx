@@ -12,6 +12,9 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import LoadingIcon from '@/assets/icons/LoadingIcon'
+import Email from 'next-auth/providers/email'
+import EmailIcon from '@/assets/icons/EmailIcon'
+import PasswordInputField from '@/components/input/PasswordInputField'
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required()
@@ -98,6 +101,7 @@ export default function LoginPage() {
                             type="email"
                             id="email"
                             name="email"
+                            leadingIcon={<EmailIcon />}
                             onChange={onChange}
                             value={value}
                             error={errors.email?.message}
@@ -108,7 +112,7 @@ export default function LoginPage() {
                     control={control}
                     name="password"
                     render={({ field: { onChange, value } }) => (
-                        <InputField
+                        <PasswordInputField
                             label="Password"
                             type="password"
                             id="password"

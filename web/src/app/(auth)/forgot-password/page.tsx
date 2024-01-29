@@ -7,6 +7,7 @@ import InputField from '@/components/input/InputField'
 import Button from '@/components/button/Button'
 import LoadingIcon from '@/assets/icons/LoadingIcon'
 import customToast from '@/components/toast/customToast'
+import EmailIcon from '@/assets/icons/EmailIcon'
 const schema = yup.object({
     email: yup.string().email().required(),
 })
@@ -63,6 +64,7 @@ export default function ForgotPasswordPage() {
                     name="email"
                     render={({ field: { onChange, value } }) => (
                         <InputField
+                            leadingIcon={<EmailIcon />}
                             label="Email"
                             type="email"
                             id="email"

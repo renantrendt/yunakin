@@ -11,24 +11,31 @@ interface InputFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   error?: string
   additionalProps?: any
+  leadingIcon?: React.ReactNode
+  trailingIcon?: React.ReactNode
 }
 
-const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', placeholder, onChange, error, id, ...additionalProps }) => {
+const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, error, id, ...additionalProps }) => {
   return (
     <div className="form-control ">
-      <label className="label">
+      <label className="label text-black dark:text-white">
         <span className="label-text">{label}</span>
       </label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        className="input input-bordered input-primary text-white dark:text-black "
-        name={name}
-        id={id}
-        onChange={onChange}
-        {...additionalProps}
-      />
-      {error && <p className='text-red-300'>{error}</p>}
+      <div className='flex relative'>
+        {leadingIcon && <div className='absolute left-[6px] top-3 text-black dark:text-white '>{leadingIcon}</div>}
+        <input
+          type={type}
+          placeholder={placeholder}
+          className={`input  input-primary dark:bg-gray-800 text-black dark:text-white  w-full ${leadingIcon ? "pl-8" : ""}`}
+          name={name}
+          id={id}
+          onChange={onChange}
+          {...additionalProps}
+        />
+        {trailingIcon && <div className='absolute right-[6px] top-3  text-black dark:text-white'>{trailingIcon}</div>}
+      </div>
+
+      {error && <p className='text-red-600 mt-1 pl-1'>{error}</p>}
     </div>
   )
 }

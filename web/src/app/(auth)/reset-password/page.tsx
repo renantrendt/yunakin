@@ -8,6 +8,7 @@ import Button from '@/components/button/Button'
 import LoadingIcon from '@/assets/icons/LoadingIcon'
 import customToast from '@/components/toast/customToast'
 import { useRouter } from 'next/navigation'
+import PasswordInputField from '@/components/input/PasswordInputField'
 const schema = yup.object({
     password: yup.string().min(6).required()
 })
@@ -65,7 +66,7 @@ export default function ForgotPasswordPage() {
                     control={control}
                     name="password"
                     render={({ field: { onChange, value } }) => (
-                        <InputField
+                        <PasswordInputField
                             label="Password"
                             type="password"
                             id="password"

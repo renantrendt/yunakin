@@ -6,6 +6,9 @@ import InputField from '@/components/input/InputField'
 import customToast from '@/components/toast/customToast'
 import { useSession } from 'next-auth/react'
 import Button from '@/components/button/Button'
+import TextArea from '@/components/textarea/TextArea'
+import EmailIcon from '@/assets/icons/EmailIcon'
+import AccountIcon from '@/assets/icons/AccountIcon'
 interface FormValues {
     email: string
     password: string
@@ -63,6 +66,7 @@ const AccountSsttings = () => {
                         name="name"
                         render={({ field: { onChange, value } }) => (
                             <InputField
+                                leadingIcon={<AccountIcon />}
                                 label="Name"
                                 type="text"
                                 id="name"
@@ -95,6 +99,8 @@ const AccountSsttings = () => {
                         name="email"
                         render={({ field: { onChange, value } }) => (
                             <InputField
+                                leadingIcon={
+                                    <EmailIcon />}
                                 label="Email"
                                 type="email"
                                 id="email"
@@ -128,9 +134,8 @@ const AccountSsttings = () => {
                         control={control}
                         name="bio"
                         render={({ field: { onChange, value } }) => (
-                            <InputField
+                            <TextArea
                                 label="Bio"
-                                type="text"
                                 id="bio"
                                 name="bio"
                                 onChange={onChange}
