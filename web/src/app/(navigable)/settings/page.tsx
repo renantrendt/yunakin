@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import Pricing from "@/components/pricing/pricing";
+import AccountSsttings from "@/components/dashboard/settings/account/Account";
 
 const validationSchema = yup.object({
     email: yup.string().email().required(),
@@ -26,7 +27,7 @@ const tabs = [
     },
     {
         name: "Account",
-        component: <div>Account</div>
+        component: <div><AccountSsttings /> </div>
     },
     {
         name: "Subscription",
@@ -39,7 +40,7 @@ export default function SettingsPage() {
             resolver: yupResolver(validationSchema)
         }
     )
-    const [tab, setTab] = React.useState(tabs[0]);
+    const [tab, setTab] = React.useState(tabs[1]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = async (data: any) => {
     }
