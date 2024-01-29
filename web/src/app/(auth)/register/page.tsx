@@ -10,6 +10,9 @@ import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import customToast from '@/components/toast/customToast'
 import { useRouter } from 'next/navigation'
+import EmailIcon from '@/assets/icons/EmailIcon'
+import AccountIcon from '@/assets/icons/AccountIcon'
+import PasswordInputField from '@/components/input/PasswordInputField'
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required(),
@@ -61,6 +64,7 @@ export default function RegisterPage() {
                     name="name"
                     render={({ field: { onChange, value } }) => (
                         <InputField
+                            leadingIcon={<AccountIcon />}
                             label="Name"
                             type="text"
                             id="name"
@@ -76,6 +80,7 @@ export default function RegisterPage() {
                     name="email"
                     render={({ field: { onChange, value } }) => (
                         <InputField
+                            leadingIcon={<EmailIcon />}
                             label="Email"
                             type="email"
                             id="email"
@@ -90,7 +95,7 @@ export default function RegisterPage() {
                     control={control}
                     name="password"
                     render={({ field: { onChange, value } }) => (
-                        <InputField
+                        <PasswordInputField
                             label="Password"
                             type="password"
                             id="password"

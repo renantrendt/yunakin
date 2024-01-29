@@ -12,6 +12,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import LoadingIcon from '@/assets/icons/LoadingIcon'
+import EmailIcon from '@/assets/icons/EmailIcon'
+import PasswordInputField from '@/components/input/PasswordInputField'
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required()
@@ -87,7 +89,7 @@ export default function LoginPage() {
     }
     return (
         <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg w-11/12 md:w-1/3 shadow-md dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg w-11/12 md:w-1/3  dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-8">
                 <h1 className="text-3xl font-bold text-center text-black dark:text-white">Login</h1>
                 <Controller
                     control={control}
@@ -98,6 +100,7 @@ export default function LoginPage() {
                             type="email"
                             id="email"
                             name="email"
+                            leadingIcon={<EmailIcon />}
                             onChange={onChange}
                             value={value}
                             error={errors.email?.message}
@@ -108,7 +111,7 @@ export default function LoginPage() {
                     control={control}
                     name="password"
                     render={({ field: { onChange, value } }) => (
-                        <InputField
+                        <PasswordInputField
                             label="Password"
                             type="password"
                             id="password"

@@ -29,7 +29,7 @@ const Sidebar: React.FC = () => {
                 </Link>
                 {/* <Button className='block lg:hidden' >Show</Button> */}
             </div>
-            <div className="sidebar no-scrollbar overflow-y-auto  h-[500px">
+            <div className="sidebar no-scrollbar overflow-y-auto ">
                 <ul className="menu  w-64">
                     {sidebarLinks.map((link) => (
                         <li key={link.label} className=' dark:hover:bg-gray-600 hover:bg-gray-200  rounded-md my-1'>
@@ -45,6 +45,7 @@ const Sidebar: React.FC = () => {
                     ))}
                 </ul >
             </div >
+            <div className='absolute bottom-0'> Collapse Sidebar</div>
         </>
 
     )

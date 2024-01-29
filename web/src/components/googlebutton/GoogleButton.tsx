@@ -1,4 +1,4 @@
-import GoogleCircleIcon from '@/assets/icons/GoogleIcon'
+import GoogleCircleIcon from '@/assets/icons/GoogleCircleIcon'
 import React from 'react'
 
 interface GoogleButtonProps {
@@ -12,8 +12,8 @@ const GoogleButton = ({ onClick }: GoogleButtonProps) => {
       onClick={onClick}
       type="button"
     >
-      <GoogleCircleIcon className='text-orange-300' />
-      <p>Sign In with Google </p>
+      <GoogleCircleIcon width={24} height={24} />
+      <p className='text-white dark:text-black'>Sign In with Google </p>
     </button>
   )
 }
