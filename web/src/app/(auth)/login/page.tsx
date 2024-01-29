@@ -12,7 +12,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import LoadingIcon from '@/assets/icons/LoadingIcon'
-import Email from 'next-auth/providers/email'
 import EmailIcon from '@/assets/icons/EmailIcon'
 import PasswordInputField from '@/components/input/PasswordInputField'
 const schema = yup.object({

@@ -27,6 +27,7 @@ const PieChart = () => {
     };
 
     return (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         <Chart options={state.options} series={state.series} type="pie" height={320} />
     )

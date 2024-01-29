@@ -13,7 +13,7 @@ const GoogleButton = ({ onClick }: GoogleButtonProps) => {
       type="button"
     >
       <GoogleCircleIcon width={24} height={24} />
-      <p>Sign In with Google </p>
+      <p className='text-white dark:text-black'>Sign In with Google </p>
     </button>
   )
 }

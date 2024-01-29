@@ -1,9 +1,7 @@
 "use client";
 import React from "react";
-import Button from "@/components/button/Button";
-import InputField from "@/components/input/InputField";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import Pricing from "@/components/pricing/pricing";
 import AccountSsttings from "@/components/dashboard/settings/account/Account";
@@ -35,6 +33,7 @@ const tabs = [
     }
 ]
 export default function SettingsPage() {
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(validationSchema)
