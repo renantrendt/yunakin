@@ -29,21 +29,25 @@ model Team {
   id            String         @id @default(uuid())
   name          String
   createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  updatedAt     DateTime       @default(now())
   users         User[] // A team can have multiple users
   subscriptions Subscription[] // A team can have multiple subscriptions
 }
 
 model Subscription {
-  id        String    @id @default(uuid())
-  name      String
-  team      Team      @relation(fields: [teamId], references: [id])
-  teamId    String
-  startDate DateTime
-  endDate   DateTime
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  payments  Payment[] // A subscription can have multiple payments
+  id                   String    @id @default(uuid())
+  stripeSubscriptionId String    @unique
+  name                 String
+  userId               String
+  priceId              String
+  status               String
+  team                 Team?     @relation(fields: [teamId], references: [id])
+  teamId               String?
+  startDate            DateTime
+  endDate              DateTime
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @default(now())
+  payments             Payment[] // A subscription can have multiple payments
 }
 
 model Payment {

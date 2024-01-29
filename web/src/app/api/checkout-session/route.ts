@@ -1,5 +1,7 @@
 // app/checkout-sessions/route.ts
+import { authOptions } from "@/lib/auth/authOptions";
 import stripe from "@/utils/stripe";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -10,18 +12,19 @@ export interface CheckoutSubscriptionBody {
 }
 
 export async function POST(req: Request) {
+    const data = await getServerSession(authOptions);
+
+    if (!data?.user) {
+        return NextResponse.json({}, { status: 403 })
+    }
     const body = (await req.json()) as CheckoutSubscriptionBody;
     const origin = req.headers.get("origin") || "http://localhost:3000";
-
-    // if user is logged in, redirect to thank you page, otherwise redirect to signup page.
-    const success_url = !body.customerId
-        ? `${origin}/checkout?session_id={CHECKOUT_SESSION_ID}&success=true`
-        : `${origin}/checkout?session_id={CHECKOUT_SESSION_ID}&success=true`;
-
     try {
         const session = await stripe.checkout.sessions.create({
+            ui_mode: "embedded",
+            client_reference_id: data?.user?.id ?? "",
+            customer_email: data?.user?.email ?? "",
             // if user is logged in, stripe will set the email in the checkout page
-            customer: body.customerId,
             mode: "subscription", // mode should be subscription
             line_items: [
                 // generate inline price and product
@@ -30,8 +33,12 @@ export async function POST(req: Request) {
                     quantity: 1
                 }
             ],
-            success_url: success_url,
-            cancel_url: `${origin}/checkout?canceled=true&session_id={CHECKOUT_SESSION_ID}`,
+            subscription_data: {
+                metadata: {
+                    userId: data?.user?.id ?? "",
+                },
+            },
+            return_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}`,
         });
         return NextResponse.json(session);
     } catch (error) {

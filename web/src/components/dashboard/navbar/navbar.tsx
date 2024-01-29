@@ -32,6 +32,11 @@ const DashboardNavbar = ({ onClick }: { onClick: () => void }): JSX.Element => {
                 <div className='flex items-center gap-3 2xsm:gap-7'>
                     <div className=" gap-2 col-span-10 w-full flex justify-between items-center">
                         <ThemeSwitcher />
+                        <div>
+                            <p className='text-green-200'>
+                                {session?.user?.subscription ? session.user.subscription.name : null}
+                            </p>
+                        </div>
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">

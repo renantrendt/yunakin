@@ -14,17 +14,23 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'stone-950': "#0F0F0F",
+        'neutral-600': "#4B4B4B",
+        'neutral-200': "#DEDEDE",
+        'landing-background': "#FAFAFA"
+      }
     },
   },
   plugins: [require("daisyui"), require('@tailwindcss/typography')],
   daisyui: {
     themes: [{
       light: {
-        primary: "#9463FB",
+        primary: "#1F76EB",
       }
     }, {
       dark: {
-        primary: "#9463FB",
+        primary: "#1F76EB",
       }
     }],
 
