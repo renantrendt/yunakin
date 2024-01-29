@@ -1,11 +1,10 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { loadStripe } from '@stripe/stripe-js';
 import {
     EmbeddedCheckoutProvider,
     EmbeddedCheckout
 } from '@stripe/react-stripe-js';
-import Modal from '@/components/modal/Modal';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 // This is your test public API key.

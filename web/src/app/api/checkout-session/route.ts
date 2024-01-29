@@ -14,17 +14,11 @@ export interface CheckoutSubscriptionBody {
 export async function POST(req: Request) {
     const data = await getServerSession(authOptions);
 
-    if (!data.user) {
+    if (!data?.user) {
         return NextResponse.json({}, { status: 403 })
     }
     const body = (await req.json()) as CheckoutSubscriptionBody;
     const origin = req.headers.get("origin") || "http://localhost:3000";
-
-    // if user is logged in, redirect to thank you page, otherwise redirect to signup page.
-    const success_url = !body.customerId
-        ? `${origin}/checkout?session_id={CHECKOUT_SESSION_ID}&success=true`
-        : `${origin}/checkout?session_id={CHECKOUT_SESSION_ID}&success=true`;
-
     try {
         const session = await stripe.checkout.sessions.create({
             ui_mode: "embedded",
@@ -39,6 +33,9 @@ export async function POST(req: Request) {
                     quantity: 1
                 }
             ],
+            metadata: {
+                userId: data?.user?.id ?? "",
+            },
             return_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}`,
         });
         return NextResponse.json(session);

@@ -1,7 +1,6 @@
 'use client'
 import { CheckoutSubscriptionBody } from '@/app/api/checkout-session/route'
 import LoadingIcon from '@/assets/icons/LoadingIcon';
-import { loadStripe } from "@stripe/stripe-js";
 import React from 'react'
 import Stripe from 'stripe';
 import { Plans } from './pricing';
@@ -25,9 +24,6 @@ export default function PricingProduct({ name, description, price, features, pla
     const handleClick = async () => {
         // step 1: load stripe
         try {
-            const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
-            const stripe = await loadStripe(STRIPE_PK);
-
             // step 2: define the data for monthly subscription
             const body: CheckoutSubscriptionBody = {
                 price_id: plan === Plans.PRO ? process.env.NEXT_PUBLIC_STRIPE_PRO_PLAN_ID! : plan === Plans.BUSINESS ? process.env.NEXT_PUBLIC_STRIPE_BUSINESS_PLAN_ID! : process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID!,

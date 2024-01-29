@@ -34,13 +34,6 @@ export const authOptions: NextAuthOptions = {
                     where: {
                         email: credentials.email
                     },
-                    select: {
-                        id: true,
-                        email: true,
-                        name: true,
-                        password: true,
-                        provider: true
-                    }
                 })) as User
                 if (!user) {
                     throw { message: 'No user found with this email', statusCode: 400 }
@@ -53,9 +46,13 @@ export const authOptions: NextAuthOptions = {
                 }
 
                 return {
-                    id: user.id,
                     email: user.email,
-                    name: user.name
+                    name: user.name,
+                    createdAt: user.createdAt,
+                    emailVerified: user.verified,
+                    id: user.id,
+                    image: user.avatar,
+                    updatedAt: user.updatedAt,
                 }
             }
         }),
@@ -109,11 +106,19 @@ export const authOptions: NextAuthOptions = {
                     avatar: true,
                 }
             });
+            const userSubscription = await prisma.subscription.findFirst({
+                where: {
+                    userId: user?.id
+                },
+            });
             return {
                 ...session,
                 user: {
                     ...session.user,
-                    ...user
+                    ...user,
+                    subscription: {
+                        ...userSubscription
+                    },
                 },
                 accessToken: token
             }
