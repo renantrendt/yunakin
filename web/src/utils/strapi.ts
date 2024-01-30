@@ -27,10 +27,10 @@ export async function fetchStrapiAPI(
     try {
         // Merge default and user options
         const mergedOptions = {
+            next: { revalidate: 60 },
             headers: {
                 "Content-Type": "application/json",
             },
-            cache: "no-cache",
             ...options,
         };
 
@@ -41,7 +41,7 @@ export async function fetchStrapiAPI(
         )}`;
 
         // Trigger API call
-        const response = await fetch(requestUrl, mergedOptions);
+        const response = await fetch(requestUrl, { cache: "no-cache", ...mergedOptions });
         const data = await response.json();
         return data;
 
