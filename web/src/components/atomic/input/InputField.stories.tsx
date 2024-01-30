@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import InputField from './InputField';
 import AccountIcon from '@/assets/icons/AccountIcon';
 import LockOffIcon from '@/assets/icons/LockOffIcon';
-
+import React from 'react'
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
     title: 'Atomic/InputField',

@@ -11,7 +11,6 @@ import customToast from '@/components/atomic/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
-import LoadingIcon from '@/assets/icons/LoadingIcon'
 import EmailIcon from '@/assets/icons/EmailIcon'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 const schema = yup.object({
@@ -125,8 +124,7 @@ export default function LoginPage() {
                 <div>
 
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full">
-                            <span>{loading ? <LoadingIcon /> : null}  </span> Sign In</Button>
+                        <Button variant="primary" type="submit" classname="w-full" label='Sign In' loading={loading} />
                         <div className='text-black dark:text-white'>
                             <Link href={siteUrls.forgotPassword} className="text-primary">Forgot Password?</Link>
                         </div>

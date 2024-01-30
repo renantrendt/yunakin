@@ -52,7 +52,7 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end flex gap-4">
-                <Button classname="btn btn-primary" onClick={() => router.push('/login')}>To App</Button>
+                <Button classname="btn btn-primary" onClick={() => router.push('/login')} label='To App' />
                 <ThemeSwitcher />
             </div>
         </div>

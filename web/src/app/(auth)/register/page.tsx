@@ -1,6 +1,6 @@
 'use client'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -27,6 +27,7 @@ interface FormValues {
 export default function RegisterPage() {
     const { data: session } = useSession()
     const router = useRouter()
+    const [loading, setIsLoading] = useState(false)
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
@@ -42,18 +43,26 @@ export default function RegisterPage() {
     }
 
     const onSubmit = async (data: any) => {
-        const register = await fetch('/api/auth/register', {
-            method: 'POST',
-            body: JSON.stringify(data)
-        })
+        setIsLoading(true);
+        try {
+            const register = await fetch('/api/auth/register', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            })
 
-        if (register.status === 200) {
-            // router.push(`/auth/verify-request?email=${values.email}`);
-            customToast.success('Registration successful, a confirmation email has been sent to your email address.')
-            router.push('/login')
-        } else {
-            customToast.error('Something went wrong')
+            if (register.status === 200) {
+                // router.push(`/auth/verify-request?email=${values.email}`);
+                customToast.success('Registration successful, a confirmation email has been sent to your email address.')
+                router.push('/login')
+            } else {
+                customToast.error('Something went wrong')
+            }
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsLoading(false)
         }
+
     }
     return (
         <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800  ">
@@ -107,7 +116,7 @@ export default function RegisterPage() {
                     )}
                 />
                 <div className="flex justify-center">
-                    <Button variant="primary" type="submit" classname="w-full">Register</Button>
+                    <Button variant="primary" type="submit" classname="w-full" loading={loading} label='Register' />
                 </div>
                 <div className='text-black dark:text-white'>
                     Already have an account ? <Link href={siteUrls.login} className="text-primary">Login</Link>

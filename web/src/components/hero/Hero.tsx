@@ -14,15 +14,12 @@ export default function Hero() {
                     <Button
                         variant='primary'
                         classname='py-3 px-4 bg-gradient-to-b from-[#2F80ED] to-[#146EE9] text-white'
-                    >
-                        Call to action
-                    </Button>
+                        label='Call to action'
+                    />
                     <Button
                         variant='outline'
-
-                    >
-                        Join Crash Course
-                    </Button>
+                        label='Join Crash Course'
+                    />
                 </div>
 
 

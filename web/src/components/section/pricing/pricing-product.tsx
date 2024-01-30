@@ -1,6 +1,5 @@
 'use client'
 import { CheckoutSubscriptionBody } from '@/app/api/checkout-session/route'
-import LoadingIcon from '@/assets/icons/LoadingIcon';
 import React from 'react'
 import Stripe from 'stripe';
 import { Plans } from './pricing';
@@ -70,9 +69,7 @@ export default function PricingProduct({ name, description, price, features, pla
                     </div>
 
                     <div className="card-actions justify-center">
-                        <Button classname='w-full mb-8' onClick={handleClick}>
-                            {loading ? <div className='h-6 w-6 text-blu-200'><LoadingIcon /> </div> : null} Start
-                        </Button>
+                        <Button classname='w-full mb-8' onClick={handleClick} loading={loading} label='Start' />
                     </div>
                     <ul role="list" className="mb-8 space-y-4 text-left">
                         {
