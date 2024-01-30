@@ -11,14 +11,15 @@ interface ButtonProps {
   size?: 'small' | 'medium' | 'large'
   classname?: string
   loading?: boolean
+  disabled?: boolean
 }
 
-const Button: React.FC<ButtonProps> = ({ variant = 'primary', label, onClick, type, classname, loading }) => {
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', disabled, label, onClick, type, classname, size, loading }) => {
   const baseStyle = 'btn text-white'
-  const variantStyle = variant === 'primary' ? 'btn-primary' : variant === 'secondary' ? 'btn-secondary' : ' hover:bg-base-100 bg-white border !text-blue-600  border-black'
-
+  const variantStyle = variant === 'primary' ? 'btn-primary' : variant === 'secondary' ? 'btn-secondary' : 'btn-accent'
+  const sizeStyle = size === 'small' ? 'btn-sm' : size === 'medium' ? 'btn-md' : 'btn-lg'
   return (
-    <button className={`${baseStyle} ${variantStyle} ${classname}`} onClick={onClick} type={type}>
+    <button disabled={disabled || loading} className={`${baseStyle} ${variantStyle} ${classname} ${sizeStyle}`} onClick={onClick} type={type}>
       {loading ? <LoadingIcon /> : null}  {label}
     </button>
   )
