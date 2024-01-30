@@ -27,10 +27,10 @@ export async function fetchStrapiAPI(
     try {
         // Merge default and user options
         const mergedOptions = {
-            next: { revalidate: 60 },
             headers: {
                 "Content-Type": "application/json",
             },
+            cache: "no-cache",
             ...options,
         };
 
