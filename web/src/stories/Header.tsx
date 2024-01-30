@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from './Button';
+import Button from '@/components/atomic/button/Button';
 import './header.css';
 
 type User = {
@@ -47,7 +47,7 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
         ) : (
           <>
             <Button size="small" onClick={onLogin} label="Log in" />
-            <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
+            <Button variant='primary' size="small" onClick={onCreateAccount} label="Sign up" />
           </>
         )}
       </div>
