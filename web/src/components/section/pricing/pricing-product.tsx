@@ -6,7 +6,7 @@ import { Plans } from './pricing';
 import Button from '../../atomic/button/Button';
 import TickIcon from '@/assets/icons/TickIcon';
 import CrossIcon from '@/assets/icons/CrossIcon';
-import Modal from '../../atomic/modal/Modal';
+import Modal from '../../molecules/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
 import customToast from '../../atomic/toast/customToast';
 export default function PricingProduct({ name, description, price, features, plan, recommended }: {
