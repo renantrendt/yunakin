@@ -13,26 +13,27 @@ const config: StorybookConfig = {
 
       options: {
         rules: [{
-      test: /\.css$/,
-      sideEffects: true,
-      use: [
-          require.resolve("style-loader"),
-          {
+          test: /\.css$/,
+          sideEffects: true,
+          use: [
+            require.resolve("style-loader"),
+            {
               loader: require.resolve("css-loader"),
               options: {
-                  
-                  importLoaders: 1,
+
+                importLoaders: 1,
               },
-          },{
-    loader: require.resolve("postcss-loader"),
-    options: {
-    implementation: require.resolve("postcss"),
-    },
-    },
-      ],
-    },],
+            }, {
+              loader: require.resolve("postcss-loader"),
+              options: {
+                implementation: require.resolve("postcss"),
+              },
+            },
+          ],
+        },],
       }
-    })
+    }),
+    "@storybook/addon-themes"
   ],
   webpackFinal(config, options) {
     (config.resolve as any).alias = {
