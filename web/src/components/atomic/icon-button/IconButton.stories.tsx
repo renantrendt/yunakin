@@ -16,7 +16,7 @@ const meta = {
     // More on argTypes: https://storybook.js.org/docs/api/argtypes
     argTypes: {
         icon: {
-            options: [<AccountIcon />, <CrossIcon />],
+            options: [<AccountIcon key={'1'} />, <CrossIcon key={'2'} />],
             control: { type: 'radio' },
         },
     },

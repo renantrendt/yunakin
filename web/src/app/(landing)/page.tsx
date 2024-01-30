@@ -7,7 +7,6 @@ import Testimonial from '@/components/section/testimonial/Testimonial'
 import Features from '@/components/features/features'
 import Cta from '@/components/section/cta/cta'
 import TrustedBy from '@/components/landing/trustedBy'
-import Modal from '@/components/molecules/modal/Modal'
 
 export default function Home() {
   return (
