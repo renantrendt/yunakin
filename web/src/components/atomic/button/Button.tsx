@@ -15,8 +15,8 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ variant = 'primary', disabled, label, onClick, type, classname, size, loading }) => {
-  const baseStyle = 'btn text-white'
-  const variantStyle = variant === 'primary' ? 'btn-primary' : variant === 'secondary' ? 'btn-secondary' : 'btn-accent'
+  const baseStyle = 'btn '
+  const variantStyle = variant === 'primary' ? 'btn-primary text-white' : variant === 'secondary' ? 'btn-secondary' : 'btn-outline text-primary'
   const sizeStyle = size === 'small' ? 'btn-sm' : size === 'medium' ? 'btn-md' : 'btn-lg'
   return (
     <button disabled={disabled || loading} className={`${baseStyle} ${variantStyle} ${classname} ${sizeStyle}`} onClick={onClick} type={type}>

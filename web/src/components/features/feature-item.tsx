@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../atomic/button/Button';
 
 interface FeatureItemProps {
     direction?: "ltr" | "rtl" | string
@@ -15,11 +16,7 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                     <div className="FastEditing  text-stone-950  dark:text-white text-5xl font-black  leading-10">{title}</div>
                     <div className="     text-neutral-600 dark:text-white text-xl font-light max-w-[574px] leading-loose">{description}</div>
                 </div>
-                <div className=" px-4 py-3 bg-white rounded-md  shadow-inner border border-gray-200 justify-center items-center gap-2.5 inline-flex">
-                    <div className="Frame6 justify-center items-center gap-3 flex">
-                        <div className="LearnMore text-blue-600 text-base font-medium ">Learn More</div>
-                    </div>
-                </div>
+                <Button label='Learn More' variant="outline" size='medium' />
             </div>
             <img className="w-72 h-72 lg:w-96 lg:h-96  rounded-3xl" src={image} />
         </div>
