@@ -2,6 +2,7 @@ import PageHeader from '@/components/blog/PageHeader';
 import { fetchStrapiAPI } from '@/utils/strapi';
 import React from 'react'
 import BlogCard from '@/components/blog/BlogCard';
+import platformConfig from '@/config/app-config';
 
 export interface BlogsViewModel {
     name: string;
@@ -25,7 +26,7 @@ export interface BlogsViewModel {
 
 const BlogPage = async () => {
 
-    const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+    const token = platformConfig.variables.NEXT_PUBLIC_STRAPI_API_TOKEN;
     const categorypath = '/categories';
 
     const urlParamsObject = {

@@ -1,5 +1,6 @@
 'use client'
 import BackIcon from '@/assets/icons/BackIcon'
+import platformConfig from '@/config/app-config'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -38,7 +39,7 @@ const BlogContent = ({ data, isLoading }: { data: any, isLoading?: boolean }) =>
             </div>
             <div className="image flex justify-center mt-4 md:mt-16 relative w-full h-96 rounded-md">
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${data.imageURL}`} layout="fill"
+                    src={`${platformConfig.variables.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${data.imageURL}`} layout="fill"
                     objectFit="cover"
                     alt='image'
                     className='rounded-lg'

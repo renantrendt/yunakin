@@ -1,3 +1,4 @@
+import platformConfig from "@/config/app-config";
 import {
     Body,
     Button,
@@ -22,7 +23,7 @@ interface VerificationEmailProps {
 
 }
 
-const baseUrl = process.env.NEXT_URL
+const baseUrl = platformConfig.variables.NEXT_URL
 
 export const VerificationEmail = ({
     name,
