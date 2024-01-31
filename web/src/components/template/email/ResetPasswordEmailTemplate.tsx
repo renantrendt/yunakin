@@ -1,3 +1,4 @@
+import platformConfig from "@/config/app-config";
 import {
     Body,
     Button,
@@ -21,7 +22,7 @@ interface ResetPasswordEmailProps {
     resetPasswordLink?: string;
 }
 
-const baseUrl = process.env.NEXT_URL
+const baseUrl = platformConfig.variables.NEXT_URL
 
 export const ResetPasswordEmail = ({
     name,

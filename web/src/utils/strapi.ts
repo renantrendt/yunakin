@@ -1,7 +1,8 @@
+import platformConfig from "@/config/app-config";
 import qs from "qs";
 
 export function getStrapiURL(path = '') {
-    return `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}${path}`;
+    return `${platformConfig.variables.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}${path}`;
 }
 
 export function getStrapiMedia(url: string | null) {
