@@ -1,3 +1,4 @@
+import Typography from '@/components/atomic/typography/Typography'
 import React from 'react'
 
 const reasons = [
@@ -25,7 +26,7 @@ const Cta = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 dark:text-white  w-full ">
                 {reasons.map((reason) => (
                     <div key={reason.metric} className=" w-full h-56 rounded-lg  shadow border border-neutral-200 flex-col justify-center items-center gap-4 inline-flex">
-                        <div className="text-center text-stone-950 dark:text-white  text-6xl font-black font-['Inter'] leading-10">{reason.metric}</div>
+                        <Typography type='h3' className='text-stone-950 dark:text-white  !text-6xl  !font-black  !leading-10 '>{reason.metric}</Typography>
                         <div className=" text-center text-neutral-600 dark:text-white text-xl font-light font-['Inter'] leading-loose">{reason.descriptin}</div>
                     </div>
                 ))}

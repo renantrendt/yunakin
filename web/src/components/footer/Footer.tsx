@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 export default function Footer(): JSX.Element {
     return (
-        <footer className="footer h-full md:h-[50vh] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-10 md:px-28 text-base-content w-full bg-white dark:bg-gray-700  dark:text-white pt-24 pb-10">
+        <footer className="footer h-full md:h-[50vh] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-10 :px-28 text-base-content w-full bg-white dark:bg-gray-700  dark:text-white pt-24 pb-10">
             {/* <div className='container  mx-auto h-full w-full '> */}
             <nav className=''>
                 <header className="footer-title">Services</header>
