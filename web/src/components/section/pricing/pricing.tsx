@@ -1,50 +1,10 @@
+import platformConfig, { Plans } from '@/config/app-config'
 import PricingProduct from './pricing-product'
 import React from 'react'
 
-export enum Plans {
-    PRO,
-    BUSINESS,
-    ADVANCED
-}
 
-const features = [
-    {
-        name: "Feature 1",
-        plans: [Plans.PRO, Plans.BUSINESS, Plans.ADVANCED],
-    },
-    {
-        name: "Feature 2",
-        plans: [Plans.PRO, Plans.BUSINESS, Plans.ADVANCED],
-    },
-    {
-        name: "Feature 3",
-        plans: [Plans.PRO, Plans.BUSINESS, Plans.ADVANCED],
-    },
-    {
-        name: "Feature 4",
-        plans: [Plans.BUSINESS, Plans.ADVANCED],
-    },
-    {
-        name: "Feature 5",
-        plans: [Plans.BUSINESS, Plans.ADVANCED],
-    },
-    {
-        name: "Feature 6",
-        plans: [Plans.BUSINESS, Plans.ADVANCED],
-    },
-    {
-        name: "Feature 7",
-        plans: [Plans.ADVANCED],
-    },
-    {
-        name: "Feature 8",
-        plans: [Plans.ADVANCED],
-    },
-    {
-        name: "Feature 9",
-        plans: [Plans.ADVANCED],
-    }
-]
+
+const features = platformConfig.pricing.features;
 export default function Pricing({ showDescription = false }: { showDescription?: boolean }) {
     return (
         <div className='my-20 w-full px-4 md:px-28 '>

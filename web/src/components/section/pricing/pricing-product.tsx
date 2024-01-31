@@ -2,13 +2,13 @@
 import { CheckoutSubscriptionBody } from '@/app/api/checkout-session/route'
 import React from 'react'
 import Stripe from 'stripe';
-import { Plans } from './pricing';
 import Button from '../../atomic/button/Button';
 import TickIcon from '@/assets/icons/TickIcon';
 import CrossIcon from '@/assets/icons/CrossIcon';
 import Modal from '../../molecules/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
 import customToast from '../../atomic/toast/customToast';
+import platformConfig, { Plans } from '@/config/app-config';
 export default function PricingProduct({ name, description, price, features, plan, recommended }: {
     name: string
     description: string
@@ -25,7 +25,7 @@ export default function PricingProduct({ name, description, price, features, pla
         try {
             // step 2: define the data for monthly subscription
             const body: CheckoutSubscriptionBody = {
-                price_id: plan === Plans.PRO ? process.env.NEXT_PUBLIC_STRIPE_PRO_PLAN_ID! : plan === Plans.BUSINESS ? process.env.NEXT_PUBLIC_STRIPE_BUSINESS_PLAN_ID! : process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID!,
+                price_id: plan === Plans.PRO ? platformConfig.variables.NEXT_PUBLIC_STRIPE_PRO_PLAN_ID! : plan === Plans.BUSINESS ? platformConfig.variables.NEXT_PUBLIC_STRIPE_BUSINESS_PLAN_ID! : platformConfig.variables.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID!,
             };
 
             setLoading(true)

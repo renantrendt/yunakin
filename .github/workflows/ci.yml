@@ -3,7 +3,6 @@ name: CI/CD Pipeline
 on: [push, pull_request]
 env:
   GOOGLE_ANALYTICS_ID: your-google-analytics-id
-  SENDGRID_API_KEY: SG...
   GOOGLE_CLIENT_ID: 592455481995-cgnvp80af1efu9pk1jo1s2bnh4b6lmmg.apps.googleusercontent.com
   GOOGLE_CLIENT_SECRET: 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
   DATABASE_URL: postgres://postgres.wiazdxtrtjtvumtixrqj:Goo@millano23@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true
