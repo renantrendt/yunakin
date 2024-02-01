@@ -1,13 +1,9 @@
 import PageHeader from '@/components/blog/PageHeader';
-import { fetchStrapiAPI } from '@/utils/strapi';
 import React from 'react'
 import BlogCard from '@/components/blog/BlogCard';
-import platformConfig from '@/config/app-config';
 import getServerSideQueryClient from '@/react-query/server/queryClient';
 import { blogPostsWithCategoryQueryKey } from '@/react-query/queryKeys';
 import blogPostsWithCategoriesQueryFn from '@/react-query/server/queries/blogPostsWithCategories';
-import { useQuery } from '@tanstack/react-query';
-
 export interface BlogsViewModel {
     name: string;
     slug: string;
