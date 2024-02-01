@@ -1,6 +1,7 @@
 import { fetchStrapiAPI } from '@/utils/strapi';
 import BlogContent from '@/components/blog/BlogContent';
 import React from 'react';
+import platformConfig from '@/config/app-config';
 
 interface SingleBlogViewModel {
     title: string;
@@ -14,7 +15,7 @@ interface SingleBlogViewModel {
 }
 //eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SlugPage = async ({ params }: { params: { slug: string } }) => {
-    const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+    const token = platformConfig.variables.NEXT_PUBLIC_STRAPI_API_TOKEN;
     const path = `/articles`;
     const urlParamsObject = {
         filters: {

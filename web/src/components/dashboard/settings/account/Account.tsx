@@ -2,10 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import InputField from '@/components/input/InputField'
+import InputField from '@/components/atomic/input/InputField'
 import { useSession } from 'next-auth/react'
-import Button from '@/components/button/Button'
-import TextArea from '@/components/textarea/TextArea'
+import Button from '@/components/atomic/button/Button'
+import TextArea from '@/components/atomic/textarea/TextArea'
 import EmailIcon from '@/assets/icons/EmailIcon'
 import AccountIcon from '@/assets/icons/AccountIcon'
 import FileUploadIcon from '@/assets/icons/FileUploadIcon'
@@ -129,8 +129,8 @@ const AccountSsttings = () => {
                     />
                 </div>
                 <div className='flex justify-end gap-8'>
-                    <Button type='submit' variant='secondary' classname='w-24' >Cancel</Button>
-                    <Button type='submit' variant='primary' classname='w-24'>Save</Button>
+                    <Button type='submit' variant='secondary' classname='w-24' label='Cancel' />
+                    <Button type='submit' variant='primary' classname='w-24' label='Save' />
                 </div>
             </form>
             <div className="  col-span-5 w-full dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-8">
@@ -163,8 +163,8 @@ const AccountSsttings = () => {
                             <p><span className="text-primary">Click to upload</span> or drag and drop</p><p className="mt-1.5">SVG, PNG, JPG or GIF</p><p>(max, 800 X 800px)</p></div></div>
                 </div>
                 <div className='flex justify-end gap-8'>
-                    <Button type='submit' variant='secondary' classname='w-24' >Cancel</Button>
-                    <Button type='submit' variant='primary' classname='w-24'>Save</Button>
+                    <Button type='submit' variant='secondary' classname='w-24' label='Cancel' />
+                    <Button type='submit' variant='primary' classname='w-24' label='Save' />
                 </div>
             </div>
         </div >

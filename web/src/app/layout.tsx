@@ -6,7 +6,7 @@ import { initGA, logPageView } from '@/utils/ga-analytics'
 import Providers from '@/lib/providers/providers'
 import 'react-toastify/dist/ReactToastify.css'
 import React from 'react'
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ preload: false, weight: 'variable', subsets: ['latin'] })
 
 export default function RootLayout({
   children,

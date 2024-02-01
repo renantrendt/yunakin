@@ -15,9 +15,11 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
+        'primary': '#1F76EB',
         'stone-950': "#0F0F0F",
         'neutral-600': "#4B4B4B",
         'neutral-200': "#DEDEDE",
+        'header-color': '#91A0B5',
         'landing-background': "#FAFAFA"
       }
     },
@@ -27,10 +29,16 @@ const config: Config = {
     themes: [{
       light: {
         primary: "#1F76EB",
+        secondary: "#3E21EB",
+        danger: "#eeeeee",
+        transparent: "transparent",
       }
     }, {
       dark: {
         primary: "#1F76EB",
+        secondary: "#3E21EB",
+        danger: "#eeeeee",
+        transparent: "transparent",
       }
     }],
 

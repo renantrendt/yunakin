@@ -1,9 +1,10 @@
 // utils/sendEmail.ts
 import ResetPasswordEmail from '@/components/template/email/ResetPasswordEmailTemplate';
 import { VerificationEmail } from '@/components/template/email/WelcomeEmailTemplate';
+import platformConfig from '@/config/app-config';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(platformConfig.variables.RESEND_API_KEY);
 
 
 
@@ -26,7 +27,7 @@ export const sendVerificationEmail = async ({
       from: 'Fortan <fortan@codepilot.dev>',
       to: [to],
       subject: subject,
-      react: VerificationEmail({ confirmationEmail: `${process.env.NEXT_URL}/verify?token=${token}`, name: name, organizationName: "CodePilot" }) as React.ReactElement,
+      react: VerificationEmail({ confirmationEmail: `${platformConfig.variables.NEXT_URL}/verify?token=${token}`, name: name, organizationName: "CodePilot" }) as React.ReactElement,
     });
     return { success: true, data: data }
   } catch (error: any) {
@@ -55,7 +56,7 @@ export const sendResetPasswordEmail = async ({
       from: 'Fortan <fortan@codepilot.dev>',
       to: [to],
       subject: subject,
-      react: ResetPasswordEmail({ resetPasswordLink: `${process.env.NEXT_URL}/reset-password?token=${token}`, name: name, organizationName: "CodePilot" }) as React.ReactElement,
+      react: ResetPasswordEmail({ resetPasswordLink: `${platformConfig.variables.NEXT_URL}/reset-password?token=${token}`, name: name, organizationName: "CodePilot" }) as React.ReactElement,
     });
     return { success: true, data: data }
   } catch (error: any) {

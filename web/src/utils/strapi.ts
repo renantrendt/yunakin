@@ -1,7 +1,8 @@
+import platformConfig from "@/config/app-config";
 import qs from "qs";
 
 export function getStrapiURL(path = '') {
-    return `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}${path}`;
+    return `${platformConfig.variables.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}${path}`;
 }
 
 export function getStrapiMedia(url: string | null) {
@@ -41,7 +42,7 @@ export async function fetchStrapiAPI(
         )}`;
 
         // Trigger API call
-        const response = await fetch(requestUrl, mergedOptions);
+        const response = await fetch(requestUrl, { cache: "no-cache", ...mergedOptions });
         const data = await response.json();
         return data;
 

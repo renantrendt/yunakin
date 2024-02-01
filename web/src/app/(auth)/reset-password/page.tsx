@@ -3,11 +3,10 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import Button from '@/components/button/Button'
-import LoadingIcon from '@/assets/icons/LoadingIcon'
-import customToast from '@/components/toast/customToast'
+import Button from '@/components/atomic/button/Button'
+import customToast from '@/components/atomic/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
-import PasswordInputField from '@/components/input/PasswordInputField'
+import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 const schema = yup.object({
     password: yup.string().min(6).required()
 })
@@ -83,9 +82,7 @@ export default function ForgotPasswordPage() {
                 <div>
 
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full">
-                            {loading ? <div className='h-6 w-6'><LoadingIcon /> </div> : null}  Reset Password </Button>
-
+                        <Button variant="primary" type="submit" classname="w-full" loading={loading} label='Reset Password' />
                     </div>
                 </div>
             </form>

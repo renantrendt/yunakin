@@ -1,5 +1,5 @@
 'use client'
-import customToast from '@/components/toast/customToast'
+import customToast from '@/components/atomic/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect } from 'react'
 

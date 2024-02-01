@@ -4,16 +4,15 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import InputField from '@/components/input/InputField'
-import Button from '@/components/button/Button'
-import GoogleButton from '@/components/googlebutton/GoogleButton'
-import customToast from '@/components/toast/customToast'
+import InputField from '@/components/atomic/input/InputField'
+import Button from '@/components/atomic/button/Button'
+import GoogleButton from '@/components/molecules/googlebutton/GoogleButton'
+import customToast from '@/components/atomic/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
-import LoadingIcon from '@/assets/icons/LoadingIcon'
 import EmailIcon from '@/assets/icons/EmailIcon'
-import PasswordInputField from '@/components/input/PasswordInputField'
+import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required()
@@ -125,8 +124,7 @@ export default function LoginPage() {
                 <div>
 
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full">
-                            <span>{loading ? <LoadingIcon /> : null}  </span> Sign In</Button>
+                        <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='medium' loading={loading} />
                         <div className='text-black dark:text-white'>
                             <Link href={siteUrls.forgotPassword} className="text-primary">Forgot Password?</Link>
                         </div>

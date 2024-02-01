@@ -1,17 +1,19 @@
 import Footer from '@/components/footer/Footer'
-import Navbar from '@/components/navbar/navbar'
+import Navbar from '@/components/section/navbar/navbar'
 import React from 'react'
 
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className='bg-landing-background  dark:bg-gray-800 w-full flex justify-center'>
-            <div className='max-w-[1920px]'>
+        <div className='bg-landing-background flex flex-col dark:bg-gray-800 w-full items-center'>
+            <div className='max-w-[1440px] w-full'>
                 <Navbar />
                 {children}
+            </div>
+            <div className='bg-white w-full justify-center flex dark:bg-gray-700  dark:text-white'>
                 <Footer />
             </div>
 
-        </div>
+        </div >
     )
 }
 

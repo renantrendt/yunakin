@@ -3,7 +3,6 @@ name: CI/CD Pipeline
 on: [push, pull_request]
 env:
   GOOGLE_ANALYTICS_ID: your-google-analytics-id
-  SENDGRID_API_KEY: SG...
   GOOGLE_CLIENT_ID: 592455481995-cgnvp80af1efu9pk1jo1s2bnh4b6lmmg.apps.googleusercontent.com
   GOOGLE_CLIENT_SECRET: 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
   DATABASE_URL: postgres://postgres.wiazdxtrtjtvumtixrqj:Goo@millano23@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true
@@ -17,6 +16,9 @@ env:
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: sk_test_51OZUfiDikzGwEbQeSvORw9s0ohghLE6uxjeG3PD3OoDVFhZ06bKcbVKleEr7gBdk0RrpkokyHtqtHh1B7ZGIKSYC00436mbd0h
   STRIPE_SECRET_KEY: sk_test_51OZUfiDikzGwEbQe9B7EoMdZ7z1FYnvCtk65XNYVUwcADvue89cmuzn4YqOEX8CYcXP4Cm0FimFOV3awy2wLl9aC00o5UiMreO
   RESEND_API_KEY: Resdfasdf
+  NEXT_PUBLIC_STRAPI_API_TOKEN: a49192f22fe3e34bda8868deacf1b925aaf625568338bee98b6a9126e3497ef55a629835f72d1d6c9a89ba5f390899bcb3a77b09984d484e566f22f9c668da445a6f351073ee6ffd07aa2c92c1bd5e13f7042cacced841e56f46c10f047aa12c14423c68741bbbd6e7f8d18c444e08a9fc6e255033a7bd2d8966ac5fd050738c
+  NEXT_PUBLIC_PAGE_LIMIT: 50
+  NEXT_PUBLIC_STRAPI_API_URL: https://fresh-miracle-f408b11009.strapiapp.com
 jobs:
   build:
     runs-on: ubuntu-latest

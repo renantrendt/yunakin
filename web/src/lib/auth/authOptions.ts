@@ -6,12 +6,13 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import jwt from 'jsonwebtoken'
 import GoogleProvider from 'next-auth/providers/google'
 import { sendVerificationEmail } from '@/utils/sendEmail'
+import platformConfig from '@/config/app-config'
 
 export const authOptions: NextAuthOptions = {
     session: {
         strategy: 'jwt'
     },
-    secret: process.env.NEXTAUTH_JWT_SECRET,
+    secret: platformConfig.variables.NEXTAUTH_JWT_SECRET,
 
     providers: [
         CredentialsProvider({
@@ -57,8 +58,8 @@ export const authOptions: NextAuthOptions = {
             }
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            clientId: platformConfig.variables.GOOGLE_CLIENT_ID!,
+            clientSecret: platformConfig.variables.GOOGLE_CLIENT_SECRET!,
         })
     ],
     callbacks: {
@@ -132,7 +133,7 @@ export const authOptions: NextAuthOptions = {
                 token.randomKey = 'KG KEY'
                 token.encoded = jwt.sign(
                     token,
-                    process.env.NEXTAUTH_JWT_SECRET!
+                    platformConfig.variables.NEXTAUTH_JWT_SECRET!
                 )
             }
 
