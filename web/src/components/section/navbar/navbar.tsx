@@ -37,8 +37,10 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="lg:navbar-end  w-full lg:w-[10%]  gap-4 ">
-                <div className="dropdown flex justify-end w-full">
-                    <IconButton icon={<HamburgerIcon />} onClick={() => { }} className='w-8 h-8' />
+                <div className="dropdown flex justify-end w-full lg:hidden">
+                    <div className='text-black font-black'>
+                        <IconButton icon={<HamburgerIcon />} onClick={() => { }} className='w-8 h-8' />
+                    </div>
                     <ul tabIndex={0} className=" dropdown-content mt-8 z-[1] p-8 shadow bg-base-100 dark:bg-gray-700 rounded-box w-72 flex flex-col gap-8">
                         <li><Link href={siteUrls.pricing}>Pricing</Link></li>
                         <li>
