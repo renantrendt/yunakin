@@ -3,6 +3,10 @@ import { fetchStrapiAPI } from '@/utils/strapi';
 import React from 'react'
 import BlogCard from '@/components/blog/BlogCard';
 import platformConfig from '@/config/app-config';
+import getServerSideQueryClient from '@/react-query/server/queryClient';
+import { blogPostsWithCategoryQueryKey } from '@/react-query/queryKeys';
+import blogPostsWithCategoriesQueryFn from '@/react-query/server/queries/blogPostsWithCategories';
+import { useQuery } from '@tanstack/react-query';
 
 export interface BlogsViewModel {
     name: string;
@@ -26,53 +30,18 @@ export interface BlogsViewModel {
 
 const BlogPage = async () => {
 
-    const token = platformConfig.variables.NEXT_PUBLIC_STRAPI_API_TOKEN;
-    const categorypath = '/categories';
+    const queryClient = await getServerSideQueryClient();
 
-    const urlParamsObject = {
-        sort: { createdAt: "desc" },
-        populate: {
-            articles: {
-                populate: {
-                    author: {
-                        populate: "*",
-                    },
-                    imageURL: { fields: ["url"] }
-                }
-            },
-        },
-        pagination: {
-            start: 0,
-            limit: 50,
-        },
-    };
-    const options = { headers: { Authorization: `Bearer ${token}` } };
-    const responseData = await fetchStrapiAPI(categorypath, urlParamsObject, options);
+    await queryClient.prefetchQuery(
+        {
+            queryKey: blogPostsWithCategoryQueryKey(),
+            queryFn: blogPostsWithCategoriesQueryFn,
+        }
+    )
 
-    const mappedData = [
-        ...responseData.data.map((item: any) => ({
-            id: item.id,
-            name: item.attributes.name,
-            slug: item.attributes.slug,
-            articles: item.attributes.articles.data.map((article: any) => {
-                return {
-                    id: article.id,
-                    title: article.attributes.title,
-                    description: article.attributes.description,
-                    short_description: article.attributes.short_description,
-                    publishedAt: article.attributes.publishedAt,
-                    slug: article.attributes.slug,
-                    imageURL: article.attributes.imageURL.data.attributes.url ?? "",
-                    author: {
-                        id: article.attributes.author.data.id,
-                        name: article.attributes.author.data.attributes.name,
-                        avatar: article.attributes.author.data.attributes.avatar.data.attributes.url ?? "",
-                    }
-                }
-            }),
-        })),
-    ] as BlogsViewModel[];
-
+    const mappedData = await queryClient.getQueryData<BlogsViewModel[]>(
+        blogPostsWithCategoryQueryKey()
+    )
 
     return (
         <div className='mb-24 px-4 md:px-28'>
