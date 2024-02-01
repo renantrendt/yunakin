@@ -45,7 +45,7 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
     return (
         <div className='category mb-20' key={key} >
             <div className="  px-5 py-1.5 bg-gray-200 rounded-3xl border justify-start items-start gap-2.5 inline-flex">
-                <div className=" text-center text-neutral-600 text-sm font-semibold font-['Inter'] uppercase tracking-wide">{category.name}</div>
+                <div className=" text-center text-neutral-600 text-sm  uppercase tracking-wide">{category.name}</div>
             </div>
             <div className='grid grid-cols-12 justify-items-center w-full gap-x-4 mx-auto gap-y-12 pt-6'>
                 {category.articles.map((article, index: any) => (

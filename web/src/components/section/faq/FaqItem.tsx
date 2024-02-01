@@ -29,7 +29,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }: FaqItemProps) => {
                 className='w-full py-4 px-6'
             >
                 <h3 className='word-break'>{question}</h3>
-                {isOpen ? <div className='text-white' ><MinusIcon /> </div> : <div><PlusIcon /></div>}
+                {isOpen ? <div className='' ><MinusIcon /> </div> : <div><PlusIcon /></div>}
             </motion.div>
             <AnimatePresence initial={false}>
                 {isOpen && (

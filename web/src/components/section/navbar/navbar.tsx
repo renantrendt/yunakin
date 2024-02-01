@@ -11,7 +11,7 @@ import Image from 'next/image'
 export default function Navbar() {
     const router = useRouter()
     return (
-        <div className="navbar p-2 md:px-28 pt-7 md:pt-14 text-black dark:text-white max-w-8xl">
+        <div className="navbar p-2 md:px-28 pt-7 md:pt-14 dark:text-white max-w-8xl text-header-color font-medium text-base leading-[19px]">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

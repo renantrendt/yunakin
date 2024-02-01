@@ -6,9 +6,9 @@ import Typography from '../atomic/typography/Typography'
 export default function Hero() {
     return (
         <section
-            className="my-20 flex flex-col md:flex-row justify-center items-center text-center md:text-left text-black dark:text-white">
-            <div className="w-full ">
-                <Typography type='h1' className='text-5xl leading-[64px] text-stone-950 font-bold max-w-2xl'>
+            className="my-20 mt-40 flex flex-col md:flex-row justify-center gap-8  items-center text-center md:text-left text-black dark:text-white">
+            <div className="w-full flex flex-1 flex-col gap-4 ">
+                <Typography type='h1' className='text-5xl leading-[64px] text-stone-950 !font-black '>
                     Create high-converting funnels in just 60 minutes
                 </Typography>
                 <Typography type='p' className='text-xl py-6 leading-[30px] font-normal text-neutral-600' >
@@ -26,10 +26,8 @@ export default function Hero() {
                     />
                 </div>
             </div>
-            <div
-                className="relative w-full  flex justify-end ">
-                <RockerLaunchIcon />
-            </div>
+            <img className='rounded-[32px] flex-1' src='https://s3-alpha-sig.figma.com/img/120e/c241/8f0118fdb790196d933c064ff2113490?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eX9qwXwHonKWPqjJM18Q7nYyr5P-LnvMc9VU4l3KY8rnrSGpcsc1BW3f1a0t5ZQCuzS5VbO6dG4AmzwAS-z9Duh42DuDSoTtuD6Ib4UWErZpoD79P1Hgt3miY6O-NzhVQ60S6tsXjsbSbbURiMNHSkPcxWdf63AO4o1Og~nL6tfo~0LDz5gesR4sXg7azrAdlvAJYghzjrN~RBK8rnIAqDLcSLrru6bR1yzSYJyp5kwFFbxrBpye2ZJg71tfVKSP9y8-aeEcCPIgCw3XEvCgqEQUU~oX4S70ULw57tRoDwwiUj2ZFB~eI32KOJ3ep7QeaPpgMdjfbHQfRHkqCz5tSg__'
+                width={495} height={420} />
         </section>
 
     )

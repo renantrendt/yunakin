@@ -19,6 +19,7 @@ const config: Config = {
         'stone-950': "#0F0F0F",
         'neutral-600': "#4B4B4B",
         'neutral-200': "#DEDEDE",
+        'header-color': '#91A0B5',
         'landing-background': "#FAFAFA"
       }
     },

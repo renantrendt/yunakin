@@ -16,9 +16,9 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                     <div className="FastEditing  text-stone-950  dark:text-white text-5xl font-black  leading-10">{title}</div>
                     <div className="     text-neutral-600 dark:text-white text-xl font-light max-w-[574px] leading-loose">{description}</div>
                 </div>
-                <Button label='Learn More' variant="outline" size='medium' />
+                <Button label='Learn More' variant="outline" size='small' />
             </div>
-            <img className="w-72 h-72 lg:w-96 lg:h-96  rounded-3xl" src={image} />
+            <img className="w-72 h-72 lg:w-[495px] lg:h-[420px]  rounded-3xl" src={image} />
         </div>
     )
 }

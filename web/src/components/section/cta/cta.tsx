@@ -27,7 +27,7 @@ const Cta = () => {
                 {reasons.map((reason) => (
                     <div key={reason.metric} className=" w-full h-56 rounded-lg  shadow border border-neutral-200 flex-col justify-center items-center gap-4 inline-flex">
                         <Typography type='h3' className='text-stone-950 dark:text-white  !text-6xl  !font-black  !leading-10 '>{reason.metric}</Typography>
-                        <div className=" text-center text-neutral-600 dark:text-white text-xl font-light font-['Inter'] leading-loose">{reason.descriptin}</div>
+                        <div className=" text-center text-neutral-600 dark:text-white text-xl font-light  leading-loose">{reason.descriptin}</div>
                     </div>
                 ))}
             </div>
