@@ -1,11 +1,12 @@
 import React from 'react'
 import Button from '../atomic/button/Button'
 import Typography from '../atomic/typography/Typography'
+import Image from 'next/image'
 
 export default function Hero() {
     return (
         <section
-            className="my-20 mt-40 flex flex-col lg:flex-row justify-center gap-8  items-center text-center md:text-left text-black dark:text-white">
+            className="my-20  mt-20 lg:mt-40 grid grid-cols-1 lg:grid-cols-2 justify-center gap-8  items-center text-center md:text-left text-black dark:text-white">
             <div className="w-full flex flex-1 flex-col gap-4 ">
                 <Typography type='h1' className=' text-left  text-stone-950 !font-black '>
                     Create high-converting funnels in just 60 minutes
@@ -25,8 +26,15 @@ export default function Hero() {
                     />
                 </div>
             </div>
-            <img className='rounded-[32px] flex-1 lg:w-[495px]' src='https://s3-alpha-sig.figma.com/img/120e/c241/8f0118fdb790196d933c064ff2113490?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eX9qwXwHonKWPqjJM18Q7nYyr5P-LnvMc9VU4l3KY8rnrSGpcsc1BW3f1a0t5ZQCuzS5VbO6dG4AmzwAS-z9Duh42DuDSoTtuD6Ib4UWErZpoD79P1Hgt3miY6O-NzhVQ60S6tsXjsbSbbURiMNHSkPcxWdf63AO4o1Og~nL6tfo~0LDz5gesR4sXg7azrAdlvAJYghzjrN~RBK8rnIAqDLcSLrru6bR1yzSYJyp5kwFFbxrBpye2ZJg71tfVKSP9y8-aeEcCPIgCw3XEvCgqEQUU~oX4S70ULw57tRoDwwiUj2ZFB~eI32KOJ3ep7QeaPpgMdjfbHQfRHkqCz5tSg__'
-            />
+            <div className='relative w-full  flex-1 h-96'>
+                <Image
+                    alt=''
+                    fill
+                    objectFit="cover"
+                    src={"https://s3-alpha-sig.figma.com/img/120e/c241/8f0118fdb790196d933c064ff2113490?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eX9qwXwHonKWPqjJM18Q7nYyr5P-LnvMc9VU4l3KY8rnrSGpcsc1BW3f1a0t5ZQCuzS5VbO6dG4AmzwAS-z9Duh42DuDSoTtuD6Ib4UWErZpoD79P1Hgt3miY6O-NzhVQ60S6tsXjsbSbbURiMNHSkPcxWdf63AO4o1Og~nL6tfo~0LDz5gesR4sXg7azrAdlvAJYghzjrN~RBK8rnIAqDLcSLrru6bR1yzSYJyp5kwFFbxrBpye2ZJg71tfVKSP9y8-aeEcCPIgCw3XEvCgqEQUU~oX4S70ULw57tRoDwwiUj2ZFB~eI32KOJ3ep7QeaPpgMdjfbHQfRHkqCz5tSg__"}
+                    className="w-full h-full object-cover rounded-2xl"
+                />
+            </div>
         </section>
 
     )

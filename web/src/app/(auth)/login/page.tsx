@@ -124,7 +124,7 @@ export default function LoginPage() {
                 <div>
 
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='large' loading={loading} />
+                        <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='medium' loading={loading} />
                         <div className='text-black dark:text-white'>
                             <Link href={siteUrls.forgotPassword} className="text-primary">Forgot Password?</Link>
                         </div>
