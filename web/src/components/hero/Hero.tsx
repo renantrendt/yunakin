@@ -1,4 +1,3 @@
-import RockerLaunchIcon from '@/assets/icons/RockerLaunchIcon'
 import React from 'react'
 import Button from '../atomic/button/Button'
 import Typography from '../atomic/typography/Typography'
