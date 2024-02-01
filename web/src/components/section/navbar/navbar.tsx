@@ -6,17 +6,16 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import siteUrls from '@/config/site-config'
 import { ThemeSwitcher } from '../../atomic/theme/ThemeSwitcher'
-import HamburgerIcon from '@/assets/icons/HamburgerIcon'
+import HamburgerIcon from '@/assets/icons/HamburgerIcon.svg'
 import Image from 'next/image'
+import IconButton from '@/components/atomic/icon-button/IconButton'
 export default function Navbar() {
     const router = useRouter()
     return (
         <div className="navbar p-2 md:px-28 pt-7 md:pt-14 dark:text-white max-w-8xl text-header-color font-medium text-base leading-[19px]">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <HamburgerIcon />
-                    </div>
+                    <IconButton icon={HamburgerIcon} onClick={() => { }} />
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 dark:bg-gray-700 rounded-box w-52">
                         <li><Link href={siteUrls.pricing}>Pricing</Link></li>
                         <li>

@@ -32,8 +32,8 @@ const Testimonial = () => {
             <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 justify-center '>
                 {testimonials.map((testimonial, index) => (
                     <div key={index} className='card dark:bg-gray-700 shadow border  border-neutral-200 flex-col    h-full p-5 '>
-                        <div className='card-body flex py-8   border-justify-center items-center '>
-                            <p className='max-w-[316px] text-neutral-600 dark:text-white text-base leading-[26px] text-center font-light'>{testimonial.content}</p>
+                        <div className='card-body flex py-8  px-0 border-justify-center items-center '>
+                            <p className=' w-10/12 text-neutral-600 dark:text-white text-base leading-[26px] text-center font-light'>{testimonial.content}</p>
                             <Image src={testimonial.avatar} alt={testimonial.name} width={100} height={100} className='rounded-full w-20 h-20' />
                             <h4 className='text-lg text-stone-950 font-black'>{testimonial.name}</h4>
                             <p className='role text-base font-light text-stone-950'>{testimonial.role}</p>

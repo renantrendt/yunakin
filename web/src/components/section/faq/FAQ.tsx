@@ -22,7 +22,7 @@ const faqItems = [
 const FAQ = () => {
     const [showAnswer, setShowAnswer] = React.useState<number | null>(null)
     return (
-        <div className='container px-4  h-screen flex flex-col justify-center items-center  w-full m-auto gap-20' >
+        <div className='container   h-screen flex flex-col justify-center items-center  w-full m-auto gap-20' >
             <div className='text flex  flex-col justify-center items-center mb-8 md:mb-0 text-black dark:text-white  '>
                 <h1 className='text-5xl  font-bold mb-5'>FAQ</h1>
                 <h4 className='text-center text-xl '>Frequently Asked Questions</h4>

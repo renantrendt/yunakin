@@ -19,7 +19,7 @@ const Cta = () => {
     return (
         <div className="my-20 w-full flex-col justify-center items-center gap-20 inline-flex text-black dark:text-white">
             <div className=' flex flex-col justify-center items-center gap-5 mb-8'>
-                <h1 className='text-stone-950 text-5xl font-black leading-10 dark:text-white '>Why you need a Mobile Funnel?</h1>
+                <Typography type='h2' className='text-center'>Why you need a Mobile Funnel?</Typography>
                 <h3 className='text-xl  mb-20  max-w-2xl text-center text-neutral-600 font-normal leading-loose dark:text-white '>Traditional websites and landing pages are neither interactive nor personalized. These sites also load slowly and are not optimized for the mobile world</h3>
             </div>
 
