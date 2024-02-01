@@ -5,9 +5,9 @@ import React from 'react'
 import Typography from '../atomic/typography/Typography'
 export default function Footer(): JSX.Element {
     return (
-        <footer className="footer max-w-[1440px]  md:h-[50vh] grid grid-cols-2 grid-flow-row-dense  lg:grid-cols-9 px-4 md:px-28 text-base-content w-full  pt-24 pb-2">
+        <footer className="footer max-w-[1440px]  md:h-[50vh] grid grid-cols-9 grid-flow-row-dense  lg:grid-cols-9 px-4 md:px-28 text-base-content w-full  pt-24 pb-2">
             {/* <div className='container  mx-auto h-full w-full '> */}
-            <div className='flex flex-col col-span-2 lg:col-span-3 justify-start items-start'>
+            <div className='flex flex-col col-span-9 lg:col-span-3 justify-start items-start'>
                 <Link href={siteUrls.home}>
                     <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
                 </Link>
@@ -15,7 +15,7 @@ export default function Footer(): JSX.Element {
                     Lorem ipsum dolor sit amet consectetur. Egestas ac etiam in ac at risus volutpat ultricies aliquet
                 </Typography>
             </div>
-            <div className='grid col-start-5 grid-cols-4 w-full col-span-6'>
+            <div className='grid  col-span-9 lg:col-start-5 grid-cols-2 lg:grid-cols-4 w-full lg:col-span-6 gap-y-16'>
                 <nav className='flex flex-col gap-4'>
                     <header className="footer-title">Services</header>
                     <Link href='/' className="link link-hover">Branding</Link>

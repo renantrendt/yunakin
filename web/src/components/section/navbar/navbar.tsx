@@ -12,7 +12,7 @@ import IconButton from '@/components/atomic/icon-button/IconButton'
 export default function Navbar() {
     const router = useRouter()
     return (
-        <div className="navbar p-2 md:px-28 pt-7 md:pt-14 dark:text-white max-w-8xl text-header-color font-medium text-base leading-[19px]">
+        <div className="navbar px-4 md:px-28 pt-7 md:pt-14 dark:text-white max-w-8xl text-header-color font-medium text-base leading-[19px]">
             <div className="navbar-start">
 
                 <Link href={siteUrls.home}>
@@ -37,12 +37,10 @@ export default function Navbar() {
                     <li><Link href={siteUrls.features}>Features</Link></li>
                 </ul>
             </div>
-            <div className="navbar-end w-[10%]  gap-4 ">
-                <div className="dropdown">
-                    <div tabIndex={0}>
-                        <IconButton icon={HamburgerIcon} onClick={() => { }} />
-                    </div>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 dark:bg-gray-700 rounded-box w-52">
+            <div className="lg:navbar-end  w-full lg:w-[10%]  gap-4 ">
+                <div className="dropdown flex justify-end w-full">
+                    <IconButton icon={<HamburgerIcon />} onClick={() => { }} className='w-8 h-8' />
+                    <ul tabIndex={0} className=" dropdown-content mt-8 z-[1] p-8 shadow bg-base-100 dark:bg-gray-700 rounded-box w-72 flex flex-col gap-8">
                         <li><Link href={siteUrls.pricing}>Pricing</Link></li>
                         <li>
                             <Link href={siteUrls.blog}>Blog</Link>
@@ -52,6 +50,24 @@ export default function Navbar() {
                             </ul> */}
                         </li>
                         <li><Link href={siteUrls.features}>Features</Link></li>
+                        <li>
+                            <Button
+                                variant='outline'
+                                label='Login'
+                                classname='w-full '
+                                onClick={() => router.push(siteUrls.login)}
+                            />
+                        </li>
+                        <li>
+
+                            <Button
+                                variant='primary'
+                                classname='py-3 px-4 w-full bg-gradient-to-b from-[#2F80ED] to-[#146EE9] text-white '
+                                label='Get Started'
+                                onClick={() => router.push(siteUrls.register)}
+                            />
+                        </li>
+
                     </ul>
                 </div>
                 <Button

@@ -8,7 +8,7 @@ interface IconButtonProps {
 
 const IconButton = ({ icon, onClick, className }: IconButtonProps) => {
     return (
-        <button onClick={onClick} className={`p-1 flex justify-center rounded-full items-center hover:bg-gray-200 bg-transparent ${className}`}>{icon}</button>
+        <button onClick={onClick} className={`p-1 flex justify-center rounded-full items-center  hover:bg-gray-200  ${className}`}>{icon}</button>
     )
 }
 

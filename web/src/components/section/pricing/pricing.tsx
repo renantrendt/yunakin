@@ -7,7 +7,7 @@ import React from 'react'
 const features = platformConfig.pricing.features;
 export default function Pricing({ showDescription = false }: { showDescription?: boolean }) {
     return (
-        <div className='my-20 w-full px-4 md:px-28 '>
+        <div className='my-20 w-full  '>
             {showDescription && (
                 <div className=' flex flex-col justify-center items-center gap-5 mb-8 text-black dark:text-white'>
                     <h1 className='text-5xl font-bold text-center mb-2'>Enable the best experience</h1>
