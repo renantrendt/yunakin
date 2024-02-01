@@ -2,11 +2,11 @@ import React from 'react'
 import Button from '../atomic/button/Button'
 import Typography from '../atomic/typography/Typography'
 import Image from 'next/image'
-
+import PlayIcon from '@/assets/icons/PlayIcon.svg'
 export default function Hero() {
     return (
         <section
-            className="my-20  mt-20 lg:mt-40 grid grid-cols-1 lg:grid-cols-2 justify-center gap-8  items-center text-center md:text-left text-black dark:text-white">
+            className="my-20  mt-20 lg:mt-40 grid grid-cols-1 lg:grid-cols-2 justify-center gap-x-8  items-center text-center md:text-left text-black dark:text-white">
             <div className="w-full flex flex-1 flex-col gap-4 ">
                 <Typography type='h1' className=' text-left  text-stone-950 !font-black '>
                     Create high-converting funnels in just 60 minutes
@@ -23,6 +23,7 @@ export default function Hero() {
                     <Button
                         variant='outline'
                         label='Join Crash Course'
+                        icon={<PlayIcon />}
                     />
                 </div>
             </div>

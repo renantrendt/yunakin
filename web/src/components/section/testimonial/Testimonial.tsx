@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Typography from '@/components/atomic/typography/Typography';
 
 const testimonials = [
     {
@@ -26,22 +27,27 @@ const Testimonial = () => {
 
 
     return (
-        <div className='my-20 w-full  dark:text-white'>
-            <h1 className='text-4xl text-stone-950 font-black text-center mb-2'>Testimonials</h1>
+        <div className='pt-20 w-full dark:text-white'>
+            <Typography type='h1' className=' text-stone-950 !font-black text-center pb-4'>Testimonials</Typography>
             <h3 className='text-xl text-center  text-neutral-600  mb-20'>Read what people say about us</h3>
             <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 justify-center '>
                 {testimonials.map((testimonial, index) => (
                     <div key={index} className='card dark:bg-gray-700 shadow border  border-neutral-200 flex-col    h-full p-5 '>
-                        <div className='card-body flex py-8  px-0 border-justify-center items-center '>
+                        <div className='card-body flex   px-0 border-justify-center items-center '>
                             <p className=' w-10/12 text-neutral-600 dark:text-white text-base leading-[26px] text-center font-light'>{testimonial.content}</p>
-                            <Image src={testimonial.avatar} alt={testimonial.name} width={100} height={100} className='rounded-full w-20 h-20' />
-                            <h4 className='text-lg text-stone-950 font-black'>{testimonial.name}</h4>
+                            <div className='relative  w-20 h-20  mt-4'>
+                                <Image src={testimonial.avatar} alt={testimonial.name} fill objectFit='cover' className='rounded-full w-20 h-20' />
+                            </div>
+                            <Typography type='p' className='text-lg text-stone-950 font-black'>
+                                {testimonial.name}
+                            </Typography>
                             <p className='role text-base font-light text-stone-950'>{testimonial.role}</p>
                         </div>
                     </div>
-                ))}
-            </section>
-        </div>
+                ))
+                }
+            </section >
+        </div >
     );
 };
 
