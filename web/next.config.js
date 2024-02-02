@@ -1,9 +1,8 @@
-const withMDX = require('@next/mdx')()
+const { withContentlayer } = require("next-contentlayer")
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    //  // Configure `pageExtensions` to include MDX files
-    pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+
     webpack(config) {
         // Grab the existing rule that handles SVG imports
         const fileLoaderRule = config.module.rules.find((rule) =>
@@ -46,7 +45,7 @@ const nextConfig = {
     }
 }
 
-module.exports = withMDX(nextConfig)
+module.exports = withContentlayer(nextConfig)
 
 
 // Injected content via Sentry wizard below
