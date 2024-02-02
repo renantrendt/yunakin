@@ -10,6 +10,7 @@ import React from 'react'
 const DashboardNavbar = ({ onClick }: { onClick: () => void }): JSX.Element => {
     const { data: session } = useSession()
 
+    console.log(session?.user)
     //eslint-disable-next-line
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     }
@@ -40,7 +41,7 @@ const DashboardNavbar = ({ onClick }: { onClick: () => void }): JSX.Element => {
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img alt="Tailwind CSS Navbar component" src={`${(session?.user as any).avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}`} />
+                                    <img src={`${(session?.user as any).avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}`} />
                                 </div>
                             </div>
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100  dark:bg-gray-500 rounded-box w-52">
