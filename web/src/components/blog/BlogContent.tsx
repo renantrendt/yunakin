@@ -5,11 +5,11 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm';
 
 const BlogContent = ({ data, isLoading }: { data: any, isLoading?: boolean }) => {
     const router = useRouter()
 
+    console.log(data)
     if (isLoading) return (
         <>
             <div className='flex mt-16 relative animate-pulse  '>
@@ -46,7 +46,8 @@ const BlogContent = ({ data, isLoading }: { data: any, isLoading?: boolean }) =>
                 />
             </div>
             <div className="content mx-auto max-w-3xl my-8 md:my-16  ">
-                <Markdown remarkPlugins={[remarkGfm]} className={'prose'} >
+                <Markdown
+                    className={'prose'} >
                     {data.description}
                 </Markdown>
             </div>
