@@ -4,8 +4,6 @@ import BlogCard from '@/components/blog/BlogCard';
 import getServerSideQueryClient from '@/react-query/server/queryClient';
 import { blogPostsWithCategoryQueryKey } from '@/react-query/queryKeys';
 import blogPostsWithCategoriesQueryFn from '@/react-query/server/queries/blogPostsWithCategories';
-import { platform } from 'os';
-import platformConfig from '@/config/app-config';
 export interface BlogsViewModel {
     name: string;
     slug: string;
