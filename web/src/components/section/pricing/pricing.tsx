@@ -6,7 +6,7 @@ import React from 'react'
 
 const features = platformConfig.pricing.features;
 export default function Pricing({ showDescription = false }: { showDescription?: boolean }) {
-    const [isMonthly, setIsMonthly] = React.useState(true)
+    const [isMonthly, setIsMonthly] = React.useState(false)
     return (
         <div className='my-20 w-full  '>
             {showDescription && (
@@ -16,7 +16,7 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                 </div>
             )}
 
-            <div className='flex justify-center items-center mx-auto  hover:cursor-pointer  text-md w-fit gap-0 bg-white shadow-md rounded-3xl p-1'>
+            <div className='flex justify-center mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit gap-0 bg-white shadow-md rounded-3xl p-1'>
                 <div className={`${isMonthly ? "bg-primary text-white" : ""} rounded-3xl px-3 py-2  transition duration-300 `} onClick={() => setIsMonthly(true)}>
                     <span className=''>Monthly</span>
                 </div>
@@ -31,6 +31,7 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                     price={29.99}
                     plan={Plans.PRO}
                     features={features}
+                    isMonthly={isMonthly}
                 />
                 <PricingProduct
                     name={'Personal'}
@@ -40,6 +41,8 @@ export default function Pricing({ showDescription = false }: { showDescription?:
 
                     features={features}
                     recommended={true}
+                    isMonthly={isMonthly}
+
                 />
                 <PricingProduct
                     name={'Startup'}
@@ -47,6 +50,8 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                     price={79.99}
                     plan={Plans.ADVANCED}
                     features={features}
+                    isMonthly={isMonthly}
+
                 />
             </section>
         </div>

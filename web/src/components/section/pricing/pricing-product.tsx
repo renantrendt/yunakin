@@ -9,13 +9,14 @@ import Modal from '../../molecules/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
 import customToast from '../../atomic/toast/customToast';
 import platformConfig, { Plans } from '@/config/app-config';
-export default function PricingProduct({ name, description, price, features, plan, recommended }: {
+export default function PricingProduct({ name, description, price, features, plan, recommended, isMonthly = false }: {
     name: string
     description: string
     price: number
     features: { name: string, plans: Plans[] }[]
     plan: Plans
     recommended?: boolean
+    isMonthly?: boolean
 }) {
 
     const [loading, setLoading] = React.useState(false)
@@ -61,10 +62,10 @@ export default function PricingProduct({ name, description, price, features, pla
 
                     <div className="flex justify-center items-center py-10 text-black dark:text-white ">
                         <span className="mr-2 text-5xl font-extrabold ">
-                            {price}€
+                            {isMonthly ? (price * 1.2).toFixed(2) : price}€
                         </span>
                         <span>
-                            /month
+                            /{isMonthly ? "month" : "year"}
                         </span>
                     </div>
 
