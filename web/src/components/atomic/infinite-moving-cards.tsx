@@ -10,10 +10,10 @@ const items = [
 ]
 export const InfiniteMovingCards = ({
     direction = "left",
-    speed = "fast",
+    speed = "normal",
     pauseOnHover = true,
     className,
-    
+
 }: {
 
     direction?: "left" | "right";
@@ -74,7 +74,7 @@ export const InfiniteMovingCards = ({
         <div
             ref={containerRef}
             className={cn(
-                "scroller relative z-20  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+                "scroller relative z-20  flex  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
                 className
             )}
         >
@@ -82,7 +82,7 @@ export const InfiniteMovingCards = ({
                 ref={scrollerRef}
                 className={cn(
                     " flex min-w-full shrink-0 gap-16 py-4 w-max flex-nowrap",
-                    start && "animate-scroll ",
+                    start && "animate-scroll animate-infinite-scroll ",
                     pauseOnHover && "hover:[animation-play-state:paused]"
                 )}
             >
@@ -90,6 +90,7 @@ export const InfiniteMovingCards = ({
                     <Item key={idx} />
                 ))}
             </ul >
+
         </div>
     );
 };

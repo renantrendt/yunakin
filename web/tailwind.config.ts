@@ -18,15 +18,13 @@ const config: Config = {
       },
       animation: {
         scroll:
-          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+          "infinite-scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
 
       },
       keyframes: {
-        scroll: {
-          to: {
-            transform: "translate(calc(-50% - 0.5rem))",
-
-          }
+        'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
         }
       },
       colors: {
