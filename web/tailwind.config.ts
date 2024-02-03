@@ -30,7 +30,8 @@ const config: Config = {
         }
       },
       colors: {
-        'primary': '#1F76EB',
+        'primary': '#8E76FE',
+        'primary-end': '#8C5AFC',
         'stone-950': "#0F0F0F",
         'neutral-600': "#4B4B4B",
         'neutral-200': "#DEDEDE",
@@ -43,14 +44,14 @@ const config: Config = {
   daisyui: {
     themes: [{
       light: {
-        primary: "#1F76EB",
+        primary: "#8E76FE",
         secondary: "#3E21EB",
         danger: "#eeeeee",
         transparent: "transparent",
       }
     }, {
       dark: {
-        primary: "#1F76EB",
+        primary: "#8E76FE",
         secondary: "#3E21EB",
         danger: "#eeeeee",
         transparent: "transparent",

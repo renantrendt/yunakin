@@ -22,9 +22,9 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
                     {[0, 1, 2].map((article, index: any) => (
                         <Link key={index} className="card w-full dark:text-white  max-w-lg bg-base-100 dark:bg-gray-700 h-96  col-span-12  md:col-span-6 lg:col-span-4  hover:cursor-pointer 
                         rounded-lg shadow-sm" href={`/`}>
-                            <figure className='relative hidden w-64 h-64 bg-slate-700 animate-pulse' ></figure>
-                            <div className="card-body pb-4">
-                                <h2 className="card-title w-16 bg-slate-700" ></h2>
+                            <figure className='relative hidden  h-64 bg-slate-700 animate-pulse w-full' ></figure>
+                            <div className="card-body animate-pulse pb-4">
+                                <h2 className="card-title w-16  bg-slate-700" ></h2>
                                 <p className='w-16 bg-slate-700'></p>
                                 <div className='flex  items-center justify-start mt-4'>
                                     <div className='avatar'>

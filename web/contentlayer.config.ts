@@ -47,15 +47,19 @@ export const Post = defineDocumentType(() => ({
         description: {
             type: "string",
         },
-        date: {
+        short_description: {
             type: "date",
             required: true,
         },
-        category: {
+        publishedAt: {
             type: 'string',
             required: true
         },
-        image: {
+        slug: {
+            type: 'string',
+            required: true
+        },
+        imageURL: {
             type: 'string',
             required: false
         },
