@@ -13,6 +13,8 @@ import { useRouter } from 'next/navigation'
 import EmailIcon from '@/assets/icons/EmailIcon'
 import AccountIcon from '@/assets/icons/AccountIcon'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
+import Image from 'next/image'
+import Typography from '@/components/atomic/typography/Typography'
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required(),
@@ -66,8 +68,11 @@ export default function RegisterPage() {
     }
     return (
         <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800  ">
-            <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 rounded-xl    shadow-lg p-8  m-auto flex flex-col gap-8">
-                <h1 className="text-3xl font-bold text-center  text-black dark:text-white">Register</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 rounded-xl    shadow-lg p-8  m-auto flex flex-col gap-6">
+                <Link href={siteUrls.home}>
+                    <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
+                </Link>
+                <Typography type='h4' className='font-bold'>Sign Up</Typography>
                 <Controller
                     control={control}
                     name="name"
