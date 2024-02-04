@@ -9,6 +9,9 @@ import Modal from '../../molecules/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
 import customToast from '../../atomic/toast/customToast';
 import platformConfig, { Plans } from '@/config/app-config';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import siteUrls from '@/config/site-config';
 export default function PricingProduct({ name, description, price, features, plan, recommended, isMonthly = false }: {
     name: string
     description: string
@@ -18,10 +21,16 @@ export default function PricingProduct({ name, description, price, features, pla
     recommended?: boolean
     isMonthly?: boolean
 }) {
-
+    const { data: session } = useSession()
     const [loading, setLoading] = React.useState(false)
     const [clientSecret, setClientSecret] = React.useState<string | null>(null)
+    const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+    const router = useRouter()
     const handleClick = async () => {
+
+        if (!session?.user) {
+            return router.push(`${siteUrls.login}?callbackUrl=${siteUrls.settings}`)
+        }
         // step 1: load stripe
         try {
             // step 2: define the data for monthly subscription
@@ -42,6 +51,7 @@ export default function PricingProduct({ name, description, price, features, pla
             // step 4: get the data and redirect to checkout using the sessionId
             const data = (await result.json()) as Stripe.Checkout.Session;
             setClientSecret(data.client_secret);
+            setIsModalOpen(true);
             setLoading(false)
         } catch (error) {
             customToast.error((error as any).message)
@@ -87,7 +97,7 @@ export default function PricingProduct({ name, description, price, features, pla
 
                 </div>
             </div>
-            {clientSecret && <Modal isOpen={true} title='stripe' onClose={() => { }} > <CheckoutForm clientSecret={clientSecret} /></Modal>}
+            {clientSecret && <Modal isOpen={isModalOpen} title='stripe' onClose={() => { setIsModalOpen(false) }} > <CheckoutForm clientSecret={clientSecret} /></Modal>}
         </>
     )
 }

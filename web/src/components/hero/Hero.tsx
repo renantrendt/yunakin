@@ -24,7 +24,12 @@ export default function Hero() {
                     <Button
                         variant='outline'
                         label='Join Crash Course'
-                        icon={<PlayIcon />}
+                        icon={
+                            <div className='text-primary'>
+
+                                <PlayIcon />
+                            </div>
+                        }
                     />
                 </div>
             </div>

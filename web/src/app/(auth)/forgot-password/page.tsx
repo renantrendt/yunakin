@@ -7,6 +7,10 @@ import InputField from '@/components/atomic/input/InputField'
 import Button from '@/components/atomic/button/Button'
 import customToast from '@/components/atomic/toast/customToast'
 import EmailIcon from '@/assets/icons/EmailIcon'
+import Link from 'next/link'
+import Image from 'next/image'
+import siteUrls from '@/config/site-config'
+import Typography from '@/components/atomic/typography/Typography'
 const schema = yup.object({
     email: yup.string().email().required(),
 })
@@ -56,8 +60,14 @@ export default function ForgotPasswordPage() {
 
     return (
         <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
-            <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-8">
-                <h1 className="text-3xl font-bold text-center text-black dark:text-white">Forgot Password </h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-4">
+                <Link href={siteUrls.home}>
+                    <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
+                </Link>
+                <div>
+                    <Typography type='h4' className='font-bold'>Forgot Password</Typography>
+                    <Typography type='p' className='font-light'>Enter your email below and we’ll send you password reset instructions.</Typography>
+                </div>
                 <Controller
                     control={control}
                     name="email"
