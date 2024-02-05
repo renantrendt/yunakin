@@ -1,4 +1,29 @@
-export const blogs = [
+
+export interface Author {
+    id: number;
+    name: string;
+    description: string;
+    avatar: string;
+    slug: string;
+}
+export interface Category {
+    id: number;
+    name: string;
+    slug: string;
+    articles: Article[];
+}
+export interface Article {
+    id: number;
+    title: string;
+    description: string;
+    short_description: string;
+    publishedAt: string;
+    slug: string;
+    imageURL: string;
+    category: string;
+    author: string;
+}
+export const blogs: Article[] = [
     {
         id: 1,
         title: "Blog 1",
@@ -11,35 +36,45 @@ export const blogs = [
         author: "fortan-pireva",
     },
 ]
-export const categories = [
+export const categories: Category[] = [
     {
         id: 1,
-        name: "Category 1",
-        slug: "category-1",
+        name: "Science",
+        slug: "science",
         articles: blogs,
     },
     {
         id: 2,
-        name: "Category 2",
-        slug: "category-2",
+        name: "Tutorials",
+        slug: "tutorials",
         articles: blogs,
     },
 ]
 
-export const authors = [
+
+export const authors: Author[] = [
     {
         id: 1,
-        name: "Author 1",
+        name: "Fortan Pireva",
+        description: "Distinguished Software Engineer",
+
+        slug: "fortan-pireva",
         avatar: "https://via.placeholder.com/150",
     },
     {
         id: 2,
-        name: "Author 2",
+        name: "Enis Presheva",
+        description: "Distinguished Software Engineer",
+        slug: "enis-presheva",
         avatar: "https://via.placeholder.com/150",
     },
 ]
 
 
-export const categoryPosts(slug: string)  {
+export const getCategoryBySlug = (slug: string) => {
     return categories.find((category) => category.slug === slug);
 }
+
+export const getAuthorBySlug = (slug: string) => {
+    return authors.find((author) => author.slug === slug);
+};
