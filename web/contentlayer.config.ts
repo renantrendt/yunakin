@@ -10,7 +10,7 @@ import rehypePrism from 'rehype-prism-plus';
 const computedFields = {
     slug: {
         type: "string",
-        resolve: (doc: any) => `/${doc._raw.flattenedPath}`,
+        resolve: (doc: any) => `/${doc.slug}`,
     },
     slugAsParams: {
         type: "string",
@@ -43,7 +43,7 @@ export const Post = defineDocumentType(() => ({
         author: {
             type: "string",
             required: true
-        }
+        },
         id: {
             type: "string",
             required: true,
@@ -56,18 +56,13 @@ export const Post = defineDocumentType(() => ({
             type: "string",
         },
         short_description: {
-            type: "date",
-            required: true,
+            type: "string",
         },
         publishedAt: {
             type: 'string',
             required: true
         },
         slug: {
-            type: 'string',
-            required: true
-        },
-        date: {
             type: 'string',
             required: true
         },
