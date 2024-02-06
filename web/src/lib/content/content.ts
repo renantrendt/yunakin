@@ -59,7 +59,7 @@ export const authors: Author[] = [
         description: "Distinguished Software Engineer",
 
         slug: "fortan-pireva",
-        avatar: "https://via.placeholder.com/150",
+        avatar: "/images/author-1.jpeg",
     },
     {
         id: 2,

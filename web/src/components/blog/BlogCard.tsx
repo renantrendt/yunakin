@@ -51,14 +51,14 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
                 {category.articles.map((article, index: any) => (
                     <Link key={index} className="card w-full dark:text-white  max-w-lg bg-base-100 dark:bg-gray-700 h-96  col-span-12  md:col-span-6 lg:col-span-4  hover:cursor-pointer 
               rounded-lg shadow-sm" href={`/blogs/${article.slug}`}>
-                        <figure className='relative hidden'><Image src={`${platformConfig.variables.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
+                        <figure className='relative hidden'><Image src={`${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
                         <div className="card-body pb-4">
                             <h2 className="card-title">{article.title}</h2>
                             <p>{article.short_description}</p>
                             <div className='flex  items-center justify-start mt-4'>
                                 <div className='avatar'>
                                     <div className="w-10 rounded-full ">
-                                        <img alt="Author name" src={`${platformConfig.variables.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${(article.author?.avatar)}`} />
+                                        <img alt="Author name" src={`${(article.author?.avatar)}`} />
                                     </div>
                                 </div>
                                 <p className='ml-2 w-16'>{article.author?.name ?? ""}</p>

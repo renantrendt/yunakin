@@ -6,10 +6,15 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import Markdown from 'react-markdown'
 
-const BlogContent = ({ data, isLoading }: { data: any, isLoading?: boolean }) => {
-    const router = useRouter()
+interface BlogContentProps {
+    data: any
+    isLoading?: boolean
+    content?: React.ReactNode
+}
 
-    console.log(data)
+const BlogContent = ({ data, isLoading, content }: BlogContentProps) => {
+    const router = useRouter()
+    // Parse the MDX file via the useMDXComponent hook.
     if (isLoading) return (
         <>
             <div className='flex mt-16 relative animate-pulse  '>
@@ -39,17 +44,14 @@ const BlogContent = ({ data, isLoading }: { data: any, isLoading?: boolean }) =>
             </div>
             <div className="image flex justify-center mt-4 md:mt-16 relative w-full h-96 rounded-md">
                 <Image
-                    src={`${platformConfig.variables.NEXT_PUBLIC_STRAPI_API_URL_LOCAL ?? ""}${data.imageURL}`} layout="fill"
+                    src={`${data.imageURL}`} layout="fill"
                     objectFit="cover"
                     alt='image'
                     className='rounded-lg'
                 />
             </div>
             <div className="content mx-auto max-w-3xl my-8 md:my-16  ">
-                <Markdown
-                    className={'prose'} >
-                    {data.description}
-                </Markdown>
+                {content}
             </div>
         </>
     )
