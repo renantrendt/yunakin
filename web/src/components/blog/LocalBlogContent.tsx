@@ -1,9 +1,6 @@
 import { Post } from 'contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import Image from 'next/image'
-import { format, parseISO } from "date-fns"
 import React from 'react'
-import Link from 'next/link'
 import BlogContent from './BlogContent'
 
 interface LocalBlogContentProps {

@@ -3,7 +3,6 @@ import BlogContent from '@/components/blog/BlogContent';
 import React from 'react';
 import platformConfig from '@/config/app-config';
 import { allPosts } from "contentlayer/generated"
-import { useMDXComponent } from 'next-contentlayer/hooks'
 import { Metadata } from 'next';
 import LocalBlogContent from '@/components/blog/LocalBlogContent';
 import { notFound } from 'next/navigation';

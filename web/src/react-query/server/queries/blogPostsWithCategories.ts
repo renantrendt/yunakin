@@ -87,7 +87,7 @@ const blogPostsWithCategoriesQueryFn = async () => {
                     avatar: author.avatar,
                 },
             };
-        }).filter((article) => article !== null) as BlogsViewModel[0]['articles'];
+        }).filter((article) => article !== null) as BlogsViewModel["articles"];
         view.push({
             // id: category.id,
             name: category.name,

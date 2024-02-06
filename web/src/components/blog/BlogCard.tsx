@@ -4,7 +4,6 @@ import { formatDate } from '@/utils/format'
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-import platformConfig from '@/config/app-config'
 
 interface BlogCardProps {
     key: string

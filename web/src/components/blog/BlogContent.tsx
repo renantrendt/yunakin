@@ -1,10 +1,8 @@
 'use client'
 import BackIcon from '@/assets/icons/BackIcon'
-import platformConfig from '@/config/app-config'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import Markdown from 'react-markdown'
 
 interface BlogContentProps {
     data: any
