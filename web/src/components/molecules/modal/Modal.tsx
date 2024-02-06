@@ -12,7 +12,6 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
-
   return (
     <dialog className={`modal  ${isOpen ? "modal-open" : ""} `}>
       <div className="modal-box bg-gray-100 ">

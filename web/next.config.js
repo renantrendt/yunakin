@@ -1,5 +1,8 @@
+const { withContentlayer } = require("next-contentlayer")
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
     webpack(config) {
         // Grab the existing rule that handles SVG imports
         const fileLoaderRule = config.module.rules.find((rule) =>
@@ -42,7 +45,7 @@ const nextConfig = {
     }
 }
 
-module.exports = nextConfig
+module.exports = withContentlayer(nextConfig)
 
 
 // Injected content via Sentry wizard below

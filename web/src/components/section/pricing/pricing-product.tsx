@@ -9,18 +9,28 @@ import Modal from '../../molecules/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
 import customToast from '../../atomic/toast/customToast';
 import platformConfig, { Plans } from '@/config/app-config';
-export default function PricingProduct({ name, description, price, features, plan, recommended }: {
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import siteUrls from '@/config/site-config';
+export default function PricingProduct({ name, description, price, features, plan, recommended, isMonthly = false }: {
     name: string
     description: string
     price: number
     features: { name: string, plans: Plans[] }[]
     plan: Plans
     recommended?: boolean
+    isMonthly?: boolean
 }) {
-
+    const { data: session } = useSession()
     const [loading, setLoading] = React.useState(false)
     const [clientSecret, setClientSecret] = React.useState<string | null>(null)
+    const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+    const router = useRouter()
     const handleClick = async () => {
+
+        if (!session?.user) {
+            return router.push(`${siteUrls.login}?callbackUrl=${siteUrls.settings}`)
+        }
         // step 1: load stripe
         try {
             // step 2: define the data for monthly subscription
@@ -41,6 +51,7 @@ export default function PricingProduct({ name, description, price, features, pla
             // step 4: get the data and redirect to checkout using the sessionId
             const data = (await result.json()) as Stripe.Checkout.Session;
             setClientSecret(data.client_secret);
+            setIsModalOpen(true);
             setLoading(false)
         } catch (error) {
             customToast.error((error as any).message)
@@ -51,7 +62,7 @@ export default function PricingProduct({ name, description, price, features, pla
         <>
             <div className="card  shadow-xl dark:bg-gray-700 rounded-[32px] h-full p-5">
                 {recommended && (
-                    <div className='rounded-[40px] shadow-md  px-6 py-2  bg-white dark:bg-gray-700 text-black  w-fit absolute top-[-20px] left-[32%]  '>Recommended</div>
+                    <div className='rounded-[40px] shadow-md  px-6 py-2  bg-white dark:bg-gray-700 text-black  w-fit absolute top-[-0px] left-[32%]  '>Recommended</div>
                 )}
                 <div className="card-body">
                     <div className='flex  flex-col items-center justify-center mb-8 '>
@@ -61,10 +72,10 @@ export default function PricingProduct({ name, description, price, features, pla
 
                     <div className="flex justify-center items-center py-10 text-black dark:text-white ">
                         <span className="mr-2 text-5xl font-extrabold ">
-                            {price}€
+                            {isMonthly ? (price * 1.2).toFixed(2) : price}€
                         </span>
                         <span>
-                            /month
+                            /{isMonthly ? "month" : "year"}
                         </span>
                     </div>
 
@@ -86,7 +97,7 @@ export default function PricingProduct({ name, description, price, features, pla
 
                 </div>
             </div>
-            {clientSecret && <Modal isOpen={true} title='stripe' onClose={() => { }} > <CheckoutForm clientSecret={clientSecret} /></Modal>}
+            {clientSecret && <Modal isOpen={isModalOpen} title='stripe' onClose={() => { setIsModalOpen(false) }} > <CheckoutForm clientSecret={clientSecret} /></Modal>}
         </>
     )
 }

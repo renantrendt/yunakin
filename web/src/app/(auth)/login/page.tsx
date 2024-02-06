@@ -13,6 +13,8 @@ import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import EmailIcon from '@/assets/icons/EmailIcon'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
+import Image from 'next/image'
+import Typography from '@/components/atomic/typography/Typography'
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required()
@@ -88,8 +90,12 @@ export default function LoginPage() {
     }
     return (
         <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
-            <form onSubmit={handleSubmit(onSubmit)} className=" w-10/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-8">
-                <h1 className="text-3xl font-bold text-center text-black dark:text-white">Login</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 p-8 rounded-[20px]     shadow-lg  m-auto flex flex-col gap-6">
+                <Link href={siteUrls.home}>
+                    <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
+                </Link>
+                <Typography type='h4' className='font-bold'>Log In</Typography>
+                {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
                 <Controller
                     control={control}
                     name="email"

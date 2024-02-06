@@ -22,17 +22,17 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
         <span className="label-text">{label}</span>
       </label>
       <div className='flex relative'>
-        {leadingIcon && <div className='absolute left-[6px] top-3 text-black dark:text-white '>{leadingIcon}</div>}
+        {leadingIcon && <div className='absolute left-[8px] top-3 text-black dark:text-white '>{leadingIcon}</div>}
         <input
           type={type}
           placeholder={placeholder}
-          className={`input  input-primary dark:bg-gray-800 text-black dark:text-white  w-full ${leadingIcon ? "pl-8" : ""}`}
+          className={`input  input-primary dark:bg-gray-800 text-black dark:text-white  w-full ${leadingIcon ? "pl-9" : ""}`}
           name={name}
           id={id}
           onChange={onChange}
           {...additionalProps}
         />
-        {trailingIcon && <div className='absolute right-[6px] top-3  text-black dark:text-white'>{trailingIcon}</div>}
+        {trailingIcon && <div className='absolute right-[8px] top-3  text-black dark:text-white'>{trailingIcon}</div>}
       </div>
 
       {error && <p className='text-red-600 mt-1 pl-1'>{error}</p>}

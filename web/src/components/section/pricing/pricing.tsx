@@ -6,6 +6,7 @@ import React from 'react'
 
 const features = platformConfig.pricing.features;
 export default function Pricing({ showDescription = false }: { showDescription?: boolean }) {
+    const [isMonthly, setIsMonthly] = React.useState(false)
     return (
         <div className='my-20 w-full  '>
             {showDescription && (
@@ -15,13 +16,22 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                 </div>
             )}
 
-            <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8 w-full'>
+            <div className='flex justify-center mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit gap-0 bg-white shadow-md rounded-3xl p-1'>
+                <div className={`${isMonthly ? "bg-primary text-white" : ""} rounded-3xl px-3 py-2  transition duration-300 `} onClick={() => setIsMonthly(true)}>
+                    <span className=''>Monthly</span>
+                </div>
+                <div className={`${!isMonthly ? "bg-primary text-white" : ""} rounded-3xl px-3 py-2 transition duration-300 `} onClick={() => setIsMonthly(false)}>
+                    <span >Yearly</span>
+                </div>
+            </div>
+            <section className='grid mt-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8 w-full'>
                 <PricingProduct
                     name={'Pro'}
                     description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
                     price={29.99}
                     plan={Plans.PRO}
                     features={features}
+                    isMonthly={isMonthly}
                 />
                 <PricingProduct
                     name={'Personal'}
@@ -31,6 +41,8 @@ export default function Pricing({ showDescription = false }: { showDescription?:
 
                     features={features}
                     recommended={true}
+                    isMonthly={isMonthly}
+
                 />
                 <PricingProduct
                     name={'Startup'}
@@ -38,6 +50,8 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                     price={79.99}
                     plan={Plans.ADVANCED}
                     features={features}
+                    isMonthly={isMonthly}
+
                 />
             </section>
         </div>

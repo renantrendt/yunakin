@@ -41,3 +41,5 @@ web/.next-env.d.ts
 
 .env
 web/.env
+
+web/.contentlayer

@@ -8,7 +8,7 @@ interface TypographyProps {
 type TypographyType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p"
 
 const Typography = ({ type, children, className }: TypographyProps) => {
-    const baseClasses = `${className}`;
+    const baseClasses = `text-stone-950  ${className}`;
     switch (type) {
         case "h1":
             return <h1 className={`${baseClasses} text-stone-950 text-5xl  lg:leading-[64px] lg:text-6xl `}>{children}</h1>
@@ -17,7 +17,7 @@ const Typography = ({ type, children, className }: TypographyProps) => {
         case "h3":
             return <h3 className={`${baseClasses} lg:text-5xl`}>{children}</h3>
         case "h4":
-            return <h4 className={`${baseClasses} lg:text-4xl`}>{children}</h4>
+            return <h4 className={`${baseClasses} lg:text-2xl`}>{children}</h4>
         case "h5":
             return <h5 className={`${baseClasses} lg:text-3xl`}>{children}</h5>
         case "h6":

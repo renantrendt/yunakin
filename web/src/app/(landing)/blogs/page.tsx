@@ -25,7 +25,6 @@ export interface BlogsViewModel {
 
 
 const BlogPage = async () => {
-
     const queryClient = await getServerSideQueryClient();
 
     await queryClient.prefetchQuery(

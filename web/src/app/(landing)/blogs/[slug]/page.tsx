@@ -2,7 +2,41 @@ import { fetchStrapiAPI } from '@/utils/strapi';
 import BlogContent from '@/components/blog/BlogContent';
 import React from 'react';
 import platformConfig from '@/config/app-config';
+import { allPosts } from "contentlayer/generated"
+import { Metadata } from 'next';
+import LocalBlogContent from '@/components/blog/LocalBlogContent';
+import { notFound } from 'next/navigation';
+interface PostProps {
+    params: {
+        slug: string
+    }
+}
 
+function getPostFromParams(params: PostProps["params"]) {
+    const slug = params?.slug
+    const post = allPosts.find((post: any) => post.slug.replace("/", "") === slug)
+    console.log(allPosts, slug)
+    if (!post) {
+        null
+    }
+
+    return post
+}
+
+export async function generateMetadata({
+    params,
+}: PostProps): Promise<Metadata> {
+    const post = getPostFromParams(params)
+
+    if (!post) {
+        return {}
+    }
+
+    return {
+        title: post.title,
+        description: post.description,
+    }
+}
 interface SingleBlogViewModel {
     title: string;
     description: string;
@@ -15,6 +49,14 @@ interface SingleBlogViewModel {
 }
 //eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SlugPage = async ({ params }: { params: { slug: string } }) => {
+
+    const post = getPostFromParams(params)
+    if (!post) {
+        return notFound()
+    }
+    if (!platformConfig.features.blog.strapi_enabled) {
+        return <LocalBlogContent post={post} />
+    }
     const token = platformConfig.variables.NEXT_PUBLIC_STRAPI_API_TOKEN;
     const path = `/articles`;
     const urlParamsObject = {
