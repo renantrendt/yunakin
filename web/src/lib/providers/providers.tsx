@@ -12,7 +12,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
         <SessionProvider>
             <QueryClientProvider client={queryClient}>
                 <ToastProvider>
-                    <ThemeProvider attribute='class'>
+                    <ThemeProvider attribute='class' defaultTheme='light'>
                         <ClientThemeProvider>
                             {children}
                         </ClientThemeProvider>
