@@ -1,13 +1,11 @@
 import platformConfig from "@/config/app-config";
 import {
     Body,
-    Button,
     Column,
     Container,
     Head,
     Html,
     Img,
-    Link,
     Preview,
     Row,
     Section,
@@ -53,7 +51,7 @@ export const WelcomeWaitingListEmailTemplate = ({
                         </Text>
                         <Section className="text-left mt-[32px] mb-[32px]">
                             <Text>
-                                Thanks,
+                                Thanks, {email}
                             </Text>
                             <Text>
                                 {organizationName} team

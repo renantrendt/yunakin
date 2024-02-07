@@ -154,3 +154,9 @@ html.dark .prose * {
     linear-gradient(180deg, #171524 0%, #0A0910 100%);
 
 }
+
+.coming-soon-button-linear-gradient {
+  background: linear-gradient(180deg, #763AFB 0%, #601AF9 98%, rgba(118, 58, 251, 0) 100%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
+
+}

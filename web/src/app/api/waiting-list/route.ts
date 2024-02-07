@@ -1,7 +1,6 @@
 // import { sendEmail } from "@/lib/mailer";
 import { prisma } from '@/lib/prisma'
-import { sendVerificationEmail, sendWelcomeWaitingListEmail } from '@/utils/sendEmail'
-import { hash } from 'bcryptjs'
+import { sendWelcomeWaitingListEmail } from '@/utils/sendEmail'
 import { NextResponse } from 'next/server'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -31,9 +30,7 @@ export async function POST(req: Request): Promise<NextResponse<boolean>> {
         })
         await sendWelcomeWaitingListEmail({
             to: email,
-            name: email,
             subject: 'Confirm Email',
-            token: 'waiting-list'
         });
         return new NextResponse(
             JSON.stringify({
