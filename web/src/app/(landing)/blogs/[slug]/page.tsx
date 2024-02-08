@@ -88,7 +88,7 @@ const SlugPage = async ({ params }: { params: { slug: string } }) => {
     }
 
     return (
-        <div className=' w-full px-4  md:px-28 text-black dark:text-white '>
+        <div className=' w-full px-4  md:px-28 text-black dark:text-white ' >
             {mappedData && (
                 <BlogContent data={mappedData} />
             )}

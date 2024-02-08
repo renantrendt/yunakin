@@ -6,19 +6,6 @@ import PlayIcon from '@/assets/icons/PlayIcon.svg'
 import { siteCopy } from '@/config/site-config'
 import { motion } from 'framer-motion'
 export default function Hero() {
-    const containerVariants = {
-        initial: {
-            opacity: 0,
-            y: 100,
-        },
-        animate: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 5,
-            },
-        },
-    };
     return (
         <section
             className="my-20  mt-20 lg:mt-40   items-center text-center md:text-left text-black dark:text-white">
@@ -37,7 +24,7 @@ export default function Hero() {
                 transition={
                     {
                         duration: 0.6,
-                        ease: 'linear'
+                        ease: 'easeOut'
                     }
                 }
             >
