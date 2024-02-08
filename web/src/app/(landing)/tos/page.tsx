@@ -2,7 +2,6 @@
 
 import Markdown from 'react-markdown'
 import React from 'react';
-import remarkGfm from "remark-gfm";
 import BackIcon from '@/assets/icons/BackIcon';
 import { useRouter } from 'next/navigation';
 

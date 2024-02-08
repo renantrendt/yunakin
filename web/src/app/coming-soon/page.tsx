@@ -4,7 +4,6 @@ import React from 'react'
 import ComingSoonIcon from '@/assets/icons/coming-soon/icon'
 import localFont from 'next/font/local'
 import { cn } from '@/utils/cn';
-import getClientSideQueryClient from '@/react-query/client/queryClient';
 
 const uniSans = localFont({ src: '../fonts/uni-sans.heavy-caps.otf' });
 const monaSans = localFont({ src: '../fonts/Mona-Sans-Light.otf' });
@@ -12,7 +11,6 @@ const monaSans = localFont({ src: '../fonts/Mona-Sans-Light.otf' });
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
-import InputField from '@/components/atomic/input/InputField';
 import { useMutation } from '@tanstack/react-query';
 import customToast from '@/components/atomic/toast/customToast';
 import LoadingIcon from '@/assets/icons/LoadingIcon';
@@ -61,7 +59,7 @@ const ComingSoon = () => {
             customToast.error(error.message, customToastConfig)
         }
     })
-    const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
+    const { handleSubmit, control } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
         }

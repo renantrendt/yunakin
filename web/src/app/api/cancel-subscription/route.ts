@@ -11,7 +11,7 @@ export interface CheckoutSubscriptionBody {
     customerId?: string;
 }
 
-export async function POST(req: Request) {
+export async function POST() {
     const data = await getServerSession(authOptions);
 
     if (!data?.user) {
