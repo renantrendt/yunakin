@@ -10,7 +10,6 @@ import React from 'react'
 const DashboardNavbar = ({ onClick }: { onClick: () => void }): JSX.Element => {
     const { data: session } = useSession()
 
-    console.log(session?.user)
     //eslint-disable-next-line
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     }

@@ -148,3 +148,15 @@ html.dark .prose * {
     @apply !font-sans !text-base;
   }
 } */
+
+.coming-soon-linear-gradient {
+  background: linear-gradient(129.42deg, rgba(21, 20, 32, 0.2) 35.61%, rgba(89, 74, 255, 0.2) 74.49%),
+    linear-gradient(180deg, #171524 0%, #0A0910 100%);
+
+}
+
+.coming-soon-button-linear-gradient {
+  background: linear-gradient(180deg, #763AFB 0%, #601AF9 98%, rgba(118, 58, 251, 0) 100%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
+
+}

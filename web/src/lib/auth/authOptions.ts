@@ -5,6 +5,8 @@ import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import jwt from 'jsonwebtoken'
 import GoogleProvider from 'next-auth/providers/google'
+import TwitterProvider from "next-auth/providers/twitter";
+
 import { sendVerificationEmail } from '@/utils/sendEmail'
 import platformConfig from '@/config/app-config'
 
@@ -60,7 +62,11 @@ export const authOptions: NextAuthOptions = {
         GoogleProvider({
             clientId: platformConfig.variables.GOOGLE_CLIENT_ID!,
             clientSecret: platformConfig.variables.GOOGLE_CLIENT_SECRET!,
-        })
+        }),
+        TwitterProvider({
+            clientId: platformConfig.variables.TWITTER_CLIENT_ID!,
+            clientSecret: platformConfig.variables.TWITTER_CLIENT_SECRET!,
+        }),
     ],
     callbacks: {
         signIn: async ({ account, profile }) => {

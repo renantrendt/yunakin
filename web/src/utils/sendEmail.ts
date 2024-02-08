@@ -1,6 +1,7 @@
 // utils/sendEmail.ts
 import ResetPasswordEmail from '@/components/template/email/ResetPasswordEmailTemplate';
 import { VerificationEmail } from '@/components/template/email/WelcomeEmailTemplate';
+import WelcomeWaitingListEmailTemplate from '@/components/template/email/WelcomeWaitingListEmailTemplate';
 import platformConfig from '@/config/app-config';
 import { Resend } from 'resend';
 
@@ -57,6 +58,31 @@ export const sendResetPasswordEmail = async ({
       to: [to],
       subject: subject,
       react: ResetPasswordEmail({ resetPasswordLink: `${platformConfig.variables.NEXT_URL}/reset-password?token=${token}`, name: name, organizationName: "CodePilot" }) as React.ReactElement,
+    });
+    return { success: true, data: data }
+  } catch (error: any) {
+    console.error(error)
+
+    if (error.response) {
+      console.error(error.response.body)
+    }
+    return { success: false, error }
+  }
+}
+export const sendWelcomeWaitingListEmail = async ({
+  to,
+  subject,
+}: {
+  to: string
+  subject: string
+}) => {
+
+  try {
+    const data = await resend.emails.send({
+      from: 'noreply <noreply@codepilot.dev>',
+      to: [to],
+      subject: subject,
+      react: WelcomeWaitingListEmailTemplate({ email: to, organizationName: "CodePilot" }) as React.ReactElement,
     });
     return { success: true, data: data }
   } catch (error: any) {
