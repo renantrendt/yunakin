@@ -3,6 +3,8 @@
 import Markdown from 'react-markdown'
 import React from 'react';
 import remarkGfm from "remark-gfm";
+import BackIcon from '@/assets/icons/BackIcon';
+import { useRouter } from 'next/navigation';
 
 const markdown = `
 # CodePilot Terms of Service
@@ -56,13 +58,18 @@ You agree to indemnify and hold harmless CodePilot, its contractors, and its lic
 These Terms constitute the entire agreement between CodePilot and you concerning the subject matter hereof, and they may only be modified by a written amendment signed by an authorized executive of CodePilot`
 
 const TermsOfServicePage = () => {
-
-    return <section className="w-full mx-auto  flex justify-center pt-24 text-black">
-        <div className='w-8/12'>
-            <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
-
+    const router = useRouter()
+    return <section
+        className="flex min-h-screen   flex-col my-20 mx-auto px-4 md:px-28 max-w-8xl">
+        <div className='  w-8 h-8 items-center flex justify-center hover:cursor-pointer rounded-full hover:bg-gray-100' onClick={() => { router.back() }}>
+            <BackIcon />
         </div>
-    </section>
+        <div className='prose'>
+            <Markdown remarkPlugins={[]}>
+                {markdown}</Markdown>
+        </div>
+
+    </section >
 };
 
 export default TermsOfServicePage;

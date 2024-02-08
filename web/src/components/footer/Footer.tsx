@@ -32,14 +32,14 @@ export default function Footer(): JSX.Element {
                 </nav>
                 <nav className='flex flex-col gap-4'>
                     <header className="footer-title">Legal</header>
-                    <Link href='/' className="link link-hover">Terms of use</Link>
-                    <Link href='/' className="link link-hover">Privacy policy</Link>
+                    <Link href='/tos' className="link link-hover">Terms of use</Link>
+                    <Link href='/privacy-policy' className="link link-hover">Privacy policy</Link>
                     <Link href='/' className="link link-hover">Cookie policy</Link>
                 </nav>
                 <nav className='flex flex-col gap-4'>
                     <header className="footer-title">Legal</header>
-                    <Link href='/' className="link link-hover">Terms of use</Link>
-                    <Link href='/' className="link link-hover">Privacy policy</Link>
+                    <Link href='/tos' className="link link-hover">Terms of use</Link>
+                    <Link href='/privacy-policy' className="link link-hover">Privacy policy</Link>
                     <Link href='/' className="link link-hover">Cookie policy</Link>
                 </nav>
             </div>
