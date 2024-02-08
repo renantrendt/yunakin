@@ -16,7 +16,7 @@ const ComingSoon = () => {
                 </div>
                 <h1 className={cn("uppercase text-center text-white text-4xl lg:text-8xl font-black", uniSans.className, "font-black")}>launching soon</h1>
                 <p className="text-[#B2AFD0] text-sm   text-center mt-3 lg:text-[29px] font-light  leading-[37.70px]">The Ultimate SaaS Starter Kit with all you need to ship fast.</p>
-                <div className='flex lg:flex-col w-full justify-center items-center lg:pt-[60px] pt-10 gap-0 lg:gap-4 flex-col-reverse'>
+                <div className='flex lg:flex-col w-full justify-center items-center lg:pt-[60px] pt-10 gap-0 lg:gap-5 flex-col-reverse'>
                     <div className='relative w-full  lg:w-[600px]'>
                         <input className="w-full h-[67px] pl-8 pr-32 py-2 rounded-[35px] border hover:decoration-neutral outline-none text-white text-lg lg:text-xl  border-violet-500 bg-transparent justify-between items-center inline-flex"
                             type='email'
@@ -27,7 +27,7 @@ const ComingSoon = () => {
                             submit
                         </button>
                     </div>
-                    <p className="text-[#B2AFD0] text-sm  text-center  text-[29px] font-light  leading-[37.70px]">Sign up to find out when we launch</p>
+                    <p className="text-[#B2AFD0E5] text-sm  text-center  lg:text-lg font-light ">Sign up to find out when we launch</p>
 
                 </div>
             </div>
