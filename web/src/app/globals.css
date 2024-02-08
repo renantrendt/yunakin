@@ -105,6 +105,7 @@ html.dark .prose * {
   width: 100vw !important;
 }
 
+
 @media only screen and (max-width: 768px) {
   .Toastify__toast-container {
     padding: 0 8px !important;
@@ -159,4 +160,9 @@ html.dark .prose * {
   background: linear-gradient(180deg, #763AFB 0%, #601AF9 98%, rgba(118, 58, 251, 0) 100%),
     linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
 
+}
+
+.coming-soon-button-linear-gradient:hover {
+  background: linear-gradient(180deg, #5B12FC 0%, #4805DD 98%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
 }

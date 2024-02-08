@@ -45,7 +45,7 @@ export default function Footer(): JSX.Element {
             </div>
 
             <div className='col-span-2 lg:col-span-3 flex justify-end pb-4 '>
-                <p>@2024 Company</p>
+                <p>@2024 Codepilot Company</p>
             </div>
             {/* <form>
                 <header className="footer-title">Newsletter</header>

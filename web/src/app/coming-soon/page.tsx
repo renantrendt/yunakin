@@ -24,6 +24,15 @@ const schema = yup.object({
 interface FormValues {
     email: string
 }
+const customToastConfig = {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+}
 const ComingSoon = () => {
 
     const addEmailToWaitinListMutation = useMutation({
@@ -46,10 +55,10 @@ const ComingSoon = () => {
             return response.json()
         },
         onSuccess: () => {
-            customToast.success("Successfully added to waiting list. We'll notify you when we launch")
+            customToast.success("Successfully added to waiting list. We'll notify you when we launch", customToastConfig)
         },
         onError: (error) => {
-            customToast.error(error.message)
+            customToast.error(error.message, customToastConfig)
         }
     })
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
@@ -77,7 +86,9 @@ const ComingSoon = () => {
                             control={control}
                             name="email"
                             render={({ field: { onChange, value } }) => (
-                                <input className="w-full  h-[50px] lg:h-[67px] text-sm  pl-5 lg:pl-8 pr-32 py-2 rounded-[35px] border hover:decoration-neutral outline-none text-white  lg:text-xl  border-violet-500 bg-transparent justify-between items-center inline-flex"
+                                <input className="w-full  h-[50px] lg:h-[67px] text-sm  pl-5 lg:pl-8 pr-32 py-2 rounded-[35px] border hover:decoration-neutral outline-none text-white  lg:text-xl  border-violet-500 bg-transparent justify-between items-center inline-flex
+                                
+                                focus:border-[1.5px] focus:border-[#9A6DFE]"
                                     type='email'
                                     placeholder='email'
                                     onChange={onChange}
