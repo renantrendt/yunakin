@@ -13,6 +13,7 @@ interface InputFieldProps {
   additionalProps?: any
   leadingIcon?: React.ReactNode
   trailingIcon?: React.ReactNode
+  customClassName?: string
 }
 
 const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, error, id, ...additionalProps }) => {
@@ -26,7 +27,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
         <input
           type={type}
           placeholder={placeholder}
-          className={`input  input-primary dark:bg-gray-800 text-black dark:text-white  w-full ${leadingIcon ? "pl-9" : ""}`}
+          className={additionalProps.customClassName ? additionalProps.customClassName : `input  input-primary dark:bg-gray-800 text-black dark:text-white  w-full ${leadingIcon ? "pl-9" : ""}`}
           name={name}
           id={id}
           onChange={onChange}

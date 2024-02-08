@@ -62,3 +62,5 @@ const DashboardNavbar = ({ onClick }: { onClick: () => void }): JSX.Element => {
 }
 
 export default DashboardNavbar
+
+

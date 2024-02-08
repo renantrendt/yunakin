@@ -25,6 +25,7 @@ export default function ToastProvider({ children }: ToastProviderProps) {
                     collapseDuration: 0,
                 })}
             />
+
         </>
     )
 }
