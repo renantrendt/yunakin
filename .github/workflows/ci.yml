@@ -37,4 +37,4 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npx prisma generate &&   npm run build
+        run: npx prisma migrate deploy &&   npm run build
