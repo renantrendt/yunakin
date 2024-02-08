@@ -5,8 +5,8 @@ env:
   GOOGLE_ANALYTICS_ID: your-google-analytics-id
   GOOGLE_CLIENT_ID: 592455481995-cgnvp80af1efu9pk1jo1s2bnh4b6lmmg.apps.googleusercontent.com
   GOOGLE_CLIENT_SECRET: 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
-  DATABASE_URL: postgres://postgres.wiazdxtrtjtvumtixrqj:Goo@millano23@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true
-  DIRECT_URL: postgres://postgres:Goo@millano23@db.wiazdxtrtjtvumtixrqj.supabase.co:5432/postgres?pgbouncer=true
+  DATABASE_URL: postgres://postgres.wiazdxtrtjtvumtixrqj:Goo@millano23@aws-0-eu-central-1.pooler.supabase.com:5432/postgres?pgbouncer=true
+  DIRECT_URL: postgres://postgres.wiazdxtrtjtvumtixrqj:Goo@millano23@aws-0-eu-central-1.pooler.supabase.com:5432/postgres?pgbouncer=true
   POSTGRES_PASSWORD: password123
   POSTGRES_USER: admin
   POSTGRES_DB: nextstackksaas
