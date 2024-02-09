@@ -66,16 +66,17 @@ export const siteCopy = {
 
 export const siteConfig: Metadata = {
     applicationName: 'Landing Page',
-    title: 'Landing Page',
-    description: 'Landing Page',
+    title: 'CodePilot',
+    description: 'The best saas boilerplate  for your business. Ship your startup in 1 week, not months',
     keywords: ['Landing Page'],
     openGraph: {
         type: 'website',
         locale: 'en',
-        siteName: 'Landing Page',
+        siteName: 'CodePilotDev',
         url: '',
-        title: 'Landing Page',
-        description: 'Landing Page',
+        title: 'CodePilot',
+        description: 'The best saas boilerplate  for your business. Ship your startup in 1 week, not months',
+        images: ["./images/logo.png"]
     },
     twitter: {
         card: 'summary',
