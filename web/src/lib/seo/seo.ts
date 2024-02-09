@@ -1,13 +1,23 @@
 import { Metadata } from "next";
 
 import { siteConfig } from "@/config/site-config";
-// eslint-disable-next-line 
-function getSeoMetadata(options: Metadata): Metadata {
+function getSeoMetadata(options?: Metadata): Metadata {
     return {
-        title: siteConfig.siteName,
-        applicationName: siteConfig.siteName,
-        description: siteConfig.siteDescription,
+        title: siteConfig.title,
+        applicationName: siteConfig.applicationName,
+        description: siteConfig.description,
         keywords: siteConfig.keywords,
+        openGraph: {
+            ...siteConfig.openGraph,
+            ...options?.openGraph
+        },
+        twitter: {
+            ...siteConfig.twitter,
+            ...options?.twitter
+        },
         ...options
     };
 }
+
+
+export default getSeoMetadata;

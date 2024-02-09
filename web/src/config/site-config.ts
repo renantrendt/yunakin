@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 const siteUrls = {
     home: '/',
     dashboard: '/dashboard',
@@ -62,10 +64,23 @@ export const siteCopy = {
     }
 }
 
-export const siteConfig = {
-    siteName: "CodePilot",
-    siteUrl: "https://codepilot.dev",
-    siteDescription: "Generate",
-    keywords: "next.js, codepilot, saas"
+export const siteConfig: Metadata = {
+    applicationName: 'Landing Page',
+    title: 'Landing Page',
+    description: 'Landing Page',
+    keywords: ['Landing Page'],
+    openGraph: {
+        type: 'website',
+        locale: 'en',
+        siteName: 'Landing Page',
+        url: '',
+        title: 'Landing Page',
+        description: 'Landing Page',
+    },
+    twitter: {
+        card: 'summary',
+        creator: '@Landing Page',
+        creatorId: '',
+    },
 };
 export default siteUrls
