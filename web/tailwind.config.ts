@@ -19,13 +19,21 @@ const config: Config = {
       animation: {
         scroll:
           "infinite-scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
-
+        "meteor-effect": "meteor 5s linear infinite"
       },
       keyframes: {
         'infinite-scroll': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-100%)' },
-        }
+        },
+        meteor: {
+          "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
+          "70%": { opacity: "1" },
+          "100%": {
+            transform: "rotate(215deg) translateX(-500px)",
+            opacity: "0",
+          },
+        },
       },
       colors: {
         'primary': '#8E76FE',

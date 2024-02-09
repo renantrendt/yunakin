@@ -156,13 +156,40 @@ html.dark .prose * {
 
 }
 
-.coming-soon-button-linear-gradient {
-  background: linear-gradient(180deg, #763AFB 0%, #601AF9 98%, rgba(118, 58, 251, 0) 100%),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
+@property --color1 {
+  syntax: '<color>';
+  initial-value: #763AFB;
+  inherits: false;
+}
 
+@property --color2 {
+  syntax: '<color>';
+  initial-value: #601AF9;
+  inherits: false;
+}
+
+
+.coming-soon-button-linear-gradient {
+  background: linear-gradient(180deg, var(--color1) 0%, var(--color2) 98%, rgba(118, 58, 251, 0) 100%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
+  transition: --color1 0.15s, --color2 0.15s;
+}
+
+.coming-soon-input-shadow {
+  transition: box-shadow 0.15s;
+}
+
+.coming-soon-input-shadow:hover {
+  box-shadow: 0px 0px 5px 0px #9A6DFE;
+}
+
+.coming-soon-input-shadow:focus {
+  box-shadow: 0px 0px 5px 0px #9A6DFE;
 }
 
 .coming-soon-button-linear-gradient:hover {
-  background: linear-gradient(180deg, #5B12FC 0%, #4805DD 98%),
+  background: linear-gradient(180deg, var(--color1) 0%, var(--color2) 98%),
     linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
+  --color1: #5B12FC;
+  --color2: #4805DD;
 }
