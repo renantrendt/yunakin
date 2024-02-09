@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import ComingSoonIcon from '@/assets/icons/coming-soon/icon'
 import localFont from 'next/font/local'
@@ -34,6 +34,8 @@ const customToastConfig = {
 }
 const ComingSoon = () => {
 
+    const outerDivRef = React.useRef<HTMLDivElement>(null)
+
     const addEmailToWaitinListMutation = useMutation({
         mutationFn: async (email: string) => {
             const response = await fetch('/api/waiting-list', {
@@ -66,12 +68,30 @@ const ComingSoon = () => {
         }
     )
 
+    useEffect(() => {
+        (document.querySelector("body") as any).addEventListener('mousemove', mouse_shadow)
+        return () => {
+            (document.querySelector("body") as any).removeEventListener('mousemove', mouse_shadow)
+        }
+    }, [])
     const onSubmit = async (data: any) => {
         await addEmailToWaitinListMutation.mutateAsync(data.email);
     }
+    const mouse_shadow = function (event: any) {
+        if (!outerDivRef.current) return
+        console.log(event.pageX, event.pageY)
+        outerDivRef.current.style.top = event.pageY + 'px';
+        outerDivRef.current.style.left = event.pageX + 'px';
+    }
     return (
-        <div className={cn("w-full h-screen coming-soon-linear-gradient relative ", monaSans.className)}
+        <div className={cn("w-full h-screen coming-soon-linear-gradient relative overflow-hidden", monaSans.className)}
         >
+            <div
+                id='shadow'
+                ref={outerDivRef}
+            >
+
+            </div>
             <div className="flex flex-col items-center h-screen justify-center px-6 relative overflow-y-hidden">
                 <Meteors number={20} />
 

@@ -1,6 +1,12 @@
 import Footer from '@/components/footer/Footer'
 import Navbar from '@/components/section/navbar/navbar'
+import { Metadata } from 'next'
 import React from 'react'
+
+export const metadata: Metadata = {
+    applicationName: 'Landing Page',
+}
+
 
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
     return (

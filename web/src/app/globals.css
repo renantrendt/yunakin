@@ -193,3 +193,17 @@ html.dark .prose * {
   --color1: #5B12FC;
   --color2: #4805DD;
 }
+
+/* #shadow {
+  width: 50px;
+  height: 50px;
+  background-color: #9A6DFE;
+  opacity: 0.1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  box-shadow: 0px 0px 20px 0px #9A6DFE;
+  pointer-events: none;
+} */

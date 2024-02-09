@@ -61,4 +61,11 @@ export const siteCopy = {
         ],
     }
 }
+
+export const siteConfig = {
+    siteName: "CodePilot",
+    siteUrl: "https://codepilot.dev",
+    siteDescription: "Generate",
+    keywords: "next.js, codepilot, saas"
+};
 export default siteUrls
