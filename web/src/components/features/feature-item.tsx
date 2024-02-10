@@ -43,7 +43,7 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                     <Typography type='h2'>{title}</Typography>
                     <div className="     text-neutral-600 dark:text-white text-xl font-light max-w-[574px] leading-loose">{description}</div>
                 </div>
-                <Button label='Learn More' variant="outline" size='small' />
+                <Button label='Learn More' variant="outline" size='sm' />
             </div>
             <div className='relative w-full  flex-1 h-96'>
                 <Image alt='' fill

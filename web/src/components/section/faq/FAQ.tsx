@@ -32,7 +32,7 @@ const FAQ = () => {
                 </div>
                 <div className='faq-list flex flex-col justify-start gap-5  max-w-2xl w-full   '>
                     {faqItems.map((item, index) => (
-                        <FaqItem question={item.question} answer={item.answer} isOpen={index == showAnswer} onClick={() => setShowAnswer(index == showAnswer ? null : index)} />
+                        <FaqItem key={index} question={item.question} answer={item.answer} isOpen={index == showAnswer} onClick={() => setShowAnswer(index == showAnswer ? null : index)} />
 
                     ))}
                 </div>

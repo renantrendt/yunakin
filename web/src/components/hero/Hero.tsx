@@ -4,7 +4,6 @@ import Typography from '../atomic/typography/Typography'
 import Image from 'next/image'
 import PlayIcon from '@/assets/icons/PlayIcon.svg'
 import { siteCopy } from '@/config/site-config'
-import { motion } from 'framer-motion'
 import AnimatedSection from '../animated/AnimatedSection'
 export default function Hero() {
     return (
