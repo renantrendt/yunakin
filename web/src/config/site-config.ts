@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import platformConfig from "./app-config";
 
 const siteUrls = {
     home: '/',
@@ -76,14 +77,14 @@ export const siteConfig: Metadata = {
         url: 'www.codepilot.dev',
         title: 'Codepilot - The Ultimate SaaS Starter Kit',
         description: 'Accelerate your development process. Launch in days!',
-        images: ["./images/og-demo-landing.png"]
+        images: [`${platformConfig.variables.NEXT_URL}/images/og-demo-landing.png`],
     },
     twitter: {
         card: 'summary_large_image',
         creator: '@Landing Page',
         creatorId: '',
         description: "Accelerate your development process. Launch in days!",
-        images: ["./images/og-demo-landing.png"],
+        images: [`${platformConfig.variables.NEXT_URL}/images/og-demo-landing.png`],
         title: "Codepilot - The Ultimate SaaS Starter Kit"
     },
 };
