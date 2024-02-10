@@ -43,3 +43,6 @@ web/.next-env.d.ts
 web/.env
 
 web/.contentlayer
+
+web/public/sitemap*.xml
+web/public/robots.txt
