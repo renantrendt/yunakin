@@ -80,7 +80,7 @@ export const siteConfig: Metadata = {
         images: [`${platformConfig.variables.NEXT_URL}/images/og-demo-landing.png`],
     },
     twitter: {
-        card: 'summary_large_image',
+        card: 'summary',
         creator: '@Landing Page',
         creatorId: '',
         description: "Accelerate your development process. Launch in days!",
