@@ -34,7 +34,10 @@ const config: Config = {
         'neutral-600': "#4B4B4B",
         'neutral-200': "#DEDEDE",
         'header-color': '#91A0B5',
-        'landing-background': "#FAFAFA"
+        'landing-background': "#FAFAFA",
+        'category-blog-color': "#515151",
+        'category-blog-background': "#EBEBEB",
+        'category-card-autor': "#8B8B8B"
       }
     },
   },
