@@ -1,6 +1,12 @@
 import Footer from '@/components/footer/Footer'
 import Navbar from '@/components/section/navbar/navbar'
+import getSeoMetadata from '@/lib/seo/seo'
+import { Metadata } from 'next'
 import React from 'react'
+
+export async function generateMetadata(): Promise<Metadata> {
+    return getSeoMetadata();
+}
 
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
     return (

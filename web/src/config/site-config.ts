@@ -1,3 +1,6 @@
+import { Metadata } from "next";
+import platformConfig from "./app-config";
+
 const siteUrls = {
     home: '/',
     dashboard: '/dashboard',
@@ -61,4 +64,28 @@ export const siteCopy = {
         ],
     }
 }
+
+export const siteConfig: Metadata = {
+    applicationName: 'CodePilot',
+    title: 'Codepilot - The Ultimate SaaS Starter Kit',
+    description: 'Accelerate your development process. Launch in days!',
+    keywords: ['SaaS', 'boilerplate'],
+    openGraph: {
+        type: 'website',
+        locale: 'en',
+        siteName: 'Codepilot',
+        url: 'www.codepilot.dev',
+        title: 'Codepilot - The Ultimate SaaS Starter Kit',
+        description: 'Accelerate your development process. Launch in days!',
+        images: [`${platformConfig.variables.NEXT_URL}/images/og-demo-landing.png`],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        creator: '@Landing Page',
+        creatorId: '',
+        description: "Accelerate your development process. Launch in days!",
+        images: [`${platformConfig.variables.NEXT_URL}/images/og-demo-landing.png`],
+        title: "Codepilot - The Ultimate SaaS Starter Kit"
+    },
+};
 export default siteUrls

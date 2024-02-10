@@ -105,6 +105,7 @@ html.dark .prose * {
   width: 100vw !important;
 }
 
+
 @media only screen and (max-width: 768px) {
   .Toastify__toast-container {
     padding: 0 8px !important;
@@ -155,8 +156,54 @@ html.dark .prose * {
 
 }
 
-.coming-soon-button-linear-gradient {
-  background: linear-gradient(180deg, #763AFB 0%, #601AF9 98%, rgba(118, 58, 251, 0) 100%),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
-
+@property --color1 {
+  syntax: '<color>';
+  initial-value: #763AFB;
+  inherits: false;
 }
+
+@property --color2 {
+  syntax: '<color>';
+  initial-value: #601AF9;
+  inherits: false;
+}
+
+
+.coming-soon-button-linear-gradient {
+  background: linear-gradient(180deg, var(--color1) 0%, var(--color2) 98%, rgba(118, 58, 251, 0) 100%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
+  transition: --color1 0.15s, --color2 0.15s;
+}
+
+.coming-soon-input-shadow {
+  transition: box-shadow 0.15s;
+}
+
+.coming-soon-input-shadow:hover {
+  box-shadow: 0px 0px 5px 0px #9A6DFE;
+}
+
+.coming-soon-input-shadow:focus {
+  box-shadow: 0px 0px 5px 0px #9A6DFE;
+}
+
+.coming-soon-button-linear-gradient:hover {
+  background: linear-gradient(180deg, var(--color1) 0%, var(--color2) 98%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
+  --color1: #5B12FC;
+  --color2: #4805DD;
+}
+
+/* #shadow {
+  width: 50px;
+  height: 50px;
+  background-color: #9A6DFE;
+  opacity: 0.1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  box-shadow: 0px 0px 20px 0px #9A6DFE;
+  pointer-events: none;
+} */

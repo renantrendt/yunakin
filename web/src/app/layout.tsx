@@ -6,7 +6,8 @@ import { initGA, logPageView } from '@/utils/ga-analytics'
 import Providers from '@/lib/providers/providers'
 import 'react-toastify/dist/ReactToastify.css'
 import React from 'react'
-const inter = Inter({ preload: true, weight: 'variable', subsets: ['latin'] })
+import { cn } from '@/utils/cn'
+const inter = Inter({ preload: false, weight: 'variable', subsets: ['latin'] })
 
 export default function RootLayout({
   children,
@@ -22,11 +23,11 @@ export default function RootLayout({
   }, [])
   return (
     <html lang="en" >
-      <body className={`${inter.className}`}>
+      <body className={cn(inter.className, "min-h-screen", "h-screen")}>
         <Providers>
           {children}
         </Providers>
       </body>
-    </html>
+    </html >
   )
 }
