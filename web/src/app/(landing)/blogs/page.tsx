@@ -39,11 +39,16 @@ const BlogPage = async () => {
     )
 
     return (
-        <div className='mb-24 px-4 md:px-28'>
-            <PageHeader />
-            {mappedData && mappedData.map((category: BlogsViewModel, index: any) => (
-                <BlogCard loading={false} key={index} category={category} />
-            ))}
+        <div className='mb-24  md:px-28'>
+            <div className='px-4 md:px-0'>
+                <PageHeader />
+            </div>
+            <div className='pl-4 md:px-0'>
+                {mappedData && mappedData.map((category: BlogsViewModel, index: any) => (
+                    <BlogCard loading={false} key={index} category={category} />
+                ))}
+            </div>
+
         </div>
     )
 }

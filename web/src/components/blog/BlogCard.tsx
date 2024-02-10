@@ -42,26 +42,29 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
         )
     }
     return (
-        <div className='category mb-20' key={key} >
-            <div className="  px-5 py-1.5 bg-gray-200 rounded-3xl border justify-start items-start gap-2.5 inline-flex">
-                <div className=" text-center text-neutral-600 text-sm  uppercase tracking-wide">{category.name}</div>
+        <div className='category mb-14 lg:mb-20' key={key} >
+            <div className="  px-5 py-1.5 bg-category-blog-background rounded-[30px] border justify-start items-start gap-2.5 inline-flex">
+                <div className=" text-center text-category-blog-color text-sm font-semibold  uppercase tracking-wide">{category.name}</div>
             </div>
-            <div className='grid grid-cols-12 justify-items-center w-full gap-x-4 mx-auto gap-y-12 pt-6'>
+            <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll no-scrollbar '>
                 {category.articles.map((article, index: any) => (
-                    <Link key={index} className="card w-full dark:text-white  max-w-lg bg-base-100 dark:bg-gray-700 h-96  col-span-12  md:col-span-6 lg:col-span-4  hover:cursor-pointer 
-              rounded-lg shadow-sm" href={`/blogs/${article.slug}`}>
+                    <Link key={index} className="card w-full dark:text-white min-w-[324px]  max-w-lg bg-base-100 last:mr-4 lg:last:mr-0 dark:bg-gray-700 h-96  col-span-4  hover:cursor-pointer 
+            rounded-[10px] shadow-sm" href={`/blogs/${article.slug}`}>
                         <figure className='relative hidden'><Image src={`${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
-                        <div className="card-body pb-4">
-                            <h2 className="card-title">{article.title}</h2>
-                            <p>{article.short_description}</p>
-                            <div className='flex  items-center justify-start mt-4'>
+                        <div className="px-6 pt-6 pb-2">
+                            <h2 className="card-title text-2xl font-bold mb-2">{article.title}</h2>
+                            <p className='text-neutral-600 text-base'>{article.short_description}</p>
+                            <div className='flex  items-center justify-start my-4 text-category-card-autor text-xs'>
                                 <div className='avatar'>
-                                    <div className="w-10 rounded-full ">
+                                    <div className="w-6 rounded-full ">
                                         <img alt="Author name" src={`${(article.author?.avatar)}`} />
                                     </div>
                                 </div>
-                                <p className='ml-2 w-16'>{article.author?.name ?? ""}</p>
-                                <p>{formatDate(article.publishedAt)}</p>
+                                <div className='flex justify-start gap-4'>
+                                    <p className='ml-2 '>{article.author?.name ?? ""}</p>
+                                    <p>{formatDate(article.publishedAt)}</p>
+                                </div>
+
                             </div>
 
                         </div>

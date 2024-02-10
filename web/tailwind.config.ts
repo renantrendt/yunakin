@@ -35,29 +35,69 @@ const config: Config = {
           },
         },
       },
-      colors: {
-        'primary': '#8E76FE',
-        'primary-end': '#8C5AFC',
-        'stone-950': "#0F0F0F",
-        'neutral-600': "#4B4B4B",
-        'neutral-200': "#DEDEDE",
-        'header-color': '#91A0B5',
-        'landing-background': "#FAFAFA"
+      fontSize: {
+        '5xl': '48px',
+        '4xl': "36px",
+        "3xl": "30px",
+        "2xl": "24px",
+        "xl": "20px",
+        "lg": "18px",
+        "md": "16px",
+        "sm": "14px",
+        "xs": "12px",
+        "paragraph": "14px"
+      },
+      lineHeight: {
+        '5xl': '48px',
+        '4xl': "40px",
+        "3xl": "36px",
+        "2xl": "32px",
+        "xl": "28px",
+        "lg": "28px",
+        "md": "24px",
+        "sm": "20px",
+        "xs": "16px",
+        "paragraph": "24px"
+      },
+      fontWeight: {
+        'regular': "400",
+        'medium': "500",
+        'semibold': "600",
       }
+
     },
+    colors: {
+      // 'primary': '#8E76FE',
+      'primary-end': '#8C5AFC',
+      'stone-950': "#0F0F0F",
+      'neutral-600': "#4B4B4B",
+      'neutral-200': "#DEDEDE",
+      'header-color': '#91A0B5',
+      'landing-background': "#FAFAFA",
+      'category-blog-color': "#515151",
+      'category-blog-background': "#EBEBEB",
+      'category-card-autor': "#8B8B8B",
+      'white': "#FFFFFF",
+      'black': "#121212",
+      'grey-50': "#FBFBFB",
+      'grey-100': "#F5F5F5",
+      'primary': {
+        500: '#996cff',
+      },
+    }
   },
   plugins: [require("daisyui"), require('@tailwindcss/typography'), addVariablesForColors],
   daisyui: {
     themes: [{
       light: {
-        primary: "#8E76FE",
+        primary: "#996cff",
         secondary: "#3E21EB",
         danger: "#eeeeee",
         transparent: "transparent",
       }
     }, {
       dark: {
-        primary: "#8E76FE",
+        primary: "#996cff",
         secondary: "#3E21EB",
         danger: "#eeeeee",
         transparent: "transparent",

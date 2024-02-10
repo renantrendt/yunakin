@@ -39,8 +39,8 @@ const FaqItem = ({ question, answer, isOpen, onClick }: FaqItemProps) => {
                         animate="open"
                         exit="collapsed"
                         variants={{
-                            open: { height: "initial" },
-                            collapsed: { height: 0 },
+                            open: { height: "initial", opacity: 1 },
+                            collapsed: { height: 0, opacity: 0 },
                         }}
                         transition={{ duration: 0.15 }}
 
