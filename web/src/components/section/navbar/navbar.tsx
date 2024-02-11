@@ -63,7 +63,7 @@ export default function Navbar() {
 
                             <Button
                                 variant='primary'
-                                classname='py-3 px-4 w-full bg-gradient-to-b from-[#2F80ED] to-[#146EE9] text-white '
+                                classname='py-3 px-4 w-full  text-white '
                                 label='Get Started'
                                 onClick={() => router.push(siteUrls.register)}
                             />
@@ -72,14 +72,14 @@ export default function Navbar() {
                     </ul>
                 </div>
                 <Button
-                    variant='outline'
+                    variant='secondary'
                     label='Login'
                     classname='w-full hidden lg:block'
                     onClick={() => router.push(siteUrls.login)}
                 />
                 <Button
                     variant='primary'
-                    classname='py-3 px-4 w-full bg-gradient-to-b from-[#2F80ED] to-[#146EE9] text-white hidden lg:block'
+                    classname='py-3 px-4 w-full  hidden lg:block'
                     label='Get Started'
                     onClick={() => router.push(siteUrls.register)}
                 />

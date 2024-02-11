@@ -5,7 +5,7 @@ import React from 'react'
 
 
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'outline'
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'alert' | 'sucesss' | 'clear'
   label: string
   onClick?: () => void
   type?: 'button' | 'reset' | 'submit' | undefined
@@ -17,8 +17,29 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "md", loading }) => {
-  const baseStyle = 'btn '
-  const variantStyle = variant === 'primary' ? 'btn-primary text-white from-primary to-secondary' : variant === 'secondary' ? 'btn-secondary' : 'btn-outline hover:text-black text-primary'
+  const baseStyle = 'btn'
+  let variantStyle = ''
+  switch (variant) {
+    case 'primary':
+      variantStyle = 'btn-primary text-white  bg-gradient-to-b from-primary to-secondary'
+      break
+    case 'secondary':
+      variantStyle = 'border border-zinc-300 text-black bg-white rounded-lg shadow '
+      break
+    case 'tertiary':
+      variantStyle = ' bg-grey-200 rounded-lg  text-black border-none  '
+      break
+    case 'alert':
+      variantStyle = 'btn-alert'
+      break
+    case 'sucesss':
+      variantStyle = 'btn-sucesss'
+      break
+    case 'clear':
+      variantStyle = 'btn-clear'
+      break
+  }
+
   let sizeStyle = ''
   switch (size) {
     case 'lg':
