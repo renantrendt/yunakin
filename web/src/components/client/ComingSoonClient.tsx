@@ -93,7 +93,7 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
             >
 
             </div>
-            <div className="flex flex-col items-center h-screen justify-center px-6 relative overflow-y-hidden">
+            <div className="flex flex-col items-center h-screen justify-start pt-32 lg:pt-40  px-6 relative overflow-x-hidden overflow-y-hidden">
                 <Meteors number={20} />
 
                 <div className='mb-12 lg:mb-16'>
@@ -102,7 +102,7 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
                 <h1 className={cn("uppercase text-center text-white text-[38px] lg:text-8xl font-black", uniSans.className, "font-black")}>launching soon</h1>
                 <p className="text-[#B2AFD0] text-xs   text-center lg:mt-5 lg:text-[29px] font-light ">Ready to accelerate your development process?</p>
 
-                <form className='flex flex-col w-full justify-center items-center lg:pt-[60px] pt-10 gap-0 lg:gap-5 ' onSubmit={handleSubmit(onSubmit)}>
+                <form className='flex flex-col w-full items-center lg:pt-[60px] pt-10 gap-0 lg:gap-5 ' onSubmit={handleSubmit(onSubmit)}>
                     <div className='relative min-w-[280px] lg:w-full max-w-[530px]'>
                         <Controller
                             control={control}

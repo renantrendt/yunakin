@@ -7,6 +7,7 @@ import Providers from '@/lib/providers/providers'
 import 'react-toastify/dist/ReactToastify.css'
 import React from 'react'
 import { cn } from '@/utils/cn'
+import Head from 'next/head'
 const inter = Inter({ preload: false, weight: 'variable', subsets: ['latin'] })
 
 export default function RootLayout({
@@ -23,6 +24,9 @@ export default function RootLayout({
   }, [])
   return (
     <html lang="en" >
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <body className={cn(inter.className, "min-h-screen", "h-screen")}>
         <Providers>
           {children}
