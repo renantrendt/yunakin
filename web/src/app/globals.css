@@ -46,7 +46,7 @@ html.dark .prose * {
 }
 
 .toast-message {
-  border-radius: 89px !important;
+  border-radius: 8px !important;
   outline: none;
   border: none;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15) !important;
@@ -55,7 +55,8 @@ html.dark .prose * {
 
 
 .toast-success {
-  background-color: #64d59f !important;
+  background-color: #1B3C3C !important;
+  color: #6FCF97 !important;
 }
 
 .toast-info {
@@ -67,8 +68,8 @@ html.dark .prose * {
 }
 
 .Toastify__toast {
-  margin-bottom: 16px !important;
-  padding: 12px 16px !important;
+  /* margin-bottom: 16px !important; */
+  padding: 16px 30px 16px 16px !important;
   max-width: fit-content;
 }
 

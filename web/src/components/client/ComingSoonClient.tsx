@@ -25,11 +25,10 @@ interface FormValues {
 const customToastConfig = {
     position: "top-center",
     autoClose: 5000,
-    hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    progress: undefined,
+    progress: undefined
 }
 
 interface ComingSoonClientProps {
@@ -38,7 +37,6 @@ interface ComingSoonClientProps {
 }
 const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
     const outerDivRef = React.useRef<HTMLDivElement>(null)
-
     const addEmailToWaitinListMutation = useMutation({
         mutationFn: async (email: string) => {
             const response = await fetch('/api/waiting-list', {
@@ -59,7 +57,7 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
             return response.json()
         },
         onSuccess: () => {
-            customToast.success("Successfully added to waiting list. We'll notify you when we launch", customToastConfig)
+            customToast.success("Email successfully subscribed", customToastConfig)
         },
         onError: (error) => {
             customToast.error(error.message, customToastConfig)
