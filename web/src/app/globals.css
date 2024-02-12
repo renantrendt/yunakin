@@ -51,8 +51,13 @@ html.dark .prose * {
   border: none;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15) !important;
   color: #fff !important;
+
 }
 
+.toast-message .Toastify__toast-icon {
+  display: flex;
+  align-items: center;
+}
 
 .toast-success {
   background-color: #1B3C3C !important;
@@ -60,7 +65,8 @@ html.dark .prose * {
 }
 
 .toast-info {
-  background-color: #ffb000 !important;
+  background-color: #3C311B !important;
+  color: #F2994A !important;
 }
 
 .toast-error {
