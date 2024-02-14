@@ -15,6 +15,7 @@ import EmailIcon from '@/assets/icons/EmailIcon'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
+import TwitterButton from '@/components/molecules/twitterbutton/TwitterButton'
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required()
@@ -143,7 +144,13 @@ export default function LoginPage() {
                         <span className="flex-shrink mx-4 text-gray-400">Or</span>
                         <div className="flex-grow border-t border-gray-400"></div>
                     </div>
-                    <GoogleButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} />
+                    <div className='flex gap-4 flex-col'>
+
+                        <GoogleButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} />
+
+                        <TwitterButton onClick={() => { signIn('twitter', { callbackUrl: '/dashboard' }) }} />
+                    </div>
+
                 </div>
 
             </form>
