@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import Head from "next/head";
+import Script from "next/script";
 
 export type SEOSchemaType = "Article" | "WebPage" | "ProfilePage" | "SearchResultsPage";
 
@@ -8,30 +9,29 @@ export interface BlogSchemaOptions {
     title: string;
     datePublished: string;
     dateModified: string;
+    imageURL: string;
+    slug: string;
+    author: {
+        name: string;
+        avatar: string;
+    }
 }
 
 
-const renderArticleSchema = (options = {}) => {
+const renderArticleSchema = (options: BlogSchemaOptions) => {
     return `{
         "@context": "https://schema.org",
     "@type": "NewsArticle",
-    "headline": "Title of a News Article",
+    "headline": ${options.title}
     "image": [
-    "https://example.com/photos/1x1/photo.jpg",
-    "https://example.com/photos/4x3/photo.jpg",
-    "https://example.com/photos/16x9/photo.jpg"
+        ${options.imageURL}
     ],
-    "datePublished": "2015-02-05T08:00:00+08:00",
-    "dateModified": "2015-02-05T09:20:00+08:00",
+    "datePublished": "${options.datePublished}",
+    "dateModified": "${options.dateModified}",
     "author": [{
         "@type": "Person",
-    "name": "Jane Doe",
-    "url": "https://example.com/profile/janedoe123"
-    },
-    {
-        "@type": "Person",
-    "name": "John Doe",
-    "url": "https://example.com/profile/johndoe123"
+    "name": "${options.author.name}",
+    "url": "${options.author.avatar}"
     }
     ]
      }`;
@@ -47,17 +47,15 @@ function renderSchematags(schemaType: SEOSchemaType = "Article", options: BlogSc
     }
 
 
-    return <>
-        <Head>
-            <script type="application/ld+json"
+    return (
+        <Script type="application/ld+json"
+            dangerouslySetInnerHTML={{
+                __html: content
+            }}
+        >
+        </Script>
+    )
 
-                dangerouslySetInnerHTML={{
-                    __html: content
-                }}
-            >
-            </script>
-        </Head>
-    </>
 }
 
 export default renderSchematags;
