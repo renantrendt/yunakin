@@ -6,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import InputField from '@/components/atomic/input/InputField'
 import Button from '@/components/atomic/button/Button'
-import GoogleButton from '@/components/molecules/googlebutton/GoogleButton'
 import customToast from '@/components/atomic/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -15,7 +14,10 @@ import EmailIcon from '@/assets/icons/EmailIcon'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
-import TwitterButton from '@/components/molecules/twitterbutton/TwitterButton'
+import AuthButton from '@/components/molecules/authbutton/AuthButton'
+import GoogleCircleIcon from '@/assets/icons/GoogleCircleIcon'
+import TwitterIcon from '@/assets/icons/TwitterIcon.svg'
+import GithubIcon from "@/assets/icons/GithubIcon.svg"
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required()
@@ -146,9 +148,9 @@ export default function LoginPage() {
                     </div>
                     <div className='flex gap-4 flex-col'>
 
-                        <GoogleButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} />
-
-                        <TwitterButton onClick={() => { signIn('twitter', { callbackUrl: '/dashboard' }) }} />
+                        <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content='Sign in with Google' icon={<GoogleCircleIcon />} />
+                        <AuthButton onClick={() => { signIn('twitter', { callbackUrl: '/dashboard' }) }} content='Sign In with Twitter' icon={<TwitterIcon />} />
+                        <AuthButton onClick={() => { signIn('github', { callbackUrl: '/dashboard' }) }} content='Sign In with Github' icon={<GithubIcon />} />
                     </div>
 
                 </div>
