@@ -51,7 +51,6 @@ html.dark .prose * {
   border: none;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15) !important;
   color: #fff !important;
-
 }
 
 .toast-message .Toastify__toast-icon {
@@ -87,7 +86,7 @@ html.dark .prose * {
   justify-content: flex-start !important;
   flex-basis: auto !important;
   max-width: fit-content;
-  @apply !font-sans !text-sm;
+  @apply !font-monaSans;
 }
 
 .Toastify__toast-icon {

@@ -11,7 +11,7 @@ import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import customToast from '@/components/atomic/toast/customToast';
-import { Meteors } from '@/components/atomic/meteor/Meteor';
+import Meteors from '@/components/atomic/meteor/Meteor';
 import { NextFont } from 'next/dist/compiled/@next/font'
 
 const schema = yup.object({
@@ -93,6 +93,7 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
 
             </div>
             <div className="flex flex-col items-center h-screen justify-center   px-6 relative overflow-x-hidden overflow-y-hidden">
+
                 <Meteors number={4} />
 
                 <div className='mb-12 lg:mb-16'>
