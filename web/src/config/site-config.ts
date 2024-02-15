@@ -41,6 +41,28 @@ export const siteCopy = {
         description: "Generate a steady flow of customers or talents with lightning-fast and easy-to-build Perspective Funnels. No design or programming skills required.",
         image: "https://s3-alpha-sig.figma.com/img/120e/c241/8f0118fdb790196d933c064ff2113490?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eX9qwXwHonKWPqjJM18Q7nYyr5P-LnvMc9VU4l3KY8rnrSGpcsc1BW3f1a0t5ZQCuzS5VbO6dG4AmzwAS-z9Duh42DuDSoTtuD6Ib4UWErZpoD79P1Hgt3miY6O-NzhVQ60S6tsXjsbSbbURiMNHSkPcxWdf63AO4o1Og~nL6tfo~0LDz5gesR4sXg7azrAdlvAJYghzjrN~RBK8rnIAqDLcSLrru6bR1yzSYJyp5kwFFbxrBpye2ZJg71tfVKSP9y8-aeEcCPIgCw3XEvCgqEQUU~oX4S70ULw57tRoDwwiUj2ZFB~eI32KOJ3ep7QeaPpgMdjfbHQfRHkqCz5tSg__"
     },
+    testimonialsSection: {
+        testimonials: [
+            {
+                "name": "John Doe",
+                "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum., Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.,Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+                "role": "Product Manager",
+                "avatar": "https://s3-alpha-sig.figma.com/img/fd74/0791/c0eda28c846f98c39e7926aea7c79a95?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ca9dQ6mz7qoeazaRy6i7RI6RQeb4Nijs01TBU-siNz5BhpLPFUDzSRfDWrtowkLVeLswD7AMsErIvBM7uV2QVFW57cNbK~FJztr6PzZk5zCEZPAVI635D~6NgNgfa2D6n7c2IYemDg5QqnekMctv6rIPy0q78cFlqI3oz5oROw736blogcRaaaD~IF0t62GVzXhaNaZV2t1BL4Xo2yTZdRRhdu9dUgR7h~XIpA7SKhoWwKrbcI8uH7VCkuIuoSFE9lrEBPp-pjASPCywQiGtlz9bCRHdXL4mMJoWGBjPDSLtr680vB3zanW-Zgx3-7I~hfMyjSiWmmWNKveR96AivQ__"
+            },
+            {
+                "name": "John Doe",
+                "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum., Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.,Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+                "role": "Product Manager",
+                "avatar": "https://s3-alpha-sig.figma.com/img/fd74/0791/c0eda28c846f98c39e7926aea7c79a95?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ca9dQ6mz7qoeazaRy6i7RI6RQeb4Nijs01TBU-siNz5BhpLPFUDzSRfDWrtowkLVeLswD7AMsErIvBM7uV2QVFW57cNbK~FJztr6PzZk5zCEZPAVI635D~6NgNgfa2D6n7c2IYemDg5QqnekMctv6rIPy0q78cFlqI3oz5oROw736blogcRaaaD~IF0t62GVzXhaNaZV2t1BL4Xo2yTZdRRhdu9dUgR7h~XIpA7SKhoWwKrbcI8uH7VCkuIuoSFE9lrEBPp-pjASPCywQiGtlz9bCRHdXL4mMJoWGBjPDSLtr680vB3zanW-Zgx3-7I~hfMyjSiWmmWNKveR96AivQ__"
+            },
+            {
+                "name": "John Doe",
+                "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum., Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.,Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+                "role": "Product Manager",
+                "avatar": "https://s3-alpha-sig.figma.com/img/fd74/0791/c0eda28c846f98c39e7926aea7c79a95?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ca9dQ6mz7qoeazaRy6i7RI6RQeb4Nijs01TBU-siNz5BhpLPFUDzSRfDWrtowkLVeLswD7AMsErIvBM7uV2QVFW57cNbK~FJztr6PzZk5zCEZPAVI635D~6NgNgfa2D6n7c2IYemDg5QqnekMctv6rIPy0q78cFlqI3oz5oROw736blogcRaaaD~IF0t62GVzXhaNaZV2t1BL4Xo2yTZdRRhdu9dUgR7h~XIpA7SKhoWwKrbcI8uH7VCkuIuoSFE9lrEBPp-pjASPCywQiGtlz9bCRHdXL4mMJoWGBjPDSLtr680vB3zanW-Zgx3-7I~hfMyjSiWmmWNKveR96AivQ__"
+            }
+        ]
+    },
     featuresSection:
     {
         features: [
