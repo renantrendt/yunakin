@@ -14,6 +14,8 @@ export default function RootLayout({
   params: any
 }) {
   return (
-    <RootLayoutClient children={children} params={{ ...params, monaSans }} />
+    <RootLayoutClient params={{ ...params, monaSans }}>
+      {children}
+    </RootLayoutClient>
   )
 }
