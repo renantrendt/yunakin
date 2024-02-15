@@ -1,4 +1,3 @@
-import GoogleCircleIcon from '@/assets/icons/GoogleCircleIcon'
 import React from 'react'
 
 

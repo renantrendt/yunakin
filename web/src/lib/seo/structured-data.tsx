@@ -1,8 +1,5 @@
-import { Metadata } from "next";
-
-import Head from "next/head";
 import Script from "next/script";
-
+import React from 'react'
 export type SEOSchemaType = "Article" | "WebPage" | "ProfilePage" | "SearchResultsPage";
 
 export interface BlogSchemaOptions {
@@ -43,7 +40,9 @@ function renderSchematags(schemaType: SEOSchemaType = "Article", options: BlogSc
     switch (schemaType) {
         case "Article":
             content = renderArticleSchema(options);
+            break;
         default:
+            break
     }
 
 

@@ -1,4 +1,3 @@
-import { Post } from 'contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import React from 'react'
 import BlogContent from './BlogContent'

@@ -163,6 +163,10 @@ html.dark .prose * {
 
 }
 
+.input-gradient-border {
+  border: 1.5px solid rgba(154, 109, 254, 0.31);
+}
+
 @property --color1 {
   syntax: '<color>';
   initial-value: #763AFB;
@@ -186,7 +190,8 @@ html.dark .prose * {
   transition: box-shadow 0.15s;
 }
 
-.coming-soon-input-shadow:hover {
+.coming-soon-input-shadow:hover,
+.coming-soon-input-shadow:disabled {
   box-shadow: 0px 0px 5px 0px #9A6DFE;
 }
 

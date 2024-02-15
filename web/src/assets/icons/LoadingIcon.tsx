@@ -3,7 +3,7 @@ import * as React from 'react'
 
 function LoadingIcon(): JSX.Element {
     return (
-        <span className="loading loading-spinner loading-md"></span>
+        <span className="loading loading-spinner loading-xs"></span>
     )
 }
 

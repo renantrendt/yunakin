@@ -1,7 +1,7 @@
 import localFont from 'next/font/local'
 
 import ComingSoonClient from "@/components/client/ComingSoonClient";
-import getSeoMetadata from "@/lib/seo/seo";
+import getSeoMetadata from "@/lib/seo/metadata";
 import { Metadata } from "next";
 import React from 'react'
 
