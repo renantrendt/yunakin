@@ -1,7 +1,7 @@
 import { cn } from "@/utils/cn";
 import React from "react";
 
-export const Meteors = ({
+const Meteors = ({
     number,
     className,
 }: {
@@ -30,3 +30,5 @@ export const Meteors = ({
         </>
     );
 };
+
+export default React.memo(Meteors);
