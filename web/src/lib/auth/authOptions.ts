@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken'
 import GoogleProvider from 'next-auth/providers/google'
 import TwitterProvider from "next-auth/providers/twitter";
 import GitHubProvider from "next-auth/providers/github";
+import FacebookProvider from "next-auth/providers/facebook";
 
 import { sendVerificationEmail } from '@/utils/sendEmail'
 import platformConfig from '@/config/app-config'
@@ -71,6 +72,10 @@ export const authOptions: NextAuthOptions = {
         GitHubProvider({
             clientId: platformConfig.variables.GITHUB_ID as string,
             clientSecret: platformConfig.variables.GITHUB_SECRET as string
+        }),
+        FacebookProvider({
+            clientId: platformConfig.variables.FACEBOOK_CLIENT_ID as string,
+            clientSecret: platformConfig.variables.FACEBOOK_CLIENT_SECRET as string
         })
     ],
     callbacks: {
