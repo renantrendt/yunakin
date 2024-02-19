@@ -11,6 +11,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return getSeoMetadata({
     openGraph: {
       images: [`${platformConfig.variables.NEXT_URL}/images/og-coming-soon.png`],
+    },
+    twitter: {
+      images: [`${platformConfig.variables.NEXT_URL}/images/og-coming-soon.png`],
     }
   });
 }
