@@ -22,11 +22,11 @@ export default function Hero() {
                         <div className='flex justify-center flex-col lg:flex-row lg:justify-start gap-4 lg:gap-8'>
                             <Button
                                 variant='primary'
-                                classname='py-3 px-4 bg-gradient-to-b  text-white'
+                                classname='py-3 px-4 '
                                 label='Call to action'
                             />
                             <Button
-                                variant='outline'
+                                variant='secondary'
                                 label='Join Crash Course'
                                 icon={
                                     <div className='text-primary'>

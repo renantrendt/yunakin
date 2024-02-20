@@ -79,9 +79,11 @@ const config: Config = {
       'category-blog-background': "#EBEBEB",
       'category-card-autor': "#8B8B8B",
       'white': "#FFFFFF",
-      'black': "#121212",
+      'black': "# ",
       'grey-50': "#FBFBFB",
       'grey-100': "#F5F5F5",
+      'grey-200': "#ECECEC",
+      'grey-300': "#DBDBDB",
       'green-3': "#1B3C3C",
       'primary': {
         500: '#705AF8',
