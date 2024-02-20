@@ -45,6 +45,12 @@ html.dark .prose * {
   scrollbar-width: none;
 }
 
+.coming-soon-container {
+  height: 100vh;
+  /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+
 .toast-message {
   border-radius: 8px !important;
   outline: none;
@@ -180,6 +186,8 @@ html.dark .prose * {
 
 
 .coming-soon-button-linear-gradient {
+  --color1: #763AFB;
+  --color2: #601AF9;
   background: linear-gradient(180deg, var(--color1) 0%, var(--color2) 98%, rgba(118, 58, 251, 0) 100%),
     linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
   transition: --color1 0.15s, --color2 0.15s;

@@ -84,7 +84,7 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
         outerDivRef.current.style.left = event.pageX + 'px';
     }
     return (
-        <div className={cn("w-full h-screen coming-soon-linear-gradient relative overflow-hidden", monaSans.className)}
+        <div className={cn("w-full  coming-soon-linear-gradient relative   no-scrollbar coming-soon-container", monaSans.className)}
         >
             <div
                 id='shadow'
@@ -92,7 +92,7 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
             >
 
             </div>
-            <div className="flex flex-col items-center h-screen justify-center   px-6 relative overflow-x-hidden overflow-y-hidden">
+            <div className="flex flex-col items-center  min-h-[calc(100%)] h-[calc(100%)] overflow-hidden  justify-center   px-6 relative overflow-x-hidden overflow-y-hidden">
 
                 <Meteors number={4} />
 
