@@ -84,7 +84,7 @@ const config: Config = {
       'grey-100': "#F5F5F5",
       'green-3': "#1B3C3C",
       'primary': {
-        500: '#996cff',
+        500: '#705AF8',
       },
     }
   },
@@ -92,14 +92,14 @@ const config: Config = {
   daisyui: {
     themes: [{
       light: {
-        primary: "#996cff",
+        primary: "#705AF8",
         secondary: "#3E21EB",
         danger: "#eeeeee",
         transparent: "transparent",
       }
     }, {
       dark: {
-        primary: "#996cff",
+        primary: "#705AF8",
         secondary: "#3E21EB",
         danger: "#eeeeee",
         transparent: "transparent",

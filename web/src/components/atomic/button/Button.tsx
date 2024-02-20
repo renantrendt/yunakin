@@ -18,7 +18,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "md", loading }) => {
   const baseStyle = 'btn '
-  const variantStyle = variant === 'primary' ? 'btn-primary text-white from-primary to-secondary' : variant === 'secondary' ? 'btn-secondary' : 'btn-outline hover:text-black text-primary'
+  const variantStyle = variant === 'primary' ? 'btn-primary text-white bg-primary' : variant === 'secondary' ? 'btn-secondary ' : 'btn-outline hover:text-black text-primary'
   let sizeStyle = ''
   switch (size) {
     case 'lg':
