@@ -89,8 +89,8 @@ export const siteCopy = {
 
 export const siteConfig: Metadata = {
     applicationName: 'CodePilot',
-    title: 'Codepilot - The Ultimate SaaS Starter Kit',
-    description: 'Accelerate your development process. Launch in days!',
+    title: 'Codepilot - Launch in days, not weeks.',
+    description: 'Ready to accelerate your development process?!',
     keywords: ['SaaS', 'boilerplate'],
     openGraph: {
         type: 'website',
@@ -98,16 +98,16 @@ export const siteConfig: Metadata = {
         siteName: 'Codepilot',
         url: 'www.codepilot.dev',
         title: 'Codepilot - The Ultimate SaaS Starter Kit',
-        description: 'Accelerate your development process. Launch in days!',
+        description: 'Ready to accelerate your development process?',
         images: [`${platformConfig.variables.NEXT_URL}/images/og-demo-landing.png`],
     },
     twitter: {
         card: 'summary_large_image',
         creator: '@Landing Page',
         creatorId: '',
-        description: "Accelerate your development process. Launch in days!",
+        description: "Ready to accelerate your development process?",
         images: [`${platformConfig.variables.NEXT_URL}/images/og-demo-landing.png`],
-        title: "Codepilot - The Ultimate SaaS Starter Kit"
+        title: "Codepilot - Launch in days, not weeks."
     },
 };
 export default siteUrls
