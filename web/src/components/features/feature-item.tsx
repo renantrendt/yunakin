@@ -3,6 +3,7 @@ import Button from '../atomic/button/Button';
 import Typography from '../atomic/typography/Typography';
 import Image from 'next/image';
 import { motion, useAnimation, useInView } from 'framer-motion';
+import ArrowRightIcon from "@/assets/icons/arrow-right.svg";
 interface FeatureItemProps {
     direction?: "ltr" | "rtl" | string
     image?: string
@@ -43,7 +44,7 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                     <Typography type='h2'>{title}</Typography>
                     <div className="     text-neutral-600 dark:text-white text-xl font-light max-w-[574px] leading-loose">{description}</div>
                 </div>
-                <Button label='Learn More' variant="tertiary" size='sm' />
+                <Button label='Learn More' variant="secondary" size='sm' icon={<ArrowRightIcon />} trailing />
             </div>
             <div className='relative w-full  flex-1 h-96'>
                 <Image alt='' fill

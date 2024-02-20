@@ -14,9 +14,10 @@ interface ButtonProps {
   loading?: boolean
   disabled?: boolean
   icon?: React.ReactNode
+  trailing?: boolean
 }
 
-const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "md", loading }) => {
+const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "md", loading, trailing }) => {
   const baseStyle = 'btn'
   let variantStyle = ''
   switch (variant) {
@@ -57,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
   }
   return (
     <button disabled={disabled || loading} className={cn(baseStyle, variantStyle, classname, sizeStyle)} onClick={onClick} type={type}>
-      {loading ? <LoadingIcon /> : null} {icon} {label}
+      {loading ? <LoadingIcon /> : null} {trailing ? <>{label} {icon} </> : <>{icon} {label}</>}
     </button>
   )
 }

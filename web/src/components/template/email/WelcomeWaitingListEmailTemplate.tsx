@@ -34,17 +34,8 @@ export const WelcomeWaitingListEmailTemplate = ({
             <Tailwind>
                 <Body className="bg-white font-sans px-2 ">
                     <Container className="  my-[40px] mx-auto    max-w-[665px]">
-                        <Section className="mt-[32px]">
-                            <Img
-                                src={`${baseUrl}/images/logo.png`}
-                                width="150"
-                                height="120"
-                                alt="CodePilot"
-                                className="my-0 "
-                            />
-                        </Section>
                         <Text className="text-black text-2xl font-bold leading-[24px]">
-                            Hi,
+                            Dear, [Name] 💌
                         </Text>
                         <Text className="text-black text-[14px] leading-[24px]">
                             Thanks for signing up for our email waiting list
