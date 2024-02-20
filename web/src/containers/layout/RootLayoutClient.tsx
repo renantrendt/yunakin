@@ -5,7 +5,6 @@ import { initGA, logPageView } from '@/utils/ga-analytics'
 import Providers from '@/lib/providers/providers'
 import React from 'react'
 import { cn } from '@/utils/cn'
-import Head from 'next/head'
 const inter = Inter({ preload: false, weight: 'variable', subsets: ['latin'] })
 
 export default function RootLayoutClient({
@@ -20,12 +19,12 @@ export default function RootLayoutClient({
         initGA()
         logPageView()
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-        let vh = window.innerHeight * 0.01;
+        const vh = window.innerHeight * 0.01;
         // Then we set the value in the --vh custom property to the root of the document
         document.documentElement.style.setProperty('--vh', `${vh}px`);
         const listener = () => {
             // We execute the same script as before
-            let vh = window.innerHeight * 0.01;
+            const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         };
         window.addEventListener('resize', listener)
