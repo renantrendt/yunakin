@@ -1,14 +1,20 @@
-'use client'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import { useEffect } from 'react'
-import { initGA, logPageView } from '@/utils/ga-analytics'
-import Providers from '@/lib/providers/providers'
-import 'react-toastify/dist/ReactToastify.css'
 import React from 'react'
-import { cn } from '@/utils/cn'
-const inter = Inter({ preload: false, weight: 'variable', subsets: ['latin'] })
+import 'react-toastify/dist/ReactToastify.css'
+import './globals.css'
 
+import RootLayoutClient from '@/containers/layout/RootLayoutClient'
+import localFont from 'next/font/local'
+const monaSans = localFont({ src: './fonts/Mona-Sans-Light.otf', variable: "--font-coming-soon" });
+import type { Viewport } from 'next'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  // Also supported by less commonly used
+  // interactiveWidget: 'resizes-visual',
+}
 export default function RootLayout({
   children,
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -17,17 +23,9 @@ export default function RootLayout({
   children: React.ReactNode
   params: any
 }) {
-  useEffect(() => {
-    initGA()
-    logPageView()
-  }, [])
   return (
-    <html lang="en" >
-      <body className={cn(inter.className, "min-h-screen", "h-screen")}>
-        <Providers>
-          {children}
-        </Providers>
-      </body>
-    </html >
+    <RootLayoutClient params={{ ...params, monaSans }}>
+      {children}
+    </RootLayoutClient>
   )
 }

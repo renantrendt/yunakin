@@ -2,17 +2,16 @@
 import { toast } from 'react-toastify'
 import React from 'react'
 
-import WarningIcon from '@/assets/icons/WarningIcon'
 import AlertIcon from '@/assets/icons/AlertIcon'
-import SucessIcon from '@/assets/icons/SucessIcon'
-
+import CheckCircleIcon from "@/assets/icons/CheckCircleIcon.svg"
+import WarningIcon from "@/assets/icons/WarningIcon.svg"
 const defaultToastId = "default-toast-id"
 const customToast = {
     success(msg: string, options = {}) {
         return toast.success(msg, {
             toastId: defaultToastId,
             className: 'toast-message toast-success ',
-            icon: <SucessIcon />,
+            icon: <CheckCircleIcon />,
             closeButton: false,
             ...options,
         })

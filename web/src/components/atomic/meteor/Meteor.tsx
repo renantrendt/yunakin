@@ -1,7 +1,7 @@
 import { cn } from "@/utils/cn";
 import React from "react";
 
-export const Meteors = ({
+const Meteors = ({
     number,
     className,
 }: {
@@ -21,7 +21,7 @@ export const Meteors = ({
                     )}
                     style={{
                         top: 0,
-                        left: Math.floor(Math.random() * (800 - -800) + -400) + "px",
+                        left: Math.floor(Math.random() * (800 - -800) + -400 * idx) + "px",
                         animationDelay: Math.random() * (0.8 - 0.2) + 0.2 + "s",
                         animationDuration: Math.floor(Math.random() * (10 - 2) + 2) + "s",
                     }}
@@ -30,3 +30,5 @@ export const Meteors = ({
         </>
     );
 };
+
+export default React.memo(Meteors);

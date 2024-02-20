@@ -1,6 +1,6 @@
 import Footer from '@/components/footer/Footer'
 import Navbar from '@/components/section/navbar/navbar'
-import getSeoMetadata from '@/lib/seo/seo'
+import getSeoMetadata from '@/lib/seo/metadata'
 import { Metadata } from 'next'
 import React from 'react'
 

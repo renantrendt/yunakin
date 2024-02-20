@@ -45,21 +45,33 @@ html.dark .prose * {
   scrollbar-width: none;
 }
 
+.coming-soon-container {
+  height: 100vh;
+  /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+
 .toast-message {
-  border-radius: 89px !important;
+  border-radius: 8px !important;
   outline: none;
   border: none;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15) !important;
   color: #fff !important;
 }
 
+.toast-message .Toastify__toast-icon {
+  display: flex;
+  align-items: center;
+}
 
 .toast-success {
-  background-color: #64d59f !important;
+  background-color: #1B3C3C !important;
+  color: #6FCF97 !important;
 }
 
 .toast-info {
-  background-color: #ffb000 !important;
+  background-color: #3C311B !important;
+  color: #F2994A !important;
 }
 
 .toast-error {
@@ -67,8 +79,8 @@ html.dark .prose * {
 }
 
 .Toastify__toast {
-  margin-bottom: 16px !important;
-  padding: 12px 16px !important;
+  /* margin-bottom: 16px !important; */
+  padding: 16px 30px 16px 16px !important;
   max-width: fit-content;
 }
 
@@ -80,7 +92,7 @@ html.dark .prose * {
   justify-content: flex-start !important;
   flex-basis: auto !important;
   max-width: fit-content;
-  @apply !font-sans !text-sm;
+  @apply !font-monaSans;
 }
 
 .Toastify__toast-icon {
@@ -156,6 +168,10 @@ html.dark .prose * {
 
 }
 
+.input-gradient-border {
+  border: 1.5px solid rgba(154, 109, 254, 0.31);
+}
+
 @property --color1 {
   syntax: '<color>';
   initial-value: #763AFB;
@@ -170,6 +186,8 @@ html.dark .prose * {
 
 
 .coming-soon-button-linear-gradient {
+  --color1: #763AFB;
+  --color2: #601AF9;
   background: linear-gradient(180deg, var(--color1) 0%, var(--color2) 98%, rgba(118, 58, 251, 0) 100%),
     linear-gradient(0deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18));
   transition: --color1 0.15s, --color2 0.15s;
@@ -179,7 +197,8 @@ html.dark .prose * {
   transition: box-shadow 0.15s;
 }
 
-.coming-soon-input-shadow:hover {
+.coming-soon-input-shadow:hover,
+.coming-soon-input-shadow:disabled {
   box-shadow: 0px 0px 5px 0px #9A6DFE;
 }
 

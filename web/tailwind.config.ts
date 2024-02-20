@@ -1,6 +1,4 @@
 import type { Config } from 'tailwindcss'
-import defaultTheme from 'tailwindcss/defaultTheme';
-import colors from 'tailwindcss/colors';
 const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette')
 const config: Config = {
   content: [
@@ -11,6 +9,9 @@ const config: Config = {
   darkMode: ['class'],
   theme: {
     extend: {
+      fontFamily: {
+        monaSans: ['var(--font-coming-soon)']
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -83,8 +84,9 @@ const config: Config = {
       'grey-100': "#F5F5F5",
       'grey-200': "#ECECEC",
       'grey-300': "#DBDBDB",
+      'green-3': "#1B3C3C",
       'primary': {
-        500: '#996cff',
+        500: '#705AF8',
       },
     }
   },
@@ -92,14 +94,14 @@ const config: Config = {
   daisyui: {
     themes: [{
       light: {
-        primary: "#996cff",
+        primary: "#705AF8",
         secondary: "#3E21EB",
         danger: "#eeeeee",
         transparent: "transparent",
       }
     }, {
       dark: {
-        primary: "#996cff",
+        primary: "#705AF8",
         secondary: "#3E21EB",
         danger: "#eeeeee",
         transparent: "transparent",

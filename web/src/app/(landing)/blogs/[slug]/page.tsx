@@ -2,24 +2,36 @@ import { fetchStrapiAPI } from '@/utils/strapi';
 import BlogContent from '@/components/blog/BlogContent';
 import React from 'react';
 import platformConfig from '@/config/app-config';
-import { allPosts } from "contentlayer/generated"
+import { Post, allPosts } from "contentlayer/generated"
 import { Metadata } from 'next';
 import LocalBlogContent from '@/components/blog/LocalBlogContent';
 import { notFound } from 'next/navigation';
+import renderSchematags from '@/lib/seo/structured-data';
+import { authors } from '@/lib/content/content';
+
+export interface PostWithAuthor extends Post {
+    authorProps: {
+        name: string;
+        avatar: string;
+    }
+}
 interface PostProps {
     params: {
         slug: string
     }
 }
 
-function getPostFromParams(params: PostProps["params"]) {
+function getPostFromParams(params: PostProps["params"]): PostWithAuthor | null {
     const slug = params?.slug
-    const post = allPosts.find((post: any) => post.slug.replace("/", "") === slug)
+    const post = allPosts.find((post: any) => post.slug.replace("/", "") === slug) as PostWithAuthor
     console.log(allPosts, slug)
     if (!post) {
-        null
+        return null
     }
-
+    const author = authors.filter(a => a.slug == post.author)[0]
+    post.authorProps = {} as any
+    post.authorProps.name = author.name
+    post.authorProps.avatar = author.avatar
     return post
 }
 
@@ -35,6 +47,7 @@ export async function generateMetadata({
     return {
         title: post.title,
         description: post.description,
+
     }
 }
 interface SingleBlogViewModel {
@@ -89,6 +102,17 @@ const SlugPage = async ({ params }: { params: { slug: string } }) => {
 
     return (
         <div className=' w-full px-4  md:px-28 text-black dark:text-white ' >
+            {renderSchematags('Article', {
+                title: mappedData.title,
+                datePublished: mappedData.publishedAt,
+                dateModified: mappedData.publishedAt,
+                imageURL: mappedData.imageURL,
+                slug: params.slug,
+                author: {
+                    name: mappedData.author.name,
+                    avatar: mappedData.author.avatar
+                }
+            })}
             {mappedData && (
                 <BlogContent data={mappedData} />
             )}
