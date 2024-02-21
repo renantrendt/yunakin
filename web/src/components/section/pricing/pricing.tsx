@@ -28,30 +28,30 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                 <PricingProduct
                     name={'Pro'}
                     description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
-                    price={29.99}
+                    price={isMonthly ? platformConfig.pricing.plans.pro.price : platformConfig.pricing.plans.pro_yearly.price}
                     plan={Plans.PRO}
                     features={features}
+                    planId={isMonthly ? platformConfig.pricing.plans.pro.planId : platformConfig.pricing.plans.pro_yearly.planId}
                     isMonthly={isMonthly}
                 />
                 <PricingProduct
                     name={'Personal'}
                     description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
-                    price={59.99}
+                    price={isMonthly ? platformConfig.pricing.plans.business.price : platformConfig.pricing.plans.business_yearly.price}
                     plan={Plans.BUSINESS}
-
                     features={features}
                     recommended={true}
+                    planId={isMonthly ? platformConfig.pricing.plans.business.planId : platformConfig.pricing.plans.business_yearly.planId}
                     isMonthly={isMonthly}
-
                 />
                 <PricingProduct
                     name={'Startup'}
                     description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
-                    price={79.99}
+                    price={isMonthly ? platformConfig.pricing.plans.advanced.price : platformConfig.pricing.plans.advanced_yearly.price}
                     plan={Plans.ADVANCED}
                     features={features}
+                    planId={isMonthly ? platformConfig.pricing.plans.advanced.planId : platformConfig.pricing.plans.advanced_yearly.planId}
                     isMonthly={isMonthly}
-
                 />
             </section>
         </div>

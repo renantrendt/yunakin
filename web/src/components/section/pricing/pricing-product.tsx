@@ -12,12 +12,13 @@ import platformConfig, { Plans } from '@/config/app-config';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import siteUrls from '@/config/site-config';
-export default function PricingProduct({ name, description, price, features, plan, recommended, isMonthly = false }: {
+export default function PricingProduct({ name, description, price, features, plan, recommended, planId, isMonthly }: {
     name: string
     description: string
     price: number
     features: { name: string, plans: Plans[] }[]
     plan: Plans
+    planId: string
     recommended?: boolean
     isMonthly?: boolean
 }) {
@@ -35,7 +36,7 @@ export default function PricingProduct({ name, description, price, features, pla
         try {
             // step 2: define the data for monthly subscription
             const body: CheckoutSubscriptionBody = {
-                price_id: plan === Plans.PRO ? platformConfig.variables.NEXT_PUBLIC_STRIPE_PRO_PLAN_ID! : plan === Plans.BUSINESS ? platformConfig.variables.NEXT_PUBLIC_STRIPE_BUSINESS_PLAN_ID! : platformConfig.variables.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID!,
+                price_id: planId
             };
 
             setLoading(true)
@@ -72,8 +73,8 @@ export default function PricingProduct({ name, description, price, features, pla
 
                     <div className="flex justify-center items-center py-10 text-black dark:text-white ">
                         <span className="mr-2 text-5xl font-extrabold ">
-                            {isMonthly ? (price * 1.2).toFixed(2) : price}€
-                        </span>
+                            {price.toFixed(2)}€
+                        </span>§
                         <span>
                             /{isMonthly ? "month" : "year"}
                         </span>
