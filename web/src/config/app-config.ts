@@ -27,6 +27,44 @@ const platformConfig = {
     },
   },
   pricing: {
+    plans: {
+      pro: {
+        name: "Pro",
+        price: 29.99,
+        description: "Ideal for getting started with desktop funnels and achieving your first successes.",
+        planId: process.env.NEXT_PUBLIC_STRIPE_PRO_PLAN_ID,
+      },
+      business: {
+        name: "Business",
+        price: 59.99,
+        description: "Ideal for getting started with desktop funnels and achieving your first successes.",
+        planId: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_PLAN_ID
+      },
+      advanced: {
+        name: "Startup",
+        price: 79.99,
+        description: "Ideal for getting started with desktop funnels and achieving your first successes.",
+        planId: process.env.NEXT_PUBLIC_STRIPE_ADVANCED_PLAN_ID
+      },
+      pro_yearly: {
+        name: "Pro",
+        price: 19.99,
+        description: "Ideal for getting started with desktop funnels and achieving your first successes.",
+        planId: process.env.NEXT_PUBLIC_STRIPE_PRO_PLAN_ID,
+      },
+      business_yearly: {
+        name: "Business",
+        price: 49.99,
+        description: "Ideal for getting started with desktop funnels and achieving your first successes.",
+        planId: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_PLAN_ID
+      },
+      advanced_yearly: {
+        name: "Startup",
+        price: 69.99,
+        description: "Ideal for getting started with desktop funnels and achieving your first successes.",
+        planId: process.env.NEXT_PUBLIC_STRIPE_ADVANCED_PLAN_ID
+      },
+    },
     features: [
       {
         name: "Feature 1",
