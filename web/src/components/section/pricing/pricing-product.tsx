@@ -8,7 +8,7 @@ import CrossIcon from '@/icons/CrossIcon';
 import Modal from '../../molecules/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
 import customToast from '../../atomic/toast/customToast';
-import platformConfig, { Plans } from '@/config/app-config';
+import { Plans } from '@/config/app-config';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import siteUrls from '@/config/site-config';

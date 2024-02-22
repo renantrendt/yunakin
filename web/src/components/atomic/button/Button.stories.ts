@@ -38,7 +38,7 @@ export const Secondary: Story = {
 
 export const Large: Story = {
     args: {
-        variant: "outline",
+        variant: "alert",
         size: 'lg',
         label: 'Button',
     },

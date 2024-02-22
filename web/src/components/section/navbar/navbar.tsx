@@ -53,7 +53,7 @@ export default function Navbar() {
                         <li><Link href={siteUrls.features}>Features</Link></li>
                         <li>
                             <Button
-                                variant='outline'
+                                variant='tertiary'
                                 label='Login'
                                 classname='w-full '
                                 onClick={() => router.push(siteUrls.login)}
