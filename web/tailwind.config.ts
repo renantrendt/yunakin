@@ -84,6 +84,7 @@ const config: Config = {
       'grey-100': "#F5F5F5",
       'grey-200': "#ECECEC",
       'grey-300': "#DBDBDB",
+      'grey-500': "#5E5E5E",
       'green-3': "#1B3C3C",
       'primary': {
         500: '#705AF8',

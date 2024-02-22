@@ -2,7 +2,7 @@
 import React from 'react'
 
 interface InputFieldProps {
-  label: string
+  label?: string
   name: string
   id: string
   type?: 'text' | 'email' | 'password'
@@ -19,15 +19,17 @@ interface InputFieldProps {
 const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, error, id, ...additionalProps }) => {
   return (
     <div className="form-control ">
-      <label className="label text-black dark:text-white">
-        <span className="label-text">{label}</span>
-      </label>
+      {label &&
+        <label className="label text-black dark:text-white">
+          <span className="label-text">{label}</span>
+        </label>
+      }
       <div className='flex relative'>
         {leadingIcon && <div className='absolute left-[8px] top-3 text-black dark:text-white '>{leadingIcon}</div>}
         <input
           type={type}
           placeholder={placeholder}
-          className={additionalProps.customClassName ? additionalProps.customClassName : `input  input-primary dark:bg-gray-800 text-black dark:text-white  w-full ${leadingIcon ? "pl-9" : ""}`}
+          className={`input  input-primary dark:bg-gray-800 text-black dark:text-white  w-full ${leadingIcon ? "pl-9" : ""} ${additionalProps.customClassName}`}
           name={name}
           id={id}
           onChange={onChange}
