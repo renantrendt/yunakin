@@ -2,7 +2,7 @@
 
 import Markdown from 'react-markdown'
 import React from 'react';
-import BackIcon from '@/assets/icons/BackIcon';
+import BackIcon from '@/icons/BackIcon';
 import { useRouter } from 'next/navigation';
 
 const markdown = `

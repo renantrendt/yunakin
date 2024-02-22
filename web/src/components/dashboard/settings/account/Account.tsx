@@ -6,9 +6,9 @@ import InputField from '@/components/atomic/input/InputField'
 import { useSession } from 'next-auth/react'
 import Button from '@/components/atomic/button/Button'
 import TextArea from '@/components/atomic/textarea/TextArea'
-import EmailIcon from '@/assets/icons/EmailIcon'
-import AccountIcon from '@/assets/icons/AccountIcon'
-import FileUploadIcon from '@/assets/icons/FileUploadIcon'
+import EmailIcon from '@/icons/EmailIcon'
+import AccountIcon from '@/icons/AccountIcon'
+import FileUploadIcon from '@/icons/FileUploadIcon'
 interface FormValues {
     email: string
     password: string

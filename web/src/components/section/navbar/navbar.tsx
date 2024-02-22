@@ -5,7 +5,7 @@ import React from 'react'
 
 import { useRouter } from 'next/navigation'
 import siteUrls from '@/config/site-config'
-import HamburgerIcon from '@/assets/icons/HamburgerIcon.svg'
+import HamburgerIcon from '@/icons/HamburgerIcon.svg'
 import Image from 'next/image'
 import IconButton from '@/components/atomic/icon-button/IconButton'
 export default function Navbar() {

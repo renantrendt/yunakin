@@ -1,5 +1,5 @@
 // components/Modal.tsx
-import CrossIcon from '@/assets/icons/CrossIcon'
+import CrossIcon from '@/icons/CrossIcon'
 import IconButton from '@/components/atomic/icon-button/IconButton'
 import Typography from '@/components/atomic/typography/Typography'
 import React from 'react'

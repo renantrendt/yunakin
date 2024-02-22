@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import AccountIcon from '@/assets/icons/AccountIcon';
+import AccountIcon from '@/icons/AccountIcon';
 import React from 'react'
 import IconButton from './IconButton';
-import CrossIcon from '@/assets/icons/CrossIcon';
+import CrossIcon from '@/icons/CrossIcon';
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
     title: 'Atomic/IconButton',

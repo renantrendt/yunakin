@@ -2,9 +2,9 @@
 
 import { cn } from "@/utils/cn";
 import React, { useEffect, useState } from "react";
-import CompanyLogo1 from '@/assets/icons/company-icons/logo-ipsum1.svg'
-import CompanyLogo2 from '@/assets/icons/company-icons/logo-ipsum2.svg'
-import CompanyLogo3 from '@/assets/icons/company-icons/logo-ipsum3.svg'
+import CompanyLogo1 from '@/icons/company-icons/logo-ipsum1.svg'
+import CompanyLogo2 from '@/icons/company-icons/logo-ipsum2.svg'
+import CompanyLogo3 from '@/icons/company-icons/logo-ipsum3.svg'
 const items = [
     CompanyLogo1, CompanyLogo2, CompanyLogo3
 ]

@@ -1,5 +1,5 @@
 'use client'
-import LoadingIcon from '@/assets/icons/LoadingIcon'
+import LoadingIcon from '@/icons/LoadingIcon'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import React from 'react'

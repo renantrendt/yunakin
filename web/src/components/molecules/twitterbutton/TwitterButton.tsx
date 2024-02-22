@@ -1,4 +1,4 @@
-import TwitterIcon from '@/assets/icons/TwitterIcon.svg'
+import TwitterIcon from '@/icons/TwitterIcon.svg'
 import React from 'react'
 
 interface TwitterButtonProps {

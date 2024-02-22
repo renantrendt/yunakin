@@ -2,9 +2,9 @@
 import { toast } from 'react-toastify'
 import React from 'react'
 
-import AlertIcon from '@/assets/icons/AlertIcon'
-import CheckCircleIcon from "@/assets/icons/CheckCircleIcon.svg"
-import WarningIcon from "@/assets/icons/WarningIcon.svg"
+import AlertIcon from '@/icons/AlertIcon'
+import CheckCircleIcon from "@/icons/CheckCircleIcon.svg"
+import WarningIcon from "@/icons/WarningIcon.svg"
 const defaultToastId = "default-toast-id"
 const customToast = {
     success(msg: string, options = {}) {

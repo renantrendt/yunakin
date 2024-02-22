@@ -1,5 +1,5 @@
 // components/Button.tsx
-import LoadingIcon from '@/assets/icons/LoadingIcon'
+import LoadingIcon from '@/icons/LoadingIcon'
 import { cn } from '@/utils/cn'
 import React from 'react'
 

@@ -10,14 +10,14 @@ import customToast from '@/components/atomic/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
-import EmailIcon from '@/assets/icons/EmailIcon'
+import EmailIcon from '@/icons/EmailIcon'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
 import AuthButton from '@/components/molecules/authbutton/AuthButton'
-import GoogleCircleIcon from '@/assets/icons/GoogleCircleIcon'
-import TwitterIcon from '@/assets/icons/TwitterIcon.svg'
-import GithubIcon from "@/assets/icons/GithubIcon.svg"
+import GoogleCircleIcon from '@/icons/GoogleCircleIcon'
+import TwitterIcon from '@/icons/TwitterIcon.svg'
+import GithubIcon from "@/icons/GithubIcon.svg"
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required()

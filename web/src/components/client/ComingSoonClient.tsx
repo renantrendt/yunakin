@@ -2,7 +2,7 @@
 import { useMutation } from '@tanstack/react-query'
 import React, { useEffect } from 'react'
 
-import ComingSoonIcon from '@/assets/icons/coming-soon/icon'
+import ComingSoonIcon from '@/icons/coming-soon/icon'
 import { cn } from '@/utils/cn';
 
 

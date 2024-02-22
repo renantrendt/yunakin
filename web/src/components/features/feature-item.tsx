@@ -3,7 +3,7 @@ import Button from '../atomic/button/Button';
 import Typography from '../atomic/typography/Typography';
 import Image from 'next/image';
 import { motion, useAnimation, useInView } from 'framer-motion';
-import ArrowRightIcon from "@/assets/icons/arrow-right.svg";
+import ArrowRightIcon from "@/icons/arrow-right.svg";
 interface FeatureItemProps {
     direction?: "ltr" | "rtl" | string
     image?: string

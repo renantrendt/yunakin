@@ -1,5 +1,5 @@
 import React from 'react'
-import NotFoundSvg from '@/assets/icons/404.svg'
+import NotFoundSvg from '@/icons/404.svg'
 const NotFoundPage = () => {
     return (
         <div className="flex items-center justify-center min-h-screen dark:bg-gray-800 bg-white py-48">

@@ -4,14 +4,14 @@ import React from 'react'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import InputField from '../atomic/input/InputField'
-import MagnifyingGlass from "@/assets/icons/magnifying-glass.svg"
-import DashboardLogoIcon from "@/assets/icons/dashboard-logo.svg"
-import HomeIcon from "@/assets/icons/home.svg"
-import InboxIcon from "@/assets/icons/inbox.svg"
-import UserGroupIcon from "@/assets/icons/user-group.svg"
-import SettingsIcon from "@/assets/icons/settings.svg"
-import BookOpen from "@/assets/icons/book-open.svg"
-import AnalyticsIcon from "@/assets/icons/analytics.svg"
+import MagnifyingGlass from "@/icons/magnifying-glass.svg"
+import DashboardLogoIcon from "@/icons/dashboard-logo.svg"
+import HomeIcon from "@/icons/home.svg"
+import InboxIcon from "@/icons/inbox.svg"
+import UserGroupIcon from "@/icons/user-group.svg"
+import SettingsIcon from "@/icons/settings.svg"
+import BookOpen from "@/icons/book-open.svg"
+import AnalyticsIcon from "@/icons/analytics.svg"
 interface SidebarLink {
     label: string
     path: string

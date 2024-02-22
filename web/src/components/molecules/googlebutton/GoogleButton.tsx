@@ -1,4 +1,4 @@
-import GoogleCircleIcon from '@/assets/icons/GoogleCircleIcon'
+import GoogleCircleIcon from '@/icons/GoogleCircleIcon'
 import React from 'react'
 
 interface GoogleButtonProps {

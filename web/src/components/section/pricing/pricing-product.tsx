@@ -3,8 +3,8 @@ import { CheckoutSubscriptionBody } from '@/app/api/checkout-session/route'
 import React from 'react'
 import Stripe from 'stripe';
 import Button from '../../atomic/button/Button';
-import TickIcon from '@/assets/icons/TickIcon';
-import CrossIcon from '@/assets/icons/CrossIcon';
+import TickIcon from '@/icons/TickIcon';
+import CrossIcon from '@/icons/CrossIcon';
 import Modal from '../../molecules/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
 import customToast from '../../atomic/toast/customToast';

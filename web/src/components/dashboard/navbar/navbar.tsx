@@ -1,5 +1,5 @@
 'use client'
-import HamburgerIcon from '@/assets/icons/HamburgerIcon.svg'
+import HamburgerIcon from '@/icons/HamburgerIcon.svg'
 import InputField from '@/components/atomic/input/InputField'
 import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
 import siteUrls from '@/config/site-config'

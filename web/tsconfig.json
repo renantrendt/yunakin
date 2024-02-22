@@ -25,7 +25,8 @@
     ],
     "paths": {
       "@/*": [
-        "./src/*"
+        "./src/*",
+        "./assets/*"
       ],
       "contentlayer/generated": [
         "./.contentlayer/generated"

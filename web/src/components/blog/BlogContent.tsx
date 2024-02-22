@@ -1,5 +1,5 @@
 'use client'
-import BackIcon from '@/assets/icons/BackIcon'
+import BackIcon from '@/icons/BackIcon'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'

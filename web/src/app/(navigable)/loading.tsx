@@ -1,4 +1,4 @@
-import LoadingIcon from '@/assets/icons/LoadingIcon'
+import LoadingIcon from '@/icons/LoadingIcon'
 import React from 'react'
 
 const Loading = () => {
