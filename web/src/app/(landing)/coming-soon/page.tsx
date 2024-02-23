@@ -7,6 +7,7 @@ import Testimonial from '@/components/section/testimonial/Testimonial'
 import Features from '@/components/features/features'
 import Cta from '@/components/section/cta/cta'
 import UsedBy from '@/components/section/usedBy/UsedBy'
+import FeatureListicle from '@/components/features/feature-listicle'
 
 export default function Home() {
     return (
@@ -16,6 +17,7 @@ export default function Home() {
             <UsedBy />
             <Cta />
             <Features />
+            <FeatureListicle />
             <Testimonial />
             <FAQ />
         </main>

@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
 import InputField from './InputField'
-import LockOnIcon from '@/icons/LockOnIcon'
-import LockOffIcon from '@/icons/LockOffIcon'
+import LockOnIcon from '@/icons/LockOnIcon.svg'
+import LockOffIcon from '@/icons/LockOffIcon.svg'
 
 interface PasswordInputFieldProps extends React.ComponentProps<typeof InputField> {
 
