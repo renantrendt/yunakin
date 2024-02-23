@@ -40,6 +40,7 @@ const config: StorybookConfig = {
     (config.resolve as any).alias = {
       ...(config.resolve as any).alias,
       '@': path.resolve(__dirname, "../src/"),
+      '@/icons': path.resolve(__dirname, "../assets/icons/"),
     };
     return config;
   },

@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import InputField from './InputField';
 import AccountIcon from '@/icons/AccountIcon';
-import LockOffIcon from '@/icons/LockOffIcon';
 import React from 'react'
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -42,12 +41,3 @@ export const InputWithLeadingIcon: Story = {
     },
 };
 
-export const InputWithTralingIcon: Story = {
-    args: {
-        label: 'InputWithTralingIcon',
-        name: 'input',
-        id: 'input',
-        type: 'text',
-        trailingIcon: <LockOffIcon />,
-    },
-};
