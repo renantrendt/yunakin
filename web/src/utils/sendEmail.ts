@@ -82,7 +82,7 @@ export const sendWelcomeWaitingListEmail = async ({
       from: 'noreply <noreply@codepilot.dev>',
       to: [to],
       subject: subject,
-      react: WelcomeWaitingListEmailTemplate({ email: to, organizationName: "CodePilot" }) as React.ReactElement,
+      react: WelcomeWaitingListEmailTemplate({ organizationName: "CodePilot" }) as React.ReactElement,
     });
     return { success: true, data: data }
   } catch (error: any) {

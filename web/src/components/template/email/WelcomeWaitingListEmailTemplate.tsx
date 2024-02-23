@@ -17,7 +17,6 @@ import * as React from "react";
 
 
 interface WelcomeWaitingListEmailTemplateProps {
-    email?: string;
     organizationName?: string;
 }
 
@@ -37,8 +36,8 @@ export const WelcomeWaitingListEmailTemplate = ({
                 <Head>
 
                 </Head>
-                <Body className="bg-[#FAFAFA] font-sans ">
-                    <Container className=" bg-white  px-[60px] pt-[36px] pb-[24px] rounded-[10px]   mt-[60px] mx-auto  flex flex-col justify-center    min-w-[300px] max-w-[565px]">
+                <Body className="bg-[#FAFAFA] font-sans  pt-[60px] ">
+                    <Container className=" bg-white  px-[60px] pt-[36px] pb-[24px] rounded-[10px]   mx-auto  flex flex-col justify-center    min-w-[300px] max-w-[565px]">
                         <Section>
 
                             <Text className="text-black text-2xl font-bold leading-[24px]">
@@ -63,23 +62,25 @@ export const WelcomeWaitingListEmailTemplate = ({
                         </Section>
                     </Container>
                     <Container className=" !w-full min-w-full min-h-[250px] mx-auto">
-                        <Section className="mt-4 flex items-center mb-4">
-                            <Img
-                                src={`${baseUrl}/images/email-footer-logo.png`}
+                        <Section className="mt-4 text-center mb-4">
+                            <Row>
+                                <Img
+                                    src={`${baseUrl}/images/email-footer-logo.png`}
 
-                                alt="CodePilot"
-                                className="my-0  mx-auto w-[40%] h-[40%] lg:w-[10%] lg:h-[10%]"
-                            />
+                                    alt="CodePilot"
+                                    className="my-0  mx-auto w-[40%] h-[40%] md:w-[20%] md:h-[20%] lg:w-[10%] lg:h-[10%]"
+                                />
+                            </Row>
                         </Section>
                         <Section className="  flex justify-center gap-4 text-[#8E8E8E]">
                             <Row className="mx-auto">
                                 <Column>
-                                    <Link className="mr-4  text-[#8E8E8E] text-[12px] " href={`${baseUrl}/privacy-policy`}>
+                                    <Link className="mr-4  text-[#8E8E8E] text-[12px] text-right px-2 " href={`${baseUrl}/privacy-policy`}>
                                         Privacy Policy
                                     </Link>
                                 </Column>
                                 <Column>
-                                    <Link href={`${baseUrl}/tos`} className="text-[#8E8E8E] text-[12px]">
+                                    <Link href={`${baseUrl}/tos`} className="text-[#8E8E8E] text-left text-[12px]">
                                         Terms & Conditions
                                     </Link>
                                 </Column>
@@ -89,7 +90,7 @@ export const WelcomeWaitingListEmailTemplate = ({
                             <Row className="mx-auto">
                                 <Column>
 
-                                    <Text className="text-[#8E8E8E] text-[12px]">
+                                    <Text className="text-[#8E8E8E] text-center text-[12px]">
                                         © 2024, All right reserved.
                                     </Text>
                                 </Column>
