@@ -76,21 +76,11 @@ export const sendWelcomeWaitingListEmail = async ({
   to: string
   subject: string
 }) => {
-
-  try {
-    const data = await resend.emails.send({
-      from: 'noreply <noreply@codepilot.dev>',
-      to: [to],
-      subject: subject,
-      react: WelcomeWaitingListEmailTemplate({ organizationName: "CodePilot" }) as React.ReactElement,
-    });
-    return { success: true, data: data }
-  } catch (error: any) {
-    console.error(error)
-
-    if (error.response) {
-      console.error(error.response.body)
-    }
-    return { success: false, error }
-  }
+  const data = await resend.emails.send({
+    from: 'noreply <noreply@codepilot.dev>',
+    to: [to],
+    subject: subject,
+    react: WelcomeWaitingListEmailTemplate({ organizationName: "CodePilot" }) as React.ReactElement,
+  });
+  return { success: true, data: data }
 }

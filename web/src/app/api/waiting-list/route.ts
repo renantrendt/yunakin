@@ -32,19 +32,10 @@ export async function POST(req: Request): Promise<NextResponse<boolean>> {
             to: email,
             subject: 'Waiting List Confirmation',
         });
-        if (!result.success) {
-            return new NextResponse(
-                JSON.stringify({
-                    status: 'error',
-                    message: JSON.stringify(result.error)
-                }),
-                { status: 500 }
-            )
-        }
         return new NextResponse(
             JSON.stringify({
-                status: 'success',
-                message: 'Email sent successfully'
+                status: result.success ? 'success' : 'error',
+                data: result.data
             }),
             { status: 200 }
         )
@@ -53,7 +44,8 @@ export async function POST(req: Request): Promise<NextResponse<boolean>> {
         return new NextResponse(
             JSON.stringify({
                 status: 'error',
-                message: error.message
+                message: JSON.stringify(error),
+                reason: "Something bad happened"
             }),
             { status: 500 }
         )

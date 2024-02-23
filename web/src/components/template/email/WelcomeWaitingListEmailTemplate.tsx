@@ -25,7 +25,7 @@ const baseUrl = platformConfig.variables.NEXT_URL || "http://localhost:3000";
 export const WelcomeWaitingListEmailTemplate = ({
     organizationName
 }: WelcomeWaitingListEmailTemplateProps) => {
-    const previewText = `Confirm registration on ${organizationName}`;
+    const previewText = `Welcome list completion ${organizationName}`;
 
     return (
         <Html>
