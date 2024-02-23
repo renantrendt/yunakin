@@ -28,10 +28,19 @@ export async function POST(req: Request): Promise<NextResponse<boolean>> {
                 email
             }
         })
-        await sendWelcomeWaitingListEmail({
+        const result = await sendWelcomeWaitingListEmail({
             to: email,
             subject: 'Confirm Email',
         });
+        if (!result.success) {
+            return new NextResponse(
+                JSON.stringify({
+                    status: 'error',
+                    message: 'Error sending email'
+                }),
+                { status: 500 }
+            )
+        }
         return new NextResponse(
             JSON.stringify({
                 status: 'success',
