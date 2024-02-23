@@ -63,7 +63,7 @@ export const WelcomeWaitingListEmailTemplate = ({
                         </Section>
                     </Container>
                     <Container className=" !w-full min-w-full min-h-[250px] mx-auto">
-                        <Section className="mt-4 f items-center mb-4">
+                        <Section className="mt-4 flex items-center mb-4">
                             <Img
                                 src={`${baseUrl}/images/email-footer-logo.png`}
 
@@ -72,7 +72,7 @@ export const WelcomeWaitingListEmailTemplate = ({
                             />
                         </Section>
                         <Section className="  flex justify-center gap-4 text-[#8E8E8E]">
-                            <Row>
+                            <Row className="mx-auto">
                                 <Column>
                                     <Link className="mr-4  text-[#8E8E8E] text-[12px] " href={`${baseUrl}/privacy-policy`}>
                                         Privacy Policy
@@ -86,7 +86,7 @@ export const WelcomeWaitingListEmailTemplate = ({
                             </Row>
                         </Section>
                         <Section className=" flex justify-center">
-                            <Row>
+                            <Row className="mx-auto">
                                 <Column>
 
                                     <Text className="text-[#8E8E8E] text-[12px]">

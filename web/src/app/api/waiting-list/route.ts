@@ -36,7 +36,7 @@ export async function POST(req: Request): Promise<NextResponse<boolean>> {
             return new NextResponse(
                 JSON.stringify({
                     status: 'error',
-                    message: 'Error sending email'
+                    message: JSON.stringify(result.error)
                 }),
                 { status: 500 }
             )
