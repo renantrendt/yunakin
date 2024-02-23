@@ -1,12 +1,14 @@
 import platformConfig from "@/config/app-config";
 import {
     Body,
+    Column,
     Container,
     Head,
     Html,
     Img,
     Link,
     Preview,
+    Row,
     Section,
     Text,
 } from "@react-email/components";
@@ -32,6 +34,9 @@ export const WelcomeWaitingListEmailTemplate = ({
             <Preview>{previewText}</Preview>
             <Tailwind
             >
+                <Head>
+
+                </Head>
                 <Body className="bg-[#FAFAFA] font-sans ">
                     <Container className=" bg-white  px-[60px] pt-[36px] pb-[24px] rounded-[10px]   mt-[60px] mx-auto  flex flex-col justify-center    min-w-[300px] max-w-[565px]">
                         <Section>
@@ -57,28 +62,38 @@ export const WelcomeWaitingListEmailTemplate = ({
                             </Text>
                         </Section>
                     </Container>
-                    <Container className=" !w-full min-w-full min-h-[250px]">
-                        <Section className="mt-4 flex justify-center items-center mb-4">
+                    <Container className=" !w-full min-w-full min-h-[250px] mx-auto">
+                        <Section className="mt-4 f items-center mb-4">
                             <Img
                                 src={`${baseUrl}/images/email-footer-logo.png`}
-                                width="10%"
-                                height="10%"
+
                                 alt="CodePilot"
-                                className="my-0  mx-auto"
+                                className="my-0  mx-auto w-[40%] h-[40%] lg:w-[10%] lg:h-[10%]"
                             />
                         </Section>
-                        <Section className="flex flex-row justify-center gap-4 text-[#8E8E8E]">
-                            <Link className="mr-4 text-[#8E8E8E] text-[12px] " href={`${baseUrl}/privacy-policy`}>
-                                Privacy Policy
-                            </Link>
-                            <Link href={`${baseUrl}/tos`} className="text-[#8E8E8E] text-[12px]">
-                                Terms & Conditions
-                            </Link>
+                        <Section className="  flex justify-center gap-4 text-[#8E8E8E]">
+                            <Row>
+                                <Column>
+                                    <Link className="mr-4  text-[#8E8E8E] text-[12px] " href={`${baseUrl}/privacy-policy`}>
+                                        Privacy Policy
+                                    </Link>
+                                </Column>
+                                <Column>
+                                    <Link href={`${baseUrl}/tos`} className="text-[#8E8E8E] text-[12px]">
+                                        Terms & Conditions
+                                    </Link>
+                                </Column>
+                            </Row>
                         </Section>
-                        <Section className="flex justify-center">
-                            <Text className="text-[#8E8E8E] text-[12px]">
-                                © 2024, All right reserved.
-                            </Text>
+                        <Section className=" flex justify-center">
+                            <Row>
+                                <Column>
+
+                                    <Text className="text-[#8E8E8E] text-[12px]">
+                                        © 2024, All right reserved.
+                                    </Text>
+                                </Column>
+                            </Row>
                         </Section>
                     </Container>
                 </Body>
