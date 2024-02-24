@@ -20,7 +20,7 @@ interface WelcomeWaitingListEmailTemplateProps {
     organizationName?: string;
 }
 
-const baseUrl = platformConfig.variables.NEXT_URL;
+const baseUrl = "https://codepilot.dev";
 
 export const WelcomeWaitingListEmailTemplate = ({
     organizationName
@@ -29,16 +29,16 @@ export const WelcomeWaitingListEmailTemplate = ({
 
     return (
         <Html>
+            <Head />
+            <Preview>{previewText}</Preview>
+
             <Tailwind
             >
-                <Preview>{previewText}</Preview>
 
-                <Head />
 
                 <Body className="bg-[#FAFAFA] font-sans  pt-[60px] ">
-                    <Container className=" bg-white  px-[60px] pt-[36px] pb-[24px] rounded-[10px]   mx-auto  flex flex-col justify-center    min-w-[300px] max-w-[565px]">
+                    <Container className=" bg-white  px-[5vw] pt-[36px] pb-[24px] rounded-[10px]   mx-auto  flex flex-col justify-center    min-w-[350px] max-w-[565px]">
                         <Section>
-
                             <Text className="text-black text-2xl font-bold leading-[24px]">
                                 You’ve submitted! 💌
                             </Text>
@@ -67,25 +67,27 @@ export const WelcomeWaitingListEmailTemplate = ({
                                     src={`${baseUrl}/images/email-footer-logo.png`}
 
                                     alt="CodePilot"
-                                    className="my-0  mx-auto w-[40%] h-[40%] md:w-[20%] md:h-[20%] lg:w-[10%] lg:h-[10%]"
+                                    className="my-0  mx-auto"
+                                    width={"142"}
+                                    height={"35"}
                                 />
                             </Row>
                         </Section>
-                        <Section className="  flex justify-center gap-4 text-[#8E8E8E]">
-                            <Row className="mx-auto">
-                                <Column>
-                                    <Link className="mr-4  text-[#8E8E8E] text-[12px] text-right px-2 " href={`${baseUrl}/privacy-policy`}>
+                        <Section className="  text-center gap-4 text-[#8E8E8E]">
+                            <Row className="">
+                                <Column className="text-right">
+                                    <Link className="mr-4  text-[#8E8E8E] text-[12px] px-2 " href={`${baseUrl}/privacy-policy`}>
                                         Privacy Policy
                                     </Link>
                                 </Column>
-                                <Column>
-                                    <Link href={`${baseUrl}/tos`} className="text-[#8E8E8E] text-left text-[12px]">
+                                <Column className="text-left">
+                                    <Link href={`${baseUrl}/tos`} className="text-[#8E8E8E]  text-[12px]">
                                         Terms & Conditions
                                     </Link>
                                 </Column>
                             </Row>
                         </Section>
-                        <Section className=" flex justify-center">
+                        <Section className=" text-center">
                             <Row className="mx-auto">
                                 <Column>
 
@@ -101,6 +103,7 @@ export const WelcomeWaitingListEmailTemplate = ({
         </Html>
     );
 };
+
 
 WelcomeWaitingListEmailTemplate.PreviewProps = {
     organizationName: "CodePilot",
