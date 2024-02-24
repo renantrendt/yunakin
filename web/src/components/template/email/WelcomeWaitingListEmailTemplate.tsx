@@ -29,13 +29,12 @@ export const WelcomeWaitingListEmailTemplate = ({
 
     return (
         <Html>
-            <Head />
-            <Preview>{previewText}</Preview>
             <Tailwind
             >
-                <Head>
+                <Preview>{previewText}</Preview>
 
-                </Head>
+                <Head />
+
                 <Body className="bg-[#FAFAFA] font-sans  pt-[60px] ">
                     <Container className=" bg-white  px-[60px] pt-[36px] pb-[24px] rounded-[10px]   mx-auto  flex flex-col justify-center    min-w-[300px] max-w-[565px]">
                         <Section>
@@ -104,7 +103,6 @@ export const WelcomeWaitingListEmailTemplate = ({
 };
 
 WelcomeWaitingListEmailTemplate.PreviewProps = {
-    email: "fortanpireva@gmail.com",
     organizationName: "CodePilot",
 } as WelcomeWaitingListEmailTemplateProps;
 
