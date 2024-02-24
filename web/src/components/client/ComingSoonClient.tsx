@@ -47,11 +47,10 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
                 cache: 'no-cache'
             })
             if (!response.ok) {
-                if (response.status === 400) {
+                if (response.status === 400 || response.status === 429) {
                     const data = await response.json()
                     throw new Error(data.message)
                 }
-                throw new Error('Something bad happened')
             }
             return response.json()
         },
