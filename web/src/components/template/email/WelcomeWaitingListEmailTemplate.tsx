@@ -20,7 +20,7 @@ interface WelcomeWaitingListEmailTemplateProps {
     organizationName?: string;
 }
 
-const baseUrl = platformConfig.variables.NEXT_URL || "http://localhost:3000";
+const baseUrl = platformConfig.variables.NEXT_URL;
 
 export const WelcomeWaitingListEmailTemplate = ({
     organizationName
