@@ -73,20 +73,6 @@ export const WelcomeWaitingListEmailTemplate = ({
                                 />
                             </Row>
                         </Section>
-                        <Section className="  text-center gap-4 text-[#8E8E8E]">
-                            <Row className="">
-                                <Column className="text-right">
-                                    <Link className="mr-4  text-[#8E8E8E] text-[12px] px-2 " href={`${baseUrl}/privacy-policy`}>
-                                        Privacy Policy
-                                    </Link>
-                                </Column>
-                                <Column className="text-left">
-                                    <Link href={`${baseUrl}/tos`} className="text-[#8E8E8E]  text-[12px]">
-                                        Terms & Conditions
-                                    </Link>
-                                </Column>
-                            </Row>
-                        </Section>
                         <Section className=" text-center">
                             <Row className="mx-auto">
                                 <Column>
