@@ -20,7 +20,7 @@ interface WelcomeWaitingListEmailTemplateProps {
     organizationName?: string;
 }
 
-const baseUrl = "https://codepilot.dev";
+const baseUrl = platformConfig.variables.NEXT_URL;
 
 export const WelcomeWaitingListEmailTemplate = ({
     organizationName
