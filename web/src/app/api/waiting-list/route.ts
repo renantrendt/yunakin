@@ -30,7 +30,7 @@ export async function POST(req: Request): Promise<NextResponse<boolean>> {
         })
         const result = await sendWelcomeWaitingListEmail({
             to: email,
-            subject: 'Waiting List Confirmation',
+            subject: 'Waiting List Confirmation'
         });
         return new NextResponse(
             JSON.stringify({
