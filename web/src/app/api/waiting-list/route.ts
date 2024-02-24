@@ -44,6 +44,7 @@ export async function POST(req: Request): Promise<NextResponse<boolean>> {
         return new NextResponse(
             JSON.stringify({
                 status: 'error',
+                error: error,
                 message: JSON.stringify(error),
                 reason: "Something bad happened"
             }),
