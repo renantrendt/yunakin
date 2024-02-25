@@ -3,7 +3,7 @@ import customToast from '@/components/atomic/toast/customToast'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 
 const VerifyPage = () => {
     const router = useRouter()
@@ -48,11 +48,14 @@ const VerifyPage = () => {
         })()
     }, []);
     return (
-        <div className='flex min-h-full flex-col justify-center mt-10 sm:px-6 lg:px-8'>
-            <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-                Verifying token...
+        <Suspense fallback="loading">
+            <div className='flex min-h-full flex-col justify-center mt-10 sm:px-6 lg:px-8'>
+                <div className='sm:mx-auto sm:w-full sm:max-w-md'>
+                    Verifying token...
+                </div>
             </div>
-        </div>
+        </Suspense>
+
     )
 }
 

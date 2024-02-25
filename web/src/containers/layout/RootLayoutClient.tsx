@@ -5,6 +5,9 @@ import { initGA, logPageView } from '@/utils/ga-analytics'
 import Providers from '@/lib/providers/providers'
 import React from 'react'
 import { cn } from '@/utils/cn'
+import { GoogleTagManager } from '@next/third-parties/google'
+import platformConfig from '@/config/app-config'
+
 const inter = Inter({ preload: false, weight: 'variable', subsets: ['latin'] })
 
 export default function RootLayoutClient({
@@ -39,6 +42,8 @@ export default function RootLayoutClient({
                 <Providers>
                     {children}
                 </Providers>
+                <GoogleTagManager gtmId={platformConfig.variables.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string} />
+
             </body>
         </html >
     )

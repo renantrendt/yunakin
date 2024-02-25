@@ -1,6 +1,6 @@
 'use client'
 import { signIn, useSession } from 'next-auth/react'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -92,71 +92,73 @@ export default function LoginPage() {
         }
     }
     return (
-        <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
-            <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 p-8 rounded-[20px]     shadow-lg  m-auto flex flex-col gap-6">
-                <Link href={siteUrls.home}>
-                    <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
-                </Link>
-                <Typography type='h4' className='font-bold'>Log In</Typography>
-                {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
-                <Controller
-                    control={control}
-                    name="email"
-                    render={({ field: { onChange, value } }) => (
-                        <InputField
-                            label="Email"
-                            type="email"
-                            id="email"
-                            name="email"
-                            leadingIcon={<EmailIcon />}
-                            onChange={onChange}
-                            value={value}
-                            error={errors.email?.message}
-                        />
-                    )}
-                />
-                <Controller
-                    control={control}
-                    name="password"
-                    render={({ field: { onChange, value } }) => (
-                        <PasswordInputField
-                            label="Password"
-                            type="password"
-                            id="password"
-                            name="password"
-                            onChange={onChange}
-                            value={value}
-                            error={errors.password?.message}
-                        />
-                    )}
-                />
-                <div>
+        <Suspense fallback="loading">
+            <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
+                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 p-8 rounded-[20px]     shadow-lg  m-auto flex flex-col gap-6">
+                    <Link href={siteUrls.home}>
+                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
+                    </Link>
+                    <Typography type='h4' className='font-bold'>Log In</Typography>
+                    {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
+                    <Controller
+                        control={control}
+                        name="email"
+                        render={({ field: { onChange, value } }) => (
+                            <InputField
+                                label="Email"
+                                type="email"
+                                id="email"
+                                name="email"
+                                leadingIcon={<EmailIcon />}
+                                onChange={onChange}
+                                value={value}
+                                error={errors.email?.message}
+                            />
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name="password"
+                        render={({ field: { onChange, value } }) => (
+                            <PasswordInputField
+                                label="Password"
+                                type="password"
+                                id="password"
+                                name="password"
+                                onChange={onChange}
+                                value={value}
+                                error={errors.password?.message}
+                            />
+                        )}
+                    />
+                    <div>
 
-                    <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='md' loading={loading} />
-                        <div className='text-black dark:text-white'>
-                            <Link href={siteUrls.forgotPassword} className="text-primary">Forgot Password?</Link>
+                        <div className="flex justify-center flex-col gap-4">
+                            <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='md' loading={loading} />
+                            <div className='text-black dark:text-white'>
+                                <Link href={siteUrls.forgotPassword} className="text-primary">Forgot Password?</Link>
+                            </div>
+                            <div className='text-black dark:text-white'>
+                                Don&apos;t have an account ? <Link href={siteUrls.register} className="text-primary">Register</Link>
+                            </div>
                         </div>
-                        <div className='text-black dark:text-white'>
-                            Don&apos;t have an account ? <Link href={siteUrls.register} className="text-primary">Register</Link>
+                        <div className="relative flex  items-center py-3">
+                            <div className="flex-grow border-t border-gray-400"></div>
+                            <span className="flex-shrink mx-4 text-gray-400">Or</span>
+                            <div className="flex-grow border-t border-gray-400"></div>
                         </div>
-                    </div>
-                    <div className="relative flex  items-center py-3">
-                        <div className="flex-grow border-t border-gray-400"></div>
-                        <span className="flex-shrink mx-4 text-gray-400">Or</span>
-                        <div className="flex-grow border-t border-gray-400"></div>
-                    </div>
-                    <div className='flex gap-4 flex-col'>
+                        <div className='flex gap-4 flex-col'>
 
-                        <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content='Sign in with Google' icon={<GoogleCircleIcon />} />
-                        <AuthButton onClick={() => { signIn('twitter', { callbackUrl: '/dashboard' }) }} content='Sign In with Twitter' icon={<TwitterIcon />} />
-                        <AuthButton onClick={() => { signIn('github', { callbackUrl: '/dashboard' }) }} content='Sign In with Github' icon={<GithubIcon />} />
+                            <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content='Sign in with Google' icon={<GoogleCircleIcon />} />
+                            <AuthButton onClick={() => { signIn('twitter', { callbackUrl: '/dashboard' }) }} content='Sign In with Twitter' icon={<TwitterIcon />} />
+                            <AuthButton onClick={() => { signIn('github', { callbackUrl: '/dashboard' }) }} content='Sign In with Github' icon={<GithubIcon />} />
+                        </div>
+
                     </div>
 
-                </div>
-
-            </form>
-        </div>
+                </form>
+            </div>
+        </Suspense>
 
     )
 }

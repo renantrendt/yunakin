@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -65,38 +65,41 @@ export default function ForgotPasswordPage() {
     }
 
     return (
-        <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
-            <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 md:w-2/3 lg:w-1/2 max-w-xl   dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-4">
-                <Link href={siteUrls.home}>
-                    <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
-                </Link>
-                <div>
-                    <Typography type='h4' className='font-bold'>Reset Password</Typography>
-                    <Typography type='p' className='font-light'>Enter your new password.</Typography>
-                </div>
-                <Controller
-                    control={control}
-                    name="password"
-                    render={({ field: { onChange, value } }) => (
-                        <PasswordInputField
-                            label="Password"
-                            type="password"
-                            id="password"
-                            name="password"
-                            onChange={onChange}
-                            value={value}
-                            error={errors.password?.message}
-                        />
-                    )}
-                />
-                <div>
+        <Suspense fallback="loading...">
 
-                    <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" loading={loading} label='Reset Password' />
+            <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
+                <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 md:w-2/3 lg:w-1/2 max-w-xl   dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-4">
+                    <Link href={siteUrls.home}>
+                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
+                    </Link>
+                    <div>
+                        <Typography type='h4' className='font-bold'>Reset Password</Typography>
+                        <Typography type='p' className='font-light'>Enter your new password.</Typography>
                     </div>
-                </div>
-            </form>
-        </div>
+                    <Controller
+                        control={control}
+                        name="password"
+                        render={({ field: { onChange, value } }) => (
+                            <PasswordInputField
+                                label="Password"
+                                type="password"
+                                id="password"
+                                name="password"
+                                onChange={onChange}
+                                value={value}
+                                error={errors.password?.message}
+                            />
+                        )}
+                    />
+                    <div>
+
+                        <div className="flex justify-center flex-col gap-4">
+                            <Button variant="primary" type="submit" classname="w-full" loading={loading} label='Reset Password' />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </Suspense>
 
     )
 }
