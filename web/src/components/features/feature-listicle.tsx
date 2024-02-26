@@ -7,7 +7,6 @@ import ServerIcon from "@/icons/server-icon.svg";
 import UserIcon from "@/icons/user-icon.svg";
 import PaintIcon from "@/icons/paint-icon.svg"
 import Typography from '../atomic/typography/Typography';
-import { m } from 'framer-motion';
 interface FeatureListicle {
     id: string
     icon: React.ReactNode
