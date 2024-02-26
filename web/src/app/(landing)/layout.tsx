@@ -18,7 +18,6 @@ const LandingLayout = ({ children }: { children: React.ReactNode }) => {
             <div className='bg-white w-full justify-center flex dark:bg-gray-700  dark:text-white'>
                 <Footer />
             </div>
-
         </div >
     )
 }

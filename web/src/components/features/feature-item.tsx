@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useRef } from 'react'
 import Button from '../atomic/button/Button';
 import Typography from '../atomic/typography/Typography';
