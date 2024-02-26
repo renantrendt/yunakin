@@ -43,7 +43,7 @@ export default function Hero() {
                             fill
                             objectFit="cover"
                             src={siteCopy.heroSection.image}
-                            className="w-full h-full object-cover rounded-2xl"
+                            className="w-full h-full object-cover rounded-3xl"
                         />
                     </div>
                 </div>
