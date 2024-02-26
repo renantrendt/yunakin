@@ -7,6 +7,7 @@ import ServerIcon from "@/icons/server-icon.svg";
 import UserIcon from "@/icons/user-icon.svg";
 import PaintIcon from "@/icons/paint-icon.svg"
 import Typography from '../atomic/typography/Typography';
+import { m } from 'framer-motion';
 interface FeatureListicle {
     id: string
     icon: React.ReactNode
@@ -21,8 +22,9 @@ const features: FeatureListicle[] = [
         icon: <EnvelopeIcon />,
         title: "Email",
         points: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "Magnam eaque aut est asperiores suscipit debitis doloremque, voluptas impedit rerum aperiam."
+            "Send transactional emails.",
+            "Easy setup with Resend SDK.",
+            "Time saved: 2 hours",
         ]
     },
     {
@@ -30,8 +32,9 @@ const features: FeatureListicle[] = [
         icon: <WalletIcon />,
         title: "Payments",
         points: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "Magnam eaque aut est asperiores suscipit debitis doloremque, voluptas impedit rerum aperiam."
+            "Stripe and Lemon Squeezy support.",
+            "Webhook to update user's subscription.",
+            "Time saved 5 hours"
         ]
     },
     {
@@ -39,8 +42,10 @@ const features: FeatureListicle[] = [
         icon: <UserIcon />,
         title: "Login",
         points: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "Magnam eaque aut est asperiores suscipit debitis doloremque, voluptas impedit rerum aperiam."
+            "Multiple Federated logins.",
+            "Login with Google, Facebook, and Apple.",
+            "User profile and settings.",
+            "Time saved 5 hours"
         ]
     },
     {
@@ -48,8 +53,11 @@ const features: FeatureListicle[] = [
         icon: <MagnifyingGlassIcon />,
         title: "SEO",
         points: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "Magnam eaque aut est asperiores suscipit debitis doloremque, voluptas impedit rerum aperiam."
+            "Blog structure(usage with (contentlayer and strapi support).",
+            "All the meta tags and open graph tags are set up.",
+            "Sitemap and robots.txt are generated.",
+            "SEO-optimized UI components.",
+            "Time saved 10 hours."
         ]
     },
     {
@@ -57,8 +65,9 @@ const features: FeatureListicle[] = [
         icon: <ServerIcon />,
         title: "Database",
         points: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "Magnam eaque aut est asperiores suscipit debitis doloremque, voluptas impedit rerum aperiam."
+            "Prisma schema|database setup.",
+            "Database seeding and migrations.",
+            "Time saved 2 hours"
         ]
     },
     {
@@ -66,10 +75,11 @@ const features: FeatureListicle[] = [
         icon: <PaintIcon />,
         title: "Design",
         points: [
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "Magnam eaque aut est asperiores suscipit debitis doloremque, voluptas impedit rerum aperiam."
+            "Automatic dark mode.",
+            "Tailwind CSS setup.",
+            "Entire figma UI design library",
+            "Time saved 3 hours"
         ]
-
     }
 
 ]
@@ -82,7 +92,7 @@ const FeatureListicle = () => {
                 <Typography type='h2' className='text-center mb-4'>Supercharge  your app instantly, launch faster, make $</Typography>
                 <Typography type='p' className='text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam eaque aut est asperiores suscipit debitis doloremque, voluptas impedit rerum aperiam.</Typography>
             </div>
-            <div className='flex gap-4 justify-between'>
+            <div className='flex gap-16 justify-start'>
                 {features.map((feature, index) => (
                     <div key={index} className={`flex hover:cursor-pointer gap-4 flex-col items-center w-16 ${selectedFeature.id == feature.id ? "text-primary-end" : ""}`} onClick={() => setSelectedFeature(feature)}>
                         <div className='icon'>{feature.icon}</div>
@@ -93,16 +103,15 @@ const FeatureListicle = () => {
                 ))}
             </div>
             <div className=" w-full py-16 px-4">
-                <ul className='flex flex-col gap-4'>
+                <ul className='flex flex-col gap-4 '>
                     {selectedFeature.points.map((point, index) => (
-                        <li key={index} className='flex gap-2 p-0'>
+                        <li key={index} className='flex gap-2 p-0 last:text-[#00FF00]'>
                             <div className='bg-green'>
                                 <CheckIcon />
                             </div>
                             <span>
                                 {point}
                             </span>
-
                         </li>
                     ))}
                 </ul>
