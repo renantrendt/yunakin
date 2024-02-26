@@ -11,7 +11,7 @@ import IconButton from '@/components/atomic/icon-button/IconButton'
 export default function Navbar() {
     const router = useRouter()
     return (
-        <div className="navbar px-4 md:px-28 pt-7 md:pt-14 dark:text-white max-w-8xl text-header-color font-medium text-base leading-[19px]">
+        <div className="navbar px-4 md:px-28 pt-7 md:pt-14 dark:text-white max-w-8xl     font-medium text-base leading-[19px] text-grey-400">
             <div className="navbar-start">
 
                 <Link href={siteUrls.home}>

@@ -63,22 +63,22 @@ export const siteCopy = {
     testimonialsSection: {
         testimonials: [
             {
-                "name": "John Doe",
-                "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum., Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.,Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-                "role": "Product Manager",
-                "avatar": "https://s3-alpha-sig.figma.com/img/fd74/0791/c0eda28c846f98c39e7926aea7c79a95?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ca9dQ6mz7qoeazaRy6i7RI6RQeb4Nijs01TBU-siNz5BhpLPFUDzSRfDWrtowkLVeLswD7AMsErIvBM7uV2QVFW57cNbK~FJztr6PzZk5zCEZPAVI635D~6NgNgfa2D6n7c2IYemDg5QqnekMctv6rIPy0q78cFlqI3oz5oROw736blogcRaaaD~IF0t62GVzXhaNaZV2t1BL4Xo2yTZdRRhdu9dUgR7h~XIpA7SKhoWwKrbcI8uH7VCkuIuoSFE9lrEBPp-pjASPCywQiGtlz9bCRHdXL4mMJoWGBjPDSLtr680vB3zanW-Zgx3-7I~hfMyjSiWmmWNKveR96AivQ__"
+                "name": "Alex Johnson",
+                "content": "CodePilot has been a game-changer for our startup. The reduction in development time allowed us to launch our app weeks ahead of schedule, giving us a significant advantage in a competitive market. The scalability and robustness built into CodePilot meant we could seamlessly grow our user base without worrying about performance hiccups. Highly recommend it to any team looking to make a mark fast",
+                "role": "CTO of StartTech Innovations",
+                "avatar": "/images/testimonials/alex-johnson.jpeg"
             },
             {
-                "name": "John Doe",
-                "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum., Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.,Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-                "role": "Product Manager",
-                "avatar": "https://s3-alpha-sig.figma.com/img/fd74/0791/c0eda28c846f98c39e7926aea7c79a95?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ca9dQ6mz7qoeazaRy6i7RI6RQeb4Nijs01TBU-siNz5BhpLPFUDzSRfDWrtowkLVeLswD7AMsErIvBM7uV2QVFW57cNbK~FJztr6PzZk5zCEZPAVI635D~6NgNgfa2D6n7c2IYemDg5QqnekMctv6rIPy0q78cFlqI3oz5oROw736blogcRaaaD~IF0t62GVzXhaNaZV2t1BL4Xo2yTZdRRhdu9dUgR7h~XIpA7SKhoWwKrbcI8uH7VCkuIuoSFE9lrEBPp-pjASPCywQiGtlz9bCRHdXL4mMJoWGBjPDSLtr680vB3zanW-Zgx3-7I~hfMyjSiWmmWNKveR96AivQ__"
+                "name": "Samantha Lee",
+                "content": "Implementing CodePilot into our development workflow has dramatically improved our effic    iency. The pre-configured environments and best practices embedded in the platform have significantly reduced our onboarding time for new developers, and the cost savings have been remarkable. CodePilot is now an integral part of our toolset for all future projects.",
+                "role": "Project Manager at Digital Solutions Corp.",
+                "avatar": "/images/testimonials/samanta.jpeg"
             },
             {
-                "name": "John Doe",
-                "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum., Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.,Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-                "role": "Product Manager",
-                "avatar": "https://s3-alpha-sig.figma.com/img/fd74/0791/c0eda28c846f98c39e7926aea7c79a95?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ca9dQ6mz7qoeazaRy6i7RI6RQeb4Nijs01TBU-siNz5BhpLPFUDzSRfDWrtowkLVeLswD7AMsErIvBM7uV2QVFW57cNbK~FJztr6PzZk5zCEZPAVI635D~6NgNgfa2D6n7c2IYemDg5QqnekMctv6rIPy0q78cFlqI3oz5oROw736blogcRaaaD~IF0t62GVzXhaNaZV2t1BL4Xo2yTZdRRhdu9dUgR7h~XIpA7SKhoWwKrbcI8uH7VCkuIuoSFE9lrEBPp-pjASPCywQiGtlz9bCRHdXL4mMJoWGBjPDSLtr680vB3zanW-Zgx3-7I~hfMyjSiWmmWNKveR96AivQ__"
+                "name": "Ethan Rivera",
+                "content": "As a freelancer, every minute counts, and CodePilot has been instrumental in helping me deliver high-quality work on tight deadlines. The ease of use, coupled with powerful customization options, means I can cater to diverse client needs without starting from zero each time. It's like having an expert team by my side, 24/7",
+                "role": "Freelance App Developer",
+                "avatar": "/images/testimonials/ethan.jpeg"
             }
         ]
     },
@@ -103,6 +103,39 @@ export const siteCopy = {
             },
 
         ],
+    },
+    faqSection: {
+        faqs: [
+            {
+                "question": "What is CodePilot?",
+                "answer": "CodePilot is a comprehensive SaaS boilerplate designed to help developers launch applications faster by providing a pre-configured foundation, ensuring best practices, and facilitating scalability."
+            },
+            {
+                "question": "How can CodePilot reduce development time?",
+                "answer": "CodePilot reduces development time by offering customizable templates and state-of-the-art tools that eliminate the need to build from scratch, allowing developers to focus on creating unique features."
+            },
+            {
+                "question": "Is CodePilot suitable for beginners?",
+                "answer": "Yes, CodePilot is designed to be user-friendly for beginners while offering advanced features for experienced developers, making it an ideal tool for projects of any size and complexity."
+            },
+            {
+                "question": "Can I use CodePilot for commercial projects?",
+                "answer": "Absolutely. CodePilot is built to support both personal and commercial projects, providing the scalability and robustness needed for enterprise-grade applications."
+            },
+            {
+                "question": "What kind of support does CodePilot offer?",
+                "answer": "CodePilot offers comprehensive support through documentation, a dedicated support team, and a community forum where users can share insights and seek help from fellow developers."
+            },
+            {
+                "question": "How often is CodePilot updated?",
+                "answer": "CodePilot is regularly updated to incorporate the latest development trends, security patches, and community feedback to ensure it remains at the forefront of technology."
+            },
+            {
+                "question": "Does CodePilot offer customization options?",
+                "answer": "Yes, CodePilot provides extensive customization options to ensure that developers can tailor their projects to meet specific requirements, making it a flexible solution for a wide range of applications."
+            }
+        ]
+
     }
 }
 
