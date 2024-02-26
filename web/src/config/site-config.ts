@@ -37,9 +37,28 @@ const siteUrls = {
 
 export const siteCopy = {
     heroSection: {
-        title: "Create high-converting funnels in just 60 minutes",
-        description: "Generate a steady flow of customers or talents with lightning-fast and easy-to-build Perspective Funnels. No design or programming skills required.",
-        image: "https://s3-alpha-sig.figma.com/img/120e/c241/8f0118fdb790196d933c064ff2113490?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eX9qwXwHonKWPqjJM18Q7nYyr5P-LnvMc9VU4l3KY8rnrSGpcsc1BW3f1a0t5ZQCuzS5VbO6dG4AmzwAS-z9Duh42DuDSoTtuD6Ib4UWErZpoD79P1Hgt3miY6O-NzhVQ60S6tsXjsbSbbURiMNHSkPcxWdf63AO4o1Og~nL6tfo~0LDz5gesR4sXg7azrAdlvAJYghzjrN~RBK8rnIAqDLcSLrru6bR1yzSYJyp5kwFFbxrBpye2ZJg71tfVKSP9y8-aeEcCPIgCw3XEvCgqEQUU~oX4S70ULw57tRoDwwiUj2ZFB~eI32KOJ3ep7QeaPpgMdjfbHQfRHkqCz5tSg__"
+        title: "Elevate Your Development Journey with CodePilot",
+        description: "The ultimate SaaS boilerplate, designed to fast-track your application development with ease and precision.",
+        image: "/images/hero-image.jpeg"
+    },
+    ctaSection: {
+        title: "Why use CodePilot",
+        description: "CodePilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
+        reasons: [
+            {
+                metric: "40%",
+                description: "faster to market time",
+            },
+            {
+                metric: "25%",
+                description: "lower development costs",
+            },
+            {
+                metric: "100%",
+                description: "productivity increase",
+            },
+
+        ]
     },
     testimonialsSection: {
         testimonials: [

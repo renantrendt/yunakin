@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
   let variantStyle = ''
   switch (variant) {
     case 'primary':
-      variantStyle = 'btn-primary text-white  bg-gradient-to-b from-primary to-secondary'
+      variantStyle = 'btn-primary text-white bg-primary rounded-lg shadow'
       break
     case 'secondary':
       variantStyle = 'border border-zinc-300 text-black bg-white rounded-lg shadow '
