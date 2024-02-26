@@ -88,8 +88,10 @@ const config: Config = {
       'grey-400': "#909090",
       'green-3': "#1B3C3C",
       'old-gray': " #F5F5F5",
+      "faq-color": "#0E0E0E",
       'primary': {
         500: '#705AF8',
+        600: "#5C37EB"
       },
     }
   },

@@ -14,12 +14,12 @@ const Cta = () => {
                     <Typography type='h6' className='text-neutral-600 text-center max-w-2xl leading-[30px] text-[20px] '>{siteCopy.ctaSection.description}</Typography>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 dark:text-white  w-full ">
+                <div className="grid mt-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 dark:text-white  w-full ">
                     {siteCopy.ctaSection.reasons.map((reason) => (
                         <AnimatedSection key={reason.metric}>
-                            <div className=" w-full h-56 rounded-lg  shadow border border-neutral-200 flex-col justify-center items-center gap-4 inline-flex">
-                                <Typography type='h3' className='text-stone-950 dark:text-white  !text-6xl  !font-black  !leading-10 '>{reason.metric}</Typography>
-                                <div className=" text-center text-neutral-600 dark:text-white text-xl font-light  leading-loose">{reason.description}</div>
+                            <div className=" w-full h-56 rounded-[10px]  shadow-lg border border-neutral-200  flex-col justify-center items-center gap-4 inline-flex">
+                                <Typography type='h3' className='text-stone-950   !text-[64px leading-[64px]  !font-black '>{reason.metric}</Typography>
+                                <Typography type='p' className=" text-center text-neutral-600  text-[20px] leading-[30px] font-light  l">{reason.description}</Typography>
                             </div>
                         </AnimatedSection>
 

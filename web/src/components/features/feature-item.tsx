@@ -35,15 +35,15 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
         }
     }, [controls, inView]);
     return (
-        <motion.div ref={ref} className={`grid grid-cols-1  lg:flex justify-center relative  lg:justify-between flex-col lg:flex-row  gap-x-8 gap-y-8  lg:gap-16 w-full items-center text-black dark:text-white   ${direction === "ltr" ? "" : "lg:flex-row-reverse"}`}
+        <motion.div ref={ref} className={`grid grid-cols-1   lg:flex items-start justify-start relative  lg:justify-between flex-col lg:flex-row  gap-x-8 gap-y-8  lg:gap-16 w-full  text-black dark:text-white   ${direction === "ltr" ? "" : "lg:flex-row-reverse"}`}
             initial="hidden"
             animate={controls}
             variants={variants}
         >
-            <div className="flex-col flex-1  justify-start items-start gap-8 inline-flex">
+            <div className="flex-col flex-1  justify-start items-start gap-8 inline-flex h-full">
                 <div className="flex-col justify-start items-start gap-5 flex text-left">
-                    <Typography type='h2'>{title}</Typography>
-                    <div className="     text-neutral-600 dark:text-white text-xl font-light max-w-[574px] leading-loose">{description}</div>
+                    <Typography type='h1' className='text-[36px] font-semibold  '>{title}</Typography>
+                    <Typography type='p' className="text-neutral-600 dark:text-white text-[20px] max-w-[574px] leading-[30px]">{description}</Typography>
                 </div>
                 <Button label='Learn More' variant="secondary" size='sm' icon={<ArrowRightIcon />} trailing />
             </div>

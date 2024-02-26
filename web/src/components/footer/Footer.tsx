@@ -1,4 +1,4 @@
-import siteUrls from '@/config/site-config'
+import siteUrls, { siteCopy } from '@/config/site-config'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -12,7 +12,7 @@ export default function Footer(): JSX.Element {
                     <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
                 </Link>
                 <Typography type='p' className=' !font-light'>
-                    Lorem ipsum dolor sit amet consectetur. Egestas ac etiam in ac at risus volutpat ultricies aliquet
+                    {siteCopy.footer.description}
                 </Typography>
             </div>
             <div className='grid  col-span-9 lg:col-start-5 grid-cols-2 lg:grid-cols-4 w-full lg:col-span-6 gap-y-16'>
@@ -44,8 +44,8 @@ export default function Footer(): JSX.Element {
                 </nav>
             </div>
 
-            <div className='col-span-2 lg:col-span-3 flex justify-end pb-4 '>
-                <p>@2024 Codepilot Company</p>
+            <div className='col-span-2 lg:col-span-3 flex justify-start pb-4 border-t-grey-100 border-t pt-4 border-[#F0F0F0] w-full '>
+                <p>{siteCopy.footer.footnote.replaceAll("%Date%", new Date().getFullYear().toString())}</p>
             </div>
             {/* <form>
                 <header className="footer-title">Newsletter</header>

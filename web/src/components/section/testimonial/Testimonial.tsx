@@ -19,15 +19,18 @@ const Testimonial = () => {
                     {siteCopy.testimonialsSection.testimonials.map((testimonial, index) => (
                         <AnimatedSection key={index}>
                             <div key={index} className='card dark:bg-gray-700 shadow border  border-neutral-200 flex-col    h-full p-5 '>
-                                <div className='card-body flex   px-0 border-justify-center items-center '>
+                                <div className='card-body flex   px-0 border-justify-cent  flex-col justify-between   items-center  '>
                                     <p className=' w-10/12 text-neutral-600 dark:text-white text-base leading-[26px] text-center font-light'>{testimonial.content}</p>
-                                    <div className='relative  w-20 h-20  mt-4'>
+                                    <div className='relative  w-20 h-20  mt-6'>
                                         <Image src={testimonial.avatar} alt={testimonial.name} fill objectFit='cover' className='rounded-full w-20 h-20' />
                                     </div>
-                                    <Typography type='p' className='text-lg text-stone-950 font-black'>
-                                        {testimonial.name}
-                                    </Typography>
-                                    <p className='role text-base font-light text-stone-950'>{testimonial.role}</p>
+                                    <div className='text-center'>
+                                        <Typography type='p' className='text-lg text-stone-950 font-black mt-3'>
+                                            {testimonial.name}
+                                        </Typography>
+                                        <p className='role text-base font-light text-stone-950'>{testimonial.role}</p>
+                                    </div>
+
                                 </div>
                             </div>
                         </AnimatedSection >

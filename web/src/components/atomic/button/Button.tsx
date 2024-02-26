@@ -22,10 +22,10 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
   let variantStyle = ''
   switch (variant) {
     case 'primary':
-      variantStyle = 'btn-primary text-white bg-primary  rounded-lg shadow'
+      variantStyle = 'btn-primary hover:bg-primary-600 text-white bg-primary-500  rounded-lg shadow'
       break
     case 'secondary':
-      variantStyle = ' button-secondary text-black bg-white rounded-lg py-[14px] px-5  '
+      variantStyle = ' button-secondary  hover:border-none hover:outline-none text-black bg-white rounded-lg py-[14px] px-5  '
       break
     case 'tertiary':
       variantStyle = ' bg-grey-200 rounded-lg  text-black border-none  '
