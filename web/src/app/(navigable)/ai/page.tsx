@@ -2,36 +2,29 @@
 import InputField from '@/components/atomic/input/InputField'
 import { Button } from '@react-email/components';
 import React, { useEffect } from 'react'
+import { useChat } from 'ai/react';
 
 const AiPage = () => {
-    const [prompt, setPrompt] = React.useState('')
-    const [chatList, setChatList] = React.useState([])
-    useEffect(() => {
-        console.log('chatList', chatList)
-
-
-    }, []);
+    const { messages, input, handleInputChange, handleSubmit } = useChat();
     return (
-        <div>
-            <h1>AI Page</h1>
+        <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+            {messages.map(m => (
+                <div key={m.id} className="whitespace-pre-wrap">
+                    {m.role === 'user' ? 'User: ' : 'AI: '}
+                    {m.content}
+                </div>
+            ))}
 
-
-
-            <div>
-                <InputField
-                    id='prompt'
-                    name='prompt'
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder='Enter your prompt'
-                    customClassName='w-full'
-
+            <form onSubmit={handleSubmit}>
+                <input
+                    className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
+                    value={input}
+                    placeholder="Say something..."
+                    onChange={handleInputChange}
                 />
-                <Button onClick={() => console.log('clicked')} className='w-full mt-4'>Generate</Button>
-            </div>
-
+            </form>
         </div>
-    )
+    );
 }
 
 export default AiPage
