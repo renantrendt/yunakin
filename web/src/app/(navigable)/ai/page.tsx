@@ -1,7 +1,5 @@
 'use client';
-import InputField from '@/components/atomic/input/InputField'
-import { Button } from '@react-email/components';
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useChat } from 'ai/react';
 
 const AiPage = () => {
