@@ -8,10 +8,11 @@ import siteUrls from '@/config/site-config'
 import HamburgerIcon from '@/icons/HamburgerIcon.svg'
 import Image from 'next/image'
 import IconButton from '@/components/atomic/icon-button/IconButton'
+import ContentSection from '@/containers/layout/ContentSection'
 export default function Navbar() {
     const router = useRouter()
     return (
-        <div className="navbar px-4 md:px-28 pt-7 md:pt-14 dark:text-white max-w-8xl     font-medium text-base leading-[19px] text-grey-400">
+        <div className=" max-w-[1440px] w-full navbar px-4 md:px-28 pt-7 md:pt-14 dark:text-white max-w-8xl     font-medium text-base leading-[19px] text-grey-400">
             <div className="navbar-start">
 
                 <Link href={siteUrls.home}>

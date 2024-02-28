@@ -11,10 +11,8 @@ export async function generateMetadata(): Promise<Metadata> {
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className='bg-landing-background flex flex-col dark:bg-gray-800 w-full items-center'>
-            <div className='max-w-[1440px] w-full'>
-                <Navbar />
-                {children}
-            </div>
+            <Navbar />
+            {children}
             <div className='bg-white w-full justify-center flex dark:bg-gray-700  dark:text-white'>
                 <Footer />
             </div>
