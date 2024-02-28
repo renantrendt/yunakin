@@ -8,7 +8,6 @@ import siteUrls from '@/config/site-config'
 import HamburgerIcon from '@/icons/HamburgerIcon.svg'
 import Image from 'next/image'
 import IconButton from '@/components/atomic/icon-button/IconButton'
-import ContentSection from '@/containers/layout/ContentSection'
 export default function Navbar() {
     const router = useRouter()
     return (
