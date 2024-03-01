@@ -8,7 +8,7 @@ import AnimatedSection from '../animated/AnimatedSection'
 export default function Hero() {
     return (
         <section
-            className="my-20  mt-20 lg:mt-40   items-center text-center md:text-left text-black dark:text-white">
+            className="my-20  mt-20 lg:mt-28   items-center text-center md:text-left text-black dark:text-white">
             <AnimatedSection>
                 <div className='grid grid-cols-1 lg:grid-cols-7 justify-center gap-x-8 gap-y-8'>
 
