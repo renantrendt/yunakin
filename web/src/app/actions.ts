@@ -16,3 +16,12 @@ export async function getChat(id: string, userId: string) {
 
     return chat
 }
+
+export async function getChats(userId: string) {
+    const chats = await prisma.chat.findMany({
+        where: {
+            userId: userId
+        },
+    })
+    return chats;
+}

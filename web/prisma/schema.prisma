@@ -99,13 +99,14 @@ model Chat {
 }
 
 model Message {
-  id          String   @id @default(uuid())
-  chatId      String
-  chat        Chat     @relation(fields: [chatId], references: [id])
-  userId      String?
-  user        User?    @relation(fields: [userId], references: [id])
-  content     String
-  messageType String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(uuid())
+  chatId     String
+  chat       Chat     @relation(fields: [chatId], references: [id])
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id])
+  content    String
+  serialized String
+  role       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

@@ -8,8 +8,9 @@ import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { usePathname, useRouter } from 'next/navigation'
 import customToast from '../atomic/toast/customToast'
 import { useState } from 'react'
-import { Message } from '@prisma/client'
-
+import { Message } from 'ai'
+import UserIcon from '@/icons/user-icon.svg'
+import ChatGptIcon from '@/icons/chatgot.svg'
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
     initialMessages?: Message[]
@@ -49,7 +50,7 @@ function Chat({ id, initialMessages, className }: ChatProps) {
             <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
                 {messages.map(m => (
                     <div key={m.id} className="whitespace-pre-wrap">
-                        {m.role === 'user' ? 'User: ' : 'AI: '}
+                        {m.role === 'user' ? <UserIcon /> : <ChatGptIcon />}
                         {m.content}
                     </div>
                 ))}
