@@ -1,28 +1,47 @@
-'use client';
-import React from 'react'
-import { useChat } from 'ai/react';
+import { type Metadata } from 'next'
+import { notFound, redirect } from 'next/navigation'
 
-const AiPage = () => {
-    const { messages, input, handleInputChange, handleSubmit } = useChat();
-    return (
-        <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-            {messages.map(m => (
-                <div key={m.id} className="whitespace-pre-wrap">
-                    {m.role === 'user' ? 'User: ' : 'AI: '}
-                    {m.content}
-                </div>
-            ))}
+import Chat from '@/components/chat/Chat'
+import { getServerSession } from 'next-auth'
+import { getChat } from '@/app/actions'
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
-                    value={input}
-                    placeholder="Say something..."
-                    onChange={handleInputChange}
-                />
-            </form>
-        </div>
-    );
+export interface ChatPageProps {
+    params: {
+        id: string
+    }
 }
 
-export default AiPage
+export async function generateMetadata({
+    params
+}: ChatPageProps): Promise<Metadata> {
+    const session = await getServerSession()
+
+    if (!session?.user) {
+        return {}
+    }
+
+    const chat = await getChat(params.id, session.user.id)
+    return {
+        title: chat?.title.toString().slice(0, 50) ?? 'Chat'
+    }
+}
+
+export default async function ChatPage({ params }: ChatPageProps) {
+    const session = await getServerSession()
+
+    if (!session?.user) {
+        redirect(`/sign-in?next=/chat/${params.id}`)
+    }
+
+    const chat = await getChat(params.id, session.user.id)
+
+    if (!chat) {
+        notFound()
+    }
+
+    if (chat?.userId !== session?.user?.id) {
+        notFound()
+    }
+
+    return <Chat id={chat.id} initialMessages={chat.messages} />
+}
