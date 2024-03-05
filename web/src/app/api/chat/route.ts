@@ -9,8 +9,6 @@ const openai = new OpenAI({
     apiKey: platformConfig.variables.OPENAI_API_KEY,
 });
 
-// IMPORTANT! Set the runtime to edge
-export const runtime = 'edge';
 
 export async function POST(req: Request) {
     const json = await req.json();
@@ -20,7 +18,7 @@ export async function POST(req: Request) {
     if (!session?.user) {
         return new Response('Unauthorized', { status: 401 })
     }
-    const { messages, previewToken } = json
+    const { messages } = json
 
     // Ask OpenAI for a streaming chat completion given the prompt
     const response = await openai.chat.completions.create({
@@ -34,7 +32,7 @@ export async function POST(req: Request) {
     const stream = OpenAIStream(response, {
         async onCompletion(completion) {
             const id = json.id ?? nanoid()
-            const newMessage = await prisma.message.create({
+            await prisma.message.create({
                 data: {
                     serialized: JSON.stringify(completion),
                     chatId: id,

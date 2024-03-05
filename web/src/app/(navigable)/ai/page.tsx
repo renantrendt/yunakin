@@ -1,7 +1,8 @@
-import { getChat, getChats } from '@/app/actions'
+import { getChats } from '@/app/actions'
+import Chats from '@/components/chat/Chats'
 import siteUrls from '@/config/site-config'
 import { getServerSession } from 'next-auth'
-import { notFound, redirect } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
 

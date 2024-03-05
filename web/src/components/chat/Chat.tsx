@@ -1,32 +1,27 @@
 'use client'
-
+import React from 'react'
 import { useChat } from 'ai/react'
 
 
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import customToast from '../atomic/toast/customToast'
-import { useState } from 'react'
 import { Message } from 'ai'
 import UserIcon from '@/icons/user-icon.svg'
-import ChatGptIcon from '@/icons/chatgot.svg'
-const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
+import ChatGptIcon from '@/icons/chatgpt.svg'
 export interface ChatProps extends React.ComponentProps<'div'> {
     initialMessages?: Message[]
     id?: string
 }
 
-function Chat({ id, initialMessages, className }: ChatProps) {
-    const router = useRouter()
+function Chat({ id, initialMessages }: ChatProps) {
     const path = usePathname()
-    const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
+    const [previewToken,] = useLocalStorage<string | null>(
         'ai-token',
         null
     )
-    const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
-    const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
-    const { messages, append, reload, stop, isLoading, input, setInput, handleSubmit, handleInputChange } =
+    const { messages, input, handleSubmit, handleInputChange } =
         useChat({
             initialMessages,
             id,
