@@ -18,14 +18,14 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "md", loading, trailing }) => {
-  const baseStyle = 'btn'
+  const baseStyle = 'btn button'
   let variantStyle = ''
   switch (variant) {
     case 'primary':
-      variantStyle = 'btn-primary text-white  bg-gradient-to-b from-primary to-secondary'
+      variantStyle = 'btn-primary hover:bg-primary-600 text-white bg-primary-500  rounded-lg shadow'
       break
     case 'secondary':
-      variantStyle = 'border border-zinc-300 text-black bg-white rounded-lg shadow '
+      variantStyle = ' button-secondary  hover:border-none hover:outline-none text-black bg-white rounded-lg py-[14px] px-5  '
       break
     case 'tertiary':
       variantStyle = ' bg-grey-200 rounded-lg  text-black border-none  '
@@ -58,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
   }
   return (
     <button disabled={disabled || loading} className={cn(baseStyle, variantStyle, classname, sizeStyle)} onClick={onClick} type={type}>
-      {loading ? <LoadingIcon /> : null} {trailing ? <>{label} {icon} </> : <>{icon} {label}</>}
+      {loading ? <LoadingIcon /> : null} {trailing ? <><span className='mr-2'>{label}</span> {icon} </> : <>{icon} <span className='ml-2'> {label} </span></>}
     </button>
   )
 }

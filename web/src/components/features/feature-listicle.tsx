@@ -7,6 +7,7 @@ import ServerIcon from "@/icons/server-icon.svg";
 import UserIcon from "@/icons/user-icon.svg";
 import PaintIcon from "@/icons/paint-icon.svg"
 import Typography from '../atomic/typography/Typography';
+import EllipsisIcon from "@/icons/ellipsis-icon.svg"
 interface FeatureListicle {
     id: string
     icon: React.ReactNode
@@ -79,6 +80,17 @@ const features: FeatureListicle[] = [
             "Entire figma UI design library",
             "Time saved 3 hours"
         ]
+    },
+    {
+        id: "more",
+        icon: <EllipsisIcon />,
+        title: "More",
+        points: [
+            "Analytics setup.",
+            "Testing setup.",
+            "Deployment setup.",
+            "Time saved 5 hours"
+        ]
     }
 
 ]
@@ -93,7 +105,7 @@ const FeatureListicle = () => {
             </div>
             <div className='flex gap-16 justify-start'>
                 {features.map((feature, index) => (
-                    <div key={index} className={`flex hover:cursor-pointer gap-4 flex-col items-center w-16 ${selectedFeature.id == feature.id ? "text-primary-end" : ""}`} onClick={() => setSelectedFeature(feature)}>
+                    <div key={index} className={`flex hover:cursor-pointer gap-2 flex-col items-center w-16 ${selectedFeature.id == feature.id ? "text-primary-end" : ""}`} onClick={() => setSelectedFeature(feature)}>
                         <div className='icon'>{feature.icon}</div>
                         <div className='flex flex-col gap-4'>
                             <h3>{feature.title}</h3>

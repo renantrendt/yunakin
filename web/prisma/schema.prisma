@@ -12,17 +12,18 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  email       String   @unique
+  id          String    @id @default(uuid())
+  email       String    @unique
   name        String
   password    String?
-  verifyToken String   @default(uuid())
+  verifyToken String    @default(uuid())
   verified    Boolean
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   avatar      String?
   provider    String
   teams       Team[] // A user can belong to multiple teams
+  Message     Message[]
 }
 
 model Team {
@@ -32,6 +33,7 @@ model Team {
   updatedAt     DateTime       @default(now())
   users         User[] // A team can have multiple users
   subscriptions Subscription[] // A team can have multiple subscriptions
+  Chat          Chat[]
 }
 
 model Subscription {
@@ -84,4 +86,27 @@ model WaitlistUser {
   email     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Chat {
+  id        String    @id @default(uuid())
+  title     String
+  userId    String
+  team      Team      @relation(fields: [userId], references: [id])
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  chatId     String
+  chat       Chat     @relation(fields: [chatId], references: [id])
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id])
+  content    String
+  serialized String
+  role       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

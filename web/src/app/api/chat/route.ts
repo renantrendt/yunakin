@@ -1,0 +1,50 @@
+import OpenAI from 'openai';
+import { OpenAIStream, StreamingTextResponse, nanoid } from 'ai';
+import platformConfig from '@/config/app-config';
+import { prisma } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+
+// Create an OpenAI API client (that's edge friendly!)
+const openai = new OpenAI({
+    apiKey: platformConfig.variables.OPENAI_API_KEY,
+});
+
+// IMPORTANT! Set the runtime to edge
+export const runtime = 'edge';
+
+export async function POST(req: Request) {
+    const json = await req.json();
+    const session = await getServerSession();
+
+
+    if (!session?.user) {
+        return new Response('Unauthorized', { status: 401 })
+    }
+    const { messages, previewToken } = json
+
+    // Ask OpenAI for a streaming chat completion given the prompt
+    const response = await openai.chat.completions.create({
+        model: 'gpt-4',
+        stream: true,
+        messages,
+        temperature: 0.7
+    });
+
+    // Convert the response into a friendly text-stream
+    const stream = OpenAIStream(response, {
+        async onCompletion(completion) {
+            const id = json.id ?? nanoid()
+            const newMessage = await prisma.message.create({
+                data: {
+                    serialized: JSON.stringify(completion),
+                    chatId: id,
+                    userId: (session?.user as any).id,
+                    content: completion,
+                    role: 'assistant'
+                }
+            })
+        }
+    });
+    // Respond with the stream
+    return new StreamingTextResponse(stream);
+}

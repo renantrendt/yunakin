@@ -43,8 +43,7 @@ export default function RootLayoutClient({
                     {children}
                 </Providers>
                 <GoogleTagManager gtmId={platformConfig.variables.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string} />
-
             </body>
-        </html >
+        </html>
     )
 }

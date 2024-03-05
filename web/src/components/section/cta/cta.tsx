@@ -1,38 +1,25 @@
 import AnimatedSection from '@/components/animated/AnimatedSection'
 import Typography from '@/components/atomic/typography/Typography'
+import { siteCopy } from '@/config/site-config'
 import React from 'react'
 
-const reasons = [
-    {
-        metric: "7x",
-        descriptin: "higher conversion rate",
-    },
-    {
-        metric: "42x",
-        descriptin: "faster implementation",
-    },
-    {
-        metric: "300%",
-        descriptin: "higher lead quality",
-    },
-]
 const Cta = () => {
     return (
         <AnimatedSection>
 
-            <div className=" w-full lg:h-screen  flex-col justify-center items-center gap-0 lg:gap-10 inline-flex text-black dark:text-white">
+            <div className=" w-full my-20  flex-col justify-center items-center gap-0 lg:gap-10 inline-flex text-black dark:text-white">
 
                 <div className=' flex flex-col justify-center items-center gap-5 mb-8'>
-                    <Typography type='h2' className='text-center'>Why you need a Mobile Funnel?</Typography>
-                    <h3 className='text-xl  mb-20  max-w-2xl text-center text-neutral-600 font-normal leading-loose dark:text-white '>Traditional websites and landing pages are neither interactive nor personalized. These sites also load slowly and are not optimized for the mobile world</h3>
+                    <Typography type='h1' className='text-center text-white !text-[48px] !leading-[64px]'>{siteCopy.ctaSection.title}</Typography>
+                    <Typography type='h6' className='text-white text-center max-w-2xl leading-[30px] text-[20px] '>{siteCopy.ctaSection.description}</Typography>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 dark:text-white  w-full ">
-                    {reasons.map((reason) => (
+                <div className="grid mt-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 dark:text-white  w-full ">
+                    {siteCopy.ctaSection.reasons.map((reason) => (
                         <AnimatedSection key={reason.metric}>
-                            <div className=" w-full h-56 rounded-lg  shadow border border-neutral-200 flex-col justify-center items-center gap-4 inline-flex">
-                                <Typography type='h3' className='text-stone-950 dark:text-white  !text-6xl  !font-black  !leading-10 '>{reason.metric}</Typography>
-                                <div className=" text-center text-neutral-600 dark:text-white text-xl font-light  leading-loose">{reason.descriptin}</div>
+                            <div className=" w-full h-56 rounded-[10px]  shadow-lg bg-white border border-neutral-200  flex-col justify-center items-center gap-4 inline-flex">
+                                <Typography type='h3' className='text-stone-950   !text-[64px] leading-[64px]  !font-semibold '>{reason.metric}</Typography>
+                                <Typography type='p' className=" text-center text-neutral-600  text-[20px] leading-[30px] font-light  l">{reason.description}</Typography>
                             </div>
                         </AnimatedSection>
 

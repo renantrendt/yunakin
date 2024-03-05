@@ -39,8 +39,8 @@ web/.env*.local
 next-env.d.ts
 web/.next-env.d.ts
 
-.env
-web/.env
+# .env
+# web/.env
 
 web/.contentlayer
 

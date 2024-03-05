@@ -12,6 +12,7 @@ import UserGroupIcon from "@/icons/user-group.svg"
 import SettingsIcon from "@/icons/settings.svg"
 import BookOpen from "@/icons/book-open.svg"
 import AnalyticsIcon from "@/icons/analytics.svg"
+import ChatGptIcon from "@/icons/chatgpt.svg"
 interface SidebarLink {
     label: string
     path: string
@@ -20,6 +21,7 @@ interface SidebarLink {
 
 const sidebarLinks: SidebarLink[] = [
     { label: 'Home', path: '/dashboard', iconSrc: <HomeIcon /> },
+    { label: "AI", path: "/ai", iconSrc: <div className='w-6 h-6'> <ChatGptIcon /> </div> },
     { label: 'Notications', path: '/notifications', iconSrc: <InboxIcon /> },
     { label: 'Users', path: '/users', iconSrc: <UserGroupIcon /> },
     { label: 'Analytics', path: '/analytics', iconSrc: <AnalyticsIcon /> },

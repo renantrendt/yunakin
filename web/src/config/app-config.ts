@@ -132,6 +132,7 @@ const platformConfig = {
     GITHUB_SECRET: process.env.GITHUB_SECRET,
     FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
     FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   }
 }
 
