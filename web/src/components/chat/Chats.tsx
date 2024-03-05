@@ -5,11 +5,13 @@ import InputField from '../atomic/input/InputField'
 import { useMutation } from '@tanstack/react-query'
 import customToast from '../atomic/toast/customToast'
 import { useRouter } from 'next/navigation'
-
+import DeleteIcon from "@/icons/trash-icon.svg"
+import { deleteChat } from '@/app/actions'
 interface ChatsProps {
     chats: Chat[]
 }
 const Chats = ({ chats }: ChatsProps) => {
+    const [pageChats, setPageChats] = React.useState<Chat[]>(chats)
     const [chatTitle, setChatTitle] = React.useState('')
     const router = useRouter()
     const addChatMutation = useMutation({
@@ -31,8 +33,8 @@ const Chats = ({ chats }: ChatsProps) => {
             return response.json()
         },
         onSuccess: (data) => {
-            router.push(`/chat/${data.id}`)
-            customToast.success("Email successfully subscribed")
+            router.push(`/chat/${data.data.id}`)
+            customToast.success("New chat initiated")
         },
         onError: (error) => {
             customToast.error(error.message)
@@ -42,18 +44,26 @@ const Chats = ({ chats }: ChatsProps) => {
         await addChatMutation.mutateAsync()
     }
     return (
-        <div>
-            <div>
+        <div className='relative'>
+            <div className='grid grid-cols-12 gap-x-2 gap-y-4'>
 
-                {chats.map((chat) => (
-                    <div className='chat card' key={chat.id} onClick={() => { router.push(`/chat/${chat.id}`) }}>
-                        <div className='card-body'>
-                            <h1>{chat.title}</h1>
+                {pageChats.map((chat) => (
+                    <div className='chat relative card w-92  h-92  bg-base-100 col-span-3 shadow-md rounded-md hover:cursor-pointer hover:shadow-xl' key={chat.id} onClick={() => { router.push(`/chat/${chat.id}`) }}>
+                        <div className='card-body '>
+                            <h1 className='card-title w-32'>{chat.title}</h1>
+                            <div className='absolute top-4 right-2 text-red-700' onClick={async (e) => {
+                                e.stopPropagation()
+                                await deleteChat(chat.id)
+                                setPageChats(pageChats.filter((c) => c.id !== chat.id))
+                                customToast.success("Chat deleted")
+                            }}>
+                                <DeleteIcon />
+                            </div>
                         </div>
                     </div>
                 ))}
             </div>
-            <div className='form flex '>
+            <div className=' flex mt-16 fixed bottom-2 gap-4 justify-center w-full '>
                 <InputField id='chat-title' name='chat-title' onChange={(e) => { setChatTitle(e.target.value) }} value={chatTitle} />
                 <button className='btn' onClick={createChat}>Create Chat</button>
             </div>

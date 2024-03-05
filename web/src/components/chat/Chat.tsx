@@ -42,11 +42,15 @@ function Chat({ id, initialMessages }: ChatProps) {
         })
     return (
         <>
-            <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+            <div className="flex flex-col w-full max-w-lg py-24 mx-auto items-start gap-4">
                 {messages.map(m => (
-                    <div key={m.id} className="whitespace-pre-wrap">
-                        {m.role === 'user' ? <UserIcon /> : <ChatGptIcon />}
-                        {m.content}
+                    <div key={m.id} className="whitespace-pre-wrap grid grid-cols-12 gap-4 justify-start">
+                        <div className='col-span-2 w-full'>
+                            {m.role === 'user' ? <UserIcon /> : <ChatGptIcon />}
+                        </div>
+                        <div className='col-span-10 flex text-left'>
+                            {m.content}
+                        </div>
                     </div>
                 ))}
 
