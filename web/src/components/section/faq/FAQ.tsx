@@ -13,7 +13,7 @@ const FAQ = () => {
                     <Typography type='h1' className=''>{siteCopy.faqSection.title}</Typography>
                     <Typography type='h6'>{siteCopy.faqSection.description}</Typography>
                 </div>
-                <div className='faq-list flex flex-col justify-start gap-5  max-w-2xl w-full   '>
+                <div className='faq-list flex flex-col justify-start gap-2  max-w-2xl w-full   '>
                     {siteCopy.faqSection.faqs.map((item, index) => (
                         <FaqItem key={index} question={item.question} answer={item.answer} isOpen={index == showAnswer} onClick={() => setShowAnswer(index == showAnswer ? null : index)} />
 
