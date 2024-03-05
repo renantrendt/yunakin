@@ -10,6 +10,7 @@ import customToast from '../atomic/toast/customToast'
 import { Message } from 'ai'
 import UserIcon from '@/icons/user-icon.svg'
 import ChatGptIcon from '@/icons/chatgpt.svg'
+import InputField from '../atomic/input/InputField'
 export interface ChatProps extends React.ComponentProps<'div'> {
     initialMessages?: Message[]
     id?: string
@@ -55,12 +56,15 @@ function Chat({ id, initialMessages }: ChatProps) {
                 ))}
 
                 <form onSubmit={handleSubmit}>
-                    <input
-                        className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
+                    <InputField
+                        name='message'
+                        id='message'
                         value={input}
                         placeholder="Say something..."
                         onChange={handleInputChange}
+                        customClassName="fixed bottom-2 w-full max-w-md "
                     />
+
                 </form>
             </div>
         </>

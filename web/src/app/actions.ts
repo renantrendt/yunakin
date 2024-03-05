@@ -28,7 +28,7 @@ export async function getChats(userId: string) {
 }
 
 export async function deleteChat(id: string) {
-    const deletedmessage = await prisma.message.deleteMany({
+    await prisma.message.deleteMany({
         where: {
             chatId: id
         }

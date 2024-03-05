@@ -1,5 +1,4 @@
 import React from 'react'
-import { type Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 
 import Chat from '@/components/chat/Chat'

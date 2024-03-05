@@ -44,7 +44,7 @@ const Chats = ({ chats }: ChatsProps) => {
         await addChatMutation.mutateAsync()
     }
     return (
-        <div className='relative'>
+        <div className='relative w-full'>
             <div className='grid grid-cols-12 gap-x-2 gap-y-4'>
 
                 {pageChats.map((chat) => (
@@ -63,7 +63,7 @@ const Chats = ({ chats }: ChatsProps) => {
                     </div>
                 ))}
             </div>
-            <div className=' flex mt-16 fixed bottom-2 gap-4 justify-center w-full '>
+            <div className=' flex mt-16 fixed bottom-2 gap-4 justify-start mx-auto w-["inherit"]  '>
                 <InputField id='chat-title' name='chat-title' onChange={(e) => { setChatTitle(e.target.value) }} value={chatTitle} />
                 <button className='btn' onClick={createChat}>Create Chat</button>
             </div>
