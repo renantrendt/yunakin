@@ -22,10 +22,10 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
   let variantStyle = ''
   switch (variant) {
     case 'primary':
-      variantStyle = 'btn-primary hover:bg-primary-600 text-white bg-primary-500  rounded-lg shadow'
+      variantStyle = 'btn-primary hover:bg-primary-600 text-white bg-primary-500  rounded-lg shadow py-[14px] !px-7'
       break
     case 'secondary':
-      variantStyle = ' button-secondary  hover:border-none hover:outline-none text-black bg-white rounded-lg py-[14px] px-5  '
+      variantStyle = ' button-secondary  hover:border-none hover:outline-none text-black bg-white rounded-lg py-[14px] !px-5  '
       break
     case 'tertiary':
       variantStyle = ' bg-grey-200 rounded-lg  text-black border-none  '
@@ -58,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
   }
   return (
     <button disabled={disabled || loading} className={cn(baseStyle, variantStyle, classname, sizeStyle)} onClick={onClick} type={type}>
-      {loading ? <LoadingIcon /> : null} {trailing ? <><span className='mr-2'>{label}</span> {icon} </> : <>{icon} <span className='ml-2'> {label} </span></>}
+      {loading ? <LoadingIcon /> : null} {trailing ? <><span className='mr-0'>{label}</span> {icon} </> : <>{icon} <span className='ml-0'> {label} </span></>}
     </button>
   )
 }

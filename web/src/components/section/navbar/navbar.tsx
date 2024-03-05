@@ -18,7 +18,7 @@ export default function Navbar() {
                     <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
                 </Link>
             </div>
-            <div className="navbar-center  w-[80%] hidden lg:flex justify-center">
+            <div className="navbar-center  w-[79%] hidden lg:flex justify-center">
                 <ul className="menu menu-horizontal px-1">
                     <li><Link href={siteUrls.pricing}>Pricing</Link></li>
                     <li>
@@ -36,7 +36,7 @@ export default function Navbar() {
                     <li><Link href={siteUrls.features}>Features</Link></li>
                 </ul>
             </div>
-            <div className="lg:navbar-end  w-full lg:w-[10%]  gap-4 ">
+            <div className="lg:navbar-end  w-full lg:w-[12%]  gap-4">
                 <div className="dropdown flex justify-end w-full lg:hidden">
                     <div className='text-black font-black'>
                         <IconButton icon={<HamburgerIcon />} onClick={() => { }} className='w-8 h-8' />
@@ -63,7 +63,7 @@ export default function Navbar() {
 
                             <Button
                                 variant='primary'
-                                classname='py-3 px-4 w-full  text-white '
+                                classname='w-full  text-white '
                                 label='Get Started'
                                 onClick={() => router.push(siteUrls.register)}
                             />
@@ -79,7 +79,7 @@ export default function Navbar() {
                 />
                 <Button
                     variant='primary'
-                    classname='py-3 px-4 w-full  hidden lg:block'
+                    classname='w-full  hidden lg:block'
                     label='Get Started'
                     onClick={() => router.push(siteUrls.register)}
                 />

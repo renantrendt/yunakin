@@ -7,14 +7,14 @@ const Cta = () => {
     return (
         <AnimatedSection>
 
-            <div className=" w-full my-20  flex-col justify-center items-center gap-0 lg:gap-10 inline-flex text-black dark:text-white">
+            <div className=" w-full my-32  flex-col justify-center items-center gap-0 lg:gap-10 inline-flex text-black dark:text-white">
 
                 <div className=' flex flex-col justify-center items-center gap-5 mb-8'>
                     <Typography type='h1' className='text-center text-white !text-[48px] !leading-[64px]'>{siteCopy.ctaSection.title}</Typography>
                     <Typography type='h6' className='text-white text-center max-w-2xl leading-[30px] text-[20px] '>{siteCopy.ctaSection.description}</Typography>
                 </div>
 
-                <div className="grid mt-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 dark:text-white  w-full ">
+                <div className="grid mt-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 dark:text-white  w-full ">
                     {siteCopy.ctaSection.reasons.map((reason) => (
                         <AnimatedSection key={reason.metric}>
                             <div className=" w-full h-56 rounded-[10px]  shadow-lg bg-white border border-neutral-200  flex-col justify-center items-center gap-4 inline-flex">

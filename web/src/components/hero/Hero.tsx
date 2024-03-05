@@ -20,11 +20,11 @@ export default function Hero() {
                         <Typography type='h6' className='text-left text-neutral-600 max-w-lg' >
                             {siteCopy.heroSection.description}
                         </Typography>
-                        <div className='flex justify-center flex-col lg:flex-row lg:justify-start lg:mt-14 gap-4 lg:gap-8'>
+                        <div className='flex justify-center flex-col lg:flex-row lg:justify-start lg:mt-14 gap-4 lg:gap-4'>
                             <Button
                                 variant='primary'
                                 classname='py-3 px-4 '
-                                label="Learn More"
+                                label="Start 14-Day Free Trial"
                             />
                             <Button
                                 variant='secondary'
