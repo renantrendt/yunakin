@@ -1,32 +1,28 @@
 'use client'
-
+import React from 'react'
 import { useChat } from 'ai/react'
 
 
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import customToast from '../atomic/toast/customToast'
-import { useState } from 'react'
 import { Message } from 'ai'
 import UserIcon from '@/icons/user-icon.svg'
-import ChatGptIcon from '@/icons/chatgot.svg'
-const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
+import ChatGptIcon from '@/icons/chatgpt.svg'
+import InputField from '../atomic/input/InputField'
 export interface ChatProps extends React.ComponentProps<'div'> {
     initialMessages?: Message[]
     id?: string
 }
 
-function Chat({ id, initialMessages, className }: ChatProps) {
-    const router = useRouter()
+function Chat({ id, initialMessages }: ChatProps) {
     const path = usePathname()
-    const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
+    const [previewToken,] = useLocalStorage<string | null>(
         'ai-token',
         null
     )
-    const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
-    const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
-    const { messages, append, reload, stop, isLoading, input, setInput, handleSubmit, handleInputChange } =
+    const { messages, input, handleSubmit, handleInputChange } =
         useChat({
             initialMessages,
             id,
@@ -47,21 +43,28 @@ function Chat({ id, initialMessages, className }: ChatProps) {
         })
     return (
         <>
-            <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+            <div className="flex flex-col w-full max-w-lg py-24 mx-auto items-start gap-4">
                 {messages.map(m => (
-                    <div key={m.id} className="whitespace-pre-wrap">
-                        {m.role === 'user' ? <UserIcon /> : <ChatGptIcon />}
-                        {m.content}
+                    <div key={m.id} className="whitespace-pre-wrap grid grid-cols-12 gap-4 justify-start">
+                        <div className='col-span-2 w-full'>
+                            {m.role === 'user' ? <UserIcon /> : <ChatGptIcon />}
+                        </div>
+                        <div className='col-span-10 flex text-left'>
+                            {m.content}
+                        </div>
                     </div>
                 ))}
 
                 <form onSubmit={handleSubmit}>
-                    <input
-                        className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
+                    <InputField
+                        name='message'
+                        id='message'
                         value={input}
                         placeholder="Say something..."
                         onChange={handleInputChange}
+                        customClassName="fixed bottom-2 w-full max-w-md "
                     />
+
                 </form>
             </div>
         </>
