@@ -1,5 +1,4 @@
 'use client'
-import { BlogsViewModel } from '@/app/(landing)/blogs/page'
 import { formatDate } from '@/utils/format'
 import Link from 'next/link'
 import React from 'react'
@@ -38,11 +37,11 @@ const SimilarBlogCard = ({ articles, loading }: SimilarBlogCardProps) => {
         )
     }
     return (
-        <div className='category mt-20' >
-            <Typography type='h3' className='text-center !font-semibold text-[20px] leading-[30px] !text-stone-950'>Read about similiar topics</Typography>
-            <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
+        <div className='category my-20 lg:my-36' >
+            <Typography type='h3' className='text-center !font-semibold text-[20px] lg:text-[32px] !lg:font-normal leading-[30px] !text-stone-950 mb-6 lg:mb-20'>Read about similiar topics</Typography>
+            <div className='flex flex-row gap-3 lg:gap-6 justify-start lg:justify-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                 {articles.map((article, index: any) => (
-                    <Link key={index} className="card w-full dark:text-white min-w-[324px]    overflow-hidden max-w-lg  bg-base-100 last:mr-4 lg:last:mr-0 dark:bg-gray-700 h-96  col-span-4  hover:cursor-pointer 
+                    <Link key={index} className="card w-full dark:text-white min-w-[324px]     overflow-hidden max-w-lg  bg-base-100 last:mr-4 lg:last:mr-0 dark:bg-gray-700 h-96  col-span-4  hover:cursor-pointer 
             rounded-[10px] shadow-sm" href={`/blogs/${article.slug}`}>
                         <figure className='relative hidden'><Image src={`${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
                         <div className="px-6 pt-6 pb-2">

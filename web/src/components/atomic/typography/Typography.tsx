@@ -11,7 +11,7 @@ const Typography = ({ type, children, className, }: TypographyProps) => {
     const baseClasses = `text-black  ${className}`;
     switch (type) {
         case "h1":
-            return <h1 className={`${baseClasses} text-stone-950 text-4xl  leading-[48px] lg:leading-[64px] lg:text-5xl font-semibold `}>{children}</h1>
+            return <h1 className={`${baseClasses} text-stone-950 text-4xl  leading-[48px] lg:leading-[64px] lg:text-5xl lg:font-semibold `}>{children}</h1>
         case "h2":
             return <h2 className={`${baseClasses} text-5xl font-black text-stone-950 lg:text-6xl leading-[64px]`}>{children}</h2>
         case "h3":

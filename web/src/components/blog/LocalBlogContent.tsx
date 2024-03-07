@@ -12,7 +12,7 @@ const LocalBlogContent = ({ post }: LocalBlogContentProps) => {
     const MDXContent = useMDXComponent(post.body.code)
 
     return (
-        <div className=' w-full px-4  md:px-28 text-black dark:text-white '>
+        <div className='max-w-[1440px] w-full mx-auto px-4 md:px-28'>
             {renderSchematags('Article', {
                 title: post.title,
                 datePublished: post.publishedAt,

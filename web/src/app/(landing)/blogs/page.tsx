@@ -39,16 +39,13 @@ const BlogPage = async () => {
     )
 
     return (
-        <div className='mb-24  md:px-28 overflow-scroll'>
+        <div className='max-w-[1440px] w-full mx-auto px-4 md:px-28'>
             <div className='px-4 md:px-0'>
                 <PageHeader />
             </div>
-            <div className='pl-4 md:px-0'>
-                {mappedData && mappedData.map((category: BlogsViewModel, index: any) => (
-                    <BlogCard loading={false} key={index} category={category} />
-                ))}
-            </div>
-
+            {mappedData && mappedData.map((category: BlogsViewModel, index: any) => (
+                <BlogCard loading={false} key={index} category={category} />
+            ))}
         </div>
     )
 }

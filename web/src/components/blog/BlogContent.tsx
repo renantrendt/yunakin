@@ -33,15 +33,15 @@ const BlogContent = ({ data, isLoading, content }: BlogContentProps) => {
     )
     return (
         <>
-            <div className='flex mt-10 justify-start gap-0  '>
+            <div className='flex mt-10 lg:mt-20 justify-start gap-0  '>
                 <div className=' lg:absolute w-8 h-8 items-center flex justify-center hover:cursor-pointer rounded-full hover:bg-gray-100' onClick={() => { router.back() }}>
                     <BackIcon />
                 </div>
                 <div className="flex flex-1 justify-center mr-[32px]">
-                    <Typography type='h1' className='text-[32px]  !text-stone-950 !font-black  leading-[130%] max-w-[300px] lg:max-w-lg text-center'>{data.title}</Typography>
+                    <Typography type='h1' className='text-[32px] lg:text-[46px] !text-stone-950 !lg:font-semibold  leading-[130%] max-w-[300px] lg:max-w-3xl text-center'>{data.title}</Typography>
                 </div>
             </div>
-            <div className="image flex justify-center mt-10 md:mt-16 relative w-full max-h-[180px] h-96 rounded-md">
+            <div className="image flex justify-center mt-10 md:mt-16 relative w-full max-h-[180px] md:max-h-[350px] lg:max-h-[450px] h-96 rounded-md">
                 <Image
                     src={`${data.imageURL}`} layout="fill"
                     objectFit="cover"
@@ -49,7 +49,7 @@ const BlogContent = ({ data, isLoading, content }: BlogContentProps) => {
                     className='rounded-lg '
                 />
             </div>
-            <div className="content mx-auto max-w-[320px] w-[100vw] text-base my-8 md:my-16 overflow-x-scroll no-scrollbar ">
+            <div className="content mx-auto max-w-[320px] md:max-w-[500px] lg:max-w-[720px] w-[100vw] text-base my-8 md:my-16 overflow-x-scroll no-scrollbar ">
                 {content}
             </div>
         </>
