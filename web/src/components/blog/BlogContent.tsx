@@ -3,6 +3,7 @@ import BackIcon from '@/icons/BackIcon'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import Typography from '../atomic/typography/Typography'
 
 interface BlogContentProps {
     data: any
@@ -32,20 +33,20 @@ const BlogContent = ({ data, isLoading, content }: BlogContentProps) => {
     )
     return (
         <>
-            <div className='flex mt-16 relative  '>
-                <div className=' absolute w-8 h-8 items-center flex justify-center hover:cursor-pointer rounded-full hover:bg-gray-100' onClick={() => { router.back() }}>
+            <div className='flex mt-16 justify-start gap-0  '>
+                <div className=' lg:absolute w-8 h-8 items-center flex justify-center hover:cursor-pointer rounded-full hover:bg-gray-100' onClick={() => { router.back() }}>
                     <BackIcon />
                 </div>
-                <div className="flex flex-1 justify-center">
-                    <h1 className='text-3xl font-bold max-w-sm lg:max-w-lg text-center'>{data.title}</h1>
+                <div className="flex flex-1 justify-center mr-[32px]">
+                    <Typography type='h1' className='text-[32px]  !text-stone-950 font-black  leading-[130%] max-w-sm lg:max-w-lg text-center'>{data.title}</Typography>
                 </div>
             </div>
-            <div className="image flex justify-center mt-4 md:mt-16 relative w-full h-96 rounded-md">
+            <div className="image flex justify-center mt-4 md:mt-16 relative w-full max-h-[180px] h-96 rounded-md">
                 <Image
                     src={`${data.imageURL}`} layout="fill"
                     objectFit="cover"
                     alt='image'
-                    className='rounded-lg'
+                    className='rounded-lg '
                 />
             </div>
             <div className="content mx-auto max-w-3xl my-8 md:my-16  ">

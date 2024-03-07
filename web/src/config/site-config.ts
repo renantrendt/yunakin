@@ -209,6 +209,10 @@ export const siteCopy = {
         passwordPlaceholder: "Password",
         submit: "Confirm",
     },
+    pricingPage: {
+        title: "Enable the best experience",
+        description: "Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.",
+    },
 }
 
 export const siteConfig: Metadata = {
