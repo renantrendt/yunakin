@@ -6,6 +6,7 @@ import PlayIcon from '@/icons/PlayIcon.svg'
 import { siteCopy } from '@/config/site-config'
 import AnimatedSection from '../animated/AnimatedSection'
 import { TypewriterEffect } from '../typewriter/TypeWriter'
+import Avatar from '../atomic/avatar/Avatar'
 export default function Hero() {
     return (
         <section
@@ -14,7 +15,7 @@ export default function Hero() {
                 <div className='grid grid-cols-1 lg:grid-cols-7 justify-center gap-x-8 gap-y-8'>
 
                     <div className="w-full flex flex-1 lg:col-span-4 flex-col py-3 ">
-                        <Typography type='h1' className=' text-left break-all  text-stone-950  lg:mb-5 !font-semibold '>
+                        <Typography type='h1' className=' text-left break-all  text-stone-950  min-h-[128px] lg:mb-5 !font-semibold '>
                             <TypewriterEffect words={siteCopy.heroSection.title.split(" ").map(word => ({ text: word }))} />
                         </Typography>
                         <Typography type='h6' className='text-left text-neutral-600 max-w-lg' >
@@ -36,6 +37,21 @@ export default function Hero() {
                                     </div>
                                 }
                             />
+                        </div>
+                        <div className='flex mt-16 items-center gap-8'>
+                            <div className='flex gap-0'>
+                                {siteCopy.heroSection.usedBy.map((user, index) =>
+                                    <div className='-mr-2 '>
+
+                                        <Avatar
+                                            image={user.avatar}
+                                            name={user.name}
+                                        />
+                                    </div>
+
+                                )}
+                            </div>
+                            <p dangerouslySetInnerHTML={{ __html: siteCopy.heroSection.usedByCopy }}></p>
                         </div>
                     </div>
                     <div className='relative w-full  flex-1 h-96 lg:col-span-3'>

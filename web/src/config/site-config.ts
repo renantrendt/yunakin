@@ -39,7 +39,22 @@ export const siteCopy = {
     heroSection: {
         title: "Elevate Your Development Journey with Codepilot",
         description: "The ultimate SaaS boilerplate, designed to fast-track your application development with ease and precision.",
-        image: "/images/hero-image.jpeg"
+        image: "/images/hero-image.jpeg",
+        usedBy: [
+            {
+                name: "Eric Johnson",
+                avatar: "/images/testimonials/alex-johnson.jpeg"
+            },
+            {
+                name: "Eric Johnson",
+                avatar: "/images/testimonials/alex-johnson.jpeg"
+            },
+            {
+                name: "Eric Johnson",
+                avatar: "/images/testimonials/alex-johnson.jpeg"
+            },
+        ],
+        usedByCopy: "Used by <b>1000+</b> developers and teams worldwide",
     },
     ctaSection: {
         title: "Why use Codepilot?",

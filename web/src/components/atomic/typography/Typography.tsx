@@ -7,7 +7,7 @@ interface TypographyProps {
 }
 type TypographyType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p"
 
-const Typography = ({ type, children, className }: TypographyProps) => {
+const Typography = ({ type, children, className, dangerouslySetInnerHTML = false }: TypographyProps) => {
     const baseClasses = `text-stone-950  ${className}`;
     switch (type) {
         case "h1":
