@@ -6,7 +6,7 @@ import PlayIcon from '@/icons/PlayIcon.svg'
 import { siteCopy } from '@/config/site-config'
 import AnimatedSection from '../animated/AnimatedSection'
 import { TypewriterEffect } from '../typewriter/TypeWriter'
-import Avatar from '../atomic/avatar/Avatar'
+import { AnimatedTooltip } from '../molecules/animated-tooltip/AnimatedTooltip'
 export default function Hero() {
     return (
         <section
@@ -39,17 +39,11 @@ export default function Hero() {
                             />
                         </div>
                         <div className='flex mt-16 items-center gap-8'>
-                            <div className='flex gap-0'>
-                                {siteCopy.heroSection.usedBy.map((user, index) =>
-                                    <div className='-mr-2 ' key={index} >
-
-                                        <Avatar
-                                            image={user.avatar}
-                                            name={user.name}
-                                        />
-                                    </div>
-
-                                )}
+                            <div className='flex flex-row items-center justify-center'>
+                                <AnimatedTooltip
+                                    key={"animated-tooltip"}
+                                    items={siteCopy.heroSection.usedBy.map((item, idx) => ({ ...item, image: item.avatar, designation: item.name, id: idx }))}
+                                />
                             </div>
                             <p dangerouslySetInnerHTML={{ __html: siteCopy.heroSection.usedByCopy }}></p>
                         </div>

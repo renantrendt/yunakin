@@ -42,19 +42,24 @@ export const siteCopy = {
         image: "/images/hero-image.jpeg",
         usedBy: [
             {
-                name: "Eric Johnson",
-                avatar: "/images/testimonials/alex-johnson.jpeg"
+                name: "John Doe",
+                avatar: "/images/used-by/first.jpeg"
             },
             {
-                name: "Eric Johnson",
-                avatar: "/images/testimonials/alex-johnson.jpeg"
+                name: "John Doe",
+                avatar: "/images/used-by/second.jpeg"
             },
             {
-                name: "Eric Johnson",
-                avatar: "/images/testimonials/alex-johnson.jpeg"
+                name: "John Doe",
+                avatar: "/images/used-by/third.jpeg"
             },
+            {
+                name: "John Doe",
+                avatar: "/images/used-by/fourth.jpeg"
+            },
+
         ],
-        usedByCopy: "Used by <b>1000+</b> developers and teams worldwide",
+        usedByCopy: "Used by <b>100+</b> developers",
     },
     ctaSection: {
         title: "Why use Codepilot?",
@@ -87,7 +92,7 @@ export const siteCopy = {
                 "name": "Samantha Lee",
                 "content": "Implementing Codepilot into our development workflow has dramatically improved our effic    iency. The pre-configured environments and best practices embedded in the platform have significantly reduced our onboarding time for new developers.",
                 "role": "Project Manager at Digital Solutions Corp.",
-                "avatar": "/images/testimonials/samanta.jpeg"
+                "avatar": "/images/tes  timonials/samanta.jpeg"
             },
             {
                 "name": "Ethan Rivera",
