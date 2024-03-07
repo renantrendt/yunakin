@@ -17,7 +17,6 @@ import Typography from '@/components/atomic/typography/Typography'
 import AuthButton from '@/components/molecules/authbutton/AuthButton'
 import GoogleCircleIcon from '@/icons/GoogleCircleIcon'
 import Checkbox from '@/components/atomic/checkbox/Checkbox'
-import AccountIcon from '@/icons/AccountIcon'
 
 const schema = yup.object({
     email: yup.string().email().required(),
