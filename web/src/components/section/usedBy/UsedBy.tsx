@@ -7,9 +7,9 @@ const UsedBy = () => {
     return (
         <AnimatedSection>
 
-            <div className='flex my-28 justify-center flex-col items-center gap-8 lg:gap-12 w-full overflow-x-hidden'>
+             <div className='flex my-20 justify-center flex-col items-center gap-8 lg:gap-12 w-full overflow-x-hidden'>
 
-                <Typography type='h6' className=' text-[20px] font-normal leading-[30px]'>Used daily by more than 100+businesses</Typography>
+                <Typography type='h6' className=' text-[16px] font-normal leading-[30px]'>Used daily by more than 100+businesses</Typography>
                 <InfiniteMovingCards speed='normal' />
             </div>
         </AnimatedSection>
