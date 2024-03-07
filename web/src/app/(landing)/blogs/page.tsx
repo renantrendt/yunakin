@@ -39,7 +39,7 @@ const BlogPage = async () => {
     )
 
     return (
-        <div className='mb-24  md:px-28'>
+        <div className='mb-24  md:px-28 overflow-scroll'>
             <div className='px-4 md:px-0'>
                 <PageHeader />
             </div>
