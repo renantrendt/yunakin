@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -9,7 +9,7 @@ import customToast from '@/components/atomic/toast/customToast'
 import EmailIcon from '@/icons/EmailIcon'
 import Link from 'next/link'
 import Image from 'next/image'
-import siteUrls from '@/config/site-config'
+import siteUrls, { siteCopy } from '@/config/site-config'
 import Typography from '@/components/atomic/typography/Typography'
 const schema = yup.object({
     email: yup.string().email().required(),
@@ -58,40 +58,50 @@ export default function ForgotPasswordPage() {
         }
     }
 
-    return (
-        <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
-            <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-4">
-                <Link href={siteUrls.home}>
-                    <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
-                </Link>
-                <div>
-                    <Typography type='h4' className='font-bold'>Forgot Password</Typography>
-                    <Typography type='p' className='font-light'>Enter your email below and we’ll send you password reset instructions.</Typography>
-                </div>
-                <Controller
-                    control={control}
-                    name="email"
-                    render={({ field: { onChange, value } }) => (
-                        <InputField
-                            leadingIcon={<EmailIcon />}
-                            label="Email"
-                            type="email"
-                            id="email"
-                            name="email"
-                            onChange={onChange}
-                            value={value}
-                            error={errors.email?.message}
-                        />
-                    )}
-                />
-                <div>
+    const forgotPasswordCopy = siteCopy.forgotPasswordPage
 
-                    <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" loading={loading} label='Send Reset Password Link' />
+    return (
+        <Suspense fallback="loading">
+            <div className="flex justify-center w-full h-screen items-center  ">
+                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white  rounded-[20px] shadow-form-container     shadow-lg  m-auto flex flex-col  gap-4  lg:gap-8 p-6 lg:p-10 ">
+                    <Link href={siteUrls.home}>
+                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
+                    </Link>
+                    <div className='flex flex-col gap-8'>
+                        <div>
+
+                            <Typography type='h3' className=''>{forgotPasswordCopy.title}</Typography>
+                            {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
+                            <Typography type="p" className='mt-2  text-grey-700'>{forgotPasswordCopy.description}</Typography>
+                        </div>
+
+                        <div className='flex flex-col gap-6'>
+
+                            <Controller
+                                control={control}
+                                name="email"
+                                render={({ field: { onChange, value } }) => (
+                                    <InputField
+                                        label={forgotPasswordCopy.email}
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        placeholder={forgotPasswordCopy.emailPlaceholder}
+                                        leadingIcon={<EmailIcon />}
+                                        onChange={onChange}
+                                        value={value}
+                                        error={errors.email?.message}
+                                    />
+                                )}
+                            />
+                            <div className="flex justify-center flex-col gap-4">
+                                <Button variant="primary" type="submit" classname="w-full" label={forgotPasswordCopy.submit} size='md' loading={loading} />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        </Suspense>
 
     )
 }

@@ -9,24 +9,24 @@ import Button from '@/components/atomic/button/Button'
 import customToast from '@/components/atomic/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import siteUrls from '@/config/site-config'
+import siteUrls, { siteConfig, siteCopy } from '@/config/site-config'
 import EmailIcon from '@/icons/EmailIcon'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
 import AuthButton from '@/components/molecules/authbutton/AuthButton'
 import GoogleCircleIcon from '@/icons/GoogleCircleIcon'
-import TwitterIcon from '@/icons/TwitterIcon.svg'
-import GithubIcon from "@/icons/GithubIcon.svg"
 import Checkbox from '@/components/atomic/checkbox/Checkbox'
 const schema = yup.object({
     email: yup.string().email().required(),
-    password: yup.string().min(6).required()
+    password: yup.string().min(6).required(),
+    remember: yup.boolean()
 })
 
 interface FormValues {
     email: string
     password: string
+    remember?: boolean
 }
 export default function LoginPage() {
     const { data: session } = useSession()
@@ -92,20 +92,21 @@ export default function LoginPage() {
             setIsLoading(false)
         }
     }
+
+    const loginCopy = siteCopy.loginPage;
     return (
         <Suspense fallback="loading">
             <div className="flex justify-center w-full h-screen items-center  ">
-                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white  rounded-[20px] shadow-form-container     shadow-lg  m-auto flex flex-col gap-[32px] p-10 ">
+                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white  rounded-[20px] shadow-form-container     shadow-lg  m-auto flex flex-col  gap-4  lg:gap-8 p-6 lg:p-10 ">
                     <Link href={siteUrls.home}>
                         <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
                     </Link>
                     <div className='flex flex-col gap-8'>
-
                         <div>
 
-                            <Typography type='h3' className=''>Log In</Typography>
+                            <Typography type='h3' className=''>{loginCopy.title}</Typography>
                             {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
-                            <Typography type="p" className='mt-2  text-grey-700'>Enter your credentials to acces your account</Typography>
+                            <Typography type="p" className='mt-2  text-grey-700'>{loginCopy.description}</Typography>
                         </div>
 
                         <div className='flex flex-col gap-6'>
@@ -115,11 +116,11 @@ export default function LoginPage() {
                                 name="email"
                                 render={({ field: { onChange, value } }) => (
                                     <InputField
-                                        label="Email"
+                                        label={loginCopy.email}
                                         type="email"
                                         id="email"
                                         name="email"
-                                        placeholder='Enter Email'
+                                        placeholder={loginCopy.emailPlaceholder}
                                         leadingIcon={<EmailIcon />}
                                         onChange={onChange}
                                         value={value}
@@ -129,7 +130,7 @@ export default function LoginPage() {
                             />
                             <div className='relative '>
                                 <div className='text-black absolute right-0 top-1 dark:text-white'>
-                                    <Link href={siteUrls.forgotPassword} className="text-primary text-sm">Forgot Password?</Link>
+                                    <Link href={siteUrls.forgotPassword} className="text-primary text-sm">{loginCopy.forgotPassword}</Link>
                                 </div>
                                 <Controller
                                     control={control}
@@ -140,6 +141,7 @@ export default function LoginPage() {
                                             type="password"
                                             id="password"
                                             name="password"
+                                            placeholder={loginCopy.passwordPlaceholder}
                                             onChange={onChange}
                                             value={value}
                                             error={errors.password?.message}
@@ -166,7 +168,7 @@ export default function LoginPage() {
                                 <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='md' loading={loading} />
 
                                 <div className=' text-sm'>
-                                    Not a member? <Link href={siteUrls.register} className="text-primary ">Sign up now</Link>
+                                    {loginCopy.notMember} <Link href={siteUrls.register} className="text-primary ">{loginCopy.register}</Link>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +183,7 @@ export default function LoginPage() {
 
                             <div className='flex gap-2 flex-col'>
 
-                                <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content='Sign in with Google' icon={<GoogleCircleIcon />} />
+                                <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content={loginCopy.signWithGoogle} icon={<GoogleCircleIcon />} />
                                 {/* <AuthButton onClick={() => { signIn('twitter', { callbackUrl: '/dashboard' }) }} content='Sign In with Twitter' icon={<TwitterIcon />} /> */}
                                 {/* <AuthButton onClick={() => { signIn('github', { callbackUrl: '/dashboard' }) }} content='Sign In with Github' icon={<GithubIcon />} /> */}
 

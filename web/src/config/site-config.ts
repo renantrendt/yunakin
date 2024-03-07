@@ -162,7 +162,46 @@ export const siteCopy = {
     footer: {
         description: "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
         footnote: "@%Date% Codepilot. All rights reserved."
-    }
+    },
+    loginPage: {
+        title: "Log in",
+        description: "Enter your credentials to access your account",
+        forgotPassword: "Forgot your password?",
+        remember: "Remember me",
+        email: "Email",
+        password: "Password",
+        emailPlaceholder: "name@company.com",
+        passwordPlaceholder: "Password",
+        login: "Log in",
+        register: "Sign up",
+        notMember: "Not a member?",
+        signWithGoogle: "Sign in with Google",
+        signWithTwitter: "Sign in with Twitter",
+    },
+    registerPage: {
+        title: "Sign Up",
+        description: "Enter your credentials to register your account",
+        forgotPassword: "Forgot your password?",
+        remember: "Remember me",
+        name: "Name",
+        email: "Email",
+        password: "Password",
+        namePlaceholder: "John Doe",
+        emailPlaceholder: "name@company.com",
+        passwordPlaceholder: "Password",
+        createAccount: "Create Account",
+        register: "Sign up",
+        notMember: "Not a member?",
+        signWithGoogle: "Continue with Google",
+        signWithTwitter: "Continue with Twitter",
+    },
+    forgotPasswordPage: {
+        title: "Forgot your Password?",
+        description: "Enter your email below and we’ll send you password reset instructions.",
+        email: "Email",
+        emailPlaceholder: "name@company.com",
+        submit: "Submit",
+    },
 }
 
 export const siteConfig: Metadata = {
