@@ -46,9 +46,9 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
             <div className="  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex">
                 <div className=" text-center text-category-blog-color text-sm font-semibold  uppercase tracking-wide">{category.name}</div>
             </div>
-            <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll no-scrollbar '>
+            <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                 {category.articles.map((article, index: any) => (
-                    <Link key={index} className="card w-full dark:text-white min-w-[324px]  max-w-lg bg-base-100 last:mr-4 lg:last:mr-0 dark:bg-gray-700 h-96  col-span-4  hover:cursor-pointer 
+                    <Link key={index} className="card w-full dark:text-white min-w-[324px]    overflow-hidden max-w-lg  bg-base-100 last:mr-4 lg:last:mr-0 dark:bg-gray-700 h-96  col-span-4  hover:cursor-pointer 
             rounded-[10px] shadow-sm" href={`/blogs/${article.slug}`}>
                         <figure className='relative hidden'><Image src={`${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
                         <div className="px-6 pt-6 pb-2">

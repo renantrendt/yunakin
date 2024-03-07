@@ -1,6 +1,6 @@
 // components/InputField.tsx
 import React from 'react'
-
+import ExclmationIcon from '@/icons/exclamation-circle.svg'
 interface InputFieldProps {
   label?: string
   name: string
@@ -20,25 +20,35 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
   return (
     <div className="form-control ">
       {label &&
-        <label className="label text-black dark:text-white">
+        <label className="label text-sm text-black dark:text-white">
           <span className="label-text">{label}</span>
         </label>
       }
       <div className='flex relative'>
-        {leadingIcon && <div className='absolute left-[8px] top-3 text-black dark:text-white '>{leadingIcon}</div>}
+        {leadingIcon && <div className='absolute left-[16px] top-[11px] text-black dark:text-white '>{leadingIcon}</div>}
         <input
           type={type}
           placeholder={placeholder}
-          className={`input  input-primary dark:bg-gray-800 text-black dark:text-white  w-full ${leadingIcon ? "pl-9" : ""} ${additionalProps.customClassName}`}
+          className={` outline-none  dark:bg-gray-800 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-[10px] border-[1px] border-solid
+           border-grey-300 hover:border-grey-400 
+            disabled:bg-grey-100 text-sm
+           shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out ${leadingIcon ? "pl-11" : ""} 
+           ${trailingIcon ? "pr-11" : ""}
+            ${error ? "border-red-500" : ""}
+           ${additionalProps.customClassName}`}
           name={name}
           id={id}
           onChange={onChange}
           {...additionalProps}
         />
-        {trailingIcon && <div className='absolute right-[8px] top-3  text-black dark:text-white'>{trailingIcon}</div>}
+        {trailingIcon && <div className='absolute right-4 top-[12px]  text-black dark:text-white'>{trailingIcon}</div>}
       </div>
 
-      {error && <p className='text-red-600 mt-1 pl-1'>{error}</p>}
+      {error &&
+        <div className='flex justify-start gap-2 text-red-600 items-center mt-2'>
+          <ExclmationIcon />
+          <p className='text-sm leading-5'>{error}</p>
+        </div>}
     </div>
   )
 }

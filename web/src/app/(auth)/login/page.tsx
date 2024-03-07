@@ -9,23 +9,24 @@ import Button from '@/components/atomic/button/Button'
 import customToast from '@/components/atomic/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import siteUrls from '@/config/site-config'
+import siteUrls, { siteCopy } from '@/config/site-config'
 import EmailIcon from '@/icons/EmailIcon'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
 import AuthButton from '@/components/molecules/authbutton/AuthButton'
 import GoogleCircleIcon from '@/icons/GoogleCircleIcon'
-import TwitterIcon from '@/icons/TwitterIcon.svg'
-import GithubIcon from "@/icons/GithubIcon.svg"
+import Checkbox from '@/components/atomic/checkbox/Checkbox'
 const schema = yup.object({
     email: yup.string().email().required(),
-    password: yup.string().min(6).required()
+    password: yup.string().min(6).required(),
+    remember: yup.boolean()
 })
 
 interface FormValues {
     email: string
     password: string
+    remember?: boolean
 }
 export default function LoginPage() {
     const { data: session } = useSession()
@@ -91,69 +92,104 @@ export default function LoginPage() {
             setIsLoading(false)
         }
     }
+
+    const loginCopy = siteCopy.loginPage;
     return (
         <Suspense fallback="loading">
-            <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
-                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-1/2 max-w-xl  dark:bg-gray-700 p-8 rounded-[20px]     shadow-lg  m-auto flex flex-col gap-6">
+            <div className="flex justify-center w-full h-screen items-center  ">
+                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white  rounded-[20px] shadow-form-container     shadow-lg  m-auto flex flex-col  gap-4  lg:gap-8 p-6 lg:p-10 ">
                     <Link href={siteUrls.home}>
                         <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
                     </Link>
-                    <Typography type='h4' className='font-bold'>Log In</Typography>
-                    {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
-                    <Controller
-                        control={control}
-                        name="email"
-                        render={({ field: { onChange, value } }) => (
-                            <InputField
-                                label="Email"
-                                type="email"
-                                id="email"
-                                name="email"
-                                leadingIcon={<EmailIcon />}
-                                onChange={onChange}
-                                value={value}
-                                error={errors.email?.message}
-                            />
-                        )}
-                    />
-                    <Controller
-                        control={control}
-                        name="password"
-                        render={({ field: { onChange, value } }) => (
-                            <PasswordInputField
-                                label="Password"
-                                type="password"
-                                id="password"
-                                name="password"
-                                onChange={onChange}
-                                value={value}
-                                error={errors.password?.message}
-                            />
-                        )}
-                    />
-                    <div>
+                    <div className='flex flex-col gap-8'>
+                        <div>
 
-                        <div className="flex justify-center flex-col gap-4">
-                            <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='md' loading={loading} />
-                            <div className='text-black dark:text-white'>
-                                <Link href={siteUrls.forgotPassword} className="text-primary">Forgot Password?</Link>
+                            <Typography type='h3' className=''>{loginCopy.title}</Typography>
+                            {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
+                            <Typography type="p" className='mt-2  text-grey-700'>{loginCopy.description}</Typography>
+                        </div>
+
+                        <div className='flex flex-col gap-6'>
+
+                            <Controller
+                                control={control}
+                                name="email"
+                                render={({ field: { onChange, value } }) => (
+                                    <InputField
+                                        label={loginCopy.email}
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        placeholder={loginCopy.emailPlaceholder}
+                                        leadingIcon={<EmailIcon />}
+                                        onChange={onChange}
+                                        value={value}
+                                        error={errors.email?.message}
+                                    />
+                                )}
+                            />
+                            <div className='relative '>
+                                <div className='text-black absolute right-0 top-1 dark:text-white'>
+                                    <Link href={siteUrls.forgotPassword} className="text-primary text-sm">{loginCopy.forgotPassword}</Link>
+                                </div>
+                                <Controller
+                                    control={control}
+                                    name="password"
+                                    render={({ field: { onChange, value } }) => (
+                                        <PasswordInputField
+                                            label="Password"
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            placeholder={loginCopy.passwordPlaceholder}
+                                            onChange={onChange}
+                                            value={value}
+                                            error={errors.password?.message}
+                                        />
+                                    )}
+                                />
                             </div>
-                            <div className='text-black dark:text-white'>
-                                Don&apos;t have an account ? <Link href={siteUrls.register} className="text-primary">Register</Link>
+                            <Controller
+                                control={control}
+                                name='remember'
+                                render={({ field: { onChange, value } }) => (
+                                    <Checkbox
+                                        label='Remember me'
+                                        id='remember'
+                                        name='remember'
+                                        onChange={onChange}
+                                        checked={value ? true : false}
+                                        key={"remember"}
+                                        className='text-sm'
+                                    />
+                                )}
+                            />
+                            <div className="flex justify-center flex-col gap-4">
+                                <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='md' loading={loading} />
+
+                                <div className=' text-sm'>
+                                    {loginCopy.notMember} <Link href={siteUrls.register} className="text-primary ">{loginCopy.register}</Link>
+                                </div>
                             </div>
                         </div>
                         <div className="relative flex  items-center py-3">
-                            <div className="flex-grow border-t border-gray-400"></div>
-                            <span className="flex-shrink mx-4 text-gray-400">Or</span>
-                            <div className="flex-grow border-t border-gray-400"></div>
+                            <div className="flex-grow border-t border-grey-400"></div>
+                            <span className="flex-shrink mx-4 text-sm text-grey-400">OR</span>
+                            <div className="flex-grow border-t border-grey-400"></div>
                         </div>
-                        <div className='flex gap-4 flex-col'>
+                        <div>
 
-                            <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content='Sign in with Google' icon={<GoogleCircleIcon />} />
-                            <AuthButton onClick={() => { signIn('twitter', { callbackUrl: '/dashboard' }) }} content='Sign In with Twitter' icon={<TwitterIcon />} />
-                            <AuthButton onClick={() => { signIn('github', { callbackUrl: '/dashboard' }) }} content='Sign In with Github' icon={<GithubIcon />} />
+
+
+                            <div className='flex gap-2 flex-col'>
+
+                                <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content={loginCopy.signWithGoogle} icon={<GoogleCircleIcon />} />
+                                {/* <AuthButton onClick={() => { signIn('twitter', { callbackUrl: '/dashboard' }) }} content='Sign In with Twitter' icon={<TwitterIcon />} /> */}
+                                {/* <AuthButton onClick={() => { signIn('github', { callbackUrl: '/dashboard' }) }} content='Sign In with Github' icon={<GithubIcon />} /> */}
+
+                            </div>
+
                         </div>
-
                     </div>
 
                 </form>
