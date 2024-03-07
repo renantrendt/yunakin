@@ -37,7 +37,7 @@ const siteUrls = {
 
 export const siteCopy = {
     heroSection: {
-        title: "Elevate Your Development Journey with Codepilot",
+        title: "Your Code Elevated. Product Shipped.",
         description: "The ultimate SaaS boilerplate, designed to fast-track your application development with ease and precision.",
         image: "/images/hero-image.jpeg",
         usedBy: [
@@ -54,7 +54,7 @@ export const siteCopy = {
                 avatar: "/images/testimonials/alex-johnson.jpeg"
             },
         ],
-        usedByCopy: "Used by <b>1000+</b> developers and teams worldwide",
+        usedByCopy: "Used by <b>100+</b> developers",
     },
     ctaSection: {
         title: "Why use Codepilot?",
