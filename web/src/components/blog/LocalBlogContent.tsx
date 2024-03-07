@@ -3,12 +3,12 @@ import React from 'react'
 import BlogContent from './BlogContent'
 import renderSchematags from '@/lib/seo/structured-data'
 import { PostWithAuthor } from '@/app/(landing)/blogs/[slug]/page'
+import SimilarBlogCard from './SimilarBlogCard'
 
 interface LocalBlogContentProps {
     post: PostWithAuthor
 }
 const LocalBlogContent = ({ post }: LocalBlogContentProps) => {
-
     const MDXContent = useMDXComponent(post.body.code)
 
     return (
@@ -25,6 +25,7 @@ const LocalBlogContent = ({ post }: LocalBlogContentProps) => {
                 }
             })}
             <BlogContent data={post} content={<MDXContent />} />
+            <SimilarBlogCard articles={post.otherPosts} loading={false} />
         </div>
     )
 }

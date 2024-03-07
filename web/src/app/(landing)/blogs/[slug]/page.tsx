@@ -14,6 +14,7 @@ export interface PostWithAuthor extends Post {
         name: string;
         avatar: string;
     }
+    otherPosts: PostWithAuthor[]
 }
 interface PostProps {
     params: {
@@ -24,14 +25,28 @@ interface PostProps {
 function getPostFromParams(params: PostProps["params"]): PostWithAuthor | null {
     const slug = params?.slug
     const post = allPosts.find((post: any) => post.slug.replace("/", "") === slug) as PostWithAuthor
-    console.log(allPosts, slug)
+
     if (!post) {
         return null
     }
     const author = authors.filter(a => a.slug == post.author)[0]
+
     post.authorProps = {} as any
     post.authorProps.name = author.name
     post.authorProps.avatar = author.avatar
+
+
+
+    const otherPosts = allPosts.filter((p: any) => p.slug !== post.slug && p.category === post.category).slice(0, 3) as PostWithAuthor[]
+
+    otherPosts.forEach((p: any) => {
+        const author = authors.filter(a => a.slug == p.author)[0]
+        p.authorProps = {} as any
+        p.authorProps.name = author.name
+        p.authorProps.avatar = author.avatar
+    })
+
+    post.otherPosts = otherPosts
     return post
 }
 
@@ -116,6 +131,7 @@ const SlugPage = async ({ params }: { params: { slug: string } }) => {
             {mappedData && (
                 <BlogContent data={mappedData} />
             )}
+
         </div>
     )
 }
