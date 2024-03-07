@@ -16,7 +16,7 @@ export default function Hero() {
 
                     <div className="w-full flex flex-1 lg:col-span-4 flex-col py-3 ">
                         <Typography type='h1' className=' text-left break-all  text-stone-950  min-h-[128px] lg:mb-5 !font-semibold '>
-                            <TypewriterEffect words={siteCopy.heroSection.title.split(" ").map(word => ({ text: word }))} />
+                            <TypewriterEffect words={siteCopy.heroSection.title.split(" ").map((word) => ({ text: word }))} />
                         </Typography>
                         <Typography type='h6' className='text-left text-neutral-600 max-w-lg' >
                             {siteCopy.heroSection.description}
@@ -41,7 +41,7 @@ export default function Hero() {
                         <div className='flex mt-16 items-center gap-8'>
                             <div className='flex gap-0'>
                                 {siteCopy.heroSection.usedBy.map((user, index) =>
-                                    <div className='-mr-2 '>
+                                    <div className='-mr-2 ' key={index} >
 
                                         <Avatar
                                             image={user.avatar}
