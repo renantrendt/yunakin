@@ -79,13 +79,14 @@ const config: Config = {
       'category-blog-background': "#EBEBEB",
       'category-card-autor': "#8B8B8B",
       'white': "#FFFFFF",
-      'black': "# ",
+      'black': "#121212",
       'grey-50': "#FBFBFB",
       'grey-100': "#F5F5F5",
       'grey-200': "#ECECEC",
       'grey-300': "#DBDBDB",
       'grey-500': "#5E5E5E",
       'grey-400': "#909090",
+      'grey-700': "#4F4F4F",
       'red-100': "#FEE6E5",
       'red-200': "#FBD0D0",
       'red-300': "#F8A9AA",
@@ -102,9 +103,14 @@ const config: Config = {
       'primary': {
         600: "#5C37EB"
       },
+    },
+    "boxShadow": {
+      "sm": "0px 3px 6px -3px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.05), 0px 1px 2px -1px rgba(0, 0, 0, 0.05), 0px 1px 0px -1px rgba(0, 0, 0, 0.05)",
+      "focus-primary": "0px 0px 0px 3px rgba(112, 90, 248, 0.40)",
+      "form-container": "0px 1px 4px 0px rgba(0, 0, 0, 0.10)",
     }
   },
-  plugins: [require("daisyui"), require('@tailwindcss/typography'), addVariablesForColors],
+  plugins: [require("daisyui"), require('@tailwindcss/typography'), require("@tailwindcss/forms"), addVariablesForColors],
   daisyui: {
     themes: [{
       light: {

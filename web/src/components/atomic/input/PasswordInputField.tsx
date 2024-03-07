@@ -13,6 +13,7 @@ const PasswordInputField: React.FC<PasswordInputFieldProps> = (props) => {
         <InputField
             {...props}
             type={showPassword ? 'text' : 'password'}
+            leadingIcon={null}
             trailingIcon={
                 <span onClick={() => setShowPassword(!showPassword)} className='hover:cursor-pointer'>
                     {showPassword ?
