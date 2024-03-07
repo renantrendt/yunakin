@@ -45,8 +45,7 @@ export default function ForgotPasswordPage() {
                 customToast.success('A reset password link has been sent to this email address')
             } else {
                 const data = await response.json()
-
-                customToast.error(data.error.message)
+                customToast.error(data.message)
             }
             // redirect to reset password page
             // show toast message

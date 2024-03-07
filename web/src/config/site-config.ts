@@ -202,6 +202,13 @@ export const siteCopy = {
         emailPlaceholder: "name@company.com",
         submit: "Submit",
     },
+    resetPasswordPage: {
+        title: "Reset password",
+        description: "Enter your new password.",
+        password: "Password",
+        passwordPlaceholder: "Password",
+        submit: "Confirm",
+    },
 }
 
 export const siteConfig: Metadata = {

@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Link from 'next/link'
-import siteUrls from '@/config/site-config'
+import siteUrls, { siteCopy } from '@/config/site-config'
 import Typography from '@/components/atomic/typography/Typography'
 const schema = yup.object({
     password: yup.string().min(6).required()
@@ -64,37 +64,43 @@ export default function ForgotPasswordPage() {
         }
     }
 
-    return (
-        <Suspense fallback="loading...">
+    const resetPasswordCopy = siteCopy.resetPasswordPage
 
-            <div className="flex justify-center w-full h-screen items-center dark:bg-gray-800 ">
-                <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 md:w-2/3 lg:w-1/2 max-w-xl   dark:bg-gray-700 p-8 rounded-xl    shadow-lg  m-auto flex flex-col gap-4">
+    return (
+        <Suspense fallback="loading">
+            <div className="flex justify-center w-full h-screen items-center  ">
+                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white  rounded-[20px] shadow-form-container     shadow-lg  m-auto flex flex-col  gap-4  lg:gap-8 p-6 lg:p-10 ">
                     <Link href={siteUrls.home}>
                         <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
                     </Link>
-                    <div>
-                        <Typography type='h4' className='font-bold'>Reset Password</Typography>
-                        <Typography type='p' className='font-light'>Enter your new password.</Typography>
-                    </div>
-                    <Controller
-                        control={control}
-                        name="password"
-                        render={({ field: { onChange, value } }) => (
-                            <PasswordInputField
-                                label="Password"
-                                type="password"
-                                id="password"
-                                name="password"
-                                onChange={onChange}
-                                value={value}
-                                error={errors.password?.message}
-                            />
-                        )}
-                    />
-                    <div>
+                    <div className='flex flex-col gap-8'>
+                        <div>
 
-                        <div className="flex justify-center flex-col gap-4">
-                            <Button variant="primary" type="submit" classname="w-full" loading={loading} label='Reset Password' />
+                            <Typography type='h3' className=''>{resetPasswordCopy.title}</Typography>
+                            <Typography type="p" className='mt-2  text-grey-700'>{resetPasswordCopy.description}</Typography>
+                        </div>
+
+                        <div className='flex flex-col gap-6'>
+
+                            <Controller
+                                control={control}
+                                name="password"
+                                render={({ field: { onChange, value } }) => (
+                                    <PasswordInputField
+                                        label={resetPasswordCopy.password}
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        placeholder={resetPasswordCopy.passwordPlaceholder}
+                                        onChange={onChange}
+                                        value={value}
+                                        error={errors.password?.message}
+                                    />
+                                )}
+                            />
+                            <div className="flex justify-center flex-col gap-4">
+                                <Button variant="primary" type="submit" classname="w-full" label={resetPasswordCopy.submit} size='md' loading={loading} />
+                            </div>
                         </div>
                     </div>
                 </form>
