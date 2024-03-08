@@ -1,6 +1,7 @@
 // components/InputField.tsx
 import React from 'react'
 import ExclmationIcon from '@/icons/exclamation-circle.svg'
+import { cn } from '@/utils/cn'
 interface InputFieldProps {
   label?: string
   name: string
@@ -14,6 +15,7 @@ interface InputFieldProps {
   leadingIcon?: React.ReactNode
   trailingIcon?: React.ReactNode
   customClassName?: string
+  customLeadingIconClassName?: string
 }
 
 const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, error, id, ...additionalProps }) => {
@@ -25,7 +27,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
         </label>
       }
       <div className='flex relative'>
-        {leadingIcon && <div className='absolute left-[16px] top-[11px] text-black dark:text-white '>{leadingIcon}</div>}
+        {leadingIcon && <div className={cn('absolute left-[16px] top-[11px] text-black ', additionalProps.customLeadingIconClassName)}>{leadingIcon}</div>}
         <input
           type={type}
           placeholder={placeholder}
