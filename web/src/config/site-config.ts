@@ -19,7 +19,7 @@ const siteUrls: SiteUrls = {
     navbar: {
         pricing: {
             label: "Pricing",
-            url: "/coming-soon#pricing",
+            url: "#pricing",
         },
         blog: {
             label: "Blog",
@@ -27,7 +27,7 @@ const siteUrls: SiteUrls = {
         },
         features: {
             label: "Features",
-            url: "/coming-soon#features",
+            url: "#features",
         },
         docs: {
             label: "Docs",
