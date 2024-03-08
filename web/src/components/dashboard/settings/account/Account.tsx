@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import React from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import React, { useEffect } from 'react'
+import { Controller, useForm, useWatch } from 'react-hook-form'
 import * as yup from 'yup'
 import InputField from '@/components/atomic/input/InputField'
 import { useSession } from 'next-auth/react'
@@ -9,6 +9,7 @@ import TextArea from '@/components/atomic/textarea/TextArea'
 import EmailIcon from '@/icons/EmailIcon'
 import AccountIcon from '@/icons/AccountIcon'
 import FileUploader from '@/components/atomic/file-uploader/FileUploader'
+import { watch } from 'fs'
 interface FormValues {
     email: string
     password: string
@@ -30,11 +31,18 @@ const schema = yup.object({
 const AccountSsttings = () => {
     const { data: session } = useSession()
 
-    const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
+    const { handleSubmit, control, formState: { errors }, setValue } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
         }
     )
+
+    const avatar = useWatch({
+        control,
+        name: 'avatar',
+        defaultValue: (session?.user as any).avatar
+    })
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = async (data: any) => {
 
@@ -139,7 +147,7 @@ const AccountSsttings = () => {
                 <div className='flex justify-start  gap-4 items-center'>
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-24 rounded-full">
-                            <img alt="Tailwind CSS Navbar component" src={`${(session?.user as any).avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}`} />
+                            <img alt="Tailwind CSS Navbar component" src={avatar} />
                         </div>
 
                     </div>
@@ -155,7 +163,13 @@ const AccountSsttings = () => {
                 </div>
 
                 <div>
-                    <FileUploader />
+                    <FileUploader
+                        onFileUpload={(val) => {
+                            console.log('hola')
+                            console.log(val)
+                            setValue('avatar', val)
+                        }}
+                    />
                 </div>
                 <div className='flex justify-end gap-8'>
                     <Button type='submit' variant='secondary' classname='w-24' label='Cancel' />
