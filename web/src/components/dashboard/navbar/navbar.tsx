@@ -1,15 +1,9 @@
 'use client'
 import HamburgerIcon from '@/icons/HamburgerIcon.svg'
-import InputField from '@/components/atomic/input/InputField'
-import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
-import siteUrls from '@/config/site-config'
-import { signOut, useSession } from 'next-auth/react'
-import Link from 'next/link'
 import React from 'react'
+import Topbar from '../navigation/Topbar'
 
 const DashboardNavbar = ({ onClick }: { onClick: () => void }): JSX.Element => {
-    const { data: session } = useSession()
-
     //eslint-disable-next-line
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     }
@@ -20,42 +14,8 @@ const DashboardNavbar = ({ onClick }: { onClick: () => void }): JSX.Element => {
                     onClick={onClick}>
                     <HamburgerIcon />
                 </div>
-                <div className="hidden sm:block">
-                    <InputField
-                        label='Search'
-                        name="search"
-                        placeholder="Search"
-                        id='search'
-                        onChange={handleSearch}
-                    />
-                </div>
-                <div className='flex items-center gap-3 2xsm:gap-7'>
-                    <div className=" gap-2 col-span-10 w-full flex justify-between items-center">
-                        <ThemeSwitcher />
-                        <div>
-                            <p className='text-green-200'>
-                                {session?.user?.subscription ? session.user.subscription.name : null}
-                            </p>
-                        </div>
-                        <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img src={`${(session?.user as any).avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}`} />
-                                </div>
-                            </div>
-                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100  dark:bg-gray-500 rounded-box w-52">
-                                <li>
-                                    <Link href={'/profile'} className="justify-between">
-                                        Profile
-                                        <span className="badge dark:bg-gray-600">New</span>
-                                    </Link>
-                                </li>
-                                <li><Link href={siteUrls.general.settings}>Settings</Link></li>
-                                <li><Link href={'#'} onClick={async () => { await signOut({ callbackUrl: "/login" }) }}>Logout</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+
+                <Topbar />
             </div>
         </header>
     )
