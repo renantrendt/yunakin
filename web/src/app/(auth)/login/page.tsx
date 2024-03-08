@@ -168,7 +168,7 @@ export default function LoginPage() {
                                 <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='md' loading={loading} />
 
                                 <div className=' text-sm'>
-                                    {loginCopy.notMember} <Link href={siteUrls.general.pricing} className="text-primary ">{loginCopy.register}</Link>
+                                    {loginCopy.notMember} <Link href={siteUrls.general.register} className="text-primary ">{loginCopy.register}</Link>
                                 </div>
                             </div>
                         </div>

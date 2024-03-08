@@ -25,12 +25,13 @@ export default function Hero() {
                         <div className='flex justify-center flex-col lg:flex-row lg:justify-start mt-8 lg:mt-14 gap-2 lg:gap-4'>
                             <Button
                                 variant='primary'
-                                classname='py-3 px-4 '
+                                size='lg'
                                 label="Start 14-Day Free Trial"
                             />
                             <Button
                                 variant='secondary'
                                 label='Join Crash Course'
+                                size='lg'
                                 icon={
                                     <div className='text-primary'>
 

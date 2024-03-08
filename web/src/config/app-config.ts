@@ -24,7 +24,8 @@ const platformConfig = {
   features: {
     blog: {
       "strapi_enabled": false,
-    }
+    },
+    payment_type: "one_time",
   },
   pricing: {
     plans: {

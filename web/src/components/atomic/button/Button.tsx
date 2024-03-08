@@ -17,18 +17,18 @@ interface ButtonProps {
   trailing?: boolean
 }
 
-const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "md", loading, trailing }) => {
-  const baseStyle = 'btn button'
+const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "lg", loading, trailing }) => {
+  const baseStyle = "min-w-[150px] rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  font-[14px] font-normal leading-[20px] "
   let variantStyle = ''
   switch (variant) {
     case 'primary':
-      variantStyle = 'btn-primary hover:bg-primary-600 text-white bg-primary-500  rounded-lg shadow py-[14px] !px-7'
+      variantStyle = ' hover:bg-primary-600 text-white bg-primary-500 focus:shadow-focus-primary  disabled:bg-disabled   '
       break
     case 'secondary':
-      variantStyle = ' button-secondary  hover:border-none hover:outline-none text-black bg-white rounded-lg py-[14px] !px-5  '
+      variantStyle = 'border-[1px] bg-white border-grey-300 shadow-sm hover:bg-grey-200 focus:shadow-focus-primary  text-black bg-white disabled:bg-disabled '
       break
     case 'tertiary':
-      variantStyle = ' bg-grey-200 rounded-lg  text-black border-none  '
+      variantStyle = ' bg-grey-200  text-black border-none hover:bg-grey-300 focus:shadow-focus-primary  disabled:bg-grey-200 '
       break
     case 'alert':
       variantStyle = 'btn-alert'
@@ -57,7 +57,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
       break
   }
   return (
-    <button disabled={disabled || loading} className={cn(baseStyle, variantStyle, classname, sizeStyle)} onClick={onClick} type={type}>
+    <button disabled={disabled || loading} className={cn(baseStyle, variantStyle, classname, sizeStyle,)} onClick={onClick} type={type}>
       {loading ? <LoadingIcon /> : null} {trailing ? <><span className='mr-0'>{label}</span> {icon} </> : <>{icon} <span className='ml-0'> {label} </span></>}
     </button>
   )

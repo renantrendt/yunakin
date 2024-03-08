@@ -68,6 +68,7 @@ export default function Navbar() {
                 <Button
                     variant='secondary'
                     label='Login'
+                    size='lg'
                     classname='w-full hidden lg:block'
                     onClick={() => router.push(siteUrls.general.login)}
                 />
@@ -75,6 +76,7 @@ export default function Navbar() {
                     variant='primary'
                     classname='w-full  hidden lg:block'
                     label='Get Started'
+                    size='lg'
                     onClick={() => router.push(siteUrls.general.register)}
                 />
 

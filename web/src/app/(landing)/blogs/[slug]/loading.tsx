@@ -3,7 +3,7 @@ import React from 'react'
 
 const Loading = () => {
     return (
-        <div className='mx-auto  w-full px-4   md:px-28  text-black dark:text-white '>
+        <div className='max-w-[1440px] w-full mx-auto px-4 md:px-28'>
             <BlogContent data={[]} isLoading={true} />
         </div>
     )

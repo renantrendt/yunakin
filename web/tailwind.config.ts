@@ -86,7 +86,9 @@ const config: Config = {
       'grey-300': "#DBDBDB",
       'grey-500': "#5E5E5E",
       'grey-400': "#909090",
+      'grey-600': "#DFDFDF",
       'grey-700': "#4F4F4F",
+      'light-grey': "#919191",
       'red-100': "#FEE6E5",
       'red-200': "#FBD0D0",
       'red-300': "#F8A9AA",
@@ -100,9 +102,8 @@ const config: Config = {
       'old-gray': " #F5F5F5",
       'primary-500': "#705AF8",
       "faq-color": "#0E0E0E",
-      'primary': {
-        600: "#5C37EB"
-      },
+      'primary-600': " #5C37EB",
+      'disabled': "#D6D5FF"
     },
     "boxShadow": {
       "sm": "0px 3px 6px -3px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.05), 0px 1px 2px -1px rgba(0, 0, 0, 0.05), 0px 1px 0px -1px rgba(0, 0, 0, 0.05)",

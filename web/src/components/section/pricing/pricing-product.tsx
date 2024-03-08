@@ -61,35 +61,42 @@ export default function PricingProduct({ name, description, price, features, pla
     };
     return (
         <>
-            <div className="card  shadow-xl rounded-[32px] h-full bg-white p-5">
+            <div className="card  shadow-xl rounded-[32px] h-full bg-white px-5 py-14 lg:px-8">
                 {recommended && (
                     <div className='rounded-[40px] shadow-md  px-6 py-2  bg-white dark:bg-gray-700 text-black  w-fit absolute top-[-0px] left-[32%]  '>Recommended</div>
                 )}
-                <div className="card-body">
+                <div className="card-body p-0">
                     <div className='flex  flex-col items-center justify-center mb-8 '>
-                        <h3 className="mb-6 text-4xl font-bold text-black dark:text-white">{name}</h3>
-                        <p className="font-light m:text-lg text-black dark:text-white">{description}</p>
+                        <h3 className="mb-6 text-[40px] font-semibold text-stone-950 ">{name}</h3>
+                        <p className="font-light text-light-grey text-center m:text-lg text-stone-6 ">{description}</p>
                     </div>
 
-                    <div className="flex justify-center items-center py-10 text-black dark:text-white ">
-                        <span className="mr-2 text-5xl font-extrabold ">
+                    <div className="flex justify-center items-end py-8 !text-stone-950">
+                        <span className="mr-2 text-4xl font-bold flex items-end leading-none ">
                             {price.toFixed(2)}€
-                        </span>§
-                        <span>
-                            /{isMonthly ? "month" : "year"}
                         </span>
+                        <div className='text-2xl leading-none'>
+                            <span className='mr-1'>
+                                /
+                            </span>
+                            <span>
+                                {isMonthly ? "month" : "year"}
+                            </span>
+
+                        </div>
+
                     </div>
 
-                    <div className="card-actions justify-center">
-                        <Button classname='w-full mb-8' onClick={handleClick} loading={loading} label='Start' />
+                    <div className="card-actions mb-8 justify-center">
+                        <Button classname='w-full' onClick={handleClick} loading={loading} label='Start' />
                     </div>
-                    <ul role="list" className="mb-8 space-y-4 text-left">
+                    <ul role="list" className="mb-8 space-y-2 text-left">
                         {
                             features.map((feature, index) => {
                                 return (
-                                    <li className="flex items-center space-x-3 py-3 px-2 text-black dark:text-white" key={feature + '-' + index}>
+                                    <li className="flex  flex-row items-center gap-4 py-3 px-2 text-stone-950 text-sm font-semibold dark:text-white" key={feature + '-' + index}>
                                         {feature.plans.includes(plan) ? <TickIcon /> : <CrossIcon />}
-                                        <span><b className='text-lg'></b> {feature.name}</span>
+                                        <span><b className='text-lg leading-none'></b> {feature.name}</span>
                                     </li>
                                 )
                             })
