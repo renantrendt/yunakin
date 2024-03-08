@@ -12,7 +12,7 @@ interface NavigationItemProps {
 const NavigationItem = ({ title, link, icon, selected }: NavigationItemProps) => {
     return (
         <Link href={link} >
-            <li tabIndex={1} className='focus:shadow-focus-primary' >
+            <li tabIndex={1} className='focus:shadow-focus-primary rounded-lg' >
 
                 <div className={cn('flex flex-row  gap-2 justify-start items-center p-2 !text-grey-600  hover:bg-grey-200 ', selected ? "bg-grey-200" : "")}>
                     {icon}

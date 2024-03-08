@@ -50,7 +50,7 @@ export default function Hero() {
                             <p className='text-sm' dangerouslySetInnerHTML={{ __html: siteCopy.heroSection.usedByCopy }}></p>
                         </div>
                     </div>
-                    <div className='relative w-full  flex-1 h-full lg:col-span-4'>
+                    <div className='relative w-full  flex-1 h-full  min-h-[283px] lg:col-span-4'>
 
                         <Image
                             alt=''

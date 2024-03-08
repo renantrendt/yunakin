@@ -41,7 +41,7 @@ interface SidebarProps {
     showMenu?: boolean
 }
 
-const Sidebar: React.FC = ({ showMenu }: SidebarProps) => {
+const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
 
     const [search, setSearch] = React.useState('')
     const pathname = usePathname()
