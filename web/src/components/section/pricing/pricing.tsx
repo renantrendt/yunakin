@@ -1,6 +1,7 @@
 import platformConfig, { Plans } from '@/config/app-config'
 import PricingProduct from './pricing-product'
 import React from 'react'
+import Typography from '@/components/atomic/typography/Typography';
 
 
 
@@ -10,13 +11,13 @@ export default function Pricing({ showDescription = false }: { showDescription?:
     return (
         <div className='py-28 w-full  ' id='pricing'>
             {showDescription && (
-                <div className=' flex flex-col justify-center items-center gap-5 mb-8 text-black dark:text-white'>
-                    <h1 className='text-5xl font-bold text-center mb-2'>Enable the best experience</h1>
-                    <h3 className='text-xl  mb-20 max-w-xl text-center'>Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.</h3>
+                <div className=' flex flex-col justify-center items-center mb-20 gap-5 text-black dark:text-white'>
+                    <Typography type='h1' className='!lg:text-[46px] !lg:leading-[64px] text-stone-950 font-semibold text-center mb-2'>Enable the best experience</Typography>
+                    <h3 className=' text-lg lg:text-xl  max-w-[700px] font-normal  leading-[30px] text-center text-neutral-600'>Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.</h3>
                 </div>
             )}
 
-            <div className='flex border-[1px] border-grey-600 justify-center gap-4 mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit  bg-white shadow-md rounded-[40px] p-2'>
+            <div className='flex border-[1px] border-grey-600 justify-center gap-4 mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit  bg-white  rounded-[40px] p-2'>
                 <div className={`${isMonthly ? "bg-primary text-white" : ""} rounded-3xl px-8 py-[10px]  transition duration-150 ease-in-out `} onClick={() => setIsMonthly(true)}>
                     <span className='text-sm font-semibold leading-[140%]'>Monthly</span>
                 </div>
@@ -27,7 +28,7 @@ export default function Pricing({ showDescription = false }: { showDescription?:
             <section className='grid mt-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8 w-full'>
                 <PricingProduct
                     name={'Pro'}
-                    description={'Ideal for getting started with desktop funnels and achieving your first successes.'} DFDFDF
+                    description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
                     price={isMonthly ? platformConfig.pricing.plans.pro.price : platformConfig.pricing.plans.pro_yearly.price}
                     plan={Plans.PRO}
                     features={features}
