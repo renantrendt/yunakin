@@ -24,7 +24,7 @@ export default function Navbar() {
                     {_.keys(siteUrls.navbar).map((key: string) => {
                         const link = siteUrls.navbar[key]
                         return (
-                            <li><Link href={link.url}>{link.label}</Link></li>
+                            <li key={key}><Link href={link.url}>{link.label}</Link></li>
                         )
                     })}
 

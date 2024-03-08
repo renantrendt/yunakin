@@ -2,7 +2,7 @@
 // components/Sidebar.tsx
 import React from 'react'
 import Link from 'next/link'
-import siteUrls.general from '@/config/site-config'
+import siteUrls from '@/config/site-config'
 import InputField from '../atomic/input/InputField'
 import MagnifyingGlass from "@/icons/magnifying-glass.svg"
 import DashboardLogoIcon from "@/icons/dashboard-logo.svg"
