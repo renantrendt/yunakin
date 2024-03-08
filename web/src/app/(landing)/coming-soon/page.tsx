@@ -8,6 +8,7 @@ import Cta from '@/components/section/cta/cta'
 import UsedBy from '@/components/section/usedBy/UsedBy'
 import ContentSection from '@/containers/layout/ContentSection'
 import Features from '@/components/features/features'
+import Pricing from '@/components/section/pricing/pricing'
 
 export default function Home() {
     return (
@@ -24,6 +25,7 @@ export default function Home() {
                     <Cta />
                 </div>
             </div>
+
             <ContentSection>
                 <Features />
             </ContentSection>
@@ -32,6 +34,9 @@ export default function Home() {
                     <Testimonial />
                 </div>
             </div>
+            <ContentSection>
+                <Pricing showDescription={true} />
+            </ContentSection>
             <ContentSection>
                 <FAQ />
             </ContentSection>

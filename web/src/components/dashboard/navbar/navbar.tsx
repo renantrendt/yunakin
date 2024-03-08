@@ -50,7 +50,7 @@ const DashboardNavbar = ({ onClick }: { onClick: () => void }): JSX.Element => {
                                         <span className="badge dark:bg-gray-600">New</span>
                                     </Link>
                                 </li>
-                                <li><Link href={siteUrls.settings}>Settings</Link></li>
+                                <li><Link href={siteUrls.general.settings}>Settings</Link></li>
                                 <li><Link href={'#'} onClick={async () => { await signOut({ callbackUrl: "/login" }) }}>Logout</Link></li>
                             </ul>
                         </div>

@@ -8,7 +8,7 @@ const features = platformConfig.pricing.features;
 export default function Pricing({ showDescription = false }: { showDescription?: boolean }) {
     const [isMonthly, setIsMonthly] = React.useState(false)
     return (
-        <div className='my-20 w-full  '>
+        <div className='my-20 w-full  ' id='pricing'>
             {showDescription && (
                 <div className=' flex flex-col justify-center items-center gap-5 mb-8 text-black dark:text-white'>
                     <h1 className='text-5xl font-bold text-center mb-2'>Enable the best experience</h1>

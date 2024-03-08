@@ -1,38 +1,72 @@
 import { Metadata } from "next";
 import platformConfig from "./app-config";
 
-const siteUrls = {
-    home: '/',
-    dashboard: '/dashboard',
-    docs: "https://docs.Codepilot.dev",
-    login: '/login',
-    logout: '/logout',
-    register: '/register',
-    forgotPassword: '/forgot-password',
-    resetPassword: '/reset-password',
-    pricing: "/pricing",
-    features: "/features",
-    profile: '/profile',
-    settings: '/settings',
-    notFound: '/404',
-    serverError: '/500',
-    unauthorized: '/401',
-    forbidden: '/403',
-    contactUs: '/contact-us',
-    aboutUs: '/about-us',
-    privacyPolicy: '/privacy-policy',
-    termsAndConditions: '/terms-and-conditions',
-    faq: '/faq',
-    blog: '/blogs',
-    blogDetail: '/blog/:slug',
-    category: '/category/:slug',
-    tag: '/tag/:slug',
-    search: '/search',
-    cart: '/cart',
-    checkout: '/checkout',
-    orderSuccess: '/order-success',
-    orders: '/orders',
-    orderDetail: '/orders/:id'
+
+interface SiteUrls {
+    navbar: {
+        [key: string]: {
+            label: string;
+            url: string;
+        }
+    },
+    general: {
+        [key: string]: any;
+    }
+
+}
+
+const siteUrls: SiteUrls = {
+    navbar: {
+        pricing: {
+            label: "Pricing",
+            url: "/coming-soon#pricing",
+        },
+        blog: {
+            label: "Blog",
+            url: "/blogs",
+        },
+        features: {
+            label: "Features",
+            url: "/coming-soon#features",
+        },
+        docs: {
+            label: "Docs",
+            url: "https://docs.codepilot.dev",
+        }
+    },
+    general: {
+        home: '/',
+        dashboard: '/dashboard',
+        docs: "https://docs.Codepilot.dev",
+        login: '/login',
+        logout: '/logout',
+        register: '/register',
+        forgotPassword: '/forgot-password',
+        resetPassword: '/reset-password',
+        pricing: "/pricing",
+        features: "/features",
+        profile: '/profile',
+        settings: '/settings',
+        notFound: '/404',
+        serverError: '/500',
+        unauthorized: '/401',
+        forbidden: '/403',
+        contactUs: '/contact-us',
+        aboutUs: '/about-us',
+        privacyPolicy: '/privacy-policy',
+        termsAndConditions: '/terms-and-conditions',
+        faq: '/faq',
+        blog: '/blogs',
+        blogDetail: '/blog/:slug',
+        category: '/category/:slug',
+        tag: '/tag/:slug',
+        search: '/search',
+        cart: '/cart',
+        checkout: '/checkout',
+        orderSuccess: '/order-success',
+        orders: '/orders',
+        orderDetail: '/orders/:id'
+    }
 }
 
 export const siteCopy = {

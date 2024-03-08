@@ -30,7 +30,7 @@ export default function PricingProduct({ name, description, price, features, pla
     const handleClick = async () => {
 
         if (!session?.user) {
-            return router.push(`${siteUrls.login}?callbackUrl=${siteUrls.settings}`)
+            return router.push(`${siteUrls.general.login}?callbackUrl=${siteUrls.general.settings}`)
         }
         // step 1: load stripe
         try {

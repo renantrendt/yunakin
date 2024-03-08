@@ -11,7 +11,7 @@ export default async function AiPage() {
     const session = await getServerSession(authOptions)
 
     if (!session?.user) {
-        redirect(siteUrls.login)
+        redirect(siteUrls.general.login)
     }
 
     console.log('session', session)

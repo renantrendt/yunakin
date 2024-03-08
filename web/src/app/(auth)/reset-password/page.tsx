@@ -70,7 +70,7 @@ export default function ForgotPasswordPage() {
         <Suspense fallback="loading">
             <div className="flex justify-center w-full h-screen items-center  ">
                 <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white  rounded-[20px] shadow-form-container     shadow-lg  m-auto flex flex-col  gap-4  lg:gap-8 p-6 lg:p-10 ">
-                    <Link href={siteUrls.home}>
+                    <Link href={siteUrls.general.home}>
                         <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
                     </Link>
                     <div className='flex flex-col gap-8'>

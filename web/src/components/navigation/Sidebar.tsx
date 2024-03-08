@@ -2,7 +2,7 @@
 // components/Sidebar.tsx
 import React from 'react'
 import Link from 'next/link'
-import siteUrls from '@/config/site-config'
+import siteUrls.general from '@/config/site-config'
 import InputField from '../atomic/input/InputField'
 import MagnifyingGlass from "@/icons/magnifying-glass.svg"
 import DashboardLogoIcon from "@/icons/dashboard-logo.svg"
@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
     return (
         <>
             <div className=" flex items-center justify-between gap-2 px-3 pt-4 pb-3   ">
-                <Link href={siteUrls.dashboard} className="btn btn-ghost text-xl">
+                <Link href={siteUrls.general.dashboard} className="btn btn-ghost text-xl">
                     <DashboardLogoIcon />
                 </Link>
                 {/* <Button className='block lg:hidden' >Show</Button> */}

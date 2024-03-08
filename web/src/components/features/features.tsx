@@ -6,7 +6,7 @@ const Features = () => {
     const features = siteCopy.featuresSection.features
     return (
 
-        <section className='my-32  flex flex-col gap-32 lg:gap-64 w-full h-full md:px-0 text-black dark:text-white'>
+        <section id='features' className='my-32  flex flex-col gap-32 lg:gap-64 w-full h-full md:px-0 text-black dark:text-white'>
             {features.map((feature, index) => (
                 <FeatureItem
                     key={index}

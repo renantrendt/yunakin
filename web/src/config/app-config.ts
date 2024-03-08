@@ -24,7 +24,7 @@ const platformConfig = {
   features: {
     blog: {
       "strapi_enabled": false,
-    },
+    }
   },
   pricing: {
     plans: {

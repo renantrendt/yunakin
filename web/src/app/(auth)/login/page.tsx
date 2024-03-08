@@ -98,7 +98,7 @@ export default function LoginPage() {
         <Suspense fallback="loading">
             <div className="flex justify-center w-full h-screen items-center  ">
                 <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white  rounded-[20px] shadow-form-container     shadow-lg  m-auto flex flex-col  gap-4  lg:gap-8 p-6 lg:p-10 ">
-                    <Link href={siteUrls.home}>
+                    <Link href={siteUrls.general.home}>
                         <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
                     </Link>
                     <div className='flex flex-col gap-8'>
@@ -130,7 +130,7 @@ export default function LoginPage() {
                             />
                             <div className='relative '>
                                 <div className='text-black absolute right-0 top-1 dark:text-white'>
-                                    <Link href={siteUrls.forgotPassword} className="text-primary text-sm">{loginCopy.forgotPassword}</Link>
+                                    <Link href={siteUrls.general.forgotPassword} className="text-primary text-sm">{loginCopy.forgotPassword}</Link>
                                 </div>
                                 <Controller
                                     control={control}
@@ -168,7 +168,7 @@ export default function LoginPage() {
                                 <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='md' loading={loading} />
 
                                 <div className=' text-sm'>
-                                    {loginCopy.notMember} <Link href={siteUrls.register} className="text-primary ">{loginCopy.register}</Link>
+                                    {loginCopy.notMember} <Link href={siteUrls.general.pricing} className="text-primary ">{loginCopy.register}</Link>
                                 </div>
                             </div>
                         </div>
