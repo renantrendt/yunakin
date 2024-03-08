@@ -7,6 +7,7 @@ import customToast from '../atomic/toast/customToast'
 import { useRouter } from 'next/navigation'
 import DeleteIcon from "@/icons/trash-icon.svg"
 import { deleteChat } from '@/app/actions'
+import Button from '../atomic/button/Button'
 interface ChatsProps {
     chats: Chat[]
 }
@@ -65,7 +66,7 @@ const Chats = ({ chats }: ChatsProps) => {
             </div>
             <div className=' flex mt-16 fixed bottom-2 gap-4 justify-start mx-auto w-["inherit"]  '>
                 <InputField id='chat-title' name='chat-title' onChange={(e) => { setChatTitle(e.target.value) }} value={chatTitle} />
-                <button className='btn' onClick={createChat}>Create Chat</button>
+                <Button onClick={createChat} label='Create Chat' size='lg' variant='primary' />
             </div>
         </div>
     )
