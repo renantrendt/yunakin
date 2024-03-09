@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import Pricing from "@/components/section/pricing/pricing";
 import AccountSsttings from "@/components/dashboard/settings/account/Account";
+import TabItem from "@/components/atomic/tabs/TabItem";
 
 const validationSchema = yup.object({
     email: yup.string().email().required(),
@@ -46,9 +47,9 @@ export default function SettingsPage() {
     return (
         <div>
             <div className="flex justify-start w-full">
-                <div role="tablist" className="tabs tabs-boxed">
+                <div role="tablist" className="flex flex-row gap-2">
                     {tabs.map((t, index) => {
-                        return <div className={`tab ${t.name == tab.name ? "tab-active" : ""}`} key={index} role="tab" aria-selected={t.name === tab.name} onClick={() => setTab(t)}>{t.name}</div>
+                        return <TabItem selected={t.name == tab.name} key={index} onClick={() => setTab(t)} label={t.name} />
                     })}
                 </div>
             </div>
