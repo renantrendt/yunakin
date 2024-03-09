@@ -5,7 +5,7 @@ interface TableCellProps {
     children: React.ReactNode;
     className?: string;
     onClick?: () => void;
-    padding?: string;
+    padding?: boolean;
     cellStyle?: 'white' | 'grey';
     size?: 'sm' | 'md' | 'lg';
     align?: 'left' | 'center' | 'right';
