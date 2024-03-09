@@ -6,7 +6,7 @@ import React from 'react'
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'alert' | 'sucesss' | 'clear'
-  label: string
+  label?: string
   onClick?: () => void
   type?: 'button' | 'reset' | 'submit' | undefined
   size?: 'lg' | 'md' | 'sm' | 'xs'
@@ -58,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
   }
   return (
     <button disabled={disabled || loading} className={cn(baseStyle, variantStyle, classname, sizeStyle,)} onClick={onClick} type={type}>
-      {loading ? <LoadingIcon /> : null} {trailing ? <><span className='mr-0'>{label}</span> {icon} </> : <>{icon} <span className='ml-0'> {label} </span></>}
+      {loading ? <LoadingIcon /> : null} {trailing ? <>{label ? <span className='mr-0'>{label}</span> : null}  {icon} </> : <>{icon} {label && <span className='ml-0'> {label} </span>}</>}
     </button>
   )
 }
