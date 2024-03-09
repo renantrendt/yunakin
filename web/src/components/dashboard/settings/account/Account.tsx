@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import * as yup from 'yup'
 import InputField from '@/components/atomic/input/InputField'
@@ -9,7 +9,6 @@ import TextArea from '@/components/atomic/textarea/TextArea'
 import EmailIcon from '@/icons/EmailIcon'
 import AccountIcon from '@/icons/AccountIcon'
 import FileUploader from '@/components/atomic/file-uploader/FileUploader'
-import { watch } from 'fs'
 interface FormValues {
     email: string
     password: string
@@ -165,8 +164,6 @@ const AccountSsttings = () => {
                 <div>
                     <FileUploader
                         onFileUpload={(val) => {
-                            console.log('hola')
-                            console.log(val)
                             setValue('avatar', val)
                         }}
                     />

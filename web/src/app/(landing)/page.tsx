@@ -19,20 +19,20 @@ export default function Home() {
       <ContentSection>
         <UsedBy />
       </ContentSection>
-      <div className='w-full min-w=full bg-primary-500'>
-        <div className={'max-w-[1440px] w-full mx-auto px-4 md:px-28'}>
-          <Cta />
-        </div>
-      </div>
-
+      <ContentSection
+        fullWidth
+        additionalClassName='bg-primary-500'
+      >
+        <Cta />
+      </ContentSection>
       <ContentSection>
         <Features />
       </ContentSection>
-      <div className='w-full min-w=full bg-primary-500'>
-        <div className={'max-w-[1440px] w-full mx-auto px-4 md:px-28'}>
-          <Testimonial />
-        </div>
-      </div>
+      <ContentSection
+        fullWidth
+        additionalClassName='bg-primary-500'>
+        <Testimonial />
+      </ContentSection>
       <ContentSection>
         <Pricing showDescription={true} />
       </ContentSection>

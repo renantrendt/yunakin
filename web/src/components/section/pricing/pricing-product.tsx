@@ -61,9 +61,9 @@ export default function PricingProduct({ name, description, price, features, pla
     };
     return (
         <>
-            <div className="card  shadow-xl rounded-[32px] h-full bg-white px-5 py-14 lg:px-8">
+            <div className="card  border-[1px] border-grey-500 rounded-[32px] h-full bg-white px-5 py-14 lg:px-8">
                 {recommended && (
-                    <div className='rounded-[40px] border-[1px] border-grey-300  px-6 py-[6px]  bg-white text-primary-500 leading-[140%] text-sm font-semibold  w-fit absolute top-[-12px] left-[32%]  '>Recommended</div>
+                    <div className='rounded-[40px] border-[1px] shadow-recommended-pricing border-grey-300  px-6 py-[6px]  bg-white text-primary-500 leading-[140%] text-sm font-semibold  w-fit absolute top-[-12px] left-[32%]  '>Recommended</div>
                 )}
                 <div className="card-body p-0">
                     <div className='flex  flex-col items-center justify-center mb-2 '>

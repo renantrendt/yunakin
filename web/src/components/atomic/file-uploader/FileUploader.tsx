@@ -10,14 +10,12 @@ interface FileUploaderProps {
 
 const FileUploader = ({ onFileUpload }: FileUploaderProps) => {
     const onDrop = useCallback((acceptedFiles: File[]) => {
-
         const file = acceptedFiles[0];
         if (file) {
-            var url = URL.createObjectURL(file);
+            const url = URL.createObjectURL(file);
             onFileUpload(url);
         }
     }, [])
-
     const { getRootProps, getInputProps } = useDropzone({ onDrop })
     return (
         <div  {...getRootProps()} id="FileUpload" className="relative w-full cursor-pointer appearance-none rounded border-[1px] border-dashed border-grey-300 bg-white py-14 px-16

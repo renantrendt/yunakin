@@ -17,7 +17,7 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                 </div>
             )}
 
-            <div className='flex border-[1px] border-grey-600 justify-center gap-4 mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit  bg-white  rounded-[40px] p-2'>
+            <div className='flex border-[1px] border-grey-500 justify-center gap-4 mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit  bg-white  rounded-[40px] p-2'>
                 <div className={`${isMonthly ? "bg-primary text-white" : ""} rounded-3xl px-8 py-[10px]  transition duration-150 ease-in-out `} onClick={() => setIsMonthly(true)}>
                     <span className='text-sm font-semibold leading-[140%]'>Monthly</span>
                 </div>
