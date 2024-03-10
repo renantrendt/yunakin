@@ -1,7 +1,5 @@
-import Modal, { ModalProps } from '@/components/atomic/modal/Modal'
+import Modal from '@/components/atomic/modal/Modal'
 import React from 'react'
-import DeleteIcon from "@/icons/trash-icon.svg"
-import Button from '@/components/atomic/button/Button';
 
 interface ConfirmationModalProps {
     isOpen: boolean;

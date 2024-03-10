@@ -11,7 +11,6 @@ import TableRow from '@/components/atomic/table/TableRow'
 import DeleteIcon from "@/icons/trash-icon.svg"
 import { changeUserRole, deleteUser } from '@/app/actions/users'
 import customToast from '../atomic/toast/customToast'
-import Modal from '../atomic/modal/Modal'
 import ConfirmationModal from '../molecules/confirmation-modal/ConfirmationModal'
 const colors = ['primary', 'red', 'green', 'grey', 'orange', 'white']
 

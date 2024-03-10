@@ -30,7 +30,8 @@ const ReturnPage = () => {
     if (status === 'complete') {
         return (
             <div className="h-screen w-full">
-                <Modal isOpen={true} title="success" onClose={() => { router.push("/dashboard") }}>
+                <Modal isOpen={true} onClose={() => { router.push("/dashboard") }}>
+                    <h1>Success</h1>
                     <section id="success" >
                         <p className="text-black dark:text-white">
                             We appreciate your business! A confirmation email will be sent to {customerEmail}.
