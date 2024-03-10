@@ -11,7 +11,6 @@ export async function getChat(id: string, userId: string) {
         }
     })
 
-
     if (!chat || (userId && chat.userId !== userId)) {
         return null
     }
