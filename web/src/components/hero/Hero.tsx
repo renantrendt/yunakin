@@ -10,7 +10,7 @@ import { AnimatedTooltip } from '../molecules/animated-tooltip/AnimatedTooltip'
 export default function Hero() {
     return (
         <section
-            className="my-20  mt-12 lg:mt-28  items-center text-center md:text-left text-black dark:text-white">
+            className="my-20  mt-24 lg:mt-40  items-center text-center md:text-left text-black dark:text-white">
             <AnimatedSection>
                 <div className='grid grid-cols-1 lg:grid-cols-8 justify-center gap-x-8 gap-y-8'>
 

@@ -12,7 +12,7 @@ const ContentSection = ({ children, additionalClassName, fullWidth }: ContentSec
 
     if (fullWidth) {
         return (
-            <div className={cn('w-full min-w=full', additionalClassName)}>
+            <div className={cn('w-full min-w-full', additionalClassName)}>
                 <div className={'max-w-[1440px] w-full mx-auto px-4 md:px-28'}>
                     {children}
                 </div>
