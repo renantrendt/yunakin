@@ -12,8 +12,8 @@ interface TableCellProps {
 }
 
 const TableCell = ({ children, className, onClick, padding = true, cellStyle = 'white', size = "lg", align = "left" }: TableCellProps) => {
-    const sizeStyle = size == "lg" ? "py-[30px]" : "md" ? "py-[20px]" : "py-[10px]";
-    const alignStyle = align == "left" ? "text-left" : "center" ? "text-center" : "text-right";
+    const sizeStyle = size == "lg" ? "py-[30px]" : size == "md" ? "py-[20px]" : "py-[10px]";
+    const alignStyle = align == "left" ? "text-left" : align == "center" ? "text-center" : "text-right";
     return (
         <td onClick={onClick} className={cn('py-[14px] text-grey-400', sizeStyle, alignStyle, padding ? "px-6" : "", cellStyle == 'white' ? "bg-white " : "bg-grey-50", className)}>{children}</td>
     )

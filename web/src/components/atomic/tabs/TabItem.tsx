@@ -8,7 +8,7 @@ interface TabItemProps {
     onClick: () => void;
 }
 
-const TabItem = ({ label, icon, selected, onClick }: TabItemProps) => {
+const TabItem = ({ label, selected, onClick }: TabItemProps) => {
 
 
     return (

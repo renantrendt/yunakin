@@ -1,4 +1,3 @@
-import Badge from '@/components/atomic/badge/Badge'
 import Button from '@/components/atomic/button/Button'
 import Chip from '@/components/atomic/chip/Chip'
 import Dropdown from '@/components/atomic/dropdown/Dropdown'
@@ -12,38 +11,6 @@ import { prisma } from '@/lib/prisma'
 
 import React from 'react'
 
-const data = [
-    {
-        username: 'John Doe',
-        email: 'johndoe@gmail.com',
-        role: 'admin',
-    },
-    {
-        username: 'John Doe',
-        email: 'johndoe@gmail.com',
-        role: 'admin',
-    },
-    {
-        username: 'John Doe',
-        email: 'johndoe@gmail.com',
-        role: 'admin',
-    },
-    {
-        username: 'John Doe',
-        email: 'johndoe@gmail.com',
-        role: 'admin',
-    },
-    {
-        username: 'John Doe',
-        email: 'johndoe@gmail.com',
-        role: 'admin',
-    },
-    {
-        username: 'John Doe',
-        email: 'johndoe@gmail.com',
-        role: 'admin',
-    },
-]
 const colors = ['primary', 'red', 'green', 'grey', 'orange', 'white']
 const UsersPage = async () => {
 
