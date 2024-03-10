@@ -137,7 +137,8 @@ const config: Config = {
       "focus-green": "0px 0px 0px 3px rgba(104, 193, 50, 0.40)",
       "form-container": "0px 1px 4px 0px rgba(0, 0, 0, 0.10)",
       'recommended-pricing': "0px 1px 10px 0px rgba(0, 0, 0, 0.10)",
-      'lg': '0px 6px 12px -6px rgba(0, 0, 0, 0.08), 0px 3px 6px -3px rgba(0, 0, 0, 0.08)'
+      'lg': '0px 6px 12px -6px rgba(0, 0, 0, 0.08), 0px 3px 6px -3px rgba(0, 0, 0, 0.08)',
+      '2xl': "0px 16px 32px -16px rgba(0, 0, 0, 0.08), 0px 12px 24px -12px rgba(0, 0, 0, 0.12)"
     }
   },
   plugins: [require("daisyui"), require('@tailwindcss/typography'), require("@tailwindcss/forms"), addVariablesForColors],
