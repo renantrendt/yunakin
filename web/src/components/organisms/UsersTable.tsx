@@ -11,6 +11,8 @@ import TableRow from '@/components/atomic/table/TableRow'
 import DeleteIcon from "@/icons/trash-icon.svg"
 import { changeUserRole, deleteUser } from '@/app/actions/users'
 import customToast from '../atomic/toast/customToast'
+import Modal from '../atomic/modal/Modal'
+import ConfirmationModal from '../molecules/confirmation-modal/ConfirmationModal'
 const colors = ['primary', 'red', 'green', 'grey', 'orange', 'white']
 
 interface UsersTableProps {
@@ -31,6 +33,8 @@ interface UsersTableProps {
 const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
     const [users, setUsers] = useState(defaultUsers)
 
+    const [modalOpen, setModalOpen] = useState(false)
+    const [tobeDeletedUserId, setTobeDeletedUserId] = useState('')
 
     const handleRoleChange = async (userId: string, role: string) => {
         try {
@@ -62,6 +66,9 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
         } catch (error) {
             customToast.error('Failed to delete user')
         }
+        finally {
+            setTobeDeletedUserId('')
+        }
     }
 
     return (
@@ -83,20 +90,7 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.email}</TableCell>
                                 <TableCell>
-                                    <Dropdown
-                                        // onChange={(value) => console.log(value)}
-                                        options={[{
-                                            value: 'ADMIN',
-                                            label: 'Admin',
-                                            selected: user.role === "ADMIN"
-                                        },
-                                        {
-                                            value: 'USER',
-                                            label: 'User',
-                                            selected: user.role === "USER"
-                                        }]}
-                                        onChange={(value: string) => handleRoleChange(user.id, value)}
-                                    />
+                                    {user.role}
                                 </TableCell>
                                 <TableCell>
                                     <Chip includeClose={true} color={colors[index] as any} type='outline'>
@@ -105,7 +99,24 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                                 </TableCell>
                                 <TableCell align='right'>
                                     <div className='flex justify-center gap-2'>
-                                        <Button icon={<DeleteIcon />} size='sm' onClick={() => handleDelete(user.id)} classname='!w-fit !p-2 !min-w-fit bg-red-200 hover:bg-red-300 text-red-600' label='' />
+                                        <Dropdown
+                                            // onChange={(value) => console.log(value)}
+                                            options={[{
+                                                value: 'ADMIN',
+                                                label: 'Admin',
+                                                selected: user.role === "ADMIN"
+                                            },
+                                            {
+                                                value: 'USER',
+                                                label: 'User',
+                                                selected: user.role === "USER"
+                                            }]}
+                                            onChange={(value: string) => handleRoleChange(user.id, value)}
+                                        />
+                                        <Button icon={<DeleteIcon />} size='md' onClick={() => {
+                                            setTobeDeletedUserId(user.id)
+                                            setModalOpen(true)
+                                        }} classname='!w-fit !p-2 !min-w-fit' variant='alert' label='' />
                                     </div>
                                 </TableCell>
                             </TableRow>
@@ -113,6 +124,23 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                     })}
                 </TableBody>
             </Table>
+            <ConfirmationModal
+                icon={
+                    <div className='p-2 w-fit bg-gradient-to-b from-red-100 to-red-200  text-red-500
+            rounded-[32px] border-[1px] border-grey-200'>
+                        <DeleteIcon />
+                    </div>
+                }
+                isOpen={modalOpen} onClose={() => setModalOpen(false)} title='Delete user?' description='This action is irreversible'>
+                <>
+                    <Button variant='secondary' label='Cancel' onClick={() => setModalOpen(false)} />
+                    <Button variant='alert' label='Delete User' onClick={() => {
+                        handleDelete(tobeDeletedUserId)
+                        setModalOpen(false)
+                    }}
+                    />
+                </>
+            </ConfirmationModal>
         </div>
     )
 }

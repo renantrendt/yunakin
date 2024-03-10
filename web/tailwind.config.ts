@@ -133,6 +133,8 @@ const config: Config = {
     "boxShadow": {
       "sm": "0px 3px 6px -3px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.05), 0px 1px 2px -1px rgba(0, 0, 0, 0.05), 0px 1px 0px -1px rgba(0, 0, 0, 0.05)",
       "focus-primary": "0px 0px 0px 3px rgba(112, 90, 248, 0.40)",
+      "focus-red": "0px 0px 0px 3px rgba(236, 89, 98, 0.40)",
+      "focus-green": "0px 0px 0px 3px rgba(104, 193, 50, 0.40)",
       "form-container": "0px 1px 4px 0px rgba(0, 0, 0, 0.10)",
       'recommended-pricing': "0px 1px 10px 0px rgba(0, 0, 0, 0.10)",
       'lg': '0px 6px 12px -6px rgba(0, 0, 0, 0.08), 0px 3px 6px -3px rgba(0, 0, 0, 0.08)'

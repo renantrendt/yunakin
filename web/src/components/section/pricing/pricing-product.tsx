@@ -5,7 +5,7 @@ import Stripe from 'stripe';
 import Button from '../../atomic/button/Button';
 import TickIcon from '@/icons/TickIcon';
 import CrossIcon from '@/icons/CrossIcon';
-import Modal from '../../molecules/modal/Modal';
+import Modal from '../../atomic/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
 import customToast from '../../atomic/toast/customToast';
 import { Plans } from '@/config/app-config';
@@ -105,7 +105,7 @@ export default function PricingProduct({ name, description, price, features, pla
 
                 </div>
             </div>
-            {clientSecret && <Modal isOpen={isModalOpen} title='stripe' onClose={() => { setIsModalOpen(false) }} > <CheckoutForm clientSecret={clientSecret} /></Modal>}
+            {clientSecret && <Modal isOpen={isModalOpen} onClose={() => { setIsModalOpen(false) }} > <h1>Stripe</h1> <CheckoutForm clientSecret={clientSecret} /></Modal>}
         </>
     )
 }
