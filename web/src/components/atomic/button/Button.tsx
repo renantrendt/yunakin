@@ -18,7 +18,7 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "lg", loading, trailing }) => {
-  const baseStyle = "min-w-[150px] cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px] "
+  const baseStyle = " min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px] "
   let variantStyle = ''
   switch (variant) {
     case 'primary':
@@ -57,7 +57,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
       break
   }
   return (
-    <button disabled={disabled || loading} className={cn(baseStyle, variantStyle, classname, sizeStyle,)} onClick={onClick} type={type}>
+    <button disabled={disabled || loading} className={cn(baseStyle, variantStyle, sizeStyle, classname)} onClick={onClick} type={type}>
       {loading ? <LoadingIcon /> : null} {trailing ? <>{label ? <span className='mr-0'>{label}</span> : null}  {icon} </> : <>{icon} {label && <span className='ml-0'> {label} </span>}</>}
     </button>
   )

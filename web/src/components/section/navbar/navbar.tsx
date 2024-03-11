@@ -36,13 +36,13 @@ export default function Navbar() {
         <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background z-50 !py-2 !md:py-6', border && "border-b-[2px] border-grey-200")}>
 
             <div ref={navRef} className="  navbar p-0 max-w-8xl     font-medium text-base leading-[19px] text-grey-400" >
-                <div className="navbar-start">
+                <div className="navbar-start w-full">
 
                     <Link href={siteUrls.general.home}>
-                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
+                        <Image src="/images/logo.svg" alt="logo" width={165} height={96} className='w-full h-full' />
                     </Link>
                 </div>
-                <div className="navbar-center  w-[79%] hidden lg:flex justify-center">
+                <div className="navbar-center   hidden lg:flex justify-center">
                     <ul className="menu menu-horizontal px-1 flex gap-1">
                         {_.keys(siteUrls.navbar).map((key: string) => {
                             const link = siteUrls.navbar[key]
@@ -57,7 +57,7 @@ export default function Navbar() {
                         })}
                     </ul>
                 </div>
-                <div className="lg:navbar-end  w-full lg:w-[12%]  gap-4">
+                <div className="navbar-end  w-full   gap-4">
                     <div className="dropdown flex justify-end w-full lg:hidden">
                         <div className='text-black font-black'>
                             <IconButton icon={<HamburgerIcon />} onClick={() => { setShowMenu(!showMenu) }} className='w-8 h-8' />
@@ -78,7 +78,7 @@ export default function Navbar() {
                                 <Button
                                     variant='tertiary'
                                     label='Login'
-                                    classname='w-full '
+                                    classname='!min-w-[150px] !w-full '
                                     onClick={() => router.push(siteUrls.general.login)}
                                 />
                             </li>
@@ -86,7 +86,7 @@ export default function Navbar() {
 
                                 <Button
                                     variant='primary'
-                                    classname='w-full  text-white '
+                                    classname=' !min-w-[150px] !w-full  text-white '
                                     label='Get Started'
                                     onClick={() => router.push(siteUrls.general.register)}
                                 />
@@ -98,12 +98,12 @@ export default function Navbar() {
                         variant='secondary'
                         label='Login'
                         size='lg'
-                        classname='w-full hidden lg:block'
+                        classname='hidden !min-w-[120px] lg:block'
                         onClick={() => router.push(siteUrls.general.login)}
                     />
                     <Button
                         variant='primary'
-                        classname='w-full  hidden lg:block'
+                        classname=' hidden !min-w-[120px] lg:block'
                         label='Get Started'
                         size='lg'
                         onClick={() => router.push(siteUrls.general.register)}
