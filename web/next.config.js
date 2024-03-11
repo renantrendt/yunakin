@@ -4,6 +4,7 @@ const { withContentlayer } = require("next-contentlayer")
 const nextConfig = {
     experimental: {
         missingSuspenseWithCSRBailout: false,
+        instrumentationHook: true
     },
     webpack(config) {
         // Grab the existing rule that handles SVG imports
