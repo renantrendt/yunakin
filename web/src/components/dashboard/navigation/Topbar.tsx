@@ -12,7 +12,7 @@ const Topbar = () => {
             <Typography type='h1' className='!text-xl'>Welcome {session?.user?.name}</Typography>
             <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                    <Avatar image={session?.user?.image || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
+                    <Avatar image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
                 </div>
                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100  dark:bg-gray-500 rounded-box w-52">
                     <li>

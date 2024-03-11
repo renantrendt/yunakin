@@ -46,8 +46,22 @@ const deleteBucket = async (bucketName: string) => {
     }
     return data
 }
+const uploadFile = async (bucketName: string, path: string, file: File, options: any) => {
+    const { data, error } = await supabase.storage.from(bucketName).upload(path, file, options)
+    if (error) {
+        console.error(error)
+        return false
+    }
+    return data
+}
 
-export { checkBucketExists, createBucket, deleteBucket }
+const getDownloadUrl = async (bucketName: string, path: string) => {
+    const { data } = await supabase.storage.from(bucketName).getPublicUrl(path)
+    return data
+}
+
+
+export { checkBucketExists, createBucket, deleteBucket, uploadFile, getDownloadUrl }
 
 
 

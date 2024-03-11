@@ -94,7 +94,7 @@ model Chat {
   title     String
   userId    String
   messages  Message[]
-  user      User?     @relation(fields: [userId], references: [id])
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
@@ -102,9 +102,9 @@ model Chat {
 model Message {
   id         String   @id @default(uuid())
   chatId     String
-  chat       Chat     @relation(fields: [chatId], references: [id])
+  chat       Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   userId     String?
-  user       User?    @relation(fields: [userId], references: [id])
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   content    String
   serialized String
   role       String
