@@ -28,6 +28,15 @@ interface FormValues {
     password: string
     remember?: boolean
 }
+
+const appendParams = (searchParams: URLSearchParams) => {
+    const callbackUrl = searchParams.get('callbackUrl')
+    if (callbackUrl) {
+        return `?callbackUrl=${callbackUrl}`
+    }
+    return ''
+}
+
 export default function LoginPage() {
     const { data: session } = useSession()
     const router = useRouter()
@@ -183,7 +192,7 @@ export default function LoginPage() {
 
                             <div className='flex gap-2 flex-col'>
 
-                                <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content={loginCopy.signWithGoogle} icon={<GoogleIcon />} />
+                                <AuthButton onClick={() => { signIn('google', { callbackUrl: `/dashboard${appendParams(searchParams)}` }) }} content={loginCopy.signWithGoogle} icon={<GoogleIcon />} />
 
                             </div>
 
