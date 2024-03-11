@@ -22,7 +22,7 @@ const Topbar = () => {
                         </Link>
                     </li>
                     <li><Link href={siteUrls.general.settings}>Settings</Link></li>
-                    <li><Link href={'#'} onClick={async () => { await signOut({ callbackUrl: "/login" }) }}>Logout</Link></li>
+                    <li><Link href={'#'} onClick={async () => { await signOut({ callbackUrl: "/ " }) }}>Logout</Link></li>
                 </ul>
             </div>
         </div>

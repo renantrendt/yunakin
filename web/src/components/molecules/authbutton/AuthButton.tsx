@@ -21,7 +21,7 @@ const AuthButton = ({ onClick, content, icon }: AuthButtonProps) => {
             type="button"
         >
             {icon}
-            <p className='text-black text-sm leading-5 font-normal '>{content}</p>
+            <p className='text-black text-sm leading-5 font-medium '>{content}</p>
         </button>
     )
 }

@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
 import InputField from './InputField'
-import LockOnIcon from '@/icons/LockOnIcon.svg'
-import LockOffIcon from '@/icons/LockOffIcon.svg'
+import EyeIcon from '@/icons/eye-icon.svg'
+import EyeSlashIcon from '@/icons/eye-slash-icon.svg'
 
 interface PasswordInputFieldProps extends React.ComponentProps<typeof InputField> {
 
@@ -17,7 +17,7 @@ const PasswordInputField: React.FC<PasswordInputFieldProps> = (props) => {
             trailingIcon={
                 <span onClick={() => setShowPassword(!showPassword)} className='hover:cursor-pointer'>
                     {showPassword ?
-                        <LockOffIcon /> : <LockOnIcon />}
+                        <EyeSlashIcon /> : <EyeIcon />}
                 </span>
             }
         />

@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import InputField from '@/components/atomic/input/InputField'
 import Button from '@/components/atomic/button/Button'
 import customToast from '@/components/atomic/toast/customToast'
-import EmailIcon from '@/icons/EmailIcon'
+import EnvelopeIcon from '@/icons/envelope-icon.svg'
 import Link from 'next/link'
 import Image from 'next/image'
 import siteUrls, { siteCopy } from '@/config/site-config'
@@ -86,7 +86,7 @@ export default function ForgotPasswordPage() {
                                         id="email"
                                         name="email"
                                         placeholder={forgotPasswordCopy.emailPlaceholder}
-                                        leadingIcon={<EmailIcon />}
+                                        trailingIcon={<EnvelopeIcon />}
                                         onChange={onChange}
                                         value={value}
                                         error={errors.email?.message}

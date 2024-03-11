@@ -10,12 +10,12 @@ import customToast from '@/components/atomic/toast/customToast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteUrls, { siteCopy } from '@/config/site-config'
-import EmailIcon from '@/icons/EmailIcon'
+import EnvelopeIcon from '@/icons/envelope-icon.svg'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
 import AuthButton from '@/components/molecules/authbutton/AuthButton'
-import GoogleCircleIcon from '@/icons/GoogleCircleIcon'
+import GoogleIcon from "@/icons/google-icon.svg"
 import Checkbox from '@/components/atomic/checkbox/Checkbox'
 const schema = yup.object({
     email: yup.string().email().required(),
@@ -121,7 +121,7 @@ export default function LoginPage() {
                                         id="email"
                                         name="email"
                                         placeholder={loginCopy.emailPlaceholder}
-                                        leadingIcon={<EmailIcon />}
+                                        trailingIcon={<EnvelopeIcon />}
                                         onChange={onChange}
                                         value={value}
                                         error={errors.email?.message}
@@ -183,9 +183,7 @@ export default function LoginPage() {
 
                             <div className='flex gap-2 flex-col'>
 
-                                <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content={loginCopy.signWithGoogle} icon={<GoogleCircleIcon />} />
-                                {/* <AuthButton onClick={() => { signIn('twitter', { callbackUrl: '/dashboard' }) }} content='Sign In with Twitter' icon={<TwitterIcon />} /> */}
-                                {/* <AuthButton onClick={() => { signIn('github', { callbackUrl: '/dashboard' }) }} content='Sign In with Github' icon={<GithubIcon />} /> */}
+                                <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content={loginCopy.signWithGoogle} icon={<GoogleIcon />} />
 
                             </div>
 
