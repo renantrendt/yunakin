@@ -99,7 +99,7 @@ export default function ForgotPasswordPage() {
                                 )}
                             />
                             <div className="flex justify-center flex-col gap-4">
-                                <Button variant="primary" type="submit" classname="w-full" label={resetPasswordCopy.submit} size='md' loading={loading} />
+                                <Button variant="primary" type="submit" classname="w-full" label={resetPasswordCopy.submit} size='lg' loading={loading} />
                             </div>
                         </div>
                     </div>

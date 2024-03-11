@@ -121,7 +121,7 @@ export default function LoginPage() {
                                         id="email"
                                         name="email"
                                         placeholder={loginCopy.emailPlaceholder}
-                                        trailingIcon={<EnvelopeIcon />}
+                                        trailingIcon={<span className='text-grey-400'><EnvelopeIcon /> </span>}
                                         onChange={onChange}
                                         value={value}
                                         error={errors.email?.message}
@@ -165,7 +165,7 @@ export default function LoginPage() {
                                 )}
                             />
                             <div className="flex justify-center flex-col gap-4">
-                                <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='md' loading={loading} />
+                                <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='lg' loading={loading} />
 
                                 <div className=' text-sm'>
                                     {loginCopy.notMember} <Link href={siteUrls.general.register} className="text-primary ">{loginCopy.register}</Link>

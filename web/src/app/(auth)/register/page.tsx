@@ -114,7 +114,7 @@ export default function RegisterPage() {
                                         id="email"
                                         name="email"
                                         placeholder={registerCopy.emailPlaceholder}
-                                        trailingIcon={<EnvelopeIcon />}
+                                        trailingIcon={<span className='text-grey-400'><EnvelopeIcon /> </span>}
                                         onChange={onChange}
                                         value={value}
                                         error={errors.email?.message}
@@ -155,7 +155,7 @@ export default function RegisterPage() {
                                 )}
                             />
                             <div className="flex justify-center flex-col gap-4">
-                                <Button variant="primary" type="submit" classname="w-full" label={registerCopy.createAccount} size='md' loading={loading} />
+                                <Button variant="primary" type="submit" classname="w-full" label={registerCopy.createAccount} size='lg' loading={loading} />
                             </div>
                         </div>
                         <div className="relative flex  items-center py-3">

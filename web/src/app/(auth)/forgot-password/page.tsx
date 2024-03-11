@@ -86,7 +86,7 @@ export default function ForgotPasswordPage() {
                                         id="email"
                                         name="email"
                                         placeholder={forgotPasswordCopy.emailPlaceholder}
-                                        trailingIcon={<EnvelopeIcon />}
+                                        trailingIcon={<span className='text-grey-400'><EnvelopeIcon /> </span>}
                                         onChange={onChange}
                                         value={value}
                                         error={errors.email?.message}
@@ -94,7 +94,7 @@ export default function ForgotPasswordPage() {
                                 )}
                             />
                             <div className="flex justify-center flex-col gap-4">
-                                <Button variant="primary" type="submit" classname="w-full" label={forgotPasswordCopy.submit} size='md' loading={loading} />
+                                <Button variant="primary" type="submit" classname="w-full" label={forgotPasswordCopy.submit} size='lg' loading={loading} />
                             </div>
                         </div>
                     </div>
