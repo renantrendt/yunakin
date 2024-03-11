@@ -34,7 +34,7 @@ const EditProfile = () => {
             if (!session?.user) return
 
             if (data.avatar !== session?.user.avatar) {
-                let blob = await fetch(data.avatar).then(r => r.blob());
+                const blob = await fetch(data.avatar).then(r => r.blob());
 
                 const path = "avatars/" + session?.user.id + "/" + "avatar.jpg"
 
@@ -92,7 +92,7 @@ const EditProfile = () => {
             <div className='flex flex-col gap-8'>
                 <div className='flex items-center justify-center gap-6'>
                     <ImageUploader onImageUpload={(image) => setValue('avatar', image)} image={avatar} />
-                    <Typography type='p' className='text-grey-600 !text-xs !leading-[18px]' >Recommended size: 300px X 300px Supported format: jpg, jpeg, png Max size: 2mb</Typography>
+                    <Typography type='p' className='text-grey-600 !text-xs !leading-[18px]' >Recommended size: 300px X 300px <br /> Supported format: jpg, jpeg, png <br /> Max size: 2mb</Typography>
                 </div>
                 <div className='flex flex-col gap-6'>
                     <Controller

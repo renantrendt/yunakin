@@ -1,5 +1,4 @@
 import Button from '@/components/atomic/button/Button'
-import InputField from '@/components/atomic/input/InputField'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useSession } from 'next-auth/react'
 import React from 'react'
@@ -22,7 +21,7 @@ const schema = yup.object({
     confirmPassword: yup.string().oneOf([yup.ref('newPassword')], 'Passwords are not the same').required()
 })
 const EditPassword = () => {
-    const { data: session, update } = useSession()
+    const { data: session } = useSession()
     const { handleSubmit, control, formState: { errors }, setError } = useForm<FormValues>(
         {
             resolver: yupResolver(schema),
