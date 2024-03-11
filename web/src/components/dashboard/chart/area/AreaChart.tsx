@@ -8,6 +8,7 @@ const AreaChart = () => {
             data: [100, 200, 350, 400, 500, 500, 400, 350, 200, 100]
         }],
         options: {
+            colors: ['#5C37EB', '#705AF8', '#5C37EB'],
             chart: {
                 type: 'area',
                 height: 350,

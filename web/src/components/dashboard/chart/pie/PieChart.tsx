@@ -7,6 +7,8 @@ const PieChart = () => {
 
         series: [44, 55, 13, 43, 22],
         options: {
+            colors: ['#5C37EB', '#705AF8', '#5C37EB'],
+
             chart: {
                 width: 380,
                 type: 'pie',

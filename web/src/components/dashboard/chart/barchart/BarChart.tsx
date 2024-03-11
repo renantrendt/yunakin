@@ -5,6 +5,7 @@ import Chart from 'react-apexcharts'
 const BarChart = () => {
     const state = {
         options: {
+            colors: ['#5C37EB', '#705AF8', '#5C37EB'],
             chart: {
                 id: 'apexchart-example'
             },
@@ -14,7 +15,7 @@ const BarChart = () => {
         },
         series: [{
             name: 'series-1',
-            data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+            data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
         }]
     }
 

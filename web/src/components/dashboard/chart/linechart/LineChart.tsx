@@ -15,6 +15,7 @@ const LineChart = () => {
             data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7, 5]
         }],
         options: {
+            colors: ['#5C37EB', '#705AF8', '#5C37EB'],
             chart: chartType,
             forecastDataPoints: {
                 count: 7
@@ -43,18 +44,18 @@ const LineChart = () => {
                     color: '#666'
                 }
             },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    shade: 'dark',
-                    gradientToColors: ['#FDD835'],
-                    shadeIntensity: 1,
-                    type: 'horizontal',
-                    opacityFrom: 1,
-                    opacityTo: 1,
-                    stops: [0, 100, 100, 100]
-                },
-            },
+            // fill: {
+            //     type: 'gradient',
+            //     gradient: {
+            //         shade: 'dark',
+            //         gradientToColors: ['#FDD835'],
+            //         shadeIntensity: 1,
+            //         type: 'horizontal',
+            //         opacityFrom: 1,
+            //         opacityTo: 1,
+            //         stops: [0, 100, 100, 100]
+            //     },
+            // },
             yaxis: {
                 min: -10,
                 max: 40

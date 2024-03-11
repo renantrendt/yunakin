@@ -18,7 +18,7 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "lg", loading, trailing }) => {
-  const baseStyle = "min-w-[150px] cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  font-[14px] font-normal leading-[20px] "
+  const baseStyle = "min-w-[150px] cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px] "
   let variantStyle = ''
   switch (variant) {
     case 'primary':
