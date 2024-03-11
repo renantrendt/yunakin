@@ -115,7 +115,7 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                                         <Button icon={<DeleteIcon />} size='md' onClick={() => {
                                             setTobeDeletedUserId(user.id)
                                             setModalOpen(true)
-                                        }} classname='!w-fit !p-2 !min-w-fit' variant='alert' label='' />
+                                        }} classname='!w-fit !p-2 !min-w-fit text-red-600 border-red-300 bg-red-100 hover:bg-red-200' variant='alert' label='' />
                                     </div>
                                 </TableCell>
                             </TableRow>

@@ -27,7 +27,7 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
         await sendResetPasswordEmail({
             to: user.email,
             name: user.name,
-            subject: 'Rest Password',
+            subject: 'Reset Password',
             token: resetPassword.token as string
         });        // await sendEmail("verifyEmail", user.email, user.id);
         return NextResponse.json(

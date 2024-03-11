@@ -25,10 +25,10 @@ export const sendVerificationEmail = async ({
 
   try {
     const data = await resend.emails.send({
-      from: 'Fortan <fortan@codepilot.dev>',
+      from: 'noreply <noreply@codepilot.dev>',
       to: [to],
       subject: subject,
-      react: VerificationEmail({ confirmationEmail: `${platformConfig.variables.NEXT_URL}/verify?token=${token}`, name: name, organizationName: "CodePilot" }) as React.ReactElement,
+      react: VerificationEmail({ confirmationEmail: `${platformConfig.variables.NEXT_URL}/verify?token=${token}`, name: name, organizationName: "Codepilot" }) as React.ReactElement,
     });
     return { success: true, data: data }
   } catch (error: any) {
@@ -54,10 +54,10 @@ export const sendResetPasswordEmail = async ({
 
   try {
     const data = await resend.emails.send({
-      from: 'Fortan <fortan@codepilot.dev>',
+      from: 'noreply <noreply@codepilot.dev>',
       to: [to],
       subject: subject,
-      react: ResetPasswordEmail({ resetPasswordLink: `${platformConfig.variables.NEXT_URL}/reset-password?token=${token}`, name: name, organizationName: "CodePilot" }) as React.ReactElement,
+      react: ResetPasswordEmail({ resetPasswordLink: `${platformConfig.variables.NEXT_URL}/reset-password?token=${token}`, name: name, organizationName: "Codepilot" }) as React.ReactElement,
     });
     return { success: true, data: data }
   } catch (error: any) {
@@ -80,7 +80,7 @@ export const sendWelcomeWaitingListEmail = async ({
     from: 'noreply <noreply@codepilot.dev>',
     to: [to],
     subject: subject,
-    react: WelcomeWaitingListEmailTemplate({ organizationName: "CodePilot" }) as React.ReactElement,
+    react: WelcomeWaitingListEmailTemplate({ organizationName: "Codepilot" }) as React.ReactElement,
   });
   return { success: true, data: data }
 }

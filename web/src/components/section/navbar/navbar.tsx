@@ -57,7 +57,7 @@ export default function Navbar() {
                         })}
                     </ul>
                 </div>
-                <div className="navbar-end  w-full   gap-4">
+                <div className="navbar-end  w-full   gap-3">
                     <div className="dropdown flex justify-end w-full lg:hidden">
                         <div className='text-black font-black'>
                             <IconButton icon={<HamburgerIcon />} onClick={() => { setShowMenu(!showMenu) }} className='w-8 h-8' />
@@ -78,6 +78,7 @@ export default function Navbar() {
                                 <Button
                                     variant='tertiary'
                                     label='Login'
+                                    size='md'
                                     classname='!min-w-[150px] !w-full '
                                     onClick={() => router.push(siteUrls.general.login)}
                                 />
@@ -88,6 +89,7 @@ export default function Navbar() {
                                     variant='primary'
                                     classname=' !min-w-[150px] !w-full  text-white '
                                     label='Get Started'
+                                    size='md'
                                     onClick={() => router.push(siteUrls.general.register)}
                                 />
                             </li>
@@ -97,7 +99,7 @@ export default function Navbar() {
                     <Button
                         variant='secondary'
                         label='Login'
-                        size='lg'
+                        size='md'
                         classname='hidden !min-w-[120px] lg:block'
                         onClick={() => router.push(siteUrls.general.login)}
                     />
@@ -105,7 +107,7 @@ export default function Navbar() {
                         variant='primary'
                         classname=' hidden !min-w-[120px] lg:block'
                         label='Get Started'
-                        size='lg'
+                        size='md'
                         onClick={() => router.push(siteUrls.general.register)}
                     />
 

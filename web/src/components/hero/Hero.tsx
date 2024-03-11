@@ -22,7 +22,7 @@ export default function Hero() {
                             {siteCopy.heroSection.description}
                         </Typography>
 
-                        <div className='flex justify-center flex-col lg:flex-row lg:justify-start mt-8 lg:mt-14 gap-2 lg:gap-4'>
+                        <div className='flex justify-center flex-col lg:flex-row lg:justify-start mt-8 lg:mt-14 gap-2 lg:gap-3'>
                             <Button
                                 variant='primary'
                                 size='lg'
