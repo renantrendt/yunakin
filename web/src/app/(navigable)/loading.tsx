@@ -3,7 +3,9 @@ import React from 'react'
 
 const Loading = () => {
     return (
-        <div className='flex w-full justify-center items-center text-red-300'> <LoadingIcon /></div>
+        <div className='flex w-full justify-center items-center'>
+            <LoadingIcon />
+        </div>
     )
 }
 
