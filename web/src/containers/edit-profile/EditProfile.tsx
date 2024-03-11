@@ -17,15 +17,17 @@ import platformConfig from '@/config/app-config'
 interface FormValues {
     email: string
     name: string
-    avatar: string
+    avatar?: string
 }
 const schema = yup.object({
     email: yup.string().email().required(),
     name: yup.string().required(),
-    avatar: yup.string().required(),
+    avatar: yup.string()
 })
 const EditProfile = () => {
     const { data: session, update } = useSession()
+
+    console.log(session)
     const editProfileMutation = useMutation({
         mutationFn: async (data: any) => {
 
@@ -51,16 +53,8 @@ const EditProfile = () => {
 
 
             }
-
-            console.log(data.avatar)
-            const updatedUser = await updateUser(session?.user.id as string, data)
-
-            update(
-                {
-                    ...session,
-                    user: updatedUser
-                }
-            )
+            await updateUser(session?.user.id as string, data)
+            update()
         },
         onSuccess: () => {
             customToast.success("Profile updated successfully")

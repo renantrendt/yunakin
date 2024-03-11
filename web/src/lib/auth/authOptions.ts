@@ -114,7 +114,7 @@ export const authOptions: NextAuthOptions = {
             return true;
         },
         session: async ({ session, token }) => {
-            const user = await prisma.user.findUnique({
+            const user = await prisma.user.findFirst({
                 where: { email: token.email as string },
                 select: {
                     id: true,
@@ -123,6 +123,7 @@ export const authOptions: NextAuthOptions = {
                     avatar: true,
                 }
             });
+            console.log(user)
             const userSubscription = await prisma.subscription.findFirst({
                 where: {
                     userId: user?.id
@@ -152,7 +153,6 @@ export const authOptions: NextAuthOptions = {
                     platformConfig.variables.NEXTAUTH_JWT_SECRET!
                 )
             }
-
             return await Promise.resolve(token)
         }
     },
