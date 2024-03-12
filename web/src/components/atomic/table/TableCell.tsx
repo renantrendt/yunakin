@@ -15,7 +15,7 @@ const TableCell = ({ children, className, onClick, padding = true, cellStyle = '
     const sizeStyle = size == "lg" ? "py-[30px]" : size == "md" ? "py-[20px]" : "py-[10px]";
     const alignStyle = align == "left" ? "text-left" : align == "center" ? "text-center" : "text-right";
     return (
-        <td onClick={onClick} className={cn('py-[14px] dark:bg-card-dark dark:text-white  text-grey-400 text-sm', sizeStyle, alignStyle, padding ? "px-6" : "", cellStyle == 'white' ? "bg-white " : "bg-grey-50", className)}>{children}</td>
+        <td onClick={onClick} className={cn('py-[14px] dark:bg-card-dark dark:text-white  text-grey-400 text-sm table-cell w-', sizeStyle, alignStyle, padding ? "px-6" : "", cellStyle == 'white' ? "bg-white " : "bg-grey-50", className)}>{children}</td>
     )
 }
 
