@@ -6,8 +6,10 @@ import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
 import NotificationIcon from "@/icons/notification-icon.svg"
+import AccountModal from '@/components/molecules/account-modal/AccountModal'
 const Topbar = () => {
     const { data: session } = useSession()
+    const [show, setShow] = React.useState(false)
     return (
         <div className='flex justify-between px-2 py-[10px] w-full items-center'>
             <Typography type='h1' className='!text-xl'>Welcome {session?.user?.name}</Typography>
@@ -16,24 +18,16 @@ const Topbar = () => {
                 <div className="cursor-pointer p-[10px] bg-grey-100 text-grey-600 w-fit h-fit dark:bg-icon-dark dark:text-white rounded-full">
                     <NotificationIcon />
                 </div>
-                <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                        <Avatar image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
-                    </div>
-                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100  dark:bg-gray-500 rounded-box w-52">
-                        <li>
-                            <Link href={'/profile'} className="justify-between">
-                                Profile
-                                <span className="badge dark:bg-gray-600">New</span>
-                            </Link>
-                        </li>
-                        <li><Link href={siteUrls.general.settings}>Settings</Link></li>
-                        <li><Link href={'#'} onClick={async () => { await signOut({ callbackUrl: "/ " }) }}>Logout</Link></li>
-                    </ul>
+                <div className='relative'>
+                    <Avatar onMouseEnter={() => setShow(true)} onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
+                    <AccountModal email={session?.user?.email as string}
+                        name={session?.user?.name || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
+                        image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} shown={show}
+                    />
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }
 

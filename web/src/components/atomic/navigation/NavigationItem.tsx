@@ -7,11 +7,13 @@ interface NavigationItemProps {
     link: string;
     icon?: React.ReactNode;
     selected?: boolean;
+    onClick?: () => void;
 }
 
-const NavigationItem = ({ title, link, icon, selected }: NavigationItemProps) => {
+const NavigationItem = ({ title, link, icon, selected, onClick }: NavigationItemProps) => {
     return (
-        <Link href={link} >
+
+        <Link href={link} onClick={() => { onClick && onClick() }} >
             <li tabIndex={1} className='focus:shadow-focus-primary rounded-lg' >
 
                 <div className={cn('flex flex-row  gap-2 justify-start items-center p-2 !text-grey-600  hover:bg-grey-200 dark:hover:bg-input-dark  dark:text-sidebar-icon-dark ', selected ? "bg-grey-200 dark:bg-input-dark " : "")}>
@@ -20,6 +22,7 @@ const NavigationItem = ({ title, link, icon, selected }: NavigationItemProps) =>
                 </div>
             </li>
         </Link>
+
     )
 }
 

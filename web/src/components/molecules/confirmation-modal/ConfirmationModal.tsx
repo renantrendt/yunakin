@@ -22,7 +22,7 @@ const ConfirmationModal = ({ isOpen, onClose, children, icon, title, description
                     <p className='text-sm font-normal leading-5'>{description}</p>
                 </div>
             </div>
-            <div className='flex justify-end gap-2 py-4 px-6 bg-grey-50'>
+            <div className='flex justify-end gap-2 py-4 px-6 bg-grey-50 dark:bg-card-dark'>
                 {children}
             </div>
         </Modal>
