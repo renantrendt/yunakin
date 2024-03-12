@@ -33,18 +33,18 @@ const Pagination = ({ totalPages, previousButton, previousButtonDisabled, nextBu
         <div className='text-black flex justify-center w-fit rounded-lg border-[1px] border-grey-300 shadow-sm bg-white   '>
             {previousButton && <PaginationItem
                 disabled={previousButtonDisabled}
-                onClick={onPreviousClick} pageNumber={'Previous'} isActive={false} />}
+                onClick={onPreviousClick} pageNumber={'Previous'} />}
             {pageNumbers.map((pageNumber, index) => {
                 return <PaginationItem
                     key={index} onClick={() => {
                         if (typeof pageNumber === 'number') {
                             onPageClick && onPageClick(pageNumber)
                         }
-                    }} pageNumber={pageNumber} isActive={false} />
+                    }} pageNumber={pageNumber} />
             })}
             {nextButton && <PaginationItem
                 disabled={nextButtonDisabled}
-                onClick={onNextClick} pageNumber={'Next'} isActive={false} />}
+                onClick={onNextClick} pageNumber={'Next'} />}
         </div>
     )
 }

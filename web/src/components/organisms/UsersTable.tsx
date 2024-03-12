@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react'
 import Button from '@/components/atomic/button/Button'
-import Chip from '@/components/atomic/chip/Chip'
 import Dropdown from '@/components/atomic/dropdown/Dropdown'
 import Table from '@/components/atomic/table/Table'
 import TableBody from '@/components/atomic/table/TableBody'
@@ -13,7 +12,8 @@ import { changeUserRole, deleteUser } from '@/app/actions/users'
 import customToast from '../atomic/toast/customToast'
 import ConfirmationModal from '../molecules/confirmation-modal/ConfirmationModal'
 import Pagination from '../molecules/pagination/Pagination'
-import { useReactTable, getCoreRowModel, getPaginationRowModel, ColumnDef, PaginationState, flexRender, createColumnHelper, CellContext } from '@tanstack/react-table';
+import { useReactTable, getCoreRowModel, getPaginationRowModel, PaginationState, flexRender, createColumnHelper } from '@tanstack/react-table';
+import Badge from '../atomic/badge/Badge'
 
 const colors = ['primary', 'red', 'green', 'grey', 'orange', 'white']
 
@@ -56,7 +56,7 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
 
         columnHelper.accessor(row => row.role, {
             id: 'Role',
-            cell: info => users[info.row.index].role,
+            cell: info => <Badge type='outline' color={colors[info.row.index % 6] as any}>{users[info.row.index].role}</Badge>,
             header: () => <span>Role</span>,
             footer: info => info.column.id,
         }),
