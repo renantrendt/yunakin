@@ -14,12 +14,14 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/utils/cn'
 import ContentSection from '@/containers/layout/ContentSection'
 import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
+import { useTheme } from 'next-themes'
 export default function Navbar() {
     const pathName = usePathname()
     const router = useRouter()
     const [showMenu, setShowMenu] = React.useState(false)
     const [border, setBorder] = React.useState(false)
     const navRef = React.useRef<HTMLDivElement>(null)
+    const { theme } = useTheme()
     const changeNavBg = () => {
         if (!navRef.current) {
             return;
@@ -40,7 +42,7 @@ export default function Navbar() {
                 <div className="navbar-start w-full">
 
                     <Link href={siteUrls.general.home}>
-                        <Image src="/images/logo.svg" alt="logo" width={165} height={96} className='w-full h-full' />
+                        <Image src={theme == "light" ? `/images/logo.svg` : '/images/logo-dark.svg'} alt="logo" width={165} height={96} className='w-full h-full' />
                     </Link>
                 </div>
                 <div className="navbar-center   hidden lg:flex justify-center">

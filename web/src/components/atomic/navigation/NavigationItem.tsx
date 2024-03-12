@@ -14,7 +14,7 @@ const NavigationItem = ({ title, link, icon, selected }: NavigationItemProps) =>
         <Link href={link} >
             <li tabIndex={1} className='focus:shadow-focus-primary rounded-lg' >
 
-                <div className={cn('flex flex-row  gap-2 justify-start items-center p-2 !text-grey-600  hover:bg-grey-200 ', selected ? "bg-grey-200" : "")}>
+                <div className={cn('flex flex-row  gap-2 justify-start items-center p-2 !text-grey-600  hover:bg-grey-200 dark:hover:bg-input-dark  dark:text-sidebar-icon-dark ', selected ? "bg-grey-200 dark:bg-input-dark " : "")}>
                     {icon}
                     <p className='text-sm font-normal leading-[20px] '>{title}</p>
                 </div>

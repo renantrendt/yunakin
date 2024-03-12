@@ -137,6 +137,7 @@ const config: Config = {
       'line-dark': "#3B344E",
       'input-hover-dark': "#37354B",
       'icon-dark': "#383749",
+      'sidebar-icon-dark': "#A19DBE",
 
     },
     "boxShadow": {

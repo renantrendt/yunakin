@@ -15,7 +15,8 @@ import AnalyticsIcon from "@/icons/analytics.svg"
 import ChatGptIcon from "@/icons/chatgpt.svg"
 import NavigationItem from '../atomic/navigation/NavigationItem'
 import { usePathname } from 'next/navigation'
-
+import { useTheme } from 'next-themes'
+import DashboardDarkIcon from "@/icons/dashboard-logo-dark-icon.svg"
 interface SidebarLink {
     label: string
     path: string
@@ -45,6 +46,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
     const [search, setSearch] = React.useState('')
     const pathname = usePathname()
+    const { theme, setTheme } = useTheme();
 
     return (
         <aside className={` z-50 flex  h-screen  text-white overflow-y-hidden absolute lg:static top-0 left-0 w-72 flex-col bg-grey-100 dark:bg-card-dark
@@ -52,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
         lg:translate-x-0 ${showMenu ? '-translate-x-0' : '-translate-x-full'}`}>
             <div className=" flex items-center justify-between gap-2  mb-2   ">
                 <Link href={siteUrls.general.dashboard} className="btn btn-ghost text-xl">
-                    <DashboardLogoIcon />
+                    {theme == "light" ? <DashboardLogoIcon /> : <DashboardDarkIcon />}
                 </Link>
                 {/* <Button className='block lg:hidden' >Show</Button> */}
             </div>

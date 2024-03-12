@@ -5,7 +5,7 @@ import siteUrls from '@/config/site-config'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
-
+import NotificationIcon from "@/icons/notification-icon.svg"
 const Topbar = () => {
     const { data: session } = useSession()
     return (
@@ -13,7 +13,9 @@ const Topbar = () => {
             <Typography type='h1' className='!text-xl'>Welcome {session?.user?.name}</Typography>
             <div className='flex justify-center gap-2'>
                 <ThemeSwitcher />
-
+                <div className="cursor-pointer p-[10px] bg-grey-100 text-grey-600 w-fit h-fit dark:bg-icon-dark dark:text-white rounded-full">
+                    <NotificationIcon />
+                </div>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <Avatar image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
