@@ -12,28 +12,103 @@ import DeleteIcon from "@/icons/trash-icon.svg"
 import { changeUserRole, deleteUser } from '@/app/actions/users'
 import customToast from '../atomic/toast/customToast'
 import ConfirmationModal from '../molecules/confirmation-modal/ConfirmationModal'
+import Pagination from '../molecules/pagination/Pagination'
+import { useReactTable, getCoreRowModel, getPaginationRowModel, ColumnDef, PaginationState, flexRender, createColumnHelper, CellContext } from '@tanstack/react-table';
+
 const colors = ['primary', 'red', 'green', 'grey', 'orange', 'white']
 
+interface User {
+    id: string;
+    email: string;
+    name: string;
+    password: string | null;
+    verifyToken: string;
+    verified: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+    avatar: string | null;
+    role: string;
+    provider: string;
+
+}
 interface UsersTableProps {
-    users: {
-        id: string;
-        email: string;
-        name: string;
-        password: string | null;
-        verifyToken: string;
-        verified: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        avatar: string | null;
-        role: string;
-        provider: string;
-    }[]
+    users: User[]
 }
 const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
-    const [users, setUsers] = useState(defaultUsers)
-
+    const [users, setUsers] = useState<User[]>(defaultUsers)
     const [modalOpen, setModalOpen] = useState(false)
     const [tobeDeletedUserId, setTobeDeletedUserId] = useState('')
+    const columnHelper = createColumnHelper<User>()
+
+    const columns = [
+        columnHelper.accessor(row => row.name, {
+            id: 'Name',
+            cell: info => info.getValue(),
+            header: () => <span>Last Name</span>,
+            footer: info => info.column.id,
+        }),
+        columnHelper.accessor(row => row.email, {
+            id: 'Email',
+            cell: info => info.getValue(),
+            header: () => <span>Email</span>,
+            footer: info => info.column.id,
+        }),
+
+        columnHelper.accessor(row => row.role, {
+            id: 'Role',
+            cell: info => users[info.row.index].role,
+            header: () => <span>Role</span>,
+            footer: info => info.column.id,
+        }),
+        columnHelper.display({
+            id: 'Actions',
+            cell: info => {
+                const user = users[info.row.index]
+                return (<div className='flex justify-center gap-2'>
+                    <Dropdown
+                        options={[{
+                            value: 'ADMIN',
+                            label: 'Admin',
+                            selected: user.role === "ADMIN"
+                        },
+                        {
+                            value: 'USER',
+                            label: 'User',
+                            selected: user.role === "USER"
+                        }]}
+                        onChange={(value: string) => {
+                            const user = users[info.row.index]
+                            handleRoleChange(user.id, value)
+                        }
+                        }
+                        className='!w-fit'
+                    />
+                    <Button icon={<DeleteIcon />} size='md' onClick={() => {
+                        setTobeDeletedUserId(user.id)
+                        setModalOpen(true)
+                    }} classname='!w-fit !p-2 !min-w-fit text-red-600 border-red-300 bg-red-100 hover:bg-red-200' variant='alert' label='' />
+                </div>)
+            },
+            header: () => <span>Actions</span>,
+        }),
+    ]
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 5,
+    })
+    const table = useReactTable({
+        columns,
+        data: users,
+        debugTable: true,
+        getCoreRowModel: getCoreRowModel(),
+        getPaginationRowModel: getPaginationRowModel(), //load client-side pagination code
+        onPaginationChange: setPagination,
+        autoResetPageIndex: false,
+        state: {
+            pagination
+
+        },
+    });
 
     const handleRoleChange = async (userId: string, role: string) => {
         try {
@@ -72,57 +147,65 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
 
     return (
         <div className='h-full min-h-[100vh]'>
+            <div className='flex flex-col gap-4'>
 
-            <Table>
-                <TableHead>
-                    <TableCell cellStyle='grey'>Username</TableCell>
-                    <TableCell cellStyle='grey'>Email</TableCell>
-                    <TableCell cellStyle='grey'>Role</TableCell>
-                    <TableCell cellStyle='grey'>Tag</TableCell>
-                    <TableCell cellStyle='grey' align='right'>Actions</TableCell>
-                </TableHead>
-                <TableBody>
-                    {users.map((user, index) => {
-                        console.log(user)
-                        return (
-                            <TableRow key={index}>
-                                <TableCell>{user.name}</TableCell>
-                                <TableCell>{user.email}</TableCell>
-                                <TableCell>
-                                    {user.role}
-                                </TableCell>
-                                <TableCell>
-                                    <Chip includeClose={true} color={colors[index] as any} type='outline'>
-                                        member
-                                    </Chip>
-                                </TableCell>
-                                <TableCell align='right'>
-                                    <div className='flex justify-center gap-2'>
-                                        <Dropdown
-                                            // onChange={(value) => console.log(value)}
-                                            options={[{
-                                                value: 'ADMIN',
-                                                label: 'Admin',
-                                                selected: user.role === "ADMIN"
-                                            },
-                                            {
-                                                value: 'USER',
-                                                label: 'User',
-                                                selected: user.role === "USER"
-                                            }]}
-                                            onChange={(value: string) => handleRoleChange(user.id, value)}
-                                        />
-                                        <Button icon={<DeleteIcon />} size='md' onClick={() => {
-                                            setTobeDeletedUserId(user.id)
-                                            setModalOpen(true)
-                                        }} classname='!w-fit !p-2 !min-w-fit text-red-600 border-red-300 bg-red-100 hover:bg-red-200' variant='alert' label='' />
-                                    </div>
-                                </TableCell>
+                <Table>
+                    <TableHead>
+                        {table.getHeaderGroups().map(headerGroup => (
+                            <TableRow key={headerGroup.id}>
+                                {headerGroup.headers.map(header => (
+                                    <TableCell key={header.id}>
+                                        {header.isPlaceholder
+                                            ? null
+                                            : flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext()
+                                            )}
+                                    </TableCell>
+                                ))}
                             </TableRow>
-                        )
-                    })}
-                </TableBody>
-            </Table>
+                        ))}
+                    </TableHead>
+                    <TableBody>
+                        {table.getRowModel().rows.map(row => {
+                            console.log(row.getVisibleCells())
+                            return (
+                                <TableRow key={row.id}>
+                                    {row.getVisibleCells().map(cell => {
+                                        return (
+                                            <TableCell key={cell.id}>
+                                                {flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext()
+                                                )}
+                                            </TableCell>
+                                        )
+                                    })}
+                                </TableRow>
+                            )
+                        })}
+                    </TableBody>
+                </Table>
+                <div className='self-end'>
+
+                    <Pagination
+                        totalPages={Math.ceil(users.length / 5)}
+                        previousButton
+                        nextButton
+                        previousButtonDisabled={!table.getCanPreviousPage()}
+                        nextButtonDisabled={!table.getCanNextPage()}
+                        onPreviousClick={() => { table.previousPage() }}
+                        onNextClick={() => { table.nextPage() }}
+                        onPageClick={(pageNumber) => {
+                            table.setPagination({
+                                pageIndex: pageNumber - 1,
+                                pageSize: 5
+                            })
+                        }}
+                    />
+                </div>
+
+            </div>
             <ConfirmationModal
                 icon={
                     <div className='p-2 w-fit bg-gradient-to-b from-red-100 to-red-200  text-red-500

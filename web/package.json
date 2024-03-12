@@ -29,6 +29,7 @@
     "@supabase/supabase-js": "^2.39.7",
     "@tailwindcss/forms": "^0.5.7",
     "@tanstack/react-query": "^5.18.0",
+    "@tanstack/react-table": "^8.13.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/mdx": "^2.0.11",
     "@types/qs": "^6.9.11",
