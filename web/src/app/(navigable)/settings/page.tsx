@@ -53,10 +53,9 @@ export default function SettingsPage() {
                     })}
                 </div>
             </div>
-            <div className="pricing min-h-screen" >
+            <div className="  flex justify-center lg:justify-start"  >
                 {tab.component}
             </div>
-
             {/* <Access /> */}
         </div>
     );

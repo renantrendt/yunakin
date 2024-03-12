@@ -8,6 +8,7 @@ import { useMutation } from '@tanstack/react-query'
 import customToast from '@/components/atomic/toast/customToast'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import { updatePassword } from '@/app/actions/users'
+import Typography from '@/components/atomic/typography/Typography'
 
 interface FormValues {
     currentPassword: string
@@ -52,7 +53,7 @@ const EditPassword = () => {
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col   bg-white   p-6 rounded-2xl border-[1px] border-grey-200   gap-6">
-            <h1 className="text-2xl font-bold text-left text-black dark:text-white">Edit Password</h1>
+            <Typography type='p' className='text-sm text-grey-600 leading-5 ' >Edit Password</Typography>
 
             <div className='flex flex-col gap-8'>
                 <div className='flex flex-col gap-6'>

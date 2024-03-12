@@ -115,7 +115,7 @@ export const authOptions: NextAuthOptions = {
         },
         session: async ({ session, token }) => {
             const user = await prisma.user.findFirst({
-                where: { email: token.email as string },
+                where: { id: token.id as string },
                 select: {
                     id: true,
                     email: true,
@@ -123,7 +123,6 @@ export const authOptions: NextAuthOptions = {
                     avatar: true,
                 }
             });
-            console.log(user)
             const userSubscription = await prisma.subscription.findFirst({
                 where: {
                     userId: user?.id
@@ -147,6 +146,7 @@ export const authOptions: NextAuthOptions = {
                 token.id = user.id
                 token.email = user.email
                 token.name = user.name
+                token.avatar = user.image
                 token.randomKey = 'KG KEY'
                 token.encoded = jwt.sign(
                     token,

@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react'
 import React from 'react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import * as yup from 'yup'
-import EmailIcon from '@/icons/EmailIcon'
+import EnvelopeIcon from "@/icons/envelope-icon.svg"
 import ImageUploader from '@/components/atomic/file-uploader/ImageUploader'
 import Typography from '@/components/atomic/typography/Typography'
 import { useMutation } from '@tanstack/react-query'
@@ -87,11 +87,14 @@ const EditProfile = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col   bg-white   p-6 rounded-2xl border-[1px] border-grey-200   gap-6">
-            <h1 className="text-2xl font-bold text-left text-black dark:text-white">Edit Profile</h1>
+
+            <Typography type='p' className='text-sm text-grey-600 leading-5 ' >Edit Profile</Typography>
 
             <div className='flex flex-col gap-8'>
                 <div className='flex items-center justify-center gap-6'>
-                    <ImageUploader onImageUpload={(image) => setValue('avatar', image)} image={avatar} />
+                    <div className='w-fit h-fit'>
+                        <ImageUploader onImageUpload={(image) => setValue('avatar', image)} image={avatar} />
+                    </div>
                     <Typography type='p' className='text-grey-600 !text-xs !leading-[18px]' >Recommended size: 300px X 300px <br /> Supported format: jpg, jpeg, png <br /> Max size: 2mb</Typography>
                 </div>
                 <div className='flex flex-col gap-6'>
@@ -115,8 +118,8 @@ const EditProfile = () => {
                         name="email"
                         render={({ field: { onChange, value } }) => (
                             <InputField
-                                leadingIcon={
-                                    <EmailIcon />}
+                                trailingIcon={
+                                    <span className='text-grey-400'><EnvelopeIcon /> </span>}
                                 label="Email"
                                 type="email"
                                 id="email"
