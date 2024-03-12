@@ -46,7 +46,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
     const [search, setSearch] = React.useState('')
     const pathname = usePathname()
-    const { theme, setTheme } = useTheme();
+    const { theme } = useTheme();
 
     return (
         <aside className={` z-50 flex  h-screen  text-white overflow-y-hidden absolute lg:static top-0 left-0 w-72 flex-col bg-grey-100 dark:bg-card-dark
