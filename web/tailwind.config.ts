@@ -135,7 +135,9 @@ const config: Config = {
       'placeholder-dark': "#847FAA",
       'input-border-dark': "#33344D",
       'line-dark': "#3B344E",
-      'input-hover-dark': "#37354B"
+      'input-hover-dark': "#37354B",
+      'icon-dark': "#383749",
+
     },
     "boxShadow": {
       "sm": "0px 3px 6px -3px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.05), 0px 1px 2px -1px rgba(0, 0, 0, 0.05), 0px 1px 0px -1px rgba(0, 0, 0, 0.05)",

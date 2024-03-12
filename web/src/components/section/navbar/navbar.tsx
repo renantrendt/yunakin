@@ -34,7 +34,7 @@ export default function Navbar() {
         }
     }, [])
     return (
-        <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background dark:bg-bg-landing-dark-background  bg-landing-background z-50 !py-2 !md:py-6', border && "border-b-[2px] border-grey-200")}>
+        <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 !py-2 !md:py-6', border && "border-b-[2px] border-grey-200")}>
 
             <div ref={navRef} className="  navbar p-0 max-w-8xl     font-medium text-base leading-[19px] text-grey-400" >
                 <div className="navbar-start w-full">
@@ -101,9 +101,7 @@ export default function Navbar() {
 
                         </ul>
                     </div>
-                    <li>
-                        <ThemeSwitcher />
-                    </li>
+                    <ThemeSwitcher />
                     <Button
                         variant='secondary'
                         label='Login'

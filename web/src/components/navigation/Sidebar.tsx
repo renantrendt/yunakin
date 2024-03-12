@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
     const pathname = usePathname()
 
     return (
-        <aside className={` z-50 flex  h-screen  text-white overflow-y-hidden absolute lg:static top-0 left-0 w-72 flex-col bg-grey-100 darK:bg-grey-100
+        <aside className={` z-50 flex  h-screen  text-white overflow-y-hidden absolute lg:static top-0 left-0 w-72 flex-col bg-grey-100 dark:bg-card-dark
         duration-300 ease-linear p-3 pt-5
         lg:translate-x-0 ${showMenu ? '-translate-x-0' : '-translate-x-full'}`}>
             <div className=" flex items-center justify-between gap-2  mb-2   ">

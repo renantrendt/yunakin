@@ -38,7 +38,7 @@ export default function RootLayoutClient({
     console.log(params.monaSans.variable)
     return (
         <html lang="en" >
-            <body className={cn(inter.className, params.monaSans.variable, "bg-landing-background  dark:bg-landing-dark-background ")}>
+            <body className={cn(inter.className, params.monaSans.variable, "bg-landing-background  dark:bg-landing-dark-background  duration-300 ease-linear")}>
                 <Providers>
                     {children}
                 </Providers>
