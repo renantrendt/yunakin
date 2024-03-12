@@ -106,16 +106,17 @@ export default function LoginPage() {
     return (
         <Suspense fallback="loading">
             <div className="flex justify-center w-full h-screen items-center  ">
-                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white  rounded-[20px] shadow-form-container     shadow-lg  m-auto flex flex-col  gap-4  lg:gap-8 p-6 lg:p-10 ">
+                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white dark:bg-card-dark  rounded-[20px]      m-auto flex flex-col  gap-4  lg:gap-8 p-6 lg:p-10 ">
                     <Link href={siteUrls.general.home}>
-                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
+                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
+                        <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
                     </Link>
                     <div className='flex flex-col gap-8'>
                         <div>
 
                             <Typography type='h3' className=''>{loginCopy.title}</Typography>
                             {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
-                            <Typography type="p" className='mt-2  text-grey-700'>{loginCopy.description}</Typography>
+                            <Typography type="p" className='mt-2  text-grey-700 !dark:text-placeholder-dark '>{loginCopy.description}</Typography>
                         </div>
 
                         <div className='flex flex-col gap-6'>
@@ -130,7 +131,7 @@ export default function LoginPage() {
                                         id="email"
                                         name="email"
                                         placeholder={loginCopy.emailPlaceholder}
-                                        trailingIcon={<span className='text-grey-400'><EnvelopeIcon /> </span>}
+                                        trailingIcon={<span className='text-grey-400 dark:text-placeholder-dark'><EnvelopeIcon /> </span>}
                                         onChange={onChange}
                                         value={value}
                                         error={errors.email?.message}
@@ -176,15 +177,15 @@ export default function LoginPage() {
                             <div className="flex justify-center flex-col gap-4">
                                 <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='lg' loading={loading} />
 
-                                <div className=' text-sm'>
+                                <div className=' text-sm dark:text-white'>
                                     {loginCopy.notMember} <Link href={siteUrls.general.register} className="text-primary ">{loginCopy.register}</Link>
                                 </div>
                             </div>
                         </div>
                         <div className="relative flex  items-center py-3">
-                            <div className="flex-grow border-t border-grey-400"></div>
-                            <span className="flex-shrink mx-4 text-sm text-grey-400">OR</span>
-                            <div className="flex-grow border-t border-grey-400"></div>
+                            <div className="flex-grow border-t border-grey-400 dark:border-line-dark"></div>
+                            <span className="flex-shrink mx-4 text-sm text-grey-400 dark:text-placeholder-dark">OR</span>
+                            <div className="flex-grow border-t border-grey-400 dark:border-line-dark"></div>
                         </div>
                         <div>
 

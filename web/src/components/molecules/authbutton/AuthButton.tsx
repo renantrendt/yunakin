@@ -14,6 +14,9 @@ const AuthButton = ({ onClick, content, icon }: AuthButtonProps) => {
             
             hover:bg-grey-200
             focus:bg-white
+                dark:hover:bg-input-hover-dark
+            dark:bg-input-dark
+            dark:border-input-border-dark
             focus:shadow-focus-primary
 
             "
@@ -21,7 +24,7 @@ const AuthButton = ({ onClick, content, icon }: AuthButtonProps) => {
             type="button"
         >
             {icon}
-            <p className='text-black text-sm leading-5 font-medium '>{content}</p>
+            <p className='text-black dark:text-grey-200 text-sm leading-5 font-medium '>{content}</p>
         </button>
     )
 }

@@ -20,13 +20,14 @@ interface SidebarLink {
     label: string
     path: string
     iconSrc: React.ReactNode // Path to your icon images
+    adminRoute?: boolean
 }
 
 const sidebarLinks: SidebarLink[] = [
     { label: 'Home', path: '/dashboard', iconSrc: <HomeIcon /> },
     { label: "AI", path: "/ai", iconSrc: <div className='w-6 h-6'> <ChatGptIcon /> </div> },
-    { label: 'Notications', path: '/notifications', iconSrc: <InboxIcon /> },
-    { label: 'Users', path: '/users', iconSrc: <UserGroupIcon /> },
+    { label: 'Notifications', path: '/notifications', iconSrc: <InboxIcon /> },
+    { label: 'Users', path: '/users', iconSrc: <UserGroupIcon />, adminRoute: true },
     { label: 'Analytics', path: '/analytics', iconSrc: <AnalyticsIcon /> },
     // Add other necessary links here
 ]
@@ -42,7 +43,6 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
-
     const [search, setSearch] = React.useState('')
     const pathname = usePathname()
 
@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
                 {/* <Button className='block lg:hidden' >Show</Button> */}
             </div>
             <ul className="menu w-64 no-scrollbar flex-1 flex justify-between flex-col">
-                <div >
+                <div>
                     <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
                         id='search' value={search} onChange={(e) => setSearch(e.target.value)} customClassName='bg-transparent border-none outline-none hover:border-none focus:border-none
                              py-0 !px-8 !shadow-none !mb-2  ' customLeadingIconClassName='!left-[8px]' />
@@ -86,9 +86,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
                         />
                     ))}
                 </div>
-
-            </ul >
-            {/* <div className='absolute bottom-0'> Collapse Sidebar</div> */}
+            </ul>
         </aside >
     )
 }

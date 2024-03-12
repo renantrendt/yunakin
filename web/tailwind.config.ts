@@ -128,7 +128,14 @@ const config: Config = {
       'primary-500': "#705AF8",
       'primary-600': " #5C37EB",
       "faq-color": "#0E0E0E",
-      'disabled': "#D6D5FF"
+      'disabled': "#D6D5FF",
+      'landing-dark-background': "#1A191F",
+      'card-dark': "#24232F",
+      'input-dark': "#2C2A3C",
+      'placeholder-dark': "#847FAA",
+      'input-border-dark': "#33344D",
+      'line-dark': "#3B344E",
+      'input-hover-dark': "#37354B"
     },
     "boxShadow": {
       "sm": "0px 3px 6px -3px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.05), 0px 1px 2px -1px rgba(0, 0, 0, 0.05), 0px 1px 0px -1px rgba(0, 0, 0, 0.05)",

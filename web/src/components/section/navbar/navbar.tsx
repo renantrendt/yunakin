@@ -13,6 +13,7 @@ import TopbarNavigationItem from '@/components/atomic/navigation/TopbarNavigatio
 import { usePathname } from 'next/navigation'
 import { cn } from '@/utils/cn'
 import ContentSection from '@/containers/layout/ContentSection'
+import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
 export default function Navbar() {
     const pathName = usePathname()
     const router = useRouter()
@@ -33,7 +34,7 @@ export default function Navbar() {
         }
     }, [])
     return (
-        <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background z-50 !py-2 !md:py-6', border && "border-b-[2px] border-grey-200")}>
+        <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background dark:bg-bg-landing-dark-background  bg-landing-background z-50 !py-2 !md:py-6', border && "border-b-[2px] border-grey-200")}>
 
             <div ref={navRef} className="  navbar p-0 max-w-8xl     font-medium text-base leading-[19px] text-grey-400" >
                 <div className="navbar-start w-full">
@@ -74,6 +75,10 @@ export default function Navbar() {
                                     />
                                 )
                             })}
+
+                            <li>
+                                <ThemeSwitcher />
+                            </li>
                             <li>
                                 <Button
                                     variant='tertiary'
@@ -96,6 +101,9 @@ export default function Navbar() {
 
                         </ul>
                     </div>
+                    <li>
+                        <ThemeSwitcher />
+                    </li>
                     <Button
                         variant='secondary'
                         label='Login'

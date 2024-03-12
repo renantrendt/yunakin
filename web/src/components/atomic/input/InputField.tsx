@@ -27,12 +27,16 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
         </label>
       }
       <div className='flex relative'>
-        {leadingIcon && <div className={cn('absolute left-[16px] top-[11px] text-black ', additionalProps.customLeadingIconClassName)}>{leadingIcon}</div>}
+        {leadingIcon && <div className={cn('absolute left-[16px] top-[11px] text-black dark:text-placeholder-dark ', additionalProps.customLeadingIconClassName)}>{leadingIcon}</div>}
         <input
           type={type}
           placeholder={placeholder}
           className={` outline-none  dark:bg-gray-800 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border-[1px] border-solid
            border-grey-300 hover:border-grey-400 
+           dark:bg-input-dark
+            dark:border-input-border-dark
+            dark:text-grey-200
+            dark:placeholder:text-placeholder-dark
             disabled:bg-grey-100 text-sm
            shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out ${leadingIcon ? "pl-11" : ""} 
            ${trailingIcon ? "pr-11" : ""}
@@ -43,7 +47,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
           onChange={onChange}
           {...additionalProps}
         />
-        {trailingIcon && <div className='absolute right-4 top-[12px]  text-black dark:text-white'>{trailingIcon}</div>}
+        {trailingIcon && <div className='absolute right-4 top-[15px]  text-black dark:text-placeholder-dark'>{trailingIcon}</div>}
       </div>
 
       {error &&
