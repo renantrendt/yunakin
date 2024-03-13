@@ -12,6 +12,7 @@ import { Plans } from '@/config/app-config';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import siteUrls from '@/config/site-config';
+import { cn } from '@/utils/cn';
 export default function PricingProduct({ name, description, price, features, plan, recommended, planId, isMonthly }: {
     name: string
     description: string
@@ -61,17 +62,17 @@ export default function PricingProduct({ name, description, price, features, pla
     };
     return (
         <>
-            <div className="card  border-[1px] border-grey-500 rounded-[32px] h-full bg-white px-5 py-14 lg:px-8">
+            <div className={cn("card  border-[1px] rborder-grey-500 dark:bg-card-dark rounded-[32px] h-full bg-white px-5 py-14 lg:px-8", recommended ? "border-[4px] border-primary" : "")}>
                 {recommended && (
-                    <div className='rounded-[40px] border-[1px] shadow-recommended-pricing border-grey-300  px-6 py-[6px]  bg-white text-primary-500 leading-[140%] text-sm font-semibold  w-fit absolute top-[-12px] left-[32%]  '>Recommended</div>
+                    <div className='rounded-[40px] border-[1px] shadow-recommended-pricing border-grey-300  px-6 py-[6px]  bg-primary text-white leading-[140%] text-sm font-semibold  w-fit absolute top-[-20px] left-[32%]  '>Recommended</div>
                 )}
                 <div className="card-body p-0">
                     <div className='flex  flex-col items-center justify-center mb-2 '>
-                        <h3 className="mb-6 text-[40px] font-semibold text-stone-950 ">{name}</h3>
+                        <h3 className="mb-6 text-[40px] font-semibold text-stone-950 dark:text-white ">{name}</h3>
                         <p className="font-light text-light-grey text-center m:text-lg text-stone-6 max-w-[300px] ">{description}</p>
                     </div>
 
-                    <div className="flex justify-center items-end py-8 !text-stone-950">
+                    <div className="flex justify-center items-end py-8 !text-stone-950 dark:!text-white">
                         <span className="mr-2 text-4xl font-bold flex items-end leading-none ">
                             {price.toFixed(2)}€
                         </span>

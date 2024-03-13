@@ -12,16 +12,16 @@ export default function Pricing({ showDescription = false }: { showDescription?:
         <div className='py-28 w-full  ' id='pricing'>
             {showDescription && (
                 <div className=' flex flex-col justify-center items-center mb-20 gap-5 text-black dark:text-white'>
-                    <Typography type='h1' className='!lg:text-[46px] !lg:leading-[64px] text-stone-950 font-semibold text-center mb-2'>Enable the best experience</Typography>
-                    <h3 className=' text-lg lg:text-xl  max-w-[700px] font-normal  leading-[30px] text-center text-neutral-600'>Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.</h3>
+                    <Typography type='h1' className='!lg:text-[46px] !lg:leading-[64px] text-stone-950 font-semibold text-center mb-2 dark:text-white'>Enable the best experience</Typography>
+                    <h3 className=' text-lg lg:text-xl  max-w-[700px] font-normal  leading-[30px] text-center text-neutral-600 dark:text-sidebar-icon-dark'>Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.</h3>
                 </div>
             )}
 
-            <div className='flex border-[1px] border-grey-500 justify-center gap-4 mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit  bg-white  rounded-[40px] p-2'>
-                <div className={`${isMonthly ? "bg-primary text-white" : ""} rounded-3xl px-8 py-[10px]  transition duration-150 ease-in-out `} onClick={() => setIsMonthly(true)}>
+            <div className='flex justify-center border-[1px] border-grey-500  gap-4 mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit  bg-white dark:bg-card-dark dark:text-white dark:border-none rounded-[40px] p-2'>
+                <div className={`${isMonthly ? " border-primary " : "border-transparent"} rounded-3xl px-8 py-[10px] border-[2px]  transition duration-150 ease-in-out `} onClick={() => setIsMonthly(true)}>
                     <span className='text-sm font-semibold leading-[140%]'>Monthly</span>
                 </div>
-                <div className={`${!isMonthly ? "bg-primary text-white" : ""} rounded-3xl px-8 py-[10px] transition duration-150 ease-in-out`} onClick={() => setIsMonthly(false)}>
+                <div className={`${!isMonthly ? " border-primary " : "border-transparent"} rounded-3xl px-8 border-[2px]  py-[10px] transition duration-150 ease-in-out`} onClick={() => setIsMonthly(false)}>
                     <span className='text-sm font-semibold leading-[140%]' >Yearly</span>
                 </div>
             </div>
