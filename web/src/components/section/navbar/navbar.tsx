@@ -109,6 +109,7 @@ export default function Navbar() {
                         </ul>
                     </div>
                     <>
+                        <ThemeSwitcher />
 
                         {session?.user && (<div className='relative' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
                             <Avatar onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
