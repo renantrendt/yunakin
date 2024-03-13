@@ -1,5 +1,4 @@
 import Avatar from '@/components/atomic/avatar/Avatar';
-import NavigationItem from '@/components/atomic/navigation/NavigationItem';
 import siteUrls from '@/config/site-config';
 import { cn } from '@/utils/cn';
 import { signOut } from 'next-auth/react';
@@ -7,7 +6,6 @@ import React from 'react'
 import SettingsIcon from "@/icons/settings.svg"
 import UserIcon from "@/icons/user-icon.svg"
 import ArrowLeftOnIcon from "@/icons/arrow-left-on-icon.svg"
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 interface AccountModalProps {

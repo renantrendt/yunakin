@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import Button from '../../atomic/button/Button'
 import React, { useEffect } from 'react'
-
 import { useRouter } from 'next/navigation'
 import siteUrls from '@/config/site-config'
 import HamburgerIcon from '@/icons/HamburgerIcon.svg'
@@ -18,7 +17,6 @@ import { useTheme } from 'next-themes'
 import AccountModal from '@/components/molecules/account-modal/AccountModal'
 import { useSession } from 'next-auth/react'
 import Avatar from '@/components/atomic/avatar/Avatar'
-import { stat } from 'fs'
 export default function Navbar() {
     const pathName = usePathname()
     const router = useRouter()
