@@ -33,7 +33,7 @@ const BlogContent = ({ data, isLoading, content }: BlogContentProps) => {
     )
     return (
         <>
-            <div className='flex  mt-24 lg:mt-40  justify-start gap-0 dark:text-white  '>
+            <div className='flex  mt-24 lg:mt-48  justify-start gap-0 dark:text-white  '>
                 <div className=' lg:absolute w-8 h-8 items-center flex justify-center hover:cursor-pointer rounded-full hover:bg-grey-200' onClick={() => { router.back() }}>
                     <BackIcon />
                 </div>

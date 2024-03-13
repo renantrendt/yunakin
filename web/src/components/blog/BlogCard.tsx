@@ -19,7 +19,7 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
                 </div>
                 <div className='grid grid-cols-12 justify-items-center w-full gap-x-4 mx-auto gap-y-12 pt-6'>
                     {[0, 1, 2].map((article, index: any) => (
-                        <Link key={index} className="card w-full dark:text-white  max-w-lg bg-base-100 dark:bg-gray-700 h-96  col-span-12  md:col-span-6 lg:col-span-4  hover:cursor-pointer 
+                        <Link key={index} className="card w-full dark:text-white  max-w-lg bg-base-100 dark:bg-card-dark h-96  col-span-12  md:col-span-6 lg:col-span-4  hover:cursor-pointer 
                         rounded-lg shadow-sm" href={`/`}>
                             <figure className='relative hidden  h-64 bg-slate-700 animate-pulse w-full' ></figure>
                             <div className="card-body animate-pulse pb-4">
@@ -48,7 +48,7 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
             </div>
             <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                 {category.articles.map((article, index: any) => (
-                    <Link key={index} className="card w-full dark:text-white min-w-[324px] h-full   overflow-hidden max-w-lg  bg-base-100 last:mr-4 lg:last:mr-0 dark:bg-gray-700   col-span-4  hover:cursor-pointer 
+                    <Link key={index} className="card w-full dark:text-white dark:bg-card-dark min-w-[324px] h-full   overflow-hidden max-w-lg  last:mr-4 lg:last:mr-0 dark:bg-gray-700   col-span-4  hover:cursor-pointer 
             rounded-[10px] shadow-sm" href={`/blogs/${article.slug}`}>
                         <figure className='relative hidden max-h-[176px]'><Image src={`${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
                         <div className="px-6 pt-6 pb-2">
