@@ -1,9 +1,7 @@
 import Avatar from '@/components/atomic/avatar/Avatar'
 import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
 import Typography from '@/components/atomic/typography/Typography'
-import siteUrls from '@/config/site-config'
-import { signOut, useSession } from 'next-auth/react'
-import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 import NotificationIcon from "@/icons/notification-icon.svg"
 import AccountModal from '@/components/molecules/account-modal/AccountModal'

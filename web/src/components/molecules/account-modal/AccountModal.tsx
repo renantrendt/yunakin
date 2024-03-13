@@ -3,7 +3,6 @@ import NavigationItem from '@/components/atomic/navigation/NavigationItem';
 import siteUrls from '@/config/site-config';
 import { cn } from '@/utils/cn';
 import { signOut } from 'next-auth/react';
-import Link from 'next/link';
 import React from 'react'
 import SettingsIcon from "@/icons/settings.svg"
 

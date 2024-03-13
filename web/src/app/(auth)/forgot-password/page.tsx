@@ -1,5 +1,5 @@
 'use client'
-import React, { Suspense } from 'react'
+import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -11,6 +11,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import siteUrls, { siteCopy } from '@/config/site-config'
 import Typography from '@/components/atomic/typography/Typography'
+import FormContainer from '@/components/form/FormContainer'
 const schema = yup.object({
     email: yup.string().email().required(),
 })
@@ -60,47 +61,43 @@ export default function ForgotPasswordPage() {
     const forgotPasswordCopy = siteCopy.forgotPasswordPage
 
     return (
-        <Suspense fallback="loading">
-            <div className="flex justify-center w-full h-screen items-center  ">
-                <form onSubmit={handleSubmit(onSubmit)} className=" w-11/12 md:w-2/3 lg:w-full max-w-[500px] bg-white  rounded-[20px] shadow-form-container     shadow-lg  m-auto flex flex-col  gap-4  lg:gap-8 p-6 lg:p-10 ">
-                    <Link href={siteUrls.general.home}>
-                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} />
-                    </Link>
-                    <div className='flex flex-col gap-8'>
-                        <div>
+        <FormContainer onSubmit={handleSubmit(onSubmit)} >
+            <Link href={siteUrls.general.home}>
+                <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
+                <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
+            </Link>
+            <div className='flex flex-col gap-8'>
+                <div>
 
-                            <Typography type='h3' className=''>{forgotPasswordCopy.title}</Typography>
-                            {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
-                            <Typography type="p" className='mt-2  text-grey-700'>{forgotPasswordCopy.description}</Typography>
-                        </div>
+                    <Typography type='h3' className=''>{forgotPasswordCopy.title}</Typography>
+                    {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
+                    <Typography type="p" className='mt-2  text-grey-700'>{forgotPasswordCopy.description}</Typography>
+                </div>
 
-                        <div className='flex flex-col gap-6'>
+                <div className='flex flex-col gap-6'>
 
-                            <Controller
-                                control={control}
+                    <Controller
+                        control={control}
+                        name="email"
+                        render={({ field: { onChange, value } }) => (
+                            <InputField
+                                label={forgotPasswordCopy.email}
+                                type="email"
+                                id="email"
                                 name="email"
-                                render={({ field: { onChange, value } }) => (
-                                    <InputField
-                                        label={forgotPasswordCopy.email}
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        placeholder={forgotPasswordCopy.emailPlaceholder}
-                                        trailingIcon={<span className='text-grey-400'><EnvelopeIcon /> </span>}
-                                        onChange={onChange}
-                                        value={value}
-                                        error={errors.email?.message}
-                                    />
-                                )}
+                                placeholder={forgotPasswordCopy.emailPlaceholder}
+                                trailingIcon={<span className='text-grey-400'><EnvelopeIcon /> </span>}
+                                onChange={onChange}
+                                value={value}
+                                error={errors.email?.message}
                             />
-                            <div className="flex justify-center flex-col gap-4">
-                                <Button variant="primary" type="submit" classname="w-full" label={forgotPasswordCopy.submit} size='lg' loading={loading} />
-                            </div>
-                        </div>
+                        )}
+                    />
+                    <div className="flex justify-center flex-col gap-4">
+                        <Button variant="primary" type="submit" classname="w-full" label={forgotPasswordCopy.submit} size='lg' loading={loading} />
                     </div>
-                </form>
+                </div>
             </div>
-        </Suspense>
-
+        </FormContainer>
     )
 }
