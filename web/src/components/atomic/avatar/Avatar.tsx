@@ -43,7 +43,7 @@ const Avatar = ({ image, name, size = 'md', ...additionalProps }: AvatarProps) =
                     width={40}
                     src={image}
                     alt={name}
-                    className="object-cover   h-10 w-10  !m-0 !p-0 border-[1px] border-white object-top rounded-full group-hover:scale-105 group-hover:z-30"
+                    className="object-cover   h-10 w-10  !m-0 !p-0  object-top rounded-full group-hover:scale-105 group-hover:z-30"
                 />
             </div>
         </div>

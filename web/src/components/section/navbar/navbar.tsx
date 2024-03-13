@@ -15,13 +15,19 @@ import { cn } from '@/utils/cn'
 import ContentSection from '@/containers/layout/ContentSection'
 import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
 import { useTheme } from 'next-themes'
+import AccountModal from '@/components/molecules/account-modal/AccountModal'
+import { useSession } from 'next-auth/react'
+import Avatar from '@/components/atomic/avatar/Avatar'
+import { stat } from 'fs'
 export default function Navbar() {
     const pathName = usePathname()
     const router = useRouter()
     const [showMenu, setShowMenu] = React.useState(false)
     const [border, setBorder] = React.useState(false)
     const navRef = React.useRef<HTMLDivElement>(null)
+    const { data: session, status } = useSession()
     const { theme } = useTheme()
+    const [show, setShow] = React.useState(false)
     const changeNavBg = () => {
         if (!navRef.current) {
             return;
@@ -61,11 +67,14 @@ export default function Navbar() {
                     </ul>
                 </div>
                 <div className="navbar-end  w-full   gap-3">
+
                     <div className="dropdown flex justify-end w-full lg:hidden">
-                        <div className='text-black font-black'>
+                        <ThemeSwitcher />
+
+                        <div className='text-black dark:text-white font-black'>
                             <IconButton icon={<HamburgerIcon />} onClick={() => { setShowMenu(!showMenu) }} className='w-8 h-8' />
                         </div>
-                        <ul tabIndex={0} className={cn(showMenu ? " absolute flex" : "hidden", "  mt-8 z-[1] p-8 shadow bg-base-100 dark:bg-gray-700 rounded-box w-72  flex-col gap-4")}>
+                        <ul tabIndex={0} className={cn(showMenu ? " absolute flex" : "hidden", "  mt-8 z-[1] p-8 shadow bg-base-100 dark:bg-card-dark dark:text-profile-modal-text-dark rounded-box w-72  flex-col gap-4")}>
                             {_.keys(siteUrls.navbar).map((key: string) => {
                                 const link = siteUrls.navbar[key]
                                 return (
@@ -78,9 +87,7 @@ export default function Navbar() {
                                 )
                             })}
 
-                            <li>
-                                <ThemeSwitcher />
-                            </li>
+
                             <li>
                                 <Button
                                     variant='tertiary'
@@ -103,21 +110,36 @@ export default function Navbar() {
 
                         </ul>
                     </div>
-                    <ThemeSwitcher />
-                    <Button
-                        variant='secondary'
-                        label='Login'
-                        size='md'
-                        classname='hidden !min-w-[120px] lg:block'
-                        onClick={() => router.push(siteUrls.general.login)}
-                    />
-                    <Button
-                        variant='primary'
-                        classname=' hidden !min-w-[120px] lg:block'
-                        label='Get Started'
-                        size='md'
-                        onClick={() => router.push(siteUrls.general.register)}
-                    />
+                    <>
+
+                        {session?.user && (<div className='relative' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
+                            <Avatar onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
+                            <AccountModal email={session?.user?.email as string}
+                                name={session?.user?.name || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
+                                image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} shown={show}
+                            />
+                        </div>)}
+                        {
+                            !session?.user && status !== "loading" && (
+                                <>
+                                    <Button
+                                        variant='secondary'
+                                        label='Login'
+                                        size='md'
+                                        classname='hidden !min-w-[120px] lg:block'
+                                        onClick={() => router.push(siteUrls.general.login)}
+                                    />
+                                    <Button
+                                        variant='primary'
+                                        classname=' hidden !min-w-[120px] lg:block'
+                                        label='Get Started'
+                                        size='md'
+                                        onClick={() => router.push(siteUrls.general.register)}
+                                    />
+                                </>
+                            )
+                        }
+                    </>
 
                 </div>
             </div>

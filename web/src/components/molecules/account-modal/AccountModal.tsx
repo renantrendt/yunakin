@@ -5,8 +5,10 @@ import { cn } from '@/utils/cn';
 import { signOut } from 'next-auth/react';
 import React from 'react'
 import SettingsIcon from "@/icons/settings.svg"
-
+import UserIcon from "@/icons/user-icon.svg"
 import ArrowLeftOnIcon from "@/icons/arrow-left-on-icon.svg"
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface AccountModalProps {
     name: string;
@@ -17,27 +19,31 @@ interface AccountModalProps {
 
 
 const AccountModal = ({ name, image, email, shown }: AccountModalProps) => {
+    const router = useRouter()
     return (
-        <div className={cn('flex flex-col gap-6 p-4 rounded-lg justify-start content duration-150 ease-in-out absolute top-10 bg-grey-100 dark:bg-card-dark right-0', shown ? "opacity-100" : "opacity-0")}>
-            <div className='flex flex-row gap-4'>
-                <Avatar image={image} name={name} />
-                <div className='flex text-grey-400 dark:text-white flex-col gap-2'>
-                    <p className='text-sm font-semibold leading-5'>{name}</p>
-                    <p className='text-sm font-normal leading-5'>{email}</p>
+        <div className={cn('flex flex-col p-4 pt-1 pb-4 shadow-lg  border-[1px] border-grey-200 dark:border-profile-modal-border-dark dark:bg-profile-modal-background-dark rounded-lg justify-start content duration-150 ease-in-out absolute top-12 bg-white right-0', shown ? "opacity-100" : "opacity-0")}>
+            <div className='flex flex-row justify-center items-center gap-4 my-2 py-2'>
+                <Avatar size='sm' image={image} name={name} />
+                <div className='flex text-grey-400 dark:text-white flex-col '>
+                    <p className='text-sm leading-[18px] text-black font-medium dark:text-white'>{name}</p>
+                    <p className='text-xs font-normal leading[18px] dark:text-profile-modal-text-dark'>{email}</p>
                 </div>
             </div>
-            <ul className='flex flex-col w-full'>
-                <NavigationItem
-                    title="Settings"
-                    link={siteUrls.general.settings}
-                    icon={<SettingsIcon />}
-                />
-                <NavigationItem
-                    title="Log Out"
-                    link={siteUrls.general.settings}
-                    icon={<ArrowLeftOnIcon />}
-                    onClick={async () => { await signOut({ callbackUrl: "/ " }) }}
-                />
+            <ul className='flex flex-col w-full gap-[6px]'>
+                <div className='px-[6px] py-2 gap-[22px] rounded-[5px] bg-white dark:bg-card-dark hover:bg-grey-100 focus:text-black focus:bg-grey-100 text-grey-600 flex flex-row cursor-pointer dark:text-profile-modal-text-dark hover:dark:bg-profile-modal-hover-dark'>
+                    <UserIcon />
+                    <p className='text-sm leading-[18px] font-medium'>Profile</p>
+                </div>
+
+                <div onClick={() => router.push(siteUrls.general.settings)} className='px-[6px] py-2 gap-[22px] rounded-[5px] bg-white dark:bg-card-dark hover:bg-grey-100 focus:text-black focus:bg-grey-100 text-grey-600  flex flex-row cursor-pointer dark:text-profile-modal-text-dark hover:dark:bg-profile-modal-hover-dark'>
+                    <SettingsIcon />
+                    <p className='text-sm leading-[18px] font-medium'>Settings</p>
+                </div>
+                <div onClick={async () => { await signOut({ callbackUrl: "/ " }) }}
+                    className='px-[6px] py-2 gap-[22px] rounded-[5px] bg-white dark:bg-card-dark dark:text-red-400 hover:bg-grey-100 focus:text-black focus:bg-grey-100 text-red-400 flex flex-row cursor-pointer hover:dark:bg-profile-modal-hover-dark '>
+                    <ArrowLeftOnIcon />
+                    <p className='text-sm leading-[18px] font-medium text-red-400'>Log out</p>
+                </div>
             </ul>
         </div>
     )

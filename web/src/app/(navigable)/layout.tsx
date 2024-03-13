@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
         <Sidebar showMenu={showMenu} />
         <div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden min-h-screen' >
           <DashboardNavbar onClick={() => setShowMenu(true)} />
-          <main className='mx-auto w-full  bg-white dark:bg-card-dark px-5 py-8   lg:px-12 lg:py-8' onClick={() => setShowMenu(false)}>
+          <main className='mx-auto w-full  bg-white dark:bg-white px-5 py-8   lg:px-12 lg:py-8' onClick={() => setShowMenu(false)}>
             {children}
           </main>
         </div>

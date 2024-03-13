@@ -10,10 +10,10 @@ const Topbar = () => {
     const [show, setShow] = React.useState(false)
     return (
         <div className='flex justify-between px-2 py-[10px] w-full items-center'>
-            <Typography type='h1' className='!text-xl'>Welcome {session?.user?.name}</Typography>
+            <Typography type='h1' className='!text-base !md:text-xl'>Welcome {session?.user?.name}</Typography>
             <div className='flex justify-center gap-2'>
                 <ThemeSwitcher />
-                <div className="cursor-pointer p-[10px] bg-grey-100 text-grey-600 w-fit h-fit dark:bg-icon-dark dark:text-white rounded-full">
+                <div className="cursor-pointer p-[10px] bg-grey-100 text-grey-600 hover:bg-primary-500 focus:bg-primary-500  w-fit h-fit dark:bg-icon-dark dark:hover:bg-primary-500 dark:focus:bg-primary-500  hover:text-white focus:text-white dark:text-white rounded-full">
                     <NotificationIcon />
                 </div>
                 <div className='relative'>

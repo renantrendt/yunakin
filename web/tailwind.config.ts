@@ -138,7 +138,10 @@ const config: Config = {
       'input-hover-dark': "#37354B",
       'icon-dark': "#383749",
       'sidebar-icon-dark': "#A19DBE",
-
+      'profile-modal-border-dark': "#3A384C",
+      'profile-modal-background-dark': "#24232F",
+      'profile-modal-text-dark': "#A19DBE",
+      'profile-modal-hover-dark': "#313041",
     },
     "boxShadow": {
       "sm": "0px 3px 6px -3px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.05), 0px 1px 2px -1px rgba(0, 0, 0, 0.05), 0px 1px 0px -1px rgba(0, 0, 0, 0.05)",
