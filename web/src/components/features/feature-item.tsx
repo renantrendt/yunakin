@@ -43,7 +43,7 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
             <div className="flex-col flex-1  justify-center items-start gap-8  h-full">
                 <div className="flex-col justify-start items-start gap-5 flex text-left">
                     <Typography type='h1' className='text-[32px]  !lg:text-[32px] font-semibold !leading-normal  '>{title}</Typography>
-                    <Typography type='p' className="!text-neutral-600 dark:text-white text-[18px]  !lg:text-[20]  max-w-[520px] !leading-[28px]">{description}</Typography>
+                    <Typography type='p' className="text-neutral-600 dark:text-sidebar-icon-dark text-[18px]  !lg:text-[20]  max-w-[520px] !leading-[28px]">{description}</Typography>
                 </div>
                 <Button label='Learn More' classname='mt-16' variant="secondary" size='lg' icon={<ArrowRightIcon />} trailing />
             </div>

@@ -18,14 +18,14 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disabled, label, onClick, type, classname, size = "lg", loading, trailing }) => {
-  const baseStyle = " min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px] "
+  const baseStyle = " min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px]  "
   let variantStyle = ''
   switch (variant) {
     case 'primary':
       variantStyle = ' hover:bg-primary-600 text-white bg-primary-500 focus:shadow-focus-primary  disabled:bg-disabled   '
       break
     case 'secondary':
-      variantStyle = 'border-[1px] bg-white border-grey-300 shadow-sm hover:bg-grey-200 focus:shadow-focus-primary  text-black bg-white disabled:bg-disabled '
+      variantStyle = 'border-[1px] bg-white border-grey-300 shadow-sm hover:bg-grey-200 focus:shadow-focus-primary  text-black bg-white disabled:bg-disabled  dark:bg-input-dark dark:text-white dark:border-input-border-dark '
       break
     case 'tertiary':
       variantStyle = ' bg-grey-200  text-black border-none hover:bg-grey-300 focus:shadow-focus-primary  disabled:bg-grey-200 '

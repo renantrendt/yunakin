@@ -126,7 +126,7 @@ export const siteCopy = {
                 "name": "Samantha Lee",
                 "content": "Implementing Codepilot into our development workflow has dramatically improved our effic    iency. The pre-configured environments and best practices embedded in the platform have significantly reduced our onboarding time for new developers.",
                 "role": "Project Manager at Digital Solutions Corp.",
-                "avatar": "/images/tes  timonials/samanta.jpeg"
+                "avatar": "/images/testimonials/samanta.jpeg"
             },
             {
                 "name": "Ethan Rivera",

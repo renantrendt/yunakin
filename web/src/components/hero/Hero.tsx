@@ -18,7 +18,7 @@ export default function Hero() {
                         <Typography type='h1' className=' text-left break-all  text-stone-950  min-h-[128px]  mb-4 lg:mb-5 !font-semibold '>
                             <TypewriterEffect words={siteCopy.heroSection.title.split(" ").map((word) => ({ text: word }))} />
                         </Typography>
-                        <Typography type='h6' className='text-left text-neutral-600 max-w-lg' >
+                        <Typography type='h6' className='text-left text-neutral-600 max-w-lg dark:text-sidebar-icon-dark' >
                             {siteCopy.heroSection.description}
                         </Typography>
 
