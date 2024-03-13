@@ -10,7 +10,7 @@ const Cta = () => {
             <div className=" w-full my-24  flex-col justify-center items-center gap-0 lg:gap-10 inline-flex text-black ">
 
                 <div className=' flex flex-col justify-center items-center gap-5 mb-6'>
-                    <Typography type='h1' className='text-left lg:text-center text-white !text-[40px]  lg:text-[40px] !leading-[56px]'>{siteCopy.ctaSection.title}</Typography>
+                    <Typography type='h1' className='text-left lg:text-center !text-white !text-[40px]  lg:text-[40px] !leading-[56px]'>{siteCopy.ctaSection.title}</Typography>
                     <Typography type='h6' className='text-white text-left lg:text-center max-w-2xl leading-[24px] text-[16px] '>{siteCopy.ctaSection.description}</Typography>
                 </div>
 

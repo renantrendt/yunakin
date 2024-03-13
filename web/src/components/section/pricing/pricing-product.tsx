@@ -4,7 +4,7 @@ import React from 'react'
 import Stripe from 'stripe';
 import Button from '../../atomic/button/Button';
 import TickIcon from '@/icons/TickIcon';
-import CrossIcon from '@/icons/CrossIcon';
+import CrossIcon from '@/icons/cross-icon.svg';
 import Modal from '../../atomic/modal/Modal';
 import CheckoutForm from '@/containers/CheckoutForm';
 import customToast from '../../atomic/toast/customToast';
@@ -62,9 +62,9 @@ export default function PricingProduct({ name, description, price, features, pla
     };
     return (
         <>
-            <div className={cn("card  border-[1px] rborder-grey-500 dark:bg-card-dark rounded-[32px] h-full bg-white px-5 py-14 lg:px-8", recommended ? "border-[4px] border-primary" : "")}>
+            <div className={cn("card  border-[1px] rborder-grey-500 dark:bg-card-dark rounded-[32px] h-full flex justify-center bg-white px-5 py-14 lg:px-8", recommended ? "border-[4px] border-primary" : "")}>
                 {recommended && (
-                    <div className='rounded-[40px] border-[1px] shadow-recommended-pricing border-grey-300  px-6 py-[6px]  bg-primary text-white leading-[140%] text-sm font-semibold  w-fit absolute top-[-20px] left-[32%]  '>Recommended</div>
+                    <div className='rounded-[40px] border-[1px] shadow-recommended-pricing border-grey-300  px-6 py-[6px]  bg-primary text-white leading-[140%] text-sm font-semibold  w-fit absolute top-[-20px] mx-auto left-0 right-0 text-center  '>Recommended</div>
                 )}
                 <div className="card-body p-0">
                     <div className='flex  flex-col items-center justify-center mb-2 '>
