@@ -114,8 +114,9 @@ export const authOptions: NextAuthOptions = {
             return true;
         },
         session: async ({ session, token }) => {
+            console.log(session, token)
             const user = await prisma.user.findFirst({
-                where: { id: token.id as string },
+                where: { email: token.email as string },
                 select: {
                     id: true,
                     email: true,

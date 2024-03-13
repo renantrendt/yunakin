@@ -45,7 +45,7 @@ const Chats = ({ chats }: ChatsProps) => {
         await addChatMutation.mutateAsync()
     }
     return (
-        <div className='relative w-full'>
+        <div className='relative w-full '>
             <div className='grid grid-cols-12 gap-x-2 gap-y-4'>
 
                 {pageChats.map((chat) => (
