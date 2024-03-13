@@ -13,7 +13,7 @@ interface PaginationProps {
 
 const PaginationItem = ({ pageNumber, disabled = false, onClick }: { pageNumber: number | string, disabled?: boolean, icon?: React.ReactNode, onClick?: () => void }) => {
     return (
-        <button disabled={disabled} onClick={onClick} className='py-[10px] disabled:bg-grey-200 text-sm leading-5 font-normal px-4 flex justify-center items-center cursor-pointer hover:bg-grey-100 gap-2 border-r-[1px] border-grey-300 last:border-none'>{pageNumber}</button>
+        <button disabled={disabled} onClick={onClick} className='py-[10px] disabled:opacity-50  text-sm leading-5 font-normal px-4 flex justify-center items-center cursor-pointer hover:bg-grey-100 dark:hover:bg-input-hover-dark gap-2 border-r-[1px] border-grey-300 dark:border-profile-modal-border-dark last:border-none'>{pageNumber}</button>
     )
 }
 
@@ -30,7 +30,13 @@ const Pagination = ({ totalPages, previousButton, previousButtonDisabled, nextBu
     // const pageNumbers = [firstPage, firstPage + 1, firstPage + 2, "...", lastPage - 2, lastPage - 1, lastPage]
 
     return (
-        <div className='text-black flex justify-center w-fit rounded-lg border-[1px] border-grey-300 shadow-sm bg-white   '>
+        <div className='text-black flex justify-center w-fit rounded-lg border-[1px] border-grey-300 shadow-sm bg-white 
+        overflow-hidden
+        dark:text-white
+        dark:border-profile-modal-border-dark
+        dark:bg-profile-modal-background-dark
+        
+        '>
             {previousButton && <PaginationItem
                 disabled={previousButtonDisabled}
                 onClick={onPreviousClick} pageNumber={'Previous'} />}

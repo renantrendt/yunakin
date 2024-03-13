@@ -26,7 +26,7 @@ interface SidebarLink {
 
 const sidebarLinks: SidebarLink[] = [
     { label: 'Home', path: '/dashboard', iconSrc: <HomeIcon /> },
-    { label: "AI", path: "/ai", iconSrc: <div className='w-6 h-6'> <ChatGptIcon /> </div> },
+    { label: "AI", path: "/ai", iconSrc: <div className='w-5 h-5'> <ChatGptIcon /> </div> },
     { label: 'Notifications', path: '/notifications', iconSrc: <InboxIcon /> },
     { label: 'Users', path: '/users', iconSrc: <UserGroupIcon />, adminRoute: true },
     { label: 'Analytics', path: '/analytics', iconSrc: <AnalyticsIcon /> },
@@ -49,7 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
     const { theme } = useTheme();
 
     return (
-        <aside className={` z-50 flex  h-screen  text-white overflow-y-hidden absolute lg:static top-0 left-0 w-72 flex-col bg-grey-100 dark:bg-card-dark
+        <aside className={` z-50 flex  h-screen  text-white overflow-y-hidden absolute lg:static top-0 left-0 w-72 flex-col bg-grey-100 dark:bg-profile-modal-background-dark
         duration-300 ease-linear p-3 pt-5
         lg:translate-x-0 ${showMenu ? '-translate-x-0' : '-translate-x-full'}`}>
             <div className=" flex items-center justify-between gap-2  mb-2   ">

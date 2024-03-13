@@ -6,7 +6,7 @@ interface TableRowProps {
 }
 const TableRow = ({ onRowClick, children }: TableRowProps) => {
     return (
-        <tr onClick={onRowClick} className='border-b-[1px] border-grey-200  '>
+        <tr onClick={onRowClick} className='border-b-[1px] border-grey-200 dark:border-profile-modal-border-dark  '>
             {children}
         </tr>
     )
