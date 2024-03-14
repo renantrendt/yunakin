@@ -39,6 +39,14 @@ export const authOptions: NextAuthOptions = {
                     where: {
                         email: credentials.email
                     },
+                    select: {
+                        id: true,
+                        email: true,
+                        name: true,
+                        avatar: true,
+                        provider: true,
+                        password: true,
+                    }
                 })) as User
                 if (!user) {
                     throw { message: 'No user found with this email', statusCode: 400 }
@@ -49,15 +57,11 @@ export const authOptions: NextAuthOptions = {
                 if (!user || !(await compare(credentials.password, user.password as string))) {
                     throw { message: 'Email or password is incorrect', statusCode: 401 }
                 }
-
+                console.log(user)
                 return {
                     email: user.email,
                     name: user.name,
-                    createdAt: user.createdAt,
-                    emailVerified: user.verified,
                     id: user.id,
-                    image: user.avatar,
-                    updatedAt: user.updatedAt,
                 }
             }
         }),
@@ -114,9 +118,12 @@ export const authOptions: NextAuthOptions = {
             return true;
         },
         session: async ({ session, token }) => {
-            console.log(session, token)
+            console.log(session)
+            console.log("-----")
+            console.log(token)
+
             const user = await prisma.user.findFirst({
-                where: { email: token.email as string },
+                where: { id: token.id as string },
                 select: {
                     id: true,
                     email: true,
@@ -124,6 +131,7 @@ export const authOptions: NextAuthOptions = {
                     avatar: true,
                 }
             });
+            console.log(user)
             const userSubscription = await prisma.subscription.findFirst({
                 where: {
                     userId: user?.id
@@ -132,8 +140,10 @@ export const authOptions: NextAuthOptions = {
             return {
                 ...session,
                 user: {
+                    id: token.id,
                     ...session.user,
                     ...user,
+                    image: user?.avatar,
                     subscription: {
                         ...userSubscription
                     },
@@ -143,6 +153,7 @@ export const authOptions: NextAuthOptions = {
         },
 
         jwt: async ({ token, user }) => {
+            console.log(token, user)
             if (user) {
                 token.id = user.id
                 token.email = user.email
@@ -153,6 +164,15 @@ export const authOptions: NextAuthOptions = {
                     token,
                     platformConfig.variables.NEXTAUTH_JWT_SECRET!
                 )
+            } else {
+                const user = await prisma.user.findFirst({
+                    where: { email: token.email as string },
+                    select: {
+                        id: true,
+                    }
+                });
+                console.log(user)
+                token.id = user?.id
             }
             return await Promise.resolve(token)
         }
