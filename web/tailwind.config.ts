@@ -144,7 +144,7 @@ const config: Config = {
       'profile-modal-hover-dark': "#313041",
       'navigation-item-selected': "#313040",
       'button-background-dark': "#3A3641",
-      'image-uploader-border-d  ark': "#4F5178",
+      'image-uploader-border-dark': "#4F5178",
       'image-uploader-dark': "#1D1C26",
       'navbar-bottom-dark': "#2D2B3B",
       'faq-answer-dark': "#232230",
