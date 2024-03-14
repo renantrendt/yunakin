@@ -38,9 +38,12 @@ export default function RootLayoutClient({
     console.log(params.monaSans.variable)
     return (
         <html lang="en" >
-            <body className={cn(inter.className, params.monaSans.variable, "bg-landing-background  dark:bg-landing-dark-background  ")}>
+            <body >
                 <Providers>
-                    {children}
+                    <div className={cn(inter.className, params.monaSans.variable, "bg-landing-background  dark:bg-landing-dark-background  ")}>
+                        {children}
+                    </div>
+
                 </Providers>
                 <GoogleTagManager gtmId={platformConfig.variables.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string} />
             </body>
