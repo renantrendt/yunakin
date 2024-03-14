@@ -9,7 +9,7 @@ interface DividerProps {
 
 const Divider = ({ type, style }: DividerProps) => {
     const typeStyle = type === 'vertical' ? 'w-px h-full min-h-full' : 'w-full h-px'
-    const styleStyle = style === 'light' ? 'bg-grey-200' : 'bg-grey-300'
+    const styleStyle = style === 'light' ? 'bg-grey-200 dark:!bg-profile-modal-border-dark' : 'bg-grey-300'
 
 
     return (
