@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, variant = 'primary', disab
       variantStyle = ' hover:bg-primary-600 text-white bg-primary-500 focus:shadow-focus-primary  disabled:bg-disabled   '
       break
     case 'secondary':
-      variantStyle = 'border-[1px] bg-white border-grey-300 shadow-sm hover:bg-grey-200 focus:shadow-focus-primary  text-black bg-white disabled:bg-disabled  dark:bg-input-dark dark:text-white dark:border-input-border-dark '
+      variantStyle = 'border-[1px] bg-white border-grey-300 shadow-sm hover:bg-grey-200 focus:shadow-focus-primary  text-black bg-white disabled:bg-disabled  dark:bg-input-dark dark:text-white dark:border-input-border-dark dark:hover:bg-secondary-button-hover-dark '
       break
     case 'tertiary':
       variantStyle = ' bg-grey-200  text-black border-none hover:bg-grey-300 focus:shadow-focus-primary  disabled:bg-grey-200 '

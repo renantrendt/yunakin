@@ -144,10 +144,11 @@ const config: Config = {
       'profile-modal-hover-dark': "#313041",
       'navigation-item-selected': "#313040",
       'button-background-dark': "#3A3641",
-      'image-uploader-border-dark': "#4F5178",
+      'image-uploader-border-d  ark': "#4F5178",
       'image-uploader-dark': "#1D1C26",
       'navbar-bottom-dark': "#2D2B3B",
-      'faq-answer-dark': "#232230"
+      'faq-answer-dark': "#232230",
+      'secondary-button-hover-dark': "#353248"
     },
     "boxShadow": {
       "sm": "0px 3px 6px -3px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.05), 0px 1px 2px -1px rgba(0, 0, 0, 0.05), 0px 1px 0px -1px rgba(0, 0, 0, 0.05)",

@@ -43,8 +43,8 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
     }
     return (
         <div className='category mb-14 lg:mb-20' key={key} >
-            <div className=" 	  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex">
-                <div className=" text-center text-category-blog-color text-sm font-semibold  uppercase tracking-[0.5px]">{category.name}</div>
+            <div className=" 	  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex dark:bg-card-dark">
+                <div className=" text-center text-category-blog-color dark:text-sidebar-icon-dark text-sm font-semibold  uppercase tracking-[0.5px]">{category.name}</div>
             </div>
             <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                 {category.articles.map((article, index: any) => (
@@ -53,8 +53,8 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
                         <figure className='relative hidden max-h-[176px]'><Image src={`${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
                         <div className="px-6 pt-6 pb-2">
                             <h2 className="card-title text-2xl font-bold mb-2">{article.title}</h2>
-                            <p className='text-neutral-600 text-base'>{article.short_description}</p>
-                            <div className='flex  items-center justify-start my-4 text-category-card-autor text-xs'>
+                            <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base'>{article.short_description}</p>
+                            <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                                 <div className='avatar'>
                                     <div className="w-6 rounded-full ">
                                         <img alt="Author name" src={`${(article.author?.avatar)}`} />

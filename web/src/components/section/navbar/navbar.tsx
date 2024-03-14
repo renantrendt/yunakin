@@ -42,7 +42,7 @@ export default function Navbar() {
     return (
         <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 !py-2 !md:py-6', border && "border-b-[1px] border-grey-200 dark:border-navbar-bottom-dark")}>
 
-            <div ref={navRef} className="  navbar p-0 max-w-8xl     font-medium text-base leading-[19px] text-grey-400" >
+            <div ref={navRef} className="  navbar p-0 max-w-8xl     font-medium text-base leading-[19px] text-grey-400 " >
                 <div className="navbar-start w-full">
 
                     <Link href={siteUrls.general.home}>
