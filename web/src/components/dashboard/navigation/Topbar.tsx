@@ -16,7 +16,7 @@ const Topbar = () => {
                 <div className="cursor-pointer p-[10px] bg-grey-100 text-grey-600 hover:bg-primary-500 focus:bg-primary-500  w-fit h-fit dark:bg-icon-dark dark:hover:bg-primary-500 dark:focus:bg-primary-500  hover:text-white focus:text-white dark:text-white rounded-full">
                     <NotificationIcon />
                 </div>
-                <div className='relative' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
+                <div className='relative' onMouseLeave={() => setShow(false)}>
                     <Avatar onMouseEnter={() => setShow(true)} onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
                     <AccountModal email={session?.user?.email as string}
                         name={session?.user?.name || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}

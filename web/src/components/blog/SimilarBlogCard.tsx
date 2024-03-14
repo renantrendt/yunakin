@@ -38,7 +38,7 @@ const SimilarBlogCard = ({ articles, loading }: SimilarBlogCardProps) => {
     }
     return (
         <div className='category my-20 lg:my-36' >
-            <Typography type='h3' className='text-center !font-semibold text-[20px] lg:text-[32px] !lg:font-normal leading-[30px] !text-stone-950 mb-6 lg:mb-20 dark:text-white'>Read about similiar topics</Typography>
+            <Typography type='h3' className='text-center !font-semibold text-[20px] lg:text-[32px] !lg:font-normal leading-[30px] !text-stone-950 mb-6 lg:mb-20 dark:!text-white'>Read about similiar topics</Typography>
             <div className='flex flex-row gap-3 lg:gap-6 justify-start lg:justify-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                 {articles.map((article, index: any) => (
                     <Link key={index} className="card w-full  min-w-[324px]     overflow-hidden max-w-lg  bg-base-100 last:mr-4 lg:last:mr-0 dark:bg-card-dark h-96  col-span-4  hover:cursor-pointer 
