@@ -12,6 +12,7 @@ import Pricing from '@/components/section/pricing/pricing'
 export default function Home() {
   return (
     <main className="flex min-h-screen  flex-col w-full ">
+
       <ContentSection
       >
         <Hero />
