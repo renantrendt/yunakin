@@ -10,7 +10,7 @@ interface NotificationPanelProps {
 
 const NotificationPanel = ({ avatar, title, description, children }: NotificationPanelProps) => {
     return (
-        <div className='container rounded-2xl  border-[1px]  w-fit  border-grey-100 bg-white dark:bg-card-dark dark:border-none  p-6 shadow-sm max-w-[540px] h-fit    '>
+        <div className='container     w-fit  border-grey-100 bg-white dark:bg-card-dark border-none p-6  max-w-[540px] h-fit    '>
             <div className='flex justify-start items-center gap-4'>
                 {avatar}
                 <div className='flex flex-col justify-start md:whitespace-nowrap	'>

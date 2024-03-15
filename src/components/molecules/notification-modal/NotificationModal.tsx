@@ -17,7 +17,7 @@ interface NotificationModalProps {
 
 const NotificationModal = ({ notifications, shown }: NotificationModalProps) => {
     return (
-        <div className={cn('flex flex-col  shadow-lg justify-center items-center  border-[1px] border-grey-200 dark:border-profile-modal-border-dark dark:bg-profile-modal-background-dark rounded-lg  content duration-150 ease-in-out absolute top-12 bg-white right-0', shown ? "opacity-100" : "opacity-0")}>
+        <div className={cn('flex flex-col  shadow-lg justify-center items-center  border-[1px]  border-grey-200 dark:border-profile-modal-border-dark dark:bg-profile-modal-background-dark rounded-lg  content duration-150 ease-in-out absolute top-12 bg-white right-0', shown ? "opacity-100" : "opacity-0")}>
             {notifications.map((notification, index) => (
                 <>
                     <NotificationPanel

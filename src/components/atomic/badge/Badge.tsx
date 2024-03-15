@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn';
 import React from 'react'
-interface BadgeProps {
+export interface BadgeProps {
     size?: 'sm' | 'md' | 'xs';
     children: React.ReactNode;
     type: 'outline' | 'filled' | 'clear';

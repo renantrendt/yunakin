@@ -13,7 +13,8 @@ export default function Footer(): JSX.Element {
             {/* <div className='container  mx-auto h-full w-full '> */}
             <div className='flex flex-col col-span-9 lg:col-span-3 justify-start items-start'>
                 <Link href={siteUrls.general.home}>
-                    <Image src={theme == "light" ? `/images/logo.svg` : '/images/logo-dark.svg'} alt="logo" width={165} height={96} className='w-full h-full' />
+                    <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
+                    <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
                 </Link>
                 <Typography type='p' className=' !font-light dark:text-sidebar-icon-dark'>
                     {siteCopy.footer.description}

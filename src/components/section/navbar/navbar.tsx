@@ -40,13 +40,12 @@ export default function Navbar() {
         }
     }, [])
     return (
-        <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 !py-2 !md:py-6', border && "border-b-[1px] border-grey-200 dark:border-navbar-bottom-dark")}>
-
+        <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 !py-2 !md:py-6', { "border-b-[1px] border-grey-200 dark:border-navbar-bottom-dark": border })}>
             <div ref={navRef} className="  navbar p-0 max-w-8xl     font-medium text-base leading-[19px] text-grey-400 " >
                 <div className="navbar-start w-full">
-
                     <Link href={siteUrls.general.home}>
-                        <Image src={theme == "light" ? `/images/logo.svg` : '/images/logo-dark.svg'} alt="logo" width={165} height={96} className='w-full h-full' />
+                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
+                        <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
                     </Link>
                 </div>
                 <div className="navbar-center   hidden lg:flex justify-center">
@@ -142,6 +141,6 @@ export default function Navbar() {
 
                 </div>
             </div>
-        </ContentSection>
+        </ContentSection >
     )
 }

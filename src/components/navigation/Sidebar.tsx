@@ -62,8 +62,8 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
                 <div>
                     <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
                         id='search' value={search} onChange={(e) => setSearch(e.target.value)} customClassName='bg-transparent border-none outline-none hover:border-none focus:border-none
-                             py-0 !px-8 !shadow-none !mb-2  ' customLeadingIconClassName='!left-[8px]' />
-                    <div className='flex flex-col gap-1'>
+                             py-0 !px-8 !shadow-none !mb-2 dark:!bg-transparent   ' customLeadingIconClassName='!left-[8px] !top-[14px]' />
+                    <div className='flex flex-col gap-[6px] mt-[6px]'>
                         {sidebarLinks.map((link) => (
                             <NavigationItem
                                 title={link.label}
