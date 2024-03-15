@@ -49,7 +49,7 @@ const BlogContent = ({ data, isLoading, content }: BlogContentProps) => {
                     className='rounded-lg '
                 />
             </div>
-            <div className="content mx-auto max-w-[320px] md:max-w-[500px] lg:max-w-[720px] w-[100vw] text-base dark:text-white my-8 md:my-16 overflow-x-scroll no-scrollbar ">
+            <div className="content prose mx-auto max-w-[320px] md:max-w-[500px] lg:max-w-[720px] w-[100vw] text-base dark:text-white my-8 md:my-16 overflow-x-scroll no-scrollbar ">
                 {content}
             </div>
         </>

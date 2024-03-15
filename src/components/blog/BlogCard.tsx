@@ -4,6 +4,7 @@ import { formatDate } from '@/utils/format'
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
+import siteUrls from '@/config/site-config'
 
 interface BlogCardProps {
     key: string
@@ -49,8 +50,8 @@ const BlogCard = ({ key, category, loading }: BlogCardProps) => {
             <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                 {category.articles.map((article, index: any) => (
                     <Link key={index} className="card w-full dark:text-white dark:bg-card-dark min-w-[324px] h-full   overflow-hidden max-w-lg  last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  hover:cursor-pointer 
-            rounded-[10px] shadow-sm" href={`/blogs/${article.slug}`}>
-                        <figure className='relative hidden max-h-[176px]'><Image src={`${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit='contain' /></figure>
+            rounded-[10px] shadow-sm" href={`${siteUrls.general.blog}/${article.slug}`}>
+                        <figure className='relative hidden max-h-[176px]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${article.imageURL}`} alt="Shoes" width={520} height={360} objectFit=' contain' /></figure>
                         <div className="px-6 pt-6 pb-2">
                             <h2 className="card-title text-2xl font-bold mb-2">{article.title}</h2>
                             <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base'>{article.short_description}</p>

@@ -36,6 +36,8 @@ const SimilarBlogCard = ({ articles, loading }: SimilarBlogCardProps) => {
             </div>
         )
     }
+    if (articles.length === 0) return null
+
     return (
         <div className='category my-20 lg:my-36' >
             <Typography type='h3' className='text-center !font-semibold text-[20px] lg:text-[32px] !lg:font-normal leading-[30px] !text-stone-950 mb-6 lg:mb-20 dark:!text-white'>Read about similiar topics</Typography>

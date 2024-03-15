@@ -37,12 +37,12 @@ web/.env*.local
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-web/.next-env.d.ts
+.next-env.d.ts
 
 # .env
 # web/.env
 
-web/.contentlayer
+.contentlayer
 
-web/public/sitemap*.xml
-web/public/robots.txt
+public/sitemap*.xml
+public/robots.txt
