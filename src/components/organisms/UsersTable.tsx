@@ -66,6 +66,8 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                 const user = users[info.row.index]
                 return (<div className='flex justify-center gap-2'>
                     <Dropdown
+                        id='role'
+                        name='role'
                         options={[{
                             value: 'ADMIN',
                             label: 'Admin',

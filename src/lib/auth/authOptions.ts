@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { type User } from '@prisma/client'
-import { compare, hash } from 'bcryptjs'
+import { compare } from 'bcryptjs'
 import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import jwt from 'jsonwebtoken'
@@ -77,7 +77,6 @@ export const authOptions: NextAuthOptions = {
                 if (!user || !(await compare(credentials.password, user.password as string))) {
                     throw { message: 'Email or password is incorrect', statusCode: 401 }
                 }
-                console.log(user)
                 return {
                     email: user.email,
                     name: user.name,
