@@ -13,7 +13,6 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/utils/cn'
 import ContentSection from '@/containers/layout/ContentSection'
 import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
-import { useTheme } from 'next-themes'
 import AccountModal from '@/components/molecules/account-modal/AccountModal'
 import { useSession } from 'next-auth/react'
 import Avatar from '@/components/atomic/avatar/Avatar'
@@ -24,7 +23,6 @@ export default function Navbar() {
     const [border, setBorder] = React.useState(false)
     const navRef = React.useRef<HTMLDivElement>(null)
     const { data: session, status } = useSession()
-    const { theme } = useTheme()
     const [show, setShow] = React.useState(false)
     const changeNavBg = () => {
         if (!navRef.current) {

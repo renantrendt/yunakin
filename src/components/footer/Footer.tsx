@@ -4,10 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import Typography from '../atomic/typography/Typography'
-import { useTheme } from 'next-themes'
 export default function Footer(): JSX.Element {
-    const { theme } = useTheme()
-
     return (
         <footer className="footer max-w-[1440px]  md:h-[50vh] grid grid-cols-9 grid-flow-row-dense  lg:grid-cols-9 px-4 md:px-28 text-base-content w-full  pt-24 pb-2">
             {/* <div className='container  mx-auto h-full w-full '> */}
