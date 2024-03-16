@@ -4,14 +4,17 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import Typography from '../atomic/typography/Typography'
+import { ref } from 'yup'
 
 interface BlogContentProps {
     data: any
     isLoading?: boolean
     content?: React.ReactNode
+    ref?: React.RefObject<HTMLDivElement>
 }
 
-const BlogContent = ({ data, isLoading, content }: BlogContentProps) => {
+const BlogContent = ({ data, isLoading, content, ref }: BlogContentProps) => {
+
     const router = useRouter()
     // Parse the MDX file via the useMDXComponent hook.
     if (isLoading) return (
@@ -49,7 +52,7 @@ const BlogContent = ({ data, isLoading, content }: BlogContentProps) => {
                     className='rounded-lg '
                 />
             </div>
-            <div className="content prose mx-auto max-w-[320px] md:max-w-[500px] lg:max-w-[720px] w-[100vw] text-base dark:text-white my-8 md:my-16 overflow-x-scroll no-scrollbar ">
+            <div ref={ref} className="content prose mx-auto max-w-[320px] md:max-w-[500px] lg:max-w-[720px] w-[100vw] text-base dark:text-white my-8 md:my-16 overflow-x-scroll no-scrollbar ">
                 {content}
             </div>
         </>

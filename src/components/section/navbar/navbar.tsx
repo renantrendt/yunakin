@@ -16,6 +16,7 @@ import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
 import AccountModal from '@/components/molecules/account-modal/AccountModal'
 import { useSession } from 'next-auth/react'
 import Avatar from '@/components/atomic/avatar/Avatar'
+import { motion, useScroll, useSpring } from 'framer-motion'
 export default function Navbar() {
     const pathName = usePathname()
     const router = useRouter()
@@ -30,6 +31,7 @@ export default function Navbar() {
         }
         window.scrollY >= navRef.current?.clientHeight ? setBorder(true) : setBorder(false);
     }
+
 
     useEffect(() => {
         window.addEventListener('scroll', changeNavBg);
@@ -139,6 +141,7 @@ export default function Navbar() {
 
                 </div>
             </div>
+
         </ContentSection >
     )
 }

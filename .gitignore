@@ -42,7 +42,7 @@ next-env.d.ts
 # .env
 # web/.env
 
-.contentlayer
+.contentlayer/
 
 public/sitemap*.xml
 public/robots.txt
