@@ -26,7 +26,7 @@ const LocalBlogContent = ({ post }: LocalBlogContentProps) => {
     const MDXContent = useMDXComponent(post.body.code)
     return (
         <div className='max-w-[1440px] relative w-full mx-auto px-4 md:px-28'>
-            <motion.div id='hola' className="fixed top-20 left-0 right-0  w-full h-1 z-30 bg-primary-500 origin-[0%]" style={{ scaleX }} >&nbsp;</motion.div>
+            <motion.div id='hola' className="fixed top-20 left-0 right-0  w-full h-1 z-50 bg-primary-500 origin-[0%]" style={{ scaleX }} >&nbsp;</motion.div>
             {renderSchematags('Article', {
                 title: post.title,
                 datePublished: post.publishedAt,

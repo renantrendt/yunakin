@@ -2,18 +2,17 @@
 import BackIcon from '@/icons/BackIcon'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { forwardRef } from 'react'
 import Typography from '../atomic/typography/Typography'
 
 interface BlogContentProps {
     data: any
     isLoading?: boolean
     content?: React.ReactNode
-    ref?: React.RefObject<HTMLDivElement>
 }
 
-const BlogContent = ({ data, isLoading, content, ref }: BlogContentProps) => {
-
+const BlogContent = forwardRef(function (props: BlogContentProps, ref: any) {
+    const { data, isLoading, content } = props
     const router = useRouter()
     // Parse the MDX file via the useMDXComponent hook.
     if (isLoading) return (
@@ -34,7 +33,7 @@ const BlogContent = ({ data, isLoading, content, ref }: BlogContentProps) => {
         </>
     )
     return (
-        <>
+        <div ref={ref}>
             <div className='flex  mt-24 lg:mt-48  justify-start gap-0 dark:text-white  '>
                 <div className=' lg:absolute w-8 h-8 items-center flex justify-center hover:cursor-pointer rounded-full hover:bg-grey-200 dark:hover:bg-input-hover-dark' onClick={() => { router.back() }}>
                     <BackIcon />
@@ -51,11 +50,11 @@ const BlogContent = ({ data, isLoading, content, ref }: BlogContentProps) => {
                     className='rounded-lg '
                 />
             </div>
-            <div ref={ref} className="content prose mx-auto max-w-[320px] md:max-w-[500px] lg:max-w-[720px] w-[100vw] text-base dark:text-white my-8 md:my-16 overflow-x-scroll no-scrollbar ">
+            <div className="content prose mx-auto max-w-[320px] md:max-w-[500px] lg:max-w-[720px] w-[100vw] text-base dark:text-white my-8 md:my-16 overflow-x-scroll no-scrollbar ">
                 {content}
             </div>
-        </>
+        </div>
     )
-}
-
+})
+BlogContent.displayName = 'BlogContent'
 export default BlogContent
