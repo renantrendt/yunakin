@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import Typography from '../atomic/typography/Typography'
-import { ref } from 'yup'
 
 interface BlogContentProps {
     data: any
