@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import ExclamationIcon from '@/icons/exclamation-circle.svg'
 
 interface DropdownOption {
     value: string;
@@ -40,6 +41,12 @@ const Dropdown = ({ onChange, options, error, label, id, name }: DropdownProps) 
                     )
                 })}
             </select>
+            {error &&
+                <div className='flex justify-start gap-2 text-red-600 items-center mt-2'>
+                    <ExclamationIcon />
+                    <p className='text-sm leading-5'>{error}</p>
+                </div>
+            }
         </div>
 
     )

@@ -1,4 +1,6 @@
 import React from 'react'
+import ExclamationIcon from '@/icons/exclamation-circle.svg'
+
 interface TextAreaProps {
     label: string
     name: string
@@ -33,8 +35,11 @@ const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange,
                 onChange={onChange}
                 rows={4}
                 {...additionalProps}></textarea>
-            {error && <p className='text-red-300'>{error}</p>}
-        </label>
+            {error &&
+                <div className='flex justify-start gap-2 text-red-600 items-center mt-2'>
+                    <ExclamationIcon />
+                    <p className='text-sm leading-5'>{error}</p>
+                </div>}        </label>
     )
 }
 
