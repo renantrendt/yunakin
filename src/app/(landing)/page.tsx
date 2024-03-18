@@ -8,7 +8,6 @@ import UsedBy from '@/components/section/usedBy/UsedBy'
 import ContentSection from '@/containers/layout/ContentSection'
 import Features from '@/components/features/features'
 import Pricing from '@/components/section/pricing/pricing'
-
 export default function Home() {
   return (
     <main className="flex min-h-screen  flex-col w-full ">
