@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react'
 import { createContext, useContext } from 'react';
 import { FALLBACK_LOCALE, Locales } from '@/lib/i18n/settings';
 

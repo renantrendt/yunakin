@@ -4,7 +4,6 @@ import getSeoMetadata from '@/lib/seo/metadata'
 import { Metadata } from 'next'
 import LandingPageContainer from '@/components/organisms/LandingPageContainer';
 import { createTranslation, getLocale } from '@/lib/i18n/server';
-import { FALLBACK_LOCALE } from '@/lib/i18n/settings';
 import platformConfig from '@/config/app-config';
 export async function generateMetadata(props: any): Promise<Metadata> {
 

@@ -50,7 +50,6 @@ export function useTranslation(ns: string) {
         i18n.changeLanguage(lng);
     } else {
         // Use our custom implementation when running on client side
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         useCustomTranslationImplem(i18n, lng);
     }
     return translator;
