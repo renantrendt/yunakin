@@ -16,7 +16,9 @@ import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
 import AccountModal from '@/components/molecules/account-modal/AccountModal'
 import { useSession } from 'next-auth/react'
 import Avatar from '@/components/atomic/avatar/Avatar'
+import { useTranslation } from '@/lib/i18n/client'
 export default function Navbar() {
+    const { t } = useTranslation('landing')
     const pathName = usePathname()
     const router = useRouter()
     const [showMenu, setShowMenu] = React.useState(false)
@@ -66,7 +68,6 @@ export default function Navbar() {
                     <div className="navbar-end  w-full   gap-3">
 
                         <div className="dropdown flex justify-end w-full lg:hidden">
-                            <ThemeSwitcher />
 
                             <div className='text-black dark:text-white font-black'>
                                 <IconButton icon={<HamburgerIcon />} onClick={() => { setShowMenu(!showMenu) }} className='w-8 h-8' />
@@ -83,6 +84,7 @@ export default function Navbar() {
                                         />
                                     )
                                 })}
+                                <ThemeSwitcher />
 
 
                                 <li>
@@ -107,7 +109,7 @@ export default function Navbar() {
 
                             </ul>
                         </div>
-                        <>
+                        <div className='hidden lg:flex  gap-2 justify-center items-center'>
                             <ThemeSwitcher />
 
                             {session?.user && (<div className='relative' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
@@ -122,22 +124,22 @@ export default function Navbar() {
                                     <>
                                         <Button
                                             variant='secondary'
-                                            label='Login'
+                                            label={t('navbar.login')}
                                             size='md'
-                                            classname='hidden !min-w-[120px] lg:block'
+                                            classname=' !min-w-[120px] '
                                             onClick={() => router.push(siteUrls.general.login)}
                                         />
                                         <Button
                                             variant='primary'
-                                            classname=' hidden !min-w-[120px] lg:block'
-                                            label='Get Started'
+                                            classname='  !min-w-[120px] '
+                                            label={t('navbar.getStarted')}
                                             size='md'
                                             onClick={() => router.push(siteUrls.general.register)}
                                         />
                                     </>
                                 )
                             }
-                        </>
+                        </div>
 
                     </div>
                 </div>

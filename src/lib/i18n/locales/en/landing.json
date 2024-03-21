@@ -37,7 +37,8 @@
         "feature.1.title": "Built-In Practices",
         "feature.1.description": "With Codepilot, developers benefit from integrated best practices for coding, security, and scalability. This ensures that projects are not only developed faster but also maintain high standards of quality and performance.",
         "feature.2.title": "Scale and Perform",
-        "feature.2.description": "Codepilot is designed with scalability in mind, allowing applications to grow seamlessly in terms of user base and functionality. It includes optimized configurations for performance, ensuring that applications remain fast and responsive as they scale."
+        "feature.2.description": "Codepilot is designed with scalability in mind, allowing applications to grow seamlessly in terms of user base and functionality. It includes optimized configurations for performance, ensuring that applications remain fast and responsive as they scale.",
+        "learn-more": "Learn More"
     },
     "faq": {
         "title": "FAQ",
@@ -74,6 +75,8 @@
         ]
     },
     "testimonialsSection": {
+        "title": "Testimonials",
+        "description": "What our customers are saying about us",
         "testimonials": [
             {
                 "name": "Alex Johnson",

@@ -15,8 +15,8 @@ const Testimonial = () => {
     return (
         <AnimatedSection>
             <div className='py-28 max-w-[1440px]  w-full text-white'>
-                <Typography type='h1' className=' !text-white !font-semibold text-center pb-4'>Testimonials</Typography>
-                <h3 className='text-xl text-center  text-white  mb-20'>Read what people say about us</h3>
+                <Typography type='h1' className=' !text-white !font-semibold text-center pb-4'>{t("testimonialsSection.title")}</Typography>
+                <h3 className='text-xl text-center  text-white  mb-20'>{t("testimonialsSection.description")}</h3>
                 <section className='flex i  flex-row gap-3 xl:grid xl:grid-cols-3 overflow-x-scroll  w-full  no-scrollbar xl:gap-x-6 gap-y-6  '>
                     {testimonials.map((testimonial, index) => (
                         <div key={index} className='card bg-white min-w-[324px] flex-1    dark:bg-gray-700 shadow border  border-neutral-200 flex-col    h-full p-5 '>

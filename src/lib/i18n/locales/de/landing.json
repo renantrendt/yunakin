@@ -10,7 +10,9 @@
         "pricing": "Preisgestaltung",
         "blog": "Blog",
         "features": "Funktionen",
-        "docs": "Dokumentation"
+        "docs": "Dokumentation",
+        "login": "Anmeldung",
+        "getStarted": "Loslegen"
     },
     "metadata": {
         "title": "Codepilot – Das ultimative SaaS-Starterkit",
@@ -35,7 +37,8 @@
         "feature.1.title": "Integrierte Praktiken",
         "feature.1.description": "Mit Codepilot profitieren Entwickler von integrierten Best Practices für Codierung, Sicherheit und Skalierbarkeit. Dadurch wird sichergestellt, dass Projekte nicht nur schneller entwickelt werden, sondern auch hohe Qualitäts- und Leistungsstandards eingehalten werden.",
         "feature.2.title": "Skalieren und durchführen",
-        "feature.2.description": "Codepilot ist auf Skalierbarkeit ausgelegt und ermöglicht ein nahtloses Wachstum von Anwendungen hinsichtlich Benutzerbasis und Funktionalität. Es umfasst optimierte Konfigurationen für die Leistung und stellt sicher, dass Anwendungen bei der Skalierung schnell und reaktionsfähig bleiben."
+        "feature.2.description": "Codepilot ist auf Skalierbarkeit ausgelegt und ermöglicht ein nahtloses Wachstum von Anwendungen hinsichtlich Benutzerbasis und Funktionalität. Es umfasst optimierte Konfigurationen für die Leistung und stellt sicher, dass Anwendungen bei der Skalierung schnell und reaktionsfähig bleiben.",
+        "learn-more": "Mehr erfahren"
     },
     "faq": {
         "title": "FAQ",
@@ -72,6 +75,8 @@
         ]
     },
     "testimonialsSection": {
+        "title": "Referenzen",
+        "description": "Was unsere Kunden sagen",
         "testimonials": [
             {
                 "name": "Alex Johnson",

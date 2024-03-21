@@ -5,6 +5,7 @@ import Typography from '../atomic/typography/Typography';
 import Image from 'next/image';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import ArrowRightIcon from "@/icons/arrow-right.svg";
+import { useTranslation } from 'react-i18next';
 interface FeatureItemProps {
     direction?: "ltr" | "rtl" | string
     image?: string
@@ -12,6 +13,7 @@ interface FeatureItemProps {
     description: string;
 }
 const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureItemProps) => {
+    const { t } = useTranslation('landing')
     const ref = useRef(null)
     const variants = {
         visible: {
@@ -45,7 +47,7 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                     <Typography type='h1' className='text-[32px]  !lg:text-[32px] font-semibold !leading-normal  '>{title}</Typography>
                     <Typography type='p' className="text-neutral-600 dark:text-sidebar-icon-dark text-[18px]  !lg:text-[20]  max-w-[520px] !leading-[28px]">{description}</Typography>
                 </div>
-                <Button label='Learn More' classname='mt-16' variant="secondary" size='lg' icon={<ArrowRightIcon />} trailing />
+                <Button label={t("features.learn-more")} classname='mt-16' variant="secondary" size='lg' icon={<ArrowRightIcon />} trailing />
             </div>
             <div className='relative w-full  flex-1 h-96'>
                 <Image alt='' fill
