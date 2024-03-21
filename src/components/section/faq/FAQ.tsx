@@ -1,7 +1,6 @@
 import React from 'react'
 import FaqItem from './FaqItem'
 import AnimatedSection from '@/components/animated/AnimatedSection'
-import { siteCopy } from '@/config/site-config'
 import Typography from '@/components/atomic/typography/Typography'
 import { useTranslation } from '@/lib/i18n/client'
 const FAQ = () => {

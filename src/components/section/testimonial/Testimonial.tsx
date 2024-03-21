@@ -1,9 +1,8 @@
-import React, { use } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography';
 import AnimatedSection from '@/components/animated/AnimatedSection';
 
-import { siteCopy } from '@/config/site-config';
 import { useTranslation } from '@/lib/i18n/client';
 
 const Testimonial = () => {
