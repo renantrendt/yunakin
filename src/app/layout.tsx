@@ -6,6 +6,8 @@ import RootLayoutClient from '@/containers/layout/RootLayoutClient'
 import localFont from 'next/font/local'
 const monaSans = localFont({ src: './fonts/Mona-Sans-Light.otf', variable: "--font-coming-soon" });
 import type { Viewport } from 'next'
+import { getLocale } from '@/lib/i18n/server'
+import { LocaleProvider } from '@/hooks/useLocale'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -13,6 +15,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
 }
+
 export default function RootLayout({
   children,
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,9 +24,13 @@ export default function RootLayout({
   children: React.ReactNode
   params: any
 }) {
+  const locale = getLocale();
+
   return (
-    <RootLayoutClient params={{ ...params, monaSans }}>
-      {children}
+    <RootLayoutClient params={{ ...params, monaSans, locale }}>
+      <LocaleProvider value={locale}>
+        {children}
+      </LocaleProvider>
     </RootLayoutClient>
   )
 }

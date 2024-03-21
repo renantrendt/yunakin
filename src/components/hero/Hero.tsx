@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Button from '../atomic/button/Button'
 import Typography from '../atomic/typography/Typography'
@@ -7,7 +8,9 @@ import { siteCopy } from '@/config/site-config'
 import AnimatedSection from '../animated/AnimatedSection'
 import { TypewriterEffect } from '../typewriter/TypeWriter'
 import { AnimatedTooltip } from '../molecules/animated-tooltip/AnimatedTooltip'
+import { useTranslation } from '@/lib/i18n/client'
 export default function Hero() {
+    const { t } = useTranslation('landing');
     return (
         <section
             className="my-20  mt-24 lg:mt-40  items-center text-center md:text-left text-black dark:text-white">
@@ -16,10 +19,10 @@ export default function Hero() {
 
                     <div className="w-full flex flex-1 lg:col-span-4 flex-col py-3 ">
                         <Typography type='h1' className=' text-left break-all  text-stone-950  min-h-[128px]  mb-4 lg:mb-5 !font-semibold '>
-                            <TypewriterEffect words={siteCopy.heroSection.title.split(" ").map((word) => ({ text: word }))} />
+                            <TypewriterEffect words={t("heroSection.title").split(" ").map((word) => ({ text: word }))} />
                         </Typography>
                         <Typography type='h6' className='text-left text-neutral-600 max-w-lg dark:text-sidebar-icon-dark' >
-                            {siteCopy.heroSection.description}
+                            {t(siteCopy.heroSection.description)}
                         </Typography>
 
                         <div className='flex justify-center flex-col lg:flex-row lg:justify-start mt-8 lg:mt-14 gap-2 lg:gap-3'>

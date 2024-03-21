@@ -18,19 +18,19 @@ interface SiteUrls {
 const siteUrls: SiteUrls = {
     navbar: {
         pricing: {
-            label: "Pricing",
+            label: "navbar.pricing",
             url: "/#pricing",
         },
         blog: {
-            label: "Blog",
+            label: "navbar.blog",
             url: "/blogs",
         },
         features: {
-            label: "Features",
+            label: "navbar.features",
             url: "/#features",
         },
         docs: {
-            label: "Docs",
+            label: "navbar.docs",
             url: "https://docs.codepilot.dev",
         }
     },
@@ -71,8 +71,8 @@ const siteUrls: SiteUrls = {
 
 export const siteCopy = {
     heroSection: {
-        title: "Your Code Elevated. Product Shipped.",
-        description: "The ultimate SaaS boilerplate, designed to fast-track your application development with ease and precision.",
+        title: "heroSection.title",
+        description: "heroSection.description",
         image: "/images/hero-image.jpeg",
         usedBy: [
             {

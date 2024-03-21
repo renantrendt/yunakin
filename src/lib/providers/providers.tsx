@@ -8,6 +8,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import getClientSideQueryClient from '@/react-query/client/queryClient'
 const Providers = ({ children }: { children: React.ReactNode }) => {
     const [queryClient] = React.useState(() => getClientSideQueryClient())
+
     return (
         <SessionProvider>
             <QueryClientProvider client={queryClient}>
@@ -19,9 +20,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
                     </ThemeProvider>
                 </ToastProvider>
             </QueryClientProvider>
-
         </SessionProvider>
-
     )
 }
 

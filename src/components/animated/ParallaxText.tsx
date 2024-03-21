@@ -16,7 +16,7 @@ interface ParallaxProps {
 function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
     const baseX = useMotionValue(0);
 
-    const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+    const x = useTransform(baseX, (v) => `${wrap(-25, -45, v)}%`);
 
     const directionFactor = useRef<number>(1);
     useAnimationFrame((t, delta) => {
@@ -33,9 +33,8 @@ function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
      * dynamically generated number of children.
      */
     return (
-        <div className="overflow-hidden w-full leading-[0.8] whitespace-nowrap flex flex-nowrap">
-            <motion.div className="flex flex-nowrap" style={{ x }}>
-                {children}
+        <div className="  overflow-hidden w-full leading-[0.8] whitespace-nowrap flex flex-nowrap">
+            <motion.div className="flex gap-16 flex-nowrap" style={{ x }}>
                 {children}
                 {children}
                 {children}

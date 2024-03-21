@@ -1,0 +1,16 @@
+{
+    "heroSection": {
+        "title": "Your Code Elevated. Product Shipped.",
+        "description": "The ultimate SaaS boilerplate, designed to fast-track your application development with ease and precision."
+    },
+    "navbar": {
+        "pricing": "Pricing",
+        "blog": "Blog",
+        "features": "Features",
+        "docs": "Docs"
+    },
+    "metadata": {
+        "title": "Codepilot - The Ultimate SaaS Starter Kit",
+        "description": "Ready to accelerate your development process?"
+    }
+}

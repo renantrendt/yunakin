@@ -1,0 +1,16 @@
+{
+    "heroSection": {
+        "title": "Ihr Code erhöht. Produkt versendet.",
+        "description": "Der ultimative SaaS-Grundsatz, der entwickelt wurde, um Ihre Anwendungsentwicklung einfach und präzise zu beschleunigen."
+    },
+    "navbar": {
+        "pricing": "Preisgestaltung",
+        "blog": "Blog",
+        "features": "Funktionen",
+        "docs": "Dokumentation"
+    },
+    "metadata": {
+        "title": "Codepilot – Das ultimative SaaS-Starterkit",
+        "description": "Sind Sie bereit, Ihren Entwicklungsprozess zu beschleunigen?"
+    }
+}

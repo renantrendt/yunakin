@@ -10,8 +10,8 @@ function getSeoMetadata(options?: Metadata): Metadata {
         description: siteConfig.description,
         keywords: siteConfig.keywords,
         openGraph: {
+            ...options?.openGraph,
             ...siteConfig.openGraph,
-            ...options?.openGraph
         },
         twitter: {
             ...siteConfig.twitter,
