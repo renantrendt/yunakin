@@ -141,10 +141,6 @@ export const siteCopy = {
         description: "faq.description",
         faqs: "faq.faqs",
     },
-    footer: {
-        description: "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
-        footnote: "@%Date% Codepilot. All rights reserved."
-    },
     loginPage: {
         title: "Log in",
         description: "Enter your credentials to access your account",
@@ -191,10 +187,7 @@ export const siteCopy = {
         passwordPlaceholder: "Password",
         submit: "Confirm",
     },
-    pricingPage: {
-        title: "Enable the best experience",
-        description: "Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.",
-    },
+
 }
 
 export const siteConfig: Metadata = {

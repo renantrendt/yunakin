@@ -12,7 +12,9 @@
         "features": "Features",
         "docs": "Docs",
         "cta": "Start Free Trial",
-        "watchVideo": "Join Crash Course"
+        "watchVideo": "Join Crash Course",
+        "login": "Login",
+        "getStarted": "Get Started"
     },
     "metadata": {
         "title": "Codepilot - The Ultimate SaaS Starter Kit",
@@ -97,5 +99,29 @@
                 "avatar": "/images/testimonials/ethan.jpeg"
             }
         ]
+    },
+    "pricing": {
+        "title": "Enable the best experience",
+        "description": "Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.",
+        "pro": {
+            "name": "Pro",
+            "description": "Ideal for getting started with desktop funnels and achieving your first successes."
+        },
+        "enterprise": {
+            "name": "Enterprise",
+            "description": "For businesses that want to scale their lead generation and talent sourcing."
+        },
+        "personal": {
+            "name": "Personal",
+            "description": "For individuals who want to get started with desktop funnels and achieve their first successes."
+        },
+        "recommended": "Recommended",
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "start": "Start"
+    },
+    "footer": {
+        "description": "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
+        "footnote": "@%Date% Codepilot. All rights reserved."
     }
 }

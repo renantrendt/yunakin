@@ -17,6 +17,7 @@ import AccountModal from '@/components/molecules/account-modal/AccountModal'
 import { useSession } from 'next-auth/react'
 import Avatar from '@/components/atomic/avatar/Avatar'
 import { useTranslation } from '@/lib/i18n/client'
+import ChangeLocale from '@/components/locale/ChangeLocale'
 export default function Navbar() {
     const { t } = useTranslation('landing')
     const pathName = usePathname()
@@ -86,16 +87,6 @@ export default function Navbar() {
                                 })}
                                 <ThemeSwitcher />
 
-
-                                <li>
-                                    <Button
-                                        variant='tertiary'
-                                        label='Login'
-                                        size='md'
-                                        classname='!min-w-[150px] !w-full '
-                                        onClick={() => router.push(siteUrls.general.login)}
-                                    />
-                                </li>
                                 <li>
 
                                     <Button
@@ -122,18 +113,13 @@ export default function Navbar() {
                             {
                                 !session?.user && status !== "loading" && (
                                     <>
-                                        <Button
-                                            variant='secondary'
-                                            label={t('navbar.login')}
-                                            size='md'
-                                            classname=' !min-w-[120px] '
-                                            onClick={() => router.push(siteUrls.general.login)}
-                                        />
+                                        <ChangeLocale />
+
                                         <Button
                                             variant='primary'
                                             classname='  !min-w-[120px] '
                                             label={t('navbar.getStarted')}
-                                            size='md'
+                                            size='lg'
                                             onClick={() => router.push(siteUrls.general.register)}
                                         />
                                     </>

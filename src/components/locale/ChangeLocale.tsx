@@ -2,6 +2,7 @@
 import React from 'react';
 import { switchLocaleAction } from '@/app/actions/switch-locale';
 import { useTranslation } from '@/lib/i18n/client';
+import Dropdown from '../atomic/dropdown/Dropdown';
 
 // We removed the `locale` prop because we can get it from the hook
 export default function ChangeLocale() {
@@ -11,14 +12,17 @@ export default function ChangeLocale() {
 
     return (
         <div>
-            <select
-                onChange={e => switchLocaleAction(e.target.value)}
-                value={i18n.resolvedLanguage}
-            >
-                <option value="en">🇺🇸 {t('english')}</option>
-                <option value="zh-CN">🇨🇳 {t('chinese')}</option>
-                <option value="sv">🇸🇪 {t('swedish')}</option>
-            </select>
+            <Dropdown
+                id='locale-dropdown'
+                name='locale'
+                onChange={val => switchLocaleAction(val)}
+                options={[
+                    { value: 'en', label: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", selected: i18n.language == "en" },
+                    { value: 'de', label: "🇩🇪", selected: i18n.language == "de" },
+
+                ]} // Add the options here
+                className=' min-w-fit !w-16 focus:!border-none !border-none !shadow-none '
+            />
         </div>
     );
 }

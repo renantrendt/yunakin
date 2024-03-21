@@ -13,6 +13,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import siteUrls from '@/config/site-config';
 import { cn } from '@/utils/cn';
+import { useTranslation } from 'react-i18next';
 export default function PricingProduct({ name, description, price, features, plan, recommended, planId, isMonthly }: {
     name: string
     description: string
@@ -23,6 +24,7 @@ export default function PricingProduct({ name, description, price, features, pla
     recommended?: boolean
     isMonthly?: boolean
 }) {
+    const { t } = useTranslation('landing')
     const { data: session } = useSession()
     const [loading, setLoading] = React.useState(false)
     const [clientSecret, setClientSecret] = React.useState<string | null>(null)
@@ -64,12 +66,12 @@ export default function PricingProduct({ name, description, price, features, pla
         <>
             <div className={cn("card  border-[1px] border-grey-500 dark:border-input-border-dark dark:bg-card-dark rounded-[32px] h-full flex justify-center bg-white px-5 py-14 lg:px-8", recommended ? "border-[4px] border-primary-end dark:border-primary" : "")}>
                 {recommended && (
-                    <div className='rounded-[40px] border-[1px] shadow-recommended-pricing border-grey-300  px-6 py-[6px]  bg-primary text-white leading-[140%] text-sm font-semibold  w-fit absolute top-[-20px] mx-auto left-0 right-0 text-center  '>Recommended</div>
+                    <div className='rounded-[40px] shadow-recommended-pricing  px-6 py-[6px]  bg-primary text-white leading-[140%] text-sm font-semibold  w-fit absolute top-[-20px] mx-auto left-0 right-0 text-center  '>{t("pricing.recommended")}</div>
                 )}
                 <div className="card-body p-0">
                     <div className='flex  flex-col items-center justify-center mb-2 '>
                         <h3 className="mb-6 text-[40px] font-semibold text-stone-950 dark:text-white ">{name}</h3>
-                        <p className="font-light text-light-grey text-center m:text-lg text-stone-6 max-w-[300px] ">{description}</p>
+                        <p className="font-light text-light-grey text-center m:text-lg min-h-[90px] text-stone-6 max-w-[300px] ">{description}</p>
                     </div>
 
                     <div className="flex justify-center items-end py-8 !text-stone-950 dark:!text-white">
@@ -89,7 +91,7 @@ export default function PricingProduct({ name, description, price, features, pla
                     </div>
 
                     <div className="card-actions mb-8 justify-center">
-                        <Button classname='w-full' onClick={handleClick} loading={loading} label='Start' />
+                        <Button classname='w-full' onClick={handleClick} loading={loading} label={t("pricing.start")} />
                     </div>
                     <ul role="list" className="mb-8 space-y-2 text-left">
                         {

@@ -97,5 +97,29 @@
                 "avatar": "/images/testimonials/ethan.jpeg"
             }
         ]
+    },
+    "pricing": {
+        "title": "Enable the best experience",
+        "description": "Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.",
+        "pro": {
+            "name": "Pro",
+            "description": "Ideal, um mit Desktop-Trichtern zu beginnen und erste Erfolge zu erzielen."
+        },
+        "enterprise": {
+            "name": "Unternehmen",
+            "description": "Für Unternehmen, die ihre Lead-Generierung und Talentbeschaffung skalieren möchten."
+        },
+        "personal": {
+            "name": "Persönlich",
+            "description": "Für Einzelpersonen, die mit Desktop-Trichtern durchstarten und erste Erfolge erzielen möchten."
+        },
+        "recommended": "Recommended",
+        "monthly": "Monatlich",
+        "yearly": "Jährlich",
+        "start": "Anfangen"
+    },
+    "footer": {
+        "description": "Codepilot beschleunigt die Entwicklung durch die Bereitstellung einer vorkonfigurierten Grundlage, die Zeit spart, Best Practices gewährleistet und Skalierbarkeit erleichtert, sodass Sie sich auf Innovationen konzentrieren können.",
+        "footnote": "@%Date% Codepilot. Alle Rechte vorbehalten."
     }
 }

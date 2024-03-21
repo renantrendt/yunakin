@@ -1,12 +1,15 @@
+'use client'
 import platformConfig, { Plans } from '@/config/app-config'
 import PricingProduct from './pricing-product'
 import React from 'react'
 import Typography from '@/components/atomic/typography/Typography';
+import { useTranslation } from '@/lib/i18n/client';
 
 
 
 const features = platformConfig.pricing.features;
 export default function Pricing({ showDescription = false }: { showDescription?: boolean }) {
+    const { t } = useTranslation('landing')
     const [isMonthly, setIsMonthly] = React.useState(false)
     return (
         <div className='py-28 w-full  ' id='pricing'>
@@ -19,16 +22,16 @@ export default function Pricing({ showDescription = false }: { showDescription?:
 
             <div className='flex justify-center border-[1px] border-grey-500  gap-4 mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit  bg-white dark:bg-card-dark dark:text-white dark:border-none rounded-[40px] p-2'>
                 <div className={`${isMonthly ? " border-primary " : "border-transparent"} rounded-3xl px-8 py-[10px] border-[2px]  transition duration-150 ease-in-out `} onClick={() => setIsMonthly(true)}>
-                    <span className='text-sm font-semibold leading-[140%]'>Monthly</span>
+                    <span className='text-sm font-semibold leading-[140%]'>{t("pricing.monthly")}</span>
                 </div>
                 <div className={`${!isMonthly ? " border-primary " : "border-transparent"} rounded-3xl px-8 border-[2px]  py-[10px] transition duration-150 ease-in-out`} onClick={() => setIsMonthly(false)}>
-                    <span className='text-sm font-semibold leading-[140%]' >Yearly</span>
+                    <span className='text-sm font-semibold leading-[140%]' >{t("pricing.yearly")}</span>
                 </div>
             </div>
             <section className='grid mt-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8 w-full'>
                 <PricingProduct
-                    name={'Pro'}
-                    description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
+                    name={t("pricing.personal.name")}
+                    description={t("pricing.personal.description")}
                     price={isMonthly ? platformConfig.pricing.plans.pro.price : platformConfig.pricing.plans.pro_yearly.price}
                     plan={Plans.PRO}
                     features={features}
@@ -36,8 +39,8 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                     isMonthly={isMonthly}
                 />
                 <PricingProduct
-                    name={'Personal'}
-                    description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
+                    name={t("pricing.pro.name")}
+                    description={t("pricing.pro.description")}
                     price={isMonthly ? platformConfig.pricing.plans.business.price : platformConfig.pricing.plans.business_yearly.price}
                     plan={Plans.BUSINESS}
                     features={features}
@@ -46,8 +49,8 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                     isMonthly={isMonthly}
                 />
                 <PricingProduct
-                    name={'Startup'}
-                    description={'Ideal for getting started with desktop funnels and achieving your first successes.'}
+                    name={t("pricing.enterprise.name")}
+                    description={t("pricing.enterprise.description")}
                     price={isMonthly ? platformConfig.pricing.plans.advanced.price : platformConfig.pricing.plans.advanced_yearly.price}
                     plan={Plans.ADVANCED}
                     features={features}
