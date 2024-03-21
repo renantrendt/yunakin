@@ -6,7 +6,7 @@ import Dropdown from '../atomic/dropdown/Dropdown';
 
 // We removed the `locale` prop because we can get it from the hook
 export default function ChangeLocale() {
-    const { i18n, t } = useTranslation('common');
+    const { i18n, } = useTranslation('common');
     // You can also use our custom hook instead of `i18n.resolvedLanguage`
     // const locale = useLocale();
 

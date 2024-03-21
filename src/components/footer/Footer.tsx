@@ -1,5 +1,5 @@
 'use client'
-import siteUrls, { siteCopy } from '@/config/site-config'
+import siteUrls from '@/config/site-config'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
