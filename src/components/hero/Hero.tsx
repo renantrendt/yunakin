@@ -29,11 +29,11 @@ export default function Hero() {
                             <Button
                                 variant='primary'
                                 size='lg'
-                                label="Start 14-Day Free Trial"
+                                label={t('heroSection.cta')}
                             />
                             <Button
                                 variant='secondary'
-                                label='Join Crash Course'
+                                label={t('heroSection.watchVideo')}
                                 size='lg'
                                 icon={
                                     <div className='text-primary'>
@@ -50,7 +50,7 @@ export default function Hero() {
                                     items={siteCopy.heroSection.usedBy.map((item, idx) => ({ ...item, image: item.avatar, designation: item.name, id: idx }))}
                                 />
                             </div>
-                            <p className='text-sm' dangerouslySetInnerHTML={{ __html: siteCopy.heroSection.usedByCopy }}></p>
+                            <p className='text-sm' dangerouslySetInnerHTML={{ __html: t(siteCopy.heroSection.usedByCopy) }}></p>
                         </div>
                     </div>
                     <div className='relative w-full  flex-1 h-full  min-h-[283px] lg:col-span-4'>

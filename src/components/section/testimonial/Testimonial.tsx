@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { use } from 'react'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography';
 import AnimatedSection from '@/components/animated/AnimatedSection';
 
 import { siteCopy } from '@/config/site-config';
+import { useTranslation } from '@/lib/i18n/client';
 
 const Testimonial = () => {
     // Generate fake testimonials array
+    const { t } = useTranslation('landing');
 
+    const testimonials = t("testimonialsSection.testimonials", { returnObjects: true }) as { name: string, role: string, content: string, avatar: string }[];
 
     return (
         <AnimatedSection>
@@ -15,7 +18,7 @@ const Testimonial = () => {
                 <Typography type='h1' className=' !text-white !font-semibold text-center pb-4'>Testimonials</Typography>
                 <h3 className='text-xl text-center  text-white  mb-20'>Read what people say about us</h3>
                 <section className='flex i  flex-row gap-3 xl:grid xl:grid-cols-3 overflow-x-scroll  w-full  no-scrollbar xl:gap-x-6 gap-y-6  '>
-                    {siteCopy.testimonialsSection.testimonials.map((testimonial, index) => (
+                    {testimonials.map((testimonial, index) => (
                         <div key={index} className='card bg-white min-w-[324px] flex-1    dark:bg-gray-700 shadow border  border-neutral-200 flex-col    h-full p-5 '>
                             <div className='card-body flex   px-0 border-justify-cent  flex-col justify-between   items-center  '>
                                 <p className=' w-10/12 text-neutral-600 text-base leading-[26px] text-center font-light'>{testimonial.content}</p>

@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import Button from '../../atomic/button/Button'
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import siteUrls from '@/config/site-config'
 import HamburgerIcon from '@/icons/HamburgerIcon.svg'
@@ -39,38 +39,17 @@ export default function Navbar() {
         }
     }, [])
     return (
-        <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 !py-2 !md:py-6', { "border-b-[1px] border-grey-200 dark:border-navbar-bottom-dark": border })}>
-            <div ref={navRef} className="  navbar p-0 max-w-8xl     font-medium text-base leading-[19px] text-grey-400 " >
-                <div className="navbar-start w-full">
-                    <Link href={siteUrls.general.home}>
-                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
-                        <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
-                    </Link>
-                </div>
-                <div className="navbar-center   hidden lg:flex justify-center">
-                    <ul className="menu menu-horizontal px-1 flex gap-1">
-                        {_.keys(siteUrls.navbar).map((key: string) => {
-                            const link = siteUrls.navbar[key]
-                            return (
-                                <TopbarNavigationItem
-                                    link={link.url}
-                                    title={link.label}
-                                    key={key}
-                                    selected={pathName === link.url}
-                                />
-                            )
-                        })}
-                    </ul>
-                </div>
-                <div className="navbar-end  w-full   gap-3">
-
-                    <div className="dropdown flex justify-end w-full lg:hidden">
-                        <ThemeSwitcher />
-
-                        <div className='text-black dark:text-white font-black'>
-                            <IconButton icon={<HamburgerIcon />} onClick={() => { setShowMenu(!showMenu) }} className='w-8 h-8' />
-                        </div>
-                        <ul tabIndex={0} className={cn(showMenu ? " absolute flex" : "hidden", "  mt-8 z-[1] p-8 shadow bg-base-100 dark:bg-card-dark dark:text-profile-modal-text-dark rounded-box w-72  flex-col gap-4")}>
+        <Suspense fallback={<div>Loading...</div>}>
+            <ContentSection fullWidth additionalClassName={cn('fixed  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 !py-2 !md:py-6', { "border-b-[1px] border-grey-200 dark:border-navbar-bottom-dark": border })}>
+                <div ref={navRef} className="  navbar p-0 max-w-8xl     font-medium text-base leading-[19px] text-grey-400 " >
+                    <div className="navbar-start w-full">
+                        <Link href={siteUrls.general.home}>
+                            <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
+                            <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
+                        </Link>
+                    </div>
+                    <div className="navbar-center   hidden lg:flex justify-center">
+                        <ul className="menu menu-horizontal px-1 flex gap-1">
                             {_.keys(siteUrls.navbar).map((key: string) => {
                                 const link = siteUrls.navbar[key]
                                 return (
@@ -82,65 +61,88 @@ export default function Navbar() {
                                     />
                                 )
                             })}
-
-
-                            <li>
-                                <Button
-                                    variant='tertiary'
-                                    label='Login'
-                                    size='md'
-                                    classname='!min-w-[150px] !w-full '
-                                    onClick={() => router.push(siteUrls.general.login)}
-                                />
-                            </li>
-                            <li>
-
-                                <Button
-                                    variant='primary'
-                                    classname=' !min-w-[150px] !w-full  text-white '
-                                    label='Get Started'
-                                    size='md'
-                                    onClick={() => router.push(siteUrls.general.register)}
-                                />
-                            </li>
-
                         </ul>
                     </div>
-                    <>
-                        <ThemeSwitcher />
+                    <div className="navbar-end  w-full   gap-3">
 
-                        {session?.user && (<div className='relative' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
-                            <Avatar onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
-                            <AccountModal email={session?.user?.email as string}
-                                name={session?.user?.name || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
-                                image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} shown={show}
-                            />
-                        </div>)}
-                        {
-                            !session?.user && status !== "loading" && (
-                                <>
+                        <div className="dropdown flex justify-end w-full lg:hidden">
+                            <ThemeSwitcher />
+
+                            <div className='text-black dark:text-white font-black'>
+                                <IconButton icon={<HamburgerIcon />} onClick={() => { setShowMenu(!showMenu) }} className='w-8 h-8' />
+                            </div>
+                            <ul tabIndex={0} className={cn(showMenu ? " absolute flex" : "hidden", "  mt-8 z-[1] p-8 shadow bg-base-100 dark:bg-card-dark dark:text-profile-modal-text-dark rounded-box w-72  flex-col gap-4")}>
+                                {_.keys(siteUrls.navbar).map((key: string) => {
+                                    const link = siteUrls.navbar[key]
+                                    return (
+                                        <TopbarNavigationItem
+                                            link={link.url}
+                                            title={link.label}
+                                            key={key}
+                                            selected={pathName === link.url}
+                                        />
+                                    )
+                                })}
+
+
+                                <li>
                                     <Button
-                                        variant='secondary'
+                                        variant='tertiary'
                                         label='Login'
                                         size='md'
-                                        classname='hidden !min-w-[120px] lg:block'
+                                        classname='!min-w-[150px] !w-full '
                                         onClick={() => router.push(siteUrls.general.login)}
                                     />
+                                </li>
+                                <li>
+
                                     <Button
                                         variant='primary'
-                                        classname=' hidden !min-w-[120px] lg:block'
+                                        classname=' !min-w-[150px] !w-full  text-white '
                                         label='Get Started'
                                         size='md'
                                         onClick={() => router.push(siteUrls.general.register)}
                                     />
-                                </>
-                            )
-                        }
-                    </>
+                                </li>
 
+                            </ul>
+                        </div>
+                        <>
+                            <ThemeSwitcher />
+
+                            {session?.user && (<div className='relative' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
+                                <Avatar onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
+                                <AccountModal email={session?.user?.email as string}
+                                    name={session?.user?.name || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
+                                    image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} shown={show}
+                                />
+                            </div>)}
+                            {
+                                !session?.user && status !== "loading" && (
+                                    <>
+                                        <Button
+                                            variant='secondary'
+                                            label='Login'
+                                            size='md'
+                                            classname='hidden !min-w-[120px] lg:block'
+                                            onClick={() => router.push(siteUrls.general.login)}
+                                        />
+                                        <Button
+                                            variant='primary'
+                                            classname=' hidden !min-w-[120px] lg:block'
+                                            label='Get Started'
+                                            size='md'
+                                            onClick={() => router.push(siteUrls.general.register)}
+                                        />
+                                    </>
+                                )
+                            }
+                        </>
+
+                    </div>
                 </div>
-            </div>
 
-        </ContentSection >
+            </ContentSection >
+        </Suspense>
     )
 }

@@ -93,105 +93,53 @@ export const siteCopy = {
             },
 
         ],
-        usedByCopy: "Used by <b>100+</b> developers",
+        usedByCopy: "heroSection.usedByCopy",
     },
     ctaSection: {
-        title: "Why use Codepilot?",
+        title: "ctaSection.title",
         description: "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
         reasons: [
             {
-                metric: "40%",
-                description: "faster to market time",
+                metric: "ctaSection.reasons.0.title",
+                description: "ctaSection.reasons.0.description",
             },
             {
-                metric: "25%",
-                description: "lower development costs",
+                metric: "ctaSection.reasons.1.title",
+                description: "ctaSection.reasons.1.description",
             },
             {
-                metric: "100%",
-                description: "productivity increase",
+                metric: "ctaSection.reasons.2.title",
+                description: "ctaSection.reasons.2.description",
             },
+        ]
+    },
 
-        ]
-    },
-    testimonialsSection: {
-        testimonials: [
-            {
-                "name": "Alex Johnson",
-                "content": "Codepilot has been a game-changer for our startup. The reduction in development time allowed us to launch our app weeks ahead of schedule, giving us a significant advantage in a competitive market. Highly recommend it to any team looking to make a mark fast",
-                "role": "CTO of StartTech Innovations",
-                "avatar": "/images/testimonials/alex-johnson.jpeg"
-            },
-            {
-                "name": "Samantha Lee",
-                "content": "Implementing Codepilot into our development workflow has dramatically improved our effic    iency. The pre-configured environments and best practices embedded in the platform have significantly reduced our onboarding time for new developers.",
-                "role": "Project Manager at Digital Solutions Corp.",
-                "avatar": "/images/testimonials/samanta.jpeg"
-            },
-            {
-                "name": "Ethan Rivera",
-                "content": "As a freelancer, every minute counts, and Codepilot has been instrumental in helping me deliver high-quality work on tight deadlines. The ease of use, coupled with powerful customization options, means I can cater to diverse client needs without starting from zero each time.",
-                "role": "Freelance App Developer",
-                "avatar": "/images/testimonials/ethan.jpeg"
-            }
-        ]
-    },
     featuresSection:
     {
         features: [
             {
-                title: "Templates",
-                description: "Codepilot offers a wide range of customizable templates that serve as a starting point for various types of applications, enabling developers to skip the initial setup and dive straight into the development of unique features.",
+                title: "features.feature.0.title",
+                description: "features.feature.0.description",
                 image: "/images/hero-image.jpeg"
             },
             {
-                title: "Built-In Practices",
-                description: "With Codepilot, developers benefit from integrated best practices for coding, security, and scalability. This ensures that projects are not only developed faster but also maintain high standards of quality and performance..",
+                title: "features.feature.1.title",
+                description: "features.feature.1.description",
                 image: "/images/hero-image.jpeg",
                 direction: "rtl"
             },
             {
-                title: "Scale and Perform",
-                description: "Codepilot is designed with scalability in mind, allowing applications to grow seamlessly in terms of user base and functionality. It includes optimized configurations for performance, ensuring that applications remain fast and responsive as they scale.",
+                title: "features.feature.2.title",
+                description: "features.feature.2.description",
                 image: "/images/hero-image.jpeg"
             },
 
         ],
     },
     faqSection: {
-        title: "FAQ",
-        description: "Frequently Asked Questions",
-        faqs: [
-            {
-                "question": "What is Codepilot?",
-                "answer": "Codepilot is a comprehensive SaaS boilerplate designed to help developers launch applications faster by providing a pre-configured foundation, ensuring best practices, and facilitating scalability."
-            },
-            {
-                "question": "How can Codepilot reduce development time?",
-                "answer": "Codepilot reduces development time by offering customizable templates and state-of-the-art tools that eliminate the need to build from scratch, allowing developers to focus on creating unique features."
-            },
-            {
-                "question": "Is Codepilot suitable for beginners?",
-                "answer": "Yes, Codepilot is designed to be user-friendly for beginners while offering advanced features for experienced developers, making it an ideal tool for projects of any size and complexity."
-            },
-            {
-                "question": "Can I use Codepilot for commercial projects?",
-                "answer": "Absolutely. Codepilot is built to support both personal and commercial projects, providing the scalability and robustness needed for enterprise-grade applications."
-            },
-            {
-                "question": "What kind of support does Codepilot offer?",
-                "answer": "Codepilot offers comprehensive support through documentation, a dedicated support team, and a community forum where users can share insights and seek help from fellow developers."
-            },
-            {
-                "question": "How often is Codepilot updated?",
-                "answer": "Codepilot is regularly updated to incorporate the latest development trends, security patches, and community feedback to ensure it remains at the forefront of technology."
-            },
-            {
-                "question": "Does Codepilot offer customization options?",
-                "answer": "Yes, Codepilot provides extensive customization options to ensure that developers can tailor their projects to meet specific requirements, making it a flexible solution for a wide range of applications."
-            }
-        ]
-
+        title: "faq.title",
+        description: "faq.description",
+        faqs: "faq.faqs",
     },
     footer: {
         description: "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
