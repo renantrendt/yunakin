@@ -1,7 +1,6 @@
 import React from 'react'
 import FeatureItem from './feature-item'
 import { useTranslation } from '@/lib/i18n/client'
-import AnimatedSection from '../animated/AnimatedSection'
 
 const Features = () => {
     const { t } = useTranslation('landing')

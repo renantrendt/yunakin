@@ -1,9 +1,8 @@
 'use client'
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import Button from '../atomic/button/Button';
 import Typography from '../atomic/typography/Typography';
 import Image from 'next/image';
-import { motion, useAnimation, useInView } from 'framer-motion';
 import ArrowRightIcon from "@/icons/arrow-right.svg";
 import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../animated/AnimatedSection';

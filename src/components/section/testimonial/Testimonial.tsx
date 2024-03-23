@@ -22,21 +22,19 @@ const Testimonial = () => {
             </AnimatedSection>
             <section className='flex i  flex-row gap-3 xl:grid xl:grid-cols-3 overflow-x-scroll  w-full  no-scrollbar xl:gap-x-6 gap-y-6  '>
                 {testimonials.map((testimonial, index) => (
-                    <AnimatedSection delay={index * 0.1} type='scroll-opacity'>
-                        <div key={index} className='card bg-white min-w-[324px] flex-1    dark:bg-gray-700 shadow border  border-neutral-200 flex-col    h-full p-5 '>
-                            <div className='card-body flex   px-0 border-justify-cent  flex-col justify-between   items-center  '>
-                                <p className=' w-10/12 text-neutral-600 text-base leading-[26px] text-center font-light'>{testimonial.content}</p>
-                                <div className='relative  w-20 h-20  mt-6'>
-                                    <Image src={testimonial.avatar} alt={testimonial.name} fill objectFit='cover' className='rounded-full w-20 h-20' />
-                                </div>
-                                <div className='text-center'>
-                                    <Typography type='p' className='text-lg text-stone-950 font-semibold mt-3'>
-                                        {testimonial.name}
-                                    </Typography>
-                                    <p className='role text-base font-light text-stone-950'>{testimonial.role}</p>
-                                </div>
-
+                    <AnimatedSection delay={index * 0.1} type='scroll-opacity' key={index} className='card bg-white min-w-[324px] flex-1    dark:bg-gray-700 shadow border  border-neutral-200 flex-col    h-full p-5 '>
+                        <div className='card-body flex   px-0 border-justify-cent  flex-col justify-between   items-center  '>
+                            <p className=' w-10/12 text-neutral-600 text-base leading-[26px] text-center font-light'>{testimonial.content}</p>
+                            <div className='relative  w-20 h-20  mt-6'>
+                                <Image src={testimonial.avatar} alt={testimonial.name} fill objectFit='cover' className='rounded-full w-20 h-20' />
                             </div>
+                            <div className='text-center'>
+                                <Typography type='p' className='text-lg text-stone-950 font-semibold mt-3'>
+                                    {testimonial.name}
+                                </Typography>
+                                <p className='role text-base font-light text-stone-950'>{testimonial.role}</p>
+                            </div>
+
                         </div>
                     </AnimatedSection>
                 ))
