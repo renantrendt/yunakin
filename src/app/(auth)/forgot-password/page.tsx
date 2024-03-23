@@ -9,9 +9,10 @@ import customToast from '@/components/atomic/toast/customToast'
 import EnvelopeIcon from '@/icons/envelope-icon.svg'
 import Link from 'next/link'
 import Image from 'next/image'
-import siteUrls, { siteCopy } from '@/config/site-config'
+import siteUrls from '@/config/site-config'
 import Typography from '@/components/atomic/typography/Typography'
 import FormContainer from '@/components/form/FormContainer'
+import { useTranslation } from '@/lib/i18n/client'
 const schema = yup.object({
     email: yup.string().email().required(),
 })
@@ -20,6 +21,7 @@ interface FormValues {
     email: string
 }
 export default function ForgotPasswordPage() {
+    const { t } = useTranslation('auth')
     const [loading, setIsLoading] = React.useState(false)
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
@@ -43,7 +45,7 @@ export default function ForgotPasswordPage() {
                 })
             })
             if (response.status === 200) {
-                customToast.success('A reset password link has been sent to this email address')
+                customToast.success(t("forgotPasswordPage.resetPasswordLinkSent"))
             } else {
                 const data = await response.json()
                 customToast.error(data.message)
@@ -58,7 +60,6 @@ export default function ForgotPasswordPage() {
         }
     }
 
-    const forgotPasswordCopy = siteCopy.forgotPasswordPage
 
     return (
         <FormContainer onSubmit={handleSubmit(onSubmit)} >
@@ -69,9 +70,9 @@ export default function ForgotPasswordPage() {
             <div className='flex flex-col gap-8'>
                 <div>
 
-                    <Typography type='h3' className=''>{forgotPasswordCopy.title}</Typography>
+                    <Typography type='h3' className=''>{t("forgotPasswordPage.title")}</Typography>
                     {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
-                    <Typography type="p" className='mt-2  text-grey-700'>{forgotPasswordCopy.description}</Typography>
+                    <Typography type="p" className='mt-2  text-grey-700'>{t("forgotPasswordPage.description")}</Typography>
                 </div>
 
                 <div className='flex flex-col gap-6'>
@@ -81,11 +82,11 @@ export default function ForgotPasswordPage() {
                         name="email"
                         render={({ field: { onChange, value } }) => (
                             <InputField
-                                label={forgotPasswordCopy.email}
+                                label={t("forgotPasswordPage.email")}
                                 type="email"
                                 id="email"
                                 name="email"
-                                placeholder={forgotPasswordCopy.emailPlaceholder}
+                                placeholder={t("forgotPasswordPage.emailPlaceholder")}
                                 trailingIcon={<span className='text-grey-400'><EnvelopeIcon /> </span>}
                                 onChange={onChange}
                                 value={value}
@@ -94,7 +95,7 @@ export default function ForgotPasswordPage() {
                         )}
                     />
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" label={forgotPasswordCopy.submit} size='lg' loading={loading} />
+                        <Button variant="primary" type="submit" classname="w-full" label={t("forgotPasswordPage.submit")} size='lg' loading={loading} />
                     </div>
                 </div>
             </div>

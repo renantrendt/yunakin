@@ -11,6 +11,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 
 import { sendVerificationEmail } from '@/utils/sendEmail'
 import platformConfig from '@/config/app-config'
+import { createTranslation } from '../i18n/server'
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -52,6 +53,7 @@ export const authOptions: NextAuthOptions = {
                 password: { label: 'Password', type: 'password' }
             },
             async authorize(credentials) {
+                const { t } = await createTranslation('auth')
                 if (!credentials?.email || !credentials.password) {
                     return null
                 }
@@ -69,13 +71,13 @@ export const authOptions: NextAuthOptions = {
                     }
                 })) as User
                 if (!user) {
-                    throw { message: 'No user found with this email', statusCode: 400 }
+                    throw { message: t("error.userNotFound"), statusCode: 400 }
                 }
                 if (user.provider !== "credentials") {
-                    throw { message: 'A user with this email with other provider is already registered', statusCode: 400 }
+                    throw { message: t("error.emailOtherProvider"), statusCode: 400 }
                 }
                 if (!user || !(await compare(credentials.password, user.password as string))) {
-                    throw { message: 'Email or password is incorrect', statusCode: 401 }
+                    throw { message: t("error.incorrectEmailOrPassword"), statusCode: 401 }
                 }
                 return {
                     email: user.email,

@@ -1,4 +1,5 @@
 // import { sendEmail } from "@/lib/mailer";
+import { createTranslation } from '@/lib/i18n/server'
 import { prisma } from '@/lib/prisma'
 import { sendVerificationEmail } from '@/utils/sendEmail'
 import { hash } from 'bcryptjs'
@@ -7,13 +8,21 @@ import { NextResponse } from 'next/server'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function POST(req: Request): Promise<NextResponse<unknown>> {
   try {
+    const { t } = await createTranslation('auth')
     const { name, email, password } = (await req.json()) as {
       name: string
       email: string
       password: string
     }
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email: email.toLowerCase()
+      }
+    })
+    if (existingUser) {
+      throw { message: t("error.userNotFound"), statusCode: 400 }
+    }
     const hashed_password = await hash(password, 12)
-
     const user = await prisma.user.create({
       data: {
         name,

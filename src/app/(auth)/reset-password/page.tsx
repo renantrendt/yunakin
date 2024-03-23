@@ -12,6 +12,7 @@ import Link from 'next/link'
 import siteUrls, { siteCopy } from '@/config/site-config'
 import Typography from '@/components/atomic/typography/Typography'
 import FormContainer from '@/components/form/FormContainer'
+import { useTranslation } from '@/lib/i18n/client'
 const schema = yup.object({
     password: yup.string().min(6).required()
 })
@@ -20,6 +21,7 @@ interface FormValues {
     password: string
 }
 export default function ForgotPasswordPage() {
+    const { t } = useTranslation('auth')
     const [loading, setIsLoading] = React.useState(false)
     const router = useRouter()
     const searchParams = useSearchParams()
@@ -49,7 +51,7 @@ export default function ForgotPasswordPage() {
                 })
             })
             if (response.status === 200) {
-                customToast.success('Password has been reset successfully')
+                customToast.success(t("resetPasswordPage.resetPasswordSuccess"))
                 return router.push('/login')
             } else {
                 const data = await response.json()
@@ -65,7 +67,6 @@ export default function ForgotPasswordPage() {
         }
     }
 
-    const resetPasswordCopy = siteCopy.resetPasswordPage
 
     return (
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
@@ -76,8 +77,8 @@ export default function ForgotPasswordPage() {
             <div className='flex flex-col gap-8'>
                 <div>
 
-                    <Typography type='h3' className=''>{resetPasswordCopy.title}</Typography>
-                    <Typography type="p" className='mt-2  text-grey-700'>{resetPasswordCopy.description}</Typography>
+                    <Typography type='h3' className=''>{t("resetPasswordPage.title")}</Typography>
+                    <Typography type="p" className='mt-2  text-grey-700'>{t("resetPasswordPage.description")}</Typography>
                 </div>
 
                 <div className='flex flex-col gap-6'>
@@ -87,11 +88,11 @@ export default function ForgotPasswordPage() {
                         name="password"
                         render={({ field: { onChange, value } }) => (
                             <PasswordInputField
-                                label={resetPasswordCopy.password}
+                                label={t("resetPasswordPage.password")}
                                 type="password"
                                 id="password"
                                 name="password"
-                                placeholder={resetPasswordCopy.passwordPlaceholder}
+                                placeholder={t("resetPasswordPage.passwordPlaceholder")}
                                 onChange={onChange}
                                 value={value}
                                 error={errors.password?.message}
@@ -99,7 +100,7 @@ export default function ForgotPasswordPage() {
                         )}
                     />
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" label={resetPasswordCopy.submit} size='lg' loading={loading} />
+                        <Button variant="primary" type="submit" classname="w-full" label={t("resetPasswordPage.submit")} size='lg' loading={loading} />
                     </div>
                 </div>
             </div>

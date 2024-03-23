@@ -1,6 +1,6 @@
 'use client'
 import { signIn, useSession } from 'next-auth/react'
-import React from 'react'
+import React, { use } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -18,11 +18,7 @@ import AuthButton from '@/components/molecules/authbutton/AuthButton'
 import GoogleIcon from "@/icons/google-icon.svg"
 import Checkbox from '@/components/atomic/checkbox/Checkbox'
 import FormContainer from '@/components/form/FormContainer'
-const schema = yup.object({
-    email: yup.string().email().required(),
-    password: yup.string().min(6).required(),
-    remember: yup.boolean()
-})
+import { useTranslation } from '@/lib/i18n/client'
 
 interface FormValues {
     email: string
@@ -39,10 +35,18 @@ const appendParams = (searchParams: URLSearchParams) => {
 }
 
 export default function LoginPage() {
+    const { t } = useTranslation('auth')
     const { data: session } = useSession()
     const router = useRouter()
     const [loading, setIsLoading] = React.useState(false)
     const searchParams = useSearchParams()
+
+    const schema = yup.object({
+        email: yup.string().email(t("error.invalidEmail")).required(t("error.missingEmail")),
+        password: yup.string().min(6, t("error.weakPassword")).required(t("error.missingPassword")),
+        remember: yup.boolean()
+    })
+
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
@@ -57,7 +61,6 @@ export default function LoginPage() {
     }
 
     const onSubmit = async (data: any) => {
-        // Handle sign up logic here
         setIsLoading(true)
         try {
             const result = await signIn('credentials', {
@@ -82,13 +85,13 @@ export default function LoginPage() {
                         if (data?.error) {
                             customToast.error(data.error)
                         } else {
-                            customToast.success('Email verified, redirecting to dashboard')
+                            customToast.success(t("loginPage.emailVerified"))
                             setTimeout(() => {
                                 router.push('/dashboard')
                             }, 1000)
                         }
                     } else {
-                        customToast.error('Something went wrong')
+                        customToast.error(t("loginPage.somethingWentWrong"))
                         return router.push('/')
                     }
                 } else {
@@ -103,7 +106,6 @@ export default function LoginPage() {
         }
     }
 
-    const loginCopy = siteCopy.loginPage;
     return (
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
 
@@ -114,9 +116,9 @@ export default function LoginPage() {
             <div className='flex flex-col gap-8'>
                 <div>
 
-                    <Typography type='h3' className=''>{loginCopy.title}</Typography>
+                    <Typography type='h3' className=''>{t("loginPage.title")}</Typography>
                     {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
-                    <Typography type="p" className='mt-2  text-grey-700 !dark:text-placeholder-dark '>{loginCopy.description}</Typography>
+                    <Typography type="p" className='mt-2  text-grey-700 !dark:text-placeholder-dark '>{t("loginPage.description")}</Typography>
                 </div>
 
                 <div className='flex flex-col gap-6'>
@@ -126,11 +128,11 @@ export default function LoginPage() {
                         name="email"
                         render={({ field: { onChange, value } }) => (
                             <InputField
-                                label={loginCopy.email}
+                                label={t("loginPage.email")}
                                 type="email"
                                 id="email"
                                 name="email"
-                                placeholder={loginCopy.emailPlaceholder}
+                                placeholder={t("loginPage.emailPlaceholder")}
                                 trailingIcon={<span className='text-grey-400 dark:text-placeholder-dark'><EnvelopeIcon /> </span>}
                                 onChange={onChange}
                                 value={value}
@@ -140,7 +142,7 @@ export default function LoginPage() {
                     />
                     <div className='relative '>
                         <div className='text-black absolute right-0 top-1 dark:text-white'>
-                            <Link href={siteUrls.general.forgotPassword} className="text-primary text-sm">{loginCopy.forgotPassword}</Link>
+                            <Link href={siteUrls.general.forgotPassword} className="text-primary text-sm">{t("loginPage.forgotPassword")}</Link>
                         </div>
                         <Controller
                             control={control}
@@ -151,7 +153,7 @@ export default function LoginPage() {
                                     type="password"
                                     id="password"
                                     name="password"
-                                    placeholder={loginCopy.passwordPlaceholder}
+                                    placeholder={t("loginPage.passwordPlaceholder")}
                                     onChange={onChange}
                                     value={value}
                                     error={errors.password?.message}
@@ -164,7 +166,7 @@ export default function LoginPage() {
                         name='remember'
                         render={({ field: { onChange, value } }) => (
                             <Checkbox
-                                label='Remember me'
+                                label={t("loginPage.rememberMe")}
                                 id='remember'
                                 name='remember'
                                 onChange={onChange}
@@ -175,10 +177,10 @@ export default function LoginPage() {
                         )}
                     />
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" label='Sign In' size='lg' loading={loading} />
+                        <Button variant="primary" type="submit" classname="w-full" label={t("loginPage.signIn")} size='lg' loading={loading} />
 
                         <div className=' text-sm dark:text-white'>
-                            {loginCopy.notMember} <Link href={siteUrls.general.register} className="text-primary ">{loginCopy.register}</Link>
+                            {t("loginPage.notMember")} <Link href={siteUrls.general.register} className="text-primary ">{t("loginPage.register")}</Link>
                         </div>
                     </div>
                 </div>
@@ -189,7 +191,7 @@ export default function LoginPage() {
                 </div>
                 <div>
                     <div className='flex gap-2 flex-col'>
-                        <AuthButton onClick={() => { signIn('google', { callbackUrl: `/dashboard${appendParams(searchParams)}` }) }} content={loginCopy.signWithGoogle} icon={<GoogleIcon />} />
+                        <AuthButton onClick={() => { signIn('google', { callbackUrl: `/dashboard${appendParams(searchParams)}` }) }} content={t("loginPage.signWithGoogle")} icon={<GoogleIcon />} />
                     </div>
                 </div>
             </div>

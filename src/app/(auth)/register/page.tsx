@@ -1,6 +1,6 @@
 'use client'
 import { signIn, useSession } from 'next-auth/react'
-import React, { useState } from 'react'
+import React, { use, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -18,13 +18,9 @@ import Checkbox from '@/components/atomic/checkbox/Checkbox'
 import GoogleIcon from "@/icons/google-icon.svg"
 import EnvelopeIcon from '@/icons/envelope-icon.svg'
 import FormContainer from '@/components/form/FormContainer'
+import { useTranslation } from '@/lib/i18n/client'
 
-const schema = yup.object({
-    email: yup.string().email().required(),
-    password: yup.string().min(6).required(),
-    name: yup.string().required(),
-    remember: yup.boolean()
-})
+
 
 interface FormValues {
     email: string
@@ -33,9 +29,16 @@ interface FormValues {
     remember?: boolean
 }
 export default function RegisterPage() {
+    const { t } = useTranslation('auth')
     const { data: session } = useSession()
     const router = useRouter()
     const [loading, setIsLoading] = useState(false)
+    const schema = yup.object({
+        email: yup.string().email(t("error.invalidEmail")).required(t("error.missingEmail")),
+        password: yup.string().min(6, t("error.weakPassword")).required(t("error.missingPassword")),
+        name: yup.string().required(t("error.missingName")),
+        remember: yup.boolean()
+    })
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
@@ -60,10 +63,10 @@ export default function RegisterPage() {
 
             if (register.status === 200) {
                 // router.push(`/auth/verify-request?email=${values.email}`);
-                customToast.success('Registration successful, a confirmation email has been sent to your email address.')
+                customToast.success(t("registerPage.registrationSuccessful"))
                 router.push('/login')
             } else {
-                customToast.error('Something went wrong')
+                customToast.error(t("registerPage.somethingWentWrong"))
             }
         } catch (error) {
             console.error(error)
@@ -72,7 +75,6 @@ export default function RegisterPage() {
         }
 
     }
-    const registerCopy = siteCopy.registerPage
     return (
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
             <Link href={siteUrls.general.home}>
@@ -82,9 +84,9 @@ export default function RegisterPage() {
             <div className='flex flex-col gap-8'>
                 <div>
 
-                    <Typography type='h3' className=''>{registerCopy.title}</Typography>
+                    <Typography type='h3' className=''>{t("registerPage.title")}</Typography>
                     {/* <h3 className="text-2xl text-left font-bold  text-black dark:text-white">Login</h3> */}
-                    <Typography type="p" className='mt-2  text-grey-700'>{registerCopy.description}</Typography>
+                    <Typography type="p" className='mt-2  text-grey-700'>{t("registerPage.description")}</Typography>
                 </div>
 
                 <div className='flex flex-col gap-6'>
@@ -97,7 +99,7 @@ export default function RegisterPage() {
                                 type="text"
                                 id="name"
                                 name="name"
-                                placeholder='Enter your name'
+                                placeholder={t("registerPage.namePlaceholder")}
                                 onChange={onChange}
                                 value={value}
                                 error={errors.name?.message}
@@ -109,11 +111,11 @@ export default function RegisterPage() {
                         name="email"
                         render={({ field: { onChange, value } }) => (
                             <InputField
-                                label={registerCopy.email}
+                                label={t("registerPage.email")}
                                 type="email"
                                 id="email"
                                 name="email"
-                                placeholder={registerCopy.emailPlaceholder}
+                                placeholder={t("registerPage.emailPlaceholder")}
                                 trailingIcon={<span className='text-grey-400'><EnvelopeIcon /> </span>}
                                 onChange={onChange}
                                 value={value}
@@ -127,11 +129,11 @@ export default function RegisterPage() {
                             name="password"
                             render={({ field: { onChange, value } }) => (
                                 <PasswordInputField
-                                    label={registerCopy.password}
+                                    label={t("registerPage.password")}
                                     type="password"
                                     id="password"
                                     name="password"
-                                    placeholder={registerCopy.passwordPlaceholder}
+                                    placeholder={t("registerPage.passwordPlaceholder")}
                                     onChange={onChange}
                                     value={value}
                                     error={errors.password?.message}
@@ -144,7 +146,7 @@ export default function RegisterPage() {
                         name='remember'
                         render={({ field: { onChange, value } }) => (
                             <Checkbox
-                                label='Remember me'
+                                label={t("registerPage.rememberMe")}
                                 id='remember'
                                 name='remember'
                                 onChange={onChange}
@@ -155,7 +157,7 @@ export default function RegisterPage() {
                         )}
                     />
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" label={registerCopy.createAccount} size='lg' loading={loading} />
+                        <Button variant="primary" type="submit" classname="w-full" label={t("registerPage.createAccount")} size='lg' loading={loading} />
                     </div>
                 </div>
                 <div className="relative flex  items-center py-3">
@@ -164,18 +166,11 @@ export default function RegisterPage() {
                     <div className="flex-grow border-t border-grey-400"></div>
                 </div>
                 <div>
-
-
-
                     <div className='flex gap-2 flex-col'>
-
-                        <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content={registerCopy.signWithGoogle} icon={<GoogleIcon />} />
-
+                        <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content={t("registerPage.signWithGoogle")} icon={<GoogleIcon />} />
                     </div>
-
                 </div>
             </div>
-
         </FormContainer>
 
     )
