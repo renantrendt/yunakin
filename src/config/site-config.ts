@@ -95,52 +95,6 @@ export const siteCopy = {
         ],
         usedByCopy: "heroSection.usedByCopy",
     },
-    ctaSection: {
-        title: "ctaSection.title",
-        description: "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
-        reasons: [
-            {
-                metric: "ctaSection.reasons.0.title",
-                description: "ctaSection.reasons.0.description",
-            },
-            {
-                metric: "ctaSection.reasons.1.title",
-                description: "ctaSection.reasons.1.description",
-            },
-            {
-                metric: "ctaSection.reasons.2.title",
-                description: "ctaSection.reasons.2.description",
-            },
-        ]
-    },
-
-    featuresSection:
-    {
-        features: [
-            {
-                title: "features.feature.0.title",
-                description: "features.feature.0.description",
-                image: "/images/hero-image.jpeg"
-            },
-            {
-                title: "features.feature.1.title",
-                description: "features.feature.1.description",
-                image: "/images/hero-image.jpeg",
-                direction: "rtl"
-            },
-            {
-                title: "features.feature.2.title",
-                description: "features.feature.2.description",
-                image: "/images/hero-image.jpeg"
-            },
-
-        ],
-    },
-    faqSection: {
-        title: "faq.title",
-        description: "faq.description",
-        faqs: "faq.faqs",
-    },
     loginPage: {
         title: "Log in",
         description: "Enter your credentials to access your account",

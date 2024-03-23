@@ -18,7 +18,10 @@ const FAQ = () => {
                 </div>
                 <div className='faq-list flex flex-col justify-start gap-2  max-w-xl w-full   '>
                     {faqs.map((item, index) => (
-                        <FaqItem key={index} question={item.question} answer={item.answer} isOpen={index == showAnswer} onClick={() => setShowAnswer(index == showAnswer ? null : index)} />
+                        <AnimatedSection delay={index * 0.04}>
+
+                            <FaqItem key={index} question={item.question} answer={item.answer} isOpen={index == showAnswer} onClick={() => setShowAnswer(index == showAnswer ? null : index)} />
+                        </AnimatedSection>
 
                     ))}
                 </div>
