@@ -90,10 +90,11 @@ export default function Navbar() {
                                         />
                                     )
                                 })}
-                                <ThemeSwitcher />
-
+                                <div className='flex flex-row justify-start gap-3'>
+                                    <ThemeSwitcher />
+                                    <ChangeLocale />
+                                </div>
                                 <li>
-
                                     <Button
                                         variant='primary'
                                         classname=' !min-w-[150px] !w-full  text-white '
@@ -107,27 +108,27 @@ export default function Navbar() {
                         </div>
                         <div className='hidden lg:flex  gap-2 justify-center items-center'>
                             <ThemeSwitcher />
+                            <ChangeLocale />
 
-                            {session?.user && (<div className='relative' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
-                                <Avatar onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
-                                <AccountModal email={session?.user?.email as string}
-                                    name={session?.user?.name || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
-                                    image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} shown={show}
-                                />
-                            </div>)}
+                            {session?.user && (
+                                <div className='relative' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
+                                    <Avatar onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
+                                    <AccountModal email={session?.user?.email as string}
+                                        name={session?.user?.name || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
+                                        image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} shown={show}
+                                    />
+                                </div>
+                            )}
                             {
                                 !session?.user && status !== "loading" && (
-                                    <>
-                                        <ChangeLocale />
 
-                                        <Button
-                                            variant='primary'
-                                            classname='  !min-w-[120px] '
-                                            label={t('navbar.getStarted')}
-                                            size='lg'
-                                            onClick={() => router.push(siteUrls.general.register)}
-                                        />
-                                    </>
+                                    <Button
+                                        variant='primary'
+                                        classname='  !min-w-[120px] '
+                                        label={t('navbar.getStarted')}
+                                        size='lg'
+                                        onClick={() => router.push(siteUrls.general.register)}
+                                    />
                                 )
                             }
                         </div>

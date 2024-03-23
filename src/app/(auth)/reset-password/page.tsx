@@ -9,23 +9,23 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Link from 'next/link'
-import siteUrls, { siteCopy } from '@/config/site-config'
+import siteUrls from '@/config/site-config'
 import Typography from '@/components/atomic/typography/Typography'
 import FormContainer from '@/components/form/FormContainer'
 import { useTranslation } from '@/lib/i18n/client'
-const schema = yup.object({
-    password: yup.string().min(6).required()
-})
+
 
 interface FormValues {
     password: string
 }
-export default function ForgotPasswordPage() {
+export default function ResetPasswordPage() {
     const { t } = useTranslation('auth')
     const [loading, setIsLoading] = React.useState(false)
     const router = useRouter()
     const searchParams = useSearchParams()
-
+    const schema = yup.object({
+        password: yup.string().min(6, t("error.weakPassword")).required(t("error.missingPassword")),
+    })
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)

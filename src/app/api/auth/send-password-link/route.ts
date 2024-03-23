@@ -1,4 +1,5 @@
 // import { sendEmail } from "@/lib/mailer";
+import { createTranslation } from '@/lib/i18n/server'
 import { prisma } from '@/lib/prisma'
 import { sendResetPasswordEmail } from '@/utils/sendEmail'
 import { hash } from 'bcryptjs'
@@ -6,6 +7,7 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request): Promise<NextResponse<unknown>> {
     try {
+        const { t } = await createTranslation('auth')
         const { email } = (await req.json()) as {
             email: string
         }
@@ -15,7 +17,7 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
         })
 
         if (!user) {
-            throw new Error('No user found')
+            throw new Error(t("error.userNotFound"))
         }
         const resetPasswordToken = await hash(user.email + user.password, 12)
         const resetPassword = await prisma.resetPassword.create({

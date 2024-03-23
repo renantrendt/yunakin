@@ -24,10 +24,10 @@ export default function Footer(): JSX.Element {
             </AnimatedSection>
             <div className='grid  col-span-9 lg:col-start-5 grid-cols-2 lg:grid-cols-4 w-full lg:col-span-6 gap-y-16'>
                 {links.map((link, index) => (
-                    <AnimatedSection delay={(index + 1) * 0.1} className='flex flex-col gap-4 dark:text-white'>
+                    <AnimatedSection key={index} delay={(index + 1) * 0.1} className='flex flex-col gap-4 dark:text-white'>
                         <header className="ext-base font-medium dark:!text-white">{link.title}</header>
                         {link.links.map((item, idx) => (
-                            <Link href={item.url} className="link link-hover dark:text-sidebar-icon-dark">{item.title}</Link>
+                            <Link href={item.url} key={idx} className="link link-hover dark:text-sidebar-icon-dark">{item.title}</Link>
                         ))}
                     </AnimatedSection>
                 ))}

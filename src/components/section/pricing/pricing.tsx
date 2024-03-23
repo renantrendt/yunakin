@@ -16,8 +16,8 @@ export default function Pricing({ showDescription = false }: { showDescription?:
         <div className='py-28 w-full  ' id='pricing'>
             {showDescription && (
                 <AnimatedSection className=' flex flex-col justify-center items-center mb-20 gap-5 text-black dark:text-white'>
-                    <Typography type='h1' className='!lg:text-[46px] !lg:leading-[64px] text-stone-950 font-semibold text-center mb-2 dark:text-white'>Enable the best experience</Typography>
-                    <h3 className=' text-lg lg:text-xl  max-w-[700px] font-normal  leading-[30px] text-center text-neutral-600 dark:text-sidebar-icon-dark'>Choose a plan and start your 14-day free trial. Generate appointments and leads or source talent online, risk-free.</h3>
+                    <Typography type='h1' className='!lg:text-[46px] !lg:leading-[64px] text-stone-950 font-semibold text-center mb-2 dark:text-white'>{t("pricing.title")}</Typography>
+                    <h3 className=' text-lg lg:text-xl  max-w-[700px] font-normal  leading-[30px] text-center text-neutral-600 dark:text-sidebar-icon-dark'>{t("pricing.description")}</h3>
                 </AnimatedSection>
             )}
 

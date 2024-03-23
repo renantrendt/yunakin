@@ -13,9 +13,6 @@ import siteUrls from '@/config/site-config'
 import Typography from '@/components/atomic/typography/Typography'
 import FormContainer from '@/components/form/FormContainer'
 import { useTranslation } from '@/lib/i18n/client'
-const schema = yup.object({
-    email: yup.string().email().required(),
-})
 
 interface FormValues {
     email: string
@@ -23,6 +20,10 @@ interface FormValues {
 export default function ForgotPasswordPage() {
     const { t } = useTranslation('auth')
     const [loading, setIsLoading] = React.useState(false)
+    const schema = yup.object({
+        email: yup.string().email(t("error.invalidEmail")).required(t("error.missingEmail")),
+    })
+
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
