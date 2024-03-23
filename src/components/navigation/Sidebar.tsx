@@ -17,6 +17,7 @@ import NavigationItem from '../atomic/navigation/NavigationItem'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import DashboardDarkIcon from "@/icons/dashboard-logo-dark-icon.svg"
+import { useTranslation } from '@/lib/i18n/client'
 interface SidebarLink {
     label: string
     path: string
@@ -25,16 +26,16 @@ interface SidebarLink {
 }
 
 const sidebarLinks: SidebarLink[] = [
-    { label: 'Home', path: '/dashboard', iconSrc: <HomeIcon /> },
-    { label: "AI", path: "/ai", iconSrc: <div className='w-5 h-5'> <ChatGptIcon /> </div> },
-    { label: 'Notifications', path: '/notifications', iconSrc: <InboxIcon /> },
-    { label: 'Users', path: '/users', iconSrc: <UserGroupIcon />, adminRoute: true },
-    { label: 'Analytics', path: '/analytics', iconSrc: <AnalyticsIcon /> },
+    { label: 'home', path: '/dashboard', iconSrc: <HomeIcon /> },
+    { label: "ai", path: "/ai", iconSrc: <div className='w-5 h-5'> <ChatGptIcon /> </div> },
+    { label: 'notifications', path: '/notifications', iconSrc: <InboxIcon /> },
+    { label: 'users', path: '/users', iconSrc: <UserGroupIcon />, adminRoute: true },
+    { label: 'analytics', path: '/analytics', iconSrc: <AnalyticsIcon /> },
     // Add other necessary links here
 ]
 const bottomSideBarLinks: SidebarLink[] = [
-    { label: 'Settings', path: '/settings', iconSrc: <SettingsIcon /> },
-    { label: 'Help & Support', path: '/help', iconSrc: <BookOpen /> },
+    { label: 'settings', path: '/settings', iconSrc: <SettingsIcon /> },
+    { label: 'helpAndSupport', path: '/help', iconSrc: <BookOpen /> },
 ]
 
 
@@ -47,6 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
     const [search, setSearch] = React.useState('')
     const pathname = usePathname()
     const { theme } = useTheme();
+    const { t } = useTranslation('dashboard')
 
     return (
         <aside className={` z-50 flex  h-screen  text-white overflow-y-hidden absolute lg:static top-0 left-0 w-72 flex-col bg-grey-100 dark:bg-profile-modal-background-dark
@@ -66,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
                     <div className='flex flex-col gap-[6px] mt-[6px]'>
                         {sidebarLinks.map((link) => (
                             <NavigationItem
-                                title={link.label}
+                                title={t(`sidebar.${link.label}`)}
                                 icon={link.iconSrc}
                                 link={link.path}
                                 key={link.label}
@@ -80,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
 
                     {bottomSideBarLinks.map((link) => (
                         <NavigationItem
-                            title={link.label}
+                            title={t(`sidebar.${link.label}`)}
                             icon={link.iconSrc}
                             link={link.path}
                             key={link.label}

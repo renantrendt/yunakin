@@ -13,7 +13,7 @@ export default function Footer(): JSX.Element {
     return (
         <footer className="footer max-w-[1440px]  md:h-[50vh] grid grid-cols-9 grid-flow-row-dense  lg:grid-cols-9 px-4 md:px-28 text-base-content w-full  pt-24 pb-2">
             {/* <div className='container  mx-auto h-full w-full '> */}
-            <AnimatedSection className='flex flex-col col-span-9 lg:col-span-3 justify-start items-start'>
+            <AnimatedSection className='flex flex-col col-span-9 lg:col-span-3  justify-start items-start'>
                 <Link href={siteUrls.general.home}>
                     <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
                     <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
@@ -22,7 +22,7 @@ export default function Footer(): JSX.Element {
                     {t("footer.description")}
                 </Typography>
             </AnimatedSection>
-            <div className='grid  col-span-9 lg:col-start-5 grid-cols-2 lg:grid-cols-4 w-full lg:col-span-6 gap-y-16'>
+            <div className='grid  col-span-9 lg:col-start-6 grid-cols-2 lg:grid-cols-3 w-full lg:col-span-6 gap-y-16'>
                 {links.map((link, index) => (
                     <AnimatedSection key={index} delay={(index + 1) * 0.1} className='flex flex-col gap-4 dark:text-white'>
                         <header className="ext-base font-medium dark:!text-white">{link.title}</header>

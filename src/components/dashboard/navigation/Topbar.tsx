@@ -8,6 +8,7 @@ import AccountModal from '@/components/molecules/account-modal/AccountModal'
 import NotificationModal from '@/components/molecules/notification-modal/NotificationModal'
 import Notification from '@/lib/models/notification'
 import { cn } from '@/utils/cn'
+import ChangeLocale from '@/components/locale/ChangeLocale'
 const Topbar = () => {
     const { data: session } = useSession()
     const [show, setShow] = React.useState(false)
@@ -41,6 +42,7 @@ const Topbar = () => {
             <Typography type='h1' className='!text-base !md:text-xl'>Welcome {session?.user?.name}</Typography>
             <div className='flex justify-center gap-2'>
                 <ThemeSwitcher />
+                <ChangeLocale />
                 <div className='relative'>
                     <div onClick={() => setShowNotifications(!showNotification)} className={cn("cursor-pointer p-[10px] bg-grey-100 text-grey-600 hover:bg-primary-500 focus:bg-primary-500  w-fit h-fit dark:bg-icon-dark dark:hover:bg-primary-500 dark:focus:bg-primary-500  hover:text-white focus:text-white dark:text-white rounded-full", showNotification ? "!bg-primary-500 !text-white" : "")} >
                         <NotificationIcon />

@@ -19,7 +19,6 @@ export default function ChangeLocale() {
                 options={[
                     { value: 'en', label: "🇺🇸", selected: i18n.language == "en" },
                     { value: 'de', label: "🇩🇪", selected: i18n.language == "de" },
-                    { value: 'sq', label: "🇦🇱", selected: i18n.language == "sq" },
 
                 ]} // Add the options here
                 className=' min-w-fit !w-16 focus:!border-none !border-none !shadow-none '

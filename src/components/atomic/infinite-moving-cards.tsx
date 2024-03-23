@@ -10,7 +10,7 @@ const items = [
 ]
 export const InfiniteMovingCards = () => {
     return (
-        <ParallaxText baseVelocity={3.5}>
+        <ParallaxText >
             {items.map((Item, idx) => (
                 <Item key={idx} />
             ))}
