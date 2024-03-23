@@ -104,7 +104,68 @@
     },
     "footer": {
         "description": "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
-        "footnote": "@%Date% Codepilot. All rights reserved."
+        "footnote": "@%Date% Codepilot. All rights reserved.",
+        "links": [
+            {
+                "title": "Services",
+                "links": [
+                    {
+                        "title": "Web Development",
+                        "url": "/services/web-development"
+                    },
+                    {
+                        "title": "Mobile Development",
+                        "url": "/services/mobile-development"
+                    },
+                    {
+                        "title": "Cloud Services",
+                        "url": "/cloud-services"
+                    },
+                    {
+                        "title": "UI/UX Design",
+                        "url": "/ui-ux-design"
+                    }
+                ]
+            },
+            {
+                "title": "Company",
+                "links": [
+                    {
+                        "title": "About Us",
+                        "url": "/about-us"
+                    },
+                    {
+                        "title": "Careers",
+                        "url": "/careers"
+                    },
+                    {
+                        "title": "Partners",
+                        "url": "/partners"
+                    },
+                    {
+                        "title": "Contact Us",
+                        "url": "/contact-us"
+                    }
+                ]
+            },
+            {
+                "title": "Legal",
+                "links": [
+                    {
+                        "title": "Privacy Policy",
+                        "url": "/privacy-policy"
+                    },
+                    {
+                        "title": "Terms of Service",
+                        "url": "/terms-of-service"
+                    },
+                    {
+                        "title": "Security",
+                        "url": "/security"
+                    }
+                ]
+            }
+        ]
     },
     "faq": {
         "title": "Frequently Asked Questions",

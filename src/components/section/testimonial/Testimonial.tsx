@@ -6,15 +6,11 @@ import AnimatedSection from '@/components/animated/AnimatedSection';
 import { useTranslation } from '@/lib/i18n/client';
 
 const Testimonial = () => {
-    // Generate fake testimonials array
     const { t } = useTranslation('landing');
-
     const testimonials = t("testimonialsSection.testimonials", { returnObjects: true }) as { name: string, role: string, content: string, avatar: string }[];
-
     return (
         <div className='py-28 max-w-[1440px]  w-full text-white'>
             <AnimatedSection>
-
                 <Typography type='h1' className=' !text-white !font-semibold text-center pb-4'>{t("testimonialsSection.title")}</Typography>
             </AnimatedSection>
             <AnimatedSection>

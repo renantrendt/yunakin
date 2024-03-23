@@ -36,6 +36,11 @@ export default function Navbar() {
 
 
     useEffect(() => {
+        document.addEventListener('click', (e) => {
+            if (e.target instanceof HTMLElement && !e.target.closest('.dropdown')) {
+                setShowMenu(false)
+            }
+        });
         window.addEventListener('scroll', changeNavBg);
         return () => {
             window.removeEventListener('scroll', changeNavBg);
