@@ -83,7 +83,7 @@ export default function PricingProduct({ name, description, price, features, pla
                                 /
                             </span>
                             <span>
-                                {isMonthly ? "month" : "year"}
+                                {isMonthly ? t("pricing.month") : t("pricing.year")}
                             </span>
 
                         </div>

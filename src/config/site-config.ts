@@ -69,36 +69,6 @@ const siteUrls: SiteUrls = {
     }
 }
 
-export const siteCopy = {
-    heroSection: {
-        title: "heroSection.title",
-        description: "heroSection.description",
-        image: "/images/hero-image.jpeg",
-        usedBy: [
-            {
-                name: "John Doe",
-                avatar: "/images/used-by/first.jpeg"
-            },
-            {
-                name: "John Doe",
-                avatar: "/images/used-by/second.jpeg"
-            },
-            {
-                name: "John Doe",
-                avatar: "/images/used-by/third.jpeg"
-            },
-            {
-                name: "John Doe",
-                avatar: "/images/used-by/fourth.jpeg"
-            },
-
-        ],
-        usedByCopy: "heroSection.usedByCopy",
-    },
-
-
-}
-
 export const siteConfig: Metadata = {
     applicationName: 'Codepilot',
     title: 'Codepilot - Launch in days, not weeks.',

@@ -4,7 +4,26 @@
         "description": "Das ultimative SaaS-Boilerplate, entworfen, um Ihre Anwendungsentwicklung schnell und präzise voranzutreiben.",
         "usedByCopy": "Von <b>100+</b> Entwicklern genutzt",
         "cta": "Kostenlose Testversion starten",
-        "watchVideo": "Am Crashkurs teilnehmen"
+        "watchVideo": "Am Crashkurs teilnehmen",
+        "image": "/images/hero-image.jpeg",
+        "usedBy": [
+            {
+                "name": "John Doe",
+                "avatar": "/images/used-by/first.jpeg"
+            },
+            {
+                "name": "John Doe",
+                "avatar": "/images/used-by/second.jpeg"
+            },
+            {
+                "name": "John Doe",
+                "avatar": "/images/used-by/third.jpeg"
+            },
+            {
+                "name": "John Doe",
+                "avatar": "/images/used-by/fourth.jpeg"
+            }
+        ]
     },
     "navbar": {
         "pricing": "Preisgestaltung",
@@ -100,7 +119,9 @@
         "recommended": "Empfohlen",
         "monthly": "Monatlich",
         "yearly": "Jährlich",
-        "start": "Starten"
+        "start": "Starten",
+        "month": "Monat",
+        "year": "Jahr"
     },
     "footer": {
         "description": "Codepilot beschleunigt die Entwicklung, indem es eine vorkonfigurierte Grundlage bietet, die Zeit spart, bewährte Praktiken gewährleistet und Skalierbarkeit erleichtert, wodurch Sie sich auf Innovation konzentrieren können.",
