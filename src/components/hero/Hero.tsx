@@ -16,7 +16,7 @@ export default function Hero() {
             className="my-20  mt-24 lg:mt-40  items-center text-center md:text-left text-black dark:text-white" >
             <div className='grid grid-cols-1 lg:grid-cols-8 justify-center gap-x-8 gap-y-8'>
 
-                <div className="w-full flex flex-1 lg:coel-span-4 flex-col py-3 ">
+                <div className="w-full flex flex-1 lg:col-span-4 flex-col py-3 ">
                     <AnimatedSection>
 
                         <Typography type='h1' className=' text-left break-all lg:!leading-[72px]  min-h-[128px]  mb-4 lg:mb-5 !font-semibold break-words '>
