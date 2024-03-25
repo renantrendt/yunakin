@@ -2,7 +2,7 @@
 import React from 'react'
 import ExclmationIcon from '@/icons/exclamation-circle.svg'
 import { cn } from '@/utils/cn'
-interface InputFieldProps {
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
   name: string
   id: string
@@ -14,13 +14,12 @@ interface InputFieldProps {
   additionalProps?: any
   leadingIcon?: React.ReactNode
   trailingIcon?: React.ReactNode
-  customClassName?: string
   customLeadingIconClassName?: string
 }
 
-const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, error, id, ...additionalProps }) => {
+const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, className, error, id, ...additionalProps }) => {
   return (
-    <div className="form-control ">
+    <div className="form-control w-full ">
       {label &&
         <label className="label text-sm text-black dark:text-white">
           <span className="label-text">{label}</span>
@@ -31,17 +30,18 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
         <input
           type={type}
           placeholder={placeholder}
-          className={` outline-none  dark:bg-gray-800 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border-[1px] border-solid
+          className={cn(` outline-none  dark:bg-gray-800 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border-[1px] border-solid
            border-grey-300 hover:border-grey-400 
            dark:bg-input-dark
             dark:border-input-border-dark
             dark:text-grey-200
             dark:placeholder:text-placeholder-dark
             disabled:bg-grey-100 text-sm
-           shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out ${leadingIcon ? "pl-11" : ""} 
-           ${trailingIcon ? "pr-11" : ""}
-            ${error ? "border-red-500" : ""}
-           ${additionalProps.customClassName}`}
+           shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out`,
+            { "pl-11": !!leadingIcon }
+            , { "pr-11": !!trailingIcon },
+            { "border-red-500": error },
+            className)}
           name={name}
           id={id}
           onChange={onChange}

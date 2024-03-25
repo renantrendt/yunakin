@@ -62,7 +62,6 @@ function Chat({ id, initialMessages }: ChatProps) {
                         value={input}
                         placeholder="Say something..."
                         onChange={handleInputChange}
-                        customClassName="fixed bottom-2 w-full max-w-md "
                     />
 
                 </form>
