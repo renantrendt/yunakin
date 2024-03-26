@@ -26,6 +26,7 @@ export const Primary: Story = {
     args: {
         variant: 'primary',
         label: 'Button',
+        children: 'Button',
     },
 };
 
@@ -33,20 +34,60 @@ export const Secondary: Story = {
     args: {
         variant: 'secondary',
         label: 'Button',
+        children: 'Button',
     },
 };
-
-export const Large: Story = {
+export const Tertiary: Story = {
+    args: {
+        variant: 'tertiary',
+        label: 'Button',
+        children: 'Tertiary Button',
+    },
+};
+export const Alert: Story = {
     args: {
         variant: "alert",
-        size: 'lg',
         label: 'Button',
+        children: 'Alert Button',
     },
 };
 
-export const Small: Story = {
+export const SuccessButton: Story = {
+    args: {
+        variant: "success",
+        label: 'Button',
+        children: 'Success button',
+    },
+};
+export const ClearButton: Story = {
+    args: {
+        variant: "clear",
+        label: 'Button',
+        children: 'Clear Button',
+    },
+};
+
+
+export const SmallButton: Story = {
     args: {
         size: 'sm',
-        label: 'Button',
+        variant: 'primary',
+        children: 'Small Button',
+    },
+};
+
+export const MediumButton: Story = {
+    args: {
+        size: 'md',
+        variant: 'primary',
+        children: 'Medium Button',
+    },
+};
+
+export const LargeButton: Story = {
+    args: {
+        size: 'lg',
+        variant: 'primary',
+        children: 'Large Button',
     },
 };
