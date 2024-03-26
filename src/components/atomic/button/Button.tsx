@@ -20,7 +20,6 @@ const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center item
       secondary:
         [
           'bg-white',
-          'bg-white',
           'border-[1px]',
           'border-grey-300',
           'dark:bg-input-dark',
@@ -51,7 +50,7 @@ const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center item
 });
 
 
-// @ts-expect-error
+// @ts-expect-error size is not defined
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement>, VariantProps<typeof button> {
   onClick?: () => void
   size?: 'sm' | 'md' | 'lg';

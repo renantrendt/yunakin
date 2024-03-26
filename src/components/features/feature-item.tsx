@@ -22,7 +22,7 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                     <Typography type='h1' className='text-[32px]  !lg:text-[32px] font-semibold !leading-normal  '>{title}</Typography>
                     <Typography type='p' className="text-neutral-600 dark:text-sidebar-icon-dark text-[18px]  !lg:text-[20]  max-w-[520px] !leading-[28px]">{description}</Typography>
                 </div>
-                <Button label={t("features.learn-more")} classname='mt-16' variant="secondary" size='lg' icon={<ArrowRightIcon />} trailing />
+                <Button label={t("features.learn-more")} className='mt-16' variant="secondary" size='lg' icon={<ArrowRightIcon />} trailing />
             </div>
             <div className='relative w-full  flex-1 h-96'>
                 <Image alt='' fill
