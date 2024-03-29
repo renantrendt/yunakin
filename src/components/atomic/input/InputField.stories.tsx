@@ -14,7 +14,7 @@ const meta = {
     tags: ['autodocs'],
     // More on argTypes: https://storybook.js.org/docs/api/argtypes
     argTypes: {
-        type: { control: 'text' },
+        type: { control: 'radio', options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local', 'month', 'week'] },
     },
 } satisfies Meta<typeof InputField>;
 

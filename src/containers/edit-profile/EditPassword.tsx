@@ -102,7 +102,7 @@ const EditPassword = () => {
                             />
                         )}
                     />
-                    <Button loading={editPasswordMutation.isPending} type='submit' variant='primary' classname='w-full' label='Save Changes' />
+                    <Button loading={editPasswordMutation.isPending} type='submit' variant='primary' className='w-full' label='Save Changes' />
                 </div>
             </div>
         </form>

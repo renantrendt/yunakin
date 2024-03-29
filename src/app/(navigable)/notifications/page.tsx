@@ -13,8 +13,8 @@ const NotificationsPage = () => {
                 avatar={<Avatar name='avatar' image='https://cdn5.vectorstock.com/i/1000x1000/92/89/hipster-avatar-image-vector-19639289.jpg' />}
             >
                 <div className='flex justify-start gap-2 '>
-                    <Button variant='primary' label='Approve' size='sm' classname='!w-fit !min-w-fit' onClick={() => { }} />
-                    <Button variant='secondary' label='Reject' size='sm' classname='!w-fit !min-w-fit' onClick={() => { }} />
+                    <Button variant='primary' label='Approve' size='sm' className='!w-fit !min-w-fit' onClick={() => { }} />
+                    <Button variant='secondary' label='Reject' size='sm' className='!w-fit !min-w-fit' onClick={() => { }} />
                 </div>
             </NotificationPanel>
             <NotificationPanel
@@ -23,8 +23,8 @@ const NotificationsPage = () => {
                 avatar={<Avatar name='avatar' image='https://cdn5.vectorstock.com/i/1000x1000/92/89/hipster-avatar-image-vector-19639289.jpg' />}
             >
                 <div className='flex justify-start gap-2 '>
-                    <Button variant='primary' label='Approve' size='sm' classname='!w-fit !min-w-fit' onClick={() => { }} />
-                    <Button variant='secondary' label='Reject' size='sm' classname='!w-fit !min-w-fit' onClick={() => { }} />
+                    <Button variant='primary' label='Approve' size='sm' className='!w-fit !min-w-fit' onClick={() => { }} />
+                    <Button variant='secondary' label='Reject' size='sm' className='!w-fit !min-w-fit' onClick={() => { }} />
                 </div>
             </NotificationPanel>
             <NotificationPanel
@@ -33,8 +33,8 @@ const NotificationsPage = () => {
                 avatar={<Avatar name='avatar' image='https://cdn5.vectorstock.com/i/1000x1000/92/89/hipster-avatar-image-vector-19639289.jpg' />}
             >
                 <div className='flex justify-start gap-2 '>
-                    <Button variant='primary' label='Approve' size='sm' classname='!w-fit !min-w-fit' onClick={() => { }} />
-                    <Button variant='secondary' label='Reject' size='sm' classname='!w-fit !min-w-fit' onClick={() => { }} />
+                    <Button variant='primary' label='Approve' size='sm' className='!w-fit !min-w-fit' onClick={() => { }} />
+                    <Button variant='secondary' label='Reject' size='sm' className='!w-fit !min-w-fit' onClick={() => { }} />
                 </div>
             </NotificationPanel>
         </div>

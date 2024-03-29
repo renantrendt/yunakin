@@ -91,7 +91,7 @@ export default function PricingProduct({ name, description, price, features, pla
                     </div>
 
                     <div className="card-actions mb-8 justify-center">
-                        <Button classname='w-full' onClick={handleClick} loading={loading} label={t("pricing.start")} />
+                        <Button className='w-full' onClick={handleClick} loading={loading} label={t("pricing.start")} />
                     </div>
                     <ul role="list" className="mb-8 space-y-2 text-left">
                         {

@@ -157,7 +157,7 @@ export default function RegisterPage() {
                         )}
                     />
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" label={t("registerPage.createAccount")} size='lg' loading={loading} />
+                        <Button variant="primary" type="submit" className="w-full" label={t("registerPage.createAccount")} size='lg' loading={loading} />
                     </div>
                 </div>
                 <div className="relative flex  items-center py-3">

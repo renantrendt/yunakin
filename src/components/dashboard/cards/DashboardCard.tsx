@@ -15,7 +15,7 @@ const DashboardCard = ({ title, quantity, increase }: DashboardCardProps) => {
             <p className='text-sm font-normal leading-5 text-grey-600 dark:text-sidebar-icon-dark'>{title}</p>
             <div className='flex justify-between items-center'>
                 <h1 className='text-2xl leading-8 text-black dark:text-white'>{quantity}</h1>
-                <Badge type='outline' color='green' includeClose={false} size='md'>
+                <Badge type='outline' color='green' size='md'>
                     {increase}%
                 </Badge>
             </div>

@@ -1,43 +1,36 @@
 import { cn } from '@/utils/cn';
+import { VariantProps, cva } from 'class-variance-authority';
 import Image from 'next/image'
 import React from 'react'
 
-interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
+
+const avatar = cva("avatar", {
+    variants: {
+        size: {
+            xs: "h-6 w-6",
+            sm: "h-8 w-8",
+            md: "h-10 w-10",
+            lg: "h-12 w-12",
+            xl: "h-16 w-16",
+            "2xl": "h-20 w-20",
+            "3xl": "h-24 w-24"
+        },
+
+    },
+    compoundVariants: [{ size: "md" }],
+    defaultVariants: {
+        size: "md",
+    },
+})
+interface AvatarProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof avatar> {
     image: string;
     name: string;
-    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 }
 
 const Avatar = ({ image, name, size = 'md', ...additionalProps }: AvatarProps) => {
-    let sizeStyle = "";
-    switch (size) {
-        case "xs":
-            sizeStyle = "h-6 w-6";
-            break;
-        case "sm":
-            sizeStyle = "h-8 w-8";
-            break;
-        case "md":
-            sizeStyle = "h-10 w-10";
-            break;
-        case "lg":
-            sizeStyle = "h-12 w-12";
-            break;
-        case "xl":
-            sizeStyle = "h-16 w-16";
-            break;
-        case "2xl":
-            sizeStyle = "h-20 w-20";
-            break;
-        case "3xl":
-            sizeStyle = "h-24 w-24";
-            break;
-        default:
-            sizeStyle = "h-10 w-10";
-    }
     return (
         <div className='avatar' {...additionalProps}>
-            <div className={cn('rounded-full', sizeStyle)}>
+            <div className={cn('rounded-full', avatar({ size }))}>
                 <Image
                     height={40}
                     width={40}

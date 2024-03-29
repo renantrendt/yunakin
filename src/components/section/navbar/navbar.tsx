@@ -97,7 +97,7 @@ export default function Navbar() {
                                 <li>
                                     <Button
                                         variant='primary'
-                                        classname=' !min-w-[150px] !w-full  text-white '
+                                        className=' !min-w-[150px] !w-full  text-white '
                                         label='Get Started'
                                         size='md'
                                         onClick={() => router.push(siteUrls.general.register)}
@@ -124,7 +124,7 @@ export default function Navbar() {
 
                                     <Button
                                         variant='primary'
-                                        classname='  !min-w-[120px] '
+                                        className='  !min-w-[120px] '
                                         label={t('navbar.getStarted')}
                                         size='lg'
                                         onClick={() => router.push(siteUrls.general.register)}

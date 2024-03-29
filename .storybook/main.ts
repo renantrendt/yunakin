@@ -42,6 +42,18 @@ const config: StorybookConfig = {
       '@': path.resolve(__dirname, "../src/"),
       '@/icons': path.resolve(__dirname, "../assets/icons/"),
     };
+    // This modifies the existing image rule to exclude .svg files
+    // since you want to handle those files with @svgr/webpack
+    const imageRule = (config.module as any).rules.find((rule) => rule?.['test']?.test('.svg'));
+    if (imageRule) {
+      imageRule['exclude'] = /\.svg$/;
+    }
+
+    // Configure .svg files to be loaded with @svgr/webpack
+    (config.module as any).rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
     return config;
   },
   framework: {

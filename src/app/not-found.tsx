@@ -15,7 +15,7 @@ const NotFoundPage = () => {
                         <Typography type='h1' className='!text-primary-500 font-semibold text-[40px] lg:text-[100px] leading-none   '>404</Typography>
                         <Typography type='p' className='text-neutral-600 text-base leading-[26px] max-w-[360px] text-center dark:text-profile-modal-text-dark' >Sorry, the page you are looking for doesn’t exist or has been moved.</Typography>
                     </div>
-                    <Button variant='secondary' size='md' label='Go back' classname='dark:text-white' icon={<ArrowLeftIcon />} onClick={() => router.back()} />
+                    <Button variant='secondary' size='md' label='Go back' className='dark:text-white' icon={<ArrowLeftIcon />} onClick={() => router.back()} />
                 </div>
             </div>
         </div>

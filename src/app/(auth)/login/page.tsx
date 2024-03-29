@@ -177,7 +177,7 @@ export default function LoginPage() {
                         )}
                     />
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" classname="w-full" label={t("loginPage.signIn")} size='lg' loading={loading} />
+                        <Button variant="primary" type="submit" className="w-full" label={t("loginPage.signIn")} size='lg' loading={loading} />
 
                         <div className=' text-sm dark:text-white'>
                             {t("loginPage.notMember")} <Link href={siteUrls.general.register} className="text-primary ">{t("loginPage.register")}</Link>

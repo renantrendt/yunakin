@@ -26,8 +26,8 @@ const NotificationModal = ({ notifications, shown }: NotificationModalProps) => 
                         avatar={<Avatar size='md' image={notification.image} name={notification.name} />}
                     >
                         <div className='flex justify-start gap-2 '>
-                            <Button variant='primary' label='Approve' size='sm' classname='!w-fit !min-w-fit' onClick={() => { }} />
-                            <Button variant='secondary' label='Reject' size='sm' classname='!w-fit !min-w-fit' onClick={() => { }} />
+                            <Button variant='primary' label='Approve' size='sm' className='!w-fit !min-w-fit' onClick={() => { }} />
+                            <Button variant='secondary' label='Reject' size='sm' className='!w-fit !min-w-fit' onClick={() => { }} />
                         </div>
                     </NotificationPanel>
                     {index !== notifications.length - 1 && <Divider type='horizontal' style='light' />}

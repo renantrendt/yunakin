@@ -88,7 +88,7 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                     <Button icon={<DeleteIcon />} size='md' onClick={() => {
                         setTobeDeletedUserId(user.id)
                         setModalOpen(true)
-                    }} classname='!w-fit !p-2 !min-w-fit text-red-600 border-red-300 bg-red-100 hover:bg-red-200 dark:bg-button-background-dark dark:hover:bg-profile-modal-border-dark' variant='alert' label='' />
+                    }} className='!w-fit !p-2 !min-w-fit text-red-600 border-red-300 bg-red-100 hover:bg-red-200 dark:bg-button-background-dark dark:hover:bg-profile-modal-border-dark' variant='alert' label='' />
                 </div>)
             },
             header: () => <span>Actions</span>,

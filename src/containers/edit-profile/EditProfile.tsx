@@ -130,7 +130,7 @@ const EditProfile = () => {
                             />
                         )}
                     />
-                    <Button loading={editProfileMutation.isPending} type='submit' variant='primary' classname='w-full' label='Save Changes' />
+                    <Button loading={editProfileMutation.isPending} type='submit' variant='primary' className='w-full' label='Save Changes' />
                 </div>
             </div>
         </form>
