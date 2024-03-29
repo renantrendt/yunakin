@@ -4,6 +4,7 @@ import Divider from './Divider';
 const meta = {
     title: "Atomic/Divider",
     component: Divider,
+    decorators: [(Story: any) => (<div style={{ display: 'flex', justifyContent: 'center', width: "w-full", height: "h-32" }}> <Story /></div>)],
     parameters: {
         layout: 'centered',
     },
@@ -18,8 +19,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const ExampleDivider: Story = {
-    args: {
-        dividerType: 'horizontal',
-        dividerStyle: 'light'
-    }
+    render: ({ dividerStyle, dividerType }) => <div className='bg-red-300  flex justify-center items-center w-32 h-32'><Divider dividerStyle={dividerStyle} dividerType={dividerType} /></div>
 };

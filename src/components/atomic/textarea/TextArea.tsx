@@ -14,7 +14,7 @@ interface TextAreaProps {
 
 const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange, error, id, ...additionalProps }) => {
     return (
-        <label className="form-control">
+        <div className="form-control">
             {label &&
                 <label className="label text-sm text-black dark:text-white">
                     <span className="label-text">{label}</span>
@@ -39,7 +39,8 @@ const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange,
                 <div className='flex justify-start gap-2 text-red-600 items-center mt-2'>
                     <ExclamationIcon />
                     <p className='text-sm leading-5'>{error}</p>
-                </div>}        </label>
+                </div>}
+        </div>
     )
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import GoogleIcon from "@/icons/google-icon.svg"
 import TwitterIcon from "@/icons/TwitterIcon.svg"
-import GithubIcon from "@/icons/git.svg"
+import GithubIcon from "@/icons/GithubIcon.svg"
 import AuthButton from './AuthButton';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -17,6 +17,7 @@ const meta = {
     tags: ['autodocs'],
     // More on argTypes: https://storybook.js.org/docs/api/argtypes
     argTypes: {
+        icon: { control: 'object', options: [<GoogleIcon />, <TwitterIcon />, <GithubIcon />] },
     },
 } satisfies Meta<typeof AuthButton>;
 
