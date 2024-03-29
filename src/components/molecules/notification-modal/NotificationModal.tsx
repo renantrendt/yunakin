@@ -17,7 +17,7 @@ interface NotificationModalProps {
 
 const NotificationModal = ({ notifications, shown }: NotificationModalProps) => {
     return (
-        <div className={cn('flex flex-col  shadow-lg justify-center items-center  border-[1px]  border-grey-200 dark:border-profile-modal-border-dark dark:bg-profile-modal-background-dark rounded-lg  content duration-150 ease-in-out absolute top-12 bg-white right-0', { "hidden": !shown })}>
+        <div className={cn('flex flex-col  shadow-lg justify-center items-center  border  border-grey-200 dark:border-profile-modal-border-dark dark:bg-profile-modal-background-dark rounded-lg  content duration-150 ease-in-out absolute top-12 bg-white right-0', { "hidden": !shown })}>
             {notifications.map((notification, index) => (
                 <>
                     <NotificationPanel
@@ -30,7 +30,7 @@ const NotificationModal = ({ notifications, shown }: NotificationModalProps) => 
                             <Button variant='secondary' label='Reject' size='sm' className='!w-fit !min-w-fit' onClick={() => { }} />
                         </div>
                     </NotificationPanel>
-                    {index !== notifications.length - 1 && <Divider type='horizontal' style='light' />}
+                    {index !== notifications.length - 1 && <Divider dividerType='horizontal' dividerStyle='light' />}
                 </>
 
             ))}

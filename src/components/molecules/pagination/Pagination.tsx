@@ -30,7 +30,7 @@ const Pagination = ({ totalPages, previousButton, previousButtonDisabled, nextBu
     // const pageNumbers = [firstPage, firstPage + 1, firstPage + 2, "...", lastPage - 2, lastPage - 1, lastPage]
 
     return (
-        <div className='text-black flex justify-center w-fit rounded-lg border-[1px] border-grey-300 shadow-sm bg-white 
+        <div className='text-black flex justify-center w-fit rounded-lg border border-grey-300 shadow-sm bg-white 
         overflow-hidden
         dark:text-white
         dark:border-profile-modal-border-dark

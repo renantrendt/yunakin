@@ -21,7 +21,7 @@ export default function Pricing({ showDescription = false }: { showDescription?:
                 </AnimatedSection>
             )}
 
-            <AnimatedSection className='flex justify-center border-[1px] border-grey-500  gap-4 mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit  bg-white dark:bg-card-dark dark:text-white dark:border-none rounded-[40px] p-2'>
+            <AnimatedSection className='flex justify-center border border-grey-500  gap-4 mb-12 items-center mx-auto  hover:cursor-pointer  text-md w-fit  bg-white dark:bg-card-dark dark:text-white dark:border-none rounded-[40px] p-2'>
                 <div className={`${isMonthly ? " border-primary " : "border-transparent"} rounded-3xl px-8 py-[10px] border-[2px]  transition duration-150 ease-in-out `} onClick={() => setIsMonthly(true)}>
                     <span className='text-sm font-semibold leading-[140%]'>{t("pricing.monthly")}</span>
                 </div>

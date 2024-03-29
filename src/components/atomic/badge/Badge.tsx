@@ -6,7 +6,7 @@ import React from 'react'
 const badge = cva("w-fit  flex flex-row justify-center gap-1 text-sm leading-5 font-normal", {
     variants: {
         type: {
-            outline: 'border-[1px] rounded-lg',
+            outline: 'border rounded-lg',
             filled: 'rounded-lg',
             clear: '!bg-transparent'
         },

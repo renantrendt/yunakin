@@ -10,15 +10,13 @@ interface AuthButtonProps {
 const AuthButton = ({ onClick, content, icon }: AuthButtonProps) => {
     return (
         <button
-            className="flex justify-center items-center duration-150 ease-in-out gap-2 px-5 py-3 w-full    border-[1px] border-grey-300 rounded-lg bg-white  text-black
-            
+            className="flex justify-center items-center duration-150 ease-in-out gap-2 px-5 py-3 w-full    border border-grey-300 rounded-lg bg-white  text-black
             hover:bg-grey-200
             focus:bg-white
-                dark:hover:bg-input-hover-dark
+            dark:hover:bg-input-hover-dark
             dark:bg-input-dark
             dark:border-input-border-dark
             focus:shadow-focus-primary
-
             "
             onClick={onClick}
             type="button"

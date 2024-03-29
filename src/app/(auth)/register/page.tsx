@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
-import AuthButton from '@/components/molecules/authbutton/AuthButton'
+import AuthButton from '@/components/molecules/auth-button/AuthButton'
 import Checkbox from '@/components/atomic/checkbox/Checkbox'
 import GoogleIcon from "@/icons/google-icon.svg"
 import EnvelopeIcon from '@/icons/envelope-icon.svg'

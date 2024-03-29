@@ -64,7 +64,7 @@ export default function PricingProduct({ name, description, price, features, pla
     };
     return (
         <>
-            <div className={cn("card  border-[1px] border-grey-500 dark:border-input-border-dark dark:bg-card-dark rounded-[32px] h-full flex justify-center bg-white px-5 py-14 lg:px-8", recommended ? "border-[4px] border-primary-end dark:border-primary" : "")}>
+            <div className={cn("card  border border-grey-500 dark:border-input-border-dark dark:bg-card-dark rounded-[32px] h-full flex justify-center bg-white px-5 py-14 lg:px-8", recommended ? "border-[4px] border-primary-end dark:border-primary" : "")}>
                 {recommended && (
                     <div className='rounded-[40px] shadow-recommended-pricing  px-6 py-[6px]  bg-primary text-white leading-[140%] text-sm font-semibold  w-fit absolute top-[-20px] mx-auto left-0 right-0 text-center  '>{t("pricing.recommended")}</div>
                 )}

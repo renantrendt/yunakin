@@ -34,7 +34,8 @@ const config: StorybookConfig = {
       }
     }),
     "@storybook/addon-styling",
-    "@storybook/addon-mdx-gfm"
+    "@storybook/addon-themes",
+    "@storybook/addon-mdx-gfm",
   ],
   webpackFinal(config, options) {
     (config.resolve as any).alias = {

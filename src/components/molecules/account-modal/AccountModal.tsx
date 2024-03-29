@@ -19,7 +19,7 @@ interface AccountModalProps {
 const AccountModal = ({ name, image, email, shown }: AccountModalProps) => {
     const router = useRouter()
     return (
-        <div className={cn('flex flex-col p-4 pt-1 pb-4 shadow-lg  border-[1px] border-grey-200 dark:border-profile-modal-border-dark dark:bg-profile-modal-background-dark rounded-lg justify-start content duration-300 ease-in-out absolute top-12 bg-white right-0', { "hidden h-0": !shown })}>
+        <div className={cn('flex flex-col p-4 pt-1 pb-4 shadow-lg  border border-grey-200 dark:border-profile-modal-border-dark dark:bg-profile-modal-background-dark rounded-lg justify-start content duration-300 ease-in-out absolute top-12 bg-white right-0', { "hidden h-0": !shown })}>
             <div className='flex flex-row justify-center items-center gap-4 my-2 py-2'>
                 <Avatar size='sm' image={image} name={name} />
                 <div className='flex text-grey-400 dark:text-white flex-col '>

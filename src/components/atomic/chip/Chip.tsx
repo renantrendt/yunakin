@@ -12,7 +12,7 @@ const chip = cva("w-fit cursor-pointer flex flex-row justify-center gap-1 items-
             "xs": "px-1 py-0.5"
         },
         "type": {
-            "outline": "border-[1px] rounded-lg",
+            "outline": "border rounded-lg",
             "filled": "rounded-lg",
             "clear": "!bg-transparent"
         },

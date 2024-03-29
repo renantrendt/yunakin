@@ -12,7 +12,7 @@ const meta = {
     tags: ['autodocs'],
     // More on argTypes: https://storybook.js.org/docs/api/argtypes
     argTypes: {
-        type: { control: 'text' },
+        type: { control: 'radio', options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'] },
     },
 } satisfies Meta<typeof Typography>;
 

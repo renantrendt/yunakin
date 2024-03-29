@@ -21,7 +21,7 @@ const ImageUploader = ({ onImageUpload, image }: ImageUploaderProps) => {
     }, [])
     const { getRootProps, getInputProps } = useDropzone({ onDrop })
     return (
-        <div  {...getRootProps()} id="ImageUpload" className="relative  cursor-pointer  rounded-[50%] border-[1px] border-dashed border-grey-300 bg-white 
+        <div  {...getRootProps()} id="ImageUpload" className="relative  cursor-pointer  rounded-[50%] border border-dashed border-grey-300 bg-white 
         hover:border-primary-500 focus:shadow-focus-primary focus:border-solid w-20 h-20 md:w-28 md:h-28 overflow-hidden
             dark:border-image-uploader-border-dark
             dark:bg-image-uploader-dark

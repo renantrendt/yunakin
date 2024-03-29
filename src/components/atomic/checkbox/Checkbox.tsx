@@ -19,7 +19,7 @@ const Checkbox = ({ checked, label, onChange, className, id, name, required, err
             <div className='flex flex-row items-center justify-start gap-2 '>
                 <input name={name} required={required} type="checkbox" id={id} onChange={onChange} checked={checked}
                     {...additionalProps}
-                    className={cn("  text-primary-500 hover:cursor-pointer duration-150 ease-in-out  shadow-sm  focus:ring-0 focus:ring-offset-0  !outline-none rounded-[4px] border-[1px] border-grey-300 dark:bg-input-dark dark:border-input-border-dark", className)} />
+                    className={cn("  text-primary-500 hover:cursor-pointer duration-150 ease-in-out  shadow-sm  focus:ring-0 focus:ring-offset-0  !outline-none rounded-[4px] border border-grey-300 dark:bg-input-dark dark:border-input-border-dark", className)} />
                 <label htmlFor={id} className='text-sm leading-5 hover:cursor-pointer dark:text-white'>{label}</label>
             </div>
             {error &&

@@ -10,7 +10,7 @@ interface DashboardCardProps {
 const DashboardCard = ({ title, quantity, increase }: DashboardCardProps) => {
 
     return (
-        <div className='py-5 px-6 rounded-2xl bg-white flex flex-col justify-start gap-3 border-[1px] border-grey-200
+        <div className='py-5 px-6 rounded-2xl bg-white flex flex-col justify-start gap-3 border border-grey-200
         dark:bg-card-dark dark:border-profile-modal-border-dark'>
             <p className='text-sm font-normal leading-5 text-grey-600 dark:text-sidebar-icon-dark'>{title}</p>
             <div className='flex justify-between items-center'>

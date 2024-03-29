@@ -68,15 +68,14 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                     <Dropdown
                         id='role'
                         name='role'
+                        value={user.role}
                         options={[{
                             value: 'ADMIN',
                             label: 'Admin',
-                            selected: user.role === "ADMIN"
                         },
                         {
                             value: 'USER',
                             label: 'User',
-                            selected: user.role === "USER"
                         }]}
                         onChange={(value: string) => {
                             const user = users[info.row.index]
@@ -211,7 +210,7 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
             <ConfirmationModal
                 icon={
                     <div className='p-2 w-fit bg-gradient-to-b from-red-100 to-red-200  text-red-500
-            rounded-[32px] border-[1px] border-grey-200'>
+            rounded-[32px] border border-grey-200'>
                         <DeleteIcon />
                     </div>
                 }

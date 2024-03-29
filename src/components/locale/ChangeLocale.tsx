@@ -16,9 +16,10 @@ export default function ChangeLocale() {
                 id='locale-dropdown'
                 name='locale'
                 onChange={val => switchLocaleAction(val)}
+                value={i18n.language}
                 options={[
-                    { value: 'en', label: "🇺🇸", selected: i18n.language == "en" },
-                    { value: 'de', label: "🇩🇪", selected: i18n.language == "de" },
+                    { value: 'en', label: "🇺🇸" },
+                    { value: 'de', label: "🇩🇪" },
 
                 ]} // Add the options here
                 className=' min-w-fit !w-16 focus:!border-none !border-none !shadow-none '

@@ -21,7 +21,7 @@ const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange,
                 </label>
             }
             <textarea className="
-            outline-none bg-white text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border-[1px] border-solid
+            outline-none bg-white text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border border-solid
             border-grey-300 hover:border-grey-400 
              disabled:bg-grey-100 text-sm
              dark:bg-input-dark

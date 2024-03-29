@@ -6,7 +6,6 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
   name: string
   id: string
-  type?: 'text' | 'email' | 'password'
   placeholder?: string
   value?: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -30,16 +29,15 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
         <input
           type={type}
           placeholder={placeholder}
-          className={cn(` outline-none  dark:bg-gray-800 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border-[1px] border-solid
-           border-grey-300 hover:border-grey-400 
-           dark:bg-input-dark
-            dark:border-input-border-dark
-            dark:text-grey-200
-            dark:placeholder:text-placeholder-dark
-            disabled:bg-grey-100 text-sm
-           shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out`,
-            { "pl-11": !!leadingIcon }
-            , { "pr-11": !!trailingIcon },
+          className={cn(` outline-none  dark:bg-gray-800 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border border-solid
+                    border-grey-300 hover:border-grey-400 
+                    dark:bg-input-dark
+                    dark:border-input-border-dark dark:text-grey-200
+                    dark:placeholder:text-placeholder-dark
+                    disabled:bg-grey-100 text-sm
+                    shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out`,
+            { "pl-11": !!leadingIcon },
+            { "pr-11": !!trailingIcon },
             { "border-red-500": error },
             className)}
           name={name}

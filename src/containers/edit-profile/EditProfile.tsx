@@ -86,7 +86,7 @@ const EditProfile = () => {
 
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col   bg-white  dark:bg-card-dark dark:border-profile-modal-border-dark  p-6 rounded-2xl border-[1px] border-grey-200   gap-6">
+        <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col   bg-white  dark:bg-card-dark dark:border-profile-modal-border-dark  p-6 rounded-2xl border border-grey-200   gap-6">
 
             <Typography type='p' className='text-sm text-grey-600  dark:text-profile-modal-text-dark   leading-5 ' >Edit Profile</Typography>
 

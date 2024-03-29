@@ -20,7 +20,7 @@ const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center item
       secondary:
         [
           'bg-white',
-          'border-[1px]',
+          'border',
           'border-grey-300',
           'dark:bg-input-dark',
           'dark:border-input-border-dark',
