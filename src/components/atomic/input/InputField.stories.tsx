@@ -41,3 +41,14 @@ export const InputWithLeadingIcon: Story = {
     },
 };
 
+
+export const InputwithError: Story = {
+    args: {
+        label: 'InputWithError',
+        name: 'input',
+        id: 'input',
+        type: 'text',
+        error: 'This is an error message',
+    },
+};
+

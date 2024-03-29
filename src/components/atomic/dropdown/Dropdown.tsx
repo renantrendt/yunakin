@@ -36,7 +36,7 @@ const Dropdown = ({ onChange, options, error, label, id, name, className, value 
                 dark:text-grey-200
                 dark:placeholder:text-placeholder-dark
                 shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out 
-                         `, { "border-red-500": error }, className)}
+                         `, { "!border-red-500": error }, className)}
                 value={value}
             >
                 {options.map((option, index) => {

@@ -10,7 +10,7 @@ const Cta = () => {
     return (
         <div className=" w-full my-24  flex-col justify-center items-center gap-0 lg:gap-10 inline-flex text-black ">
             <AnimatedSection className=' flex flex-col justify-center items-center gap-5 mb-6'>
-                <Typography type='h1' className='text-left lg:text-center !text-white !text-[40px]  lg:text-[40px] !leading-[56px]'>{t("ctaSection.title")}</Typography>
+                <Typography type='h1' className='text-left lg:text-center !text-white '>{t("ctaSection.title")}</Typography>
                 <Typography type='h6' className='text-white text-left lg:text-center max-w-2xl leading-[24px] text-[16px] '>{t("ctaSection.description")}</Typography>
             </AnimatedSection>
             <div className="grid mt-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8   w-full ">

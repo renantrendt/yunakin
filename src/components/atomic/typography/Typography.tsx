@@ -1,33 +1,34 @@
 import { cn } from '@/utils/cn';
+import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react'
 
-interface TypographyProps {
-    className?: string;
+
+
+const typography = cva("text-black", {
+    variants: {
+        type: {
+            h1: 'text-4xl leading-[48px] lg:leading-[64px] lg:text-5xl lg:font-semibold',
+            h2: 'text-3xl font-black text-stone-950 lg:text-4xl leading-[64px]',
+            h3: 'text-2xl leading-[32px] font-normal',
+            h4: 'text-xl',
+            h5: 'text-lg',
+            h6: 'text-base ',
+            p: 'text-base dark:text-sidebar-icon-dark'
+        }
+    },
+    defaultVariants: {
+        type: 'p'
+    }
+})
+
+interface TypographyProps extends React.HTMLAttributes<HTMLHeadingElement>, React.HTMLAttributes<HTMLParagraphElement>,
+    VariantProps<typeof typography> {
     type: TypographyType
-    children: string | React.ReactNode;
 }
 type TypographyType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p"
 
-const Typography = ({ type, children, className, }: TypographyProps) => {
-    const baseClasses = `text-black   ${className} `;
-    switch (type) {
-        case "h1":
-            return <h1 className={cn(baseClasses, 'dark:text-white text-stone-950 text-4xl  leading-[48px] lg:leading-[64px] lg:text-5xl lg:font-semibold ')}>{children}</h1>
-        case "h2":
-            return <h2 className={`${baseClasses} text-5xl font-black text-stone-950 lg:text-6xl leading-[64px]`}>{children}</h2>
-        case "h3":
-            return <h3 className={`${baseClasses} dark:text-white  text-2xl leading-[32px] font-normal`}>{children}</h3>
-        case "h4":
-            return <h4 className={`${baseClasses} lg:text-2xl`}>{children}</h4>
-        case "h5":
-            return <h5 className={`${baseClasses} lg:text-3xl`}>{children}</h5>
-        case "h6":
-            return <h6 className={`${baseClasses} lg:text-xl lg:leading-[30px] `}>{children}</h6>
-        case "p":
-            return <p className={`${baseClasses}   lg:text-base dark:text-sidebar-icon-dark`}>{children}</p>
-        default:
-            return <p className={`${baseClasses}  lg:text-lg`}>{children}</p>
-    }
+const Typography = ({ type, children, className, ...additionalProps }: TypographyProps) => {
+    return React.createElement(type, { className: cn("text-black dark:text-white", typography({ type }), className), ...additionalProps }, children)
 }
 
 export default Typography;

@@ -1,8 +1,8 @@
 import React from 'react'
-import TableCell from './TableCell';
+import TableRow from './TableRow';
 
 interface TableHeadProps {
-    children: React.ReactElement<typeof TableCell>[];
+    children: React.ReactElement<typeof TableRow>[] | React.ReactElement<typeof TableRow>;
 
 }
 

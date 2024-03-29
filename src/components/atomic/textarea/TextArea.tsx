@@ -1,7 +1,8 @@
 import React from 'react'
 import ExclamationIcon from '@/icons/exclamation-circle.svg'
+import { cn } from '@/utils/cn'
 
-interface TextAreaProps {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     label: string
     name: string
     id: string
@@ -20,7 +21,7 @@ const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange,
                     <span className="label-text">{label}</span>
                 </label>
             }
-            <textarea className="
+            <textarea className={cn(`
             outline-none bg-white text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border border-solid
             border-grey-300 hover:border-grey-400 
              disabled:bg-grey-100 text-sm
@@ -28,7 +29,9 @@ const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange,
              dark:border-input-border-dark
              dark:text-grey-200
              dark:placeholder:text-placeholder-dark
-            shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out"
+            shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out`,
+                { "!border-red-500": error },
+                additionalProps.className)}
                 placeholder={placeholder}
                 name={name}
                 id={id}

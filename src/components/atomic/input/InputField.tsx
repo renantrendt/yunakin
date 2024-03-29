@@ -38,7 +38,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
                     shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out`,
             { "pl-11": !!leadingIcon },
             { "pr-11": !!trailingIcon },
-            { "border-red-500": error },
+            { "!border-red-500 ": error },
             className)}
           name={name}
           id={id}
