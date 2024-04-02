@@ -10,7 +10,6 @@ declare namespace NodeJS {
         POSTGRES_DB: string;
         NEXTAUTH_URL: string;
         NEXTAUTH_SECRET: string;
-        NEXTAUTH_JWT_SECRET: string;
         NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
         STRIPE_SECRET_KEY: string;
         RESEND_API_KEY: string;

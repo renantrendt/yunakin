@@ -5,7 +5,12 @@ import WelcomeWaitingListEmailTemplate from '@/components/template/email/Welcome
 import platformConfig from '@/config/app-config';
 import { Resend } from 'resend';
 
-const resend = new Resend(platformConfig.variables.RESEND_API_KEY);
+
+if (!platformConfig.variables.RESEND_API_KEY) {
+  console.error("RESEND_API_KEY is not set in .env.local")
+}
+
+const resend: Resend | null = platformConfig.variables.RESEND_API_KEY ? new Resend(platformConfig.variables.RESEND_API_KEY) : null;
 
 
 
@@ -23,6 +28,9 @@ export const sendVerificationEmail = async ({
   token: string
 }) => {
 
+  if (!resend) {
+    return { success: false, error: "RESEND_API}KEY is not set" }
+  }
   try {
     const data = await resend.emails.send({
       from: 'noreply <noreply@codepilot.dev>',
@@ -52,6 +60,9 @@ export const sendResetPasswordEmail = async ({
   token: string
 }) => {
 
+  if (!resend) {
+    return { success: false, error: "RESEND_API}KEY is not set" }
+  }
   try {
     const data = await resend.emails.send({
       from: 'noreply <noreply@codepilot.dev>',
@@ -76,6 +87,10 @@ export const sendWelcomeWaitingListEmail = async ({
   to: string
   subject: string
 }) => {
+
+  if (!resend) {
+    return { success: false, error: "RESEND_API}KEY is not set" }
+  }
   const data = await resend.emails.send({
     from: 'noreply <noreply@codepilot.dev>',
     to: [to],

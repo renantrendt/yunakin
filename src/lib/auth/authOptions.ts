@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
     session: {
         strategy: 'jwt'
     },
-    secret: platformConfig.variables.NEXTAUTH_JWT_SECRET,
+    secret: platformConfig.variables.NEXT_AUTH_SECRET,
 
     providers: [
         CredentialsProvider({
@@ -174,7 +174,6 @@ export const authOptions: NextAuthOptions = {
         },
 
         jwt: async ({ token, user }) => {
-            console.log(token, user)
             if (user) {
                 token.id = user.id
                 token.email = user.email
@@ -183,7 +182,7 @@ export const authOptions: NextAuthOptions = {
                 token.randomKey = 'KG KEY'
                 token.encoded = jwt.sign(
                     token,
-                    platformConfig.variables.NEXTAUTH_JWT_SECRET!
+                    platformConfig.variables.NEXTAUTH_SECRET!
                 )
             } else {
                 const user = await prisma.user.findFirst({
