@@ -5,6 +5,24 @@ import React from 'react';
 import BackIcon from '@/icons/BackIcon';
 import { useRouter } from 'next/navigation';
 
+
+// Terms of Service chatgpt prompt
+// Terms of Service
+// Write a terms of service agreement for a software application named {business_name}. The terms of service should include the following sections:
+// 1. Introduction
+// 2. Changes to the Terms of Service
+// 3. Service Description
+// 4. Registration, Accounts, and Passwords
+// 5. User Conduct
+// 6. Intellectual Property Rights
+// 7. Termination
+// 8. Disclaimer of Warranties
+// 9. Limitation of Liability
+// 10. General Representation and Warranty
+// 11. Indemnification
+// 12. Miscellaneous
+
+
 const markdown = `
 # CodePilot Terms of Service
 

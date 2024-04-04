@@ -5,6 +5,24 @@ import React from 'react';
 import BackIcon from '@/icons/BackIcon';
 import { useRouter } from 'next/navigation';
 
+
+// Privacy Policy chatgpt prompt
+// Privacy Policy
+// Write a privacy policy for a {your_business_here}. The privacy policy should include the following sections:
+// 1. Information We Collect
+// a. Personal Information
+// b. Non-Personal Information
+// 2. How We Use Your Information
+// 3. How We Share Your Information
+// 4. Your Choices and Controls
+// 5. Security
+// 6. Cookies and Tracking Technologies
+// 7. International Data Transfers
+// 9. Changes to This Privacy Policy
+// 10. Contact Us
+
+
+
 const markdown = `
 # CodePilot Privacy Policy
 
