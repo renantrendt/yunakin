@@ -68,6 +68,7 @@ export const authOptions: NextAuthOptions = {
                         avatar: true,
                         provider: true,
                         password: true,
+                        role: true,
                     }
                 })) as User
                 if (!user) {
@@ -83,6 +84,7 @@ export const authOptions: NextAuthOptions = {
                     email: user.email,
                     name: user.name,
                     id: user.id,
+                    role: user.role,
                 }
             }
         }),
@@ -139,9 +141,6 @@ export const authOptions: NextAuthOptions = {
             return true;
         },
         session: async ({ session, token }) => {
-            console.log(session)
-            console.log("-----")
-            console.log(token)
 
             const user = await prisma.user.findFirst({
                 where: { id: token.id as string },
@@ -150,9 +149,9 @@ export const authOptions: NextAuthOptions = {
                     email: true,
                     name: true,
                     avatar: true,
+                    role: true,
                 }
             });
-            console.log(user)
             const userSubscription = await prisma.subscription.findFirst({
                 where: {
                     userId: user?.id
