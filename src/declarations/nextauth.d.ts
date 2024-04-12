@@ -11,6 +11,7 @@ declare module "next-auth" {
         subscription?: Subscription;
         createdAt: Date;
         updatedAt: Date;
+        role: string;
     }
     interface Session extends DefaultSession {
         user?: SessionUser;

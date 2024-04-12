@@ -18,6 +18,7 @@ import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import DashboardDarkIcon from "@/icons/dashboard-logo-dark-icon.svg"
 import { useTranslation } from '@/lib/i18n/client'
+import { useSession } from 'next-auth/react'
 interface SidebarLink {
     label: string
     path: string
@@ -45,6 +46,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
+    const session = useSession()
     const [search, setSearch] = React.useState('')
     const pathname = usePathname()
     const { theme } = useTheme();
@@ -66,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
                         id='search' value={search} onChange={(e) => setSearch(e.target.value)} className='bg-transparent border-none outline-none hover:border-none focus:border-none
                              py-0 !px-8 !shadow-none !mb-2 dark:!bg-transparent   ' customLeadingIconClassName='!left-[8px] !top-[14px]' />
                     <div className='flex flex-col gap-[6px] mt-[6px]'>
-                        {sidebarLinks.map((link) => (
+                        {sidebarLinks.filter(link => link.adminRoute ? session.data?.user?.role == "ADMIN" : true).map((link) => (
                             <NavigationItem
                                 title={t(`sidebar.${link.label}`)}
                                 icon={link.iconSrc}

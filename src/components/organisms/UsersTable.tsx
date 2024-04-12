@@ -14,6 +14,7 @@ import ConfirmationModal from '../molecules/confirmation-modal/ConfirmationModal
 import Pagination from '../molecules/pagination/Pagination'
 import { useReactTable, getCoreRowModel, getPaginationRowModel, PaginationState, flexRender, createColumnHelper } from '@tanstack/react-table';
 import Badge from '../atomic/badge/Badge'
+import { useSession } from 'next-auth/react'
 
 const colors = ['primary', 'red', 'green', 'grey', 'orange', 'white']
 
@@ -35,11 +36,11 @@ interface UsersTableProps {
     users: User[]
 }
 const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
+    const session = useSession()
     const [users, setUsers] = useState<User[]>(defaultUsers)
     const [modalOpen, setModalOpen] = useState(false)
     const [tobeDeletedUserId, setTobeDeletedUserId] = useState('')
     const columnHelper = createColumnHelper<User>()
-
     const columns = [
         columnHelper.accessor(row => row.name, {
             id: 'Name',
@@ -113,7 +114,14 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
 
     const handleRoleChange = async (userId: string, role: string) => {
         try {
-            console.log(role)
+            if (session.data?.user?.id === userId) {
+                customToast.error('You cannot change your own role')
+                return
+            }
+            if (role === 'ADMIN' && session.data?.user?.role !== 'ADMIN') {
+                customToast.error('You cannot change a user to admin')
+                return
+            }
             await changeUserRole(userId, role)
             setUsers(users.map(user => {
                 if (user.id === userId) {
@@ -134,7 +142,10 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
 
     const handleDelete = async (userId: string) => {
         try {
-            console.log(userId)
+            if (session.data?.user?.id === userId) {
+                customToast.error('You cannot delete your own account')
+                return
+            }
             await deleteUser(userId)
             setUsers(users.filter(user => user.id !== userId))
             customToast.success('User deleted successfully')
