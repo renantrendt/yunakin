@@ -1,4 +1,5 @@
 // utils/sendEmail.ts
+import InviteUserEmailTemplate from '@/components/template/email/InviteUserEmailTemplate';
 import ResetPasswordEmail from '@/components/template/email/ResetPasswordEmailTemplate';
 import { VerificationEmail } from '@/components/template/email/WelcomeEmailTemplate';
 import WelcomeWaitingListEmailTemplate from '@/components/template/email/WelcomeWaitingListEmailTemplate';
@@ -90,4 +91,40 @@ export const sendWelcomeWaitingListEmail = async ({
     react: WelcomeWaitingListEmailTemplate({ organizationName: "Codepilot" }) as React.ReactElement,
   });
   return { success: true, data: data }
+}
+
+
+export const sendInviteUserEmail = async ({
+  to,
+  subject,
+  token
+}: {
+  to: string
+  name: string
+  subject: string
+  token: string
+}) => {
+
+  if (!resend) {
+    return { success: false, error: "RESEND_API_KEY is not set" }
+  }
+  try {
+    const data = await resend.emails.send({
+      from: 'noreply <noreply@codepilot.dev>',
+      to: [to],
+      subject: subject,
+      react: InviteUserEmailTemplate({
+        acceptInviteLink: `${platformConfig.variables.NEXT_URL}/accept-invite?token=${token}`, organizationName: "Codepilot"
+      }) as React.ReactElement,
+    });
+    return { success: true, data: data }
+  }
+  catch (error: any) {
+    console.error(error)
+
+    if (error.response) {
+      console.error(error.response.body)
+    }
+    return { success: false, error }
+  }
 }
