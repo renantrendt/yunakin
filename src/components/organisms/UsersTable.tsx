@@ -35,6 +35,9 @@ interface User {
 interface UsersTableProps {
     users: User[]
 }
+
+
+
 const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
     const session = useSession()
     const [users, setUsers] = useState<User[]>(defaultUsers)
@@ -65,7 +68,7 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
             id: 'Actions',
             cell: info => {
                 const user = users[info.row.index]
-                return (<div className='flex justify-center gap-2'>
+                return (<div className='flex justify-start gap-2'>
                     <Dropdown
                         id='role'
                         name='role'
@@ -85,10 +88,7 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                         }
                         className='!w-fit'
                     />
-                    <Button icon={<DeleteIcon />} size='md' onClick={() => {
-                        setTobeDeletedUserId(user.id)
-                        setModalOpen(true)
-                    }} className='!w-fit !p-2 !min-w-fit text-red-600 border-red-300 bg-red-100 hover:bg-red-200 dark:bg-button-background-dark dark:hover:bg-profile-modal-border-dark' variant='alert' label='' />
+
                 </div>)
             },
             header: () => <span>Actions</span>,
@@ -111,6 +111,10 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
 
         },
     });
+
+
+
+
 
     const handleRoleChange = async (userId: string, role: string) => {
         try {
@@ -156,6 +160,12 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
             setTobeDeletedUserId('')
         }
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const DeleteButton = <Button icon={<DeleteIcon />} size='md' onClick={() => {
+        setModalOpen(true)
+    }} className='!w-fit !p-2 !min-w-fit text-red-600 border-red-300 bg-red-100 hover:bg-red-200 dark:bg-button-background-dark dark:hover:bg-profile-modal-border-dark' variant='alert' label='' />
+
 
     return (
         <div className='h-full min-h-[100vh]'>
