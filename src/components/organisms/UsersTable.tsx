@@ -15,6 +15,7 @@ import Pagination from '../molecules/pagination/Pagination'
 import { useReactTable, getCoreRowModel, getPaginationRowModel, PaginationState, flexRender, createColumnHelper } from '@tanstack/react-table';
 import Badge from '../atomic/badge/Badge'
 import { useSession } from 'next-auth/react'
+import AddUserModal from '../molecules/add-user-modal'
 
 const colors = ['primary', 'red', 'green', 'grey', 'orange', 'white']
 
@@ -42,6 +43,7 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
     const session = useSession()
     const [users, setUsers] = useState<User[]>(defaultUsers)
     const [modalOpen, setModalOpen] = useState(false)
+    const [userModal, setUserModal] = useState(false)
     const [tobeDeletedUserId, setTobeDeletedUserId] = useState('')
     const columnHelper = createColumnHelper<User>()
     const columns = [
@@ -245,6 +247,10 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                     />
                 </>
             </ConfirmationModal>
+            {userModal && <AddUserModal
+                onClose={() => setUserModal(false)}
+            />}
+            <Button label='Add User' variant='primary' onClick={() => setUserModal(true)} />
         </div>
     )
 }
