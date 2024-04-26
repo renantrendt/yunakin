@@ -187,15 +187,13 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
 
     return (
         <div className='h-full min-h-[100vh]'>
-            <div className='rounded-2xl p-2 mb-4 bg-white border shadow-lg dark:bg-profile-modal-background-dark dark:text-white border-grey-200 dark:border-profile-modal-border-dark overflow-hidden  overflow-x-scroll no-scrollbar'>
-                <div className='flex w-full justify-end '>
-                    <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
-                        id='search' value={search} onChange={(e) => {
-                            setSearched(false)
-                            setSearch(e.target.value)
-                        }} className='bg-transparent border-none outline-none hover:border-none focus:border-none
-                             !px-8 !shadow-none !mb-2 dark:!bg-transparent !w-fit  ' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
-                </div>
+            <div className='flex w-full justify-end my-4 '>
+                <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
+                    id='search' value={search} onChange={(e) => {
+                        setSearched(false)
+                        setSearch(e.target.value)
+                    }} className='border-none outline-none hover:border-none focus:border-none
+                             !px-8 !shadow-none !mb-2    ' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
             </div>
             <div className='flex flex-col gap-4'>
 
@@ -236,7 +234,7 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                         })}
                     </TableBody>
                 </Table>
-                <div className='self-end'>
+                <div className='self-end flex flex-col gap-4'>
 
                     <Pagination
                         totalPages={Math.ceil(users.length / 5)}
@@ -253,8 +251,8 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
                             })
                         }}
                     />
+                    <Button label='Add User' className='w-fit self-end' variant='primary' onClick={() => setUserModal(true)} />
                 </div>
-
             </div>
             <ConfirmationModal
                 icon={
@@ -276,7 +274,6 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
             {userModal && <AddUserModal
                 onClose={() => setUserModal(false)}
             />}
-            <Button label='Add User' variant='primary' onClick={() => setUserModal(true)} />
         </div>
     )
 }
