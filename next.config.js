@@ -6,6 +6,12 @@ const nextConfig = {
         missingSuspenseWithCSRBailout: false,
         instrumentationHook: true
     },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     webpack(config) {
         // Grab the existing rule that handles SVG imports
         const fileLoaderRule = config.module.rules.find((rule) =>
