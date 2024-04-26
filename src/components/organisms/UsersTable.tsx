@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@/components/atomic/button/Button'
 import Dropdown from '@/components/atomic/dropdown/Dropdown'
 import Table from '@/components/organisms/table/Table'
@@ -8,7 +8,7 @@ import TableCell from '@/components/organisms/table/TableCell'
 import TableHead from '@/components/organisms/table/TableHead'
 import TableRow from '@/components/organisms/table/TableRow'
 import DeleteIcon from "@/icons/trash-icon.svg"
-import { changeUserRole, deleteUser } from '@/app/actions/users'
+import { changeUserRole, deleteUser, searchUsers } from '@/app/actions/users'
 import customToast from '../atomic/toast/customToast'
 import ConfirmationModal from '../molecules/confirmation-modal/ConfirmationModal'
 import Pagination from '../molecules/pagination/Pagination'
@@ -16,7 +16,9 @@ import { useReactTable, getCoreRowModel, getPaginationRowModel, PaginationState,
 import Badge from '../atomic/badge/Badge'
 import { useSession } from 'next-auth/react'
 import AddUserModal from '../molecules/add-user-modal'
-
+import InputField from '../atomic/input/InputField'
+import MagnifyingGlass from "@/icons/magnifying-glass.svg"
+import useDebounce from '@/hooks/useDebounce'
 const colors = ['primary', 'red', 'green', 'grey', 'orange', 'white']
 
 interface User {
@@ -37,8 +39,6 @@ interface UsersTableProps {
     users: User[]
 }
 
-
-
 const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
     const session = useSession()
     const [users, setUsers] = useState<User[]>(defaultUsers)
@@ -46,6 +46,24 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
     const [userModal, setUserModal] = useState(false)
     const [tobeDeletedUserId, setTobeDeletedUserId] = useState('')
     const columnHelper = createColumnHelper<User>()
+    const [search, setSearch] = useState('')
+    const [searched, setSearched] = useState(false)
+    const debouncedValue = useDebounce(search, 500)
+
+
+    useEffect(() => {
+        (async () => {
+            if (!searched) {
+                if (!debouncedValue && debouncedValue === '') {
+                    setUsers(defaultUsers)
+                    return
+                }
+                const filteredUsers = await searchUsers(debouncedValue)
+                setUsers(filteredUsers)
+                setSearched(true)
+            }
+        })()
+    }, [debouncedValue])
     const columns = [
         columnHelper.accessor(row => row.name, {
             id: 'Name',
@@ -142,8 +160,6 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
         } catch (error) {
             customToast.error('Failed to update role')
         }
-
-
     }
 
     const handleDelete = async (userId: string) => {
@@ -171,6 +187,13 @@ const UsersTable = ({ users: defaultUsers }: UsersTableProps) => {
 
     return (
         <div className='h-full min-h-[100vh]'>
+            <div className='rounded-2xl p-2 mb-4 bg-white border shadow-lg dark:bg-profile-modal-background-dark dark:text-white border-grey-200 dark:border-profile-modal-border-dark overflow-hidden  overflow-x-scroll no-scrollbar'>
+                <div className='flex w-full justify-end '>
+                    <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
+                        id='search' value={search} onChange={(e) => setSearch(e.target.value)} className='bg-transparent border-none outline-none hover:border-none focus:border-none
+                             !px-8 !shadow-none !mb-2 dark:!bg-transparent !w-fit  ' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
+                </div>
+            </div>
             <div className='flex flex-col gap-4'>
 
                 <Table>

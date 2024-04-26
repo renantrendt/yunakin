@@ -1,7 +1,8 @@
 'use server'
 import { prisma } from "@/lib/prisma"
 import { compare, hash } from "bcryptjs";
-
+import meilisearchClient from "@/lib/meilisearch/meilisearch";
+import { User } from "@prisma/client";
 export async function changeUserRole(userId: string, role: string) {
     const user = await prisma.user.update({
         where: {
@@ -73,4 +74,14 @@ export async function updatePassword(userId: string, data: {
         success: true,
         data: updatedUser
     };
+}
+
+export async function searchUsers(query: string) {
+    try {
+        const documents = await meilisearchClient.index("users").search(query ?? "")
+        return documents.hits as User[];
+    } catch (error) {
+        console.error(error)
+        return []
+    }
 }
