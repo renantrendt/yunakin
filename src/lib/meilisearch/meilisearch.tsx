@@ -1,6 +1,6 @@
 import { MeiliSearch } from 'meilisearch'
 
-const init = function () {
+const createClient = async function () {
     if (!process.env.MEILISEARCH_HOST || !process.env.MEILISEARCH_API_KEY) {
         throw new Error('Please provide MEILISEARCH_HOST and MEILISEARCH_API_KEY in .env')
     }
@@ -10,18 +10,16 @@ const init = function () {
         apiKey: process.env.MEILISEARCH_API_KEY,
     })
 
-    const toolsIndex = client.index('users')
-    if (!toolsIndex) {
-        client.createIndex('users').then(() => {
-            client.index('users').updateSearchableAttributes(['name', 'email', 'role']);
-
-        })
+    try {
+        const usersIndex = await client.index('users').getRawInfo();
+    } catch (error) {
+        console.log('users index not found, creating one')
+        await client.createIndex('users')
+        await client.index('users').updateSearchableAttributes(['name', 'email', 'role']);
     }
     return client;
 }
 
-const client = init()
 
 
-
-export default client;
+export default createClient;

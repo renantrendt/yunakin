@@ -1,7 +1,7 @@
 'use server'
 import { prisma } from "@/lib/prisma"
 import { compare, hash } from "bcryptjs";
-import meilisearchClient from "@/lib/meilisearch/meilisearch";
+import createClient from "@/lib/meilisearch/meilisearch";
 import { User } from "@prisma/client";
 export async function changeUserRole(userId: string, role: string) {
     const user = await prisma.user.update({
@@ -12,6 +12,8 @@ export async function changeUserRole(userId: string, role: string) {
             role: role
         }
     })
+    const meilisearchClient = await createClient()
+    meilisearchClient.index("users").updateDocuments([user])
     return user;
 }
 export async function deleteUser(userId: string) {
@@ -20,6 +22,9 @@ export async function deleteUser(userId: string) {
             id: userId
         },
     })
+
+    const meilisearchClient = await createClient()
+    meilisearchClient.index("users").deleteDocument(userId)
     return user;
 }
 
@@ -32,6 +37,9 @@ export async function updateUser(userId: string, data: any) {
             ...data
         }
     })
+    const meilisearchClient = await createClient()
+    meilisearchClient.index("users").updateDocuments([user])
+
     return user;
 }
 export async function updatePassword(userId: string, data: {
@@ -78,7 +86,9 @@ export async function updatePassword(userId: string, data: {
 
 export async function searchUsers(query: string) {
     try {
-        const documents = await meilisearchClient.index("users").search(query ?? "")
+        const client = await createClient()
+        const documents = await client.index("users").search(query ?? "")
+        console.log(documents.hits)
         return documents.hits as User[];
     } catch (error) {
         console.error(error)
