@@ -11,7 +11,8 @@ const createClient = async function () {
     })
 
     try {
-        const usersIndex = await client.index('users').getRawInfo();
+
+        await client.index('users').getRawInfo();
     } catch (error) {
         console.log('users index not found, creating one')
         await client.createIndex('users')

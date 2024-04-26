@@ -1,5 +1,6 @@
 // import { sendEmail } from "@/lib/mailer";
 import { createTranslation } from '@/lib/i18n/server'
+import createClient from '@/lib/meilisearch/meilisearch'
 import { prisma } from '@/lib/prisma'
 import { sendVerificationEmail } from '@/utils/sendEmail'
 import { hash } from 'bcryptjs'
@@ -32,6 +33,8 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
         provider: 'credentials',
       }
     })
+    const meilisearchClient = await createClient()
+    meilisearchClient.index('users').addDocuments([user])
 
 
     await sendVerificationEmail({

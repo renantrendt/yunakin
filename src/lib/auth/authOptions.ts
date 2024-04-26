@@ -12,6 +12,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { sendVerificationEmail } from '@/utils/sendEmail'
 import platformConfig from '@/config/app-config'
 import { createTranslation } from '../i18n/server'
+import createClient from '../meilisearch/meilisearch'
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -123,6 +124,7 @@ export const authOptions: NextAuthOptions = {
                         return true;
                     }
                 } else {
+                    const meilisearchClient = await createClient()
                     user = await prisma.user.create({
                         data: {
                             name: profile.name as string,
@@ -132,6 +134,7 @@ export const authOptions: NextAuthOptions = {
                             provider: "google"
                         }
                     })
+                    await meilisearchClient.index("users").addDocuments([user])
                     if (!user.verified) {
                         await sendVerificationEmail({ to: user.email, name: user.name, subject: 'Verify Email', token: user.verifyToken as string });
                     }
