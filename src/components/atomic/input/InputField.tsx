@@ -18,7 +18,7 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, className, error, id, ...additionalProps }) => {
   return (
-    <div className="form-control  w-fit ">
+    <div className="form-control  w-full ">
       {label &&
         <label className="label text-sm text-black dark:text-white">
           <span className="label-text">{label}</span>
