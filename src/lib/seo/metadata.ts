@@ -9,6 +9,7 @@ function getSeoMetadata(options?: Metadata): Metadata {
         applicationName: siteConfig.applicationName,
         description: siteConfig.description,
         keywords: siteConfig.keywords,
+        ...options,
         openGraph: {
             ...options?.openGraph,
             ...siteConfig.openGraph,
@@ -17,7 +18,6 @@ function getSeoMetadata(options?: Metadata): Metadata {
             ...siteConfig.twitter,
             ...options?.twitter
         },
-        ...options
     };
 }
 
