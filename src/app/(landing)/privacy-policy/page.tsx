@@ -93,15 +93,14 @@ If you have any questions about this Privacy Policy, please contact us at [Inser
 const PrivacyPolicyPage = () => {
     const router = useRouter()
     return <section
-        className="flex min-h-screen   flex-col my-20 mx-auto px-4 md:px-28 max-w-8xl">
-        <div className='  w-8 h-8 items-center flex justify-center hover:cursor-pointer rounded-full hover:bg-gray-100' onClick={() => { router.back() }}>
+        className="flex relative min-h-screen mt-36   flex-col my-20 mx-auto px-4 md:px-28 max-w-8xl">
+        <div className=' text-black dark:text-white absolute left-16 w-8 h-8 items-center flex justify-center hover:cursor-pointer rounded-full hover:bg-grey-200 dark:hover:bg-category-card-autor' onClick={() => { router.back() }}>
             <BackIcon />
         </div>
         <div className='prose'>
             <Markdown remarkPlugins={[]}>
                 {markdown}</Markdown>
         </div>
-
     </section >
 };
 
