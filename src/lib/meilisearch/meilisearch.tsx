@@ -2,7 +2,11 @@ import { MeiliSearch } from 'meilisearch'
 
 const createClient = async function () {
     if (!process.env.MEILISEARCH_HOST || !process.env.MEILISEARCH_API_KEY) {
-        throw new Error('Please provide MEILISEARCH_HOST and MEILISEARCH_API_KEY in .env')
+        console.log('Meilisearch not configured, using mock client')
+        return {
+            index: async (indexName: string) => {
+            }
+        }
     }
 
     const client = new MeiliSearch({
