@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { type User } from '@prisma/client'
 import { compare } from 'bcryptjs'
-import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import jwt from 'jsonwebtoken'
 import GoogleProvider from 'next-auth/providers/google'
@@ -13,8 +12,9 @@ import { sendVerificationEmail } from '@/utils/sendEmail'
 import platformConfig from '@/config/app-config'
 import { createTranslation } from '../i18n/server'
 import createClient from '../meilisearch/meilisearch'
+import { NextAuthConfig } from 'next-auth'
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthConfig = {
     session: {
         strategy: 'jwt'
     },
@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
                 }
                 const user = (await prisma.user.findUnique({
                     where: {
-                        email: credentials.email
+                        email: credentials.email as string
                     },
                     select: {
                         id: true,
@@ -113,7 +113,7 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("No profile found");
                 }
                 let user = await prisma.user.findUnique({
-                    where: { email: profile?.email },
+                    where: { email: profile?.email as string },
                 });
 
                 if (user) {
@@ -163,7 +163,6 @@ export const authOptions: NextAuthOptions = {
             return {
                 ...session,
                 user: {
-                    id: token.id,
                     ...session.user,
                     ...user,
                     image: user?.avatar,
