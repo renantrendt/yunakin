@@ -141,21 +141,25 @@ export default function RegisterPage() {
                             )}
                         />
                     </div>
-                    <Controller
-                        control={control}
-                        name='remember'
-                        render={({ field: { onChange, value } }) => (
-                            <Checkbox
-                                label={t("registerPage.rememberMe")}
-                                id='remember'
-                                name='remember'
-                                onChange={onChange}
-                                checked={value ? true : false}
-                                key={"remember"}
-                                className='text-sm'
-                            />
-                        )}
-                    />
+                    <div className='flex justify-between items-center'>
+                        <Controller
+                            control={control}
+                            name='remember'
+                            render={({ field: { onChange, value } }) => (
+                                <Checkbox
+                                    label={t("registerPage.rememberMe")}
+                                    id='remember'
+                                    name='remember'
+                                    onChange={onChange}
+                                    checked={value ? true : false}
+                                    key={"remember"}
+                                    className='text-sm'
+                                />
+                            )}
+                        />
+                        <Link href={siteUrls.general.login} className="text-primary text-sm">{t("registerPage.haveAccount")}</Link>
+                    </div>
+
                     <div className="flex justify-center flex-col gap-4">
                         <Button variant="primary" type="submit" className="w-full" label={t("registerPage.createAccount")} size='lg' loading={loading} />
                     </div>
