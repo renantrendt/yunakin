@@ -13,6 +13,8 @@ import platformConfig from '@/config/app-config'
 import { createTranslation } from '../i18n/server'
 import createClient from '../meilisearch/meilisearch'
 import { NextAuthConfig } from 'next-auth'
+import Resend from "next-auth/providers/resend"
+
 
 export const authOptions: NextAuthConfig = {
     session: {
@@ -21,6 +23,17 @@ export const authOptions: NextAuthConfig = {
     secret: platformConfig.variables.NEXT_AUTH_SECRET,
 
     providers: [
+        Resend({
+            apiKey: platformConfig.variables.RESEND_API_KEY!,
+            from: "register@codepilot.dev",
+            sendVerificationRequest: async ({ identifier: email, url, provider: { server, from, name } }) => {
+                const { t } = await createTranslation('auth')
+                const subject = t("email.verifyEmail")
+                const html = `<p>${t("email.verifyEmailText")} <a href="${url}">${url}</a></p>`
+                const result = await sendVerificationEmail({ to: email, name, subject, token: "token" })
+
+            }
+        }),
         CredentialsProvider({
             id: 'email',
             name: 'email',

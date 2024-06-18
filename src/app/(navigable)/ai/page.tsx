@@ -1,14 +1,13 @@
 import { getChats } from '@/app/actions'
+import { auth } from '@/auth'
 import Chats from '@/components/chat/Chats'
 import siteUrls from '@/config/site-config'
-import { authOptions } from '@/lib/auth/authOptions'
-import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
 
 export default async function AiPage() {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
     if (!session?.user) {
         redirect(siteUrls.general.login)
