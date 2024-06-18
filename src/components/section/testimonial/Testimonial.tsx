@@ -22,7 +22,7 @@ const Testimonial = () => {
                 </AnimatedSection>
                 <section className='flex  flex-row gap-3 xl:grid xl:grid-cols-3 overflow-x-scroll  items-stretch  w-full no-scrollbar xl:gap-x-6 gap-y-6  '>
                     {testimonials.map((testimonial, index) => (
-                        <AnimatedSection delay={index * 0.1} type='scroll-opacity' key={index} className='card bg-white min-w-[324px] flex-[1]    dark:bg-gray-700 shadow border  border-neutral-200 flex-col  p-5 '>
+                        <AnimatedSection delay={index * 0.25} type='scroll-opacity' key={index} className='card bg-white min-w-[324px] flex-[1]    dark:bg-gray-700 shadow border  border-neutral-200 flex-col  p-5 '>
                             <div className='card-body flex   px-0   flex-col justify-between   items-center  '>
                                 <p className=' w-12/12 lg:w-10/12 text-neutral-600 text-base leading-[26px] flex-1 text-center font-light'>{testimonial.content}</p>
                                 <div className='relative  w-20 h-20  mt-6'>
