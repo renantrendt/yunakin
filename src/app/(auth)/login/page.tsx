@@ -14,6 +14,7 @@ import FormContainer from '@/components/form/FormContainer'
 import { useTranslation } from '@/lib/i18n/client'
 import TabItem from '@/components/atomic/tabs/TabItem'
 import SignInForm from '@/components/login/SignInForm'
+import MagicLinkForm from '@/components/login/MagicLinkForm'
 
 
 enum AuthType {
@@ -62,33 +63,7 @@ export default function LoginPage() {
                     <TabItem label='Email' onClick={() => setSelectedAuth(AuthType.EMAIL)} selected={selectedAuth === AuthType.EMAIL} />
                 </div>
 
-                {/* {selectedAuth == AuthType.MAGICLINK && (
-                    <div className='flex flex-col gap-6'>
-                        <Controller
-                            control={control}
-                            name="email"
-                            render={({ field: { onChange, value } }) => (
-                                <InputField
-                                    label={t("loginPage.email")}
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    placeholder={t("loginPage.emailPlaceholder")}
-                                    trailingIcon={<span className='text-grey-400 dark:text-placeholder-dark'><EnvelopeIcon /> </span>}
-                                    onChange={onChange}
-                                    value={value}
-                                    error={errors.email?.message}
-                                />
-                            )}
-                        />
-                        <div className="flex justify-center flex-col gap-4">
-                            <Button variant="primary" type="submit" className="w-full" label={t("loginPage.sendMagicLink")} size='lg' loading={loading} />
-                            <div className=' text-sm dark:text-white'>
-                                {t("loginPage.notMember")} <Link href={siteUrls.general.register} className="text-primary ">{t("loginPage.register")}</Link>
-                            </div>
-                        </div>
-                    </div>
-                )} */}
+                {selectedAuth == AuthType.MAGICLINK && <MagicLinkForm />}
                 {selectedAuth == AuthType.EMAIL && <SignInForm />}
                 <div className="relative flex  items-center py-3">
                     <div className="flex-grow border-t border-grey-400 dark:border-line-dark"></div>

@@ -192,5 +192,5 @@ export const authOptions: NextAuthConfig = {
         error: '/error', // Error code passed in query string as ?error=
         verifyRequest: '/auth/verify-request' // (used for check email message)
     },
-    adapter: PrismaAdapter(prisma)
+    adapter: PrismaAdapter(prisma),
 }
