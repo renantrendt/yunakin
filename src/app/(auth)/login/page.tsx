@@ -19,11 +19,20 @@ import GoogleIcon from "@/icons/google-icon.svg"
 import Checkbox from '@/components/atomic/checkbox/Checkbox'
 import FormContainer from '@/components/form/FormContainer'
 import { useTranslation } from '@/lib/i18n/client'
+import TabItem from '@/components/atomic/tabs/TabItem'
 
 interface FormValues {
     email: string
     password: string
     remember?: boolean
+}
+interface MagicLinkFormValues {
+    email: string
+}
+
+enum AuthType {
+    MAGICLINK = 'magiclink',
+    EMAIL = 'email'
 }
 
 const appendParams = (searchParams: URLSearchParams) => {
@@ -41,10 +50,16 @@ export default function LoginPage() {
     const [loading, setIsLoading] = React.useState(false)
     const searchParams = useSearchParams()
 
+    const [selectedAuth, setSelectedAuth] = React.useState<AuthType>(AuthType.MAGICLINK)
+
     const schema = yup.object({
         email: yup.string().email(t("error.invalidEmail")).required(t("error.missingEmail")),
         password: yup.string().min(6, t("error.weakPassword")).required(t("error.missingPassword")),
         remember: yup.boolean()
+    })
+
+    const magicLinkSchema = yup.object({
+        email: yup.string().email(t("error.invalidEmail")).required(t("error.missingEmail")),
     })
 
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
@@ -52,7 +67,6 @@ export default function LoginPage() {
             resolver: yupResolver(schema)
         }
     )
-
 
     if (session && new URLSearchParams(searchParams).get('callbackUrl') === null) {
         return (
@@ -121,7 +135,39 @@ export default function LoginPage() {
                     <Typography type="p" className='mt-2  text-grey-700 !dark:text-placeholder-dark '>{t("loginPage.description")}</Typography>
                 </div>
 
-                <div className='flex flex-col gap-6'>
+                <div className='flex justify-around'>
+                    <TabItem label='Magic Link' onClick={() => setSelectedAuth(AuthType.MAGICLINK)} selected={selectedAuth === AuthType.MAGICLINK} />
+                    <TabItem label='Email' onClick={() => setSelectedAuth(AuthType.EMAIL)} selected={selectedAuth === AuthType.EMAIL} />
+                </div>
+
+                {selectedAuth == AuthType.MAGICLINK && (
+                    <div className='flex flex-col gap-6'>
+                        <Controller
+                            control={control}
+                            name="email"
+                            render={({ field: { onChange, value } }) => (
+                                <InputField
+                                    label={t("loginPage.email")}
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder={t("loginPage.emailPlaceholder")}
+                                    trailingIcon={<span className='text-grey-400 dark:text-placeholder-dark'><EnvelopeIcon /> </span>}
+                                    onChange={onChange}
+                                    value={value}
+                                    error={errors.email?.message}
+                                />
+                            )}
+                        />
+                        <div className="flex justify-center flex-col gap-4">
+                            <Button variant="primary" type="submit" className="w-full" label={t("loginPage.sendMagicLink")} size='lg' loading={loading} />
+                            <div className=' text-sm dark:text-white'>
+                                {t("loginPage.notMember")} <Link href={siteUrls.general.register} className="text-primary ">{t("loginPage.register")}</Link>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {selectedAuth == AuthType.EMAIL && <div className='flex flex-col gap-6'>
 
                     <Controller
                         control={control}
@@ -183,7 +229,7 @@ export default function LoginPage() {
                             {t("loginPage.notMember")} <Link href={siteUrls.general.register} className="text-primary ">{t("loginPage.register")}</Link>
                         </div>
                     </div>
-                </div>
+                </div>}
                 <div className="relative flex  items-center py-3">
                     <div className="flex-grow border-t border-grey-400 dark:border-line-dark"></div>
                     <span className="flex-shrink mx-4 text-sm text-grey-400 dark:text-placeholder-dark">OR</span>
