@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { type User } from '@prisma/client'
 import { compare } from 'bcryptjs'
-import CredentialsProvider from 'next-auth/providers/credentials'
+import Credentials from 'next-auth/providers/credentials'
 import jwt from 'jsonwebtoken'
 import GoogleProvider from 'next-auth/providers/google'
 import TwitterProvider from "next-auth/providers/twitter";
@@ -28,28 +28,7 @@ export const authOptions: NextAuthConfig = {
             apiKey: platformConfig.variables.RESEND_API_KEY!,
             from: "no-reply@codepilot.dev",
         }),
-        CredentialsProvider({
-            id: 'email',
-            name: 'email',
-            credentials: {
-                email: {
-                    label: 'Email',
-                    type: 'email',
-                    placeholder: 'example@example.com'
-                },
-            },
-            async authorize(credentials) {
-                if (!credentials?.email) {
-                    return null
-                }
-                return {
-                    email: "asdf",
-                    name: "Asdf",
-                    id: "asdfasdf"
-                }
-            },
-        }),
-        CredentialsProvider({
+        Credentials({
             id: 'credentials',
             name: 'password',
             credentials: {

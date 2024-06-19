@@ -54,6 +54,7 @@ export default function RegisterPage() {
     }
 
     const onSubmit = async (data: any) => {
+        alert('sadfa')
         setIsLoading(true);
         try {
             const register = await fetch('/api/auth/register', {
@@ -75,8 +76,10 @@ export default function RegisterPage() {
         }
 
     }
+    console.log(errors)
     return (
-        <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <FormContainer>
+
             <Link href={siteUrls.general.home}>
                 <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
                 <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
@@ -89,7 +92,7 @@ export default function RegisterPage() {
                     <Typography type="p" className='mt-2  text-grey-700'>{t("registerPage.description")}</Typography>
                 </div>
 
-                <div className='flex flex-col gap-6'>
+                <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
                     <Controller
                         control={control}
                         name="name"
@@ -154,6 +157,7 @@ export default function RegisterPage() {
                                     checked={value ? true : false}
                                     key={"remember"}
                                     className='text-sm'
+                                    error={errors.remember?.message}
                                 />
                             )}
                         />
@@ -161,9 +165,10 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="flex justify-center flex-col gap-4">
-                        <Button variant="primary" type="submit" className="w-full" label={t("registerPage.createAccount")} size='lg' loading={loading} />
+                        <Button variant="primary" type="submit" className="w-full" label={t("registerPage.createAccount")} size='lg' loading={loading}
+                        />
                     </div>
-                </div>
+                </form>
                 <div className="relative flex  items-center py-3">
                     <div className="flex-grow border-t border-grey-400"></div>
                     <span className="flex-shrink mx-4 text-sm text-grey-400">OR</span>
