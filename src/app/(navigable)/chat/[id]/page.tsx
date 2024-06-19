@@ -2,10 +2,10 @@ import React from 'react'
 import { notFound, redirect } from 'next/navigation'
 
 import Chat from '@/components/chat/Chat'
-import { getServerSession } from 'next-auth'
 import { getChat } from '@/app/actions'
 import { Message } from 'ai'
 import { authOptions } from '@/lib/auth/authOptions'
+import { auth } from '@/auth'
 
 export interface ChatPageProps {
     params: {
@@ -13,24 +13,9 @@ export interface ChatPageProps {
     }
 }
 
-// export async function generateMetadata({
-//     params
-// }: ChatPageProps): Promise<Metadata> {
-//     const session = await getServerSession(authOptions)
-
-//     if (!session?.user) {
-//         return {}
-//     }
-
-//     const chat = await getChat(params.id, session.user.id)
-//     return {
-//         title: chat?.title.toString().slice(0, 50) ?? 'Chat'
-//     }
-// }
 
 export default async function ChatPage({ params }: ChatPageProps) {
-    const session = await getServerSession(authOptions)
-
+    const session = await auth()
     if (!session?.user) {
         redirect(`/sign-in?next=/chat/${params.id}`)
     }

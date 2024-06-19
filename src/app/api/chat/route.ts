@@ -2,8 +2,8 @@ import OpenAI from 'openai';
 import { OpenAIStream, StreamingTextResponse, nanoid } from 'ai';
 import platformConfig from '@/config/app-config';
 import { prisma } from '@/lib/prisma';
-import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth/authOptions';
+import { auth } from '@/auth';
 
 // Create an OpenAI API client (that's edge friendly!)
 const openai = new OpenAI({
@@ -13,9 +13,7 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
     const json = await req.json();
-    const session = await getServerSession(authOptions);
-
-
+    const session = await auth()
     if (!session?.user) {
         return new Response('Unauthorized', { status: 401 })
     }

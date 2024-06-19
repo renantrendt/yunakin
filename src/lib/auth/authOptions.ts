@@ -14,6 +14,7 @@ import { createTranslation } from '../i18n/server'
 import createClient from '../meilisearch/meilisearch'
 import { NextAuthConfig } from 'next-auth'
 import Resend from "next-auth/providers/resend"
+import { PrismaAdapter } from "@auth/prisma-adapter"
 
 
 export const authOptions: NextAuthConfig = {
@@ -25,14 +26,7 @@ export const authOptions: NextAuthConfig = {
     providers: [
         Resend({
             apiKey: platformConfig.variables.RESEND_API_KEY!,
-            from: "register@codepilot.dev",
-            sendVerificationRequest: async ({ identifier: email, url, provider: { server, from, name } }) => {
-                const { t } = await createTranslation('auth')
-                const subject = t("email.verifyEmail")
-                const html = `<p>${t("email.verifyEmailText")} <a href="${url}">${url}</a></p>`
-                const result = await sendVerificationEmail({ to: email, name, subject, token: "token" })
-
-            }
+            from: "no-reply@codepilot.dev",
         }),
         CredentialsProvider({
             id: 'email',
@@ -68,12 +62,15 @@ export const authOptions: NextAuthConfig = {
             },
             async authorize(credentials) {
                 const { t } = await createTranslation('auth')
-                if (!credentials?.email || !credentials.password) {
+                if (!credentials?.email || !credentials?.password) {
                     return null
                 }
+
+                let credEmail = credentials.email as string
+                let credPassword = credentials.password as string
                 const user = (await prisma.user.findUnique({
                     where: {
-                        email: credentials.email as string
+                        email: credEmail
                     },
                     select: {
                         id: true,
@@ -91,7 +88,7 @@ export const authOptions: NextAuthConfig = {
                 if (user.provider !== "credentials") {
                     throw { message: t("error.emailOtherProvider"), statusCode: 400 }
                 }
-                if (!user || !(await compare(credentials.password, user.password as string))) {
+                if (!user || !(await compare(credPassword, user.password as string))) {
                     throw { message: t("error.incorrectEmailOrPassword"), statusCode: 401 }
                 }
                 return {
@@ -215,5 +212,6 @@ export const authOptions: NextAuthConfig = {
         signIn: '/login',
         error: '/error', // Error code passed in query string as ?error=
         verifyRequest: '/auth/verify-request' // (used for check email message)
-    }
+    },
+    adapter: PrismaAdapter(prisma)
 }
