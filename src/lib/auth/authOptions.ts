@@ -26,7 +26,9 @@ export const authOptions: NextAuthConfig = {
     providers: [
         Resend({
             apiKey: platformConfig.variables.RESEND_API_KEY!,
+            secret: platformConfig.variables.NEXT_AUTH_SECRET!,
             from: "no-reply@codepilot.dev",
+
         }),
         Credentials({
             id: 'credentials',
@@ -193,4 +195,5 @@ export const authOptions: NextAuthConfig = {
         verifyRequest: '/auth/verify-request' // (used for check email message)
     },
     adapter: PrismaAdapter(prisma),
+    debug: true
 }
