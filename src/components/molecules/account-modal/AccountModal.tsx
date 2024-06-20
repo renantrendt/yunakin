@@ -37,7 +37,7 @@ const AccountModal = ({ name, image, email, shown }: AccountModalProps) => {
                     <SettingsIcon />
                     <p className='text-sm leading-[18px] font-medium'>Settings</p>
                 </div>
-                <div onClick={async () => { await signOut({ callbackUrl: "/ " }) }}
+                <div onClick={async () => { await signOut({ callbackUrl: "/" }) }}
                     className='px-[6px] py-2 gap-[22px] rounded-[5px] bg-white dark:bg-card-dark dark:text-red-400 hover:bg-grey-100 focus:text-black focus:bg-grey-100 text-red-400 flex flex-row cursor-pointer hover:dark:bg-profile-modal-hover-dark '>
                     <ArrowLeftOnIcon />
                     <p className='text-sm leading-[18px] font-medium text-red-400'>Log out</p>
