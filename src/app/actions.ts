@@ -40,3 +40,12 @@ export async function deleteChat(id: string) {
     return chats;
 }
 
+
+export async function checkUserExists(email: string) {
+    const user = await prisma.user.findFirst({
+        where: {
+            email: email
+        }
+    })
+    return user
+}

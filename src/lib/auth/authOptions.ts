@@ -28,7 +28,19 @@ export const authOptions: NextAuthConfig = {
             apiKey: platformConfig.variables.RESEND_API_KEY!,
             secret: platformConfig.variables.NEXT_AUTH_SECRET!,
             from: "no-reply@codepilot.dev",
+
             async sendVerificationRequest(params) {
+                const email = params.identifier;
+
+                const user = await prisma.user.findUnique({
+                    where: {
+                        email: email
+                    }
+                })
+                if (!user) {
+                    throw { message: "User not found", statusCode: 404 }
+                }
+
                 const res = await sendMagicLinkEmail({ to: params.identifier, subject: 'Sign in to Codepilot', magicLink: params.url });
                 if (res.success) {
                     throw { message: "Error sending magic link", statusCode: 500 }

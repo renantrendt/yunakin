@@ -12,6 +12,7 @@ import siteUrls from '@/config/site-config'
 import EnvelopeIcon from '@/icons/envelope-icon.svg'
 import { signIn } from 'next-auth/react'
 import customToast from '../atomic/toast/customToast'
+import { checkUserExists } from '@/app/actions'
 
 const MagicLinkForm = () => {
     const { t } = useTranslation('auth')
@@ -31,16 +32,20 @@ const MagicLinkForm = () => {
 
         try {
             setIsLoading(true)
+
+            const result = await checkUserExists(data.email)
+            if (!result) {
+                throw t("error.userNotFound")
+            }
             await signIn('resend', {
                 email: data.email,
                 callbackUrl: siteUrls.general.dashboard,
                 redirect: false // optional set it to true to show /magic-link-set page
             })
-
             setValue('email', '')
-
             customToast.success(t("magicLink.sent"))
         } catch (error) {
+            console.error(error)
             customToast.error(error as string)
         } finally {
             setIsLoading(false)
