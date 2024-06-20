@@ -1,7 +1,7 @@
 // app/checkout-sessions/route.ts
+import { auth } from "@/auth";
 import { authOptions } from "@/lib/auth/authOptions";
 import stripe from "@/utils/stripe";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -12,8 +12,7 @@ export interface CheckoutSubscriptionBody {
 }
 
 export async function GET(req: Request) {
-    const data = await getServerSession(authOptions);
-
+    const data = await auth()
     if (!data?.user) {
         return NextResponse.json({}, { status: 403 })
     }

@@ -1,8 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { type User } from '@prisma/client'
 import { compare } from 'bcryptjs'
-import type { NextAuthOptions } from 'next-auth'
-import CredentialsProvider from 'next-auth/providers/credentials'
+import Credentials from 'next-auth/providers/credentials'
 import jwt from 'jsonwebtoken'
 import GoogleProvider from 'next-auth/providers/google'
 import TwitterProvider from "next-auth/providers/twitter";
@@ -13,36 +12,25 @@ import { sendVerificationEmail } from '@/utils/sendEmail'
 import platformConfig from '@/config/app-config'
 import { createTranslation } from '../i18n/server'
 import createClient from '../meilisearch/meilisearch'
+import { NextAuthConfig } from 'next-auth'
+import Resend from "next-auth/providers/resend"
+import { PrismaAdapter } from "@auth/prisma-adapter"
 
-export const authOptions: NextAuthOptions = {
+
+export const authOptions: NextAuthConfig = {
     session: {
         strategy: 'jwt'
     },
     secret: platformConfig.variables.NEXT_AUTH_SECRET,
 
     providers: [
-        CredentialsProvider({
-            id: 'email',
-            name: 'email',
-            credentials: {
-                email: {
-                    label: 'Email',
-                    type: 'email',
-                    placeholder: 'example@example.com'
-                },
-            },
-            async authorize(credentials) {
-                if (!credentials?.email) {
-                    return null
-                }
-                return {
-                    email: "asdf",
-                    name: "Asdf",
-                    id: "asdfasdf"
-                }
-            },
+        Resend({
+            apiKey: platformConfig.variables.RESEND_API_KEY!,
+            secret: platformConfig.variables.NEXT_AUTH_SECRET!,
+            from: "no-reply@codepilot.dev",
+
         }),
-        CredentialsProvider({
+        Credentials({
             id: 'credentials',
             name: 'password',
             credentials: {
@@ -55,12 +43,15 @@ export const authOptions: NextAuthOptions = {
             },
             async authorize(credentials) {
                 const { t } = await createTranslation('auth')
-                if (!credentials?.email || !credentials.password) {
+                if (!credentials?.email || !credentials?.password) {
                     return null
                 }
+
+                let credEmail = credentials.email as string
+                let credPassword = credentials.password as string
                 const user = (await prisma.user.findUnique({
                     where: {
-                        email: credentials.email
+                        email: credEmail
                     },
                     select: {
                         id: true,
@@ -78,7 +69,7 @@ export const authOptions: NextAuthOptions = {
                 if (user.provider !== "credentials") {
                     throw { message: t("error.emailOtherProvider"), statusCode: 400 }
                 }
-                if (!user || !(await compare(credentials.password, user.password as string))) {
+                if (!user || !(await compare(credPassword, user.password as string))) {
                     throw { message: t("error.incorrectEmailOrPassword"), statusCode: 401 }
                 }
                 return {
@@ -113,7 +104,7 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("No profile found");
                 }
                 let user = await prisma.user.findUnique({
-                    where: { email: profile?.email },
+                    where: { email: profile?.email as string },
                 });
 
                 if (user) {
@@ -163,7 +154,6 @@ export const authOptions: NextAuthOptions = {
             return {
                 ...session,
                 user: {
-                    id: token.id,
                     ...session.user,
                     ...user,
                     image: user?.avatar,
@@ -200,8 +190,10 @@ export const authOptions: NextAuthOptions = {
         }
     },
     pages: {
-        signIn: '/login',
+        signIn: '/dashboard',
         error: '/error', // Error code passed in query string as ?error=
-        verifyRequest: '/auth/verify-request' // (used for check email message)
-    }
+        verifyRequest: '/magic-link-sent', // (used for check email message)
+        newUser: "/dashboard",
+    },
+    adapter: PrismaAdapter(prisma),
 }

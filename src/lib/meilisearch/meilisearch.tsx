@@ -4,7 +4,20 @@ const createClient = async function () {
     if (!process.env.MEILISEARCH_HOST || !process.env.MEILISEARCH_API_KEY) {
         console.log('Meilisearch not configured, using mock client')
         return {
-            index: async (indexName: string) => {
+            index: (indexName: string) => {
+                return {
+                    getRawInfo: async () => {
+                        return {
+                            primaryKey: 'id'
+                        }
+                    },
+                    updateSearchableAttributes: async (attributes: string[]) => {
+                        return
+                    },
+                    addDocuments: async (documents: any[]) => {
+                        return
+                    }
+                }
             }
         }
     }
