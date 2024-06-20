@@ -8,7 +8,7 @@ import TwitterProvider from "next-auth/providers/twitter";
 import GitHubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook";
 
-import { sendVerificationEmail } from '@/utils/sendEmail'
+import { sendMagicLinkEmail, sendVerificationEmail } from '@/utils/sendEmail'
 import platformConfig from '@/config/app-config'
 import { createTranslation } from '../i18n/server'
 import createClient from '../meilisearch/meilisearch'
@@ -28,7 +28,12 @@ export const authOptions: NextAuthConfig = {
             apiKey: platformConfig.variables.RESEND_API_KEY!,
             secret: platformConfig.variables.NEXT_AUTH_SECRET!,
             from: "no-reply@codepilot.dev",
-
+            async sendVerificationRequest(params) {
+                const res = await sendMagicLinkEmail({ to: params.identifier, subject: 'Sign in to Codepilot', magicLink: params.url });
+                if (res.success) {
+                    throw { message: "Error sending magic link", statusCode: 500 }
+                }
+            },
         }),
         Credentials({
             id: 'credentials',
