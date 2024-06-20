@@ -192,9 +192,8 @@ export const authOptions: NextAuthConfig = {
     pages: {
         signIn: '/dashboard',
         error: '/error', // Error code passed in query string as ?error=
-        verifyRequest: '/auth/verify-request', // (used for check email message)
+        verifyRequest: '/magic-link-sent', // (used for check email message)
         newUser: "/dashboard",
     },
     adapter: PrismaAdapter(prisma),
-    debug: true
 }

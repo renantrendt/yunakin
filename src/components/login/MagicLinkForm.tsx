@@ -29,7 +29,10 @@ const MagicLinkForm = () => {
     )
 
     const onSubmit = async (data: any) => {
-        await signIn('resend', data)
+        await signIn('resend', {
+            email: data.email,
+            callbackUrl: siteUrls.general.dashboard
+        })
     }
     return (
 
