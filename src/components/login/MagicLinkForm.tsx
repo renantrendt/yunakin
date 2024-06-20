@@ -11,28 +11,41 @@ import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import EnvelopeIcon from '@/icons/envelope-icon.svg'
 import { signIn } from 'next-auth/react'
+import customToast from '../atomic/toast/customToast'
 
 const MagicLinkForm = () => {
     const { t } = useTranslation('auth')
-    const searchParams = useSearchParams()
-    const router = useRouter()
     const [loading, setIsLoading] = React.useState(false)
 
     const schema = yup.object({
         email: yup.string().email(t("error.invalidEmail")).required(t("error.missingEmail")),
     })
 
-    const { handleSubmit, control, formState: { errors } } = useForm<{ email: string }>(
+    const { handleSubmit, control, formState: { errors }, setValue } = useForm<{ email: string }>(
         {
             resolver: yupResolver(schema)
         }
     )
 
     const onSubmit = async (data: any) => {
-        await signIn('resend', {
-            email: data.email,
-            callbackUrl: siteUrls.general.dashboard
-        })
+
+        try {
+            setIsLoading(true)
+            await signIn('resend', {
+                email: data.email,
+                callbackUrl: siteUrls.general.dashboard,
+                redirect: false // optional set it to true to show /magic-link-set page
+            })
+
+            setValue('email', '')
+
+            customToast.success(t("magicLink.sent"))
+        } catch (error) {
+            customToast.error(error as string)
+        } finally {
+            setIsLoading(false)
+        }
+
     }
     return (
 
