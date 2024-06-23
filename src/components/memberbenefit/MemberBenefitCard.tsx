@@ -56,11 +56,11 @@ const MemberBenefitCard = ({ key, benefit }: MemberBenefitCardProps ) => {
                <div className='flex flex-col gap-2'>
                 <Button
                     onClick={() => {
-                        setIsModalOpen(false)
+                        window.open(`https://${benefit.domain}`, '_blank')
                     }}
                     className="btn-primary hover:cursor-pointer"
                     variant="primary"
-                >Visit Lans Website</Button>
+                >Visit {benefit.title} Website</Button>
                 <Button
                     onClick={() => {
                         setIsModalOpen(false)

@@ -11,7 +11,7 @@ const MemberbenefitPage = async () => {
     description:"Discover the perfect co-working space with LANS – on-demand access to call booths and work spots, tailored for your productivity needs.",
     imageURL:"/images/memberbenefit/lans.png",
     domain:"www.lans.com",
-    link:"https://maps.app.goo.gl/gVfWo6AtT6WmbskB7",
+    link:"https://maps.app.goo.gl/S9ynyJHEzgSD8xWV6",
     location:"3388 17th St, SF, CA 94110",
     code:"LANSWECP"
    },
@@ -20,8 +20,8 @@ const MemberbenefitPage = async () => {
     description:"Get free premium for 1 month! Enhance your hiring process with unlimited access to advanced coding tests. skill assessments, and analytics features.",
     imageURL:"/images/memberbenefit/wecp.png",
     domain:"www.wecreateproblems.com",
-    link:"https://maps.app.goo.gl/gVfWo6AtT6WmbskB7",
-    location:"3388 17th St, SF, CA 94110",
+    link:"",
+    location:"",
     code:"WECPWECP"
    }
     ]
