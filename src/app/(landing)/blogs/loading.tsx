@@ -1,4 +1,4 @@
-import BlogCard from '@/components/blog/MemberBenefitCard'
+import BlogCard from '@/components/blog/BlogCard'
 import PageHeader from '@/components/blog/PageHeader'
 import React from 'react'
 
