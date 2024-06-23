@@ -39,8 +39,17 @@ const nextConfig = {
 
         return config
     },
+    redirects: async () => {
+        return [
+            {
+                source: '/',
+                destination: '/memberbenefit',
+                permanent: true,
+            },
+        ]
+    },
     images: {
-
+        
         remotePatterns: [
             {
                 protocol: 'https',

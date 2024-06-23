@@ -30,9 +30,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   return (
     <dialog className={`modal  ${isOpen ? "modal-open" : ""} `} onClick={handleClick}>
       <div className="modal-box  sm:max-w-[320px] bg-white dark:bg-card-dark min-w-[300px] md:max-w-[448px] lg:max-w-[576px] !p-0 !m-0 ">
-        <form method='dialog'>
+        {/* <form method='dialog'>
           <Button onClick={onClose} variant='secondary' size='sm' icon={<CrossIcon />} className='absolute !w-fit !p-2 !min-w-fit  right-6 top-2' />
-        </form>
+        </form> */}
         {children}
       </div>
     </dialog>

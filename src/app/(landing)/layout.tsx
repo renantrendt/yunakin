@@ -8,9 +8,9 @@ const LandingLayout = ({ children }: { children: React.ReactNode }) => {
         <div className=' flex flex-col bg-landing-background dark:bg-landing-dark-background  w-full items-center '>
             <Navbar />
             {children}
-            <div className='bg-white dark:bg-landing-dark-background  w-full justify-center flex dark:bg-gray-700  dark:text-white'>
+            {/* <div className='bg-white dark:bg-landing-dark-background  w-full justify-center flex dark:bg-gray-700  dark:text-white'>
                 <Footer />
-            </div>
+            </div> */}
         </div >
     )
 }

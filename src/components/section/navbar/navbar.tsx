@@ -56,7 +56,7 @@ export default function Navbar() {
                             <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
                         </Link>
                     </div>
-                    <div className="navbar-center   hidden lg:flex justify-center">
+                    {/* <div className="navbar-center   hidden lg:flex justify-center">
                         <ul className="menu menu-horizontal px-1 flex gap-1">
                             {_.keys(siteUrls.navbar).map((key: string) => {
                                 const link = siteUrls.navbar[key]
@@ -133,7 +133,7 @@ export default function Navbar() {
                             }
                         </div>
 
-                    </div>
+                    </div> */}
                 </div>
 
             </ContentSection >
