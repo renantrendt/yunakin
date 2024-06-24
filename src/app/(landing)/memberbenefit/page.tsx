@@ -8,7 +8,7 @@ const MemberbenefitPage = async () => {
    [
    {
     title:"LANS",
-    description:"Discover the perfect co-working space at LANS – Recruiters enjoy 7 days free from on-demand access to call booths, work spots, private meeting rooms and shared spaces for events, all tailored for your productivity needs. Open 8am to 11pm.",
+    description:"Discover the perfect co-working space at LANS – Recruiters enjoy 7 days free from on-demand access to call booths, work spots, private meeting, interview rooms and shared spaces also for events, all tailored for your productivity needs. Open 8am to 11pm.",
     imageURL:"/images/memberbenefit/lans.png",
     domain:"www.lans.com",
     link:"https://maps.app.goo.gl/S9ynyJHEzgSD8xWV6",
