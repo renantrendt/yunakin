@@ -13,7 +13,7 @@ const MemberbenefitPage = async () => {
     domain:"www.lans.com",
     link:"https://maps.app.goo.gl/S9ynyJHEzgSD8xWV6",
     location:"3388 17th St, SF, CA 94110",
-    code:"LANSWECP"
+    code:"LANSING"
    },
    {
     title:"WeCP",
