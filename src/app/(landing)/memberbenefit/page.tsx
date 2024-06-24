@@ -8,7 +8,7 @@ const MemberbenefitPage = async () => {
    [
    {
     title:"LANS",
-    description:"Discover the perfect co-working space with LANS – on-demand access to call booths and work spots, tailored for your productivity needs.",
+    description:"Discover the perfect co-working space at LANS – Recruiters enjoy 7 days free from on-demand access to call booths, work spots, private meeting rooms and shared spaces for events, all tailored for your productivity needs. Open 8am to 11pm.",
     imageURL:"/images/memberbenefit/lans.png",
     domain:"www.lans.com",
     link:"https://maps.app.goo.gl/S9ynyJHEzgSD8xWV6",
@@ -34,7 +34,7 @@ const MemberbenefitPage = async () => {
                
             <div>
                 <div className=" 	  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex dark:bg-card-dark">
-                <div className=" text-center text-category-blog-color dark:text-sidebar-icon-dark text-sm font-semibold  uppercase tracking-[0.5px]">{"Workspace"}</div>
+                <div className=" text-center text-category-blog-color dark:text-sidebar-icon-dark text-sm font-semibold  uppercase tracking-[0.5px]">{"Work"}</div>
             </div>
             <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
 
