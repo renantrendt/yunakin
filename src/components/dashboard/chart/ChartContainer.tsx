@@ -7,29 +7,43 @@ import PieChart from './pie/PieChart'
 import ChartCard from './ChartCard'
 
 
-const ChartContainer = () => {
+interface ChartContainerProps {
+    benefitClicks:{
+        title:string
+        count:number
+    }[]
+    benefitsByOs: {
+        title:string
+        count:number
+    }[]
+    totalClicks: number
+}
 
+const ChartContainer = ({benefitClicks, benefitsByOs, totalClicks}: ChartContainerProps) => {
+    
+    console.log(benefitClicks)
+    console.log(benefitsByOs)
     const charts = [
         {
-            title: 'Sales',
-            summary: 1000,
-            children: <BarChart />
+            title: 'Member Benefits Clicks',
+            summary: totalClicks,
+            children: <BarChart name='Member Benefits Clicks' items={benefitClicks} />
         },
         {
-            title: 'Orders',
-            summary: 2000,
-            children: <LineChart />
+            title: 'Member Benefits by OS',
+            summary: totalClicks,
+            children: <BarChart name='Member Benefits Clicks' items={benefitsByOs} />
         },
-        {
-            title: 'Revenue',
-            summary: 3000,
-            children: <AreaChart />
-        },
-        {
-            title: 'Customers',
-            summary: 4000,
-            children: <PieChart />
-        }
+        // {
+        //     title: 'Revenue',
+        //     summary: 3000,
+        //     children: <AreaChart />
+        // },
+        // {
+        //     title: 'Customers',
+        //     summary: 4000,
+        //     children: <PieChart />
+        // }
     ]
     return (
         <div className='chart-container grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2'>

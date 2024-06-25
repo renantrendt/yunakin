@@ -27,7 +27,7 @@ export const sendVerificationEmail = async ({
   }
   try {
     const data = await resend.emails.send({
-      from: 'noreply <noreply@codepilot.dev>',
+      from: 'noreply <noreply@yunakin.com>',
       to: [to],
       subject: subject,
       react: VerificationEmail({ confirmationEmail: `${platformConfig.variables.NEXT_URL}/verify?token=${token}`, name: name, organizationName: "Codepilot" }) as React.ReactElement,
@@ -59,7 +59,7 @@ export const sendResetPasswordEmail = async ({
   }
   try {
     const data = await resend.emails.send({
-      from: 'noreply <noreply@codepilot.dev>',
+      from: 'noreply <noreply@yunakin.com>',
       to: [to],
       subject: subject,
       react: ResetPasswordEmail({ resetPasswordLink: `${platformConfig.variables.NEXT_URL}/reset-password?token=${token}`, name: name, organizationName: "Codepilot" }) as React.ReactElement,
@@ -86,7 +86,7 @@ export const sendWelcomeWaitingListEmail = async ({
     return { success: false, error: "RESEND_API}KEY is not set" }
   }
   const data = await resend.emails.send({
-    from: 'noreply <noreply@codepilot.dev>',
+    from: 'noreply <noreply@yunakin.com>',
     to: [to],
     subject: subject,
     react: WelcomeWaitingListEmailTemplate({ organizationName: "Codepilot" }) as React.ReactElement,
@@ -111,7 +111,7 @@ export const sendInviteUserEmail = async ({
   }
   try {
     const data = await resend.emails.send({
-      from: 'noreply <noreply@codepilot.dev>',
+      from: 'noreply <noreply@yunakin.com>',
       to: [to],
       subject: subject,
       react: InviteUserEmailTemplate({
@@ -144,7 +144,7 @@ export const sendMagicLinkEmail = async ({
   }
   try {
     const data = await resend.emails.send({
-      from: 'noreply <noreply@codepilot.dev>',
+      from: 'noreply <noreply@yunakin.com>',
       to: [to],
       subject: subject,
       react: MagicLinkEmail({

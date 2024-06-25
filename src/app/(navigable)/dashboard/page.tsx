@@ -28,12 +28,41 @@ export default async function Dashboard() {
             totalClicksDesktop: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.
                 filter(f => f.os !=="iOS" && f.os !=="android").length).reduce((a,b) =>   a+b, 0)
     }
-
+    const chartStats = {
+        benefitsClicks: memberBenefitsWithClicks.map(memberBenefit => {
+            return {
+                title: memberBenefit.title,
+                count: memberBenefit.clicks.length,
+            }
+        }),
+        benefitsByOs: memberBenefitsWithClicks.reduce<{
+            [key:string]: number
+        }>((acc,memberBenefit)=> {
+            memberBenefit.clicks.forEach(click => {
+                if(click.os) {
+                    if(acc[click.os]) {
+                        acc[click.os]++
+                    } else {
+                        acc[click.os] = 1
+                    }
+                }
+            })
+            return acc;
+        }, {})
+    }
 
     return (
         <div>
             <DashboardCards totalClicks={cardStats.totalClicks} totalMobileClicks={cardStats.totalClicksMobile} totalDesktopClicks={cardStats.totalClicksDesktop} />
-            <ChartContainer />
+            <ChartContainer benefitClicks={chartStats.benefitsClicks}  benefitsByOs={Object.keys(chartStats.benefitsByOs).map(key => {
+                return {
+                    title: key,
+                    count: chartStats.benefitsByOs[key]
+                }
+            })}
+
+                totalClicks={cardStats.totalClicks}
+            />
         </div>
     )
 }

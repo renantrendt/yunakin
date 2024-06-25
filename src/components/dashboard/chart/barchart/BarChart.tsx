@@ -2,7 +2,14 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
 
-const BarChart = () => {
+interface BarChartProps {
+    items:{
+        title:string
+        count:number
+    }[]
+    name:string
+}
+const BarChart = ({items,name}: BarChartProps) => {
     const state = {
         options: {
             colors: ['#5C37EB', '#705AF8', '#5C37EB'],
@@ -10,12 +17,12 @@ const BarChart = () => {
                 id: 'apexchart-example'
             },
             xaxis: {
-                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+                categories: items.map(d => d.title)
             }
         },
         series: [{
-            name: 'series-1',
-            data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
+            name: name,
+            data: items.map(d => d.count),
         }]
     }
 
