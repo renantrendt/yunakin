@@ -25,10 +25,12 @@ model User {
   role          String    @default("USER")
   provider      String
   teams         Team[] // A user can belong to multiple teams
-  Message       Message[]
-  Chat          Chat[]
+  message       Message[]
+  chat          Chat[]
   accounts      Account[]
   sessions      Session[]
+  memberBenefit MemberBenefit[]
+
 }
 
 model Account {
@@ -152,4 +154,29 @@ model Message {
   role       String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+model MemberBenefit {
+  id        String @id @default(uuid())
+  title     String 
+  description String 
+  imageURL    String
+  domain      String
+  location    String
+  code        String
+  link        String
+  userId      String
+  user        User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clicks      MemberBenefitClick[] @relation("MemberBenefitToClick")
+}
+
+model MemberBenefitClick {
+  id        String   @id @default(uuid())
+  memberBenefitId    String
+  device    String?
+  browser   String?
+  os        String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  memberBenefit      MemberBenefit     @relation(name: "MemberBenefitToClick", fields: [memberBenefitId], references: [id])
 }
