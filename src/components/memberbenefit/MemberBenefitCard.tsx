@@ -5,18 +5,32 @@ import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import siteUrls from '@/config/site-config'
-import { MemberBenefit } from '@/lib/types'
+import MemberBenefit from "@prisma/client"
 import Button from '@/components/atomic/button/Button'
 import Modal from '../atomic/modal/Modal'
 import { useState } from 'react'
 import CheckIcon from "@/icons/check-icon.svg"
-
+import { upsertMemberBenefitLinkClick } from '@/app/actions'
 interface MemberBenefitCardProps {
     key: string
     benefit: MemberBenefit
 }
 const MemberBenefitCard = ({ key, benefit }: MemberBenefitCardProps ) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
+
+
+    const handleButtonClick = async (memberBenefitId: string) => {
+        // memberbenefitlinkclick row in the table
+         await upsertMemberBenefitLinkClick({
+            memberBenefitId,
+            device:"MAC",
+            browser:"Chrome",
+            os:"MACOS",
+        });
+
+    }
+    
+
     return (
         <>
 
@@ -35,7 +49,11 @@ const MemberBenefitCard = ({ key, benefit }: MemberBenefitCardProps ) => {
                         <div>
                             <Button
                                 onClick={() => {
+
                                     setIsModalOpen(true)
+                                    handleButtonClick(benefit.id)
+                                    
+                                    // save analytics data
                                 }}
                                 className="btn-primary hover:cursor-pointer"
                                 variant="primary"

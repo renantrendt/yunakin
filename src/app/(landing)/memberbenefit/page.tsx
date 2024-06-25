@@ -1,30 +1,12 @@
 import PageHeader from '@/components/memberbenefit/PageHeader';
 import React from 'react'
 import Image from 'next/image';
-import { MemberBenefit } from '@/lib/types';
+import MemberBenefit from "@prisma/client"
+import { insertMemberBenefit } from '@/app/actions';
 import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard';
 const MemberbenefitPage = async () => {
-   const benefits: MemberBenefit[] = 
-   [
-   {
-    title:"LANS",
-    description:"Discover the perfect co-working space at LANS – Recruiters enjoy 7 days free from on-demand access to call booths, work spots, private meeting, interview rooms and shared spaces also for events, all tailored for your productivity needs. Open 8am to 11pm.",
-    imageURL:"/images/memberbenefit/lans.png",
-    domain:"www.lans.com",
-    link:"https://maps.app.goo.gl/S9ynyJHEzgSD8xWV6",
-    location:"3388 17th St, SF, CA 94110",
-    code:"LANSING"
-   },
-   {
-    title:"WeCP",
-    description:"Get free premium for 1 month! Enhance your hiring process with unlimited access to advanced coding tests. skill assessments, and analytics features.",
-    imageURL:"/images/memberbenefit/wecp.png",
-    domain:"www.wecreateproblems.com",
-    link:"",
-    location:"",
-    code:"WECPWECP"
-   }
-    ]
+
+    const benefits = await prisma.memberBenefit.findMany()
 
     return (
         <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>

@@ -18,12 +18,3 @@ export type ServerActionResult<Result> = Promise<
 >
 
 
-export interface MemberBenefit {
-    title:string;
-    description:string;
-    imageURL:string;
-    domain:string;
-    location:string;
-    code:string;
-    link:string;
-}
