@@ -34,7 +34,7 @@ const MemberBenefitCard = ({ key, benefit }: MemberBenefitCardProps ) => {
     return (
         <>
 
-        <div key={key} className="card w-full dark:text-white dark:bg-card-dark min-w-[324px] h-full   overflow-hidden max-w-lg  last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
+        <div key={key} className="card w-full dark:text-white dark:bg-card-dark min-w-[270px] h-full   overflow-hidden max-w-lg  last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
         rounded-[10px] shadow-sm">
                     <figure className='relative hidden max-h-[176px]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                     <div className="px-6 pt-6 pb-6">

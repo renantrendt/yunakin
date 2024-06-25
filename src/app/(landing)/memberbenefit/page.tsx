@@ -4,6 +4,7 @@ import Image from 'next/image';
 import MemberBenefit from "@prisma/client"
 import { insertMemberBenefit } from '@/app/actions';
 import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard';
+import { prisma } from '@/lib/prisma';
 const MemberbenefitPage = async () => {
 
     const benefits = await prisma.memberBenefit.findMany()
