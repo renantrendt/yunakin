@@ -11,22 +11,32 @@ import Modal from '../atomic/modal/Modal'
 import { useState } from 'react'
 import CheckIcon from "@/icons/check-icon.svg"
 import { upsertMemberBenefitLinkClick } from '@/app/actions'
+import DeviceDetector from "device-detector-js";
+
 interface MemberBenefitCardProps {
     key: string
     benefit: MemberBenefit
 }
 const MemberBenefitCard = ({ key, benefit }: MemberBenefitCardProps ) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
-
+    const deviceDetector = new DeviceDetector()
 
     const handleButtonClick = async (memberBenefitId: string) => {
         // memberbenefitlinkclick row in the table
-         await upsertMemberBenefitLinkClick({
-            memberBenefitId,
-            device:"MAC",
-            browser:"Chrome",
-            os:"MACOS",
-        });
+        const device = deviceDetector.parse(navigator.userAgent || window.navigator.userAgent)
+
+        try {
+            await upsertMemberBenefitLinkClick({
+                memberBenefitId,
+                device:device.device?.type ,
+                browser:device.client?.name,
+                os: device.os?.name,
+            });
+
+        } catch (error) {
+            
+        }
+      
 
     }
     

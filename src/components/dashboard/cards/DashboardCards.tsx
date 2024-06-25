@@ -1,28 +1,29 @@
 import React from 'react'
 import DashboardCard from './DashboardCard'
 
-export const DashboardCards = () => {
+interface DashboardCardsProps {
+    totalClicks:number;
+    totalMobileClicks:number;
+    totalDesktopClicks:number; 
+}
+
+export const DashboardCards = ({totalClicks, totalMobileClicks, totalDesktopClicks}: DashboardCardsProps) => {
     const data = [
         {
-            title: "Page views",
-            quantity: 45329,
+            title: "Total Clicks",
+            quantity: totalClicks,
             increase: 21
         },
         {
-            title: "Page views",
-            quantity: 45329,
+            title: "Clicks on Mobile",
+            quantity: totalMobileClicks,
             increase: 21
         },
         {
-            title: "Page views",
-            quantity: 45329,
+            title: "Clicks on Desktop",
+            quantity: totalDesktopClicks,
             increase: 21
         },
-        {
-            title: "Page views",
-            quantity: 45329,
-            increase: 21
-        }
     ]
     return (
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 mb-8 '>
