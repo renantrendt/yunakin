@@ -31,6 +31,7 @@ const sidebarLinks: SidebarLink[] = [
     { label: "ai", path: "/ai", iconSrc: <div className='w-5 h-5'> <ChatGptIcon /> </div> },
     { label: 'notifications', path: '/notifications', iconSrc: <InboxIcon /> },
     { label: 'users', path: '/users', iconSrc: <UserGroupIcon />, adminRoute: true },
+    { label: 'categories', path: '/categories', iconSrc: <UserGroupIcon />, adminRoute: true },
     { label: 'analytics', path: '/analytics', iconSrc: <AnalyticsIcon /> },
     // Add other necessary links here
 ]

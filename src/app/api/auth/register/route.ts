@@ -21,7 +21,7 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
       }
     })
     if (existingUser) {
-      throw { message: t("error.userNotFound"), statusCode: 400 }
+      throw { message: t("error.emailAlreadyInUse"), statusCode: 400 }
     }
     const hashed_password = await hash(password, 12)
     const user = await prisma.user.create({
