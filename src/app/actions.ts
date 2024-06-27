@@ -1,6 +1,6 @@
 'use server'
 import { prisma } from "@/lib/prisma"
-import MemberBenefitClick, { Category } from "@prisma/client"
+import MemberBenefitClick, { Category, MemberBenefit } from "@prisma/client"
 
 export async function getChat(id: string, userId: string) {
     const chat = await prisma.chat.findFirst({
@@ -115,4 +115,13 @@ export async function deleteCategory(id: string) {
             id: id
         }
     })
+}
+
+export async function createMemberBenefit(memberBenefit: MemberBenefit) {
+    const newMemberBenefit = await prisma.memberBenefit.create({
+        data: {
+            ...memberBenefit
+        }
+    })
+    return newMemberBenefit
 }
