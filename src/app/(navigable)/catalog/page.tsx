@@ -9,7 +9,13 @@ import OnboardingContainer from '@/components/landing/onboarding/OnboardingConta
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
-    const benefits = await prisma.memberBenefit.findMany()
+    const benefits = await prisma.memberBenefit.findMany({
+        where: {
+            NOT: {
+                userId: session?.user?.id
+            }
+        }
+    })
 
     const categories = await prisma.category.findMany()
     return (
