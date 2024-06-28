@@ -10,7 +10,8 @@ const MemberBenefitsPage = async () => {
     const session = await auth()
 
 
-    if (!session) {
+    console.log(session?.user)
+    if (!session?.user) {
         notFound()
         return;
     }
@@ -21,12 +22,14 @@ const MemberBenefitsPage = async () => {
     } else {
         benefits = await prisma.memberBenefit.findMany({
             where: {
-                id: session?.user?.id ?? ''
+                userId: session?.user?.id ?? ''
             }
         })
     }
+
+    const categories = await prisma.category.findMany()
     return (
-        <MemberBenefitsTable memberBenefits={benefits} />
+        <MemberBenefitsTable memberBenefits={benefits} categories={categories} />
     )
 }
 

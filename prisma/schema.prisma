@@ -11,6 +11,10 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
 model User {
   id            String          @id @default(uuid())
   email         String          @unique
@@ -178,12 +182,12 @@ model Category {
 model MemberBenefit {
   id          String               @id @default(uuid())
   title       String
-  description String
-  imageURL    String
+  description String?
+  imageURL    String?
   domain      String
-  location    String
+  location    String?
   code        String
-  link        String
+  link        String?
   userId      String
   categoryId  String?
   category    Category?            @relation(fields: [categoryId], references: [id], onDelete: Cascade)

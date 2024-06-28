@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "MemberBenefit" ALTER COLUMN "description" DROP NOT NULL,
+ALTER COLUMN "imageURL" DROP NOT NULL,
+ALTER COLUMN "location" DROP NOT NULL,
+ALTER COLUMN "link" DROP NOT NULL;

@@ -27,9 +27,10 @@ import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
 
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefit[]
+    categories: Category[]
 }
 
-const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits }: MemberBenefitsTableProps) => {
+const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories }: MemberBenefitsTableProps) => {
     const session = useSession()
     const [memberBenefits, setMemberBenefits] = useState<MemberBenefit[]>(defaultMemberBenefits)
     const [modalOpen, setModalOpen] = useState(false)
@@ -199,6 +200,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits }: MemberBe
                 </>
             </ConfirmationModal>
             {memberBenefitModal && <AddMemberBenefitModal
+                categories={categories}
                 onClose={() => setMemberBenefitModal(false)}
                 onCreate={async (data) => {
                     const userId = session.data?.user?.id! as string
@@ -210,6 +212,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits }: MemberBe
                         description: data.description,
                         link: data.link,
                         userId: userId,
+                        categoryId: data.categoryId,
+                        title: data.name
                     })
                     setMemberBenefits([...memberBenefits, newMemberBenefit])
                     setMemberBenefitModal(false)
