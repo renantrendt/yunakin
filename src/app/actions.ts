@@ -125,3 +125,21 @@ export async function createMemberBenefit(memberBenefit: MemberBenefit) {
     })
     return newMemberBenefit
 }
+export async function updateMemberBenefit(memberBenefit: MemberBenefit) {
+    const updatedMemberBenefit = await prisma.memberBenefit.update({
+        where: {
+            id: memberBenefit.id
+        },
+        data: {
+            ...memberBenefit
+        }
+    })
+    return updatedMemberBenefit
+}
+export async function deleteMemberBenefit(id: string) {
+    await prisma.memberBenefit.delete({
+        where: {
+            id: id
+        }
+    })
+}

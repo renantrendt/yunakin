@@ -31,6 +31,7 @@ const sidebarLinks: SidebarLink[] = [
     { label: 'users', path: '/users', iconSrc: <UserGroupIcon />, adminRoute: true },
     { label: 'categories', path: '/categories', iconSrc: <UserGroupIcon />, adminRoute: true },
     { label: 'memberBenefits', path: '/memberbenefits', iconSrc: <UserGroupIcon />, adminRoute: false },
+    { label: 'catalog', path: '/catalog', iconSrc: <UserGroupIcon />, adminRoute: false },
     { label: 'analytics', path: '/analytics', iconSrc: <AnalyticsIcon /> },
     // Add other necessary links here
 ]

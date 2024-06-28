@@ -6,13 +6,15 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from "yup"
 import Dropdown from '../atomic/dropdown/Dropdown';
-import { Category } from '@prisma/client';
+import { Category, MemberBenefit } from '@prisma/client';
 
 
 interface AddMemberBenefitModalProps {
     onClose: () => void;
     onCreate: (data: FormValues) => void;
+    onUpdate: (data: FormValues) => void;
     categories: Category[];
+    editMemberBenefit?: MemberBenefit;
 }
 
 const schema = yup.object().shape({
@@ -35,12 +37,21 @@ interface FormValues {
     categoryId: string;
 }
 
-const AddMemberBenefitModal = ({ onClose, onCreate, categories }: AddMemberBenefitModalProps) => {
+const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefit, onUpdate }: AddMemberBenefitModalProps) => {
+
 
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema),
-            defaultValues: {
+            defaultValues: editMemberBenefit ? {
+                name: editMemberBenefit.title,
+                code: editMemberBenefit.code,
+                domain: editMemberBenefit.domain,
+                link: editMemberBenefit.link,
+                location: editMemberBenefit.location,
+                description: editMemberBenefit.description,
+                categoryId: editMemberBenefit.categoryId
+            } : {
                 name: '',
                 code: '',
                 domain: '',
@@ -54,6 +65,14 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories }: AddMemberBenef
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = (data: FormValues) => {
         // onTagChange(data as Tag)
+        if (editMemberBenefit) {
+            // update
+            onUpdate({
+                id: editMemberBenefit.id,
+                ...data,
+            })
+            return;
+        }
         onCreate(data)
     }
 
@@ -61,7 +80,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories }: AddMemberBenef
         <Modal isOpen={true} onClose={onClose}
         >
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col p-10 gap-8 '>
-                <p className='text-base font-medium leading-6'>Add Member Benefit</p>
+                <p className='text-base font-medium leading-6'>{editMemberBenefit ? "Edit Member Benefit" : "Add Member Benefit"}</p>
                 <p className='text-sm font-normal leading-5'>Please enter the details for the new member benefit</p>
                 <div className='flex gap-6 flex-col'>
 
@@ -138,7 +157,6 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories }: AddMemberBenef
                                 label="Category"
                                 id="categoryId"
                                 name="categoryId"
-                                placeholder='Select Category'
                                 onChange={onChange}
                                 value={value}
                                 error={errors.categoryId?.message}
@@ -179,7 +197,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories }: AddMemberBenef
                         )}
                     />
 
-                    <Button type='submit' label={"Save new Member Benefit"} variant='primary' />
+                    <Button type='submit' label={editMemberBenefit ? "Save Changes" : "Save new Member Benefit"} variant='primary' />
                 </div>
             </form>
         </Modal>

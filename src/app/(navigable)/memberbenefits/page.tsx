@@ -23,6 +23,9 @@ const MemberBenefitsPage = async () => {
         benefits = await prisma.memberBenefit.findMany({
             where: {
                 userId: session?.user?.id ?? ''
+            },
+            orderBy: {
+                updatedAt: "desc"
             }
         })
     }

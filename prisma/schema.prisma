@@ -16,26 +16,26 @@ generator erd {
 }
 
 model User {
-  id            String          @id @default(uuid())
-  email         String          @unique
-  name          String
-  password      String?
-  verifyToken   String          @default(uuid())
-  verified      Boolean
-  emailVerified DateTime?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  avatar        String?
-  role          String          @default("USER")
-  provider      String
-  teams         Team[] // A user can belong to multiple teams
-  message       Message[]
-  chat          Chat[]
-  accounts      Account[]
-  sessions      Session[]
-  memberBenefit MemberBenefit[]
-
+  id                      String                    @id @default(uuid())
+  email                   String                    @unique
+  name                    String
+  password                String?
+  verifyToken             String                    @default(uuid())
+  verified                Boolean
+  emailVerified           DateTime?
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  avatar                  String?
+  role                    String                    @default("USER")
+  provider                String
+  teams                   Team[] // A user can belong to multiple teams
+  message                 Message[]
+  chat                    Chat[]
+  accounts                Account[]
+  sessions                Session[]
+  memberBenefit           MemberBenefit[]
   MemberBenefitPageConfig MemberBenefitPageConfig[]
+  OtherMemberBenefit      OtherMemberBenefit[]
 }
 
 model Account {
@@ -162,13 +162,15 @@ model Message {
 }
 
 model MemberBenefitPageConfig {
-  id          String @id @default(uuid())
-  clientSlug  String @unique
+  id          String   @id @default(uuid())
+  clientSlug  String   @unique
   title       String
   description String
   imageURL    String
   userId      String
-  user        User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Category {
@@ -180,19 +182,22 @@ model Category {
 }
 
 model MemberBenefit {
-  id          String               @id @default(uuid())
-  title       String
-  description String?
-  imageURL    String?
-  domain      String
-  location    String?
-  code        String
-  link        String?
-  userId      String
-  categoryId  String?
-  category    Category?            @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  user        User?                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  clicks      MemberBenefitClick[] @relation("MemberBenefitToClick")
+  id                 String               @id @default(uuid())
+  title              String
+  description        String?
+  imageURL           String?
+  domain             String
+  location           String?
+  code               String
+  link               String?
+  userId             String
+  categoryId         String?
+  category           Category?            @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  user               User?                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @default(now()) @updatedAt
+  clicks             MemberBenefitClick[] @relation("MemberBenefitToClick")
+  OtherMemberBenefit OtherMemberBenefit[]
 }
 
 model MemberBenefitClick {
@@ -205,4 +210,14 @@ model MemberBenefitClick {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   memberBenefit MemberBenefit @relation(name: "MemberBenefitToClick", fields: [memberBenefitId], references: [id])
+}
+
+model OtherMemberBenefit {
+  id              String        @id @default(uuid())
+  memberBenefitId String
+  userId          String
+  memberBenefit   MemberBenefit @relation(fields: [memberBenefitId], references: [id], onDelete: Cascade)
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @default(now()) @updatedAt
 }

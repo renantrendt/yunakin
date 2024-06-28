@@ -21,8 +21,9 @@ import MagnifyingGlass from "@/icons/magnifying-glass.svg"
 import useDebounce from '@/hooks/useDebounce'
 import { Category, MemberBenefit } from '@prisma/client'
 import AddCategoryModal from '../molecules/add-category-modal'
-import { createCategory, createMemberBenefit, deleteCategory } from '@/app/actions'
+import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
+import { Row } from '@react-email/components'
 
 
 interface MemberBenefitsTableProps {
@@ -36,6 +37,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const [modalOpen, setModalOpen] = useState(false)
     const [memberBenefitModal, setMemberBenefitModal] = useState(false)
     const [toBeDeletedMemberBenefitId, setToBeDeletedMemberBenefitId] = useState('')
+    const [tobeEditedMemberBenefit, setTobeEditedMemberBenefit] = useState<MemberBenefit | undefined>(undefined)
     const columnHelper = createColumnHelper<MemberBenefit>()
     const [search, setSearch] = useState('')
     const [searched, setSearched] = useState(false)
@@ -56,18 +58,48 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
         // })()
     }, [debouncedValue])
     const columns = [
+        columnHelper.accessor(row => row.title, {
+            id: 'Title',
+            cell: info => {
+                return <a href={""} target='_blank' className='text-blue-500 hover:underline'>{info.getValue()}</a>
+            },
+            header: () => <span>Title</span>,
+            footer: info => info.column.id,
+        }),
+
+        columnHelper.accessor(row => row.categoryId, {
+            id: 'Category',
+            cell: info => {
+                const categoryId = info.getValue()
+                if (categoryId === null) return 'Uncategorized'
+                const category = categories.find(category => category.id === categoryId)
+                return category?.name
+            },
+            header: () => <span>Category</span>,
+            footer: info => info.column.id,
+        }),
+        columnHelper.accessor(row => row.description, {
+            id: 'Description',
+            cell: info => info.getValue(),
+            header: () => <span>Description</span>,
+            footer: info => info.column.id,
+        }),
         columnHelper.accessor(row => row.code, {
             id: 'Code',
             cell: info => info.getValue(),
             header: () => <span>Code</span>,
             footer: info => info.column.id,
         }),
-
         columnHelper.display({
             id: 'Actions',
             cell: info => {
                 const memberBenefit = memberBenefits[info.row.index]
                 return (<div className='flex justify-start gap-2'>
+                    <Button icon={<DeleteIcon />} size='md' onClick={() => {
+
+                        setMemberBenefitModal(true)
+                        setTobeEditedMemberBenefit(memberBenefit)
+                    }} />
                     <Button icon={<DeleteIcon />} size='md' onClick={() => {
                         setModalOpen(true)
                         setToBeDeletedMemberBenefitId(memberBenefit.id)
@@ -102,11 +134,11 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const handleDelete = async (memberBenefitId: string) => {
         try {
 
-            await deleteCategory(memberBenefitId)
+            await deleteMemberBenefit(memberBenefitId)
             setMemberBenefits(memberBenefits.filter(memberBenefit => memberBenefit.id !== memberBenefitId))
-            customToast.success('Category deleted successfully')
+            customToast.success('Member Beenfit deleted successfully')
         } catch (error) {
-            customToast.error('Failed to delete category')
+            customToast.error('Failed to delete member benefit')
         }
         finally {
             setToBeDeletedMemberBenefitId('')
@@ -201,7 +233,30 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
             </ConfirmationModal>
             {memberBenefitModal && <AddMemberBenefitModal
                 categories={categories}
+                editMemberBenefit={tobeEditedMemberBenefit}
                 onClose={() => setMemberBenefitModal(false)}
+                onUpdate={async (data) => {
+                    try {
+                        const updatedMemberBenefit = await updateMemberBenefit({
+                            id: data.id,
+                            categoryId: data.categoryId,
+                            code: data.code,
+                            domain: data.domain,
+                            location: data.location,
+                            description: data.description,
+                            link: data.link,
+                            userId: session.data?.user?.id! as string,
+                            title: data.name
+                        })
+                        setMemberBenefits(memberBenefits.map(memberBenefit => memberBenefit.id === updatedMemberBenefit.id ? updatedMemberBenefit : memberBenefit))
+                        setMemberBenefitModal(false)
+                        setTobeEditedMemberBenefit(undefined)
+                        customToast.success('Member Benefit updated successfully')
+                    } catch (error) {
+                        customToast.error('Failed to update member benefit')
+                    }
+
+                }}
                 onCreate={async (data) => {
                     const userId = session.data?.user?.id! as string
                     const newMemberBenefit = await createMemberBenefit({
