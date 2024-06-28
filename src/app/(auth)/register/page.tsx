@@ -54,7 +54,6 @@ export default function RegisterPage() {
     }
 
     const onSubmit = async (data: any) => {
-        alert('sadfa')
         setIsLoading(true);
         try {
             const register = await fetch('/api/auth/register', {
@@ -67,7 +66,8 @@ export default function RegisterPage() {
                 customToast.success(t("registerPage.registrationSuccessful"))
                 router.push('/login')
             } else {
-                customToast.error(t("registerPage.somethingWentWrong"))
+                const data = await register.json()
+                customToast.error(data.message || t("error.somethingWentWrong"))
             }
         } catch (error) {
             console.error(error)
@@ -76,7 +76,6 @@ export default function RegisterPage() {
         }
 
     }
-    console.log(errors)
     return (
         <FormContainer>
 

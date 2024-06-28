@@ -12,8 +12,8 @@ export async function changeUserRole(userId: string, role: string) {
             role: role
         }
     })
-    const meilisearchClient = await createClient()
-    meilisearchClient.index("users").updateDocuments([user])
+    // const meilisearchClient = await createClient()
+    // meilisearchClient.index("users").updateDocuments([user])
     return user;
 }
 export async function deleteUser(userId: string) {
