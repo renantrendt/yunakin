@@ -7,6 +7,9 @@
         "analytics": "Analytics",
         "settings": "Settings",
         "helpAndSupport": "Help & Support",
-        "categories": "Categories"
+        "categories": "Categories",
+        "editor": "Member Page Editor",
+        "catalog": "Member Benefits Catalog",
+        "memberBenefits": "Member Benefits"
     }
 }
