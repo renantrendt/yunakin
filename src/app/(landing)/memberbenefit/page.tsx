@@ -7,7 +7,11 @@ import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard';
 import { prisma } from '@/lib/prisma';
 const MemberbenefitPage = async () => {
 
-    const benefits = await prisma.memberBenefit.findMany()
+    const benefits = await prisma.memberBenefit.findMany({
+        orderBy: {
+            title:"asc"
+        }
+    })
 
     return (
         <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
