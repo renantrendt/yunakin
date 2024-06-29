@@ -16,6 +16,7 @@ import { cn } from '@/utils/cn'
 import { Category, MemberBenefit } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Input } from 'postcss'
 import React, { useState } from 'react'
 interface OnboardingContainerProps {
@@ -29,6 +30,7 @@ interface SelectedMemberBenefit extends MemberBenefit {
 
 
 const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps) => {
+    const router = useRouter()
     const [step, setStep] = useState<number>(1)
     const [loading, setLoading] = useState(false);
     const [clientSlug, setClientSlug] = useState<string>("")
@@ -49,14 +51,14 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                     <div className='flex flex-col md:flex-row gap-2 justify-between items-center '>
                         <p className='text-center flex-1 text-sm '>Here is a live preview of your page</p>
                         <Button label='Navigate to Admin' onClick={() => {
-                            setStep(1)
+                            router.push(`/register?clientId=${clientSlug}`)
                         }} />
                     </div>
                 </div>)}
             </ContentSection >
             <div className='max-w-[1440px] pb-20 lg:py-12 w-full mx-auto px-4 md:px-28'>
                 <div className='px-4 md:px-0'>
-                    <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5'>
+                    <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
                         <Typography type="h1" className="font-black text-[32px] leading-[45px] lg:text-5xl" >Member benefits</Typography>
                         <Typography type="p" className="text-base text-neutral-600 font-normal lg:text-xl" >Enjoy this exclusive benefits for you</Typography>
                     </div>
@@ -130,7 +132,9 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                             />
                         </div>
                         <Button
+                            loading={loading}
                             onClick={async () => {
+                                setLoading(true)
                                 if (selectedBenefits.filter(s => s.selected).length == 0) {
                                     customToast.warn("Please select at least one benefit")
                                     return
@@ -138,6 +142,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                 const memberPageConfig = await getMemberPageConfigByClientSlug(clientSlug)
                                 if (memberPageConfig) {
                                     customToast.warn("This slug is already taken. Please choose another one")
+                                    setLoading(false)
                                     return
                                 }
                                 else {
@@ -147,7 +152,9 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                         description: "My Member Page",
                                         imageURL: "https://yunakin.com/images/logo.svg",
                                     }, selectedBenefits.filter(s => s.selected).map(s => s.id))
+                                    setLoading(false)
                                     if (newMemberPageConfig) {
+                                        customToast.success("Member Benefit Page Generated Successfully")
                                         setStep(step + 1)
                                     } else {
                                         customToast.error("Something went wrong. Please try again")

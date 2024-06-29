@@ -12,16 +12,14 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
-    redirects: {
-        async redirects() {
-            return [
-                {
-                    source: '/',
-                    destination: '/onboarding',
-                    permanent: false,
-                },
-            ]
-        },
+    async redirects() {
+        return [
+            {
+                source: '/',
+                destination: '/onboarding',
+                permanent: true,
+            },
+        ]
     },
     webpack(config) {
         // Grab the existing rule that handles SVG imports

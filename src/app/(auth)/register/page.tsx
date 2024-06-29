@@ -9,7 +9,7 @@ import Button from '@/components/atomic/button/Button'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import customToast from '@/components/atomic/toast/customToast'
-import { useRouter } from 'next/navigation'
+import { notFound, useRouter, useSearchParams } from 'next/navigation'
 import PasswordInputField from '@/components/atomic/input/PasswordInputField'
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
@@ -24,20 +24,17 @@ import { useTranslation } from '@/lib/i18n/client'
 
 interface FormValues {
     email: string
-    password: string
-    name: string
-    remember?: boolean
 }
 export default function RegisterPage() {
+
+    const searchParams = useSearchParams()
+    const clientId = searchParams.get('clientId')
     const { t } = useTranslation('auth')
     const { data: session } = useSession()
     const router = useRouter()
     const [loading, setIsLoading] = useState(false)
     const schema = yup.object({
         email: yup.string().email(t("error.invalidEmail")).required(t("error.missingEmail")),
-        password: yup.string().min(6, t("error.weakPassword")).required(t("error.missingPassword")),
-        name: yup.string().required(t("error.missingName")),
-        remember: yup.boolean()
     })
     const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
         {
@@ -45,13 +42,10 @@ export default function RegisterPage() {
         }
     )
 
-    if (session) {
-        return (
-            <div>
-                <p>You are already signed in.</p>
-            </div>
-        )
+    if (!clientId) {
+        throw notFound()
     }
+
 
     const onSubmit = async (data: any) => {
         setIsLoading(true);
@@ -79,10 +73,10 @@ export default function RegisterPage() {
     return (
         <FormContainer>
 
-            <Link href={siteUrls.general.home}>
-                <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
-                <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
-            </Link>
+            {/* <Link href={siteUrls.general.home}>
+                    <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
+                    <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
+                </Link> */}
             <div className='flex flex-col gap-8'>
                 <div>
 
@@ -92,22 +86,7 @@ export default function RegisterPage() {
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
-                    <Controller
-                        control={control}
-                        name="name"
-                        render={({ field: { onChange, value } }) => (
-                            <InputField
-                                label="Name"
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder={t("registerPage.namePlaceholder")}
-                                onChange={onChange}
-                                value={value}
-                                error={errors.name?.message}
-                            />
-                        )}
-                    />
+
                     <Controller
                         control={control}
                         name="email"
@@ -125,43 +104,6 @@ export default function RegisterPage() {
                             />
                         )}
                     />
-                    <div className='relative '>
-                        <Controller
-                            control={control}
-                            name="password"
-                            render={({ field: { onChange, value } }) => (
-                                <PasswordInputField
-                                    label={t("registerPage.password")}
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    placeholder={t("registerPage.passwordPlaceholder")}
-                                    onChange={onChange}
-                                    value={value}
-                                    error={errors.password?.message}
-                                />
-                            )}
-                        />
-                    </div>
-                    <div className='flex justify-between items-center'>
-                        <Controller
-                            control={control}
-                            name='remember'
-                            render={({ field: { onChange, value } }) => (
-                                <Checkbox
-                                    label={t("registerPage.rememberMe")}
-                                    id='remember'
-                                    name='remember'
-                                    onChange={onChange}
-                                    checked={value ? true : false}
-                                    key={"remember"}
-                                    className='text-sm'
-                                    error={errors.remember?.message}
-                                />
-                            )}
-                        />
-                        <Link href={siteUrls.general.login} className="text-primary text-sm">{t("registerPage.haveAccount")}</Link>
-                    </div>
 
                     <div className="flex justify-center flex-col gap-4">
                         <Button variant="primary" type="submit" className="w-full" label={t("registerPage.createAccount")} size='lg' loading={loading}
@@ -175,7 +117,7 @@ export default function RegisterPage() {
                 </div>
                 <div>
                     <div className='flex gap-2 flex-col'>
-                        <AuthButton onClick={() => { signIn('google', { callbackUrl: '/dashboard' }) }} content={t("registerPage.signWithGoogle")} icon={<GoogleIcon />} />
+                        <AuthButton onClick={() => { signIn('google', { callbackUrl: `/register-with-google?clientId=${clientId}` }) }} content={t("registerPage.signWithGoogle")} icon={<GoogleIcon />} />
                     </div>
                 </div>
             </div>
