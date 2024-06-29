@@ -28,7 +28,7 @@ interface SelectedMemberBenefit extends MemberBenefit {
 
 
 const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps) => {
-    const [step, setStep] = useState<number>(3)
+    const [step, setStep] = useState<number>(1)
     const [clientSlug, setClientSlug] = useState<string>("")
 
     const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(
