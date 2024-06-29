@@ -25,8 +25,8 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
         benefits = await prisma.memberBenefit.findMany()
     } else {
         benefits = await prisma.memberBenefit.findMany({
-            where: {
-                id: session?.user?.id ?? ''
+            orderBy: {
+
             }
         })
     }
@@ -36,7 +36,10 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
     return (
         <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
             <div className='px-4 md:px-0'>
-                <PageHeader />
+                <PageHeader
+                    title='Member Benefits'
+                    description='This is the page for member benefits'
+                />
                 <h1>{clientSlug}</h1>
             </div>
 
