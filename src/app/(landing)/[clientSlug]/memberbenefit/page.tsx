@@ -1,12 +1,11 @@
 import PageHeader from '@/components/memberbenefit/PageHeader';
 import React from 'react'
 import Image from 'next/image';
-import MemberBenefit from "@prisma/client"
-import { insertMemberBenefit } from '@/app/actions';
 import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
 import { notFound } from 'next/navigation';
+import { MemberBenefit } from '@prisma/client';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
@@ -19,17 +18,51 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
             clientSlug: params.clientSlug
         }
     })
-
-    let benefits = []
-    if (session?.user?.role == "ADMIN") {
-        benefits = await prisma.memberBenefit.findMany()
-    } else {
-        benefits = await prisma.memberBenefit.findMany({
-            orderBy: {
-
+    if (!config) {
+        notFound()
+        return;
+    }
+    let benefits: MemberBenefit[] = []
+    if (config?.userId) {
+        const otherBenefits = await prisma.otherMemberBenefit.findMany({
+            where: {
+                userId: config.userId
             }
         })
+        benefits = await prisma.memberBenefit.findMany({
+            where: {
+                userId: config.userId,
+                OR: {
+                    id: {
+                        in: otherBenefits.map(benefit => benefit.memberBenefitId)
+                    }
+                }
+            }
+        })
+    } else {
+        const benefitIds = await prisma.onboardingMemberBenefits.findMany({
+            where: {
+                memberBenefitPageConfigId: config?.id
+            }, select: {
+                memberBenefitId: true
+            }
+        })
+        benefits = await prisma.memberBenefit.findMany({
+            where: {
+                id: {
+                    in: benefitIds.map(benefit => benefit.memberBenefitId)
+                }
+            }
+        })
+
     }
+    const categories = await prisma.category.findMany({
+        where: {
+            id: {
+                in: benefits.map(benefit => benefit.categoryId)
+            }
+        }
+    })
     const clientSlug = params.clientSlug;
 
 
@@ -40,21 +73,24 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
                     title='Member Benefits'
                     description='This is the page for member benefits'
                 />
-                <h1>{clientSlug}</h1>
             </div>
 
             <div>
-                <div className=" 	  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex dark:bg-card-dark">
-                    <div className=" text-center text-category-blog-color dark:text-sidebar-icon-dark text-sm font-semibold  uppercase tracking-[0.5px]">{"Work"}</div>
-                </div>
-                <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
+                {categories.map(category => (
+                    <>
+                        <div className=" 	  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex dark:bg-card-dark">
+                            <div className=" text-center text-category-blog-color dark:text-sidebar-icon-dark text-sm font-semibold  uppercase tracking-[0.5px]">{category.name}</div>
+                        </div>
+                        <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
+                            {benefits && benefits.filter(b => b.categoryId == category.id).map((benefit: MemberBenefit, index: any) => (
+                                // <BlogCard loading={false} key={index} category={category} />
+                                <MemberBenefitCard key={index} benefit={benefit} />
 
-                    {benefits && benefits.map((benefit: MemberBenefit, index: any) => (
-                        // <BlogCard loading={false} key={index} category={category} />
-                        <MemberBenefitCard key={index} benefit={benefit} />
+                            ))}
+                        </div>
+                    </>
+                ))}
 
-                    ))}
-                </div>
             </div>
         </div>
     )

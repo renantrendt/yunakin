@@ -5,7 +5,6 @@ import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import siteUrls from '@/config/site-config'
-import MemberBenefit from "@prisma/client"
 import Button from '@/components/atomic/button/Button'
 import Modal from '../atomic/modal/Modal'
 import { useState } from 'react'
@@ -13,6 +12,7 @@ import CheckIcon from "@/icons/check-icon.svg"
 import { upsertMemberBenefitLinkClick } from '@/app/actions'
 import DeviceDetector from "device-detector-js";
 import PlusIcon from '@/icons/PlusIcon'
+import { MemberBenefit } from '@prisma/client'
 
 interface SelectMemberBenefitCardProps {
     key: string
@@ -37,7 +37,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
                             <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.domain}</a>
-                            <a href={benefit.link} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.location}</a>
+                            <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.location || ""}</a>
                         </div>
                     </div>
                     <div>

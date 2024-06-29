@@ -235,7 +235,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                 categories={categories}
                 editMemberBenefit={tobeEditedMemberBenefit}
                 onClose={() => setMemberBenefitModal(false)}
-                onUpdate={async (data) => {
+                onUpdate={async (data: any) => {
                     try {
                         const updatedMemberBenefit = await updateMemberBenefit({
                             id: data.id,
@@ -247,7 +247,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                             link: data.link,
                             userId: session.data?.user?.id! as string,
                             title: data.name
-                        })
+                        } as MemberBenefit)
                         setMemberBenefits(memberBenefits.map(memberBenefit => memberBenefit.id === updatedMemberBenefit.id ? updatedMemberBenefit : memberBenefit))
                         setMemberBenefitModal(false)
                         setTobeEditedMemberBenefit(undefined)
@@ -257,19 +257,18 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                     }
 
                 }}
-                onCreate={async (data) => {
+                onCreate={async (data: any) => {
                     const userId = session.data?.user?.id! as string
                     const newMemberBenefit = await createMemberBenefit({
-                        categoryId: null,
+                        categoryId: data.categoryId,
                         code: data.code,
                         domain: data.domain,
                         location: data.location,
                         description: data.description,
                         link: data.link,
                         userId: userId,
-                        categoryId: data.categoryId,
                         title: data.name
-                    })
+                    } as MemberBenefit)
                     setMemberBenefits([...memberBenefits, newMemberBenefit])
                     setMemberBenefitModal(false)
                 }}

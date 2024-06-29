@@ -1,13 +1,9 @@
 import PageHeader from '@/components/memberbenefit/PageHeader';
 import React from 'react'
 import Image from 'next/image';
-import MemberBenefit from "@prisma/client"
-import { insertMemberBenefit } from '@/app/actions';
-import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
 import { notFound } from 'next/navigation';
-import SelectMemberBenefitCard from '@/components/memberbenefit/SelectMemberBenefitCard';
 import OnboardingContainer from '@/components/landing/onboarding/OnboardingContainer';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()

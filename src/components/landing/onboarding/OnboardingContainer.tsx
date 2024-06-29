@@ -6,7 +6,7 @@ import InputField from '@/components/atomic/input/InputField'
 import customToast from '@/components/atomic/toast/customToast'
 import PageHeader from '@/components/memberbenefit/PageHeader'
 import SelectMemberBenefitCard from '@/components/memberbenefit/SelectMemberBenefitCard'
-import { MemberBenefit } from '@prisma/client'
+import { Category, MemberBenefit } from '@prisma/client'
 import React, { useState } from 'react'
 interface OnboardingContainerProps {
     benefits: MemberBenefit[]

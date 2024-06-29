@@ -16,6 +16,17 @@ const createClient = async function () {
                     },
                     addDocuments: async (documents: any[]) => {
                         return
+                    },
+                    deleteDocument: async (documentId: string) => {
+                        return
+                    },
+                    search: async (query: string) => {
+                        return {
+                            hits: []
+                        }
+                    },
+                    updateDocuments: async (documents: any[]) => {
+                        return
                     }
                 }
             }
