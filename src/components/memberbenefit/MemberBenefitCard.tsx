@@ -11,13 +11,15 @@ import { useState } from 'react'
 import CheckIcon from "@/icons/check-icon.svg"
 import { upsertMemberBenefitLinkClick } from '@/app/actions'
 import DeviceDetector from "device-detector-js";
-import { MemberBenefit } from '@prisma/client'
+import { Category, MemberBenefit } from '@prisma/client'
 
 interface MemberBenefitCardProps {
     key: string
     benefit: MemberBenefit
+    category?: Category
+    createMode?: boolean
 }
-const MemberBenefitCard = ({ key, benefit }: MemberBenefitCardProps) => {
+const MemberBenefitCard = ({ key, benefit, category, createMode }: MemberBenefitCardProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const deviceDetector = new DeviceDetector()
 
