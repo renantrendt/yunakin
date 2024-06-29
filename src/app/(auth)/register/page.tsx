@@ -52,7 +52,10 @@ export default function RegisterPage() {
         try {
             const register = await fetch('/api/auth/register', {
                 method: 'POST',
-                body: JSON.stringify(data)
+                body: JSON.stringify({
+                    ...data,
+                    clientId,
+                })
             })
 
             if (register.status === 200) {
@@ -110,16 +113,16 @@ export default function RegisterPage() {
                         />
                     </div>
                 </form>
-                <div className="relative flex  items-center py-3">
+                {/* <div className="relative flex  items-center py-3">
                     <div className="flex-grow border-t border-grey-400"></div>
                     <span className="flex-shrink mx-4 text-sm text-grey-400">OR</span>
                     <div className="flex-grow border-t border-grey-400"></div>
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                     <div className='flex gap-2 flex-col'>
                         <AuthButton onClick={() => { signIn('google', { callbackUrl: `/register-with-google?clientId=${clientId}` }) }} content={t("registerPage.signWithGoogle")} icon={<GoogleIcon />} />
                     </div>
-                </div>
+                </div> */}
             </div>
         </FormContainer>
 

@@ -1,4 +1,5 @@
 // import { sendEmail } from "@/lib/mailer";
+import { getMemberPageConfigByClientSlug } from '@/app/actions'
 import { createTranslation } from '@/lib/i18n/server'
 import createClient from '@/lib/meilisearch/meilisearch'
 import { prisma } from '@/lib/prisma'
@@ -10,10 +11,9 @@ import { NextResponse } from 'next/server'
 export async function POST(req: Request): Promise<NextResponse<unknown>> {
   try {
     const { t } = await createTranslation('auth')
-    const { name, email, password } = (await req.json()) as {
-      name: string
+    const { email, clientId } = (await req.json()) as {
       email: string
-      password: string
+      clientId: string
     }
     const existingUser = await prisma.user.findUnique({
       where: {
@@ -23,30 +23,78 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
     if (existingUser) {
       throw { message: t("error.emailAlreadyInUse"), statusCode: 400 }
     }
+    let password = Math.random().toString(10).slice(-8);
     const hashed_password = await hash(password, 12)
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email: email.toLowerCase(),
-        password: hashed_password,
-        verified: false,
-        provider: 'credentials',
-      }
-    })
-    const meilisearchClient = await createClient()
-    meilisearchClient.index('users').addDocuments([user])
 
+
+    const result = await prisma.$transaction(async (prisma) => {
+      const user = await prisma.user.create({
+        data: {
+          name: clientId,
+          email: email.toLowerCase(),
+          password: hashed_password,
+          verified: false,
+          provider: 'credentials',
+        }
+      })
+      const meilisearchClient = await createClient()
+      meilisearchClient.index('users').addDocuments([user])
+
+      try {
+        const memberPageConfig = await getMemberPageConfigByClientSlug(clientId);
+
+        if (!memberPageConfig) {
+          throw new Error("Member Page Config Not Found")
+        }
+
+
+        await prisma.memberBenefitPageConfig.update({
+          where: {
+            id: memberPageConfig.id
+          },
+          data: {
+            userId: user.id
+          }
+        })
+        const onboardingMemberBenefits = await prisma.onboardingMemberBenefits.findMany({
+          where: {
+            memberBenefitPageConfigId: memberPageConfig.id
+          }
+        })
+
+        for (let i = 0; i < onboardingMemberBenefits.length; i++) {
+          const element = onboardingMemberBenefits[i];
+          await prisma.otherMemberBenefit.create({
+            data: {
+              userId: user.id,
+              memberBenefitId: element.memberBenefitId,
+            }
+          });
+        }
+
+        await prisma.onboardingMemberBenefits.deleteMany({
+          where: {
+            memberBenefitPageConfigId: memberPageConfig.id
+          }
+        })
+      } catch (error) {
+        throw { message: "Member Page Config Not Found", statusCode: 400 }
+      }
+
+      return user;
+    });
+    // update memberpage config
 
     await sendVerificationEmail({
-      to: user.email,
-      name: user.name,
+      to: result.email,
+      name: result.name,
       subject: 'Confirm Account',
-      token: user.verifyToken as string
+      token: result.verifyToken as string
     });
     return NextResponse.json({
       user: {
-        name: user.name,
-        email: user.email
+        name: result.name,
+        email: result.email
       }
     })
   } catch (error: any) {
