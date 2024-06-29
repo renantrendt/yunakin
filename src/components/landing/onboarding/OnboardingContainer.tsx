@@ -98,7 +98,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                 <div>
                     <div>
                         <div>{"Your member page is created. Yohoo"}</div>
-                        <a href={`http://localhost:3000/${clientSlug}/memberbenefits`}>{"https://yunakin.com/" + clientSlug + "/memberbenefits"}</a>
+                        <a href={`https://yunakin.com/${clientSlug}/memberbenefits`}>{"https://yunakin.com/" + clientSlug + "/memberbenefits"}</a>
                     </div>
                 </div>
             )}

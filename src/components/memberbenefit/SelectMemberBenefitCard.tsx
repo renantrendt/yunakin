@@ -46,7 +46,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
                             onClick={onClick}
                             className="btn-primary text-primary-600 hover:cursor-pointer"
                             variant="secondary"
-                        >Save Benefit</Button>
+                        >{selected ? "Benefit saved" : "Save benefit"}</Button>
                     </div>
                 </div>
             </div>
