@@ -18,3 +18,11 @@ export type ServerActionResult<Result> = Promise<
 >
 
 
+export type MemberBenefitPageConfigDto = {
+    title: string
+    description: string
+    imageURL: string
+    benefits?: string[]
+    userId?: string
+    clientSlug: string
+}

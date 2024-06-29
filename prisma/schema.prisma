@@ -162,15 +162,18 @@ model Message {
 }
 
 model MemberBenefitPageConfig {
-  id          String   @id @default(uuid())
-  clientSlug  String   @unique
-  title       String
-  description String
-  imageURL    String
-  userId      String
-  user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                       String                     @id @default(uuid())
+  clientSlug               String                     @unique
+  title                    String
+  description              String
+  imageURL                 String
+  userId                   String?
+  user                     User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  onboardingMemberBenefits OnboardingMemberBenefits[]
+
+  @@index([clientSlug])
 }
 
 model Category {
@@ -182,22 +185,23 @@ model Category {
 }
 
 model MemberBenefit {
-  id                 String               @id @default(uuid())
-  title              String
-  description        String?
-  imageURL           String?
-  domain             String
-  location           String?
-  code               String
-  link               String?
-  userId             String
-  categoryId         String?
-  category           Category?            @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  user               User?                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @default(now()) @updatedAt
-  clicks             MemberBenefitClick[] @relation("MemberBenefitToClick")
-  OtherMemberBenefit OtherMemberBenefit[]
+  id                       String                     @id @default(uuid())
+  title                    String
+  description              String?
+  imageURL                 String?
+  domain                   String
+  location                 String?
+  code                     String
+  link                     String?
+  userId                   String
+  categoryId               String?
+  category                 Category?                  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  user                     User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @default(now()) @updatedAt
+  clicks                   MemberBenefitClick[]       @relation("MemberBenefitToClick")
+  OtherMemberBenefit       OtherMemberBenefit[]
+  OnboardingMemberBenefits OnboardingMemberBenefits[]
 }
 
 model MemberBenefitClick {
@@ -220,4 +224,14 @@ model OtherMemberBenefit {
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @default(now()) @updatedAt
+}
+
+model OnboardingMemberBenefits {
+  id                        String                  @id @default(uuid())
+  memberBenefitId           String
+  memberBenefitPageConfigId String
+  memberBenefit             MemberBenefit           @relation(fields: [memberBenefitId], references: [id], onDelete: Cascade)
+  memberBenefitPageConfig   MemberBenefitPageConfig @relation(fields: [memberBenefitPageConfigId], references: [id], onDelete: Cascade)
+  createdAt                 DateTime                @default(now())
+  updatedAt                 DateTime                @default(now()) @updatedAt
 }

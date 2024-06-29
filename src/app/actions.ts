@@ -1,6 +1,7 @@
 'use server'
 import { prisma } from "@/lib/prisma"
-import MemberBenefitClick, { Category, MemberBenefit } from "@prisma/client"
+import { MemberBenefitPageConfigDto } from "@/lib/types"
+import MemberBenefitClick, { Category, MemberBenefit, MemberBenefitPageConfig } from "@prisma/client"
 
 export async function getChat(id: string, userId: string) {
     const chat = await prisma.chat.findFirst({
@@ -142,4 +143,46 @@ export async function deleteMemberBenefit(id: string) {
             id: id
         }
     })
+}
+
+
+export async function createMemberPageConfigWithoutUser(memberPageConfig: MemberBenefitPageConfigDto, memberBenefitIds: string[]) {
+    try {
+        const newMemberPageConfig = await prisma.memberBenefitPageConfig.create({
+            data: {
+                title: memberPageConfig.title,
+                description: memberPageConfig.description,
+                imageURL: memberPageConfig.imageURL,
+                userId: memberPageConfig.userId,
+                clientSlug: memberPageConfig.clientSlug
+            },
+            include: {
+                onboardingMemberBenefits: true
+            }
+        })
+        if (newMemberPageConfig) {
+            const onboardingMemberBenefits = await prisma.onboardingMemberBenefits.createMany({
+                data:
+                    memberBenefitIds.map(id => {
+                        return {
+                            memberBenefitId: id,
+                            memberBenefitPageConfigId: newMemberPageConfig.id
+                        }
+                    })
+            })
+            // newMemberPageConfig.onboardingMemberBenefits = onboardingMemberBenefits
+        }
+        return newMemberPageConfig
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
+}
+export async function getMemberPageConfigByClientSlug(clientSlug: string) {
+    const memberPageConfig = await prisma.memberBenefitPageConfig.findFirst({
+        where: {
+            clientSlug: clientSlug
+        }
+    })
+    return memberPageConfig
 }

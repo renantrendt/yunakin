@@ -1,4 +1,5 @@
 'use client'
+import { createMemberPageConfigWithoutUser, getMemberPageConfigByClientSlug } from '@/app/actions'
 import Badge from '@/components/atomic/badge/Badge'
 import Button from '@/components/atomic/button/Button'
 import InputField from '@/components/atomic/input/InputField'
@@ -19,6 +20,7 @@ interface SelectedMemberBenefit extends MemberBenefit {
 
 const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps) => {
     const [step, setStep] = useState<number>(1)
+    const [clientSlug, setClientSlug] = useState<string>("")
 
     const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(
         benefits.map(benefit => {
@@ -82,8 +84,9 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                         <InputField
                             name="clientSlug"
                             id="clientSlug"
+                            value={clientSlug}
                             onChange={(e) => {
-                                console.log(e)
+                                setClientSlug(e.target.value)
                             }}
                             label="Your member page slug"
                             placeholder="yunakin.com/{your_slug}/memberbenefits"
@@ -95,21 +98,43 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                 <div>
                     <div>
                         <div>{"Your member page is created. Yohoo"}</div>
+                        <a href={`http://localhost:3000/${clientSlug}/memberbenefits`}>{"https://yunakin.com/" + clientSlug + "/memberbenefits"}</a>
                     </div>
                 </div>
             )}
             <div className='fixed transform gap-2  w-full max-w-sm px-4 left-1/2 -translate-x-1/2 bottom-4'>
-                <Button
-                    onClick={() => {
+                {step != 3 && (<Button
+                    onClick={async () => {
                         if (step == 1 && selectedBenefits.filter(s => s.selected).length == 0) {
                             customToast.warn("Please select at least one benefit")
                             return
+                        }
+                        if (step == 2) {
+                            const memberPageConfig = await getMemberPageConfigByClientSlug(clientSlug)
+                            if (memberPageConfig) {
+                                customToast.warn("This slug is already taken. Please choose another one")
+                                return
+                            }
+                            else {
+                                const newMemberPageConfig = await createMemberPageConfigWithoutUser({
+                                    clientSlug: clientSlug,
+                                    title: "My Member Page",
+                                    description: "My Member Page",
+                                    imageURL: "https://yunakin.com/images/logo.svg",
+                                }, selectedBenefits.filter(s => s.selected).map(s => s.id))
+                                if (newMemberPageConfig) {
+                                    setStep(3)
+                                } else {
+                                    customToast.error("Something went wrong. Please try again")
+                                }
+                                return;
+                            }
                         }
                         setStep(step + 1)
                     }}
                     className='w-full'
                     label={"Next"}
-                />
+                />)}
                 {step > 1 && (
                     <Button
                         onClick={() => {
