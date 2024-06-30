@@ -54,6 +54,7 @@ export async function checkUserExists(email: string) {
 
 export async function upsertMemberBenefitLinkClick(memberBenefitClick: MemberBenefitClick) {
 
+    console.log(memberBenefitClick)
     // save the data to database
     const clickAdded = await prisma.memberBenefitClick.create({
         data: {

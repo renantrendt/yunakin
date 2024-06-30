@@ -11,9 +11,10 @@ import { NextResponse } from 'next/server'
 export async function POST(req: Request): Promise<NextResponse<unknown>> {
   try {
     const { t } = await createTranslation('auth')
-    const { email, clientId } = (await req.json()) as {
+    const { email, clientId, password } = (await req.json()) as {
       email: string
       clientId: string
+      password: string
     }
     const existingUser = await prisma.user.findUnique({
       where: {
@@ -23,7 +24,6 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
     if (existingUser) {
       throw { message: t("error.emailAlreadyInUse"), statusCode: 400 }
     }
-    let password = Math.random().toString(10).slice(-8);
     const hashed_password = await hash(password, 12)
 
 

@@ -8,25 +8,59 @@ import { auth } from '@/auth'
 export default async function Dashboard() {
 
     const session = await auth()
-    if(!session?.user) {
+    if (!session?.user) {
         throw notFound()
     }
-    const memberBenefitsWithClicks = await prisma.memberBenefit.findMany({
+    const memberBenefitIds = await prisma.memberBenefit.findMany({
         where: {
-            userId: session?.user.id,
-        },
-        include: {
-            clicks: true
+            userId: session.user.id
+        }, select: {
+            id: true
+        }
+    })
+    const otherMemberBenefitIds = await prisma.otherMemberBenefit.findMany({
+        where: {
+            userId: session.user.id
+        }, select: {
+            id: true,
+            memberBenefitId: true
         }
     })
 
+    const memberBenefitsWithClicks = await prisma.memberBenefit.findMany({
+        where: {
+            OR: [
+                { id: { in: memberBenefitIds.map(benefit => benefit.id) } },
+                { id: { in: otherMemberBenefitIds.map(benefit => benefit.memberBenefitId) } }
+            ]
+        },
+        include: {
+            clicks: {
+                where: {
+                    OR: [
+                        {
+                            memberBenefitId: {
+                                in: memberBenefitIds.map(benefit => benefit.id)
 
-    const cardStats =  {
-        totalClicks: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.length).reduce((a,b) =>  a+b, 0),
+                            }
+                        },
+                        {
+                            otherMemberBenefitId: {
+                                in: otherMemberBenefitIds.map(benefit => benefit.id)
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    })
+
+    const cardStats = {
+        totalClicks: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.length).reduce((a, b) => a + b, 0),
         totalClicksMobile: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.
-            filter(f => f.os ==="iOS" || f.os =="android").length).reduce((a,b) =>  a+b, 0),
-            totalClicksDesktop: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.
-                filter(f => f.os !=="iOS" && f.os !=="android").length).reduce((a,b) =>   a+b, 0)
+            filter(f => f.os === "iOS" || f.os == "android").length).reduce((a, b) => a + b, 0),
+        totalClicksDesktop: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.
+            filter(f => f.os !== "iOS" && f.os !== "android").length).reduce((a, b) => a + b, 0)
     }
     const chartStats = {
         benefitsClicks: memberBenefitsWithClicks.map(memberBenefit => {
@@ -36,11 +70,11 @@ export default async function Dashboard() {
             }
         }),
         benefitsByOs: memberBenefitsWithClicks.reduce<{
-            [key:string]: number
-        }>((acc,memberBenefit)=> {
+            [key: string]: number
+        }>((acc, memberBenefit) => {
             memberBenefit.clicks.forEach(click => {
-                if(click.os) {
-                    if(acc[click.os]) {
+                if (click.os) {
+                    if (acc[click.os]) {
                         acc[click.os]++
                     } else {
                         acc[click.os] = 1
@@ -54,7 +88,7 @@ export default async function Dashboard() {
     return (
         <div>
             <DashboardCards totalClicks={cardStats.totalClicks} totalMobileClicks={cardStats.totalClicksMobile} totalDesktopClicks={cardStats.totalClicksDesktop} />
-            <ChartContainer benefitClicks={chartStats.benefitsClicks}  benefitsByOs={Object.keys(chartStats.benefitsByOs).map(key => {
+            <ChartContainer benefitClicks={chartStats.benefitsClicks} benefitsByOs={Object.keys(chartStats.benefitsByOs).map(key => {
                 return {
                     title: key,
                     count: chartStats.benefitsByOs[key]

@@ -18,44 +18,31 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
             clientSlug: params.clientSlug
         }
     })
+
     if (!config) {
         notFound()
         return;
     }
     let benefits: MemberBenefit[] = []
-    if (config?.userId) {
-        const otherBenefits = await prisma.otherMemberBenefit.findMany({
-            where: {
-                userId: config.userId
-            }
-        })
-        benefits = await prisma.memberBenefit.findMany({
-            where: {
-                userId: config.userId,
-                OR: {
-                    id: {
-                        in: otherBenefits.map(benefit => benefit.memberBenefitId)
-                    }
-                }
-            }
-        })
-    } else {
-        const benefitIds = await prisma.onboardingMemberBenefits.findMany({
-            where: {
-                memberBenefitPageConfigId: config?.id
-            }, select: {
-                memberBenefitId: true
-            }
-        })
-        benefits = await prisma.memberBenefit.findMany({
-            where: {
-                id: {
-                    in: benefitIds.map(benefit => benefit.memberBenefitId)
-                }
-            }
-        })
 
+    if (!config.userId) {
+        notFound()
+        return;
     }
+    const otherBenefits = await prisma.otherMemberBenefit.findMany({
+        where: {
+            userId: config.userId
+        }
+    })
+
+    benefits = await prisma.memberBenefit.findMany({
+        where: {
+            OR: [
+                { userId: config.userId },
+                { id: { in: otherBenefits.map(benefit => benefit.memberBenefitId) } }
+            ]
+        }
+    })
     const categories = await prisma.category.findMany({
         where: {
             id: {
@@ -63,8 +50,6 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
             }
         }
     })
-    const clientSlug = params.clientSlug;
-
 
     return (
         <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
@@ -84,7 +69,12 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
                         <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                             {benefits && benefits.filter(b => b.categoryId == category.id).map((benefit: MemberBenefit, index: any) => (
                                 // <BlogCard loading={false} key={index} category={category} />
-                                <MemberBenefitCard key={index} benefit={benefit} />
+                                <MemberBenefitCard
+
+                                    otherMemberbenefit={otherBenefits.find(b => b.memberBenefitId == benefit.id)}
+                                    key={index}
+                                    benefit={benefit}
+                                />
 
                             ))}
                         </div>

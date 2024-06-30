@@ -205,25 +205,28 @@ model MemberBenefit {
 }
 
 model MemberBenefitClick {
-  id              String  @id @default(uuid())
-  memberBenefitId String
-  device          String?
+  id                   String  @id @default(uuid())
+  memberBenefitId      String?
+  otherMemberBenefitId String?
+  device               String?
 
-  browser       String?
-  os            String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  memberBenefit MemberBenefit @relation(name: "MemberBenefitToClick", fields: [memberBenefitId], references: [id])
+  browser            String?
+  os                 String?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  memberBenefit      MemberBenefit?      @relation(name: "MemberBenefitToClick", fields: [memberBenefitId], references: [id])
+  otherMemberBenefit OtherMemberBenefit? @relation(fields: [otherMemberBenefitId], references: [id])
 }
 
 model OtherMemberBenefit {
-  id              String        @id @default(uuid())
-  memberBenefitId String
-  userId          String
-  memberBenefit   MemberBenefit @relation(fields: [memberBenefitId], references: [id], onDelete: Cascade)
-  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @default(now()) @updatedAt
+  id                 String               @id @default(uuid())
+  memberBenefitId    String
+  userId             String
+  memberBenefit      MemberBenefit        @relation(fields: [memberBenefitId], references: [id], onDelete: Cascade)
+  user               User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @default(now()) @updatedAt
+  MemberBenefitClick MemberBenefitClick[]
 }
 
 model OnboardingMemberBenefits {

@@ -50,18 +50,37 @@ export default function RegisterPage() {
     const onSubmit = async (data: any) => {
         setIsLoading(true);
         try {
+            const password = Math.random().toString(10).slice(-8);
+
             const register = await fetch('/api/auth/register', {
                 method: 'POST',
                 body: JSON.stringify({
                     ...data,
                     clientId,
+                    password
                 })
             })
 
             if (register.status === 200) {
                 // router.push(`/auth/verify-request?email=${values.email}`);
                 customToast.success(t("registerPage.registrationSuccessful"))
-                router.push('/login')
+                try {
+                    const result = await signIn('credentials', {
+                        email: data.email,
+                        password: password,
+                        redirect: false
+                    })
+                    if (result?.error) {
+                        customToast.error(result.error)
+                    } else {
+                        router.push('/catalog')
+                    }
+                } catch (error) {
+                    console.error(error)
+
+                } finally {
+                    setIsLoading(false)
+                }
             } else {
                 const data = await register.json()
                 customToast.error(data.message || t("error.somethingWentWrong"))

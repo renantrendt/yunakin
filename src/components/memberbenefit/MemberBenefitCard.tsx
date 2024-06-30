@@ -11,15 +11,18 @@ import { useState } from 'react'
 import CheckIcon from "@/icons/check-icon.svg"
 import { upsertMemberBenefitLinkClick } from '@/app/actions'
 import DeviceDetector from "device-detector-js";
-import { Category, MemberBenefit } from '@prisma/client'
+import { Category, MemberBenefit, OtherMemberBenefit } from '@prisma/client'
 
 interface MemberBenefitCardProps {
     key: string
     benefit: MemberBenefit
+    otherMemberbenefit?: OtherMemberBenefit
     category?: Category
     createMode?: boolean
 }
-const MemberBenefitCard = ({ key, benefit, category, createMode }: MemberBenefitCardProps) => {
+const MemberBenefitCard = ({ key, benefit, category, createMode, otherMemberbenefit }: MemberBenefitCardProps) => {
+
+    console.log('benefit', otherMemberbenefit)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const deviceDetector = new DeviceDetector()
 
@@ -30,10 +33,12 @@ const MemberBenefitCard = ({ key, benefit, category, createMode }: MemberBenefit
         try {
             await upsertMemberBenefitLinkClick({
                 memberBenefitId,
-                device: device.device?.type || null,
+                otherMemberBenefitId: otherMemberbenefit?.id || null,
+                device: (device.device?.type as string) || null,
                 browser: device.client?.name || null,
                 os: device.os?.name || null,
             });
+
 
         } catch (error) {
 
