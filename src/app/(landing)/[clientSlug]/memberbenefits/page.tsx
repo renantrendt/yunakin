@@ -55,8 +55,8 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
         <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
             <div className='px-4 md:px-0'>
                 <PageHeader
-                    title='Member Benefits'
-                    description='This is the page for member benefits'
+                    title={config.title}
+                    description={config.description}
                 />
             </div>
 

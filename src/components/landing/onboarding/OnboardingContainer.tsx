@@ -105,7 +105,6 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                             {selectedBenefits && selectedBenefits.filter((benefit: SelectedMemberBenefit) => benefit.categoryId === category.id && benefit.selected).map((benefit: SelectedMemberBenefit, index: any) => (
                                                 // <BlogCard loading={false} key={index} category={category} />
                                                 <MemberBenefitCard
-                                                    editMode={true}
                                                     category={categories.filter(c => c.id == benefit.categoryId)[0]}
                                                     key={index} benefit={benefit} />
                                             ))}

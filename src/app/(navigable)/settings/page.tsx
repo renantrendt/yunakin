@@ -21,17 +21,10 @@ interface FormValues {
 
 const tabs = [
     {
-        name: "Profile",
-        component: <div>Profile</div>
-    },
-    {
         name: "Account",
+
         component: <div><AccountSsttings /> </div>
     },
-    {
-        name: "Subscription",
-        component: <div><Pricing showDescription={false} /></div>
-    }
 ]
 export default function SettingsPage() {
     //eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -40,7 +33,7 @@ export default function SettingsPage() {
             resolver: yupResolver(validationSchema)
         }
     )
-    const [tab, setTab] = React.useState(tabs[1]);
+    const [tab, setTab] = React.useState(tabs[0]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = async (data: any) => {
     }

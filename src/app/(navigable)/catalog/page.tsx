@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
 import { notFound } from 'next/navigation';
 import OnboardingContainer from '@/components/landing/onboarding/OnboardingContainer';
+import CatalogPageContainer from '@/components/catalog/CatalogPageContainer';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
@@ -18,15 +19,22 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
     })
 
     const categories = await prisma.category.findMany()
+    const config = await prisma.memberBenefitPageConfig.findFirst({
+        where: {
+            userId: session?.user?.id
+        }
+    })
+
+    if (!config) {
+        notFound()
+        return;
+    }
     return (
-        <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
-            <div className='px-4 md:px-0'>
-                <PageHeader title='Member Benefit Catalog'
-                    description='Here are the member benefits from other companies' />
-            </div>
-            <OnboardingContainer
+        <div className='max-w-[1440px] pb-20 w-full mx-auto px-4 md:px-28'>
+            <CatalogPageContainer
                 benefits={benefits}
                 categories={categories}
+                memberPageConfig={config}
             />
         </div>
     )

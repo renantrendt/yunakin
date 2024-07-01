@@ -209,3 +209,18 @@ export async function deleteOtherMemberBenefit(memberBenefitId: string, userId: 
         }
     })
 }
+
+
+export async function updateMemberPageConfig(config: MemberBenefitPageConfig) {
+    console.log(config)
+    const updatedConfig = await prisma.memberBenefitPageConfig.update({
+        where: {
+            id: config.id
+        },
+        data: {
+            title: config.title,
+            description: config.description,
+        }
+    })
+    return updatedConfig
+}
