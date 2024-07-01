@@ -27,6 +27,7 @@ import { Row } from '@react-email/components'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import platformConfig from '@/config/app-config'
 
+import EditIcon from "@/icons/edit-icon.svg"
 
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefit[]
@@ -100,11 +101,13 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                 const createdMemberBenefit = memberBenefit.userId === session.data?.user?.id
 
                 return (<div className='flex justify-start gap-2'>
-                    {createdMemberBenefit && <Button icon={<DeleteIcon />} size='md' onClick={() => {
+                    {createdMemberBenefit && <Button icon={<EditIcon />} size='md' onClick={() => {
 
                         setMemberBenefitModal(true)
                         setTobeEditedMemberBenefit(memberBenefit)
-                    }} />}
+                    }}
+                        className='!p-2'
+                    />}
                     <Button icon={<DeleteIcon />} size='md' onClick={() => {
                         setModalOpen(true)
                         setToBeDeletedMemberBenefitId(memberBenefit.id)

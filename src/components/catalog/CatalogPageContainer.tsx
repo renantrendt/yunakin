@@ -17,9 +17,9 @@ import { cn } from '@/utils/cn'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Input } from 'postcss'
-import React, { use, useCallback, useState } from 'react'
+import React, { use, useCallback, useEffect, useState } from 'react'
 import _ from 'lodash'
 import { set } from 'react-ga'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
@@ -36,9 +36,28 @@ interface SelectedMemberBenefit extends MemberBenefit {
 
 const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: CatalogPageContainerProps) => {
     const router = useRouter()
+    const [isEditing, setIsEditing] = useState(false)
     const [loading, setLoading] = useState(false);
     const [config, setConfig] = useState(memberPageConfig)
     const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(benefits)
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+
+    useEffect(() => {
+        if (isEditing) {
+
+        }
+    }, [pathname, searchParams])
+
+
+    useEffect(() => {
+        if (_.isEqual(config, memberPageConfig)) {
+            setIsEditing(false)
+        } else {
+            setIsEditing(true)
+        }
+    }, [config])
+
     const publishChanges = useCallback(async () => {
 
         if (config.imageURL && config.imageURL !== memberPageConfig.imageURL) {

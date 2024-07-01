@@ -170,7 +170,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                                 id="categoryId"
                                 name="categoryId"
                                 onChange={onChange}
-                                value={value}
+                                value={value ?? categories[0].id}
                                 error={errors.categoryId?.message}
                                 options={categories.map(category => ({ label: category.name, value: category.id }))}
                             />
