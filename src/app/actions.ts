@@ -222,6 +222,7 @@ export async function updateMemberPageConfig(config: MemberBenefitPageConfig) {
         data: {
             title: config.title,
             description: config.description,
+            imageURL: config.imageURL
         }
     })
     return updatedConfig

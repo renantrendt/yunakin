@@ -136,6 +136,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                 setLoading(true)
                                 if (selectedBenefits.filter(s => s.selected).length == 0) {
                                     customToast.warn("Please select at least one benefit")
+                                    setLoading(false)
                                     return
                                 }
                                 const memberPageConfig = await getMemberPageConfigByClientSlug(clientSlug)

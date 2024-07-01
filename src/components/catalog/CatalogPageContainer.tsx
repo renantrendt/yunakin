@@ -21,6 +21,8 @@ import { useRouter } from 'next/navigation'
 import { Input } from 'postcss'
 import React, { use, useCallback, useState } from 'react'
 import _ from 'lodash'
+import { set } from 'react-ga'
+import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 interface CatalogPageContainerProps {
     benefits: SelectedMemberBenefit[]
     categories: Category[]
@@ -38,6 +40,23 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
     const [config, setConfig] = useState(memberPageConfig)
     const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(benefits)
     const publishChanges = useCallback(async () => {
+
+        if (config.imageURL && config.imageURL !== memberPageConfig.imageURL) {
+            const blob = await fetch(config.imageURL).then(r => r.blob());
+
+            const path = "memberbenefit_logo/" + config.id + "/" + "image.jpg"
+
+            const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+            const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
+            if (!isUploaded) {
+                throw new Error("Failed to upload image")
+            }
+            const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
+            if (!downloadUrl) {
+                throw new Error("Failed to get download url")
+            }
+            config.imageURL = downloadUrl.publicUrl
+        }
         setLoading(true)
         try {
             const updatedMemberPageConfig = await updateMemberPageConfig(config)
@@ -45,7 +64,6 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
             setLoading(false)
             if (!_.isEqual(selectedBenefits, benefits)) {
                 // update selected benefits
-                console.log('not equal')
                 const toBeCreatedOtherMemberBenefits = selectedBenefits.filter(b => b.selected && benefits.some(benefit => benefit.id === b.id && !benefit.selected)).map(
                     b => b.id
                 )
@@ -67,7 +85,6 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
 
     }, [config, selectedBenefits]
     )
-
     return (
         <div className=''>
             <div className='w-full bg-success  mb-8 p-3 rounded-xl'>
@@ -77,9 +94,9 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
 
                 <div className='flex justify-between items-center w-full'>
                     <ImageUploader onImageUpload={image => {
-                        console.log(image)
+                        setConfig({ ...config, imageURL: image })
                     }}
-                        image='https://yunakin.com/images/logo.svg'
+                        image={config.imageURL}
                     />
                     <div className='flex justify-between gap-4 w-fit'>
                         <Button variant="secondary" className='w-full' label="View Live Page" onClick={() => {
