@@ -6,6 +6,10 @@ import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
 import { notFound } from 'next/navigation';
 import { MemberBenefit } from '@prisma/client';
+import ContentSection from '@/containers/layout/ContentSection';
+import { cn } from '@/utils/cn';
+import Avatar from '@/components/atomic/avatar/Avatar';
+import { Avatar3xl } from '@/components/atomic/avatar/Avatar.stories';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
@@ -53,6 +57,9 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
 
     return (
         <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
+            <div className="navbar-start w-full text-left ">
+                <Avatar name='avatar' size={"3xl"} image={config.imageURL} className='dark:hidden' />
+            </div>
             <div className='px-4 md:px-0'>
                 <PageHeader
                     title={config.title}
