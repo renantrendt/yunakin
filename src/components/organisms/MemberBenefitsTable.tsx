@@ -21,7 +21,7 @@ import MagnifyingGlass from "@/icons/magnifying-glass.svg"
 import useDebounce from '@/hooks/useDebounce'
 import { Category, MemberBenefit } from '@prisma/client'
 import AddCategoryModal from '../molecules/add-category-modal'
-import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, updateMemberBenefit } from '@/app/actions'
+import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, deleteOtherMemberBenefit, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
 import { Row } from '@react-email/components'
 
@@ -94,12 +94,14 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
             id: 'Actions',
             cell: info => {
                 const memberBenefit = memberBenefits[info.row.index]
+                const createdMemberBenefit = memberBenefit.userId === session.data?.user?.id
+
                 return (<div className='flex justify-start gap-2'>
-                    <Button icon={<DeleteIcon />} size='md' onClick={() => {
+                    {createdMemberBenefit && <Button icon={<DeleteIcon />} size='md' onClick={() => {
 
                         setMemberBenefitModal(true)
                         setTobeEditedMemberBenefit(memberBenefit)
-                    }} />
+                    }} />}
                     <Button icon={<DeleteIcon />} size='md' onClick={() => {
                         setModalOpen(true)
                         setToBeDeletedMemberBenefitId(memberBenefit.id)
@@ -134,9 +136,16 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const handleDelete = async (memberBenefitId: string) => {
         try {
 
-            await deleteMemberBenefit(memberBenefitId)
-            setMemberBenefits(memberBenefits.filter(memberBenefit => memberBenefit.id !== memberBenefitId))
-            customToast.success('Member Beenfit deleted successfully')
+            // check if the user is the creator of the member benefit
+            const memberBenefit = memberBenefits.find(memberBenefit => memberBenefit.id === memberBenefitId)
+            if (memberBenefit?.userId !== session.data?.user?.id) {
+                await deleteOtherMemberBenefit(memberBenefitId, session.data?.user?.id! as string)
+                setMemberBenefits(memberBenefits.filter(memberBenefit => memberBenefit.id !== memberBenefitId))
+            } else {
+                await deleteMemberBenefit(memberBenefitId)
+                setMemberBenefits(memberBenefits.filter(memberBenefit => memberBenefit.id !== memberBenefitId))
+                customToast.success('Member Beenfit deleted successfully')
+            }
         } catch (error) {
             customToast.error('Failed to delete member benefit')
         }

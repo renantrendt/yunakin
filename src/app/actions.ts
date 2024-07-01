@@ -187,3 +187,25 @@ export async function getMemberPageConfigByClientSlug(clientSlug: string) {
     })
     return memberPageConfig
 }
+
+
+
+export async function deleteOtherMemberBenefit(memberBenefitId: string, userId: string) {
+    const otherMemberBenefitId = await prisma.otherMemberBenefit.findFirst({
+        where: {
+            memberBenefitId,
+            userId
+        },
+        select: {
+            id: true
+        }
+    })
+    if (!otherMemberBenefitId) {
+        throw new Error("Other Member Benefit Not Found");
+    }
+    await prisma.otherMemberBenefit.delete({
+        where: {
+            id: otherMemberBenefitId.id
+        }
+    })
+}

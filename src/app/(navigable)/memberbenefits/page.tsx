@@ -17,12 +17,24 @@ const MemberBenefitsPage = async () => {
     }
 
     let benefits = []
+    // check if we have other member benefits
+
+    const otherMemberBenefits = await prisma.otherMemberBenefit.findMany({
+        where: {
+            userId: session?.user?.id
+        }
+    });
+
+
     if (session?.user?.role == "ADMIN") {
         benefits = await prisma.memberBenefit.findMany()
     } else {
         benefits = await prisma.memberBenefit.findMany({
             where: {
-                userId: session?.user?.id ?? ''
+                OR: [
+                    { userId: session?.user?.id },
+                    { id: { in: otherMemberBenefits.map(benefit => benefit.memberBenefitId) } }
+                ]
             },
             orderBy: {
                 updatedAt: "desc"
