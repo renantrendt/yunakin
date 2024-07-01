@@ -69,6 +69,8 @@ const uploadFile = async (bucketName: string, path: string, file: File, options:
         return false
     }
     const { data, error } = await supabase.storage.from(bucketName).upload(path, file, options)
+    console.log(data)
+    console.log(error)
     if (error) {
         console.error(error)
         return false

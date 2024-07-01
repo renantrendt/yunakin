@@ -7,6 +7,7 @@ import { Controller, useForm } from 'react-hook-form';
 import * as yup from "yup"
 import Dropdown from '../atomic/dropdown/Dropdown';
 import { Category, MemberBenefit } from '@prisma/client';
+import ImageUploader from '../atomic/file-uploader/ImageUploader';
 
 
 interface AddMemberBenefitModalProps {
@@ -15,12 +16,14 @@ interface AddMemberBenefitModalProps {
     onUpdate: (data: FormValues) => void;
     categories: Category[];
     editMemberBenefit?: MemberBenefit;
+    loading: boolean;
 }
 
 const schema = yup.object().shape({
     name: yup.string().required(),
     code: yup.string().required(),
     domain: yup.string().required(),
+    imageURL: yup.string(),
     location: yup.string(),
     link: yup.string(),
     description: yup.string(),
@@ -35,12 +38,14 @@ interface FormValues {
     link: string;
     description: string;
     categoryId: string;
+    imageURL?: string;
 }
 
-const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefit, onUpdate }: AddMemberBenefitModalProps) => {
+
+const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefit, onUpdate, loading }: AddMemberBenefitModalProps) => {
 
 
-    const { handleSubmit, control, formState: { errors } } = useForm<FormValues>(
+    const { handleSubmit, control, watch, setValue, formState: { errors } } = useForm<FormValues>(
         {
             resolver: yupResolver(schema),
             defaultValues: editMemberBenefit ? {
@@ -50,7 +55,8 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                 link: editMemberBenefit.link,
                 location: editMemberBenefit.location,
                 description: editMemberBenefit.description,
-                categoryId: editMemberBenefit.categoryId
+                categoryId: editMemberBenefit.categoryId,
+                imageURL: editMemberBenefit.imageURL
             } : {
                 name: '',
                 code: '',
@@ -58,13 +64,17 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                 link: '',
                 location: '',
                 description: '',
-                categoryId: ''
+                categoryId: '',
+                imageURL: ''
             }
         }
     )
+    const image = watch('imageURL')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = (data: FormValues) => {
         // onTagChange(data as Tag)
+        // check if image is uploaded
+        console.log(data)
         if (editMemberBenefit) {
             // update
             onUpdate({
@@ -148,7 +158,9 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                             />
                         )}
                     />
-
+                    <div className='w-fit h-fit'>
+                        <ImageUploader onImageUpload={(image) => setValue('imageURL', image)} image={image} />
+                    </div>
                     <Controller
                         control={control}
                         name="categoryId"
@@ -197,7 +209,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                         )}
                     />
 
-                    <Button type='submit' label={editMemberBenefit ? "Save Changes" : "Save new Member Benefit"} variant='primary' />
+                    <Button type='submit' loading={loading} label={editMemberBenefit ? "Save Changes" : "Save new Member Benefit"} variant='primary' />
                 </div>
             </form>
         </Modal>

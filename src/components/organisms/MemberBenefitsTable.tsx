@@ -24,6 +24,8 @@ import AddCategoryModal from '../molecules/add-category-modal'
 import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, deleteOtherMemberBenefit, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
 import { Row } from '@react-email/components'
+import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
+import platformConfig from '@/config/app-config'
 
 
 interface MemberBenefitsTableProps {
@@ -33,6 +35,7 @@ interface MemberBenefitsTableProps {
 
 const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories }: MemberBenefitsTableProps) => {
     const session = useSession()
+    const [loading, setLoading] = useState(false)
     const [memberBenefits, setMemberBenefits] = useState<MemberBenefit[]>(defaultMemberBenefits)
     const [modalOpen, setModalOpen] = useState(false)
     const [memberBenefitModal, setMemberBenefitModal] = useState(false)
@@ -241,11 +244,13 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                 </>
             </ConfirmationModal>
             {memberBenefitModal && <AddMemberBenefitModal
+                loading={loading}
                 categories={categories}
                 editMemberBenefit={tobeEditedMemberBenefit}
                 onClose={() => setMemberBenefitModal(false)}
                 onUpdate={async (data: any) => {
                     try {
+                        setLoading(true)
                         const updatedMemberBenefit = await updateMemberBenefit({
                             id: data.id,
                             categoryId: data.categoryId,
@@ -257,29 +262,74 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                             userId: session.data?.user?.id! as string,
                             title: data.name
                         } as MemberBenefit)
+                        if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
+                            const blob = await fetch(data.imageURL).then(r => r.blob());
+
+                            const path = "memberbenefits_images/" + updatedMemberBenefit.id + "/" + "image.jpg"
+
+                            const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+                            const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
+                            if (!isUploaded) {
+                                throw new Error("Failed to upload image")
+                            }
+                            const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
+                            if (!downloadUrl) {
+                                throw new Error("Failed to get download url")
+                            }
+                            updatedMemberBenefit.imageURL = downloadUrl.publicUrl
+                            await updateMemberBenefit(updatedMemberBenefit)
+                        }
                         setMemberBenefits(memberBenefits.map(memberBenefit => memberBenefit.id === updatedMemberBenefit.id ? updatedMemberBenefit : memberBenefit))
                         setMemberBenefitModal(false)
                         setTobeEditedMemberBenefit(undefined)
                         customToast.success('Member Benefit updated successfully')
                     } catch (error) {
                         customToast.error('Failed to update member benefit')
+                    } finally {
+                        setLoading(false)
                     }
 
                 }}
                 onCreate={async (data: any) => {
-                    const userId = session.data?.user?.id! as string
-                    const newMemberBenefit = await createMemberBenefit({
-                        categoryId: data.categoryId,
-                        code: data.code,
-                        domain: data.domain,
-                        location: data.location,
-                        description: data.description,
-                        link: data.link,
-                        userId: userId,
-                        title: data.name
-                    } as MemberBenefit)
-                    setMemberBenefits([...memberBenefits, newMemberBenefit])
-                    setMemberBenefitModal(false)
+                    try {
+                        setLoading(true)
+                        const userId = session.data?.user?.id! as string
+                        const newMemberBenefit = await createMemberBenefit({
+                            categoryId: data.categoryId,
+                            code: data.code,
+                            domain: data.domain,
+                            location: data.location,
+                            description: data.description,
+                            link: data.link,
+                            userId: userId,
+                            title: data.name,
+                            imageURL: data.imageURL
+                        } as MemberBenefit)
+                        if (data.imageURL) {
+                            const blob = await fetch(data.imageURL).then(r => r.blob());
+
+                            const path = "memberbenefits_images/" + newMemberBenefit.id + "/" + "image.jpg"
+
+                            const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+                            const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
+                            if (!isUploaded) {
+                                throw new Error("Failed to upload image")
+                            }
+                            const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
+                            if (!downloadUrl) {
+                                throw new Error("Failed to get download url")
+                            }
+                            newMemberBenefit.imageURL = downloadUrl.publicUrl
+                            await updateMemberBenefit(newMemberBenefit)
+                        }
+                        setMemberBenefits([...memberBenefits, newMemberBenefit])
+                        setMemberBenefitModal(false)
+
+                    } catch (error) {
+
+                    } finally {
+                        setLoading(false)
+                    }
                 }}
             />}
         </div>
