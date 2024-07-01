@@ -1,7 +1,9 @@
 'use server'
+import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { MemberBenefitPageConfigDto } from "@/lib/types"
 import { Category, MemberBenefit, MemberBenefitClick, MemberBenefitPageConfig } from "@prisma/client"
+import exp from "constants"
 
 export async function getChat(id: string, userId: string) {
     const chat = await prisma.chat.findFirst({
@@ -223,4 +225,46 @@ export async function updateMemberPageConfig(config: MemberBenefitPageConfig) {
         }
     })
     return updatedConfig
+}
+
+
+export async function updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits: string[], toBeDeletedOtherMemberBenefits: string[]) {
+    const session = await auth()
+
+    const userId = session?.user?.id
+    if (!userId) {
+        return false
+    }
+
+    console.log('user', userId)
+
+    try {
+        await prisma.otherMemberBenefit.deleteMany({
+            where: {
+                memberBenefitId: {
+                    in: toBeDeletedOtherMemberBenefits
+                },
+                userId
+            }
+        })
+
+        console.log('deleted')
+        // create the other member benefits
+        console.log(toBeCreatedOtherMemberBenefits)
+        await prisma.otherMemberBenefit.createMany({
+            data: toBeCreatedOtherMemberBenefits.map(id => {
+                return {
+                    memberBenefitId: id,
+                    userId
+                }
+            })
+        })
+        console.log('created')
+        return true;
+    } catch (error) {
+        console.log(error)
+        return false;
+    }
+
+
 }

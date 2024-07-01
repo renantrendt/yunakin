@@ -10,6 +10,12 @@ import CatalogPageContainer from '@/components/catalog/CatalogPageContainer';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
+
+    const otherBenefits = await prisma.otherMemberBenefit.findMany({
+        where: {
+            userId: session?.user?.id
+        }
+    })
     const benefits = await prisma.memberBenefit.findMany({
         where: {
             NOT: {
@@ -17,6 +23,18 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
             }
         }
     })
+
+    const selectedBenefits = benefits.map(b => {
+        return {
+            ...b,
+            selected: otherBenefits.some(ob => ob.memberBenefitId === b.id)
+        }
+    })
+
+
+
+
+
 
     const categories = await prisma.category.findMany()
     const config = await prisma.memberBenefitPageConfig.findFirst({
@@ -32,7 +50,7 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
     return (
         <div className='max-w-[1440px] pb-20 w-full mx-auto px-4 md:px-28'>
             <CatalogPageContainer
-                benefits={benefits}
+                benefits={selectedBenefits}
                 categories={categories}
                 memberPageConfig={config}
             />

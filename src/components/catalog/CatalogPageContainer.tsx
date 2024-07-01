@@ -1,5 +1,5 @@
 'use client'
-import { createMemberPageConfigWithoutUser, getMemberPageConfigByClientSlug, updateMemberPageConfig } from '@/app/actions'
+import { createMemberPageConfigWithoutUser, getMemberPageConfigByClientSlug, updateMemberPageConfig, updateOtherMemberBenefits } from '@/app/actions'
 import Badge from '@/components/atomic/badge/Badge'
 import Button from '@/components/atomic/button/Button'
 import ImageUploader from '@/components/atomic/file-uploader/ImageUploader'
@@ -20,8 +20,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Input } from 'postcss'
 import React, { use, useCallback, useState } from 'react'
+import _ from 'lodash'
 interface CatalogPageContainerProps {
-    benefits: MemberBenefit[]
+    benefits: SelectedMemberBenefit[]
     categories: Category[]
     memberPageConfig: MemberBenefitPageConfig
 }
@@ -35,25 +36,36 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
     const router = useRouter()
     const [loading, setLoading] = useState(false);
     const [config, setConfig] = useState(memberPageConfig)
-    const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(
-        benefits.map(benefit => {
-            return {
-                ...benefit,
-                selected: false
-            }
-        })
-    )
+    const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(benefits)
     const publishChanges = useCallback(async () => {
-        alert(JSON.stringify(config))
         setLoading(true)
-        const updatedMemberPageConfig = await updateMemberPageConfig(config)
-        if (updatedMemberPageConfig) {
-            customToast.success("Changes Published Successfully")
-        } else {
+        try {
+            const updatedMemberPageConfig = await updateMemberPageConfig(config)
+
+            setLoading(false)
+            if (!_.isEqual(selectedBenefits, benefits)) {
+                // update selected benefits
+                console.log('not equal')
+                const toBeCreatedOtherMemberBenefits = selectedBenefits.filter(b => b.selected && benefits.some(benefit => benefit.id === b.id && !benefit.selected)).map(
+                    b => b.id
+                )
+                const toBeDeletedOtherMemberBenefits = selectedBenefits.filter(b => !b.selected && benefits.some(benefit => benefit.id === b.id && benefit.selected)).map(b => b.id)
+                await updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits, toBeDeletedOtherMemberBenefits)
+            } else {
+                if (updatedMemberPageConfig) {
+                    customToast.success("Changes Published Successfully")
+                } else {
+                    customToast.error("Something went wrong. Please try again")
+                }
+            }
+        } catch (error) {
+            console.log(error)
             customToast.error("Something went wrong. Please try again")
+        } finally {
+            setLoading(false)
         }
-        setLoading(false)
-    }, [config]
+
+    }, [config, selectedBenefits]
     )
 
     return (
