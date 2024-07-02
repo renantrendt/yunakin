@@ -35,6 +35,7 @@ interface SelectedMemberBenefit extends MemberBenefit {
 
 
 const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: CatalogPageContainerProps) => {
+
     const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
     const [loading, setLoading] = useState(false);
@@ -109,28 +110,29 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
             <div className='w-full bg-success  mb-8 p-3 rounded-xl'>
                 <Typography type="p" className="text-white font-normal text-sm">You can customize the catalog here</Typography>
             </div>
-            <ContentSection fullWidth additionalClassName={cn('  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 ')}>
-
-                <div className='flex justify-between items-center w-full'>
-                    <ImageUploader onImageUpload={image => {
-                        setConfig({ ...config, imageURL: image })
-                    }}
-                        image={config.imageURL}
+            <ContentSection fullWidth additionalClassName={cn(' flex justify-end   w-fit   ')}>
+                <div className='flex fixed justify-end  right-36 gap-4 z-50 w-fit py-4 px-3'>
+                    <Button variant="secondary" className='w-full' label="View Live Page" onClick={() => {
+                        const url = `${platformConfig.variables.NEXT_PUBLIC_NEXT_URL}/${config.clientSlug}/memberbenefits`
+                        window.open(url, '_blank')
+                    }} />
+                    <Button variant="primary" className='w-full' label="Publish Changes"
+                        onClick={publishChanges}
                     />
-                    <div className='flex justify-between gap-4 w-fit'>
-                        <Button variant="secondary" className='w-full' label="View Live Page" onClick={() => {
-                            const url = `${platformConfig.variables.NEXT_PUBLIC_NEXT_URL}/${config.clientSlug}/memberbenefits`
-                            window.open(url, '_blank')
-                        }} />
-                        <Button variant="primary" className='w-full' label="Publish Changes"
-                            onClick={publishChanges}
-                        />
-                    </div>
+                    <Button variant="primary" className='w-full' label="Add your own Benefits"
+                        onClick={() => {
+                            router.push("/memberbenefits?openModal=true")
+                        }}
+                    />
                 </div>
-
 
             </ContentSection >
             <div className='max-w-[1440px] pb-20 lg:py-12 w-full mx-auto px-4 md:px-28'>
+                <ImageUploader onImageUpload={image => {
+                    setConfig({ ...config, imageURL: image })
+                }}
+                    image={config.imageURL}
+                />
                 <div className='px-4 md:px-0'>
                     <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
                         <Typography type="h1" contentEditable className="font-black text-[32px] leading-[45px] lg:text-5xl"

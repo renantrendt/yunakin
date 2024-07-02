@@ -28,6 +28,7 @@ import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import platformConfig from '@/config/app-config'
 
 import EditIcon from "@/icons/edit-icon.svg"
+import { useSearchParams } from 'next/navigation'
 
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefit[]
@@ -35,11 +36,12 @@ interface MemberBenefitsTableProps {
 }
 
 const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories }: MemberBenefitsTableProps) => {
+    const searchParams = useSearchParams()
     const session = useSession()
     const [loading, setLoading] = useState(false)
     const [memberBenefits, setMemberBenefits] = useState<MemberBenefit[]>(defaultMemberBenefits)
     const [modalOpen, setModalOpen] = useState(false)
-    const [memberBenefitModal, setMemberBenefitModal] = useState(false)
+    const [memberBenefitModal, setMemberBenefitModal] = useState(searchParams.get('openModal') === 'true' ? true : false)
     const [toBeDeletedMemberBenefitId, setToBeDeletedMemberBenefitId] = useState('')
     const [tobeEditedMemberBenefit, setTobeEditedMemberBenefit] = useState<MemberBenefit | undefined>(undefined)
     const columnHelper = createColumnHelper<MemberBenefit>()
