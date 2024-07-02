@@ -63,6 +63,7 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
                             <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.domain}</a>
+                            <p>{benefit.offer}</p>
                             <a href={benefit.link} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.location}</a>
                         </div>
                     </div>
