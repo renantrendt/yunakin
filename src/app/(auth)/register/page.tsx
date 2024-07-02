@@ -54,8 +54,8 @@ export default function RegisterPage() {
 
             const newMemberPageConfig = await createMemberPageConfigWithoutUser({
                 clientSlug: clientId,
-                title: "My Member Page",
-                description: "My Member Page",
+                title: "My Benefits",
+                description: "Save those exclusive benefits",
                 imageURL: "https://yunakin.com/images/logo.svg",
             }, selectedBenefits)
 
