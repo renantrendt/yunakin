@@ -49,8 +49,8 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
             <ContentSection fullWidth additionalClassName={cn('  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 ')}>
                 {step == 2 && (<div className=' fixed z-40 bottom-0 lg:bottom-[92%] left-0 right-0  lg:top-0 p-3 text-white shadow-xl rounded-xl   bg-landing-dark-background  m-1 lg:mx-4 '>
                     <div className='flex flex-col md:flex-row gap-2 justify-between items-center '>
-                        <p className='text-center flex-1 text-sm '>Here is a live preview of your page</p>
-                        <Button label='Navigate to Admin' onClick={() => {
+                        <p className='text-center flex-1 text-sm '>Here is a live preview of your members page</p>
+                        <Button label='Save and Customize' onClick={() => {
                             router.push(`/register?clientId=${clientSlug}&selectedBenefits=${encodeURIComponent(`${selectedBenefits.filter(s => s.selected).map(b => b.id).join(",")}`)}`)
                         }} />
                     </div>
@@ -59,8 +59,8 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
             <div className='max-w-[1440px] pb-20 lg:py-12 w-full mx-auto px-4 md:px-28'>
                 <div className='px-4 md:px-0'>
                     <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
-                        <Typography type="h1" className="font-black text-[32px] leading-[45px] lg:text-5xl" >Member benefits</Typography>
-                        <Typography type="p" className="text-base text-neutral-600 font-normal lg:text-xl" >Enjoy this exclusive benefits for you</Typography>
+                        <Typography type="h1" className="font-black text-[32px] leading-[45px] lg:text-5xl" >Choose the benefits you want to offer</Typography>
+                        <Typography type="p" className="text-base text-neutral-600 font-normal lg:text-xl" >Then generate a custom domain for your company</Typography>
                     </div>
                 </div>
                 <div>
