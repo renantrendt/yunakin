@@ -126,7 +126,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     <Button variant="primary" className='w-full' label="Publish Changes"
                         onClick={publishChanges}
                     />
-                    <Button variant="primary" className='w-full' label="Configure Colors anf Fonts"
+                    <Button variant="primary" className='w-full' label="Customize Color, Font and Domain"
                         onClick={() => {
                             setSettingsModalOpen(true)
                         }}

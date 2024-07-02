@@ -61,7 +61,7 @@ const CustomizePageModal = ({ onClose, config, onUpdate, loading }: CustomizePag
         >
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col p-10 gap-8 '>
                 <p className='text-base font-medium leading-6'>{"Customize Look"}</p>
-                <p className='text-sm font-normal leading-5'>Please enter the details</p>
+                {/* <p className='text-sm font-normal leading-5'>Please enter the details</p> */}
                 <div className='flex gap-6 flex-col'>
 
                     <Controller
