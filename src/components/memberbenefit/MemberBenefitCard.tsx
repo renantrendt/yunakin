@@ -87,7 +87,12 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
             </div >
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <div className='flex flex-col  p-6 justify-center items-stretch '>
-                    <div className='p-2 w-fit mx-auto rounded-lg text-primary-500 bg-gradient-to-b from-[#EAE9FE] to-[#D6D5FF]'>
+                    <div className='p-2 w-fit mx-auto rounded-lg'
+                        style={{
+                            backgroundColor: config?.buttonColor as string,
+                            color: config?.textColor as string,
+                        }}
+                    >
                         <CheckIcon />
                     </div>
                     <div className='flex flex-col items-center mt-6 mb-8 gap-2'>
@@ -100,6 +105,9 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                                 window.open(`https://${benefit.domain}`, '_blank')
                             }}
                             className="btn-primary hover:cursor-pointer"
+                            style={{
+                                backgroundColor: config?.buttonColor as string,
+                            }}
                             variant="primary"
                         >Visit {benefit.title} Website</Button>
                         <Button

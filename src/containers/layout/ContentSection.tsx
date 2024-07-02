@@ -8,11 +8,11 @@ interface ContentSectionProps extends React.HTMLAttributes<HTMLDivElement> {
     fullWidth?: boolean;
 }
 
-const ContentSection = ({ children, additionalClassName, fullWidth, className }: ContentSectionProps) => {
+const ContentSection = ({ children, additionalClassName, fullWidth, className, ...props }: ContentSectionProps) => {
 
     if (fullWidth) {
         return (
-            <div className={cn('w-full min-w-full', additionalClassName)}>
+            <div className={cn('w-full min-w-full', additionalClassName)} {...props}>
                 <div className={cn('max-w-[1440px] w-full mx-auto px-4 md:px-28', className)}>
                     {children}
                 </div>
@@ -20,7 +20,7 @@ const ContentSection = ({ children, additionalClassName, fullWidth, className }:
         )
     }
     return (
-        <div className={cn('max-w-[1440px] w-full mx-auto px-4 md:px-28', additionalClassName, className)}>
+        <div className={cn('max-w-[1440px] w-full mx-auto px-4 md:px-28', additionalClassName, className)} {...props}>
             {children}
         </div>
     )

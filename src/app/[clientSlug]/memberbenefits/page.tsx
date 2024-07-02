@@ -11,6 +11,7 @@ import { cn } from '@/utils/cn';
 import Avatar from '@/components/atomic/avatar/Avatar';
 import { Avatar3xl } from '@/components/atomic/avatar/Avatar.stories';
 import Typography from '@/components/atomic/typography/Typography';
+import { Content } from 'next/font/google';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
@@ -57,7 +58,9 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
     })
 
     return (
-        <>
+        <ContentSection fullWidth style={{
+            backgroundColor: config?.backgroundColor as string,
+        }}>
             <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
                 <div className="navbar-start w-full text-left ">
                     <Avatar name='avatar' size={"3xl"} image={config.imageURL} className='dark:hidden' />
@@ -66,6 +69,7 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
                     <PageHeader
                         title={config.title}
                         description={config.description}
+                        config={config}
                     />
                 </div>
                 <div>
@@ -80,6 +84,7 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
                                         otherMemberbenefit={otherBenefits.find(b => b.memberBenefitId == benefit.id)}
                                         key={index}
                                         benefit={benefit}
+                                        config={config}
                                     />
                                 ))}
                             </div>
@@ -89,11 +94,15 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
 
             </div>
             <div className='footer flex justify-center bottom-8 mb-5'>
-                <Typography type='p' className='text-center flex gap-2 '>
+                <Typography type='p' className='text-center flex gap-2 '
+                    style={{
+                        color: config?.textColor as string,
+                    }}
+                >
                     <span> Powered by </span><a href='https://www.yunakin.com/' target='_blank' className='text-blue-500 underline'>Yunakin.com</a>
                 </Typography>
             </div>
-        </>
+        </ContentSection>
 
     )
 }
