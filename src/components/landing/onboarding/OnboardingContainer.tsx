@@ -51,7 +51,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                     <div className='flex flex-col md:flex-row gap-2 justify-between items-center '>
                         <p className='text-center flex-1 text-sm '>Here is a live preview of your page</p>
                         <Button label='Navigate to Admin' onClick={() => {
-                            router.push(`/register?clientId=${clientSlug}`)
+                            router.push(`/register?clientId=${clientSlug}&selectedBenefits=${encodeURIComponent(`${selectedBenefits.filter(s => s.selected).map(b => b.id).join(",")}`)}`)
                         }} />
                     </div>
                 </div>)}
@@ -146,20 +146,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                     return
                                 }
                                 else {
-                                    const newMemberPageConfig = await createMemberPageConfigWithoutUser({
-                                        clientSlug: clientSlug,
-                                        title: "My Member Page",
-                                        description: "My Member Page",
-                                        imageURL: "https://yunakin.com/images/logo.svg",
-                                    }, selectedBenefits.filter(s => s.selected).map(s => s.id))
-                                    setLoading(false)
-                                    if (newMemberPageConfig) {
-                                        customToast.success("Member Benefit Page Generated Successfully")
-                                        setStep(step + 1)
-                                    } else {
-                                        customToast.error("Something went wrong. Please try again")
-                                    }
-                                    return;
+                                    setStep(step + 1)
                                 }
                             }}
                             className='w-full'

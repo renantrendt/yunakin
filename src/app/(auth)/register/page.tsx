@@ -19,6 +19,7 @@ import GoogleIcon from "@/icons/google-icon.svg"
 import EnvelopeIcon from '@/icons/envelope-icon.svg'
 import FormContainer from '@/components/form/FormContainer'
 import { useTranslation } from '@/lib/i18n/client'
+import { createMemberPageConfigWithoutUser } from '@/app/actions'
 
 
 
@@ -29,6 +30,7 @@ export default function RegisterPage() {
 
     const searchParams = useSearchParams()
     const clientId = searchParams.get('clientId')
+    const selectedBenefits = searchParams.get('selectedBenefits')?.split(",")
     const { t } = useTranslation('auth')
     const { data: session } = useSession()
     const router = useRouter()
@@ -42,48 +44,63 @@ export default function RegisterPage() {
         }
     )
 
-    if (!clientId) {
+    if (!clientId || !selectedBenefits) {
         throw notFound()
     }
-
 
     const onSubmit = async (data: any) => {
         setIsLoading(true);
         try {
-            const password = Math.random().toString(10).slice(-8);
 
-            const register = await fetch('/api/auth/register', {
-                method: 'POST',
-                body: JSON.stringify({
-                    ...data,
-                    clientId,
-                    password
-                })
-            })
+            const newMemberPageConfig = await createMemberPageConfigWithoutUser({
+                clientSlug: clientId,
+                title: "My Member Page",
+                description: "My Member Page",
+                imageURL: "https://yunakin.com/images/logo.svg",
+            }, selectedBenefits)
 
-            if (register.status === 200) {
-                // router.push(`/auth/verify-request?email=${values.email}`);
-                customToast.success(t("registerPage.registrationSuccessful"))
-                try {
-                    const result = await signIn('credentials', {
-                        email: data.email,
-                        password: password,
-                        redirect: false
+
+            if (newMemberPageConfig) {
+                customToast.success("Member Benefit Page Generated Successfully")
+                const password = Math.random().toString(10).slice(-8);
+
+                const register = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        ...data,
+                        clientId,
+                        password
                     })
-                    if (result?.error) {
-                        customToast.error(result.error)
-                    } else {
-                        router.push('/catalog')
-                    }
-                } catch (error) {
-                    console.error(error)
+                })
 
-                } finally {
-                    setIsLoading(false)
+                if (register.status === 200) {
+
+                    // router.push(`/auth/verify-request?email=${values.email}`);
+                    customToast.success(t("registerPage.registrationSuccessful"))
+                    try {
+                        const result = await signIn('credentials', {
+                            email: data.email,
+                            password: password,
+                            redirect: false
+                        })
+                        if (result?.error) {
+                            customToast.error(result.error)
+                        } else {
+                            router.push('/catalog')
+                        }
+                    } catch (error) {
+                        console.error(error)
+
+                    } finally {
+                        setIsLoading(false)
+                    }
+                } else {
+                    const data = await register.json()
+                    customToast.error(data.message || t("error.somethingWentWrong"))
                 }
-            } else {
-                const data = await register.json()
-                customToast.error(data.message || t("error.somethingWentWrong"))
+            }
+            else {
+                customToast.error("Something went wrong. Please try again")
             }
         } catch (error) {
             console.error(error)
