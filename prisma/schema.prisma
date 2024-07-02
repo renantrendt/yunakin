@@ -162,12 +162,18 @@ model Message {
 }
 
 model MemberBenefitPageConfig {
-  id                       String                     @id @default(uuid())
-  clientSlug               String                     @unique
-  title                    String
-  description              String
-  imageURL                 String
-  userId                   String?
+  id         String @id @default(uuid())
+  clientSlug String @unique
+  title      String
+
+  description String
+  imageURL    String
+  userId      String?
+
+  buttonColor              String?
+  backgroundColor          String?
+  textColor                String?
+  font                     String?
   user                     User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt                DateTime                   @default(now())
   updatedAt                DateTime                   @updatedAt

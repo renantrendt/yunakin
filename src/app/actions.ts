@@ -222,7 +222,12 @@ export async function updateMemberPageConfig(config: MemberBenefitPageConfig) {
         data: {
             title: config.title,
             description: config.description,
-            imageURL: config.imageURL
+            imageURL: config.imageURL,
+            clientSlug: config.clientSlug,
+            backgroundColor: config.backgroundColor,
+            buttonColor: config.buttonColor,
+            textColor: config.textColor,
+            font: config.font
         }
     })
     return updatedConfig

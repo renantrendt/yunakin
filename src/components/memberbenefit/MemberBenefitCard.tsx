@@ -11,16 +11,17 @@ import { useState } from 'react'
 import CheckIcon from "@/icons/check-icon.svg"
 import { upsertMemberBenefitLinkClick } from '@/app/actions'
 import DeviceDetector from "device-detector-js";
-import { Category, MemberBenefit, OtherMemberBenefit } from '@prisma/client'
+import { Category, MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from '@prisma/client'
 
 interface MemberBenefitCardProps {
     key: string
     benefit: MemberBenefit
     otherMemberbenefit?: OtherMemberBenefit
-    category?: Category
     createMode?: boolean
+    trackAnalytics?: boolean
+    config?: MemberBenefitPageConfig
 }
-const MemberBenefitCard = ({ key, benefit, category, createMode, otherMemberbenefit }: MemberBenefitCardProps) => {
+const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnalytics = true }: MemberBenefitCardProps) => {
 
     console.log('benefit', otherMemberbenefit)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -31,15 +32,16 @@ const MemberBenefitCard = ({ key, benefit, category, createMode, otherMemberbene
         const device = deviceDetector.parse(navigator.userAgent || window.navigator.userAgent)
 
         try {
-            await upsertMemberBenefitLinkClick({
-                memberBenefitId,
-                otherMemberBenefitId: otherMemberbenefit?.id || null,
-                device: (device.device?.type as string) || null,
-                browser: device.client?.name || null,
-                os: device.os?.name || null,
-            });
+            if (trackAnalytics) {
+                await upsertMemberBenefitLinkClick({
+                    memberBenefitId,
+                    otherMemberBenefitId: otherMemberbenefit?.id || null,
+                    device: (device.device?.type as string) || null,
+                    browser: device.client?.name || null,
+                    os: device.os?.name || null,
+                });
 
-
+            }
         } catch (error) {
 
         }
@@ -74,12 +76,15 @@ const MemberBenefitCard = ({ key, benefit, category, createMode, otherMemberbene
                                 // save analytics data
                             }}
                             className="btn-primary hover:cursor-pointer"
+                            style={{
+                                backgroundColor: config?.buttonColor as string,
+                            }}
                             variant="primary"
 
                         >Save Benefit</Button>
                     </div>
                 </div>
-            </div>
+            </div >
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <div className='flex flex-col  p-6 justify-center items-stretch '>
                     <div className='p-2 w-fit mx-auto rounded-lg text-primary-500 bg-gradient-to-b from-[#EAE9FE] to-[#D6D5FF]'>

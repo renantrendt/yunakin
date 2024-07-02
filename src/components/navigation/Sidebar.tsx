@@ -32,7 +32,7 @@ const sidebarLinks: SidebarLink[] = [
     { label: 'categories', path: '/categories', iconSrc: <UserGroupIcon />, adminRoute: true },
     { label: 'memberBenefits', path: '/memberbenefits', iconSrc: <UserGroupIcon />, adminRoute: false },
     { label: 'catalog', path: '/catalog', iconSrc: <UserGroupIcon />, adminRoute: false },
-    { label: 'analytics', path: '/analytics', iconSrc: <AnalyticsIcon /> },
+    { label: 'customize', path: '/customize', iconSrc: <AnalyticsIcon /> },
     // Add other necessary links here
 ]
 const bottomSideBarLinks: SidebarLink[] = [
