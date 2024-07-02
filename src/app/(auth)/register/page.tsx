@@ -27,11 +27,11 @@ interface FormValues {
     email: string
 }
 export default function RegisterPage() {
-
     const searchParams = useSearchParams()
     const clientId = searchParams.get('clientId')
     const selectedBenefits = searchParams.get('selectedBenefits')?.split(",")
     const { t } = useTranslation('auth')
+    const { t: onboardingT } = useTranslation('onboarding')
     const { data: session } = useSession()
     const router = useRouter()
     const [loading, setIsLoading] = useState(false)
@@ -54,8 +54,8 @@ export default function RegisterPage() {
 
             const newMemberPageConfig = await createMemberPageConfigWithoutUser({
                 clientSlug: clientId,
-                title: "My Benefits",
-                description: "Save those exclusive benefits",
+                title: onboardingT("customize.title"),
+                description: onboardingT("customize.description"),
                 imageURL: "https://yunakin.com/images/logo.svg",
             }, selectedBenefits)
 

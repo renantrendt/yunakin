@@ -36,9 +36,7 @@ interface SelectedMemberBenefit extends MemberBenefit {
 
 
 const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: CustomizePageContainerProps) => {
-
     const router = useRouter()
-
     const [settingsModalOpen, setSettingsModalOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [loading, setLoading] = useState(false);
@@ -128,7 +126,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                             setSettingsModalOpen(true)
                         }}
                     />
-                    <Button variant="primary" className='w-full' label="Publish Changes"
+                    <Button variant="primary" className='w-full' label="Publish Changes" loading={loading}
                         onClick={publishChanges}
                     />
 
@@ -191,15 +189,18 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                 </div>
             </div >
             {settingsModalOpen && <CustomizePageModal
+                loading={loading}
                 config={config}
                 onClose={() => {
                     setSettingsModalOpen(false)
                 }}
                 onUpdate={async (newConfig: any) => {
                     try {
+                        setLoading(true)
                         const mergedConfig = {
                             ...config,
-                            ...newConfig
+                            ...newConfig,
+                            clientSlug: newConfig.slug
                         }
                         await updateMemberPageConfig(mergedConfig)
                         setConfig(mergedConfig)
@@ -208,7 +209,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     } catch (error) {
                         customToast.error("Something went wrong. Please try again")
                     } finally {
-
+                        setLoading(false)
                     }
 
 

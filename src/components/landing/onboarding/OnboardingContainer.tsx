@@ -12,6 +12,7 @@ import SelectMemberBenefitCard from '@/components/memberbenefit/SelectMemberBene
 import siteUrls from '@/config/site-config'
 import ContentSection from '@/containers/layout/ContentSection'
 import PlusIcon from '@/icons/PlusIcon'
+import { useTranslation } from '@/lib/i18n/client'
 import { cn } from '@/utils/cn'
 import { Category, MemberBenefit } from '@prisma/client'
 import Image from 'next/image'
@@ -30,6 +31,7 @@ interface SelectedMemberBenefit extends MemberBenefit {
 
 
 const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps) => {
+    const { t } = useTranslation('onboarding')
     const router = useRouter()
     const [step, setStep] = useState<number>(1)
     const [loading, setLoading] = useState(false);
@@ -43,7 +45,6 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
             }
         })
     )
-
     return (
         <div className=''>
             <ContentSection fullWidth additionalClassName={cn('  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 ')}>
@@ -59,8 +60,8 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
             <div className='max-w-[1440px] pb-20 lg:py-12 w-full mx-auto px-4 md:px-28'>
                 <div className='px-4 md:px-0'>
                     <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
-                        <Typography type="h1" className="font-black text-[32px] leading-[45px] lg:text-5xl" >Choose the benefits you want to offer</Typography>
-                        <Typography type="p" className="text-base text-neutral-600 font-normal lg:text-xl" >Then generate a custom domain for your company</Typography>
+                        <Typography type="h1" className="font-black text-[32px] leading-[45px] lg:text-5xl" >{t(`step${step}.title`)}</Typography>
+                        <Typography type="p" className="text-base text-neutral-600 font-normal lg:text-xl" >{t(`step${step}.description`)}</Typography>
                     </div>
                 </div>
                 <div>

@@ -19,9 +19,9 @@ interface CustomizePageModalProps {
 }
 
 const schema = yup.object().shape({
-    backgroundColor: yup.string().required(),
-    textColor: yup.string().required(),
-    font: yup.string().required(),
+    backgroundColor: yup.string(),
+    textColor: yup.string(),
+    font: yup.string(),
     slug: yup.string().required(),
 })
 
