@@ -12,8 +12,8 @@ import ImageUploader from '../atomic/file-uploader/ImageUploader';
 
 interface AddMemberBenefitModalProps {
     onClose: () => void;
-    onCreate: (data: FormValues) => void;
-    onUpdate: (data: FormValues) => void;
+    onCreate: (data: any) => void;
+    onUpdate: (data: any) => void;
     categories: Category[];
     editMemberBenefit?: MemberBenefit;
     loading: boolean;
@@ -23,9 +23,9 @@ const schema = yup.object().shape({
     name: yup.string().required(),
     code: yup.string().required(),
     domain: yup.string().required(),
-    imageURL: yup.string(),
-    location: yup.string(),
-    link: yup.string(),
+    imageURL: yup.string().optional().nullable(),
+    location: yup.string().optional().nullable(),
+    link: yup.string().optional().nullable(),
     description: yup.string(),
     categoryId: yup.string().required()
 })
@@ -85,7 +85,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
         }
         onCreate(data)
     }
-
+    console.log(errors)
     return (
         <Modal isOpen={true} onClose={onClose}
         >

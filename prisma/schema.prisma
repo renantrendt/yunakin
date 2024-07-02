@@ -197,6 +197,7 @@ model MemberBenefit {
   imageURL                 String?
   domain                   String
   location                 String?
+  offer                    String?
   code                     String
   link                     String?
   userId                   String
