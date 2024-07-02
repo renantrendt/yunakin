@@ -7,8 +7,8 @@
         "title": "Members benefit",
         "description": "You can customize this page and add your own benefit after saving it"
     },
-    "customize": {
-        "title": "Member Benefits",
-        "description": "Enjoy your benefits"
+    "catalog": {
+        "title": "Catalog of benefits",
+        "description": "Save the benefits you want to offer to your members"
     }
 }

@@ -56,7 +56,7 @@ export default function RegisterPage() {
                 clientSlug: clientId,
                 title: onboardingT("customize.title"),
                 description: onboardingT("customize.description"),
-                imageURL: "https://yunakin.com/images/logo.svg",
+                imageURL: "/images/logo.svg",
             }, selectedBenefits)
 
 

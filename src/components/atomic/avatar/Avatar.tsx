@@ -33,6 +33,7 @@ const Avatar = ({ image, name, size = 'md', ...additionalProps }: AvatarProps) =
         <div className='avatar' {...additionalProps}>
             <div className={cn('rounded-full', avatar({ size }))}>
                 <Image
+                    unoptimized
                     height={40}
                     width={40}
                     src={`${image}?${timestamp}`}

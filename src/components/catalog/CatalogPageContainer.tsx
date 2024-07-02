@@ -23,6 +23,7 @@ import React, { use, useCallback, useEffect, useState } from 'react'
 import _ from 'lodash'
 import { set } from 'react-ga'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
+import { useTranslation } from '@/lib/i18n/client'
 interface CatalogPageContainerProps {
     benefits: SelectedMemberBenefit[]
     categories: Category[]
@@ -35,7 +36,7 @@ interface SelectedMemberBenefit extends MemberBenefit {
 
 
 const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: CatalogPageContainerProps) => {
-
+    const { t } = useTranslation('onboarding')
     const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
     const [loading, setLoading] = useState(false);
@@ -111,14 +112,11 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
                 <Typography type="p" className="text-white font-normal text-sm">You can customize the catalog here</Typography>
             </div>
             <ContentSection fullWidth additionalClassName={cn(' flex justify-end   w-fit   ')}>
-                <div className='flex fixed justify-end  right-36 gap-4 z-50 w-fit py-4 px-3'>
+                <div className='flex  w-full justify-end  right-36 gap-4 z-50 max-w-sm py-4 px-3'>
                     <Button variant="secondary" className='w-full' label="View Live Page" onClick={() => {
                         const url = `${platformConfig.variables.NEXT_PUBLIC_NEXT_URL}/${config.clientSlug}/memberbenefits`
                         window.open(url, '_blank')
                     }} />
-                    <Button variant="primary" className='w-full' label="Publish Changes"
-                        onClick={publishChanges}
-                    />
                     <Button variant="primary" className='w-full' label="Add your own Benefits"
                         onClick={() => {
                             router.push("/memberbenefits?openModal=true")
@@ -128,25 +126,14 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
 
             </ContentSection >
             <div className='max-w-[1440px] pb-20 lg:py-12 w-full mx-auto px-4 md:px-28'>
-                <ImageUploader onImageUpload={image => {
-                    setConfig({ ...config, imageURL: image })
-                }}
-                    image={config.imageURL}
-                />
                 <div className='px-4 md:px-0'>
                     <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
-                        <Typography type="h1" contentEditable className="font-black text-[32px] leading-[45px] lg:text-5xl"
-                            onInput={(e: any) => {
-                                setConfig({ ...config, title: e.target.textContent })
-                            }}
-                        >{memberPageConfig.title}</Typography>
-                        <Typography type="p" contentEditable className="text-base text-neutral-600 font-normal lg:text-xl"
-                            onInput={(e: any) => {
-                                console.log(e)
-                                console.log(e.target.innerText)
-                                setConfig({ ...config, description: e.target.textContent })
-                            }}
-                        >{memberPageConfig.description} </Typography>
+                        <Typography type="h1" className="font-black text-[32px] leading-[45px] lg:text-5xl"
+
+                        >{t("catalog.title")}</Typography>
+                        <Typography type="p" className="text-base text-neutral-600 font-normal lg:text-xl"
+
+                        >{t("catalog.description")}</Typography>
                     </div>
                 </div>
                 <div>
@@ -174,54 +161,6 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
                         })}
 
                     </div>
-                    {/* <div className=' transform flex flex-col gap-4  w-full max-w-sm px-4 left-1/2 -translate-x-1/2 bottom-4 bg-white rounded-lg p-4 '>
-                        <div className='relative '>
-                            <p className='absolute z-20 top-[13px] left-[16px]'>yunakin.com/</p>
-                            <InputField
-                                name="clientSlug"
-                                id="clientSlug"
-                                value={clientSlug}
-                                onChange={(e) => {
-                                    setClientSlug(e.target.value)
-                                }}
-                                className='!pl-[116px]'
-                                placeholder="your_company"
-                            />
-                        </div>
-                        <Button
-                            loading={loading}
-                            onClick={async () => {
-                                setLoading(true)
-                                if (selectedBenefits.filter(s => s.selected).length == 0) {
-                                    customToast.warn("Please select at least one benefit")
-                                    return
-                                }
-                                const memberPageConfig = await getMemberPageConfigByClientSlug(clientSlug)
-                                if (memberPageConfig) {
-                                    customToast.warn("This slug is already taken. Please choose another one")
-                                    setLoading(false)
-                                    return
-                                }
-                                else {
-                                    const newMemberPageConfig = await createMemberPageConfigWithoutUser({
-                                        clientSlug: clientSlug,
-                                        title: "My Member Page",
-                                        description: "My Member Page",
-                                        imageURL: "https://yunakin.com/images/logo.svg",
-                                    }, selectedBenefits.filter(s => s.selected).map(s => s.id))
-                                    setLoading(false)
-                                    if (newMemberPageConfig) {
-                                        customToast.success("Member Benefit Page Generated Successfully")
-                                    } else {
-                                        customToast.error("Something went wrong. Please try again")
-                                    }
-                                    return;
-                                }
-                            }}
-                            className='w-full'
-                            label={"Generate Member Benefit Page"}
-                        />
-                    </div> */}
                 </div>
             </div >
         </div >

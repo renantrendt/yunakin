@@ -57,13 +57,14 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
         }
     })
 
+    const image = config.imageURL || "/images/logo.svg"
     return (
         <ContentSection fullWidth style={{
             backgroundColor: config?.backgroundColor as string,
         }}>
             <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
                 <div className="navbar-start w-full text-left ">
-                    <Avatar name='avatar' size={"3xl"} image={config.imageURL} className='dark:hidden' />
+                    <Image unoptimized src={image} alt='logo' width={100} height={100} />
                 </div>
                 <div className='px-4 md:px-0'>
                     <PageHeader
