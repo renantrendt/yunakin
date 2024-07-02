@@ -37,7 +37,7 @@ const sidebarLinks: SidebarLink[] = [
 ]
 const bottomSideBarLinks: SidebarLink[] = [
     { label: 'settings', path: '/settings', iconSrc: <SettingsIcon /> },
-    { label: 'helpAndSupport', path: '/help', iconSrc: <BookOpen /> },
+    // { label: 'helpAndSupport', path: '/help', iconSrc: <BookOpen /> },
 ]
 
 

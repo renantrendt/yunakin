@@ -43,8 +43,16 @@ const MemberBenefitsPage = async () => {
     }
 
     const categories = await prisma.category.findMany()
+
+    const config = await prisma.memberBenefitPageConfig.findFirst({
+        where: {
+            userId: session?.user?.id
+        }
+    })
     return (
-        <MemberBenefitsTable memberBenefits={benefits} categories={categories} />
+        <MemberBenefitsTable memberBenefits={benefits} categories={categories}
+            config={config}
+        />
     )
 }
 

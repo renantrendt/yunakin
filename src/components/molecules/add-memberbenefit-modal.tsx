@@ -64,7 +64,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                 link: '',
                 location: '',
                 description: '',
-                categoryId: '',
+                categoryId: categories[0].id,
                 imageURL: ''
             }
         }

@@ -19,7 +19,7 @@ import AddUserModal from '../molecules/add-user-modal'
 import InputField from '../atomic/input/InputField'
 import MagnifyingGlass from "@/icons/magnifying-glass.svg"
 import useDebounce from '@/hooks/useDebounce'
-import { Category, MemberBenefit } from '@prisma/client'
+import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
 import AddCategoryModal from '../molecules/add-category-modal'
 import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, deleteOtherMemberBenefit, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
@@ -33,9 +33,10 @@ import { useSearchParams } from 'next/navigation'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefit[]
     categories: Category[]
+    config?: MemberBenefitPageConfig
 }
 
-const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories }: MemberBenefitsTableProps) => {
+const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, categories }: MemberBenefitsTableProps) => {
     const searchParams = useSearchParams()
     const session = useSession()
     const [loading, setLoading] = useState(false)
@@ -67,7 +68,9 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
         columnHelper.accessor(row => row.title, {
             id: 'Title',
             cell: info => {
-                return <a href={""} target='_blank' className='text-blue-500 hover:underline'>{info.getValue()}</a>
+                const memberBenefit = memberBenefits[info.row.index]
+                const domain = memberBenefit.domain.includes('http') ? memberBenefit.domain : `https://${memberBenefit.domain}`
+                return <a href={domain} target='_blank' className='text-blue-500 hover:underline'>{info.getValue()}</a>
             },
             header: () => <span>Title</span>,
             footer: info => info.column.id,
