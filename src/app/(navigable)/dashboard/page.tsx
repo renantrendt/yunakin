@@ -12,6 +12,28 @@ export default async function Dashboard() {
     if (!session?.user) {
         throw notFound()
     }
+
+    const config = await prisma.memberBenefitPageConfig.findFirst({
+        where: {
+            userId: session.user.id
+        }
+    })
+
+    let pageViews = 0
+    try {
+        if (config) {
+            const result = await prisma.memberPageViews.aggregate({
+                _count: true,
+                where: {
+                    memberBenefitPageConfigId: config.id
+                }
+            })
+            pageViews = result._count
+        }
+
+    } catch (error) {
+
+    }
     const memberBenefits = await prisma.memberBenefit.findMany({
         where: {
             userId: session.user.id
@@ -25,7 +47,6 @@ export default async function Dashboard() {
         }
     })
 
-    console.log("asdf")
 
     const memberBenefitIds = memberBenefits.map(benefit => benefit.id)
 
@@ -73,7 +94,8 @@ export default async function Dashboard() {
             filter(f => f.os === "iOS" || f.os == "android").length).reduce((a, b) => a + b, 0),
         totalDesktopClicks: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.
             filter(f => f.os !== "iOS" && f.os !== "android").length).reduce((a, b) => a + b, 0),
-        totalClaims: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.CLAIM_BENEFIT).length).reduce((a, b) => a + b, 0)
+        totalClaims: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.CLAIM_BENEFIT).length).reduce((a, b) => a + b, 0),
+        pageViews
     }
 
     // TODO 

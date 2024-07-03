@@ -8,6 +8,7 @@ interface DashboardCardsProps {
         totalMobileClicks: number;
         totalDesktopClicks: number;
         totalClaims: number;
+        pageViews: number;
     }
 
 }
@@ -35,6 +36,12 @@ export const DashboardCards = ({ cardStats }: DashboardCardsProps) => {
             quantity: totalDesktopClicks,
             increase: 21
         },
+        {
+            title: "Page Views",
+            quantity: cardStats.pageViews,
+            increase: 21
+        }
+
     ]
     return (
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 mb-8 '>
