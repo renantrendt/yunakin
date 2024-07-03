@@ -24,6 +24,7 @@ const schema = yup.object().shape({
     code: yup.string().required(),
     domain: yup.string().required(),
     imageURL: yup.string().optional().nullable(),
+    offer: yup.string().nullable(),
     location: yup.string().optional().nullable(),
     link: yup.string().optional().nullable(),
     description: yup.string(),
@@ -34,11 +35,12 @@ interface FormValues {
     name: string;
     code: string;
     domain: string;
-    location: string;
-    link: string;
+    location?: string;
+    link?: string;
     description: string;
     categoryId: string;
     imageURL?: string;
+    offer?: string;
 }
 
 
@@ -56,7 +58,8 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                 location: editMemberBenefit.location,
                 description: editMemberBenefit.description,
                 categoryId: editMemberBenefit.categoryId,
-                imageURL: editMemberBenefit.imageURL
+                imageURL: editMemberBenefit.imageURL,
+                offer: editMemberBenefit.offer
             } : {
                 name: '',
                 code: '',
@@ -65,7 +68,8 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                 location: '',
                 description: '',
                 categoryId: categories[0].id,
-                imageURL: ''
+                imageURL: '',
+                offer: ''
             }
         }
     )
@@ -139,6 +143,22 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                                 onChange={onChange}
                                 value={value}
                                 error={errors.code?.message}
+                            />
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name="offer"
+                        render={({ field: { onChange, value } }) => (
+                            <InputField
+                                label="Offer"
+                                type="text"
+                                id="offer"
+                                name="offer"
+                                placeholder='Enter Offer'
+                                onChange={onChange}
+                                value={value}
+                                error={errors.offer?.message}
                             />
                         )}
                     />

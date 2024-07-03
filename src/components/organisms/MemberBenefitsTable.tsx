@@ -98,6 +98,12 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
             header: () => <span>Description</span>,
             footer: info => info.column.id,
         }),
+        columnHelper.accessor(row => row.offer, {
+            id: 'Offer',
+            cell: info => info.getValue(),
+            header: () => <span>Offer</span>,
+            footer: info => info.column.id,
+        }),
         columnHelper.accessor(row => row.code, {
             id: 'Code',
             cell: info => info.getValue(),
@@ -279,7 +285,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                                 description: data.description,
                                 link: data.link,
                                 userId: session.data?.user?.id! as string,
-                                title: data.name
+                                title: data.name,
+                                offer: data.offer
                             } as MemberBenefit)
                             if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
@@ -322,7 +329,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                                 link: data.link,
                                 userId: userId,
                                 title: data.name,
-                                imageURL: data.imageURL
+                                imageURL: data.imageURL,
+                                offer: data.offer
                             } as MemberBenefit)
                             if (data.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
