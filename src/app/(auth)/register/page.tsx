@@ -54,8 +54,8 @@ export default function RegisterPage() {
 
             const newMemberPageConfig = await createMemberPageConfigWithoutUser({
                 clientSlug: clientId,
-                title: onboardingT("customize.title"),
-                description: onboardingT("customize.description"),
+                title: "Member Benefits",
+                description: "Enjoy your benefits",
                 imageURL: "/images/logo.svg",
             }, selectedBenefits)
 
