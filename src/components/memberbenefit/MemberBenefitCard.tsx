@@ -51,10 +51,10 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
     return (
         <>
 
-            <div key={key} className="card w-full dark:text-white dark:bg-card-dark min-w-[270px] h-full flex-1   overflow-hidden max-w-lg  last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
+            <div key={key} className="card w-full dark:text-white dark:bg-card-dark min-w-[270px] h-full flex-1    overflow-hidden max-w-lg  last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
         rounded-[10px] shadow-sm">
                 <figure className='relative hidden max-h-[176px]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${image || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
-                <div className="px-6 pt-6 pb-6 flex flex-col">
+                <div className="px-6 pt-6 pb-6 flex flex-col  ">
                     <h2 className="card-title  text-2xl font-bold mb-2">{benefit.title}</h2>
                     {benefit.description && <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base  flex-auto overflow-hidden min-h-[100px]'>{benefit.description?.length > 100 ? `${benefit.description?.substring(0, 100)}...` : benefit.description}</p>}
                     <p className='text-neutral-600 font-black dark:text-sidebar-icon-dark text-base min-h-[50px]'>{benefit.offer}</p>
@@ -62,7 +62,11 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                         <div className='flex flex-col items-start justify-start gap-4'>
 
                             <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.domain}</a>
-                            {benefit.link && <a href={benefit.link} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.location}</a>}
+                            {benefit.link && <a target='_blank'
+                                onClick={() => {
+                                    handleButtonClick(benefit.id, MemberBenefitClickType.LOCATION_CLICK)
+                                }}
+                                className='cursor-pointer text-primary-500 underline'>{benefit.location}</a>}
                         </div>
                     </div>
                     <div>
