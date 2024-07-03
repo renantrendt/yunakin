@@ -145,7 +145,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
         onPaginationChange: setPagination,
         autoResetPageIndex: false,
         state: {
-            pagination
+            // pagination
 
         },
     });
@@ -178,14 +178,14 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
 
     return (
         <div className='h-full min-h-[100vh]'>
-            <div className='flex w-full justify-end my-4 '>
+            {/* <div className='flex w-full justify-end my-4 '>
                 <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
                     id='search' value={search} onChange={(e) => {
                         setSearched(false)
                         setSearch(e.target.value)
                     }} className='border-none outline-none hover:border-none focus:border-none
                              !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
-            </div>
+            </div> */}
             <div className='flex flex-col gap-4'>
 
                 <Table>
@@ -227,7 +227,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                 </Table>
                 <div className='self-end flex flex-col gap-4'>
 
-                    <Pagination
+                    {/* <Pagination
                         totalPages={Math.ceil(memberBenefits.length / 5)}
                         previousButton
                         nextButton
@@ -241,7 +241,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                                 pageSize: 5
                             })
                         }}
-                    />
+                    /> */}
                     <Button label='Add Member Benefit' className='w-fit self-end' variant='primary' onClick={() => setMemberBenefitModal(true)} />
                 </div>
             </div>

@@ -65,9 +65,9 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
             </div>
             <ul className="menu w-64 no-scrollbar flex-1 flex justify-between flex-col">
                 <div>
-                    <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
+                    {/* <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
                         id='search' value={search} onChange={(e) => setSearch(e.target.value)} className='bg-transparent border-none outline-none hover:border-none focus:border-none
-                             py-0 !px-8 !shadow-none !mb-2 dark:!bg-transparent   ' customLeadingIconClassName='!left-[8px] !top-[14px]' />
+                             py-0 !px-8 !shadow-none !mb-2 dark:!bg-transparent   ' customLeadingIconClassName='!left-[8px] !top-[14px]' /> */}
                     <div className='flex flex-col gap-[6px] mt-[6px]'>
                         {sidebarLinks.filter(link => link.adminRoute ? session.data?.user?.role == "ADMIN" : true).map((link) => (
                             <NavigationItem
