@@ -12,6 +12,8 @@ import Avatar from '@/components/atomic/avatar/Avatar';
 import { Avatar3xl } from '@/components/atomic/avatar/Avatar.stories';
 import Typography from '@/components/atomic/typography/Typography';
 import { Content } from 'next/font/google';
+import Button from '@/components/atomic/button/Button';
+import LinkButton from '@/components/atomic/button/LinkButton';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
@@ -63,9 +65,17 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
             backgroundColor: config?.backgroundColor as string,
         }}>
             <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
-                <div className="navbar-start w-full text-left ">
-                    <Image unoptimized src={image} alt='logo' width={100} height={100} />
+                <div className='flex justify-between items-center'>
+
+                    <div className=" w-full text-left ">
+                        <Image unoptimized src={image} alt='logo' width={100} height={100} />
+                    </div>
+                    <LinkButton variant="tertiary" className='w-fit' label="Add your own Benefit here"
+                        href='/onboarding'
+                        target='_blank'
+                    />
                 </div>
+
                 <div className='px-4 md:px-0'>
                     <PageHeader
                         title={config.title}
