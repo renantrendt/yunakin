@@ -80,6 +80,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
         }
         setLoading(true)
         try {
+
             const updatedMemberPageConfig = await updateMemberPageConfig(config)
 
             setLoading(false)
@@ -196,20 +197,17 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                 }}
                 onUpdate={async (newConfig: any) => {
                     try {
-                        setLoading(true)
                         const mergedConfig = {
                             ...config,
                             ...newConfig,
                             clientSlug: newConfig.slug
                         }
-                        await updateMemberPageConfig(mergedConfig)
                         setConfig(mergedConfig)
                         setSettingsModalOpen(false)
                         customToast.success("Settings Updated Successfully")
                     } catch (error) {
                         customToast.error("Something went wrong. Please try again")
                     } finally {
-                        setLoading(false)
                     }
 
 
