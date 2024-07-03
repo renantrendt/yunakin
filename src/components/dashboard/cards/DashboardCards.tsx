@@ -2,16 +2,27 @@ import React from 'react'
 import DashboardCard from './DashboardCard'
 
 interface DashboardCardsProps {
-    totalClicks:number;
-    totalMobileClicks:number;
-    totalDesktopClicks:number; 
+
+    cardStats: {
+        totalClicks: number;
+        totalMobileClicks: number;
+        totalDesktopClicks: number;
+        totalClaims: number;
+    }
+
 }
 
-export const DashboardCards = ({totalClicks, totalMobileClicks, totalDesktopClicks}: DashboardCardsProps) => {
+export const DashboardCards = ({ cardStats }: DashboardCardsProps) => {
+    const { totalClicks, totalMobileClicks, totalDesktopClicks, totalClaims } = cardStats;
     const data = [
         {
             title: "Total Clicks",
             quantity: totalClicks,
+            increase: 21
+        },
+        {
+            title: "Total Claims",
+            quantity: totalClaims,
             increase: 21
         },
         {

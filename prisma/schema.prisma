@@ -36,6 +36,7 @@ model User {
   memberBenefit           MemberBenefit[]
   MemberBenefitPageConfig MemberBenefitPageConfig[]
   OtherMemberBenefit      OtherMemberBenefit[]
+  MemberPageViews         MemberPageViews[]
 }
 
 model Account {
@@ -178,6 +179,7 @@ model MemberBenefitPageConfig {
   createdAt                DateTime                   @default(now())
   updatedAt                DateTime                   @updatedAt
   onboardingMemberBenefits OnboardingMemberBenefits[]
+  MemberPageViews          MemberPageViews[]
 
   @@index([clientSlug])
 }
@@ -212,17 +214,17 @@ model MemberBenefit {
 }
 
 model MemberBenefitClick {
-  id                   String  @id @default(uuid())
+  id                   String              @id @default(uuid())
   memberBenefitId      String?
   otherMemberBenefitId String?
   device               String?
-
-  browser            String?
-  os                 String?
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  memberBenefit      MemberBenefit?      @relation(name: "MemberBenefitToClick", fields: [memberBenefitId], references: [id])
-  otherMemberBenefit OtherMemberBenefit? @relation(fields: [otherMemberBenefitId], references: [id])
+  event                String?             @default("SAVE_BENEFIT")
+  browser              String?
+  os                   String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  memberBenefit        MemberBenefit?      @relation(name: "MemberBenefitToClick", fields: [memberBenefitId], references: [id])
+  otherMemberBenefit   OtherMemberBenefit? @relation(fields: [otherMemberBenefitId], references: [id])
 }
 
 model OtherMemberBenefit {
@@ -244,4 +246,14 @@ model OnboardingMemberBenefits {
   memberBenefitPageConfig   MemberBenefitPageConfig @relation(fields: [memberBenefitPageConfigId], references: [id], onDelete: Cascade)
   createdAt                 DateTime                @default(now())
   updatedAt                 DateTime                @default(now()) @updatedAt
+}
+
+model MemberPageViews {
+  id                        String                  @id @default(uuid())
+  memberBenefitPageConfigId String
+  memberBenefitPageConfig   MemberBenefitPageConfig @relation(fields: [memberBenefitPageConfigId], references: [id], onDelete: Cascade)
+  createdAt                 DateTime                @default(now())
+  updatedAt                 DateTime                @default(now()) @updatedAt
+  User                      User?                   @relation(fields: [userId], references: [id])
+  userId                    String?
 }
