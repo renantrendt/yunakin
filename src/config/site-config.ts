@@ -39,6 +39,7 @@ const siteUrls: SiteUrls = {
         dashboard: '/dashboard',
         docs: "https://docs.Codepilot.dev",
         login: '/login',
+        onboarding: '/onboarding',
         logout: '/logout',
         register: '/register',
         forgotPassword: '/forgot-password',

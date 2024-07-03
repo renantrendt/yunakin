@@ -75,7 +75,7 @@ const MagicLinkForm = () => {
             <div className="flex justify-center flex-col gap-4">
                 <Button variant="primary" type="submit" className="w-full" label={t("loginPage.sendMagicLink")} size='lg' loading={loading} />
                 <div className=' text-sm dark:text-white'>
-                    {t("loginPage.notMember")} <Link href={siteUrls.general.register} className="text-primary ">{t("loginPage.register")}</Link>
+                    {t("loginPage.notMember")} <Link href={siteUrls.general.onboarding} className="text-primary ">{t("loginPage.register")}</Link>
                 </div>
             </div>
         </form>
