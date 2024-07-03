@@ -34,10 +34,10 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
                 <div className="px-6 pt-6 pb-6 flex-shrink-0">
                     <h2 className="card-title text-2xl font-bold mb-2">{benefit.title}</h2>
                     <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base'>{benefit.description}</p>
+                    <p className='text-neutral-600 font-black dark:text-sidebar-icon-dark text-base'>{benefit.offer}</p>
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
                             <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.domain}</a>
-                            <p>{benefit.offer}</p>
                             <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.location || ""}</a>
                         </div>
                     </div>
