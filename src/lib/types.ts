@@ -35,6 +35,12 @@ export type MemberBenefitLinkClickDto = {
     os?: string
     event: MemberBenefitClickType
 }
+export type MemberPageViewDto = {
+    memberBenefitPageConfigId: string
+    device?: string
+    browser?: string
+    os?: string
+}
 
 
 export enum MemberBenefitClickType {

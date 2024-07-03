@@ -1,7 +1,7 @@
 'use server'
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
-import { MemberBenefitLinkClickDto, MemberBenefitPageConfigDto } from "@/lib/types"
+import { MemberBenefitLinkClickDto, MemberBenefitPageConfigDto, MemberPageViewDto } from "@/lib/types"
 import { Category, MemberBenefit, MemberBenefitClick, MemberBenefitPageConfig } from "@prisma/client"
 import exp from "constants"
 
@@ -60,6 +60,20 @@ export async function upsertMemberBenefitLinkClick(memberBenefitClick: MemberBen
     const clickAdded = await prisma.memberBenefitClick.create({
         data: {
             ...memberBenefitClick
+        }
+    })
+
+    return;
+}
+
+export async function upsertMemberPageView(pageView: MemberPageViewDto) {
+    // save the data to database
+    const clickAdded = await prisma.memberPageViews.create({
+        data: {
+            device: pageView.device,
+            browser: pageView.browser,
+            os: pageView.os,
+            memberBenefitPageConfigId: pageView.memberBenefitPageConfigId,
         }
     })
 

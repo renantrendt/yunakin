@@ -9,6 +9,7 @@ import { MemberBenefit } from '@prisma/client';
 import ContentSection from '@/containers/layout/ContentSection';
 import Typography from '@/components/atomic/typography/Typography';
 import LinkButton from '@/components/atomic/button/LinkButton';
+import PageTracker from '@/components/analytics/pagetracker/PageTracker';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
@@ -55,11 +56,15 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
     })
 
     const image = config.imageURL || "/images/logo.svg"
+
+
     return (
         <ContentSection fullWidth style={{
             backgroundColor: config?.backgroundColor as string,
         }}>
-            <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28'>
+            <div className='max-w-full py-20 w-full '>
+                <PageTracker config={config} />
+
                 <div className='flex justify-between items-center'>
 
                     <div className=" w-full text-left ">
@@ -81,10 +86,10 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
                 <div>
                     {categories.map(category => (
                         <>
-                            <div className=" 	  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex dark:bg-card-dark">
+                            <div className=" 	mt-8  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex dark:bg-card-dark">
                                 <div className=" text-center text-category-blog-color dark:text-sidebar-icon-dark text-sm font-semibold  uppercase tracking-[0.5px]">{category.name}</div>
                             </div>
-                            <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
+                            <div className='flex flex-row gap-3 lg:gap-6 justify-items-center items-stretch   pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                                 {benefits && benefits.filter(b => b.categoryId == category.id).map((benefit: MemberBenefit, index: any) => (
                                     <MemberBenefitCard
                                         otherMemberbenefit={otherBenefits.find(b => b.memberBenefitId == benefit.id)}

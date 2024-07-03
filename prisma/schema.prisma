@@ -250,6 +250,9 @@ model OnboardingMemberBenefits {
 
 model MemberPageViews {
   id                        String                  @id @default(uuid())
+  device                    String?
+  browser                   String?
+  os                        String?
   memberBenefitPageConfigId String
   memberBenefitPageConfig   MemberBenefitPageConfig @relation(fields: [memberBenefitPageConfigId], references: [id], onDelete: Cascade)
   createdAt                 DateTime                @default(now())

@@ -51,13 +51,13 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
     return (
         <>
 
-            <div key={key} className="card w-full dark:text-white dark:bg-card-dark min-w-[270px] h-full   overflow-hidden max-w-lg  last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
+            <div key={key} className="card w-full dark:text-white dark:bg-card-dark min-w-[270px] h-full flex-1   overflow-hidden max-w-lg  last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
         rounded-[10px] shadow-sm">
                 <figure className='relative hidden max-h-[176px]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${image || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
-                <div className="px-6 pt-6 pb-6">
-                    <h2 className="card-title text-2xl font-bold mb-2">{benefit.title}</h2>
-                    <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base'>{benefit.description}</p>
-                    <p className='text-neutral-600 font-black dark:text-sidebar-icon-dark text-base'>{benefit.offer}</p>
+                <div className="px-6 pt-6 pb-6 flex flex-col">
+                    <h2 className="card-title  text-2xl font-bold mb-2">{benefit.title}</h2>
+                    {benefit.description && <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base  flex-auto overflow-hidden min-h-[100px]'>{benefit.description?.length > 100 ? `${benefit.description?.substring(0, 100)}...` : benefit.description}</p>}
+                    <p className='text-neutral-600 font-black dark:text-sidebar-icon-dark text-base min-h-[50px]'>{benefit.offer}</p>
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
 
@@ -99,7 +99,9 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                     <div className='flex flex-col gap-2'>
                         <Button
                             onClick={() => {
-                                window.open(`https://${benefit.domain}`, '_blank')
+
+                                const domain = benefit.domain.includes('http') ? benefit.domain : `https://${benefit.domain}`
+                                window.open(`${benefit.domain}`, '_blank')
                                 handleButtonClick(benefit.id, MemberBenefitClickType.CLAIM_BENEFIT)
                             }}
                             className="btn-primary hover:cursor-pointer"
