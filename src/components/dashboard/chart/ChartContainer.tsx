@@ -32,18 +32,18 @@ interface ChartContainerProps {
 const ChartContainer = ({ benefitClicks, companyClicks, totalClicks, totalCompanyClicks, totalClaims, beenfitsClaims }: ChartContainerProps) => {
     const charts = [
         {
-            title: 'Member Benefits Clicks',
+            title: 'Benefits that your members are saving at your members benefits public page',
             summary: totalClicks,
             children: <BarChart name='Clicks' items={benefitClicks} />
         },
 
         {
-            title: 'Company Clicks',
+            title: 'Benefits listed from my company that was saved at other companies public members page',
             summary: totalCompanyClicks,
             children: <BarChart name='All Member Benefit Clicks' items={companyClicks} />
         },
         {
-            title: 'Member Benefits Claims',
+            title: 'Clicks on the website of the benefits listed on my public members page',
             summary: totalClaims,
             children: <BarChart name='Benefit Claims' items={beenfitsClaims} />
         },
