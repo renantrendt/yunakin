@@ -16,36 +16,37 @@ interface ChartContainerProps {
         title: string
         count: number
     }[]
-    benefitsByOs: {
+    companyClicks: {
         title: string
         count: number
     }[]
+    // benefitsByOs: {
+    //     title: string
+    //     count: number
+    // }[]
     totalClicks: number
     totalClaims: number
+    totalCompanyClicks: number
 }
 
-const ChartContainer = ({ benefitClicks, benefitsByOs, totalClicks, totalClaims, beenfitsClaims }: ChartContainerProps) => {
+const ChartContainer = ({ benefitClicks, companyClicks, totalClicks, totalCompanyClicks, totalClaims, beenfitsClaims }: ChartContainerProps) => {
     const charts = [
         {
             title: 'Member Benefits Clicks',
             summary: totalClicks,
             children: <BarChart name='Clicks' items={benefitClicks} />
         },
+
         {
-            title: 'Member Benefits by OS',
-            summary: totalClicks,
-            children: <BarChart name='Member Benefits Clicks' items={benefitsByOs} />
+            title: 'Company Clicks',
+            summary: totalCompanyClicks,
+            children: <BarChart name='All Member Benefit Clicks' items={companyClicks} />
         },
         {
             title: 'Member Benefits Claims',
             summary: totalClaims,
             children: <BarChart name='Benefit Claims' items={beenfitsClaims} />
         },
-        // {
-        //     title: 'Customers',
-        //     summary: 4000,
-        //     children: <PieChart />
-        // }
     ]
     return (
         <div className='chart-container grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2'>
