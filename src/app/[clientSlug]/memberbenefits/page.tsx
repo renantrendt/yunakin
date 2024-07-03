@@ -7,12 +7,7 @@ import { auth } from '@/auth';
 import { notFound } from 'next/navigation';
 import { MemberBenefit } from '@prisma/client';
 import ContentSection from '@/containers/layout/ContentSection';
-import { cn } from '@/utils/cn';
-import Avatar from '@/components/atomic/avatar/Avatar';
-import { Avatar3xl } from '@/components/atomic/avatar/Avatar.stories';
 import Typography from '@/components/atomic/typography/Typography';
-import { Content } from 'next/font/google';
-import Button from '@/components/atomic/button/Button';
 import LinkButton from '@/components/atomic/button/LinkButton';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
@@ -54,7 +49,7 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
     const categories = await prisma.category.findMany({
         where: {
             id: {
-                in: benefits.map(benefit => benefit.categoryId)
+                in: benefits.map(benefit => benefit.categoryId) as string[]
             }
         }
     })

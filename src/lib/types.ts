@@ -27,8 +27,18 @@ export type MemberBenefitPageConfigDto = {
     clientSlug: string
 }
 
+export type MemberBenefitLinkClickDto = {
+    memberBenefitId: string
+    otherMemberBenefitId?: string
+    device?: string
+    browser?: string
+    os?: string
+    event: MemberBenefitClickType
+}
+
 
 export enum MemberBenefitClickType {
     SAVE_BENEFIT = "SAVE_BENEFIT",
     CLAIM_BENEFIT = "CLAIM_BENEFIT",
 }
+

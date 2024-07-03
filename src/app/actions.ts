@@ -1,7 +1,7 @@
 'use server'
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
-import { MemberBenefitPageConfigDto } from "@/lib/types"
+import { MemberBenefitLinkClickDto, MemberBenefitPageConfigDto } from "@/lib/types"
 import { Category, MemberBenefit, MemberBenefitClick, MemberBenefitPageConfig } from "@prisma/client"
 import exp from "constants"
 
@@ -54,9 +54,8 @@ export async function checkUserExists(email: string) {
     return user
 }
 
-export async function upsertMemberBenefitLinkClick(memberBenefitClick: MemberBenefitClick) {
+export async function upsertMemberBenefitLinkClick(memberBenefitClick: MemberBenefitLinkClickDto) {
 
-    console.log(memberBenefitClick)
     // save the data to database
     const clickAdded = await prisma.memberBenefitClick.create({
         data: {

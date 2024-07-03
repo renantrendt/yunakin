@@ -12,6 +12,7 @@ import CheckIcon from "@/icons/check-icon.svg"
 import { upsertMemberBenefitLinkClick } from '@/app/actions'
 import DeviceDetector from "device-detector-js";
 import { Category, MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from '@prisma/client'
+import { MemberBenefitClickType } from '@/lib/types'
 
 interface MemberBenefitCardProps {
     key: string
@@ -23,30 +24,26 @@ interface MemberBenefitCardProps {
 }
 const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnalytics = true }: MemberBenefitCardProps) => {
 
-    console.log('benefit', otherMemberbenefit)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const deviceDetector = new DeviceDetector()
 
-    const handleButtonClick = async (memberBenefitId: string) => {
+    const handleButtonClick = async (memberBenefitId: string, event: MemberBenefitClickType) => {
         // memberbenefitlinkclick row in the table
         const device = deviceDetector.parse(navigator.userAgent || window.navigator.userAgent)
-
         try {
             if (trackAnalytics) {
                 await upsertMemberBenefitLinkClick({
                     memberBenefitId,
-                    otherMemberBenefitId: otherMemberbenefit?.id || null,
-                    device: (device.device?.type as string) || null,
-                    browser: device.client?.name || null,
-                    os: device.os?.name || null,
+                    otherMemberBenefitId: otherMemberbenefit?.id,
+                    device: (device.device?.type as string),
+                    browser: device.client?.name,
+                    os: device.os?.name,
+                    event: event
                 });
-
             }
         } catch (error) {
 
         }
-
-
     }
     const timeStamp = new Date().getTime()
 
@@ -63,18 +60,16 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                     <p className='text-neutral-600 font-black dark:text-sidebar-icon-dark text-base'>{benefit.offer}</p>
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
-                            
+
                             <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.domain}</a>
-                            <a href={benefit.link} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.location}</a>
+                            {benefit.link && <a href={benefit.link} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.location}</a>}
                         </div>
                     </div>
                     <div>
                         <Button
                             onClick={() => {
-
                                 setIsModalOpen(true)
-                                handleButtonClick(benefit.id)
-
+                                handleButtonClick(benefit.id, MemberBenefitClickType.SAVE_BENEFIT)
                                 // save analytics data
                             }}
                             className="btn-primary hover:cursor-pointer"
@@ -105,12 +100,14 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                         <Button
                             onClick={() => {
                                 window.open(`https://${benefit.domain}`, '_blank')
+                                handleButtonClick(benefit.id, MemberBenefitClickType.CLAIM_BENEFIT)
                             }}
                             className="btn-primary hover:cursor-pointer"
                             style={{
                                 backgroundColor: config?.buttonColor as string,
                             }}
                             variant="primary"
+
                         >Visit {benefit.title} Website</Button>
                         <Button
                             onClick={() => {

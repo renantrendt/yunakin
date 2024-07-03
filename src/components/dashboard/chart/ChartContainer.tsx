@@ -8,37 +8,39 @@ import ChartCard from './ChartCard'
 
 
 interface ChartContainerProps {
-    benefitClicks:{
-        title:string
-        count:number
+    benefitClicks: {
+        title: string
+        count: number
+    }[]
+    beenfitsClaims: {
+        title: string
+        count: number
     }[]
     benefitsByOs: {
-        title:string
-        count:number
+        title: string
+        count: number
     }[]
     totalClicks: number
+    totalClaims: number
 }
 
-const ChartContainer = ({benefitClicks, benefitsByOs, totalClicks}: ChartContainerProps) => {
-    
-    console.log(benefitClicks)
-    console.log(benefitsByOs)
+const ChartContainer = ({ benefitClicks, benefitsByOs, totalClicks, totalClaims, beenfitsClaims }: ChartContainerProps) => {
     const charts = [
         {
             title: 'Member Benefits Clicks',
             summary: totalClicks,
-            children: <BarChart name='Member Benefits Clicks' items={benefitClicks} />
+            children: <BarChart name='Clicks' items={benefitClicks} />
         },
         {
             title: 'Member Benefits by OS',
             summary: totalClicks,
             children: <BarChart name='Member Benefits Clicks' items={benefitsByOs} />
         },
-        // {
-        //     title: 'Revenue',
-        //     summary: 3000,
-        //     children: <AreaChart />
-        // },
+        {
+            title: 'Member Benefits Claims',
+            summary: totalClaims,
+            children: <BarChart name='Benefit Claims' items={beenfitsClaims} />
+        },
         // {
         //     title: 'Customers',
         //     summary: 4000,

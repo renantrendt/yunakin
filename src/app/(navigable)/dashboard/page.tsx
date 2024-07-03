@@ -123,7 +123,8 @@ export default async function Dashboard() {
             })}
 
                 totalClicks={cardStats.totalClicks}
-
+                totalClaims={cardStats.totalClaims}
+                beenfitsClaims={chartStats.benefitsClaims}
             />
         </div>
     )
