@@ -27,16 +27,6 @@ export const DashboardCards = ({ cardStats }: DashboardCardsProps) => {
             increase: 21
         },
         {
-            title: "Clicks on Mobile",
-            quantity: totalMobileClicks,
-            increase: 21
-        },
-        {
-            title: "Clicks on Desktop",
-            quantity: totalDesktopClicks,
-            increase: 21
-        },
-        {
             title: "Page Views",
             quantity: cardStats.pageViews,
             increase: 21
