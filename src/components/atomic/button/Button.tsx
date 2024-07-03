@@ -64,7 +64,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, children, variant = 'prima
 
   return (
     <button disabled={disabled || loading} className={cn(button({ variant, size }), className)} onClick={onClick} type={type} {...props}>
-      {loading ? <LoadingIcon /> : null} {trailing ? <>{content ? <span className='mr-0'>{content}</span> : null}  {icon} </> : <>{icon} {content && <span className='ml-0'> {content} </span>}</>}
+      {loading ? <LoadingIcon /> : null} {trailing ? <>{content ? <span className='mr-0'>{content}</span> : null}  {icon} </> : <>{!loading && icon} {content && <span className='ml-0'> {content} </span>}</>}
     </button>
   )
 }

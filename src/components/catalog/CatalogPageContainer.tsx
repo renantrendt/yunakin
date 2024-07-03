@@ -106,6 +106,27 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
 
     }, [config, selectedBenefits]
     )
+
+    const handleBenefitClick = async (id: string, selected: boolean) => {
+
+        try {
+            const toBeCreatedOtherMemberBenefits = selected && !benefits.some(benefit => benefit.id === id && benefit.selected) ? [id] : []
+            const toBeDeletedOtherMemberBenefits = !selected && benefits.some(benefit => benefit.id === id && benefit.selected) ? [id] : []
+            await updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits, toBeDeletedOtherMemberBenefits)
+            setSelectedBenefits(selectedBenefits.map(benefit => {
+                if (benefit.id === id) {
+                    return { ...benefit, selected }
+                }
+                return benefit
+            })
+            )
+            customToast.success(`Benefit ${selected ? "added" : "removed"} successfully`)
+        } catch (error) {
+            console.log(error)
+            customToast.error("Something went wrong. Please try again")
+        }
+
+    }
     return (
         <div className=''>
             <div className='w-full bg-success  mb-8 p-3 rounded-xl'>
@@ -149,9 +170,8 @@ const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: Catalo
                                             // <BlogCard loading={false} key={index} category={category} />
                                             <SelectMemberBenefitCard
                                                 selected={benefit.selected}
-                                                onClick={() => {
-                                                    const newSelectedBenefits = selectedBenefits.map(b => b.id === benefit.id ? { ...b, selected: !b.selected } : b)
-                                                    setSelectedBenefits(newSelectedBenefits)
+                                                onClick={async () => {
+                                                    await handleBenefitClick(benefit.id, !benefit.selected)
                                                 }}
                                                 key={index} benefit={benefit} />
                                         ))}

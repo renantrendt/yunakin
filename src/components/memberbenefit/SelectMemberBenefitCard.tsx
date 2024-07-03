@@ -22,9 +22,22 @@ interface SelectMemberBenefitCardProps {
 }
 const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemberBenefitCardProps) => {
 
+    const [loading, setLoading] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const deviceDetector = new DeviceDetector()
+
+    const handleClick = async () => {
+        setLoading(true)
+        try {
+            await onClick()
+        } catch (error) {
+            console.error(error)
+            setLoading(false)
+        } finally {
+            setLoading(false)
+        }
+    }
     return (
         <>
 
@@ -43,8 +56,9 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
                     </div>
                     <div>
                         <Button
+                            loading={loading}
                             icon={selected ? <CheckIcon /> : <PlusIcon />}
-                            onClick={onClick}
+                            onClick={handleClick}
                             className="btn-primary text-primary-600 hover:cursor-pointer"
                             variant="secondary"
                         >{selected ? "Benefit saved" : "Save benefit"}</Button>
