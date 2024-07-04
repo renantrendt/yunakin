@@ -129,7 +129,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                     onChange={async (value) => {
                         try {
                             await updateMemberBenefit({ ...memberBenefit, visibility: value })
-                            setMemberBenefits(memberBenefits.map(memberBenefit => memberBenefit.id === memberBenefit.id ? { ...memberBenefit, visibility: value } : memberBenefit))
+                            setMemberBenefits(memberBenefits.map(b => memberBenefit.id === b.id ? { ...memberBenefit, visibility: value } : b))
                             customToast.success(`${memberBenefit.title} visibility updated to ${t(`memberbenefit.visibility.${value}`)}`)
                         } catch (error) {
                             customToast.error('Failed to update visibility')

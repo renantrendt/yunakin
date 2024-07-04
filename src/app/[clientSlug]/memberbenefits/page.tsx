@@ -10,9 +10,9 @@ import ContentSection from '@/containers/layout/ContentSection';
 import Typography from '@/components/atomic/typography/Typography';
 import LinkButton from '@/components/atomic/button/LinkButton';
 import PageTracker from '@/components/analytics/pagetracker/PageTracker';
+import { MemberBenefitVisibility } from '@/lib/types';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
-
     if (!session) {
         notFound()
         return;
@@ -22,7 +22,6 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
             clientSlug: params.clientSlug
         }
     })
-
     if (!config) {
         notFound()
         return;
@@ -33,16 +32,54 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
         notFound()
         return;
     }
-    const otherBenefits = await prisma.otherMemberBenefit.findMany({
+    let otherBenefits = await prisma.otherMemberBenefit.findMany({
         where: {
-            userId: config.userId
+            userId: config.userId,
+        },
+    })
+    const publicOtherBenefitsIds = await prisma.memberBenefit.findMany({
+        where: {
+            AND: [
+                {
+                    id: {
+                        in: otherBenefits.map(benefit => benefit.memberBenefitId) as string[]
+                    },
+                },
+                {
+                    OR: [
+                        {
+                            visibility: MemberBenefitVisibility.PUBLIC,
+                        },
+                        {
+                            visibility: MemberBenefitVisibility.OWNED_PRIVATE,
+                        }
+                    ]
+                }
+            ]
+        },
+        select: {
+            id: true,
         }
     })
-
+    otherBenefits = otherBenefits.filter(benefit => publicOtherBenefitsIds.some(b => b.id === benefit.memberBenefitId))
     benefits = await prisma.memberBenefit.findMany({
         where: {
             OR: [
-                { userId: config.userId },
+                {
+                    AND: [
+                        {
+                            OR: [
+                                {
+                                    visibility: MemberBenefitVisibility.PUBLIC,
+                                },
+                                {
+                                    visibility: MemberBenefitVisibility.OWNED_PUBLIC,
+                                }
+                            ],
+                        },
+                        { userId: config.userId }
+                    ]
+                },
                 { id: { in: otherBenefits.map(benefit => benefit.memberBenefitId) } }
             ]
         }
