@@ -24,6 +24,7 @@ import _ from 'lodash'
 import { set } from 'react-ga'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import CustomizePageModal from '../molecules/customize-page-modal'
+import EmbedModal from '../molecules/embed-modal/EmbedModal'
 interface CustomizePageContainerProps {
     benefits: SelectedMemberBenefit[]
     categories: Category[]
@@ -44,6 +45,8 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(benefits)
     const pathname = usePathname()
     const searchParams = useSearchParams()
+
+    const [embedModalOpen, setEmbedModalOpen] = useState(false)
 
     useEffect(() => {
         if (isEditing) {
@@ -122,6 +125,11 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                         const url = `${platformConfig.variables.NEXT_PUBLIC_NEXT_URL}/${config.clientSlug}/memberbenefits`
                         window.open(url, '_blank')
                     }} />
+                    <Button variant="tertiary" className='w-full' label="Share"
+                        onClick={() => {
+                            setEmbedModalOpen(true)
+                        }}
+                    />
                     <Button variant="secondary" className='w-full' label="Customize Color, Font and Domain"
                         onClick={() => {
                             setSettingsModalOpen(true)
@@ -211,6 +219,14 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     }
 
 
+                }}
+            />
+            }
+            {embedModalOpen && <EmbedModal
+                isOpen={embedModalOpen}
+                clientSlug={config.clientSlug}
+                onClose={() => {
+                    setEmbedModalOpen(false)
                 }}
             />
             }
