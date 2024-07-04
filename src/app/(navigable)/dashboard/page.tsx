@@ -147,7 +147,7 @@ export default async function Dashboard() {
             filter(f => f.os === "iOS" || f.os == "android").length).reduce((a, b) => a + b, 0),
         totalDesktopClicks: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.
             filter(f => f.os !== "iOS" && f.os !== "android").length).reduce((a, b) => a + b, 0),
-        totalClaims: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.CLAIM_BENEFIT).length).reduce((a, b) => a + b, 0),
+        totalClaims: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event != MemberBenefitClickType.SAVE_BENEFIT).length).reduce((a, b) => a + b, 0),
         pageViews
     }
     const chartStats = {
@@ -174,7 +174,7 @@ export default async function Dashboard() {
         benefitsClaims: memberBenefitsWithClicks.map(memberBenefit => {
             return {
                 title: memberBenefit.title,
-                count: memberBenefit.clicks.filter(m => m.event == MemberBenefitClickType.CLAIM_BENEFIT).length,
+                count: memberBenefit.clicks.filter(m => m.event != MemberBenefitClickType.SAVE_BENEFIT).length,
             }
         }),
         otherCompanyClicks: clicksByCompany

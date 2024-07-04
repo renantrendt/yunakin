@@ -47,5 +47,6 @@ export enum MemberBenefitClickType {
     SAVE_BENEFIT = "SAVE_BENEFIT",
     CLAIM_BENEFIT = "CLAIM_BENEFIT",
     LOCATION_CLICK = "LOCATION_CLICK",
+    WEBSITE_CLICK = "WEBSITE_CLICK",
 }
 

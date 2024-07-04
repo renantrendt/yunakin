@@ -28,8 +28,15 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
     const deviceDetector = new DeviceDetector()
 
     const handleButtonClick = async (memberBenefitId: string, event: MemberBenefitClickType) => {
-        // memberbenefitlinkclick row in the table
         const device = deviceDetector.parse(navigator.userAgent || window.navigator.userAgent)
+        // Rest of the code...
+
+        const isClicked = Boolean(localStorage.getItem(`${memberBenefitId}-${event}`));
+        if (isClicked) {
+            return;
+        }
+
+        // memberbenefitlinkclick row in the table
         try {
             if (trackAnalytics) {
                 await upsertMemberBenefitLinkClick({
@@ -40,12 +47,16 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                     os: device.os?.name,
                     event: event
                 });
+                localStorage.setItem(`${memberBenefitId}-${event}`, 'true');
             }
         } catch (error) {
 
         }
     }
     const timeStamp = new Date().getTime()
+
+
+    const domain = benefit.domain.includes('http') ? benefit.domain : `https://${benefit.domain}`
 
     const image = benefit.imageURL && `${benefit.imageURL}?${timeStamp}` || undefined
     return (
@@ -61,8 +72,12 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
 
-                            <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.domain}</a>
-                            {benefit.link && <a target='_blank'
+                            <a href={domain} target='_blank' className='cursor-pointer text-primary-500 underline'
+                                onClick={() => {
+                                    handleButtonClick(benefit.id, MemberBenefitClickType.WEBSITE_CLICK)
+                                }}
+                            >{benefit.domain}</a>
+                            {benefit.link && <a target='_blank' href={benefit.link}
                                 onClick={() => {
                                     handleButtonClick(benefit.id, MemberBenefitClickType.LOCATION_CLICK)
                                 }}
