@@ -50,3 +50,11 @@ export enum MemberBenefitClickType {
     WEBSITE_CLICK = "WEBSITE_CLICK",
 }
 
+
+
+export enum MemberBenefitVisibility {
+    PRIVATE = "PRIVATE",
+    PUBLIC = "PUBLIC",
+    OWNED_PRIVATE = "OWNED_PRIVATE",
+    OWNED_PUBLIC = "OWNED_PUBLIC",
+}

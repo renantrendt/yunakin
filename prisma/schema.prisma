@@ -167,10 +167,9 @@ model MemberBenefitPageConfig {
   clientSlug String @unique
   title      String
 
-  description String
-  imageURL    String
-  userId      String?
-
+  description              String
+  imageURL                 String
+  userId                   String?
   buttonColor              String?
   backgroundColor          String?
   textColor                String?
@@ -199,6 +198,7 @@ model MemberBenefit {
   imageURL                 String?
   domain                   String
   location                 String?
+  visibility               String                     @default("PUBLIC") // PUBLIC, PRIVATE, ALL
   offer                    String?
   code                     String
   link                     String?

@@ -29,6 +29,9 @@ import platformConfig from '@/config/app-config'
 
 import EditIcon from "@/icons/edit-icon.svg"
 import { useSearchParams } from 'next/navigation'
+import { MemberBenefitVisibility } from '@/lib/types'
+import _, { set } from 'lodash'
+import { useTranslation } from '@/lib/i18n/client'
 
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefit[]
@@ -37,6 +40,7 @@ interface MemberBenefitsTableProps {
 }
 
 const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, categories }: MemberBenefitsTableProps) => {
+    const { t } = useTranslation('dashboard')
     const searchParams = useSearchParams()
     const session = useSession()
     const [loading, setLoading] = useState(false)
@@ -109,6 +113,30 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
             cell: info => info.getValue(),
             header: () => <span>Code</span>,
             footer: info => info.column.id,
+        }),
+        columnHelper.accessor(row => row.location, {
+            id: 'Visibility',
+            cell: info => {
+                const memberBenefit = memberBenefits[info.row.index]
+                if (!isBenefitCreator(memberBenefit.id)) {
+                    return <Badge size={"md"} color={"primary"} >{t(`memberbenefit.visibility.${memberBenefit.visibility}`)}</Badge>
+                }
+                return <Dropdown
+                    id='visibility'
+                    name='visibility'
+                    options={_.keys(MemberBenefitVisibility).map(key => ({ value: key, label: t(`memberbenefit.visibility.${key}`) }))}
+                    value={memberBenefit.visibility}
+                    onChange={async (value) => {
+                        try {
+                            await updateMemberBenefit({ ...memberBenefit, visibility: value })
+                            setMemberBenefits(memberBenefits.map(memberBenefit => memberBenefit.id === memberBenefit.id ? { ...memberBenefit, visibility: value } : memberBenefit))
+                            customToast.success(`${memberBenefit.title} visibility updated to ${t(`memberbenefit.visibility.${value}`)}`)
+                        } catch (error) {
+                            customToast.error('Failed to update visibility')
+                        }
+                    }}
+                />
+            }
         }),
         columnHelper.display({
             id: 'Actions',

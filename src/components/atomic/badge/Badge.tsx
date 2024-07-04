@@ -3,7 +3,7 @@ import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react'
 
 
-const badge = cva("w-fit  flex flex-row justify-center gap-1 text-sm leading-5 font-normal", {
+const badge = cva("w-fit text-center  flex flex-row justify-center gap-1 text-sm rounded-lg leading-5 font-normal", {
     variants: {
         type: {
             outline: 'border rounded-lg',

@@ -12,5 +12,13 @@
         "catalog": "Benefits Catalog",
         "memberBenefits": "Published Benefits",
         "customize": "Customize Appearance"
+    },
+    "memberbenefit": {
+        "visibility": {
+            "PUBLIC": "Public",
+            "PRIVATE": "Private",
+            "OWNED_PRIVATE": "Private to you, public for others",
+            "OWNED_PUBLIC": "Public to you, public for others"
+        }
     }
 }
