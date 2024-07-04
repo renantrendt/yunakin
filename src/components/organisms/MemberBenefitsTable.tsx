@@ -314,7 +314,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                                 link: data.link,
                                 userId: session.data?.user?.id! as string,
                                 title: data.name,
-                                offer: data.offer
+                                offer: data.offer,
+                                visibility: data.visibility
                             } as MemberBenefit)
                             if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
@@ -358,7 +359,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                                 userId: userId,
                                 title: data.name,
                                 imageURL: data.imageURL,
-                                offer: data.offer
+                                offer: data.offer,
+                                visibility: data.visibility
                             } as MemberBenefit)
                             if (data.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());

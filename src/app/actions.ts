@@ -135,6 +135,7 @@ export async function deleteCategory(id: string) {
 }
 
 export async function createMemberBenefit(memberBenefit: MemberBenefit) {
+    console.log(memberBenefit)
     const newMemberBenefit = await prisma.memberBenefit.create({
         data: {
             ...memberBenefit

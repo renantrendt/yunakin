@@ -1,3 +1,4 @@
+"use client";
 import Button from '@/components/atomic/button/Button';
 import InputField from '@/components/atomic/input/InputField';
 import Modal from '@/components/atomic/modal/Modal';
@@ -8,6 +9,8 @@ import * as yup from "yup"
 import Dropdown from '../atomic/dropdown/Dropdown';
 import { Category, MemberBenefit } from '@prisma/client';
 import ImageUploader from '../atomic/file-uploader/ImageUploader';
+import { MemberBenefitVisibility } from '@/lib/types';
+import { useTranslation } from '@/lib/i18n/client';
 
 
 interface AddMemberBenefitModalProps {
@@ -23,8 +26,9 @@ const schema = yup.object().shape({
     name: yup.string().required(),
     code: yup.string().required(),
     domain: yup.string().required(),
+    visiblity: yup.string().default(MemberBenefitVisibility.PUBLIC),
     imageURL: yup.string().optional().nullable(),
-    offer: yup.string().nullable(),
+    offer: yup.string().optional().nullable(),
     location: yup.string().optional().nullable(),
     link: yup.string().optional().nullable(),
     description: yup.string(),
@@ -32,20 +36,20 @@ const schema = yup.object().shape({
 })
 
 interface FormValues {
-    name: string;
+    imageURL?: string | null | undefined;
+    offer?: string | null | undefined;
+    location?: string | null | undefined;
+    link?: string | null | undefined;
+    description?: string | undefined;
+    visibility?: string | undefined;
+    name: string
     code: string;
     domain: string;
-    location?: string;
-    link?: string;
-    description: string;
     categoryId: string;
-    imageURL?: string;
-    offer?: string;
 }
 
-
 const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefit, onUpdate, loading }: AddMemberBenefitModalProps) => {
-
+    const { t } = useTranslation("dashboard")
 
     const { handleSubmit, control, watch, setValue, formState: { errors } } = useForm<FormValues>(
         {
@@ -54,12 +58,13 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                 name: editMemberBenefit.title,
                 code: editMemberBenefit.code,
                 domain: editMemberBenefit.domain,
-                link: editMemberBenefit.link,
-                location: editMemberBenefit.location,
-                description: editMemberBenefit.description,
-                categoryId: editMemberBenefit.categoryId,
-                imageURL: editMemberBenefit.imageURL,
-                offer: editMemberBenefit.offer
+                link: editMemberBenefit.link as string,
+                location: editMemberBenefit.location as string,
+                description: editMemberBenefit.description as string,
+                categoryId: editMemberBenefit.categoryId as string,
+                imageURL: editMemberBenefit.imageURL as string,
+                offer: editMemberBenefit.offer as string,
+                visibility: editMemberBenefit.visibility
             } : {
                 name: '',
                 code: '',
@@ -69,7 +74,8 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                 description: '',
                 categoryId: categories[0].id,
                 imageURL: '',
-                offer: ''
+                offer: '',
+                visibility: MemberBenefitVisibility.PRIVATE
             }
         }
     )
@@ -89,7 +95,6 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
         }
         onCreate(data)
     }
-    console.log(errors)
     return (
         <Modal isOpen={true} onClose={onClose}
         >
@@ -157,8 +162,22 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                                 name="offer"
                                 placeholder='Enter Offer'
                                 onChange={onChange}
-                                value={value}
+                                value={value as string}
                                 error={errors.offer?.message}
+                            />
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name="visibility"
+                        render={({ field: { onChange, value } }) => (
+                            <Dropdown
+                                label='Visibility'
+                                id='visibility'
+                                name='visibility'
+                                options={_.keys(MemberBenefitVisibility).map(key => ({ value: key, label: t(`memberbenefit.visibility.${key}`) }))}
+                                value={value as string}
+                                onChange={onChange}
                             />
                         )}
                     />
@@ -179,7 +198,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                         )}
                     />
                     <div className='w-fit h-fit'>
-                        <ImageUploader onImageUpload={(image) => setValue('imageURL', image)} image={image} />
+                        <ImageUploader onImageUpload={(image) => setValue('imageURL', image)} image={image as string} />
                     </div>
                     <Controller
                         control={control}
@@ -207,7 +226,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                                 name="link"
                                 placeholder='Enter link'
                                 onChange={onChange}
-                                value={value}
+                                value={value as string}
                                 error={errors.link?.message}
                             />
                         )}
@@ -223,7 +242,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                                 name="location"
                                 placeholder='Enter location'
                                 onChange={onChange}
-                                value={value}
+                                value={value as string}
                                 error={errors.location?.message}
                             />
                         )}
