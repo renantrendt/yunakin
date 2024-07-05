@@ -14,9 +14,9 @@ const LandingPageContainer = () => {
             <UsedBy />
             <Cta />
             <Features />
-            <Testimonial />
+            {/* <Testimonial />
             <Pricing showDescription={true} />
-            <FAQ />
+            <FAQ /> */}
         </>
     )
 }

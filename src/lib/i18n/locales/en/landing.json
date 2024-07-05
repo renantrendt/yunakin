@@ -135,8 +135,8 @@
         "year": "Year"
     },
     "footer": {
-        "description": "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
-        "footnote": "@%Date% Codepilot. All rights reserved.",
+        "description": "(pronounced “you-and-akin”) is a San Francisco native word for a village with shared identity.",
+        "footnote": "© %Date% Yunakin® San Francisco",
         "links": [
             {
                 "title": "Services",

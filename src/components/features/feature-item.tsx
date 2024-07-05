@@ -30,7 +30,7 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                     window.open("/onboarding", "_blank")
                 }} />
             </div>
-            <div className='relative w-full  flex-1 h-96'>
+            <div className='relative w-full  flex-1 h-full lg:h-96'>
                 <Image alt='' fill
                     objectFit="contain"
                     src={image ?? ""}
