@@ -5,11 +5,7 @@ import { initGA, logPageView } from '@/utils/ga-analytics'
 import Providers from '@/lib/providers/providers'
 import React from 'react'
 import { cn } from '@/utils/cn'
-import { GoogleTagManager } from '@next/third-parties/google'
-import platformConfig from '@/config/app-config'
 import Script from 'next/script'
-import Head from 'next/head'
-
 const inter = Inter({ preload: false, weight: 'variable', subsets: ['latin'] })
 
 export default function RootLayoutClient({
@@ -50,7 +46,7 @@ export default function RootLayoutClient({
             </head>
             <body >
                 <Providers>
-                    <div className={cn(inter.className, params.monaSans.variable, "bg-landing-background  dark:bg-landing-dark-background  ")}>
+                    <div className={cn(inter.className, params.gelica.variable, params.monaSans.variable, params.satoshi.variable, "bg-landing-background  dark:bg-landing-dark-background  ")}>
                         {children}
                     </div>
                 </Providers>

@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 
 
-const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px]  ", {
+const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-satoshi font-normal leading-[20px]  ", {
   variants: {
     variant: {
       primary: [

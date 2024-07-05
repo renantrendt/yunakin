@@ -20,16 +20,15 @@ export default function Hero() {
                 className="my-20  mt-24 lg:mt-40 lg:mb-0 items-center text-center md:text-left text-black dark:text-white" >
                 <div className='grid grid-cols-1   justify-center gap-x-8 gap-y-2'>
 
-                    <div className="w-full flex flex-1 justify-center flex-col py-3 ">
+                    <div className="w-full flex flex-1 justify-center flex-col py-3 max-w-3xl mx-auto">
                         <AnimatedSection className='flex justify-center'>
 
-                            <Typography type='h1' className=' text-center break-all leading-[100%] max-w-3xl     mb-4 lg:mb-5 !font-semibold break-words '>
-                                {/* <TypewriterEffect words={t("heroSection.title").split(" ").map((word) => ({ text: word }))} /> */}
+                            <Typography type='h1' className=' text-center break-all     mb-4 lg:mb-5 !font-semibold break-words '>
                                 {t("heroSection.title")}
                             </Typography>
                         </AnimatedSection>
                         <AnimatedSection className='flex justify-center'>
-                            <Typography type='h6' className=' text-center     text-neutral-600 max-w-lg dark:text-sidebar-icon-dark' >
+                            <Typography type='h6' className=' text-center    max-w-xl   ' >
                                 {t("heroSection.description")}
                             </Typography>
                         </AnimatedSection>

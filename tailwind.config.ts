@@ -86,7 +86,9 @@ const config: Config = {
         'secondary-button-hover-dark': "#353248"
       },
       fontFamily: {
-        monaSans: ['var(--font-coming-soon)']
+        monaSans: ['var(--font-coming-soon)'],
+        gelica: ['var(--font-gelica)'],
+        satoshi: ['var(--font-satoshi)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
