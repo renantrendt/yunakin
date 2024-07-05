@@ -6,7 +6,7 @@ import ContentSection from '@/containers/layout/ContentSection'
 const Features = () => {
     const { t } = useTranslation('landing')
     const features = (t("features.features", { returnObjects: true }) as { title: string, description: string, image: string, direction?: "ltr" | "rtl" }[])
-        .map((feature, index) => ({ ...feature, image: "/images/hero-image.jpeg", direction: index % 2 === 0 ? "ltr" : "rtl" }))
+        .map((feature, index) => ({ ...feature, image: `/images/landing/features/feature-${index + 1}.svg`, direction: index % 2 === 0 ? "rtl" : "ltr" }))
     return (
         <ContentSection>
 

@@ -66,19 +66,27 @@
     "features": {
         "features": [
             {
-                "title": "Templates",
-                "description": "Codepilot offers a wide range of customizable templates that serve as a starting point for various types of applications, enabling developers to skip the initial setup and dive straight into the development of unique features."
+                "title": "One Click Partnerships",
+                "description": "Partners can select your perks to offer to their loyal customers. Similarly, you can choose partners perks to provide to your clients."
             },
             {
-                "title": "Built-In Practices",
-                "description": "With Codepilot, developers benefit from integrated best practices for coding, security, and scalability. This ensures that projects are not only developed faster but also maintain high standards of quality and performance."
+                "title": "Share gift cards",
+                "description": "Increase your reach by having companies display your perks on their members' benefit pages, attracting qualified leads to your offerings while prioritizing privacy."
             },
             {
-                "title": "Scale and Perform",
-                "description": "Codepilot is designed with scalability in mind, allowing applications to grow seamlessly in terms of user base and functionality. It includes optimized configurations for performance, ensuring that applications remain fast and responsive as they scale."
+                "title": "AI Partnerships",
+                "description": "Receive perk insights based on your clients’ behavior. Strengthen relationships with partners based on their performance."
+            },
+            {
+                "title": "Fully customizable",
+                "description": "Make your members page unique by uploading your logo, changing colors, fonts, and domain address. Customize every detail to reflect your brand's identity and create a personalized experience for your members."
+            },
+            {
+                "title": "Embed the member benefits",
+                "description": "Integrate your benefits page seamlessly into your site or app. Connect with eCommerce platforms, apps, CRM, and marketing tools. Schedule monthly updates for your members to keep them engaged and informed."
             }
         ],
-        "learn-more": "Learn More"
+        "learn-more": "Start Now"
     },
     "testimonialsSection": {
         "title": "Testimonials",

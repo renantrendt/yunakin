@@ -28,7 +28,7 @@ interface TypographyProps extends React.HTMLAttributes<HTMLHeadingElement>, Reac
 type TypographyType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p"
 
 const Typography = ({ type, children, className, ...additionalProps }: TypographyProps) => {
-    return React.createElement(type, { className: cn("text-black dark:text-white", typography({ type }), className), ...additionalProps }, children)
+    return React.createElement(type, { className: cn("text-black ", typography({ type }), className), ...additionalProps }, children)
 }
 
 export default Typography;

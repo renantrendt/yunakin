@@ -19,15 +19,15 @@ const Cta = () => {
                     <Typography type='h1' className='text-center !text-5xl leading-[133%]' >{t("ctaSection.title")}</Typography>
                     <Typography type='h6' className='text-center max-w-2xl !text-[18px]' >{t("ctaSection.description")}</Typography>
                 </AnimatedSection>
-                <AnimatedSection className='flex  justify-between  w-full gap-4 items-center'>
-                    <div className='flex flex-col h-full justify-between gap-16'>
+                <AnimatedSection className='flex flex-col md:flex-row justify-between  w-full gap-4 items-center'>
+                    <div className='flex flex-col h-full justify-between gap-10'>
 
-                        <div className='avatars  hidden lg:flex '>
+                        <div className='avatars hidden lg:flex '>
                             <Avatar size={"xl"} image='/images/landing/avatars/first.png' name='avatar' className='relative top-1 left-2' />
                             <Avatar size={"xl"} image='/images/landing/avatars/second.png' name='avatar' className='relative top-10' />
                             <Avatar size={"xl"} image='/images/landing/avatars/third.png' name='avatar' className='relative bottom-4 right-6' />
                         </div>
-                        <div className='avatars flex  lg:hidden '>
+                        <div className='avatars flex lg:hidden '>
                             <Avatar size={"md"} image='/images/landing/avatars/first.png' name='avatar' className='relative top-1 left-2' />
                             <Avatar size={"md"} image='/images/landing/avatars/second.png' name='avatar' className='relative top-10' />
                             <Avatar size={"md"} image='/images/landing/avatars/third.png' name='avatar' className='relative bottom-4 right-6' />
@@ -38,7 +38,7 @@ const Cta = () => {
                         </div>
                     </div>
 
-                    <div className='relative max-w-[500px]   flex-1 h-full  min-h-[350px] lg:min-h-[530px] '>
+                    <div className='relative max-w-[500px] w-full  flex-1 h-full  min-h-[300px] lg:min-h-[530px] '>
                         <Image
                             alt=''
                             fill
@@ -56,15 +56,10 @@ const Cta = () => {
                     </div>
                     <div className='flex flex-col h-full justify-between gap-16'>
 
-                        <div className='avatars hidden lg:flex '>
+                        <div className='avatars flex '>
                             <Avatar size={"xl"} image='/images/landing/avatars/fourth.png' name='avatar' className='relative top-1 left-2' />
                             <Avatar size={"xl"} image='/images/landing/avatars/fifth.png' name='avatar' className='relative top-10' />
                             <Avatar size={"xl"} image='/images/landing/avatars/sixth.png' name='avatar' className='relative bottom-4 right-6' />
-                        </div>
-                        <div className='avatars   flex  lg:hidden'>
-                            <Avatar size={"md"} image='/images/landing/avatars/fourth.png' name='avatar' className='relative top-1 left-2' />
-                            <Avatar size={"md"} image='/images/landing/avatars/fifth.png' name='avatar' className='relative top-10' />
-                            <Avatar size={"md"} image='/images/landing/avatars/sixth.png' name='avatar' className='relative bottom-4 right-6' />
                         </div>
                         <div>
                             <Typography type='h5' className='text-center  !text-black !font-bold max-w-2xl !text-[18px]' >My Company</Typography>
