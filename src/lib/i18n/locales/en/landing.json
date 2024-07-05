@@ -1,7 +1,7 @@
 {
     "heroSection": {
-        "title": "Hello learning! Product not Shipped.",
-        "description": "The ultimate SaaS boilerplate, designed to fast-track your application development with ease and precision.",
+        "title": "Perk Management System",
+        "description": "Expand your customer base by giving perks to clients of other companies. Recognize your loyal customers by helping them benefit from other companies’ products and services perks.",
         "usedByCopy": "Used by <b>100+</b> developers",
         "cta": "Start Free Trial",
         "watchVideo": "Join Crash Course",
@@ -23,7 +23,8 @@
                 "name": "John Doe",
                 "avatar": "/images/used-by/fourth.jpeg"
             }
-        ]
+        ],
+        "locked": "No login required"
     },
     "navbar": {
         "pricing": "Pricing",

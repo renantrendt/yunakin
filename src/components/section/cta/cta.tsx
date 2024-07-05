@@ -11,7 +11,7 @@ const Cta = () => {
     return (
         <ContentSection
             fullWidth
-            additionalClassName='bg-primary-500'
+            additionalClassName='bg-primary-500 z-20'
         >
             <div className=" w-full my-24  flex-col justify-center items-center gap-0 lg:gap-10 inline-flex text-black ">
                 <AnimatedSection className=' flex flex-col justify-center items-center gap-5 mb-6'>

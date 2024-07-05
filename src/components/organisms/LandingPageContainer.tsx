@@ -11,7 +11,6 @@ const LandingPageContainer = () => {
     return (
         <>
             <Hero />
-            <UsedBy />
             <Cta />
             <Features />
             <Testimonial />

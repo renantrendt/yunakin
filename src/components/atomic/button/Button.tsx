@@ -11,7 +11,7 @@ const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center item
     variant: {
       primary: [
         "bg-primary-500",
-        "text-white",
+        "text-stone-950",
         "border-transparent",
         "hover:bg-primary-600",
         "focus:shadow-focus-primary",
