@@ -136,7 +136,7 @@ export default function Navbar() {
                                 className='  !min-w-[120px] '
                                 label={t('navbar.getStarted')}
                                 size='lg'
-                                onClick={() => router.push(siteUrls.general.register)}
+                                onClick={() => router.push(siteUrls.general.onboarding)}
                             />
                         </div>
 
