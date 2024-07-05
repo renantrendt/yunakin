@@ -31,7 +31,6 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
           placeholder={placeholder}
           className={cn(` outline-none  dark:bg-gray-800 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border border-solid
                     border-grey-300 hover:border-grey-400 
-                    dark:bg-input-dark
                     dark:border-input-border-dark dark:text-grey-200
                     dark:placeholder:text-placeholder-dark
                     disabled:bg-grey-100 text-sm

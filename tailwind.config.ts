@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         'primary': '#FFDD04',
-        'primary-end': '#8C5AFC',
+        'primary-end': '#FFDD04',
         'stone-950': "#0F0F0F",
         'neutral-600': "#4B4B4B",
         'neutral-200': "#DEDEDE",
