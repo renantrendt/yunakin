@@ -121,16 +121,16 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
             <ContentSection fullWidth className='flex fixed left-1/2 w-6/12 justify-between z-50' >
                 <div className='flex justify-end  gap-4 z-50 w-fit py-4 px-3'>
 
-                    <Button variant="tertiary" className='w-full' label="View Live Page" onClick={() => {
+                    <Button variant="tertiary" className='w-full' label="Share Live Page" onClick={() => {
                         const url = `${platformConfig.variables.NEXT_PUBLIC_NEXT_URL}/${config.clientSlug}/memberbenefits`
                         window.open(url, '_blank')
                     }} />
-                    <Button variant="tertiary" className='w-full' label="Share"
+                    <Button variant="tertiary" className='w-full' label="Embed Code"
                         onClick={() => {
                             setEmbedModalOpen(true)
                         }}
                     />
-                    <Button variant="secondary" className='w-full' label="Customize Color, Font and Domain"
+                    <Button variant="secondary" className='w-full' label="Customizations"
                         onClick={() => {
                             setSettingsModalOpen(true)
                         }}

@@ -13,7 +13,7 @@ const typography = cva("text-black", {
             h4: 'text-xl',
             h5: ' text-base  lg:text-[24px] font-gelica',
             h6: 'text-[#757575] text-base  lg:text-[18px] font-satoshi ',
-            p: 'text-[#757575] font-satoshi dark:text-sidebar-icon-dark'
+            p: '     font-satoshi dark:text-sidebar-icon-dark'
         }
     },
     defaultVariants: {

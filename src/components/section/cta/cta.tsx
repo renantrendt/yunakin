@@ -34,7 +34,7 @@ const Cta = () => {
                         </div>
                         <div>
                             <Typography type='h5' className='text-center  !text-black !font-bold max-w-2xl !text-[18px]' >My Company</Typography>
-                            <Typography type='h6' className='text-center max-w-2xl lg:!text-[20px] ' >Customers</Typography>
+                            <Typography type='h6' className='text-center max-w-2xl lg:!text-[20px] ' >Members</Typography>
                         </div>
                     </div>
 
@@ -63,7 +63,7 @@ const Cta = () => {
                         </div>
                         <div>
                             <Typography type='h5' className='text-center  !text-black !font-bold max-w-2xl !text-[18px]' >My Company</Typography>
-                            <Typography type='h6' className='text-center max-w-2xl lg:!text-[20px] ' >Customers</Typography>
+                            <Typography type='h6' className='text-center max-w-2xl lg:!text-[20px] ' >Members</Typography>
                         </div>
                     </div>
                 </AnimatedSection>

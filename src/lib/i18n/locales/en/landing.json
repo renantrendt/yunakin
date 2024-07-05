@@ -1,9 +1,9 @@
 {
     "heroSection": {
         "title": "Perk Management System",
-        "description": "Expand your customer base by giving perks to clients of other companies. Recognize your loyal customers by helping them benefit from other companies’ products and services perks.",
+        "description": "Expand your customer base by giving perks to partners' members. Recognize your own members by helping them benefit from partners' products and services perks.",
         "usedByCopy": "Used by <b>100+</b> developers",
-        "cta": "Start Free Trial",
+        "cta": "Start Now Free",
         "watchVideo": "Join Crash Course",
         "image": "/images/hero-image.jpeg",
         "usedBy": [
@@ -34,7 +34,7 @@
         "cta": "Start Free Trial",
         "watchVideo": "Join Crash Course",
         "login": "Login",
-        "getStarted": "Get Started",
+        "getStarted": "Start Now Free",
         "aboutUs": "About Us",
         "memberPerks": "Member Perks"
     },
@@ -47,7 +47,7 @@
     },
     "ctaSection": {
         "title": "Exclusive Members Page in Seconds Without Code",
-        "description": "Easily create and share a login-free members benefits page without technical skills, manage which partner perks your customers can access, and attract new customers by distributing your perks through selected partners.",
+        "description": "Easily create and share a login-free members perks page without technical skills, manage which partner perks your members can access, and attract new members by distributing your perks through selected partners.",
         "reasons": [
             {
                 "metric": "40%",
@@ -67,23 +67,23 @@
         "features": [
             {
                 "title": "One Click Partnerships",
-                "description": "Partners can select your perks to offer to their loyal customers. Similarly, you can choose partners perks to provide to your clients."
+                "description": "Partners can select your perks to offer to their members. Similarly, you can choose partners perks to provide to your members."
             },
             {
-                "title": "Share gift cards",
-                "description": "Increase your reach by having companies display your perks on their members' benefit pages, attracting qualified leads to your offerings while prioritizing privacy."
+                "title": "Shareable Members Page",
+                "description": "Increase your reach by having partners display your perks on their members' perks pages, attracting qualified leads to your offerings while prioritizing privacy."
             },
             {
                 "title": "AI Partnerships",
-                "description": "Receive perk insights based on your clients’ behavior. Strengthen relationships with partners based on their performance."
+                "description": "Receive perk insights based on your members behavior. Strengthen relationships with partners based on their members performance."
             },
             {
                 "title": "Fully customizable",
-                "description": "Make your members page unique by uploading your logo, changing colors, fonts, and domain address. Customize every detail to reflect your brand's identity and create a personalized experience for your members."
+                "description": "Without any coding skills, customize every detail of your branding, including the domain URL, to reflect your brand's identity."
             },
             {
-                "title": "Embed the member benefits",
-                "description": "Integrate your benefits page seamlessly into your site or app. Connect with eCommerce platforms, apps, CRM, and marketing tools. Schedule monthly updates for your members to keep them engaged and informed."
+                "title": "Embed Members Page",
+                "description": "Integrate your benefits page seamlessly into your site or app without coding skills."
             }
         ],
         "learn-more": "Start Now"
@@ -135,8 +135,8 @@
         "year": "Year"
     },
     "footer": {
-        "description": "(pronounced “you-and-akin”) is a San Francisco native word for a village with shared identity.",
-        "footnote": "© %Date% Yunakin® San Francisco",
+        "description": "(pronounced “you-and-akin”) is a San Francisco native word for a village with a shared identity. As a philanthropy startup, we offer our platform for free or through recurring donations that support Indigenous-led organizations protecting forests. Donations from San Francisco specifically support the work of the Association of Ramaytush Ohlone, the original peoples of the San Francisco Peninsula.",
+        "footnote": "© %Date% Yunakin® 1007 N Orange St. 4th Floor, Wilmington, DE 19801, U.S. +1 (650) 441-6511",
         "links": [
             {
                 "title": "Services",
