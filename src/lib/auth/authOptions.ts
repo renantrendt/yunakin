@@ -42,8 +42,8 @@ export const authOptions: NextAuthConfig = {
                 }
 
                 const res = await sendMagicLinkEmail({ to: params.identifier, subject: 'Sign in to Yunakin', magicLink: params.url });
-                if (res.success) {
-                    throw { message: "Error sending magic link", statusCode: 500 }
+                if (!res.success) {
+                    throw { message: res.error, statusCode: 500 }
                 }
             },
         }),
