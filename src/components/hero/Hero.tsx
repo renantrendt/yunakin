@@ -20,7 +20,7 @@ export default function Hero() {
                 className="my-20  mt-24 lg:mt-40 lg:mb-0 items-center text-center md:text-left text-black dark:text-white" >
                 <div className='grid grid-cols-1   justify-center gap-x-8 gap-y-2'>
 
-                    <div className="w-full flex flex-1 justify-center flex-col py-3 max-w-3xl mx-auto">
+                    <div className="w-full flex flex-1 justify-center flex-col pt-3 lg:py-3 max-w-3xl mx-auto">
                         <AnimatedSection className='flex justify-center'>
 
                             <Typography type='h1' className=' text-center break-all     mb-4 lg:mb-5 !font-semibold break-words '>
@@ -45,14 +45,14 @@ export default function Hero() {
                             </div>
                         </AnimatedSection>
                     </div>
-                    <AnimatedSection type='scroll-opacity' delay={0.05} className='relative w-full  lg:mt-10 flex-1 h-full  min-h-[630px] '>
+                    <AnimatedSection type='scroll-opacity' delay={0.05} className='relative w-full  lg:mt-10 flex-1 h-full  min-h-[150px] lg:min-h-[630px] '>
 
                         <Image
                             alt=''
                             fill
                             objectFit="contain"
                             src={"/images/landing/hero-dashboard.svg"}
-                            className="w-full min-h-[800px] object-cover rounded-[32px]"
+                            className="w-fit min-h-[300px] lg:min-h-[800px] object-cover rounded-[32px]"
                         />
                     </AnimatedSection>
                 </div>

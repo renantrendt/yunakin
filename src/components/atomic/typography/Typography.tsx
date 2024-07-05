@@ -7,12 +7,12 @@ import React from 'react'
 const typography = cva("text-black", {
     variants: {
         type: {
-            h1: 'text-4xl font-gelica leading-[108%] lg:leading-[72px] lg:text-[72px] lg:font-semibold',
+            h1: 'text-5xl font-gelica leading-[108%] lg:leading-[72px] lg:text-[72px] lg:font-semibold',
             h2: 'text-3xl font-black text-stone-950 lg:text-4xl leading-[64px]',
             h3: 'text-2xl leading-[32px] font-normal',
             h4: 'text-xl',
             h5: 'text-lg',
-            h6: 'text-[#757575]  text-[18px] font-satoshi ',
+            h6: 'text-[#757575] text-base  lg:text-[18px] font-satoshi ',
             p: 'text-[#757575] font-satoshi dark:text-sidebar-icon-dark'
         }
     },
