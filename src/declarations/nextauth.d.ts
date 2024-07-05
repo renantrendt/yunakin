@@ -12,6 +12,7 @@ declare module "next-auth" {
         createdAt: Date;
         updatedAt: Date;
         role: string;
+        clientSlug: string;
     }
     interface Session extends DefaultSession {
         user?: SessionUser;

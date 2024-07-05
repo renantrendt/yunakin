@@ -1,14 +1,16 @@
 'use client'
 import LoadingIcon from '@/icons/LoadingIcon'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import Script from 'next/script'
 import React from 'react'
 
 interface AuthProps {
     children: React.ReactNode
 }
 const Auth = ({ children }: AuthProps) => {
-    const { status } = useSession()
+    const { data, status } = useSession()
+    const pathname = usePathname()
     const router = useRouter()
     if (status == 'loading') {
         return (
@@ -21,7 +23,14 @@ const Auth = ({ children }: AuthProps) => {
         router.replace('/login')
         return <></>
     }
-    return <div>{children}</div>
+    if (status == 'authenticated') {
+        if (window.clarity && data?.user) {
+            window.clarity("identify", data.user?.email, data.user?.email, pathname, data.user?.clientSlug)
+        }
+    }
+    return <div>
+        {children}
+    </div>
 }
 
 export default Auth
