@@ -33,7 +33,7 @@ const Cta = () => {
                         </div>
                     </div>
 
-                    <div className='relative max-w-[500px] w-full  flex-1 h-full  min-h-[300px] lg:min-h-[530px] '>
+                    <div className='relative max-w-[500px] w-full  flex-1 h-full  min-h-[300px] lg:min-h-[500px] '>
                         <Image
                             alt=''
                             fill
