@@ -1,7 +1,7 @@
 {
     "heroSection": {
         "title": "Perk Management System",
-        "description": "Turn partner members into your clients by offering perks from your products and services.",
+        "description": "Turn other companies customers into your leads by offering perks from your products and services.",
         "usedByCopy": "Used by <b>100+</b> developers",
         "cta": "Start Now Free",
         "watchVideo": "Join Crash Course",
@@ -46,8 +46,8 @@
         "title": "Used By"
     },
     "ctaSection": {
-        "title": "Exclusive Perks Page in Seconds Without Code",
-        "description": "Easily create and share a login-free perks page without technical skills, manage which partner perks your clients can access, and attract new clients by distributing your perks through selected partners.",
+        "title": "Exclusive Perks Page in Seconds",
+        "description": "Easily create and share a login-free perks page without technical skills. Manage which perks your clients can access and attract new clients by distributing your perks through companies you've selected.",
         "reasons": [
             {
                 "metric": "40%",
@@ -67,15 +67,15 @@
         "features": [
             {
                 "title": "One Click Partnerships",
-                "description": "Partners can select your perks to offer to their clients through their perks page. Similarly, you can choose perks to benefit your clients with products and services from other partners."
+                "description": "Companies can select your perks to offer to their clients through their perks page. Similarly, you can choose perks to benefit your clients with products and services from other companies."
             },
             {
                 "title": "Shareable Perks Page",
-                "description": "Increase your reach by having partners display your perks on their perks pages, attracting qualified leads to your offerings while prioritizing privacy."
+                "description": "Increase your reach by having companies display your perks on their perks pages, attracting qualified leads to your offerings while prioritizing privacy."
             },
             {
                 "title": "AI Partnerships",
-                "description": "Receive perk insights based on your clients behavior. Strengthen relationships with partners based on their performance."
+                "description": "Receive perk insights based on your clients behavior. Strengthen relationships with other companies by analyzing their performance."
             },
             {
                 "title": "Fully customizable",
