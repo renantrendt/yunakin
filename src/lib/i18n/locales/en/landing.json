@@ -1,7 +1,7 @@
 {
     "heroSection": {
         "title": "Perk Management System",
-        "description": "Expand your customer base by giving perks to partners' members. Recognize your own members by helping them benefit from partners' products and services perks.",
+        "description": "Turn partner members into your clients by offering perks. Promote your clients to members and benefit them with partner products and services.",
         "usedByCopy": "Used by <b>100+</b> developers",
         "cta": "Start Now Free",
         "watchVideo": "Join Crash Course",
@@ -46,8 +46,8 @@
         "title": "Used By"
     },
     "ctaSection": {
-        "title": "Exclusive Members Page in Seconds Without Code",
-        "description": "Easily create and share a login-free members perks page without technical skills, manage which partner perks your members can access, and attract new members by distributing your perks through selected partners.",
+        "title": "Exclusive Perks Page in Seconds Without Code",
+        "description": "Easily create and share a login-free perks page without technical skills, manage which partner perks your clients can access, and attract new clients by distributing your perks through selected partners.",
         "reasons": [
             {
                 "metric": "40%",
@@ -67,23 +67,23 @@
         "features": [
             {
                 "title": "One Click Partnerships",
-                "description": "Partners can select your perks to offer to their members. Similarly, you can choose partners perks to provide to your members."
+                "description": "Partners can select your perks to offer to their clients through their perks page. Similarly, you can choose partner perks to provide to your clients."
             },
             {
-                "title": "Shareable Members Page",
-                "description": "Increase your reach by having partners display your perks on their members' perks pages, attracting qualified leads to your offerings while prioritizing privacy."
+                "title": "Shareable Perks Page",
+                "description": "Increase your reach by having partners display your perks on their perks pages, attracting qualified leads to your offerings while prioritizing privacy."
             },
             {
                 "title": "AI Partnerships",
-                "description": "Receive perk insights based on your members behavior. Strengthen relationships with partners based on their members performance."
+                "description": "Receive perk insights based on your clients behavior. Strengthen relationships with partners based on their performance."
             },
             {
                 "title": "Fully customizable",
                 "description": "Without any coding skills, customize every detail of your branding, including the domain URL, to reflect your brand's identity."
             },
             {
-                "title": "Embed Members Page",
-                "description": "Integrate your benefits page seamlessly into your site or app without coding skills."
+                "title": "Embed Perks Page",
+                "description": "Integrate your perks page seamlessly into your site or app without coding skills."
             }
         ],
         "learn-more": "Start Now"
