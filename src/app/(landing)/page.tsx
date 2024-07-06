@@ -9,22 +9,22 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 
   const { t } = await createTranslation('landing', props.searchParams.locale);
   const siteMetadata = {
-    title: t('metadata.title'),
-    description: t('metadata.description'),
+    title: t('heroSection.title'),
+    description: t('heroSection.description'),
     openGraph: {
-      title: t('metadata.title'),
-      description: t('metadata.description'),
+      title: t('heroSection.title'),
+      description: t('heroSection.description'),
       locale: props.searchParams.locale ?? getLocale(),
       siteName: 'Yunakin',
       url: 'www.yunakin.com',
-      images: [`${platformConfig.variables.NEXT_URL}/images/og-demo-landing.png`],
+      images: [`${platformConfig.variables.NEXT_URL}/images/landing/performance.svg`],
 
     },
     twitter: {
-      description: t('metadata.description'),
-      title: t('metadata.title'),
+      description: t('heroSection.description'),
+      title: t('heroSection.title'),
       locale: props.searchParams.locale ?? getLocale(),
-      images: [`${platformConfig.variables.NEXT_URL}/images/og-demo-landing.png`],
+      images: [`${platformConfig.variables.NEXT_URL}/images/landing/performance.svg`],
     },
   }
   return getSeoMetadata(siteMetadata);
