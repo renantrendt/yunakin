@@ -20,15 +20,15 @@ const siteUrls: SiteUrls = {
 
         aboutUs: {
             label: "navbar.aboutUs",
-            url: "/about-us",
+            url: "/",
         },
         memberPerks: {
             label: "navbar.memberPerks",
-            url: "/member-perks",
+            url: "/",
         },
         pricing: {
             label: "navbar.pricing",
-            url: "/pricing"
+            url: "/"
         }
     },
     general: {
