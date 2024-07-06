@@ -27,7 +27,7 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                         <ArrowRightIcon />
                     </span>
                 } trailing onClick={() => {
-                    window.open("/onboarding", "_blank")
+                    window.open("/", "_blank")
                 }} />
             </div>
             <div className='relative w-full row-start-1  flex-1 h-full lg:h-96'>
