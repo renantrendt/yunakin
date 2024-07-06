@@ -1,7 +1,7 @@
 {
     "heroSection": {
         "title": "Perk Management System",
-        "description": "Turn partner members into your clients by offering perks. Promote your clients to members and benefit them with partner products and services.",
+        "description": "Turn partner members into your clients by offering perks from your products and services.",
         "usedByCopy": "Used by <b>100+</b> developers",
         "cta": "Start Now Free",
         "watchVideo": "Join Crash Course",
@@ -67,7 +67,7 @@
         "features": [
             {
                 "title": "One Click Partnerships",
-                "description": "Partners can select your perks to offer to their clients through their perks page. Similarly, you can choose partner perks to provide to your clients."
+                "description": "Partners can select your perks to offer to their clients through their perks page. Similarly, you can choose perks to benefit your clients with products and services from other partners."
             },
             {
                 "title": "Shareable Perks Page",
