@@ -17,14 +17,14 @@ export async function generateMetadata(props: any): Promise<Metadata> {
       locale: props.searchParams.locale ?? getLocale(),
       siteName: 'Yunakin',
       url: 'www.yunakin.com',
-      images: [`${platformConfig.variables.NEXT_URL}/images/landing/performance.svg`],
+      images: [`${platformConfig.variables.NEXT_URL}/images/og-image.png`],
 
     },
     twitter: {
       description: t('heroSection.description'),
       title: t('heroSection.title'),
       locale: props.searchParams.locale ?? getLocale(),
-      images: [`${platformConfig.variables.NEXT_URL}/images/landing/performance.svg`],
+      images: [`${platformConfig.variables.NEXT_URL}/images/og-image.png`],
     },
   }
   return getSeoMetadata(siteMetadata);
