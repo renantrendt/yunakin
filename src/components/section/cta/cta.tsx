@@ -62,7 +62,7 @@ const Cta = () => {
                             <Avatar size={"xl"} image='/images/landing/avatars/sixth.png' name='avatar' className='relative bottom-4 right-6' />
                         </div>
                         <div>
-                            <Typography type='h5' className='text-center  !text-black !font-bold max-w-2xl !text-[18px]' >My Company</Typography>
+                            <Typography type='h5' className='text-center  !text-black !font-bold max-w-2xl !text-[18px]' >Other Companies</Typography>
                             <Typography type='h6' className='text-center max-w-2xl lg:!text-[20px] ' >Clients</Typography>
                         </div>
                     </div>
