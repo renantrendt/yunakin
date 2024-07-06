@@ -1,9 +1,9 @@
 {
     "heroSection": {
-        "title": "Hello learning! Product not Shipped.",
-        "description": "The ultimate SaaS boilerplate, designed to fast-track your application development with ease and precision.",
+        "title": "Customer Perks",
+        "description": "Attract New Leads Without Ads by Offering Introductory Perks to Other Companies' Customers, While Increasing Retention",
         "usedByCopy": "Used by <b>100+</b> developers",
-        "cta": "Start Free Trial",
+        "cta": "Start Now Free",
         "watchVideo": "Join Crash Course",
         "image": "/images/hero-image.jpeg",
         "usedBy": [
@@ -23,7 +23,8 @@
                 "name": "John Doe",
                 "avatar": "/images/used-by/fourth.jpeg"
             }
-        ]
+        ],
+        "locked": "No login required"
     },
     "navbar": {
         "pricing": "Pricing",
@@ -33,7 +34,9 @@
         "cta": "Start Free Trial",
         "watchVideo": "Join Crash Course",
         "login": "Login",
-        "getStarted": "Get Started"
+        "getStarted": "Start Now Free",
+        "aboutUs": "About Us",
+        "memberPerks": "Member Perks"
     },
     "metadata": {
         "title": "Yunakin",
@@ -43,8 +46,11 @@
         "title": "Used By"
     },
     "ctaSection": {
-        "title": "Why use Codepilot?",
-        "description": "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
+        "clients": "Clients",
+        "mycompany": "My company",
+        "othercompany": "Other company",
+        "title": "Exclusive Perks Page in Seconds",
+        "description": "Easily create and share a login-free perks page without technical skills. Manage which perks your clients can access and attract new clients by distributing your perks through companies you've selected.",
         "reasons": [
             {
                 "metric": "40%",
@@ -58,24 +64,37 @@
                 "metric": "100%",
                 "description": "productivity increase"
             }
-        ]
+        ],
+        "compliance": "SOC2 and GDPR by design."
+    },
+    "acquisitionSection": {
+        "title": "Scale Acquisition Predict Costs",
+        "description": "Acquire customers with predictable costs by distributing your perks to customers of other companies."
     },
     "features": {
         "features": [
             {
-                "title": "Templates",
-                "description": "Codepilot offers a wide range of customizable templates that serve as a starting point for various types of applications, enabling developers to skip the initial setup and dive straight into the development of unique features."
+                "title": "One Click Partnerships",
+                "description": "Companies can select your perks to offer to their clients through their perks page. Similarly, you can choose perks to benefit your clients with products and services from other companies."
             },
             {
-                "title": "Built-In Practices",
-                "description": "With Codepilot, developers benefit from integrated best practices for coding, security, and scalability. This ensures that projects are not only developed faster but also maintain high standards of quality and performance."
+                "title": "Shareable Perks Page",
+                "description": "Increase your reach by having companies display your perks on their perks pages, attracting qualified leads to your offerings while prioritizing customers privacy."
             },
             {
-                "title": "Scale and Perform",
-                "description": "Codepilot is designed with scalability in mind, allowing applications to grow seamlessly in terms of user base and functionality. It includes optimized configurations for performance, ensuring that applications remain fast and responsive as they scale."
+                "title": "AI Partnerships",
+                "description": "Receive perk insights based on your clients behavior. Strengthen relationships with other companies by analyzing their performance."
+            },
+            {
+                "title": "Fully customizable",
+                "description": "Without any coding skills, customize every detail of your branding, including the domain URL, to reflect your brand's identity."
+            },
+            {
+                "title": "Embed Perks Page",
+                "description": "Integrate your perks page seamlessly into your site or app without coding skills."
             }
         ],
-        "learn-more": "Learn More"
+        "learn-more": "Start Now"
     },
     "testimonialsSection": {
         "title": "Testimonials",
@@ -124,8 +143,8 @@
         "year": "Year"
     },
     "footer": {
-        "description": "Codepilot accelerates development by providing a pre-configured foundation that saves time, ensures best practices, and facilitates scalability, empowering you to focus on innovation.",
-        "footnote": "@%Date% Codepilot. All rights reserved.",
+        "description": "(pronounced “you-and-akin”) is a San Francisco native word for a village with a shared identity. As a philanthropy startup, we offer our platform for free or through recurring donations that support Indigenous-led organizations protecting forests. Donations from San Francisco specifically support the work of the Association of Ramaytush Ohlone, the original peoples of the San Francisco Peninsula.",
+        "footnote": "© %Date% Yunakin® 1007 N Orange St. 4th Floor, Wilmington, DE 19801, U.S. +1 (650) 441-6511",
         "links": [
             {
                 "title": "Services",

@@ -8,42 +8,45 @@ import ChartCard from './ChartCard'
 
 
 interface ChartContainerProps {
-    benefitClicks:{
-        title:string
-        count:number
+    benefitClicks: {
+        title: string
+        count: number
     }[]
-    benefitsByOs: {
-        title:string
-        count:number
+    beenfitsClaims: {
+        title: string
+        count: number
     }[]
+    companyClicks: {
+        title: string
+        count: number
+    }[]
+    // benefitsByOs: {
+    //     title: string
+    //     count: number
+    // }[]
     totalClicks: number
+    totalClaims: number
+    totalCompanyClicks: number
 }
 
-const ChartContainer = ({benefitClicks, benefitsByOs, totalClicks}: ChartContainerProps) => {
-    
-    console.log(benefitClicks)
-    console.log(benefitsByOs)
+const ChartContainer = ({ benefitClicks, companyClicks, totalClicks, totalCompanyClicks, totalClaims, beenfitsClaims }: ChartContainerProps) => {
     const charts = [
         {
-            title: 'Member Benefits Clicks',
+            title: 'Benefits that your members are saving at your members benefits public page',
             summary: totalClicks,
-            children: <BarChart name='Member Benefits Clicks' items={benefitClicks} />
+            children: <BarChart name='Clicks' items={benefitClicks} />
+        },
+
+        {
+            title: 'Benefits listed from my company that was saved at other companies public members page',
+            summary: totalCompanyClicks,
+            children: <BarChart name='All Member Benefit Clicks' items={companyClicks} />
         },
         {
-            title: 'Member Benefits by OS',
-            summary: totalClicks,
-            children: <BarChart name='Member Benefits Clicks' items={benefitsByOs} />
+            title: 'Clicks on the website of the benefits listed on my public members page',
+            summary: totalClaims,
+            children: <BarChart name='Benefit Claims' items={beenfitsClaims} />
         },
-        // {
-        //     title: 'Revenue',
-        //     summary: 3000,
-        //     children: <AreaChart />
-        // },
-        // {
-        //     title: 'Customers',
-        //     summary: 4000,
-        //     children: <PieChart />
-        // }
     ]
     return (
         <div className='chart-container grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2'>

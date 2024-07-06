@@ -54,10 +54,10 @@ const Topbar = () => {
                     />
                 </div>
                 <div className='relative' onMouseLeave={() => setShow(false)}>
-                    <Avatar onMouseEnter={() => setShow(true)} onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
+                    <Avatar onMouseEnter={() => setShow(true)} onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "/images/default-avatar.jpeg"} name={session?.user?.name ?? ""} />
                     <AccountModal email={session?.user?.email as string}
-                        name={session?.user?.name || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
-                        image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} shown={show}
+                        name={session?.user?.name ?? ""}
+                        image={session?.user?.avatar || "/images/default-avatar.jpeg"} shown={show}
                     />
                 </div>
             </div>

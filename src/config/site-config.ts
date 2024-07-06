@@ -17,21 +17,18 @@ interface SiteUrls {
 
 const siteUrls: SiteUrls = {
     navbar: {
+
+        aboutUs: {
+            label: "navbar.aboutUs",
+            url: "/about-us",
+        },
+        memberPerks: {
+            label: "navbar.memberPerks",
+            url: "/member-perks",
+        },
         pricing: {
             label: "navbar.pricing",
-            url: "/#pricing",
-        },
-        blog: {
-            label: "navbar.blog",
-            url: "/blogs",
-        },
-        features: {
-            label: "navbar.features",
-            url: "/#features",
-        },
-        docs: {
-            label: "navbar.docs",
-            url: "https://docs.codepilot.dev",
+            url: "/pricing"
         }
     },
     general: {
@@ -39,6 +36,7 @@ const siteUrls: SiteUrls = {
         dashboard: '/dashboard',
         docs: "https://docs.Codepilot.dev",
         login: '/login',
+        onboarding: '/onboarding',
         logout: '/logout',
         register: '/register',
         forgotPassword: '/forgot-password',

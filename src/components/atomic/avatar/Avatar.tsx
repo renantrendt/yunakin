@@ -28,13 +28,15 @@ interface AvatarProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps
 }
 
 const Avatar = ({ image, name, size = 'md', ...additionalProps }: AvatarProps) => {
+    const timestamp = new Date().getTime()
     return (
         <div className='avatar' {...additionalProps}>
             <div className={cn('rounded-full', avatar({ size }))}>
                 <Image
+                    unoptimized
                     height={40}
                     width={40}
-                    src={image}
+                    src={`${image}?${timestamp}`}
                     alt={name}
                     className="object-cover   h-10 w-10  !m-0 !p-0  object-top rounded-full group-hover:scale-105 group-hover:z-30"
                 />

@@ -18,3 +18,43 @@ export type ServerActionResult<Result> = Promise<
 >
 
 
+export type MemberBenefitPageConfigDto = {
+    title: string
+    description: string
+    imageURL: string
+    benefits?: string[]
+    userId?: string
+    clientSlug: string
+}
+
+export type MemberBenefitLinkClickDto = {
+    memberBenefitId: string
+    otherMemberBenefitId?: string
+    device?: string
+    browser?: string
+    os?: string
+    event: MemberBenefitClickType
+}
+export type MemberPageViewDto = {
+    memberBenefitPageConfigId: string
+    device?: string
+    browser?: string
+    os?: string
+}
+
+
+export enum MemberBenefitClickType {
+    SAVE_BENEFIT = "SAVE_BENEFIT",
+    CLAIM_BENEFIT = "CLAIM_BENEFIT",
+    LOCATION_CLICK = "LOCATION_CLICK",
+    WEBSITE_CLICK = "WEBSITE_CLICK",
+}
+
+
+
+export enum MemberBenefitVisibility {
+    PRIVATE = "PRIVATE",
+    PUBLIC = "PUBLIC",
+    OWNED_PRIVATE = "OWNED_PRIVATE",
+    OWNED_PUBLIC = "OWNED_PUBLIC",
+}

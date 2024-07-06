@@ -3,7 +3,7 @@ import { VariantProps, cva } from 'class-variance-authority';
 import React from 'react'
 
 
-const badge = cva("w-fit  flex flex-row justify-center gap-1 text-sm leading-5 font-normal", {
+const badge = cva("w-fit text-center  flex flex-row justify-center gap-1 text-sm rounded-lg leading-5 font-normal", {
     variants: {
         type: {
             outline: 'border rounded-lg',
@@ -16,7 +16,7 @@ const badge = cva("w-fit  flex flex-row justify-center gap-1 text-sm leading-5 f
             md: 'px-2 py-1.5',
         },
         color: {
-            primary: 'text-primary-600 border-primary-300 bg-primary-100 dark:border-none dark:bg-[#32285A] dark:text-[#947BF8',
+            primary: 'text-primary-600 border-primary-300 bg-primary-100 dark:border-none dark:bg-[#32285A] dark:text-[#947BF8]',
             grey: 'text-grey-600 border-grey-300 bg-grey-100 dark:border-none dark:bg-[#B0B0B0] dark:text-[rgba(245, 245, 245, 0.1)]',
             red: 'text-red-600 border-red-300 bg-red-100 dark:border-none dark:bg-[#352325] dark:text-red-600',
             green: 'text-green-600 border-green-300 bg-green-100 dark:border-none dark:text-green-600 dark:bg-[#26301D]',

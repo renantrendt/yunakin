@@ -9,6 +9,8 @@ import type { Viewport } from 'next'
 import { getLocale } from '@/lib/i18n/server'
 import { LocaleProvider } from '@/hooks/useLocale'
 
+const gelica = localFont({ src: './fonts/Fontspring-DEMO-gelica-semibold.otf', variable: "--font-gelica" });
+const satoshi = localFont({ src: './fonts/Satoshi-Medium.otf', variable: "--font-satoshi" });
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -27,7 +29,7 @@ export default function RootLayout({
   const locale = getLocale();
 
   return (
-    <RootLayoutClient params={{ ...params, monaSans, locale }}>
+    <RootLayoutClient params={{ ...params, monaSans, locale, gelica, satoshi }}>
       <LocaleProvider value={locale}>
         {children}
       </LocaleProvider>

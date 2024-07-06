@@ -1,6 +1,6 @@
 {
     "sidebar": {
-        "home": "Home",
+        "home": "Analytics",
         "ai": "AI",
         "notifications": "Notifications",
         "users": "Users",
@@ -9,7 +9,16 @@
         "helpAndSupport": "Help & Support",
         "categories": "Categories",
         "editor": "Member Page Editor",
-        "catalog": "Member Benefits Catalog",
-        "memberBenefits": "Member Benefits"
+        "catalog": "Benefits Catalog",
+        "memberBenefits": "Published Benefits",
+        "customize": "Customize Appearance"
+    },
+    "memberbenefit": {
+        "visibility": {
+            "PUBLIC": "Public",
+            "PRIVATE": "Hidden",
+            "OWNED_PRIVATE": "Hidden to you, public for others",
+            "OWNED_PUBLIC": "Public to you, hidden for others"
+        }
     }
 }

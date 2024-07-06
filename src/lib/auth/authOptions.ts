@@ -27,7 +27,7 @@ export const authOptions: NextAuthConfig = {
         Resend({
             apiKey: platformConfig.variables.RESEND_API_KEY!,
             secret: platformConfig.variables.NEXT_AUTH_SECRET!,
-            from: "no-reply@codepilot.dev",
+            from: "no-reply@yunakin.com",
 
             async sendVerificationRequest(params) {
                 const email = params.identifier;
@@ -41,9 +41,9 @@ export const authOptions: NextAuthConfig = {
                     throw { message: "User not found", statusCode: 404 }
                 }
 
-                const res = await sendMagicLinkEmail({ to: params.identifier, subject: 'Sign in to Codepilot', magicLink: params.url });
-                if (res.success) {
-                    throw { message: "Error sending magic link", statusCode: 500 }
+                const res = await sendMagicLinkEmail({ to: params.identifier, subject: 'Sign in to Yunakin', magicLink: params.url });
+                if (!res.success) {
+                    throw { message: res.error, statusCode: 500 }
                 }
             },
         }),
@@ -78,7 +78,7 @@ export const authOptions: NextAuthConfig = {
                         provider: true,
                         password: true,
                         role: true,
-                    }
+                    },
                 })) as User
                 if (!user) {
                     throw { message: t("error.userNotFound"), statusCode: 400 }
@@ -89,11 +89,17 @@ export const authOptions: NextAuthConfig = {
                 if (!user || !(await compare(credPassword, user.password as string))) {
                     throw { message: t("error.incorrectEmailOrPassword"), statusCode: 401 }
                 }
+                const config = await prisma.memberBenefitPageConfig.findFirst({
+                    where: {
+                        userId: user.id
+                    }
+                });
                 return {
                     email: user.email,
                     name: user.name,
                     id: user.id,
                     role: user.role,
+                    clientSlug: config?.clientSlug,
                 }
             }
         }),
@@ -163,6 +169,13 @@ export const authOptions: NextAuthConfig = {
                     role: true,
                 }
             });
+            const config = await prisma.memberBenefitPageConfig.findFirst({
+                where: {
+                    userId: user?.id
+                }
+            });
+
+
             const userSubscription = await prisma.subscription.findFirst({
                 where: {
                     userId: user?.id
@@ -177,6 +190,7 @@ export const authOptions: NextAuthConfig = {
                     subscription: {
                         ...userSubscription
                     },
+                    clientSlug: config?.clientSlug,
                 },
                 accessToken: token
             }

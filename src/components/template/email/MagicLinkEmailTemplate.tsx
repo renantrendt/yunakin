@@ -55,7 +55,7 @@ export const MagicLinkEmail = ({
                         <Text>
                             Click the button below to login to your account,
                         </Text>
-                        <Section className="text-center mt-[32px] mb-[32px]">
+                        <Section className="text-left mt-[32px] mb-[32px]">
                             <Button
                                 className=" min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px] 
                                 hover:bg-primary-600 text-white bg-primary-500 focus:shadow-focus-primary  disabled:bg-disabled 
@@ -85,7 +85,7 @@ export const MagicLinkEmail = ({
                                 <Img
                                     src={`${baseUrl}/images/email-footer-logo.png`}
 
-                                    alt="CodePilot"
+                                    alt={organizationName}
                                     className="my-0  mx-auto"
                                     width={"142"}
                                     height={"35"}
@@ -111,7 +111,7 @@ export const MagicLinkEmail = ({
 
 MagicLinkEmail.PreviewProps = {
     magicLink: "https://codepilot.dev/confirm/1234567890",
-    organizationName: "CodePilot",
+    organizationName: "Yunakin",
 } as MagicLinkEmailProps;
 
 export default MagicLinkEmail;

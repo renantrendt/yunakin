@@ -56,7 +56,7 @@ export default function Navbar() {
                             <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
                         </Link>
                     </div>
-                    {/* <div className="navbar-center   hidden lg:flex justify-center">
+                    <div className="navbar-center   hidden lg:flex justify-center">
                         <ul className="menu menu-horizontal px-1 flex gap-1">
                             {_.keys(siteUrls.navbar).map((key: string) => {
                                 const link = siteUrls.navbar[key]
@@ -90,10 +90,9 @@ export default function Navbar() {
                                         />
                                     )
                                 })}
-                                <div className='flex flex-row justify-start gap-3'>
+                                {/* <div className='flex flex-row justify-start gap-3'>
                                     <ThemeSwitcher />
-                                    <ChangeLocale />
-                                </div>
+                                </div> */}
                                 <li>
                                     <Button
                                         variant='primary'
@@ -107,9 +106,9 @@ export default function Navbar() {
                             </ul>
                         </div>
                         <div className='hidden lg:flex  gap-2 justify-center items-center'>
-                            <ThemeSwitcher />
-                            <ChangeLocale />
-
+                            {/* <ThemeSwitcher /> */}
+                            {/* <ChangeLocale /> */}
+                            {/* 
                             {session?.user && (
                                 <div className='relative' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
                                     <Avatar onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} name={session?.user?.name ?? ""} />
@@ -118,22 +117,30 @@ export default function Navbar() {
                                         image={session?.user?.avatar || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} shown={show}
                                     />
                                 </div>
-                            )}
-                            {
+                            )} */}
+                            {/* {
                                 !session?.user && status !== "loading" && (
 
-                                    <Button
-                                        variant='primary'
-                                        className='  !min-w-[120px] '
-                                        label={t('navbar.getStarted')}
-                                        size='lg'
-                                        onClick={() => router.push(siteUrls.general.register)}
-                                    />
+                                   
                                 )
-                            }
+                            } */}
+                            <Button
+                                variant='secondary'
+                                className='  !min-w-[100px] '
+                                label={t('navbar.login')}
+                                size='lg'
+                                onClick={() => router.push(siteUrls.general.login)}
+                            />
+                            <Button
+                                variant='primary'
+                                className='  !min-w-[120px] '
+                                label={t('navbar.getStarted')}
+                                size='lg'
+                                onClick={() => router.push(siteUrls.general.onboarding)}
+                            />
                         </div>
 
-                    </div> */}
+                    </div>
                 </div>
 
             </ContentSection >

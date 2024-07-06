@@ -1,0 +1,14 @@
+{
+    "step1": {
+        "title": "Choose the benefits you want to offer",
+        "description": "Then generate a custom domain for your company"
+    },
+    "step2": {
+        "title": "Members benefit",
+        "description": "You can customize this page and add your own benefit after saving it"
+    },
+    "catalog": {
+        "title": "Catalog of benefits",
+        "description": "Save the benefits you want to offer to your members"
+    }
+}

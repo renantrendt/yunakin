@@ -5,9 +5,7 @@ import { initGA, logPageView } from '@/utils/ga-analytics'
 import Providers from '@/lib/providers/providers'
 import React from 'react'
 import { cn } from '@/utils/cn'
-import { GoogleTagManager } from '@next/third-parties/google'
-import platformConfig from '@/config/app-config'
-
+import Script from 'next/script'
 const inter = Inter({ preload: false, weight: 'variable', subsets: ['latin'] })
 
 export default function RootLayoutClient({
@@ -37,13 +35,22 @@ export default function RootLayoutClient({
     }, [])
     return (
         <html lang={params.locale}>
+            <head>
+                <Script id='clarity-script' type="text/javascript">
+                    {`(function(c,l,a,r,i,t,y){
+                        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "n2h394ndxk");`}
+                </Script>
+            </head>
             <body >
                 <Providers>
-                    <div className={cn(inter.className, params.monaSans.variable, "bg-landing-background  dark:bg-landing-dark-background  ")}>
+                    <div className={cn(inter.className, params.gelica.variable, params.monaSans.variable, params.satoshi.variable, "bg-landing-background  dark:bg-landing-dark-background  ")}>
                         {children}
                     </div>
                 </Providers>
-                <GoogleTagManager gtmId={platformConfig.variables.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string} />
+                {/* <GoogleTagManager gtmId={platformConfig.variables.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string} /> */}
             </body>
         </html>
     )

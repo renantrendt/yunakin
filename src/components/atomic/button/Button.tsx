@@ -6,12 +6,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 
 
-const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px]  ", {
+const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-satoshi font-normal leading-[20px]  ", {
   variants: {
     variant: {
       primary: [
         "bg-primary-500",
-        "text-white",
+        "text-stone-950",
         "border-transparent",
         "hover:bg-primary-600",
         "focus:shadow-focus-primary",
@@ -64,7 +64,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, children, variant = 'prima
 
   return (
     <button disabled={disabled || loading} className={cn(button({ variant, size }), className)} onClick={onClick} type={type} {...props}>
-      {loading ? <LoadingIcon /> : null} {trailing ? <>{content ? <span className='mr-0'>{content}</span> : null}  {icon} </> : <>{icon} {content && <span className='ml-0'> {content} </span>}</>}
+      {loading ? <LoadingIcon /> : null} {trailing ? <>{content ? <span className='mr-0'>{content}</span> : null}  {icon} </> : <>{!loading && icon} {content && <span className='ml-0'> {content} </span>}</>}
     </button>
   )
 }

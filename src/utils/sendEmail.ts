@@ -149,7 +149,7 @@ export const sendMagicLinkEmail = async ({
       subject: subject,
       react: MagicLinkEmail({
         magicLink,
-        organizationName: "Codepilot"
+        organizationName: "Yunakin"
       }) as React.ReactElement,
     });
     return { success: true, data: data }

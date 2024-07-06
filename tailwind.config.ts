@@ -10,13 +10,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // 'primary': '#8E76FE',
-        'primary-end': '#8C5AFC',
+        'primary': '#FFDD04',
+        'primary-end': '#FFDD04',
         'stone-950': "#0F0F0F",
         'neutral-600': "#4B4B4B",
         'neutral-200': "#DEDEDE",
         'header-color': '#91A0B5',
-        'landing-background': "#FAFAFA",
+        'landing-background': "#F8F7F7",
         'category-blog-color': "#515151",
         'category-blog-background': "#EBEBEB",
         'category-card-autor': "#8B8B8B",
@@ -60,10 +60,10 @@ const config: Config = {
         'primary-200': "#D6D5FF",
         'primary-300': "#B7B4FE",
         'primary-400': "#8E76FE",
-        'primary-500': "#705AF8",
-        'primary-600': " #5C37EB",
+        'primary-500': "#FFDD04",
+        'primary-600': " #FFDD04",
         "faq-color": "#0E0E0E",
-        'disabled': "#D6D5FF",
+        'disabled': "#FFEB6B",
         'landing-dark-background': "#1A191F",
         'card-dark': "#24232F",
         'input-dark': "#2C2A3C",
@@ -86,7 +86,9 @@ const config: Config = {
         'secondary-button-hover-dark': "#353248"
       },
       fontFamily: {
-        monaSans: ['var(--font-coming-soon)']
+        monaSans: ['var(--font-coming-soon)'],
+        gelica: ['var(--font-gelica)'],
+        satoshi: ['var(--font-satoshi)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -152,7 +154,7 @@ const config: Config = {
 
     "boxShadow": {
       "sm": "0px 3px 6px -3px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.05), 0px 1px 2px -1px rgba(0, 0, 0, 0.05), 0px 1px 0px -1px rgba(0, 0, 0, 0.05)",
-      "focus-primary": "0px 0px 0px 3px rgba(112, 90, 248, 0.40)",
+      "focus-primary": "0px 0px 0px 3px rgba(255, 221, 4, 0.4)",
       "focus-red": "0px 0px 0px 3px rgba(236, 89, 98, 0.40)",
       "focus-green": "0px 0px 0px 3px rgba(104, 193, 50, 0.40)",
       "form-container": "0px 1px 4px 0px rgba(0, 0, 0, 0.10)",

@@ -106,6 +106,7 @@ const platformConfig = {
     ]
   },
   variables: {
+    NEXT_PUBLIC_NEXT_URL: process.env.NEXT_PUBLIC_NEXT_URL,
     NEXT_PUBLIC_STRAPI_API_TOKEN: process.env.NEXT_PUBLIC_STRAPI_API_TOKEN,
     NEXT_PUBLIC_PAGE_LIMIT: process.env.NEXT_PUBLIC_PAGE_LIMIT,
     NEXT_PUBLIC_STRAPI_API_URL: process.env.NEXT_PUBLIC_STRAPI_API_URL,

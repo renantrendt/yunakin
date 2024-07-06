@@ -19,24 +19,35 @@ import AddUserModal from '../molecules/add-user-modal'
 import InputField from '../atomic/input/InputField'
 import MagnifyingGlass from "@/icons/magnifying-glass.svg"
 import useDebounce from '@/hooks/useDebounce'
-import { Category, MemberBenefit } from '@prisma/client'
+import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
 import AddCategoryModal from '../molecules/add-category-modal'
-import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, updateMemberBenefit } from '@/app/actions'
+import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, deleteOtherMemberBenefit, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
 import { Row } from '@react-email/components'
+import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
+import platformConfig from '@/config/app-config'
 
+import EditIcon from "@/icons/edit-icon.svg"
+import { useSearchParams } from 'next/navigation'
+import { MemberBenefitVisibility } from '@/lib/types'
+import _, { set } from 'lodash'
+import { useTranslation } from '@/lib/i18n/client'
 
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefit[]
     categories: Category[]
+    config?: MemberBenefitPageConfig
 }
 
-const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories }: MemberBenefitsTableProps) => {
+const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, categories }: MemberBenefitsTableProps) => {
+    const { t } = useTranslation('dashboard')
+    const searchParams = useSearchParams()
     const session = useSession()
+    const [loading, setLoading] = useState(false)
     const [memberBenefits, setMemberBenefits] = useState<MemberBenefit[]>(defaultMemberBenefits)
     const [modalOpen, setModalOpen] = useState(false)
-    const [memberBenefitModal, setMemberBenefitModal] = useState(false)
-    const [toBeDeletedMemberBenefitId, setToBeDeletedMemberBenefitId] = useState('')
+    const [memberBenefitModal, setMemberBenefitModal] = useState(searchParams.get('openModal') === 'true' ? true : false)
+    const [toBeDeletedMemberBenefitId, setToBeDeletedMemberBenefitId] = useState<string>('')
     const [tobeEditedMemberBenefit, setTobeEditedMemberBenefit] = useState<MemberBenefit | undefined>(undefined)
     const columnHelper = createColumnHelper<MemberBenefit>()
     const [search, setSearch] = useState('')
@@ -57,11 +68,18 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
         //     }
         // })()
     }, [debouncedValue])
+
+    const isBenefitCreator = (memberBenefitId: string) => {
+        const memberBenefit = memberBenefits.find(memberBenefit => memberBenefit.id === memberBenefitId)
+        return memberBenefit?.userId === session.data?.user?.id
+    }
     const columns = [
         columnHelper.accessor(row => row.title, {
             id: 'Title',
             cell: info => {
-                return <a href={""} target='_blank' className='text-blue-500 hover:underline'>{info.getValue()}</a>
+                const memberBenefit = memberBenefits[info.row.index]
+                const domain = memberBenefit.domain.includes('http') ? memberBenefit.domain : `https://${memberBenefit.domain}`
+                return <a href={domain} target='_blank' className='text-blue-500 hover:underline'>{info.getValue()}</a>
             },
             header: () => <span>Title</span>,
             footer: info => info.column.id,
@@ -84,22 +102,55 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
             header: () => <span>Description</span>,
             footer: info => info.column.id,
         }),
+        columnHelper.accessor(row => row.offer, {
+            id: 'Offer',
+            cell: info => info.getValue(),
+            header: () => <span>Offer</span>,
+            footer: info => info.column.id,
+        }),
         columnHelper.accessor(row => row.code, {
             id: 'Code',
             cell: info => info.getValue(),
             header: () => <span>Code</span>,
             footer: info => info.column.id,
         }),
+        columnHelper.accessor(row => row.location, {
+            id: 'Visibility',
+            cell: info => {
+                const memberBenefit = memberBenefits[info.row.index]
+                if (!isBenefitCreator(memberBenefit.id)) {
+                    return <Badge size={"md"} color={"primary"} >{t(`memberbenefit.visibility.${memberBenefit.visibility}`)}</Badge>
+                }
+                return <Dropdown
+                    id='visibility'
+                    name='visibility'
+                    options={_.keys(MemberBenefitVisibility).map(key => ({ value: key, label: t(`memberbenefit.visibility.${key}`) }))}
+                    value={memberBenefit.visibility}
+                    onChange={async (value) => {
+                        try {
+                            await updateMemberBenefit({ ...memberBenefit, visibility: value })
+                            setMemberBenefits(memberBenefits.map(b => memberBenefit.id === b.id ? { ...memberBenefit, visibility: value } : b))
+                            customToast.success(`${memberBenefit.title} visibility updated to ${t(`memberbenefit.visibility.${value}`)}`)
+                        } catch (error) {
+                            customToast.error('Failed to update visibility')
+                        }
+                    }}
+                />
+            }
+        }),
         columnHelper.display({
             id: 'Actions',
             cell: info => {
                 const memberBenefit = memberBenefits[info.row.index]
+                const createdMemberBenefit = isBenefitCreator(memberBenefits[info.row.index].id)
                 return (<div className='flex justify-start gap-2'>
-                    <Button icon={<DeleteIcon />} size='md' onClick={() => {
+                    {createdMemberBenefit && <Button icon={<EditIcon />} size='md' onClick={() => {
 
                         setMemberBenefitModal(true)
                         setTobeEditedMemberBenefit(memberBenefit)
-                    }} />
+                    }}
+                        className='!p-2'
+                    />}
                     <Button icon={<DeleteIcon />} size='md' onClick={() => {
                         setModalOpen(true)
                         setToBeDeletedMemberBenefitId(memberBenefit.id)
@@ -122,7 +173,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
         onPaginationChange: setPagination,
         autoResetPageIndex: false,
         state: {
-            pagination
+            // pagination
 
         },
     });
@@ -134,9 +185,16 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const handleDelete = async (memberBenefitId: string) => {
         try {
 
-            await deleteMemberBenefit(memberBenefitId)
-            setMemberBenefits(memberBenefits.filter(memberBenefit => memberBenefit.id !== memberBenefitId))
-            customToast.success('Member Beenfit deleted successfully')
+            // check if the user is the creator of the member benefit
+            const memberBenefit = memberBenefits.find(memberBenefit => memberBenefit.id === memberBenefitId)
+            if (memberBenefit?.userId !== session.data?.user?.id) {
+                await deleteOtherMemberBenefit(memberBenefitId, session.data?.user?.id! as string)
+                setMemberBenefits(memberBenefits.filter(memberBenefit => memberBenefit.id !== memberBenefitId))
+            } else {
+                await deleteMemberBenefit(memberBenefitId)
+                setMemberBenefits(memberBenefits.filter(memberBenefit => memberBenefit.id !== memberBenefitId))
+                customToast.success('Member Beenfit deleted successfully')
+            }
         } catch (error) {
             customToast.error('Failed to delete member benefit')
         }
@@ -145,16 +203,17 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
         }
     }
 
+
     return (
         <div className='h-full min-h-[100vh]'>
-            <div className='flex w-full justify-end my-4 '>
+            {/* <div className='flex w-full justify-end my-4 '>
                 <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
                     id='search' value={search} onChange={(e) => {
                         setSearched(false)
                         setSearch(e.target.value)
                     }} className='border-none outline-none hover:border-none focus:border-none
-                             !px-8 !shadow-none !mb-2    ' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
-            </div>
+                             !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
+            </div> */}
             <div className='flex flex-col gap-4'>
 
                 <Table>
@@ -196,7 +255,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                 </Table>
                 <div className='self-end flex flex-col gap-4'>
 
-                    <Pagination
+                    {/* <Pagination
                         totalPages={Math.ceil(memberBenefits.length / 5)}
                         previousButton
                         nextButton
@@ -210,7 +269,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                                 pageSize: 5
                             })
                         }}
-                    />
+                    /> */}
                     <Button label='Add Member Benefit' className='w-fit self-end' variant='primary' onClick={() => setMemberBenefitModal(true)} />
                 </div>
             </div>
@@ -221,60 +280,117 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                         <DeleteIcon />
                     </div>
                 }
-                isOpen={modalOpen} onClose={() => setModalOpen(false)} title='Delete Member Benefit?' description='This action is irreversible'>
+                isOpen={modalOpen} onClose={() => setModalOpen(false)} title={
+                    isBenefitCreator(toBeDeletedMemberBenefitId) ? 'Delete Member Benefit?' : 'Hide this benefit for your members'
+                } description={
+                    isBenefitCreator(toBeDeletedMemberBenefitId) ? 'This action is irreversible' : 'You can show again by selecting on the catalog'}>
                 <>
                     <Button variant='secondary' label='Cancel' onClick={() => setModalOpen(false)} />
-                    <Button variant='alert' label='Delete Member Benefit' onClick={() => {
-                        handleDelete(toBeDeletedMemberBenefitId)
-                        setModalOpen(false)
-                    }}
+                    <Button variant='alert' label={
+                        isBenefitCreator(toBeDeletedMemberBenefitId) ?
+                            'Delete Member Benefit' : 'Hide Member Benefit'} onClick={() => {
+                                handleDelete(toBeDeletedMemberBenefitId)
+                                setModalOpen(false)
+                            }}
                     />
                 </>
             </ConfirmationModal>
-            {memberBenefitModal && <AddMemberBenefitModal
-                categories={categories}
-                editMemberBenefit={tobeEditedMemberBenefit}
-                onClose={() => setMemberBenefitModal(false)}
-                onUpdate={async (data) => {
-                    try {
-                        const updatedMemberBenefit = await updateMemberBenefit({
-                            id: data.id,
-                            categoryId: data.categoryId,
-                            code: data.code,
-                            domain: data.domain,
-                            location: data.location,
-                            description: data.description,
-                            link: data.link,
-                            userId: session.data?.user?.id! as string,
-                            title: data.name
-                        })
-                        setMemberBenefits(memberBenefits.map(memberBenefit => memberBenefit.id === updatedMemberBenefit.id ? updatedMemberBenefit : memberBenefit))
-                        setMemberBenefitModal(false)
-                        setTobeEditedMemberBenefit(undefined)
-                        customToast.success('Member Benefit updated successfully')
-                    } catch (error) {
-                        customToast.error('Failed to update member benefit')
-                    }
+            {
+                memberBenefitModal && <AddMemberBenefitModal
+                    loading={loading}
+                    categories={categories}
+                    editMemberBenefit={tobeEditedMemberBenefit}
+                    onClose={() => setMemberBenefitModal(false)}
+                    onUpdate={async (data: any) => {
+                        try {
+                            setLoading(true)
+                            const updatedMemberBenefit = await updateMemberBenefit({
+                                id: data.id,
+                                categoryId: data.categoryId,
+                                code: data.code,
+                                domain: data.domain,
+                                location: data.location,
+                                description: data.description,
+                                link: data.link,
+                                userId: session.data?.user?.id! as string,
+                                title: data.name,
+                                offer: data.offer,
+                                visibility: data.visibility
+                            } as MemberBenefit)
+                            if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
+                                const blob = await fetch(data.imageURL).then(r => r.blob());
 
-                }}
-                onCreate={async (data) => {
-                    const userId = session.data?.user?.id! as string
-                    const newMemberBenefit = await createMemberBenefit({
-                        categoryId: null,
-                        code: data.code,
-                        domain: data.domain,
-                        location: data.location,
-                        description: data.description,
-                        link: data.link,
-                        userId: userId,
-                        categoryId: data.categoryId,
-                        title: data.name
-                    })
-                    setMemberBenefits([...memberBenefits, newMemberBenefit])
-                    setMemberBenefitModal(false)
-                }}
-            />}
-        </div>
+                                const path = "memberbenefits_images/" + updatedMemberBenefit.id + "/" + "image.jpg"
+
+                                const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+                                const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
+                                if (!isUploaded) {
+                                    throw new Error("Failed to upload image")
+                                }
+                                const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
+                                if (!downloadUrl) {
+                                    throw new Error("Failed to get download url")
+                                }
+                                updatedMemberBenefit.imageURL = downloadUrl.publicUrl
+                                await updateMemberBenefit(updatedMemberBenefit)
+                            }
+                            setMemberBenefits(memberBenefits.map(memberBenefit => memberBenefit.id === updatedMemberBenefit.id ? updatedMemberBenefit : memberBenefit))
+                            setMemberBenefitModal(false)
+                            setTobeEditedMemberBenefit(undefined)
+                            customToast.success('Member Benefit updated successfully')
+                        } catch (error) {
+                            customToast.error('Failed to update member benefit')
+                        } finally {
+                            setLoading(false)
+                        }
+
+                    }}
+                    onCreate={async (data: any) => {
+                        try {
+                            setLoading(true)
+                            const userId = session.data?.user?.id! as string
+                            const newMemberBenefit = await createMemberBenefit({
+                                categoryId: data.categoryId,
+                                code: data.code,
+                                domain: data.domain,
+                                location: data.location,
+                                description: data.description,
+                                link: data.link,
+                                userId: userId,
+                                title: data.name,
+                                imageURL: data.imageURL,
+                                offer: data.offer,
+                                visibility: data.visibility
+                            } as MemberBenefit)
+                            if (data.imageURL) {
+                                const blob = await fetch(data.imageURL).then(r => r.blob());
+
+                                const path = "memberbenefits_images/" + newMemberBenefit.id + "/" + "image.jpg"
+
+                                const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+                                const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
+                                if (!isUploaded) {
+                                    throw new Error("Failed to upload image")
+                                }
+                                const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
+                                if (!downloadUrl) {
+                                    throw new Error("Failed to get download url")
+                                }
+                                newMemberBenefit.imageURL = downloadUrl.publicUrl
+                                await updateMemberBenefit(newMemberBenefit)
+                            }
+                            setMemberBenefits([...memberBenefits, newMemberBenefit])
+                            setMemberBenefitModal(false)
+
+                        } catch (error) {
+
+                        } finally {
+                            setLoading(false)
+                        }
+                    }}
+                />
+            }
+        </div >
     )
 }
 

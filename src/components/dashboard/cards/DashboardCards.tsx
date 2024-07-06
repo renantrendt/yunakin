@@ -2,12 +2,19 @@ import React from 'react'
 import DashboardCard from './DashboardCard'
 
 interface DashboardCardsProps {
-    totalClicks:number;
-    totalMobileClicks:number;
-    totalDesktopClicks:number; 
+
+    cardStats: {
+        totalClicks: number;
+        totalMobileClicks: number;
+        totalDesktopClicks: number;
+        totalClaims: number;
+        pageViews: number;
+    }
+
 }
 
-export const DashboardCards = ({totalClicks, totalMobileClicks, totalDesktopClicks}: DashboardCardsProps) => {
+export const DashboardCards = ({ cardStats }: DashboardCardsProps) => {
+    const { totalClicks, totalMobileClicks, totalDesktopClicks, totalClaims } = cardStats;
     const data = [
         {
             title: "Total Clicks",
@@ -15,15 +22,16 @@ export const DashboardCards = ({totalClicks, totalMobileClicks, totalDesktopClic
             increase: 21
         },
         {
-            title: "Clicks on Mobile",
-            quantity: totalMobileClicks,
+            title: "Total Claims",
+            quantity: totalClaims,
             increase: 21
         },
         {
-            title: "Clicks on Desktop",
-            quantity: totalDesktopClicks,
+            title: "Page Views",
+            quantity: cardStats.pageViews,
             increase: 21
-        },
+        }
+
     ]
     return (
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 mb-8 '>

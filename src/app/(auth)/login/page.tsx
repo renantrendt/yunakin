@@ -58,14 +58,14 @@ export default function LoginPage() {
                     <Typography type="p" className='mt-2  text-grey-700 !dark:text-placeholder-dark '>{t("loginPage.description")}</Typography>
                 </div>
 
-                <div className='flex justify-around'>
+                {/* <div className='flex justify-around'>
                     <TabItem label='Magic Link' onClick={() => setSelectedAuth(AuthType.MAGICLINK)} selected={selectedAuth === AuthType.MAGICLINK} />
                     <TabItem label='Email' onClick={() => setSelectedAuth(AuthType.EMAIL)} selected={selectedAuth === AuthType.EMAIL} />
-                </div>
+                </div> */}
 
                 {selectedAuth == AuthType.MAGICLINK && <MagicLinkForm />}
-                {selectedAuth == AuthType.EMAIL && <SignInForm />}
-                <div className="relative flex  items-center py-3">
+                {/* {selectedAuth == AuthType.EMAIL && <SignInForm />} */}
+                {/* <div className="relative flex  items-center py-3">
                     <div className="flex-grow border-t border-grey-400 dark:border-line-dark"></div>
                     <span className="flex-shrink mx-4 text-sm text-grey-400 dark:text-placeholder-dark">OR</span>
                     <div className="flex-grow border-t border-grey-400 dark:border-line-dark"></div>
@@ -74,7 +74,7 @@ export default function LoginPage() {
                     <div className='flex gap-2 flex-col'>
                         <AuthButton onClick={() => { signIn('google', { callbackUrl: `/dashboard${appendParams(searchParams)}` }) }} content={t("loginPage.signWithGoogle")} icon={<GoogleIcon />} />
                     </div>
-                </div>
+                </div> */}
             </div>
         </FormContainer>
 

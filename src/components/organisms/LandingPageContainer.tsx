@@ -7,16 +7,18 @@ import Cta from '@/components/section/cta/cta'
 import UsedBy from '@/components/section/usedBy/UsedBy'
 import Features from '@/components/features/features'
 import Pricing from '@/components/section/pricing/pricing'
+import Acquisition from '../acquisition/acquisition'
 const LandingPageContainer = () => {
     return (
         <>
             <Hero />
             <UsedBy />
             <Cta />
+            <Acquisition />
             <Features />
-            <Testimonial />
+            {/* <Testimonial />
             <Pricing showDescription={true} />
-            <FAQ />
+            <FAQ /> */}
         </>
     )
 }
