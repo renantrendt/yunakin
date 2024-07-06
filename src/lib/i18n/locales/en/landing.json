@@ -46,6 +46,9 @@
         "title": "Used By"
     },
     "ctaSection": {
+        "clients": "Clients",
+        "mycompany": "My company",
+        "othercompany": "Other company",
         "title": "Exclusive Perks Page in Seconds",
         "description": "Easily create and share a login-free perks page without technical skills. Manage which perks your clients can access and attract new clients by distributing your perks through companies you've selected.",
         "reasons": [
@@ -61,7 +64,12 @@
                 "metric": "100%",
                 "description": "productivity increase"
             }
-        ]
+        ],
+        "compliance": "SOC2 and GDPR by design."
+    },
+    "acquisitionSection": {
+        "title": "Scale Acquisition Predict Costs",
+        "description": "Acquire customers with predictable costs by distributing your perks to customers of other companies."
     },
     "features": {
         "features": [
