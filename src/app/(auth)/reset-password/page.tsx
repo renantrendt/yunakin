@@ -74,7 +74,7 @@ export default function ResetPasswordPage() {
                 <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
                 <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
             </Link>
-            <div className='flex flex-col gap-8'>
+            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-8'>
                 <div>
 
                     <Typography type='h3' className=''>{t("resetPasswordPage.title")}</Typography>
@@ -103,7 +103,7 @@ export default function ResetPasswordPage() {
                         <Button variant="primary" type="submit" className="w-full" label={t("resetPasswordPage.submit")} size='lg' loading={loading} />
                     </div>
                 </div>
-            </div>
+            </form>
         </FormContainer>
 
     )

@@ -98,7 +98,7 @@ export const VerificationEmail = ({
                                 <Img
                                     src={`${baseUrl}/images/email-footer-logo.png`}
 
-                                    alt="Yunakin"
+                                    alt={`${organizationName} Logo`}
                                     className="my-0  mx-auto"
                                     width={"142"}
                                     height={"35"}

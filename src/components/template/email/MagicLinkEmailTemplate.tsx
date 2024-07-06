@@ -85,7 +85,7 @@ export const MagicLinkEmail = ({
                                 <Img
                                     src={`${baseUrl}/images/email-footer-logo.png`}
 
-                                    alt={organizationName}
+                                    alt={`${organizationName} Logo`}
                                     className="my-0  mx-auto"
                                     width={"140"}
                                     height={"30"}

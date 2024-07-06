@@ -92,7 +92,7 @@ export const ResetPasswordEmail = ({
                                 <Img
                                     src={`${baseUrl}/images/email-footer-logo.png`}
 
-                                    alt="CodePilot"
+                                    alt={`${organizationName} Logo`}
                                     className="my-0  mx-auto"
                                     width={"142"}
                                     height={"35"}
