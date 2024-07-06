@@ -21,7 +21,7 @@ interface MagicLinkEmailProps {
     magicLink?: string;
 }
 
-const baseUrl = platformConfig.variables.NEXT_URL || "http://localhost:3000"
+const baseUrl = platformConfig.variables.NEXT_URL || "http://localhost:3002"
 
 export const MagicLinkEmail = ({
     magicLink,
@@ -37,9 +37,9 @@ export const MagicLinkEmail = ({
                 theme: {
                     extend: {
                         colors: {
-                            'primary-500': "#705AF8",
-                            'primary-600': " #5C37EB",
-                            'disabled': "#D6D5FF"
+                            'primary-500': "#FFDD04",
+                            'primary-600': " #FFDD04",
+                            'disabled': "#FFEB6B"
                         },
                     },
                 },
@@ -58,7 +58,7 @@ export const MagicLinkEmail = ({
                         <Section className="text-left mt-[32px] mb-[32px]">
                             <Button
                                 className=" min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px] 
-                                hover:bg-primary-600 text-white bg-primary-500 focus:shadow-focus-primary  disabled:bg-disabled 
+                                hover:bg-primary-600  text-black bg-primary-500 focus:shadow-focus-primary  disabled:bg-disabled 
                                 py-[14px] px-5 "
                                 href={magicLink}
                             >
@@ -87,8 +87,8 @@ export const MagicLinkEmail = ({
 
                                     alt={organizationName}
                                     className="my-0  mx-auto"
-                                    width={"142"}
-                                    height={"35"}
+                                    width={"140"}
+                                    height={"30"}
                                 />
                             </Row>
                         </Section>
@@ -110,7 +110,7 @@ export const MagicLinkEmail = ({
 };
 
 MagicLinkEmail.PreviewProps = {
-    magicLink: "https://codepilot.dev/confirm/1234567890",
+    magicLink: "https://yunakin.com/confirm/1234567890",
     organizationName: "Yunakin",
 } as MagicLinkEmailProps;
 

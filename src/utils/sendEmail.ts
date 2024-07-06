@@ -30,7 +30,7 @@ export const sendVerificationEmail = async ({
       from: 'noreply <noreply@yunakin.com>',
       to: [to],
       subject: subject,
-      react: VerificationEmail({ confirmationEmail: `${platformConfig.variables.NEXT_URL}/verify?token=${token}`, name: name, organizationName: "Codepilot" }) as React.ReactElement,
+      react: VerificationEmail({ confirmationEmail: `${platformConfig.variables.NEXT_URL}/verify?token=${token}`, name: name, organizationName: "Yunakin" }) as React.ReactElement,
     });
     return { success: true, data: data }
   } catch (error: any) {
@@ -62,7 +62,7 @@ export const sendResetPasswordEmail = async ({
       from: 'noreply <noreply@yunakin.com>',
       to: [to],
       subject: subject,
-      react: ResetPasswordEmail({ resetPasswordLink: `${platformConfig.variables.NEXT_URL}/reset-password?token=${token}`, name: name, organizationName: "Codepilot" }) as React.ReactElement,
+      react: ResetPasswordEmail({ resetPasswordLink: `${platformConfig.variables.NEXT_URL}/reset-password?token=${token}`, name: name, organizationName: "Yunakin" }) as React.ReactElement,
     });
     return { success: true, data: data }
   } catch (error: any) {
@@ -89,7 +89,7 @@ export const sendWelcomeWaitingListEmail = async ({
     from: 'noreply <noreply@yunakin.com>',
     to: [to],
     subject: subject,
-    react: WelcomeWaitingListEmailTemplate({ organizationName: "Codepilot" }) as React.ReactElement,
+    react: WelcomeWaitingListEmailTemplate({ organizationName: "Yunakin" }) as React.ReactElement,
   });
   return { success: true, data: data }
 }
@@ -115,7 +115,7 @@ export const sendInviteUserEmail = async ({
       to: [to],
       subject: subject,
       react: InviteUserEmailTemplate({
-        acceptInviteLink: `${platformConfig.variables.NEXT_URL}/accept-invite?token=${token}`, organizationName: "Codepilot"
+        acceptInviteLink: `${platformConfig.variables.NEXT_URL}/accept-invite?token=${token}`, organizationName: "Yunakin"
       }) as React.ReactElement,
     });
     return { success: true, data: data }

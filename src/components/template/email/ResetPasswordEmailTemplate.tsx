@@ -22,7 +22,7 @@ interface ResetPasswordEmailProps {
     resetPasswordLink?: string;
 }
 
-const baseUrl = platformConfig.variables.NEXT_URL || "http://localhost:3000"
+const baseUrl = platformConfig.variables.NEXT_URL || "http://localhost:3002"
 
 export const ResetPasswordEmail = ({
     name,
@@ -39,8 +39,8 @@ export const ResetPasswordEmail = ({
                 theme: {
                     extend: {
                         colors: {
-                            'primary-500': "#705AF8",
-                            'primary-600': " #5C37EB",
+                            'primary-500': "#FFDD04",
+                            'primary-600': " #FFDD04",
                             'disabled': "#D6D5FF"
                         },
                     },
@@ -60,7 +60,7 @@ export const ResetPasswordEmail = ({
                         <Section className="text-left mt-[32px] mb-[32px]">
                             <Button
                                 className=" min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-normal leading-[20px] 
-                                hover:bg-primary-600 text-white bg-primary-500 focus:shadow-focus-primary  disabled:bg-disabled 
+                                hover:bg-primary-600 text-stone-950  bg-primary-500 focus:shadow-focus-primary  disabled:bg-disabled 
                                 py-[14px] px-5 "
                                 href={resetPasswordLink}
                             >
@@ -118,8 +118,8 @@ export const ResetPasswordEmail = ({
 
 ResetPasswordEmail.PreviewProps = {
     name: "Fortan",
-    resetPasswordLink: "https://codepilot.dev/confirm/1234567890",
-    organizationName: "CodePilot",
+    resetPasswordLink: "https://yunakin.com/confirm/1234567890",
+    organizationName: "Yunakin",
 } as ResetPasswordEmailProps;
 
 export default ResetPasswordEmail;
