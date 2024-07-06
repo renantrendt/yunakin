@@ -1,7 +1,7 @@
 {
     "heroSection": {
         "title": "Customer Perks",
-        "description": "Attract New Leads Without Ads by Offering Introductory Perks to Other Companies' Customers, While Increasing Retention",
+        "description": "Create your perks page from our listings to increase customer retention. List your perks to acquire new customers by sharing them on other companies' perks pages.",
         "usedByCopy": "Used by <b>100+</b> developers",
         "cta": "Start Now Free",
         "watchVideo": "Join Crash Course",
@@ -46,11 +46,11 @@
         "title": "Used By"
     },
     "ctaSection": {
-        "clients": "Clients",
+        "clients": "Customers",
         "mycompany": "My company",
         "othercompany": "Other company",
-        "title": "Exclusive Perks Page in Seconds",
-        "description": "Easily create and share a login-free perks page without technical skills. Manage which perks your clients can access and attract new clients by distributing your perks through companies you've selected.",
+        "title": "Your Perks Page in Seconds",
+        "description": "Create and manage which perks your customers can view. Share your login-free perks page. Attract new customers by allowing your perks to be shared through other companies perks pages.",
         "reasons": [
             {
                 "metric": "40%",
@@ -75,15 +75,15 @@
         "features": [
             {
                 "title": "One Click Partnerships",
-                "description": "Companies can select your perks to offer to their clients through their perks page. Similarly, you can choose perks to benefit your clients with products and services from other companies."
+                "description": "Companies can select your perks to offer to their customers through their perks page. You can choose perks to benefit your customers with products and services from other companies."
             },
             {
                 "title": "Shareable Perks Page",
                 "description": "Increase your reach by having companies display your perks on their perks pages, attracting qualified leads to your offerings while prioritizing customers privacy."
             },
             {
-                "title": "AI Partnerships",
-                "description": "Receive perk insights based on your clients behavior. Strengthen relationships with other companies by analyzing their performance."
+                "title": "Featured AI",
+                "description": "Smart perk switching based on preferences and customer behavior."
             },
             {
                 "title": "Fully customizable",
