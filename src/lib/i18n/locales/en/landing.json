@@ -50,7 +50,7 @@
         "mycompany": "My company",
         "othercompany": "Other company",
         "title": "Your Perks Page in Seconds",
-        "description": "Create and manage which perks your customers can view. Share your login-free perks page. Attract new customers by allowing your perks to be shared through other companies perks pages.",
+        "description": "Attract new customers by allowing your perks to be shared through other companies perks pages. Create and manage which perks your customers can view. Share your login-free perks page.",
         "reasons": [
             {
                 "metric": "40%",
@@ -83,7 +83,7 @@
             },
             {
                 "title": "Featured AI",
-                "description": "Smart perk switching based on preferences and customer behavior."
+                "description": "Audience targeting and smart perk turnkey based on companies preferences and customers behavior."
             },
             {
                 "title": "Fully customizable",
