@@ -63,7 +63,8 @@ const siteUrls: SiteUrls = {
         checkout: '/checkout',
         orderSuccess: '/order-success',
         orders: '/orders',
-        orderDetail: '/orders/:id'
+        orderDetail: '/orders/:id',
+        comingSoon: '/coming-soon',
     }
 }
 

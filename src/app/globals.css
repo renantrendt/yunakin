@@ -167,8 +167,8 @@ html.dark .prose * {
 } */
 
 .coming-soon-linear-gradient {
-  background: linear-gradient(129.42deg, rgba(21, 20, 32, 0.2) 35.61%, rgba(89, 74, 255, 0.2) 74.49%),
-    linear-gradient(180deg, #171524 0%, #0A0910 100%);
+  background: linear-gradient(129.42deg, rgba(21, 20, 32, 0.2) 35.61%, rgba(255, 221, 4, 0.2) 74.49%),
+    linear-gradient(180deg, #171524 0%, #FFDD04 100%);
 
 }
 
