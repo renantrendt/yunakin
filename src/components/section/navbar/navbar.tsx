@@ -65,7 +65,7 @@ export default function Navbar() {
                                         link={link.url}
                                         title={link.label}
                                         key={key}
-                                        selected={pathName === link.url}
+                                    // selected={pathName === link.url}
                                     />
                                 )
                             })}
