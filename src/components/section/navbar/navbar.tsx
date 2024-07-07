@@ -99,7 +99,7 @@ export default function Navbar() {
                                         className=' !min-w-[150px] !w-full  text-white '
                                         label='Get Started'
                                         size='md'
-                                        onClick={() => router.push(siteUrls.general.register)}
+                                        onClick={() => router.push(siteUrls.general.comingSoon)}
                                     />
                                 </li>
 
@@ -124,19 +124,19 @@ export default function Navbar() {
                                    
                                 )
                             } */}
-                            <Button
+                            {/* <Button
                                 variant='secondary'
                                 className='  !min-w-[100px] '
                                 label={t('navbar.login')}
                                 size='lg'
                                 onClick={() => router.push(siteUrls.general.login)}
-                            />
+                            /> */}
                             <Button
                                 variant='primary'
                                 className='  !min-w-[120px] '
                                 label={t('navbar.getStarted')}
                                 size='lg'
-                                onClick={() => router.push("/coming-soon")}
+                                onClick={() => router.push(siteUrls.general.comingSoon)}
                             />
                         </div>
 

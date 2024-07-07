@@ -59,7 +59,7 @@ export const WelcomeWaitingListEmailTemplate = ({
                             </Text>
                         </Section>
                     </Container>
-                    <Container className=" !w-full min-w-full min-h-[250px] mx-auto">
+                    <Container className=" !w-full min-w-full min-h-fit mx-auto">
                         <Section className="mt-4 text-center mb-4">
                             <Row>
                                 <Img
@@ -68,7 +68,7 @@ export const WelcomeWaitingListEmailTemplate = ({
                                     alt="CodePilot"
                                     className="my-0  mx-auto"
                                     width={"142"}
-                                    height={"35"}
+                                    height={"30"}
                                 />
                             </Row>
                         </Section>

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import ArrowRightIcon from "@/icons/arrow-right.svg";
 import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../animated/AnimatedSection';
+import siteUrls from '@/config/site-config';
 interface FeatureItemProps {
     direction?: "ltr" | "rtl" | string
     image?: string
@@ -27,7 +28,7 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                         <ArrowRightIcon />
                     </span>
                 } trailing onClick={() => {
-                    window.open("/", "_blank")
+                    window.open(siteUrls.general.comingSoon, "_blank")
                 }} />
             </div>
             <div className='relative w-full row-start-1  flex-1 h-full lg:h-96'>

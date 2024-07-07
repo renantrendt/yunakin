@@ -9,9 +9,11 @@ import { AnimatedTooltip } from '../molecules/animated-tooltip/AnimatedTooltip'
 import { useTranslation } from '@/lib/i18n/client'
 import ContentSection from '@/containers/layout/ContentSection'
 import LockIcon from '@/icons/landing/lock-icon.svg'
+import { useRouter } from 'next/navigation'
+import siteUrls from '@/config/site-config'
 export default function Hero() {
     const { t } = useTranslation('landing');
-
+    const router = useRouter()
     const usedBy = t("heroSection.usedBy", { returnObjects: true }) as { name: string, avatar: string }[];
     return (
         <ContentSection>
@@ -38,6 +40,9 @@ export default function Hero() {
                                 size='lg'
                                 className='w-fit'
                                 label={t('heroSection.cta')}
+                                onClick={() => {
+                                    router.push(siteUrls.general.comingSoon)
+                                }}
                             />
                             <div className='flex justify-center gap-1 items-center'>
                                 <LockIcon />
