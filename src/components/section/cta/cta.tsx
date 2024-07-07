@@ -62,7 +62,7 @@ const Cta = () => {
                         </div>
                     </div>
                 </AnimatedSection>
-                <AnimatedSection className='  md:hidden flex  justify-start mt-10  w-full gap-0 items-center'>
+                <AnimatedSection className='  md:hidden flex  justify-start mt-10   w-full gap-0 items-center'>
                     <div className='flex flex-col flex-1  h-full justify-center gap-0'>
 
                         <div className='avatars flex'>
@@ -75,13 +75,13 @@ const Cta = () => {
                             <Typography type='h6' className='text-center max-w-2xl !text-[8px] ' >{t("ctaSection.clients")}</Typography>
                         </div>
                     </div>
-                    <div className='relative max-w-[500px] w-full  h-full  min-h-[150px]  '>
+                    <div className='relative  w-full  h-full  min-h-[300px]  '>
                         <Image
                             alt=''
                             fill
                             objectFit="contain"
                             src={"/images/landing/performance-mobile.svg"}
-                            className="w-full z-10 object-cover rounded-[32px]"
+                            className="w-full z-10 rounded-[32px]"
                         />
                         <Typography type='p' className='absolute -bottom-2 text-[8px] w-full  !text-[#0F0F0F66] text-center left-1/2 transform -translate-x-1/2 -translate-y-1/2 '>{t("ctaSection.compliance")}</Typography>
                         <div className='absolute top-1/2  w-[110%] flex gap-1   lg:w-[800px]  left-1/2 transform -translate-x-1/2 -translate-y-1/2'>

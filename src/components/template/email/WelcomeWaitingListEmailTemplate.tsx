@@ -19,7 +19,7 @@ interface WelcomeWaitingListEmailTemplateProps {
     organizationName?: string;
 }
 
-const baseUrl = platformConfig.variables.NEXT_URL;
+const baseUrl = platformConfig.variables.NEXT_URL || "http://localhost:3002";
 
 export const WelcomeWaitingListEmailTemplate = ({
     organizationName
@@ -91,7 +91,7 @@ export const WelcomeWaitingListEmailTemplate = ({
 
 
 WelcomeWaitingListEmailTemplate.PreviewProps = {
-    organizationName: "CodePilot",
+    organizationName: "Yunakin",
 } as WelcomeWaitingListEmailTemplateProps;
 
 export default WelcomeWaitingListEmailTemplate;

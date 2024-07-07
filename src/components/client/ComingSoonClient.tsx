@@ -13,6 +13,11 @@ import { Controller, useForm } from 'react-hook-form';
 import customToast from '@/components/atomic/toast/customToast';
 import Meteors from '@/components/atomic/meteor/Meteor';
 import { NextFont } from 'next/dist/compiled/@next/font'
+import Image from 'next/image';
+import InputField from '../atomic/input/InputField';
+import Button from '../atomic/button/Button';
+import { error } from 'console';
+import Typography from '../atomic/typography/Typography';
 
 const schema = yup.object({
     email: yup.string().email().required(),
@@ -34,7 +39,7 @@ interface ComingSoonClientProps {
     uniSans: NextFont;
     monaSans: NextFont;
 }
-const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
+const ComingSoonClient = ({ monaSans }: ComingSoonClientProps) => {
     const outerDivRef = React.useRef<HTMLDivElement>(null)
     const addEmailToWaitinListMutation = useMutation({
         mutationFn: async (email: string) => {
@@ -61,7 +66,7 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
             customToast.warn(error.message, customToastConfig)
         }
     })
-    const { handleSubmit, control } = useForm<FormValues>(
+    const { handleSubmit, formState: { errors }, control } = useForm<FormValues>(
         {
             resolver: yupResolver(schema)
         }
@@ -83,7 +88,7 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
         outerDivRef.current.style.left = event.pageX + 'px';
     }
     return (
-        <div className={cn("w-full  coming-soon-linear-gradient relative   no-scrollbar coming-soon-container", monaSans.className)}
+        <div className={cn("w-full   relative   no-scrollbar coming-soon-container", monaSans.className)}
         >
             <div
                 id='shadow'
@@ -93,40 +98,45 @@ const ComingSoonClient = ({ uniSans, monaSans }: ComingSoonClientProps) => {
             </div>
             <div className="flex flex-col items-center  min-h-[calc(100%)] h-[calc(100%)] overflow-hidden  justify-center   px-6 relative overflow-x-hidden overflow-y-hidden">
 
-                <Meteors number={4} />
+                {/* <Meteors number={4} /> */}
 
-                <div className='mb-12 lg:mb-16'>
-                    <ComingSoonIcon classname='w-[110px] h-[59px] lg:w-[306px] lg:h-[119px]' />
+                <div className='mb-8'>
+                    <Image src="/images/logo.svg" alt="logo" width={306} height={59} className='dark:hidden w-32 lg:w-40' />
                 </div>
-                <h1 className={cn("uppercase text-center text-white text-[38px] lg:text-8xl font-black", uniSans.className, "font-black")}>launching soon</h1>
-                <p className="text-[#B2AFD0] text-xs   text-center lg:mt-5 lg:text-[29px] font-light ">Ready to accelerate your development process?</p>
+                <div className='flex flex-col gap-5'>
+                    <Typography type='h1' className='max-w-full text-[44px] w-full text-center'>Coming Soon...</Typography>
+                    <Typography type='h6' className='text-[18px] font-medium leading-[150%]  max-w-lg text-center text-[#757575]' >Offer perks for companies to use in their customer retention strategies.</Typography>
 
-                <form className='flex flex-col w-full items-center lg:pt-[60px] pt-10 gap-0 lg:gap-5 ' onSubmit={handleSubmit(onSubmit)}>
-                    <div className='relative min-w-[280px] lg:w-full max-w-[530px]'>
+                </div>
+
+                <form className='flex flex-col w-full items-center lg:pt-[40px] pt-10 gap-0 lg:gap-5 ' onSubmit={handleSubmit(onSubmit)}>
+                    <div className='relative  w-full max-w-[530px] font-satoshi'>
                         <Controller
                             control={control}
                             name="email"
                             render={({ field: { onChange, value } }) => (
-                                <input className="w-full  h-[50px] lg:h-[67px] text-sm   pl-5 lg:pl-8 pr-24 lg:pr-32 py-2 rounded-[35px] border hover:decoration-neutral outline-none text-white bg-transparent  lg:text-xl   border-violet-500 justify-between items-center inline-flex
-                                
-                                focus:border-[1.5px] focus:border-[#9A6DFE] hover:border-[1.5px] hover:border-[#9A6DFE] coming-soon-input-shadow input-gradient-border"
+                                <InputField
+                                    id='email'
+                                    name='email'
                                     type='email'
-                                    placeholder='email'
-                                    onChange={onChange}
+                                    placeholder='Enter your email'
                                     value={value}
+                                    onChange={onChange}
+                                    className='w-full lg:w-full px-6 pr-2 py-5 rounded-[12px] text-base leading-[150%]'
+                                    error={errors.email?.message}
                                 />
                             )}
                         />
-                        <button disabled={addEmailToWaitinListMutation.isPending} className=" coming-soon-button-linear-gradient self-stretch px-5 lg:px-8 py-[10px] lg:py-4 bg-gradient-to-b from-violet-600 via-violet-700 to-violet-600 rounded-[40px] border border-neutral-600 justify-center items-center gap-2.5 flex
-                        text-white  text-sm leading-[14px] lg:text-xl font-normal  absolute top-[7px] lg:top-[9px] right-2  min-w-[64px] min-h-[16px] " type='submit'>
-                            {addEmailToWaitinListMutation.isPending ? null : null} <span> submit </span>
-                        </button>
+                        <Button disabled={addEmailToWaitinListMutation.isPending} size={"lg"} className="  
+                          absolute top-[10px] right-2 " type='submit' >
+                            <span> Submit </span>
+                        </Button>
                     </div>
-                    <p className="text-[#B2AFD0E5] text-[10px] leading-[13px] pt-3 lg:pt-0  text-center  lg:text-lg font-light ">Sign up to find out when we launch</p>
+                    <Typography type='p' className='text-[#757575] mt-4' >Sign up to stay updated when we launch</Typography>
 
                 </form>
             </div>
-        </div>
+        </div >
     )
 }
 
