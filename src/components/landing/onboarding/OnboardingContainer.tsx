@@ -9,6 +9,7 @@ import Typography from '@/components/atomic/typography/Typography'
 import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard'
 import PageHeader from '@/components/memberbenefit/PageHeader'
 import SelectMemberBenefitCard from '@/components/memberbenefit/SelectMemberBenefitCard'
+import OnboardingModal from '@/components/molecules/onboarding-modal/OnboardingModal'
 import siteUrls from '@/config/site-config'
 import ContentSection from '@/containers/layout/ContentSection'
 import PlusIcon from '@/icons/PlusIcon'
@@ -31,6 +32,8 @@ interface SelectedMemberBenefit extends MemberBenefit {
 
 
 const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps) => {
+
+    const [showOnboardingModal, setShowOnboardingModal] = useState<boolean>(true)
     const { t } = useTranslation('onboarding')
     const router = useRouter()
     const [step, setStep] = useState<number>(1)
@@ -156,6 +159,14 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                     </div>
                     )}
                 </div>
+                {showOnboardingModal && (
+                    <OnboardingModal
+                        onClose={() => {
+                            setShowOnboardingModal(false)
+                        }}
+                        isOpen={showOnboardingModal}
+                    />
+                )}
             </div >
         </div >
     )

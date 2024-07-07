@@ -10,5 +10,23 @@
     "catalog": {
         "title": "Catalog of benefits",
         "description": "Save the benefits you want to offer to your members"
+    },
+    "onboardingModal": {
+        "step1": {
+            "title": "Retention",
+            "description": "First choose some perks for your customers."
+        },
+        "step2": {
+            "title": "Look & Feel",
+            "description": "Like what you see? Log in and publish it."
+        },
+        "step3": {
+            "title": "Acquisition",
+            "description": "Create your own perks for other companies to share."
+        },
+        "step4": {
+            "title": "Analytics",
+            "description": "Track acquisition and retention performance of your perks."
+        }
     }
 }
