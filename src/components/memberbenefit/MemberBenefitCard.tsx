@@ -62,17 +62,17 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
     return (
         <>
 
-            <div key={key} className="card w-full dark:text-white dark:bg-card-dark min-w-[270px] h-full flex-1    overflow-hidden max-w-lg  last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
+            <div key={key} className="card w-full max-w-[285px] dark:text-white dark:bg-card-dark min-w-[270px] h-full flex-1    overflow-hidden  last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
         rounded-[10px] shadow-sm">
-                <figure className='relative hidden max-h-[176px]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${image || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                 <div className="px-6 pt-6 pb-6 flex flex-col  ">
+                    <figure className='relative hidden w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                     <h2 className="card-title  text-2xl font-bold mb-2">{benefit.title}</h2>
-                    {benefit.description && <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base  flex-auto overflow-hidden min-h-[100px]'>{benefit.description?.length > 100 ? `${benefit.description?.substring(0, 100)}...` : benefit.description}</p>}
-                    <p className='text-neutral-600 font-black dark:text-sidebar-icon-dark text-base min-h-[50px]'>{benefit.offer}</p>
+                    {benefit.description && <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base min-h-[50px]'>{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
+                    {/* <p className='text-neutral-600 font-black dark:text-sidebar-icon-dark text-base min-h-[50px]'>{benefit.offer}</p> */}
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
 
-                            <a href={domain} target='_blank' className='cursor-pointer text-primary-500 underline'
+                            <a href={domain} target='_blank' className='cursor-pointer text-link-color underline'
                                 onClick={() => {
                                     handleButtonClick(benefit.id, MemberBenefitClickType.WEBSITE_CLICK)
                                 }}
@@ -81,7 +81,7 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                                 onClick={() => {
                                     handleButtonClick(benefit.id, MemberBenefitClickType.LOCATION_CLICK)
                                 }}
-                                className='cursor-pointer text-primary-500 underline'>{benefit.location}</a>}
+                                className='cursor-pointer text-link-color underline'>{benefit.location}</a>}
                         </div>
                     </div>
                     <div>
@@ -91,11 +91,10 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                                 handleButtonClick(benefit.id, MemberBenefitClickType.SAVE_BENEFIT)
                                 // save analytics data
                             }}
-                            className="btn-primary hover:cursor-pointer"
                             style={{
                                 backgroundColor: config?.buttonColor as string,
                             }}
-                            variant="primary"
+                            variant="secondary"
 
                         >Save Benefit</Button>
                     </div>

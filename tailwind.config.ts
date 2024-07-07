@@ -13,6 +13,7 @@ const config: Config = {
         'primary': '#FFDD04',
         'primary-end': '#FFDD04',
         'stone-950': "#0F0F0F",
+        'link-color': '#196AC9',
         'neutral-600': "#4B4B4B",
         'neutral-200': "#DEDEDE",
         'header-color': '#91A0B5',

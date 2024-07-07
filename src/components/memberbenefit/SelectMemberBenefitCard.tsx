@@ -41,17 +41,17 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
     return (
         <>
 
-            <div key={key} className="card w-full flex flex-col flex-shrink-0 dark:text-white dark:bg-card-dark min-w-[200px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
+            <div key={key} className="card w-full flex font-satoshi flex-col flex-shrink-0 dark:text-white dark:bg-card-dark min-w-[200px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
         rounded-[10px] shadow-sm">
-                <figure className='relative hidden max-h-[176px] flex-shrink-0'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                 <div className="px-6 pt-6 pb-6 flex-shrink-0">
+                    <figure className='relative hidden w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                     <h2 className="card-title text-2xl font-bold mb-2">{benefit.title}</h2>
-                    <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base'>{benefit.description}</p>
-                    <p className='text-neutral-600 font-black dark:text-sidebar-icon-dark text-base'>{benefit.offer}</p>
-                    <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
+                    {benefit.description && <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base min-h-[50px]'>{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
+                    {/* <p className='text-neutral-600 font-black dark:text-sidebar-icon-dark text-base'>{benefit.offer}</p> */}
+                    <div className='flex  items-center justify-start mb-4 mt-2 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
-                            <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.domain}</a>
-                            <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-primary-500 underline'>{benefit.location || ""}</a>
+                            <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-link-color underline'>{benefit.domain}</a>
+                            <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-link-color underline'>{benefit.location || ""}</a>
                         </div>
                     </div>
                     <div>
@@ -59,7 +59,6 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
                             loading={loading}
                             icon={selected ? <CheckIcon /> : <PlusIcon />}
                             onClick={handleClick}
-                            className="btn-primary text-primary-600 hover:cursor-pointer"
                             variant="secondary"
                         >{selected ? "Benefit saved" : "Save benefit"}</Button>
                     </div>
