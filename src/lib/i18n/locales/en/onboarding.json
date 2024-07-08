@@ -13,15 +13,15 @@
     },
     "onboardingModal": {
         "step1": {
-            "title": "Retention",
-            "description": "First choose some perks for your customers."
+            "title": "Increase Retention",
+            "description": "Choose some perks for your customers."
         },
         "step2": {
             "title": "Look & Feel",
-            "description": "Like what you see? Log in and publish it."
+            "description": "Like what you see? Publish it."
         },
         "step3": {
-            "title": "Acquisition",
+            "title": "Scale Acquisition",
             "description": "Create your own perks for other companies to share."
         },
         "step4": {
