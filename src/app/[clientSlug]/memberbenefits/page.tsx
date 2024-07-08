@@ -11,7 +11,8 @@ import Typography from '@/components/atomic/typography/Typography';
 import LinkButton from '@/components/atomic/button/LinkButton';
 import PageTracker from '@/components/analytics/pagetracker/PageTracker';
 import { MemberBenefitVisibility } from '@/lib/types';
-const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
+import Script from 'next/script';
+const MemberbenefitPage = async ({ params, searchParams }: { params: { clientSlug: string }, searchParams?: { [key: string]: string | string[] | undefined } }) => {
     const session = await auth()
     if (!session) {
         notFound()
@@ -104,10 +105,10 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
 
                 <div className='flex justify-between items-center'>
 
-                    <div className=" w-full text-left ">
+                    {!searchParams?.embedded && <div className=" w-full text-left ">
                         <Image unoptimized src={image} alt='logo' width={100} height={100} />
-                    </div>
-                    <LinkButton variant="tertiary" className='w-fit' label="Add your own Benefit here"
+                    </div>}
+                    <LinkButton variant="tertiary" className='w-fit self-end' label="Add your own Benefit here"
                         href='/onboarding'
                         target='_blank'
                     />
@@ -149,6 +150,15 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
                 >
                     <span> Powered by </span><a href='https://www.yunakin.com/' target='_blank' className='text-blue-500 underline'>Yunakin.com</a>
                 </Typography>
+
+                {searchParams?.embedded === 'true' && (
+                    <Script
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                 window.parent.postMessage({ type: 'yunakin_iframeHeight', height: document.body.scrollHeight }, '*')
+                            `}}
+                    />
+                )}
             </div>
         </ContentSection>
 

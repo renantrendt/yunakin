@@ -13,7 +13,21 @@ interface EmbedModalProps {
 const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
 
     const handleClick = () => {
-        navigator.clipboard.writeText(`<iframe src='https://yunakin.com/${clientSlug}/memberbenefits' width='600' height='450' frameborder='0' scrolling='no'></iframe>`)
+        const content = `
+        <div class="yunakin-iframe-container">
+            <iframe id="yunakin_frame" src='https://yunakin.com/${clientSlug}/memberbenefits?embedded=true' width='600' height='450' frameborder='0' scrolling='no'></iframe>
+        </div>
+        <script data-client-slug="${clientSlug}" >
+            window.addEventListener('message', (event) => {
+                    if (event.data && event.data.type === 'yunakin_iframeHeight') {
+                        const iframe = document.getElementById('yunakin_frame');
+                        if (iframe) {
+                            iframe.style.height = event.data.height + 'px';
+                        }
+                    }
+                });
+        </script>`;
+        navigator.clipboard.writeText(content)
         customToast.success('Copied to clipboard')
     }
     return (
@@ -33,7 +47,7 @@ const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
 
                         onClick={handleClick}
                     >
-                        <CopyIcon width={20} height={20} c />
+                        <CopyIcon width={20} height={20} />
                         <Typography type='p'>Copy</Typography>
                     </div>
                 </div>
