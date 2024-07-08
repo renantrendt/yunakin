@@ -13,11 +13,6 @@ import PageTracker from '@/components/analytics/pagetracker/PageTracker';
 import { MemberBenefitVisibility } from '@/lib/types';
 import Script from 'next/script';
 const MemberbenefitPage = async ({ params, searchParams }: { params: { clientSlug: string }, searchParams?: { [key: string]: string | string[] | undefined } }) => {
-    const session = await auth()
-    if (!session) {
-        notFound()
-        return;
-    }
     const config = await prisma.memberBenefitPageConfig.findUnique({
         where: {
             clientSlug: params.clientSlug

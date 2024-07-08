@@ -11,9 +11,7 @@ interface EmbedModalProps {
 }
 
 const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
-
-    const handleClick = () => {
-        const content = `
+    const content = `
         <div class="yunakin-iframe-container">
             <iframe id="yunakin_frame" src='https://yunakin.com/${clientSlug}/memberbenefits?embedded=true' width='600' height='450' frameborder='0' scrolling='no'></iframe>
         </div>
@@ -27,6 +25,8 @@ const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
                     }
                 });
         </script>`;
+    const handleClick = () => {
+
         navigator.clipboard.writeText(content)
         customToast.success('Copied to clipboard')
     }
@@ -41,7 +41,7 @@ const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
                 </div>
                 <div className='flex items-center gap-4'>
                     <div className='bg-gray-400 py-3 px-3'>
-                        <Typography type='p' className='text-black'>{`<iframe src='https://yunakin.com/${clientSlug}/memberbenefits' width='600' height='450' frameborder='0' scrolling='no'></iframe>`}</Typography>
+                        <Typography type='p' className='text-black'>{content}</Typography>
                     </div>
                     <div className='flex gap-1  cursor-pointer'
 
