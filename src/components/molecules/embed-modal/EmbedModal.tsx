@@ -12,8 +12,8 @@ interface EmbedModalProps {
 
 const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
     const content = `
-        <div class="yunakin-iframe-container">
-            <iframe id="yunakin_frame" src='https://yunakin.com/${clientSlug}/memberbenefits?embedded=true' width='600' height='450' frameborder='0' scrolling='no'></iframe>
+        <div class="yunakin-iframe-container" style="width:100%">
+            <iframe id="yunakin_frame" src='https://yunakin.com/${clientSlug}/memberbenefits?embedded=true' width='100%' height='1000' frameborder='0' scrolling='no'></iframe>
         </div>
         <script data-client-slug="${clientSlug}" >
             window.addEventListener('message', (event) => {

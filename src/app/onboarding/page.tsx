@@ -24,10 +24,12 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } })
 
     const categories = await prisma.category.findMany()
     return (
+
         <OnboardingContainer
             benefits={benefits}
             categories={categories}
         />
+
     )
 }
 
