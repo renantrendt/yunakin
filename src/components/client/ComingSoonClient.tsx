@@ -105,7 +105,7 @@ const ComingSoonClient = ({ monaSans }: ComingSoonClientProps) => {
                 </div>
                 <div className='flex flex-col gap-5'>
                     <Typography type='h1' className='max-w-full text-[44px] w-full text-center leading-[110%]'>Coming Soon...</Typography>
-                    <Typography type='h6' className='text-[18px] font-medium leading-[150%]  max-w-[500px] text-center text-[#757575]' >Offer perks for companies to use in their customer retention strategies.</Typography>
+                    <Typography type='h6' className='text-[18px] font-medium leading-[150%]  max-w-[500px] text-center text-[#757575]' >Reduce the effort of partnerships. Offer perks for companies to use in their customer retention strategies.</Typography>
 
                 </div>
 
@@ -132,7 +132,7 @@ const ComingSoonClient = ({ monaSans }: ComingSoonClientProps) => {
                             <span> Submit </span>
                         </Button>
                     </div>
-                    <Typography type='p' className='text-[#757575] mt-4' >Sign up to stay updated when we launch</Typography>
+                    <Typography type='p' className='text-[#757575] mt-4' >Sign up to stay updated when we launch.</Typography>
                 </form>
             </div>
         </div >
