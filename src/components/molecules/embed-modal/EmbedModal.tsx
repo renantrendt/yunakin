@@ -11,9 +11,23 @@ interface EmbedModalProps {
 }
 
 const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
-
+    const content = `
+        <div class="yunakin-iframe-container" style="width:100%">
+            <iframe id="yunakin_frame" src='https://yunakin.com/${clientSlug}/memberbenefits?embedded=true' width='100%' height='1000' frameborder='0' scrolling='no'></iframe>
+        </div>
+        <script data-client-slug="${clientSlug}" >
+            window.addEventListener('message', (event) => {
+                    if (event.data && event.data.type === 'yunakin_iframeHeight') {
+                        const iframe = document.getElementById('yunakin_frame');
+                        if (iframe) {
+                            iframe.style.height = event.data.height + 'px';
+                        }
+                    }
+                });
+        </script>`;
     const handleClick = () => {
-        navigator.clipboard.writeText(`<iframe src='https://yunakin.com/${clientSlug}/memberbenefits' width='600' height='450' frameborder='0' scrolling='no'></iframe>`)
+
+        navigator.clipboard.writeText(content)
         customToast.success('Copied to clipboard')
     }
     return (
@@ -27,13 +41,13 @@ const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
                 </div>
                 <div className='flex items-center gap-4'>
                     <div className='bg-gray-400 py-3 px-3'>
-                        <Typography type='p' className='text-black'>{`<iframe src='https://yunakin.com/${clientSlug}/memberbenefits' width='600' height='450' frameborder='0' scrolling='no'></iframe>`}</Typography>
+                        <Typography type='p' className='text-black'>{content}</Typography>
                     </div>
                     <div className='flex gap-1  cursor-pointer'
 
                         onClick={handleClick}
                     >
-                        <CopyIcon width={20} height={20} c />
+                        <CopyIcon width={20} height={20} />
                         <Typography type='p'>Copy</Typography>
                     </div>
                 </div>

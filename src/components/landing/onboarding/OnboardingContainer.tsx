@@ -50,15 +50,25 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
     )
     return (
         <div className=''>
-            <ContentSection fullWidth additionalClassName={cn('  bg-landing-background dark:bg-landing-dark-background  bg-landing-background z-50 ')}>
-                {step == 2 && (<div className=' fixed z-40 bottom-0 lg:bottom-[92%] left-0 right-0  lg:top-0 p-3 text-white shadow-xl rounded-xl   bg-landing-dark-background  m-1 lg:mx-4 '>
-                    <div className='flex flex-col md:flex-row gap-2 justify-between items-center '>
-                        <p className='text-center flex-1 text-sm '>Here is a live preview of your members page</p>
-                        <Button label='Save and Customize' onClick={() => {
+            <ContentSection fullWidth additionalClassName={cn(' fixed  bg-landing-background z-50  pt-10 pb-4')}>
+                <div className='flex flex-col md:flex-row gap-2 justify-between items-center '>
+                    <Link href={siteUrls.general.home}>
+                        <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='dark:hidden' />
+                    </Link>
+                    <div className='flex justify-between gap-3'>
+                        <Button
+                            variant='secondary'
+                            className='  !min-w-[100px] '
+                            label={'Login'}
+                            size='lg'
+                            onClick={() => router.push(siteUrls.general.login)}
+                        />
+                        <Button label={`Generate Page ${selectedBenefits.filter(s => s.selected).length > 0 ? `(${selectedBenefits.filter(s => s.selected).length})` : ""}`} size="lg" onClick={() => {
                             router.push(`/register?clientId=${clientSlug}&selectedBenefits=${encodeURIComponent(`${selectedBenefits.filter(s => s.selected).map(b => b.id).join(",")}`)}`)
                         }} />
                     </div>
-                </div>)}
+
+                </div>
             </ContentSection >
             <div className='max-w-[1440px] pb-20 lg:py-12 w-full mx-auto px-4 md:px-28'>
                 <div className='px-4 md:px-0'>
