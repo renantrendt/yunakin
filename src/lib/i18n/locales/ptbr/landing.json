@@ -1,0 +1,244 @@
+{
+    "heroSection": {
+        "title": "Escale a Aquisição de Clientes",
+        "description": "Ofereça benefícios para empresas usarem em suas estratégias de retenção de clientes.",
+        "usedByCopy": "Usado por <b>100+</b> desenvolvedores",
+        "cta": "Comece Agora Grátis",
+        "watchVideo": "Participe do Curso Intensivo",
+        "image": "/images/hero-image.jpeg",
+        "usedBy": [
+            {
+                "name": "John Doe",
+                "avatar": "/images/used-by/first.jpeg"
+            },
+            {
+                "name": "John Doe",
+                "avatar": "/images/used-by/second.jpeg"
+            },
+            {
+                "name": "John Doe",
+                "avatar": "/images/used-by/third.jpeg"
+            },
+            {
+                "name": "John Doe",
+                "avatar": "/images/used-by/fourth.jpeg"
+            }
+        ],
+        "locked": "Login não é necessário"
+    },
+    "navbar": {
+        "pricing": "Preços",
+        "blog": "Blog",
+        "features": "Recursos",
+        "docs": "Documentação",
+        "cta": "Comece o Teste Gratuito",
+        "watchVideo": "Participe do Curso Intensivo",
+        "login": "Login",
+        "getStarted": "Comece Agora Grátis",
+        "aboutUs": "Sobre Nós",
+        "memberPerks": "Meus Benefícios"
+    },
+    "metadata": {
+        "title": "Yunakin",
+        "description": "Seus benefícios"
+    },
+    "usedBy": {
+        "title": "Usado Por"
+    },
+    "ctaSection": {
+        "clients": "Clientes",
+        "mycompany": "Minha empresa",
+        "othercompany": "Outra empresa",
+        "title": "Retenha Clientes",
+        "description": "Crie e gerencie os benefícios que seus clientes podem acessar. Compartilhe sua página de benefícios sem login em segundos.",
+        "reasons": [
+            {
+                "metric": "40%",
+                "description": "Tempo de mercado mais rápido"
+            },
+            {
+                "metric": "25%",
+                "description": "custos de desenvolvimento mais baixos"
+            },
+            {
+                "metric": "100%",
+                "description": "aumento de produtividade"
+            }
+        ],
+        "compliance": "SOC2 e GDPR por design."
+    },
+    "acquisitionSection": {
+        "title": "Grátis para Usar",
+        "description": "Atraia leads e retenha clientes compartilhando um benefício com clientes de empresas similares."
+    },
+    "features": {
+        "features": [
+            {
+                "title": "Parcerias com Um Clique",
+                "description": "As empresas podem selecionar seus benefícios para oferecer aos seus clientes através da sua página de benefícios. Você pode escolher benefícios para beneficiar seus clientes com produtos e serviços de outras empresas."
+            },
+            {
+                "title": "Segmentação de Público com IA",
+                "description": "Adquira clientes com custos previsíveis distribuindo seus benefícios para clientes de outras empresas com base nas preferências das empresas e no comportamento dos clientes."
+            },
+            {
+                "title": "Páginas de Benefícios",
+                "description": "Aumente seu alcance fazendo com que as empresas exibam seus benefícios em suas páginas de benefícios, atraindo leads qualificados para suas ofertas enquanto priorizam a privacidade dos clientes."
+            },
+            {
+                "title": "Página de Benefícios Personalizada",
+                "description": "Sem habilidades de codificação, personalize em minutos todos os detalhes da sua marca, incluindo o URL do domínio, para refletir a identidade da sua marca."
+            },
+            {
+                "title": "Integrar Página de Benefícios",
+                "description": "Integre sua página de benefícios perfeitamente ao seu site ou app sem habilidades de codificação."
+            }
+        ],
+        "learn-more": "Comece Agora"
+    },
+    "testimonialsSection": {
+        "title": "Depoimentos",
+        "description": "O que nossos clientes estão dizendo sobre nós",
+        "testimonials": [
+            {
+                "name": "Alex Johnson",
+                "content": "O Codepilot tem sido uma mudança de jogo para nossa startup. A redução no tempo de desenvolvimento nos permitiu lançar nosso aplicativo semanas antes do previsto, nos dando uma vantagem significativa em um mercado competitivo. Recomendo fortemente para qualquer equipe que queira se destacar rapidamente.",
+                "role": "CTO da StartTech Innovations",
+                "avatar": "/images/testimonials/alex-johnson.jpeg"
+            },
+            {
+                "name": "Samantha Lee",
+                "content": "Implementar o Codepilot em nosso fluxo de trabalho de desenvolvimento melhorou drasticamente nossa eficiência. Os ambientes pré-configurados e as melhores práticas incorporadas na plataforma reduziram significativamente nosso tempo de integração para novos desenvolvedores.",
+                "role": "Gerente de Projetos na Digital Solutions Corp.",
+                "avatar": "/images/testimonials/samanta.jpeg"
+            },
+            {
+                "name": "Ethan Rivera",
+                "content": "Como freelancer, cada minuto conta, e o Codepilot tem sido instrumental para me ajudar a entregar trabalhos de alta qualidade em prazos apertados. A facilidade de uso, junto com opções de personalização poderosas, significa que posso atender às necessidades diversificadas dos clientes sem começar do zero a cada vez.",
+                "role": "Desenvolvedor de Apps Freelance",
+                "avatar": "/images/testimonials/ethan.jpeg"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Habilite a melhor experiência",
+        "description": "Escolha um plano e comece seu teste gratuito de 14 dias. Gere compromissos e leads ou contrate talentos online, sem riscos.",
+        "pro": {
+            "name": "Pro",
+            "description": "Ideal para começar com funis de desktop e alcançar seus primeiros sucessos."
+        },
+        "enterprise": {
+            "name": "Enterprise",
+            "description": "Para empresas que desejam escalar sua geração de leads e contratação de talentos."
+        },
+        "personal": {
+            "name": "Pessoal",
+            "description": "Para indivíduos que desejam começar com funis de desktop e alcançar seus primeiros sucessos."
+        },
+        "recommended": "Recomendado",
+        "monthly": "Mensal",
+        "yearly": "Anual",
+        "start": "Começar",
+        "month": "Mês",
+        "year": "Ano"
+    },
+    "footer": {
+        "description": "(pronuncia-se “you-and-akin”) uma palavra nativa para vila com identidade compartilhada, cunhada pelos Ramaytush Ohlone, os povos originários da Península de São Francisco.",
+        "footnote": "© %Date% Yunakin® 1007 N Orange St. 4th Floor, Wilmington, DE 19801, EUA +1 (650) 441-6511",
+        "links": [
+            {
+                "title": "Serviços",
+                "links": [
+                    {
+                        "title": "Desenvolvimento Web",
+                        "url": "/services/web-development"
+                    },
+                    {
+                        "title": "Desenvolvimento Mobile",
+                        "url": "/services/mobile-development"
+                    },
+                    {
+                        "title": "Serviços na Nuvem",
+                        "url": "/cloud-services"
+                    },
+                    {
+                        "title": "Design UI/UX",
+                        "url": "/ui-ux-design"
+                    }
+                ]
+            },
+            {
+                "title": "Empresa",
+                "links": [
+                    {
+                        "title": "Sobre Nós",
+                        "url": "/about-us"
+                    },
+                    {
+                        "title": "Carreiras",
+                        "url": "/careers"
+                    },
+                    {
+                        "title": "Parceiros",
+                        "url": "/partners"
+                    },
+                    {
+                        "title": "Contate-Nos",
+                        "url": "/contact-us"
+                    }
+                ]
+            },
+            {
+                "title": "Legal",
+                "links": [
+                    {
+                        "title": "Política de Privacidade",
+                        "url": "/privacy-policy"
+                    },
+                    {
+                        "title": "Termos de Serviço",
+                        "url": "/tos"
+                    },
+                    {
+                        "title": "Segurança",
+                        "url": "/security"
+                    }
+                ]
+            }
+        ]
+    },
+    "faq": {
+        "title": "Perguntas Frequentes",
+        "description": "Aqui estão algumas perguntas comuns sobre o Codepilot. Para mais informações, entre em contato com nossa equipe de suporte.",
+        "faqs": [
+            {
+                "question": "O que é o Codepilot?",
+                "answer": "O Codepilot é um boilerplate SaaS abrangente projetado para ajudar os desenvolvedores a lançar aplicativos mais rapidamente, fornecendo uma base pré-configurada, garantindo as melhores práticas e facilitando a escalabilidade."
+            },
+            {
+                "question": "Como o Codepilot pode reduzir o tempo de desenvolvimento?",
+                "answer": "O Codepilot reduz o tempo de desenvolvimento oferecendo templates personalizáveis e ferramentas de ponta que eliminam a necessidade de construir do zero, permitindo que os desenvolvedores se concentrem na criação de recursos exclusivos."
+            },
+            {
+                "question": "O Codepilot é adequado para iniciantes?",
+                "answer": "Sim, o Codepilot foi projetado para ser amigável para iniciantes, oferecendo recursos avançados para desenvolvedores experientes, tornando-se uma ferramenta ideal para projetos de qualquer tamanho e complexidade."
+            },
+            {
+                "question": "Posso usar o Codepilot para projetos comerciais?",
+                "answer": "Absolutamente. O Codepilot é construído para suportar projetos pessoais e comerciais, fornecendo a escalabilidade e robustez necessárias para aplicativos de nível empresarial."
+            },
+            {
+                "question": "Que tipo de suporte o Codepilot oferece?",
+                "answer": "O Codepilot oferece suporte abrangente através de documentação, uma equipe de suporte dedicada e um fórum comunitário onde os usuários podem compartilhar insights e buscar ajuda de outros desenvolvedores."
+            },
+            {
+                "question": "Com que frequência o Codepilot é atualizado?",
+                "answer": "O Codepilot é atualizado regularmente para incorporar as tendências mais recentes de desenvolvimento, patches de segurança e feedback da comunidade, garantindo que ele permaneça na vanguarda da tecnologia."
+            },
+            {
+                "question": "O Codepilot oferece opções de personalização?",
+                "answer": "Sim, o Codepilot oferece amplas opções de personalização para garantir que os desenvolvedores possam adaptar seus projetos para atender a requisitos específicos, tornando-o uma solução flexível para uma ampla gama de aplicações."
+            }
+        ]
+    }
+}

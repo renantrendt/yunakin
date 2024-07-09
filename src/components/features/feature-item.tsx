@@ -4,9 +4,9 @@ import Button from '../atomic/button/Button';
 import Typography from '../atomic/typography/Typography';
 import Image from 'next/image';
 import ArrowRightIcon from "@/icons/arrow-right.svg";
-import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../animated/AnimatedSection';
 import siteUrls from '@/config/site-config';
+import { useTranslation } from '@/lib/i18n/client';
 interface FeatureItemProps {
     direction?: "ltr" | "rtl" | string
     image?: string

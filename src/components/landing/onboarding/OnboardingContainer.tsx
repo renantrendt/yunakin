@@ -14,6 +14,7 @@ import siteUrls from '@/config/site-config'
 import ContentSection from '@/containers/layout/ContentSection'
 import PlusIcon from '@/icons/PlusIcon'
 import { useTranslation } from '@/lib/i18n/client'
+import { MemberBenefitFilter, SelectMemberBenefitFilter, SelectMemberBenenefiFilter, selectMemberBenefitFilter } from '@/lib/types'
 import { cn } from '@/utils/cn'
 import { Category, MemberBenefit } from '@prisma/client'
 import Image from 'next/image'
@@ -39,6 +40,8 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
     const [step, setStep] = useState<number>(1)
     const [loading, setLoading] = useState(false);
     const [clientSlug, setClientSlug] = useState<string>("")
+
+    const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
 
     const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(
         benefits.map(benefit => {
@@ -71,23 +74,36 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                 </div>
             </ContentSection >
             <div className='max-w-[1440px] pb-20 lg:py-12 w-full mx-auto px-4 md:px-28'>
-                <div className='px-4 md:px-0'>
+                <div className='px-4 md:px-0 lg:mt-40'>
                     <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
-                        <Typography type="h1" className="font-black text-[32px] leading-[45px] lg:text-5xl" >{t(`step${step}.title`)}</Typography>
-                        <Typography type="p" className="text-base text-neutral-600 font-normal lg:text-xl" >{t(`step${step}.description`)}</Typography>
+                        <Typography type="h1" className="font-black" >{t(`step${step}.title`)}</Typography>
+                        <Typography type="h6" className="text-xl" >{t(`step${step}.description`)}</Typography>
                     </div>
                 </div>
                 <div>
+                    <div className="flex  justify-between w-full  text-black items-center">
+                        <h1 className="text-2xl font-bold">Perks</h1>
+                        <div className='tabs bg-[#F0F0F0] p-1 flex gap-2 rounded-[10px]'>
+
+                            {Object.keys(selectMemberBenefitFilter).map((key: MemberBenefitFilter, index) => {
+                                return (
+                                    <div key={index} className={`px-4 py-2 rounded-lg cursor-pointer ${selectedDisplayType === selectMemberBenefitFilter[key] ? 'bg-white' : ''}`} onClick={() => setSelectedDisplayType(selectMemberBenefitFilter[key])}>
+                                        {selectMemberBenefitFilter[key]}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
                     {step == 1 && (
                         <div className='mb-40'>
                             <div>
-                                {categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
+                                {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
                                     return (
-                                        <div key={category.id} className='flex flex-col gap-3 lg:gap-6 justify-start  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
+                                        <div key={category.id} className='flex flex-col gap-3 lg:gap-5 justify-start  mt-8 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                                             <div className=" w-fit	  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex dark:bg-card-dark">
                                                 <div className=" text-center text-category-blog-color dark:text-sidebar-icon-dark text-sm font-semibold  uppercase tracking-[0.5px]">{category.name}</div>
                                             </div>
-                                            <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
+                                            <div className='flex flex-row gap-3 lg:gap-5 justify-items-center  overflow-x-scroll max-w-[100vw]  no-scrollbar '>
                                                 {selectedBenefits && selectedBenefits.filter((benefit: SelectedMemberBenefit) => benefit.categoryId === category.id).map((benefit: SelectedMemberBenefit, index: any) => (
                                                     // <BlogCard loading={false} key={index} category={category} />
                                                     <SelectMemberBenefitCard
@@ -103,6 +119,21 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                     )
                                 })}
 
+                                {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
+                                    <div className='grid grid-cols-3 gap-x-5 gap-y-5 mt-8 '>
+                                        {selectedBenefits && selectedBenefits
+                                            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                                            .map((benefit: SelectedMemberBenefit, index: any) => (
+                                                <SelectMemberBenefitCard
+                                                    selected={benefit.selected}
+                                                    onClick={() => {
+                                                        const newSelectedBenefits = selectedBenefits.map(b => b.id === benefit.id ? { ...b, selected: !b.selected } : b)
+                                                        setSelectedBenefits(newSelectedBenefits)
+                                                    }}
+                                                    key={index} benefit={benefit} />
+                                            ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}

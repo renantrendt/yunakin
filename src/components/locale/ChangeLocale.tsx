@@ -19,7 +19,7 @@ export default function ChangeLocale() {
                 value={i18n.language}
                 options={[
                     { value: 'en', label: "🇺🇸" },
-                    { value: 'de', label: "🇩🇪" },
+                    { value: 'ptbr', label: "🇧🇷" },
 
                 ]} // Add the options here
                 className=' min-w-fit !w-16 focus:!border-none !border-none !shadow-none '

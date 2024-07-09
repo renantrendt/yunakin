@@ -58,3 +58,10 @@ export enum MemberBenefitVisibility {
     OWNED_PRIVATE = "OWNED_PRIVATE",
     OWNED_PUBLIC = "OWNED_PUBLIC",
 }
+
+export const selectMemberBenefitFilter = {
+    NEW: "NEW",
+    FEATURED: "FEATURED",
+    CATEGORY: "CATEGORY",
+}
+export type MemberBenefitFilter = keyof typeof selectMemberBenefitFilter

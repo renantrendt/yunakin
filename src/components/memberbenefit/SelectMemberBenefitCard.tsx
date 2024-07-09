@@ -44,7 +44,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
     return (
         <>
 
-            <div key={key} className="card flex font-satoshi flex-col flex-shrink-0 dark:text-white dark:bg-card-dark w-11/12 md:w-full  md:min-w-[390px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
+            <div key={key} className="card flex font-satoshi flex-col flex-shrink-0 dark:text-white dark:bg-card-dark w-11/12 md:w-full  md:min-w-[390px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 
         rounded-[10px] shadow-sm">
                 <div className="p-5 flex-shrink-0">
                     <div className='flex justify-between items-start'>
