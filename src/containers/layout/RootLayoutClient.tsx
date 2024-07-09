@@ -46,7 +46,7 @@ export default function RootLayoutClient({
             </head>
             <body >
                 <Providers>
-                    <div className={cn(inter.className, params.gelica.variable, params.monaSans.variable, params.satoshi.variable, "bg-landing-background  dark:bg-landing-dark-background  ")}>
+                    <div className={cn(inter.className, params.gelica.variable, params.monaSans.variable, params.satoshi.variable, params.satoshiBlack.variable, "bg-landing-background  dark:bg-landing-dark-background  ")}>
                         {children}
                     </div>
                 </Providers>

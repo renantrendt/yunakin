@@ -11,6 +11,7 @@ import { LocaleProvider } from '@/hooks/useLocale'
 
 const gelica = localFont({ src: './fonts/Fontspring-DEMO-gelica-semibold.otf', variable: "--font-gelica" });
 const satoshi = localFont({ src: './fonts/Satoshi-Medium.otf', variable: "--font-satoshi" });
+const satoshiBlack = localFont({ src: './fonts/Satoshi-Black.otf', variable: "--font-satoshi-black" });
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -29,7 +30,7 @@ export default function RootLayout({
   const locale = getLocale();
 
   return (
-    <RootLayoutClient params={{ ...params, monaSans, locale, gelica, satoshi }}>
+    <RootLayoutClient params={{ ...params, monaSans, locale, gelica, satoshi, satoshiBlack }}>
       <LocaleProvider value={locale}>
         {children}
       </LocaleProvider>

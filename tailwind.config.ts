@@ -90,6 +90,7 @@ const config: Config = {
         monaSans: ['var(--font-coming-soon)'],
         gelica: ['var(--font-gelica)'],
         satoshi: ['var(--font-satoshi)'],
+        satoshiBlack: ['var(--font-satoshi-black)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
