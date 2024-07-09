@@ -14,6 +14,7 @@ import DeviceDetector from "device-detector-js";
 import { Category, MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from '@prisma/client'
 import { MemberBenefitClickType } from '@/lib/types'
 import LocationIcon from "@/icons/landing/location-icon.svg"
+import { cn } from '@/utils/cn'
 interface MemberBenefitCardProps {
     key: string
     benefit: MemberBenefit
@@ -21,8 +22,9 @@ interface MemberBenefitCardProps {
     createMode?: boolean
     trackAnalytics?: boolean
     config?: MemberBenefitPageConfig
+    className?: string
 }
-const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnalytics = true }: MemberBenefitCardProps) => {
+const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnalytics = true, className }: MemberBenefitCardProps) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const deviceDetector = new DeviceDetector()
@@ -62,8 +64,8 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
     return (
         <>
 
-            <div key={key} className="card flex font-satoshi flex-col flex-shrink-0 dark:text-white dark:bg-card-dark w-11/12 md:w-full  md:min-w-[390px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 col-span-4  
-   rounded-[10px] shadow-sm">
+            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0 dark:text-white dark:bg-card-dark w-11/12 md:w-full  md:min-w-[390px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 
+rounded-[10px] shadow-sm`, className)}>
                 <div className="p-5  flex flex-col  ">
                     <div className='flex justify-between items-start'>
                         <figure className='relative hidden w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>

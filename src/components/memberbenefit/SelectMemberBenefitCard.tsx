@@ -44,7 +44,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
     return (
         <>
 
-            <div key={key} className="card flex font-satoshi flex-col flex-shrink-0 dark:text-white dark:bg-card-dark w-11/12 md:w-full  md:min-w-[390px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 
+            <div key={key} className="card flex font-satoshi flex-col flex-shrink-0 w-full  lg:min-w-[390px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 
         rounded-[10px] shadow-sm">
                 <div className="p-5 flex-shrink-0">
                     <div className='flex justify-between items-start'>
@@ -60,7 +60,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
 
                         </div>
                     </div>
-                    <div className='flex justify-between mt-6 items-center'>
+                    <div className='flex justify-between mt-6 gap-2 items-center'>
                         <Button
                             loading={loading}
                             icon={selected ? <CheckIcon /> : <PlusIcon />}
@@ -68,7 +68,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
                             variant="secondary"
                         >{selected ? "Benefit saved" : "Add to list"}</Button>
 
-                        {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'>
+                        {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm flex-col items-end md:items-center md:flex-row flex gap-1'>
                             <LocationIcon />
                             <span>{benefit.location || ""}</span></a>}
                     </div>

@@ -1,3 +1,4 @@
+import { MemberBenefit } from "@prisma/client"
 import { Message } from "ai"
 
 export interface Chat extends Record<string, any> {
@@ -65,3 +66,7 @@ export const selectMemberBenefitFilter = {
     CATEGORY: "CATEGORY",
 }
 export type MemberBenefitFilter = keyof typeof selectMemberBenefitFilter
+
+export interface SelectedMemberBenefit extends MemberBenefit {
+    selected: boolean
+}
