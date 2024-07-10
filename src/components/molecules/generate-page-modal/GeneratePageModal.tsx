@@ -44,7 +44,7 @@ const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, t
 
     return (
         <>
-            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0 w-11/12 md:w-full  md:min-w-[195px]  h-full   overflow-hidden last:mr-4 lg:last:mr-0 bg-base-100 
+            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0 w-11/12 md:w-full  md:min-w-[195px]  h-full   overflow-hidden  bg-base-100 
             rounded-[10px] shadow-sm`, className)}>
                 <div className="p-5  flex flex-col  ">
                     <div className='flex justify-between items-start'>
@@ -59,7 +59,6 @@ const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, t
                             <p className='cursor-pointer text-[9px] text-link-color underline'
                                 onClick={(e) => {
                                     e.preventDefault()
-                                    // handleButtonClick(benefit.id, MemberBenefitClickType.WEBSITE_CLICK)
                                 }}
                             >{benefit.domain}</p>
                         </div>
@@ -68,19 +67,20 @@ const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, t
                         <Button
                             variant="secondary"
                             size={"sm"}
-                            className='text-[10px]'
+                            className='text-[9px]'
                             onClick={() => {
                                 setIsModalOpen(true)
-                                // handleButtonClick(benefit.id, MemberBenefitClickType.SAVE_BENEFIT)
-                                // save analytics data
                             }}
                         >Save Benefit</Button>
 
-                        {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-[8px]  flex gap-1'>
-                            <LocationIcon width="12" height="12" />
+                        {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer w-fit text-[#8C8C8C] text-[8px] items-center  flex '>
+                            <span className='flex-shrink-0'>
+                                <LocationIcon width="12" height="12" />
+
+                            </span>
                             <span>{benefit.location || ""}</span></a>}
                     </div>
-                </div>
+                </div >
             </div >
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} modalClassName='absolute' className='  min-w-[50px] w-[200px] h-[200px] overflow-hidden  no-scrollbar  items-center'>
 

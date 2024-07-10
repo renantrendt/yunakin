@@ -98,7 +98,7 @@ rounded-[10px] shadow-sm`, className)}>
                         >Save Benefit</Button>
 
                         {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'>
-                            <LocationIcon />
+                            <LocationIcon width="20" height="20" />
                             <span>{benefit.location || ""}</span></a>}
                     </div>
                 </div>
