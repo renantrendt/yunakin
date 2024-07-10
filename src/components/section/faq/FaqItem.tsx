@@ -1,5 +1,5 @@
 import MinusIcon from '@/icons/MinusIcon'
-import PlusIcon from '@/icons/PlusIcon'
+import PlusIcon from '@/icons/plus-icon.svg'
 import { motion, AnimatePresence } from 'framer-motion';
 
 import React from 'react'
