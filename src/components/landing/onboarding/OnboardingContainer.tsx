@@ -12,7 +12,6 @@ import SelectMemberBenefitCard from '@/components/memberbenefit/SelectMemberBene
 import OnboardingModal from '@/components/molecules/onboarding-modal/OnboardingModal'
 import siteUrls from '@/config/site-config'
 import ContentSection from '@/containers/layout/ContentSection'
-import PlusIcon from '@/icons/PlusIcon'
 import { useTranslation } from '@/lib/i18n/client'
 import { MemberBenefitFilter, SelectedMemberBenefit, selectMemberBenefitFilter } from '@/lib/types'
 import { cn } from '@/utils/cn'
@@ -95,15 +94,15 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                         <Typography type="h6" className="text-xl" >{t(`step${step}.description`)}</Typography>
                     </div>
                 </div>
-                <div className='mt-8'>
+                <div className='pt-8 lg:pt-20'>
                     <div className="flex flex-col md:flex-row gap-4  items-start justify-between w-full  text-black md:items-center">
                         <h1 className="text-xl lg:text-2xl font-bold">Perks</h1>
                         <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'>
 
-                            {Object.keys(selectMemberBenefitFilter).map((key: MemberBenefitFilter, index) => {
+                            {Object.keys(selectMemberBenefitFilter).map((key: string, index) => {
                                 return (
-                                    <div key={index} className={`px-4 flex-shrink-0 py-2 text-sm lg:text-base rounded-lg cursor-pointer ${selectedDisplayType === selectMemberBenefitFilter[key] ? 'bg-white' : ''}`} onClick={() => setSelectedDisplayType(selectMemberBenefitFilter[key])}>
-                                        {selectMemberBenefitFilter[key]}
+                                    <div key={index} className={`px-4 flex-shrink-0 py-2 text-[#5E5E5E] font-satoshi text-sm lg:text-base rounded-lg cursor-pointer ${selectedDisplayType === selectMemberBenefitFilter[key as MemberBenefitFilter] ? 'bg-white' : ''}`} onClick={() => setSelectedDisplayType(selectMemberBenefitFilter[key as MemberBenefitFilter])}>
+                                        {selectMemberBenefitFilter[key as MemberBenefitFilter]}
                                     </div>
                                 )
                             })}
@@ -167,7 +166,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                         onClick={() => {
 
                         }}
-                        selectedBenefits={selectedBenefits.filter(s => s.selected).splice(0, 3)}
+                        selectedBenefits={selectedBenefits.filter(s => s.selected)}
                         onClose={() => {
                             setShowGeneratePageModal(false)
                         }}

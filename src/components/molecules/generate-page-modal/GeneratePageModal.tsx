@@ -36,6 +36,7 @@ interface MinifiedMemberBenefitCardProps {
     trackAnalytics?: boolean
     config?: MemberBenefitPageConfig
     className?: string
+
 }
 
 const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnalytics = true, className }: MinifiedMemberBenefitCardProps) => {
@@ -43,7 +44,7 @@ const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, t
 
     return (
         <>
-            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0 w-11/12 md:w-full  md:min-w-[195px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 
+            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0 w-11/12 md:w-full  md:min-w-[195px]  h-full   overflow-hidden last:mr-4 lg:last:mr-0 bg-base-100 
             rounded-[10px] shadow-sm`, className)}>
                 <div className="p-5  flex flex-col  ">
                     <div className='flex justify-between items-start'>
@@ -127,9 +128,9 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose} className='w-full max-w-full' >
             <div className='container  flex flex-col  gap-6 px-4 py-8 lg:p-8 justify-center content'>
-                <h1 className='text-base font-satoshi'>Public perks page generated.</h1>
-                <p>This is how your clients are going to view your perk’s page.</p>
-                <div className='figure w-full h-[400px] bg-landing-background overflow-hidden   '>
+                <h1 className='text-base font-gelica text-xl leading-[120%] font-semibold'>Public perks page generated.</h1>
+                <p className='text-sm leading-[150%]'>Your clients can save those perks and you track the performance of each perk.....</p>
+                <div className='figure w-full h-[350px] lg:h-[436px] bg-landing-background overflow-hidden rounded-[18px]   '>
                     <div className='justify-between flex scale-100  w-full px-8 pt-4'>
                         <Image src="/images/logo.svg" alt="logo" width={100} height={20} className='dark:hidden' />
                         <Button label={`Create your perk    s`} className='text-[10px]' size={"sm"} />
@@ -141,23 +142,16 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
                         </div>
                     </div>
 
-                    <div className='grid grid-cols-3 w-full   max-w-[500px] mx-auto pl-0 pr-10  '>
+                    <div className='grid  grid-cols-2 lg:grid-cols-3 w-full    max-w-[500px] mx-auto pl-0 pr-10  '>
                         {props.selectedBenefits.map((benefit, index) => (
                             <MinifiedMemberBenefitCard
-                                key={index}
+                                key={index.toString()}
                                 benefit={benefit}
-                                onClick={() => { }}
-                                className='min-w-[100px] scale-75 !w-32'
+                                className={cn('min-w-[100px] scale-75 !w-32', { "-translate-y-1/4 top-2": index > 2 })}
                             />
                         ))}
                     </div>
                 </div>
-                <div className="content flex justify-center flex-col items-center mt-6">
-                    <h1 className='title text-black font-bold text-[18px] leading-[150%]'>{t(`GeneratePageModal.step${step}.title`)}</h1>
-                    <p>{t(`onboardingModal.step${step}.description`)}</p>
-
-                </div>
-
                 <div className="buttons flex justify-center w-full gap-2 mt-8">
                     <Button
                         className='button w-full'

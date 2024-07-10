@@ -11,7 +11,7 @@ import { useState } from 'react'
 import CheckIcon from "@/icons/check-icon.svg"
 import { upsertMemberBenefitLinkClick } from '@/app/actions'
 import DeviceDetector from "device-detector-js";
-import PlusIcon from '@/icons/PlusIcon'
+import { PlusIcon } from '@radix-ui/react-icons'
 import { MemberBenefit } from '@prisma/client'
 import LocationIcon from '@/icons/landing/location-icon.svg'
 
@@ -44,28 +44,29 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
     return (
         <>
 
-            <div key={key} className="card flex font-satoshi flex-col flex-shrink-0 w-full  lg:min-w-[390px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 
+            <div key={key} className="card flex font-satoshi flex-col flex-shrink-0 w-full  lg:min-w-[390px]  h-full   overflow-hidden lg:max-w-[320px]  bg-base-100 
         rounded-[10px] shadow-sm">
                 <div className="p-5 flex-shrink-0">
                     <div className='flex justify-between items-start'>
                         <figure className='relative hidden w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
-                        {benefit.offer && <div className='py-1 px-2 text-[#808080] font-bold font-satoshi leading-normal text-xs  md:text-sm bg-[#F5F5F5] rounded-[40px] '>{benefit.offer?.substring(0, 30)}</div>}
+                        {benefit.offer && <div className='py-1 px-2 text-black  font-bold font-satoshi leading-normal text-xs  bg-primary rounded-[40px] '>{benefit.offer?.substring(0, 30)}</div>}
                     </div>
 
                     <h2 className="card-title mt-4 text-[20px]  text-black font-satoshiBlack font-black">{benefit.title}</h2>
-                    {benefit.description && <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base min-h-[50px]'>{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
-                    <div className='flex  items-center justify-start mb-4 mt-2 text-category-card-autor '>
+                    {benefit.description && <p className='text-black mt-2 text-sm min-h-[50px]'>{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
+                    <div className='flex  items-center justify-start mb-4 mt-4 text-category-card-autor '>
                         <div className='flex flex-col items-start justify-start gap-4'>
-                            <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-link-color underline'>{benefit.domain}</a>
+                            <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-sm text-link-color underline'>{benefit.domain}</a>
 
                         </div>
                     </div>
                     <div className='flex justify-between mt-6 gap-2 items-center'>
                         <Button
                             loading={loading}
-                            icon={selected ? <CheckIcon /> : <PlusIcon />}
+                            icon={selected ? <CheckIcon width="20" height="20" /> : <PlusIcon width="20" height="20" />}
                             onClick={handleClick}
                             variant="secondary"
+                            className='py-[6px] pl-[12px] pr-[16px] gap-1'
                         >{selected ? "Benefit saved" : "Add to list"}</Button>
 
                         {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm flex-col items-end md:items-center md:flex-row flex gap-1'>
@@ -95,7 +96,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
                             onClick={() => {
                                 setIsModalOpen(false)
                             }}
-                            className="btn-primary hover:cursor-pointer w-full"
+                            className="btn-primary hover:cursor-pointer w-full py-[6px] pl-[12px] pr-[16px] "
                             variant="secondary"
                         >Close</Button>
                     </div>
