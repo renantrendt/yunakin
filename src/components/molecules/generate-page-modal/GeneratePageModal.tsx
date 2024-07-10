@@ -82,36 +82,39 @@ const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, t
                     </div>
                 </div>
             </div >
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} className=' w-[376px] '>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} className=' min-w-[50px] w-[200px] h-[200px]  items-center'>
 
-                <div className='flex flex-col  p-6 justify-center items-center w-[376px] mx-auto '>
-                    <div className='p-4 w-fit mx-auto rounded-[20px] bg-[#CCFFD4]'
+                <div className='flex flex-col  p-6 justify-center items-center  mx-auto scale-75 -translate-y-10  '>
+                    <div className='p-2 w-fit mx-auto rounded-[20px] bg-[#CCFFD4]'
                         style={{
                             backgroundColor: config?.buttonColor as string,
                             color: config?.textColor as string,
                         }}
                     >
-                        <CheckIcon className='text-white  rounded-full  w-12 h-12  bg-[#00CE21]' />
+                        <CheckIcon className='text-white  rounded-full  w-6 h-6  bg-[#00CE21]' />
                     </div>
-                    <div className='flex flex-col items-center mt-6 mb-8 gap-2'>
-                        <h2 className='text-[20px] text-black font-gelica font-medium'>Benefit saved!</h2>
-                        <p className='text-center text-sm text-grey-600 '>Apply the code: {benefit.code} on checkout</p>
+                    <div className='flex flex-col items-center mt-3 mb-4 gap-2'>
+                        <h2 className='text-base text-black font-gelica font-medium'>Benefit saved!</h2>
+                        <p className='text-center text-[10px] text-grey-600 '>Apply the code: {benefit.code} on checkout</p>
                     </div>
-                    <div className='flex flex-col mt-4 w-full gap-2'>
+                    <div className='flex flex-col mt-0 w-full gap-2'>
                         <Button
-                            className="btn-primary hover:cursor-pointer"
+                            className="btn-primary hover:cursor-pointer text-[9px]"
                             style={{
                                 backgroundColor: config?.buttonColor as string,
                             }}
                             variant="primary"
+                            size={"sm"}
 
                         >Visit {benefit.title} Website</Button>
                         <Button
                             onClick={() => {
                                 setIsModalOpen(false)
                             }}
-                            className="btn-primary hover:cursor-pointer w-full"
+                            className="btn-primary hover:cursor-pointer w-full text-[9px]"
                             variant="secondary"
+                            size={"sm"}
+
                         >Close</Button>
                     </div>
                 </div>

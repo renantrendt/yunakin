@@ -61,9 +61,9 @@ export enum MemberBenefitVisibility {
 }
 
 export const selectMemberBenefitFilter = {
-    NEW: "NEW",
-    FEATURED: "FEATURED",
-    CATEGORY: "CATEGORY",
+    NEW: "New",
+    FEATURED: "Featured",
+    CATEGORY: "Categories",
 }
 export type MemberBenefitFilter = keyof typeof selectMemberBenefitFilter
 

@@ -67,7 +67,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                 setShowMenu(true)
                             }} />}
                     </div>
-                    <div className={cn('hidden lg:flex justify-between gap-3', { "flex absolute w-fit p-5  right-4 top-20 flex-col bg-gray-200 rounded-[14px] z-30 ": showMenu })}>
+                    <div className={cn('hidden lg:flex justify-between gap-3', { "flex  absolute  w-fit p-5  right-4 top-20 flex-col bg-gray-200 rounded-[14px] z-30 ": showMenu })}>
                         <Button
                             variant='secondary'
                             className='  !min-w-[100px] '
@@ -101,7 +101,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
 
                             {Object.keys(selectMemberBenefitFilter).map((key: string, index) => {
                                 return (
-                                    <div key={index} className={`px-4 flex-shrink-0 py-2 text-[#5E5E5E] font-satoshi text-sm lg:text-base rounded-lg cursor-pointer ${selectedDisplayType === selectMemberBenefitFilter[key as MemberBenefitFilter] ? 'bg-white' : ''}`} onClick={() => setSelectedDisplayType(selectMemberBenefitFilter[key as MemberBenefitFilter])}>
+                                    <div key={index} className={`px-4  py-2 text-[#5E5E5E] w-full text-center font-satoshiBold font-medium text-sm lg:text-base rounded-lg cursor-pointer ${selectedDisplayType === selectMemberBenefitFilter[key as MemberBenefitFilter] ? 'bg-white' : ''}`} onClick={() => setSelectedDisplayType(selectMemberBenefitFilter[key as MemberBenefitFilter])}>
                                         {selectMemberBenefitFilter[key as MemberBenefitFilter]}
                                     </div>
                                 )
@@ -126,6 +126,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                                             const newSelectedBenefits = selectedBenefits.map(b => b.id === benefit.id ? { ...b, selected: !b.selected } : b)
                                                             setSelectedBenefits(newSelectedBenefits)
                                                         }}
+                                                        className='w-11/12'
                                                         key={index} benefit={benefit} />
                                                 ))}
                                             </div>

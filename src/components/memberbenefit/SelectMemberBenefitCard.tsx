@@ -14,16 +14,18 @@ import DeviceDetector from "device-detector-js";
 import { PlusIcon } from '@radix-ui/react-icons'
 import { MemberBenefit } from '@prisma/client'
 import LocationIcon from '@/icons/landing/location-icon.svg'
+import { cn } from '@/utils/cn'
 
 interface SelectMemberBenefitCardProps {
     key: string
     benefit: MemberBenefit
     onClick: () => void
     selected: boolean
+    className?: string
 }
 
 
-const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemberBenefitCardProps) => {
+const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }: SelectMemberBenefitCardProps) => {
 
     const [loading, setLoading] = useState(false);
 
@@ -44,8 +46,8 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected }: SelectMemb
     return (
         <>
 
-            <div key={key} className="card flex font-satoshi flex-col flex-shrink-0 w-full  lg:min-w-[390px]  h-full   overflow-hidden lg:max-w-[320px]  bg-base-100 
-        rounded-[10px] shadow-sm">
+            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0  lg:min-w-[390px]  h-full   overflow-hidden lg:max-w-[320px]  bg-base-100 
+        rounded-[10px] shadow-sm`, className)}>
                 <div className="p-5 flex-shrink-0">
                     <div className='flex justify-between items-start'>
                         <figure className='relative hidden w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
