@@ -10,7 +10,7 @@ import { MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from '@pri
 import Image from 'next/image'
 import React, { useState } from 'react'
 import LocationIcon from '@/icons/landing/location-icon.svg'
-import { CheckIcon } from '@radix-ui/react-icons'
+import { CheckIcon, Cross1Icon, Cross2Icon, CrossCircledIcon } from '@radix-ui/react-icons'
 interface DotProps {
     selected: boolean
 }
@@ -82,23 +82,23 @@ const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, t
                     </div>
                 </div>
             </div >
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} className=''>
-                <div className='flex flex-col  p-6 justify-center items-stretch  '>
-                    <div className='p-2 w-fit mx-auto rounded-lg'
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} className=' w-[376px] '>
+
+                <div className='flex flex-col  p-6 justify-center items-center w-[376px] mx-auto '>
+                    <div className='p-4 w-fit mx-auto rounded-[20px] bg-[#CCFFD4]'
                         style={{
                             backgroundColor: config?.buttonColor as string,
                             color: config?.textColor as string,
                         }}
                     >
-                        <CheckIcon />
+                        <CheckIcon className='text-white  rounded-full  w-12 h-12  bg-[#00CE21]' />
                     </div>
                     <div className='flex flex-col items-center mt-6 mb-8 gap-2'>
-                        <h2 className='text-base text-black font-medium'>Benefit saved!</h2>
+                        <h2 className='text-[20px] text-black font-gelica font-medium'>Benefit saved!</h2>
                         <p className='text-center text-sm text-grey-600 '>Apply the code: {benefit.code} on checkout</p>
                     </div>
-                    <div className='flex flex-col gap-2'>
+                    <div className='flex flex-col mt-4 w-full gap-2'>
                         <Button
-
                             className="btn-primary hover:cursor-pointer"
                             style={{
                                 backgroundColor: config?.buttonColor as string,
@@ -127,6 +127,9 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
 
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose} className='w-full max-w-full' >
+            <div className='justify-between flex w-full'>
+                <Button onClick={props.onClose} variant='secondary' size='sm' icon={<Cross1Icon />} className=' absolute !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
+            </div>
             <div className='container  flex flex-col  gap-6 px-4 py-8 lg:p-8 justify-center content'>
                 <h1 className='text-base font-gelica text-xl leading-[120%] font-semibold'>Public perks page generated.</h1>
                 <p className='text-sm leading-[150%]'>Your clients can save those perks and you track the performance of each perk.....</p>

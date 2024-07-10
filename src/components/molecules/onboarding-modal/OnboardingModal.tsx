@@ -2,6 +2,7 @@ import Button from '@/components/atomic/button/Button'
 import Modal from '@/components/atomic/modal/Modal'
 import { useTranslation } from '@/lib/i18n/client'
 import { cn } from '@/utils/cn'
+import { Cross1Icon } from '@radix-ui/react-icons'
 import React from 'react'
 
 interface DotProps {
@@ -26,6 +27,7 @@ const OnboardingModal = (props: OnboardingModalProps) => {
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
             <div className='container  flex flex-col  gap-6 p-8 justify-center content'>
+
                 <div className='figure w-full h-[200px] bg-grey-300'>
 
                 </div>
@@ -34,6 +36,7 @@ const OnboardingModal = (props: OnboardingModalProps) => {
                     <p>{t(`onboardingModal.step${step}.description`)}</p>
 
                 </div>
+
                 <div className="dots flex gap-3 justify-center mt-4">
                     {Array(4).fill(0).map((_, index) => (
                         <Dot selected={index + 1 <= step} />
@@ -42,9 +45,15 @@ const OnboardingModal = (props: OnboardingModalProps) => {
                 <div className="buttons flex justify-center w-full gap-2 mt-8">
                     <Button
                         className='button w-full'
-                        onClick={props.onClose}
+                        onClick={() => {
+                            if (step === 1) {
+                                props.onClose()
+                                return
+                            }
+                            setStep(step - 1)
+                        }}
                         variant='secondary'
-                        label='Skip'
+                        label={`${step > 1 ? 'Back' : 'Skip'}`}
                     />
                     <Button
                         className='button w-full'
@@ -59,6 +68,7 @@ const OnboardingModal = (props: OnboardingModalProps) => {
                         label={`${step === 4 ? 'Start' : 'Next'}`}
                     />
                 </div>
+
             </div>
         </Modal>
     )
