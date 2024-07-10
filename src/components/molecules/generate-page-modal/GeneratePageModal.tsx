@@ -82,7 +82,7 @@ const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, t
                     </div>
                 </div>
             </div >
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} className=' min-w-[50px] w-[200px] h-[200px]  items-center'>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} modalClassName='absolute' className='  min-w-[50px] w-[200px] h-[200px] overflow-hidden  no-scrollbar  items-center'>
 
                 <div className='flex flex-col  p-6 justify-center items-center  mx-auto scale-75 -translate-y-10  '>
                     <div className='p-2 w-fit mx-auto rounded-[20px] bg-[#CCFFD4]'

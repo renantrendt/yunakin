@@ -33,7 +33,7 @@ const OnboardingModal = (props: OnboardingModalProps) => {
                 </div>
                 <div className="content flex justify-center flex-col items-center mt-6">
                     <h1 className='title text-black font-bold text-[18px] leading-[150%]'>{t(`onboardingModal.step${step}.title`)}</h1>
-                    <p>{t(`onboardingModal.step${step}.description`)}</p>
+                    <p className='text-center'>{t(`onboardingModal.step${step}.description`)}</p>
 
                 </div>
 
