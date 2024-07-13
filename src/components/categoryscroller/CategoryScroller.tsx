@@ -41,9 +41,9 @@ const CategoryScroller = ({ category, selectedBenefits, setSelectedBenefits }: C
                 </div>
             </div>
 
-            <div className='relative w-full  h-[400px]'>
+            <div className='relative w-full  h-[400px] overflow-scroll no-scrollbar'>
 
-                <div className='  absolute   flex flex-row    gap-3  lg:gap-5 justify-between flex-nowrap      '>
+                <div className='  absolute   flex flex-row     gap-3  lg:gap-5 justify-between flex-nowrap      '>
                     {selectedBenefits.map((benefit: SelectedMemberBenefit, index: any) => (
                         // <BlogCard loading={false} key={index} category={category} />
                         <div key={index} className={cn(' relative  w-[calc(100vw-48px)] lg:w-fit  duration-300 ease-in-out')} style={{ transform: `translateX(calc(-${start * 100}% - ${start * (isDesktop ? 20 : 12)}px))` }}>
