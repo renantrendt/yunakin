@@ -25,24 +25,24 @@ const OnboardingModal = (props: OnboardingModalProps) => {
     const { t } = useTranslation('onboarding')
     const [step, setStep] = React.useState(1)
     return (
-        <Modal isOpen={props.isOpen} onClose={props.onClose}>
+        <Modal isOpen={props.isOpen} onClose={props.onClose} className='lg:max-w-[448px]'>
             <div className='container  flex flex-col  gap-6 p-8 justify-center content'>
 
-                <div className='figure w-full h-[200px] bg-grey-300'>
-
+                <div className='figure w-full  min-h-[100px] lg:min-h-[200px] h-fit bg-grey-300 rounded-lg '>
+                    {<img src={`/images/onboarding/modal/part${step}.svg`} alt='illustration' className='w-full h-full object-contain' />}
                 </div>
-                <div className="content flex justify-center flex-col items-center mt-6">
+                <div className="content flex justify-center flex-col items-center">
                     <h1 className='title text-black font-bold text-[18px] leading-[150%]'>{t(`onboardingModal.step${step}.title`)}</h1>
                     <p className='text-center'>{t(`onboardingModal.step${step}.description`)}</p>
 
                 </div>
 
-                <div className="dots flex gap-3 justify-center mt-4">
+                <div className="dots flex gap-3 justify-center mt-2">
                     {Array(4).fill(0).map((_, index) => (
                         <Dot selected={index + 1 <= step} />
                     ))}
                 </div>
-                <div className="buttons flex justify-center w-full gap-2 mt-8">
+                <div className="buttons flex justify-center w-full gap-2 mt-4">
                     <Button
                         className='button w-full'
                         onClick={() => {

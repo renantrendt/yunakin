@@ -69,7 +69,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }:
                             onClick={handleClick}
                             variant="secondary"
                             className='py-[6px] pl-[12px] pr-[16px] gap-1'
-                        >{selected ? "Benefit saved" : "Add to list"}</Button>
+                        >{selected ? "Added" : "Add to list"}</Button>
 
                         {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  items-end flex-row flex gap-1'>
                             <LocationIcon width="20" height="20" />
