@@ -1,3 +1,4 @@
+"use client"
 import Avatar from '@/components/atomic/avatar/Avatar'
 import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
 import Typography from '@/components/atomic/typography/Typography'
@@ -9,41 +10,21 @@ import NotificationModal from '@/components/molecules/notification-modal/Notific
 import Notification from '@/lib/models/notification'
 import { cn } from '@/utils/cn'
 import ChangeLocale from '@/components/locale/ChangeLocale'
+import { useParams, usePathname, useSearchParams } from 'next/navigation'
+import { useTranslation } from '@/lib/i18n/client'
 const Topbar = () => {
     const { data: session } = useSession()
     const [show, setShow] = React.useState(false)
     const [showNotification, setShowNotifications] = React.useState(false)
-
-    const notifications: Notification[] = [
-        {
-            image: "https://cdn5.vectorstock.com/i/1000x1000/92/89/hipster-avatar-image-vector-19639289.jpg",
-            name: "Joy Pacheco",
-            action: "Update tokens",
-            time: "2h ago",
-            topic: "Engineering"
-        },
-        {
-            image: "https://cdn5.vectorstock.com/i/1000x1000/92/89/hipster-avatar-image-vector-19639289.jpg",
-            name: "Joy Pacheco",
-            action: "Update tokens",
-            time: "2h ago",
-            topic: "Engineering"
-        },
-        {
-            image: "https://cdn5.vectorstock.com/i/1000x1000/92/89/hipster-avatar-image-vector-19639289.jpg",
-            name: "Joy Pacheco",
-            action: "Update tokens",
-            time: "2h ago",
-            topic: "Engineering"
-        },
-    ]
+    const { t } = useTranslation('dashboard')
+    const pathname = usePathname()
     return (
-        <div className='flex justify-between px-2 py-[10px] w-full items-center'>
-            <Typography type='h1' className='!text-base !md:text-xl'>Welcome {session?.user?.name}</Typography>
+        <div className='flex !bg-white  justify-between px-2 py-[10px] w-full items-center'>
+            <Typography type='h1' className='!text-base !md:text-xl'>{t(`pages.${pathname.replace("/", "")}.title`)}</Typography>
             <div className='flex justify-center gap-2'>
-                <ThemeSwitcher />
-                <ChangeLocale />
-                <div className='relative'>
+                {/* <ThemeSwitcher /> */}
+                {/* <ChangeLocale /> */}
+                {/* <div className='relative'>
                     <div onClick={() => setShowNotifications(!showNotification)} className={cn("cursor-pointer p-[10px] bg-grey-100 text-grey-600 hover:bg-primary-500 focus:bg-primary-500  w-fit h-fit dark:bg-icon-dark dark:hover:bg-primary-500 dark:focus:bg-primary-500  hover:text-white focus:text-white dark:text-white rounded-full", showNotification ? "!bg-primary-500 !text-white" : "")} >
                         <NotificationIcon />
 
@@ -52,7 +33,7 @@ const Topbar = () => {
                         notifications={notifications}
                         shown={showNotification}
                     />
-                </div>
+                </div> */}
                 <div className='relative' onMouseLeave={() => setShow(false)}>
                     <Avatar onMouseEnter={() => setShow(true)} onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "/images/default-avatar.jpeg"} name={session?.user?.name ?? ""} />
                     <AccountModal email={session?.user?.email as string}

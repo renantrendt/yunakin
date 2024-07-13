@@ -173,7 +173,8 @@ model MemberBenefitPageConfig {
   buttonColor              String?
   backgroundColor          String?
   textColor                String?
-  font                     String?
+  primaryFont              String?
+  secondaryFont            String?
   user                     User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt                DateTime                   @default(now())
   updatedAt                DateTime                   @updatedAt

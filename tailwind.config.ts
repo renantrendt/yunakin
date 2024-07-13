@@ -1,3 +1,4 @@
+import robots from '@/app/robots';
 import type { Config } from 'tailwindcss'
 const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette')
 const config: Config = {
@@ -91,6 +92,10 @@ const config: Config = {
         gelica: ['var(--font-gelica)'],
         satoshi: ['var(--font-satoshi)'],
         satoshiBlack: ['var(--font-satoshi-black)'],
+        openSans: ['var(--font-open-sans)'],
+        robots: ['var(--font-robots)'],
+        poppins: ['var(--font-poppins)'],
+        fraunces: ['var(--font-fraunces)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

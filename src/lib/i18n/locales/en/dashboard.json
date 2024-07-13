@@ -20,5 +20,10 @@
             "OWNED_PRIVATE": "Hidden to you, public for others",
             "OWNED_PUBLIC": "Public to you, hidden for others"
         }
+    },
+    "pages": {
+        "customize": {
+            "title": "Customize Appearance"
+        }
     }
 }

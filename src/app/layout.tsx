@@ -12,6 +12,8 @@ import { LocaleProvider } from '@/hooks/useLocale'
 const gelica = localFont({ src: './fonts/Fontspring-DEMO-gelica-semibold.otf', variable: "--font-gelica" });
 const satoshi = localFont({ src: './fonts/Satoshi-Medium.otf', variable: "--font-satoshi" });
 const satoshiBlack = localFont({ src: './fonts/Satoshi-Black.otf', variable: "--font-satoshi-black" });
+
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,

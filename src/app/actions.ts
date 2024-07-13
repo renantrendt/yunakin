@@ -241,7 +241,8 @@ export async function updateMemberPageConfig(config: MemberBenefitPageConfig) {
             backgroundColor: config.backgroundColor,
             buttonColor: config.buttonColor,
             textColor: config.textColor,
-            font: config.font
+            primaryFont: config.primaryFont,
+            secondaryFont: config.secondaryFont,
         }
     })
     return updatedConfig

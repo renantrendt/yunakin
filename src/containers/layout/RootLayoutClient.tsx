@@ -7,6 +7,13 @@ import React from 'react'
 import { cn } from '@/utils/cn'
 import Script from 'next/script'
 const inter = Inter({ preload: false, weight: 'variable', subsets: ['latin'] })
+import { Open_Sans, Roboto, Poppins, Fraunces } from "next/font/google"
+
+
+const open_sans = Open_Sans({ subsets: ['latin'], variable: "--font-open-sans" });
+const roboto = Roboto({ subsets: ['latin'], weight: ['400', '500'], variable: "--font-roboto" });
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500'], variable: "--font-poppins" });
+const fraunces = Fraunces({ subsets: ['latin'], weight: ['400', '500'], variable: "--font-fraunces" });
 
 export default function RootLayoutClient({
     children,
@@ -46,7 +53,12 @@ export default function RootLayoutClient({
             </head>
             <body >
                 <Providers>
-                    <div className={cn(inter.className, params.gelica.variable, params.monaSans.variable, params.satoshi.variable, params.satoshiBlack.variable, "bg-landing-background  dark:bg-landing-dark-background  ")}>
+                    <div className={cn(inter.className, params.gelica.variable, params.monaSans.variable, params.satoshi.variable, params.satoshiBlack.variable,
+                        open_sans.variable,
+                        roboto.variable,
+                        poppins.variable,
+                        fraunces.variable
+                        , "bg-landing-background  dark:bg-landing-dark-background  ")}>
                         {children}
                     </div>
                 </Providers>
