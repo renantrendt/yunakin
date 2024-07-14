@@ -118,14 +118,18 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
 
     return (
         <div className='bg-landing-background '>
-            <CustomizePageActions
-                loading={loading}
-                config={config}
-                publishChanges={publishChanges}
-                onUpdate={(property, value) => {
-                    setConfig({ ...config, [property]: value })
-                }}
-            />
+            <div className=' px-5 py-4   lg:px-12'>
+
+                <CustomizePageActions
+                    loading={loading}
+                    config={config}
+                    publishChanges={publishChanges}
+                    onUpdate={(property, value) => {
+                        setConfig({ ...config, [property]: value })
+                    }}
+                />
+            </div>
+
             <div style={{
                 backgroundColor: config.backgroundColor as string,
             }}>

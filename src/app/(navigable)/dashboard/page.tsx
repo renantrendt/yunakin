@@ -182,7 +182,7 @@ export default async function Dashboard() {
 
 
     return (
-        <div>
+        <div className=' px-5 py-4   lg:px-12'>
             <DashboardCards cardStats={cardStats} />
             <ChartContainer benefitClicks={chartStats.benefitsClicks}
                 totalClicks={cardStats.totalClicks}

@@ -23,8 +23,9 @@ interface MemberBenefitCardProps {
     trackAnalytics?: boolean
     config?: MemberBenefitPageConfig
     className?: string
+    isEditing?: boolean
 }
-const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnalytics = true, className }: MemberBenefitCardProps) => {
+const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnalytics = true, className, isEditing }: MemberBenefitCardProps) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const deviceDetector = new DeviceDetector()
@@ -88,7 +89,7 @@ rounded-[10px] shadow-sm`, className)} style={{
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
 
-                            <a href={domain} target='_blank' className='cursor-pointer text-link-color underline'
+                            <a href={!isEditing && domain} target='_blank' className='cursor-pointer text-link-color underline'
                                 onClick={() => {
                                     handleButtonClick(benefit.id, MemberBenefitClickType.WEBSITE_CLICK)
                                 }}
@@ -101,6 +102,7 @@ rounded-[10px] shadow-sm`, className)} style={{
                     <div className='flex justify-between mt-6 items-center'>
                         <Button
                             onClick={() => {
+                                if (isEditing) return
                                 setIsModalOpen(true)
                                 handleButtonClick(benefit.id, MemberBenefitClickType.SAVE_BENEFIT)
                                 // save analytics data
@@ -113,7 +115,7 @@ rounded-[10px] shadow-sm`, className)} style={{
 
                         >Save Benefit</Button>
 
-                        {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'
+                        {benefit.link && <a href={!isEditing && (benefit.link || "")} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'
                             style={{
                                 color: config?.textColor as string,
                             }}

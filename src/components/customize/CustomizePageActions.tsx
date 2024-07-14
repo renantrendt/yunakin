@@ -100,8 +100,7 @@ const ColorInput = ({ icon, ...props }: ColorInputProps) => {
 
 const CustomizePageActions = ({ loading, publishChanges, config, onUpdate }: CustomizePageActionsProps) => {
     return (
-        <div className=' fixed  bg-landing-background w-[1280px]  mb-8 p-3 rounded-xl z-30 flex flex-col gap-6 justify-start'>
-            <Typography type="p" className="text-[#858585] font-normal text-sm w-full text-left">Customization Tools</Typography>
+        <div className=' sticky  bg-landing-background w-[1280px]   rounded-xl z-30 flex flex-col gap-6 justify-start'>
             <div className='flex  w-full justify-between items-center' >
                 <div className='edit flex items-center gap-2'>
 

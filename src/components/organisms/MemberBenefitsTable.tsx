@@ -56,17 +56,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
 
 
     useEffect(() => {
-        // (async () => {
-        //     if (!searched) {
-        //         if (!debouncedValue && debouncedValue === '') {
-        //             setCategories(defaultUsers)
-        //             return
-        //         }
-        //         const filteredUsers = await searchUsers(debouncedValue)
-        //         setCategories(filteredUsers)
-        //         setSearched(true)
-        //     }
-        // })()
+
     }, [debouncedValue])
 
     const isBenefitCreator = (memberBenefitId: string) => {
@@ -205,7 +195,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
 
 
     return (
-        <div className='h-full min-h-[100vh]'>
+        <div className='h-full min-h-[100vh]  px-5 py-4   lg:px-12'>
             {/* <div className='flex w-full justify-end my-4 '>
                 <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
                     id='search' value={search} onChange={(e) => {

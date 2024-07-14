@@ -7,27 +7,32 @@ import Button from '../atomic/button/Button'
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import MemberBenefitCard from '../memberbenefit/MemberBenefitCard'
+import { usePathname } from 'next/navigation'
 
 interface CategoryScrollerProps {
     category: Category
     config: MemberBenefitPageConfig
     memberBenefits: MemberBenefit[]
+
 }
 
 const CategoryScroller = ({ category, memberBenefits, config }: CategoryScrollerProps) => {
+
     const isDesktop = useMediaQuery('(min-width: 960px)');
+
+    const pathname = usePathname()
 
     const [start, setStart] = React.useState(0)
     const onNext = () => {
         setStart(start + 1)
-        if (start === selectedBenefits.length - 1) {
+        if (start === memberBenefits.length - 1) {
             setStart(0)
         }
     }
     const onPrev = () => {
         setStart(start - 1)
         if (start === 0) {
-            setStart(selectedBenefits.length - 1)
+            setStart(memberBenefits.length - 1)
         }
     }
     return (
@@ -52,7 +57,9 @@ const CategoryScroller = ({ category, memberBenefits, config }: CategoryScroller
                             <MemberBenefitCard
                                 config={config}
                                 className='w-full'
-                                key={index} benefit={benefit}
+                                key={index}
+                                benefit={benefit}
+                                isEditing={pathname.includes("customized")}
                             />
                         </div>
                     ))}
