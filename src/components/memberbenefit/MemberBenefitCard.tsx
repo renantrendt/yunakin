@@ -65,20 +65,35 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
         <>
 
             <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0 dark:text-white dark:bg-card-dark w-11/12 md:w-full  md:min-w-[390px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 
-rounded-[10px] shadow-sm`, className)}>
+rounded-[10px] shadow-sm`, className)} style={{
+                    backgroundColor: config?.cardBackgroundColor as string,
+                }}>
                 <div className="p-5  flex flex-col  ">
                     <div className='flex justify-between items-start'>
                         <figure className='relative hidden w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
-                        {benefit.offer && <div className='py-1 px-2 text-[#808080] font-bold font-satoshi leading-normal text-xs  md:text-sm bg-[#F5F5F5] rounded-[40px] '>{benefit.offer?.substring(0, 30)}</div>}
+                        {benefit.offer && <div className='py-1 px-2 text-[#808080] font-bold font-satoshi leading-normal text-xs  md:text-sm bg-[#F5F5F5] rounded-[40px] ' style={{
+                            color: config?.textColor as string,
+                            backgroundColor: config?.buttonColor as string,
+                        }}>{benefit.offer?.substring(0, 30)}</div>}
                     </div>
-                    <h2 className="card-title mt-4 text-[20px]  text-black font-satoshiBlack font-black">{benefit.title}</h2>
-                    {benefit.description && <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base min-h-[50px]'>{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
+                    <h2 className="card-title mt-4 text-[20px]  text-black font-satoshiBlack font-black"
+                        style={{
+                            color: config?.textColor as string,
+                        }}>{benefit.title}</h2>
+                    {benefit.description && <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base min-h-[50px]'
+                        style={{
+                            color: config?.textColor as string,
+                        }}
+                    >{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
 
                             <a href={domain} target='_blank' className='cursor-pointer text-link-color underline'
                                 onClick={() => {
                                     handleButtonClick(benefit.id, MemberBenefitClickType.WEBSITE_CLICK)
+                                }}
+                                style={{
+                                    color: config?.textColor as string,
                                 }}
                             >{benefit.domain}</a>
                         </div>
@@ -92,12 +107,17 @@ rounded-[10px] shadow-sm`, className)}>
                             }}
                             style={{
                                 backgroundColor: config?.buttonColor as string,
+                                color: config?.textColor as string,
                             }}
                             variant="secondary"
 
                         >Save Benefit</Button>
 
-                        {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'>
+                        {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'
+                            style={{
+                                color: config?.textColor as string,
+                            }}
+                        >
                             <LocationIcon width="20" height="20" />
                             <span>{benefit.location || ""}</span></a>}
                     </div>

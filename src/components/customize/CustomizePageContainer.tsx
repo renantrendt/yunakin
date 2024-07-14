@@ -25,6 +25,9 @@ import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import CustomizePageModal from '../molecules/customize-page-modal'
 import EmbedModal from '../molecules/embed-modal/EmbedModal'
 import EditFontModal from '../molecules/modals/edit-font-modal'
+import CustomizePageActions from './CustomizePageActions'
+import { MemberBenefitFilter, selectMemberBenefitFilter } from '@/lib/types'
+import CategoryScroller from '../categoryscroller/CategoryScroller'
 interface CustomizePageContainerProps {
     benefits: SelectedMemberBenefit[]
     categories: Category[]
@@ -36,6 +39,8 @@ interface SelectedMemberBenefit extends MemberBenefit {
 }
 
 
+
+
 const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: CustomizePageContainerProps) => {
     const router = useRouter()
     const [settingsModalOpen, setSettingsModalOpen] = useState(false)
@@ -45,11 +50,9 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(benefits)
     const pathname = usePathname()
     const searchParams = useSearchParams()
-
     const [embedModalOpen, setEmbedModalOpen] = useState(false)
+    const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
 
-    const [editFontModal, setEditFontModal] = useState(false)
-    const [editColorModal, setEditColorModal] = useState(false)
     useEffect(() => {
         if (isEditing) {
 
@@ -115,32 +118,14 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
 
     return (
         <div className='bg-landing-background '>
-            <div className='   mb-8 p-3 rounded-xl z-30 flex flex-col gap-6 justify-start'>
-                <Typography type="p" className="text-[#858585] font-normal text-sm w-full text-left">Customization Tools</Typography>
-                <div className='flex  w-full justify-between items-center' >
-                    <div className='edit flex gap-2'>
-                        <Button variant="secondary" className='w-full' label="Edit Font"
-                            onClick={() => {
-                                setEditFontModal(true)
-                            }}
-                        />
-                        <Button variant="secondary" className='w-full' label="Edit  Color"
-                            onClick={() => {
-                                setEditColorModal(true)
-                            }}
-                        />
-                    </div>
-                    <div className='preview flex gap-2'>
-                        <Button variant="primary" className='w-full' label="Publish Changes" loading={loading}
-                            onClick={publishChanges}
-                        />
-
-                        <Button variant="primary" className='w-full' label="Publish Changes" loading={loading}
-                            onClick={publishChanges}
-                        />
-                    </div>
-                </div >
-            </div>
+            <CustomizePageActions
+                loading={loading}
+                config={config}
+                publishChanges={publishChanges}
+                onUpdate={(property, value) => {
+                    setConfig({ ...config, [property]: value })
+                }}
+            />
             <div style={{
                 backgroundColor: config.backgroundColor as string,
             }}>
@@ -175,61 +160,62 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     </div>
                     <div>
                         <div className='mb-40'>
-                            {categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
-                                return (
-                                    <div key={category.id} className='flex flex-col gap-3 lg:gap-6 justify-start  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
-                                        <div className=" w-fit	  px-5 py-1.5 bg-category-blog-background rounded-[30px] border-none justify-start items-start gap-2.5 inline-flex dark:bg-card-dark">
-                                            <div className=" text-center text-category-blog-color dark:text-sidebar-icon-dark text-sm font-semibold  uppercase tracking-[0.5px]">{category.name}</div>
-                                        </div>
-                                        <div className='flex flex-row gap-3 lg:gap-6 justify-items-center  pt-6 overflow-x-scroll max-w-[100vw]  no-scrollbar '>
-                                            {selectedBenefits && selectedBenefits.filter((benefit: SelectedMemberBenefit) => benefit.categoryId === category.id).map((benefit: SelectedMemberBenefit, index: any) => (
-                                                // <BlogCard loading={false} key={index} category={category} />
-                                                <MemberBenefitCard
-                                                    config={config}
-                                                    trackAnalytics={false}
+                            <div className="flex flex-col md:flex-row gap-4  items-start justify-between w-full  text-black md:items-center">
+                                <h1 className="text-xl lg:text-2xl font-bold" style={{
+                                    color: config.textColor as string
+                                }}>Perks</h1>
+                                <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'
+                                    style={{
+                                        backgroundColor: config.cardBackgroundColor as string
+                                    }}
+                                >
+
+                                    {Object.keys(selectMemberBenefitFilter).map((key: string, index) => {
+                                        return (
+                                            <div key={index} className={`px-4  py-2 text-[#5E5E5E] w-full text-center font-satoshiBold font-medium text-sm lg:text-base rounded-lg cursor-pointer ${selectedDisplayType === selectMemberBenefitFilter[key as MemberBenefitFilter] ? 'bg-white' : ''}`} onClick={() => setSelectedDisplayType(selectMemberBenefitFilter[key as MemberBenefitFilter])}
+                                                style={{
+                                                    backgroundColor: selectedDisplayType === selectMemberBenefitFilter[key as MemberBenefitFilter] ? config.buttonColor as string : config.cardBackgroundColor as string,
+                                                    color: config.textColor as string
+                                                }}
+                                            >
+                                                {selectMemberBenefitFilter[key as MemberBenefitFilter]}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                            <div>
+                                {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
+                                    return (
+                                        <CategoryScroller
+                                            category={category}
+                                            memberBenefits={selectedBenefits.filter(benefit => category.id == benefit.categoryId)}
+                                            config={config}
+                                        />
+                                    )
+                                })}
+
+                                {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
+                                    <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8 '>
+                                        {selectedBenefits && selectedBenefits
+                                            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                                            .map((benefit: SelectedMemberBenefit, index: any) => (
+                                                <SelectMemberBenefitCard
+                                                    selected={benefit.selected}
                                                     onClick={() => {
                                                         const newSelectedBenefits = selectedBenefits.map(b => b.id === benefit.id ? { ...b, selected: !b.selected } : b)
                                                         setSelectedBenefits(newSelectedBenefits)
                                                     }}
                                                     key={index} benefit={benefit} />
                                             ))}
-                                        </div>
                                     </div>
-                                )
-                            })}
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div >
                 {/** Modals */}
 
-                {editFontModal && <EditFontModal
-                    config={config}
-                    onClose={() => {
-                        setEditFontModal(false)
-                    }
-                    }
-                    onUpdate={async (data: any) => {
-                        const oldConfgi = {
-                            ...config
-                        }
-                        try {
-                            const newConfig = {
-                                ...config,
-                                primaryFont: data.primaryFont,
-                                secondaryFont: data.secondaryFont,
-                            }
-
-                            setConfig(newConfig)
-                            await updateMemberPageConfig(newConfig)
-                            setEditFontModal(false)
-                            customToast.success("Font Updated Successfully")
-                        } catch (error) {
-                            setConfig(oldConfgi)
-                            customToast.error("Something went wrong. Please try again")
-                        }
-                    }}
-                />
-                }
                 {settingsModalOpen && <CustomizePageModal
                     loading={loading}
                     config={config}

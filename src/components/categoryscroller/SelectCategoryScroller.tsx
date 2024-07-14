@@ -1,20 +1,19 @@
 import { SelectedMemberBenefit } from '@/lib/types'
-import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
+import { Category } from '@prisma/client'
 import React from 'react'
 import SelectMemberBenefitCard from '../memberbenefit/SelectMemberBenefitCard'
 import { cn } from '@/utils/cn'
 import Button from '../atomic/button/Button'
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons'
 import useMediaQuery from '@/hooks/useMediaQuery'
-import MemberBenefitCard from '../memberbenefit/MemberBenefitCard'
 
-interface CategoryScrollerProps {
+interface SelectCategoryScrollerProps {
     category: Category
-    config: MemberBenefitPageConfig
-    memberBenefits: MemberBenefit[]
+    selectedBenefits: SelectedMemberBenefit[]
+    setSelectedBenefits: (selectedBenefits: SelectedMemberBenefit[]) => void
 }
 
-const CategoryScroller = ({ category, memberBenefits, config }: CategoryScrollerProps) => {
+const SelectCategoryScroller = ({ category, selectedBenefits, setSelectedBenefits }: SelectCategoryScrollerProps) => {
     const isDesktop = useMediaQuery('(min-width: 960px)');
 
     const [start, setStart] = React.useState(0)
@@ -33,8 +32,7 @@ const CategoryScroller = ({ category, memberBenefits, config }: CategoryScroller
     return (
 
         <div key={category.id} className='flex  flex-col gap-3 lg:gap-5 justify-start  mt-8 max-w-[100vw]   '>
-            <div className='flex justify-between items-center'>
-
+            <div className='flex justify-between items-center w-full  max-w-[1440px] px-4 md:px-28  mx-auto'>
                 <div className=" text-center text-black text-sm font-semibold  uppercase tracking-[0.5px]">{category.name}</div>
                 <div className='justify-between flex w-fit gap-2'>
                     <Button onClick={onPrev} variant='secondary' size='sm' icon={<ArrowLeftIcon />} className=' rounded-full bg-white  !w-fit  p-2 !min-w-fit  ' />
@@ -42,18 +40,21 @@ const CategoryScroller = ({ category, memberBenefits, config }: CategoryScroller
                 </div>
             </div>
 
-            <div className='relative w-full  h-[350px] lg:h-[400px] overflow-scroll no-scrollbar'>
+            <div className='relative w-full   h-[350px]  overflow-scroll no-scrollbar lg:overflow-hidden'>
 
-                <div className='  absolute   flex flex-row     gap-3  lg:gap-5 justify-between flex-nowrap      '>
-                    {memberBenefits.map((benefit: MemberBenefit, index: any) => (
+                <div className='  absolute translate-x-4  lg:translate-x-[250px]  flex flex-row     gap-3  lg:gap-5 justify-between flex-nowrap      '>
+                    {selectedBenefits.map((benefit: SelectedMemberBenefit, index: any) => (
                         // <BlogCard loading={false} key={index} category={category} />
                         <div key={index} className={cn(' relative  w-[calc(100vw-48px)] lg:w-fit  duration-300 ease-in-out')} style={{ transform: `translateX(calc(-${start * 100}% - ${start * (isDesktop ? 20 : 12)}px))` }}>
 
-                            <MemberBenefitCard
-                                config={config}
+                            <SelectMemberBenefitCard
+                                selected={benefit.selected}
+                                onClick={() => {
+                                    const newSelectedBenefits = selectedBenefits.map(b => b.id === benefit.id ? { ...b, selected: !b.selected } : b)
+                                    setSelectedBenefits(newSelectedBenefits)
+                                }}
                                 className='w-full'
-                                key={index} benefit={benefit}
-                            />
+                                key={index} benefit={benefit} />
                         </div>
                     ))}
                 </div>
@@ -63,4 +64,4 @@ const CategoryScroller = ({ category, memberBenefits, config }: CategoryScroller
     )
 }
 
-export default CategoryScroller
+export default SelectCategoryScroller

@@ -12,7 +12,6 @@ import SelectMemberBenefitCard from '@/components/memberbenefit/SelectMemberBene
 import platformConfig from '@/config/app-config'
 import siteUrls from '@/config/site-config'
 import ContentSection from '@/containers/layout/ContentSection'
-import PlusIcon from '@/icons/PlusIcon'
 import { cn } from '@/utils/cn'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
 import Image from 'next/image'

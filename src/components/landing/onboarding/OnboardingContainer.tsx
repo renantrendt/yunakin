@@ -23,7 +23,7 @@ import { Input } from 'postcss'
 import React, { useState } from 'react'
 import { HamburgerMenuIcon, Cross1Icon, ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons'
 import GeneratePageModal from '@/components/molecules/generate-page-modal/GeneratePageModal'
-import CategoryScroller from '@/components/categoryscroller/CategoryScroller'
+import SelectCategoryScroller from '@/components/categoryscroller/SelectCategoryScroller'
 import { v4 } from "uuid";
 import useMediaQuery from '@/hooks/useMediaQuery'
 interface OnboardingContainerProps {
@@ -82,15 +82,15 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
             </ContentSection >
             <div className='w-full overflow-hidden'>
 
-                <div className='max-w-[1440px] py-20 w-full mx-auto px-4 md:px-28 '>
-                    <div className='px-4 md:px-0 lg:mt-40'>
+                <div className=' py-20 w-full mx-auto '>
+                    <div className='max-w-[1200px] px-4 md:px-28 mx-auto lg:mt-40'>
                         <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
                             <Typography type="h1" className="font-black" >{t(`step${step}.title`)}</Typography>
                             <Typography type="h6" className="text-xl lg:text-2xl" >{t(`step${step}.description`)}</Typography>
                         </div>
                     </div>
-                    <div className='pt-8 lg:pt-20'>
-                        <div className="flex flex-col md:flex-row gap-4  items-start justify-between w-full  text-black md:items-center">
+                    <div className='pt-8 lg:pt-20  '>
+                        <div className="flex flex-col md:flex-row gap-4   items-start justify-between w-full  text-black md:items-center  max-w-[1440px] px-4 md:px-28 mx-auto">
                             <h1 className="text-xl lg:text-2xl font-bold">Perks</h1>
                             <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'>
 
@@ -103,48 +103,45 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                 })}
                             </div>
                         </div>
-                        {step == 1 && (
-                            <div className='mb-40'>
-                                <div>
-                                    {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
-                                        return (
-                                            <CategoryScroller
-                                                category={category}
-                                                selectedBenefits={selectedBenefits.filter((benefit: SelectedMemberBenefit) => benefit.categoryId === category.id)}
-                                                setSelectedBenefits={(categorySelectedBenefits) => {
+                        <div className='mb-40 '>
+                            <>
+                                {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
+                                    return (
+                                        <SelectCategoryScroller
+                                            category={category}
+                                            selectedBenefits={selectedBenefits.filter((benefit: SelectedMemberBenefit) => benefit.categoryId === category.id)}
+                                            setSelectedBenefits={(categorySelectedBenefits) => {
 
-                                                    setSelectedBenefits(selectedBenefits.map(benefit => {
-                                                        const categoryBenefit = categorySelectedBenefits.find(cb => cb.id === benefit.id)
-                                                        if (categoryBenefit) {
-                                                            return categoryBenefit
-                                                        }
-                                                        return benefit
-                                                    }))
+                                                setSelectedBenefits(selectedBenefits.map(benefit => {
+                                                    const categoryBenefit = categorySelectedBenefits.find(cb => cb.id === benefit.id)
+                                                    if (categoryBenefit) {
+                                                        return categoryBenefit
+                                                    }
+                                                    return benefit
+                                                }))
 
-                                                }}
-                                            />
-                                        )
-                                    })}
+                                            }}
+                                        />
+                                    )
+                                })}
 
-                                    {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
-                                        <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8 '>
-                                            {selectedBenefits && selectedBenefits
-                                                .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-                                                .map((benefit: SelectedMemberBenefit, index: any) => (
-                                                    <SelectMemberBenefitCard
-                                                        selected={benefit.selected}
-                                                        onClick={() => {
-                                                            const newSelectedBenefits = selectedBenefits.map(b => b.id === benefit.id ? { ...b, selected: !b.selected } : b)
-                                                            setSelectedBenefits(newSelectedBenefits)
-                                                        }}
-                                                        key={index} benefit={benefit} />
-                                                ))}
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
-
+                                {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
+                                    <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-28 mx-auto '>
+                                        {selectedBenefits && selectedBenefits
+                                            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                                            .map((benefit: SelectedMemberBenefit, index: any) => (
+                                                <SelectMemberBenefitCard
+                                                    selected={benefit.selected}
+                                                    onClick={() => {
+                                                        const newSelectedBenefits = selectedBenefits.map(b => b.id === benefit.id ? { ...b, selected: !b.selected } : b)
+                                                        setSelectedBenefits(newSelectedBenefits)
+                                                    }}
+                                                    key={index} benefit={benefit} />
+                                            ))}
+                                    </div>
+                                )}
+                            </>
+                        </div>
                     </div>
                 </div>
 
