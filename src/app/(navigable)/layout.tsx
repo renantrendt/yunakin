@@ -10,7 +10,9 @@ const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
     <AuthProvider>
       <div className='flex h-screen  text-black dark:text-white '>
 
-        <Sidebar showMenu={showMenu} />
+        <Sidebar showMenu={showMenu} onLinkClick={() => {
+          setShowMenu(false)
+        }} />
         <div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden min-h-screen' >
           <DashboardNavbar onClick={() => setShowMenu(true)} />
           <main className='mx-auto w-full  bg-landing-background dark:bg-black px-5 py-4   lg:px-12 ' onClick={() => setShowMenu(false)}>

@@ -64,11 +64,10 @@ const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, t
                             size={"sm"}
                             className=' py-[4px] px-2 lg:py-[6px] lg:px-3 text-[8px] lg:text-[9px]'
                             onClick={() => {
-                                setIsModalOpen(true)
                             }}
                         >Save Benefit</Button>
 
-                        {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer w-fit text-[#8C8C8C] text-[8px] items-center  flex '>
+                        {benefit.link && <a className='cursor-pointer w-fit text-[#8C8C8C] text-[8px] items-center  flex '>
                             <span className='flex-shrink-0'>
                                 <LocationIcon width="12" height="12" />
 
@@ -154,18 +153,12 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
                         ))}
                     </div>
                 </div>
-                <div className="buttons flex flex-col lg:flex-row justify-center w-full gap-2 lg:mt-8">
-                    <Button
-                        className='button w-full'
-                        onClick={props.onClick}
-                        variant='secondary'
-                        label='Customize & Share'
-                    />
+                <div className="buttons flex flex-col lg:flex-row justify-center w-full gap-2 lg:mt-4">
                     <Button
                         className='button w-full'
                         onClick={props.onClick}
                         variant='primary'
-                        label={'Create my perks page'}
+                        label={'Sign Up'}
                     />
                 </div>
             </div>

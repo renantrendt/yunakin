@@ -80,10 +80,11 @@ const Cta = () => {
                             alt=''
                             fill
                             objectFit="contain"
+                            quality={100}
                             src={"/images/landing/performance-mobile.svg"}
-                            className="w-full z-10 rounded-[32px]"
+                            className="w-full h-full z-10  rounded-[32px]"
                         />
-                        <Typography type='p' className='absolute -bottom-2 text-[8px] w-full  !text-[#0F0F0F66] text-center left-1/2 transform -translate-x-1/2 -translate-y-1/2 '>{t("ctaSection.compliance")}</Typography>
+                        <Typography type='p' className='absolute z-20 -bottom-2 text-[8px] w-full  !text-[#0F0F0F66] text-center left-1/2 transform -translate-x-1/2 -translate-y-[200%] lg:-translate-y-1/2 '>{t("ctaSection.compliance")}</Typography>
                         <div className='absolute top-1/2  w-[110%] flex gap-1   lg:w-[800px]  left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                             {
                                 Array(12).fill(0).map((_, index) => (

@@ -41,7 +41,7 @@ export default function RootLayoutClient({
         }
     }, [])
     return (
-        <html lang={params.locale}>
+        <html lang={params.locale} data-theme="light">
             <head>
                 <Script id='clarity-script' type="text/javascript">
                     {`(function(c,l,a,r,i,t,y){

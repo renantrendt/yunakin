@@ -7,7 +7,8 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: ['class'],
+  darkMode: ['selector'],
+
   theme: {
     extend: {
       colors: {
@@ -180,12 +181,7 @@ const config: Config = {
         transparent: "transparent",
       }
     }, {
-      dark: {
-        primary: "#705AF8",
-        secondary: "#3E21EB",
-        danger: "#eeeeee",
-        transparent: "transparent",
-      }
+      dark: false
     }],
 
   }

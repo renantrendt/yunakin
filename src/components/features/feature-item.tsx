@@ -32,10 +32,12 @@ const FeatureItem = ({ direction = "ltr", title, description, image }: FeatureIt
                 }} />
             </div>
             <div className='relative w-full row-start-1  flex-1 h-full lg:h-96'>
-                <Image alt='' fill
+                <Image alt=''
+                    fill
                     objectFit="contain"
                     src={image ?? ""}
-                    className="w-full h-full object-cover rounded-2xl"
+                    quality={100}
+                    className="w-full h-full bg-cover rounded-2xl"
                 />
             </div>
         </AnimatedSection >

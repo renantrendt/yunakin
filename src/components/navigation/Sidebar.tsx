@@ -44,9 +44,10 @@ const bottomSideBarLinks: SidebarLink[] = [
 
 interface SidebarProps {
     showMenu?: boolean
+    onLinkClick?: () => void
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
+const Sidebar: React.FC<SidebarProps> = ({ showMenu, onLinkClick }: SidebarProps) => {
     const session = useSession()
     const [search, setSearch] = React.useState('')
     const pathname = usePathname()
@@ -76,7 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu }: SidebarProps) => {
                                 link={link.path}
                                 key={link.label}
                                 selected={pathname.includes(link.path)}
-
+                                onClick={onLinkClick}
                             />
                         ))}
                     </div>

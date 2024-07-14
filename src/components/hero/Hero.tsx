@@ -57,7 +57,8 @@ export default function Hero() {
                             fill
                             objectFit="contain"
                             src={"/images/landing/hero-dashboard.svg"}
-                            className="w-fit min-h-[300px] lg:min-h-[800px] object-cover rounded-[32px]"
+                            quality={100}
+                            className="w-fit min-h-[300px] lg:min-h-[800px]  rounded-[32px]"
                         />
                     </AnimatedSection>
                 </div>
