@@ -1,5 +1,5 @@
 'use client'
-import { createMemberPageConfigWithoutUser, getMemberPageConfigByClientSlug, updateMemberPageConfig, updateOtherMemberBenefits } from '@/app/actions'
+import { createMemberPageConfigWithoutUser, getMemberPageConfigByClientSlug, updateMemberPageConfig, updateOtherMemberBenefits, updateSlug } from '@/app/actions'
 import Badge from '@/components/atomic/badge/Badge'
 import Button from '@/components/atomic/button/Button'
 import ImageUploader from '@/components/atomic/file-uploader/ImageUploader'
@@ -286,6 +286,24 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     clientSlug={config.clientSlug}
                     onClose={() => {
                         setEmbedModalOpen(false)
+                    }}
+                    loading={loading}
+                    onUpdate={async (property: keyof MemberBenefitPageConfig, value: string | boolean) => {
+                        try {
+                            setLoading(true)
+                            if (property === "clientSlug") {
+                                const newConfig = await updateSlug(config.id, value as string)
+                                if (!newConfig) {
+                                    throw new Error("Failed to update slug")
+                                }
+                                setConfig(newConfig)
+                                customToast.success("Slug Updated Successfully")
+                            }
+                        } catch (error) {
+                            customToast.error("This slug is already taken. Please try another one")
+                        } finally {
+                            setLoading(false)
+                        }
                     }}
                 />
                 }

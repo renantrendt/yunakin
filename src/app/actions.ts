@@ -291,3 +291,20 @@ export async function updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits: 
 
 
 }
+
+export async function updateSlug(configId: string, newSlug: string) {
+    try {
+        const updatedConfig = await prisma.memberBenefitPageConfig.update({
+            where: {
+                id: configId
+            },
+            data: {
+                clientSlug: newSlug
+            }
+        })
+        return updatedConfig
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
+}

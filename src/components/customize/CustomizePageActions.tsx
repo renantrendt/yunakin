@@ -10,7 +10,8 @@ import FontColorIcon from "@/icons/editor/font-color-icon.svg"
 import ButtonColorIcon from "@/icons/editor/button-color-icon.svg"
 import PageBackgroundColorIcon from "@/icons/editor/background-color-icon.svg"
 import CardBackgroundColorIcon from "@/icons/editor/card-bacground-color-icon.svg"
-
+import { Share2Icon } from '@radix-ui/react-icons'
+import LaunchIcon from "@/icons/editor/launch-icon.svg"
 interface ColorInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     icon: React.ReactNode
 }
@@ -131,10 +132,12 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
                 <div className=' flex w-full lg:w-fit  flex-row gap-2'>
                     <Button variant="secondary" className='w-full' label="Share" loading={loading}
                         onClick={openShareModal}
+                        icon={<Share2Icon />}
                     />
 
                     <Button variant="primary" className='w-full' label="Publish Changes" loading={loading}
                         onClick={publishChanges}
+                        icon={<LaunchIcon />}
                     />
                 </div>
             </div >

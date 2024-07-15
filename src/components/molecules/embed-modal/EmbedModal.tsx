@@ -9,19 +9,25 @@ import CustomizeUrlIcon from '@/icons/editor/customize-url-icon.svg'
 import ShareUrlIcon from '@/icons/editor/share-url-icon.svg'
 import Button from '@/components/atomic/button/Button';
 import BackIcon from '@/icons/BackIcon';
+import InputField from '@/components/atomic/input/InputField';
+import { MemberBenefitPageConfig } from '@prisma/client';
 
 interface EmbedModalProps {
     isOpen: boolean;
     onClose: () => void;
     clientSlug?: string;
+    onUpdate: (property: keyof MemberBenefitPageConfig, value: string | boolean) => void
+    loading?: boolean
 }
 
 
 
-const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
+const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedModalProps) => {
+
     const [showEmbedCode, setShowEmbedCode] = React.useState(false);
     const [showShareUrl, setShowShareUrl] = React.useState(false);
     const [showCustomizeUrl, setShowCustomizeUrl] = React.useState(false);
+    const [slug, setSlug] = React.useState(clientSlug)
     const content = `
         <div class="yunakin-iframe-container" style="width:100%">
             <iframe id="yunakin_frame" src='https://yunakin.com/${clientSlug}/memberbenefits?embedded=true' width='100%' height='1000' frameborder='0' scrolling='no'></iframe>
@@ -36,9 +42,8 @@ const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
                     }
                 });
         </script>`;
-    const handleClick = () => {
-
-        navigator.clipboard.writeText(content)
+    const handleClick = (value: string) => {
+        navigator.clipboard.writeText(value)
         customToast.success('Copied to clipboard')
     }
     return (
@@ -68,14 +73,18 @@ const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
                                     <Typography type='p' className='text-[#5E5E5E] font-medium'>Copy the code to embed it directly into your site.e</Typography>
                                 </div>
                             </div>
-                            <div className='w-full  rounded-lg bg-white cursor-pointer hover:bg-gray-100 flex gap-3 justify-start items-start p-3 border-[#EDEDED] border-[1px]'>
+                            <div
+                                onClick={() => setShowShareUrl(true)}
+                                className='w-full  rounded-lg bg-white cursor-pointer hover:bg-gray-100 flex gap-3 justify-start items-start p-3 border-[#EDEDED] border-[1px]'>
                                 <ShareUrlIcon width={24} height={24} className="relative top-[2px]" />
                                 <div className='flex flex-col  gap-2'>
                                     <Typography type='p' className='text-[#121212] font-medium'>URL</Typography>
                                     <Typography type='p' className='text-[#5E5E5E] font-medium'>Copy the URL to your clipboard.</Typography>
                                 </div>
                             </div>
-                            <div className='w-full  rounded-lg bg-white cursor-pointer hover:bg-gray-100 flex gap-3 justify-start items-start p-3 border-[#EDEDED] border-[1px]'>
+                            <div
+                                onClick={() => setShowCustomizeUrl(true)}
+                                className='w-full  rounded-lg bg-white cursor-pointer hover:bg-gray-100 flex gap-3 justify-start items-start p-3 border-[#EDEDED] border-[1px]'>
                                 <CustomizeUrlIcon width={24} height={24} className="relative top-[2px]" />
                                 <div className='flex flex-col  gap-2'>
                                     <Typography type='p' className='text-[#121212] font-medium'>Customize URL</Typography>
@@ -105,7 +114,9 @@ const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
                                 <Typography type='p' className='text-black'>{content}</Typography>
                             </div>
                             <Button
-                                onClick={handleClick}
+                                onClick={() => {
+                                    handleClick(content)
+                                }}
                                 icon={<CopyIcon />}
                                 variant='primary'
                                 size='md'
@@ -113,7 +124,85 @@ const EmbedModal = ({ clientSlug, isOpen, onClose }: EmbedModalProps) => {
                                 className='w-full' />
                         </div></>
                 )}
+                {showShareUrl && (
+                    <>
+                        <div className='flex gap-2 items-center text-[#5E5E5E] cursor-pointer rounded-lg hover:bg-gray-100 p-1  w-fit' onClick={() => setShowShareUrl(false)} >
+                            <ArrowLeftIcon />
+                            <Typography type='p'>Back</Typography>
+                        </div>
+                        <div className='flex flex-col justify-start items-start gap-2'>
+                            <div className='flex items-center gap-2'>
+                                <ShareUrlIcon width={24} height={24} />
+                                <Typography type='p' className='text-xl'>URL</Typography>
+                            </div>
+                            <Typography type='p' className='text-[#5E5E5E]'>Click the button below to copy the URL to your clipboard.</Typography>
 
+                        </div>
+                        <div className='flex flex-col items-center gap-6'>
+                            <InputField
+                                disabled
+                                id='shareurl'
+                                value={`https://yunakin.com/${clientSlug}/memberbenefits`}
+                                onChange={() => { }}
+                                name='shareurl'
+                            />
+                            <Button
+                                onClick={() => {
+                                    handleClick(`https://yunakin.com/${clientSlug}/memberbenefits`)
+                                }}
+                                icon={<CopyIcon />}
+                                variant='primary'
+                                size='md'
+                                label='Copy'
+                                className='w-full' />
+                        </div>
+                    </>
+                )}
+                {showCustomizeUrl && (
+                    <>
+                        <div className='flex gap-2 items-center text-[#5E5E5E] cursor-pointer rounded-lg hover:bg-gray-100 p-1  w-fit' onClick={() => setShowCustomizeUrl(false)} >
+                            <ArrowLeftIcon />
+                            <Typography type='p'>Back</Typography>
+                        </div>
+                        <div className='flex flex-col justify-start items-start gap-2'>
+                            <div className='flex items-center gap-2'>
+                                <CustomizeUrlIcon width={24} height={24} />
+                                <Typography type='p' className='text-xl'>Customize URL</Typography>
+                            </div>
+                            <Typography type='p' className='text-[#5E5E5E]'>Feel free to customize it according to your preference.</Typography>
+
+                        </div>
+                        <div className='flex flex-col items-center gap-6 '>
+                            <div className='relative w-full'>
+                                <InputField
+                                    id='customizeUrl'
+                                    value={`${slug}`}
+                                    onChange={(e) => {
+                                        setSlug(e.target.value)
+                                    }}
+                                    name='customizeUrl'
+                                    className='lg:pl-[105px]'
+                                    error={slug === '' ? 'This field is required' : ''}
+                                />
+                                <Typography type='p' className='text-[#5E5E5E] absolute left-2 top-[12px]'>yunakin.com/</Typography>
+                            </div>
+
+                            <Button
+                                onClick={() => {
+                                    if (slug === '') {
+                                        customToast.error('This field is required')
+                                    } else {
+                                        onUpdate('clientSlug', slug as string)
+                                    }
+                                }}
+                                disabled={clientSlug === slug}
+                                loading={loading}
+                                variant='primary'
+                                size='md'
+                                label='Save'
+                                className='w-full' />
+                        </div></>
+                )}
             </div>
         </Modal>
     )
