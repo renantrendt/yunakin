@@ -121,7 +121,7 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
                             />
                         </div>
                     </div>
-                    <div className='flex flex-col items-end  lg:flex-row  gap-2 lg:gap-10 lg:items-center'>
+                    <div className='flex flex-col items-end  xl:flex-row  gap-2 lg:gap-10 lg:items-center'>
                         <Toggle label='Suggest Deals' checked={config.suggestDeal ?? true} onChange={(val: boolean) => {
                             onUpdate('suggestDeal', val)
                         }} />

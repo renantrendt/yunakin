@@ -101,7 +101,7 @@ const MemberbenefitPage = async ({ params, searchParams }: { params: { clientSlu
                 <div className='flex justify-between items-center'>
 
                     {!searchParams?.embedded && <div className=" w-full text-left ">
-                        <Image unoptimized src={image} alt='logo' width={100} height={100} />
+                        <Image unoptimized src={image} alt='logo' width={100} height={100} objectFit="contain" className=" min-w-[100px] max-w-[150px]  h-auto w-fit  z-10 " />
                     </div>}
                     <LinkButton variant="tertiary" className='w-fit self-end' label="Add your own Benefit here"
                         href='/onboarding'

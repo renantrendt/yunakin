@@ -66,7 +66,7 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
     return (
         <>
 
-            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0  w-full   lg:min-w-[390px]  h-full   overflow-hidden  last:mr-4 lg:last:mr-0 bg-base-100 
+            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0  w-full   lg:min-w-[390px]    h-full   overflow-hidden  last:mr-4 lg:last:mr-0 bg-base-100 
 rounded-[10px] shadow-sm`, className)} style={{
                     backgroundColor: config?.cardBackgroundColor as string,
                 }}>

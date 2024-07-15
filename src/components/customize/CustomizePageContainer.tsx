@@ -54,7 +54,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     const searchParams = useSearchParams()
     const [embedModalOpen, setEmbedModalOpen] = useState(false)
     const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
-
+    const [imageType, setImageType] = useState<string>("")
     const titleRef = useRef<HTMLHeadingElement>(null)
     useEffect(() => {
         if (isEditing) {
@@ -75,10 +75,10 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
 
         if (config.imageURL && config.imageURL !== memberPageConfig.imageURL) {
             const blob = await fetch(config.imageURL).then(r => r.blob());
+            const randomNumber = Math.floor(Math.random() * 10)
+            const path = "memberbenefit_logo/" + config.id + "/" + `image-${randomNumber}.${imageType ?? 'jpg'}`
 
-            const path = "memberbenefit_logo/" + config.id + "/" + "image.jpg"
-
-            const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+            const file = new File([blob], `image.${imageType ?? 'jpg'}`, { type: imageType.includes('svg') ? "image/svg+xml" : "image/jpeg" });
             const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
             if (!isUploaded) {
                 throw new Error("Failed to upload image")
@@ -137,17 +137,21 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                 backgroundColor: config.backgroundColor as string,
             }}>
 
-                <div className='max-w-[1440px] py-8 lg:pt-20 w-full mx-auto px-4 md:px-28'>
-                    <ImageUploader onImageUpload={image => {
-                        setConfig({ ...config, imageURL: image })
-                    }}
-                        image={config.imageURL}
-                    />
-                    <div className='px-4 md:px-0'>
+                <div className=''>
+                    <div className='max-w-[1440px] py-8 lg:pt-20 w-full mx-auto px-4 md:px-12'>
+                        <ImageUploader onImageUpload={(image, type) => {
+                            setConfig({ ...config, imageURL: image, })
+                            setImageType(type)
+                        }}
+                            image={config.imageURL}
+                        />
+                    </div>
+
+                    <div className='max-w-[1440px] w-full mx-auto px-4 md:px-12'>
                         <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
                             <Typography type="h1" contentEditable className={`font-black text-[32px] leading-[45px] lg:text-5xl font-${config.primaryFont}
-                                hover:border-black border-[1px] border-transparent   p-1
-                             focus:border-black
+                                hover:border-[#CECECE] border-[1px] border-transparent   p-3
+                             focus:border-[#CECECE]
                                focus:outline-none 
                                min-w-[100px]
                             `}
@@ -159,14 +163,12 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                 }}
                             >{memberPageConfig.title}</Typography>
                             <Typography type="p" contentEditable className={`text-base text-neutral-600 font-normal lg:text-xl font-${config.secondaryFont}
-                             hover:border-black border-[1px] border-transparent   p-1
-                             focus:border-black
+                             hover:border-[#CECECE] border-[1px] border-transparent   p-1
+                             focus:border-[#CECECE]
                                focus:outline-none 
                                min-w-[100px]
                                `}
                                 onInput={(e: any) => {
-                                    console.log(e)
-                                    console.log(e.target.innerText)
                                     setConfig({ ...config, description: e.target.textContent })
                                 }}
                                 style={{
@@ -177,7 +179,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     </div>
                     <div>
                         <div>
-                            <div className="flex flex-col md:flex-row gap-4  items-start justify-between w-full  text-black md:items-center">
+                            <div className="flex flex-col md:flex-row gap-4  items-start justify-between w-full  text-black md:items-center max-w-[1440px]  mx-auto px-4 md:px-12">
                                 <div className='flex justify-start gap-5'>
 
                                     <h1 className="text-xl lg:text-2xl font-bold" style={{
@@ -187,10 +189,11 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                         <Button
                                             style={{
                                                 color: config.textColor as string,
-                                                backgroundColor: config.buttonColor as string
+                                                backgroundColor: config.cardBackgroundColor as string
                                             }}
                                             onClick={() => {
                                                 // to be implemented
+                                                // window.open(siteUrls.general.onboarding, "_blank")
                                             }}
                                             icon={<PlusIcon />}
                                             className='text-[#7A7A7A] bg-[#EDEDED] rounded-[38px]'
@@ -232,7 +235,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                 })}
 
                                 {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
-                                    <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8 '>
+                                    <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-12 mx-auto '>
                                         {selectedBenefits && selectedBenefits
                                             .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                                             .map((benefit: SelectedMemberBenefit, index: any) => (

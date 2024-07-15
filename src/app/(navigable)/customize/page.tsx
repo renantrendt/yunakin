@@ -49,7 +49,7 @@ const CustomizePage = async ({ params }: { params: { clientSlug: string } }) => 
         return;
     }
     return (
-        <div className='max-w-[1440px]  w-full bg-landing-background relative '>
+        <div className='  w-full bg-landing-background relative '>
             <CustomizePageContainer
                 benefits={selectedBenefits}
                 categories={categories}

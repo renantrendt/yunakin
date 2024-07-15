@@ -38,9 +38,9 @@ const CategoryScroller = ({ category, memberBenefits, config }: CategoryScroller
     return (
 
         <div key={category.id} className='flex  flex-col gap-3 lg:gap-5 justify-start  mt-8 max-w-[100vw]   '>
-            <div className='flex justify-between items-center'>
+            <div className='flex justify-between items-center max-w-[1440px] w-full mx-auto px-4 md:px-12'>
 
-                <div className=" text-center text-black text-sm font-semibold  uppercase tracking-[0.5px]"
+                <div className=" text-center text-black text-sm font-semibold  uppercase tracking-[0.5px]  "
                     style={{
                         color: config.textColor as string
                     }}>{category.name}</div>
@@ -61,7 +61,7 @@ const CategoryScroller = ({ category, memberBenefits, config }: CategoryScroller
 
             <div className='relative w-full  h-[350px] lg:h-[400px] overflow-scroll no-scrollbar'>
 
-                <div className='  absolute   flex flex-row     gap-3  lg:gap-5 justify-between flex-nowrap      '>
+                <div className='  absolute translate-x-4  lg:translate-x-[140px]    flex flex-row     gap-3  lg:gap-5 justify-between flex-nowrap      '>
                     {memberBenefits.map((benefit: MemberBenefit, index: any) => (
                         // <BlogCard loading={false} key={index} category={category} />
                         <div key={index} className={cn(' relative  w-[calc(100vw-48px)] lg:w-fit  duration-300 ease-in-out')} style={{ transform: `translateX(calc(-${start * 100}% - ${start * (isDesktop ? 20 : 12)}px))` }}>
