@@ -130,6 +130,10 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     onUpdate={(property, value) => {
                         setConfig({ ...config, [property]: value })
                     }}
+                    openShareModal={() => {
+                        setEmbedModalOpen(true)
+                    }}
+
                 />
             </div>
             <Divider className='bg-[#DDDDDD]' dividerStyle="heavy" dividerType={"horizontal"} />
