@@ -128,8 +128,11 @@ rounded-[10px] shadow-sm`, className)} style={{
                     </div>
                 </div>
             </div >
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <div className='flex flex-col  p-6 justify-center items-stretch '>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} >
+                <div className='flex flex-col  p-6 justify-center items-stretch '
+                    style={{
+                        backgroundColor: config?.cardBackgroundColor as string,
+                    }}>
                     <div className='p-2 w-fit mx-auto rounded-lg'
                         style={{
                             backgroundColor: config?.buttonColor as string,
@@ -138,9 +141,18 @@ rounded-[10px] shadow-sm`, className)} style={{
                     >
                         <CheckIcon />
                     </div>
-                    <div className='flex flex-col items-center mt-6 mb-8 gap-2'>
-                        <h2 className='text-base text-black font-medium'>Benefit saved!</h2>
-                        <p className='text-center text-sm text-grey-600 '>Apply the code: {benefit.code} on checkout</p>
+                    <div className='flex flex-col items-center mt-6 mb-8 gap-2' style={{
+                        color: config?.textColor as string,
+                    }}>
+                        <h2 className='text-base text-black font-medium'
+                            style={{
+                                color: config?.textColor as string,
+                            }}
+                        >Benefit saved!</h2>
+                        <p className='text-center text-sm text-grey-600 '
+                            style={{
+                                color: config?.textColor as string,
+                            }}>Apply the code: {benefit.code} on checkout</p>
                     </div>
                     <div className='flex flex-col gap-2'>
                         <Button
@@ -153,6 +165,7 @@ rounded-[10px] shadow-sm`, className)} style={{
                             className="btn-primary hover:cursor-pointer"
                             style={{
                                 backgroundColor: config?.buttonColor as string,
+                                color: config?.textColor as string,
                             }}
                             variant="primary"
 
@@ -163,6 +176,10 @@ rounded-[10px] shadow-sm`, className)} style={{
                             }}
                             className="btn-primary hover:cursor-pointer w-full"
                             variant="secondary"
+                            style={{
+                                backgroundColor: config?.cardBackgroundColor as string,
+                                color: config?.textColor as string,
+                            }}
                         >Close</Button>
                     </div>
                 </div>

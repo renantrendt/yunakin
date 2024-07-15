@@ -244,3 +244,17 @@ html.dark .prose * {
 .button-secondary {
   background: #FFF;
 }
+
+
+
+.font-openSans {
+  font-family: var(--font-open-sans),
+}
+
+.font-roboto {
+  font-family: var(--font-roboto)
+}
+
+.font-poppins {
+  font-family: var(--font-poppins)
+}

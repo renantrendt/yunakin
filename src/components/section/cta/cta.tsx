@@ -19,7 +19,7 @@ const Cta = () => {
                     <Typography type='h1' className='text-center !text-5xl leading-[133%]' >{t("ctaSection.title")}</Typography>
                     <Typography type='h6' className='text-center max-w-2xl !text-[18px]' >{t("ctaSection.description")}</Typography>
                 </AnimatedSection>
-                <AnimatedSection className=' hidden md:flex justify-between  w-full gap-4 items-center'>
+                <AnimatedSection className=' hidden lg:flex justify-between  w-full gap-4 items-center'>
                     <div className='flex flex-col h-full justify-between gap-10'>
 
                         <div className='avatars flex'>
@@ -62,7 +62,7 @@ const Cta = () => {
                         </div>
                     </div>
                 </AnimatedSection>
-                <AnimatedSection className='  md:hidden flex  justify-start mt-10   w-full gap-0 items-center'>
+                <AnimatedSection className='  lg:hidden flex  justify-start mt-10   w-full gap-0 items-center'>
                     <div className='flex flex-col flex-1  h-full justify-center gap-0'>
 
                         <div className='avatars flex'>
@@ -75,7 +75,7 @@ const Cta = () => {
                             <Typography type='h6' className='text-center max-w-2xl !text-[8px] ' >{t("ctaSection.clients")}</Typography>
                         </div>
                     </div>
-                    <div className='relative  w-full  h-full  min-h-[300px]  '>
+                    <div className='relative  w-full  h-full  min-h-[200px] lg:min-h-[250px]  '>
                         <Image
                             alt=''
                             fill
@@ -84,7 +84,7 @@ const Cta = () => {
                             src={"/images/landing/performance-mobile.svg"}
                             className="w-full h-full z-10  rounded-[32px]"
                         />
-                        <Typography type='p' className='absolute z-20 -bottom-2 text-[8px] w-full  !text-[#0F0F0F66] text-center left-1/2 transform -translate-x-1/2 -translate-y-[200%] lg:-translate-y-1/2 '>{t("ctaSection.compliance")}</Typography>
+                        <Typography type='p' className='absolute z-20 -bottom-2 sm:-bottom-6 text-[8px] w-full  !text-[#0F0F0F66] text-center left-1/2  transform -translate-x-1/2 sm:translate-y-2/3 '>{t("ctaSection.compliance")}</Typography>
                         <div className='absolute top-1/2  w-[110%] flex gap-1   lg:w-[800px]  left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                             {
                                 Array(12).fill(0).map((_, index) => (

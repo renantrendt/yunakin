@@ -29,6 +29,7 @@ import CustomizePageActions from './CustomizePageActions'
 import { MemberBenefitFilter, selectMemberBenefitFilter } from '@/lib/types'
 import CategoryScroller from '../categoryscroller/CategoryScroller'
 import Divider from '../atomic/divider/Divider'
+import { PlusIcon } from '@radix-ui/react-icons'
 interface CustomizePageContainerProps {
     benefits: SelectedMemberBenefit[]
     categories: Category[]
@@ -177,9 +178,27 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     <div>
                         <div>
                             <div className="flex flex-col md:flex-row gap-4  items-start justify-between w-full  text-black md:items-center">
-                                <h1 className="text-xl lg:text-2xl font-bold" style={{
-                                    color: config.textColor as string
-                                }}>Perks</h1>
+                                <div className='flex justify-start gap-5'>
+
+                                    <h1 className="text-xl lg:text-2xl font-bold" style={{
+                                        color: config.textColor as string
+                                    }}>Perks</h1>
+                                    {config.suggestDeal && (
+                                        <Button
+                                            style={{
+                                                color: config.textColor as string,
+                                                backgroundColor: config.buttonColor as string
+                                            }}
+                                            onClick={() => {
+                                                // to be implemented
+                                            }}
+                                            icon={<PlusIcon />}
+                                            className='text-[#7A7A7A] bg-[#EDEDED] rounded-[38px]'
+
+                                            label="Suggest a Deal" variant="tertiary" />
+                                    )}
+                                </div>
+
                                 <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'
                                     style={{
                                         backgroundColor: config.cardBackgroundColor as string

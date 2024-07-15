@@ -46,7 +46,7 @@ interface CustomizePageActionsProps {
     loading: boolean
     publishChanges: () => void
     config: MemberBenefitPageConfig
-    onUpdate: (property: keyof MemberBenefitPageConfig, value: string) => void
+    onUpdate: (property: keyof MemberBenefitPageConfig, value: string | boolean) => void
     openShareModal: () => void
 
 }
@@ -71,7 +71,7 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
                                 value: 'openSans'
                             }, {
                                 label: 'Roboto',
-                                value: 'robots'
+                                value: 'roboto'
                             }, {
                                 label: 'Poppins',
                                 value: 'poppins'
@@ -122,7 +122,9 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
                         </div>
                     </div>
                     <div className='flex flex-col items-end  lg:flex-row  gap-2 lg:gap-10 lg:items-center'>
-                        <Toggle label='Suggest Deals' checked onChange={() => { }} />
+                        <Toggle label='Suggest Deals' checked={config.suggestDeal ?? true} onChange={(val: boolean) => {
+                            onUpdate('suggestDeal', val)
+                        }} />
                         <Toggle label='Login Required' disabled checked={false} onChange={() => { }} />
                     </div>
                 </div>

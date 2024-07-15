@@ -40,7 +40,10 @@ const CategoryScroller = ({ category, memberBenefits, config }: CategoryScroller
         <div key={category.id} className='flex  flex-col gap-3 lg:gap-5 justify-start  mt-8 max-w-[100vw]   '>
             <div className='flex justify-between items-center'>
 
-                <div className=" text-center text-black text-sm font-semibold  uppercase tracking-[0.5px]">{category.name}</div>
+                <div className=" text-center text-black text-sm font-semibold  uppercase tracking-[0.5px]"
+                    style={{
+                        color: config.textColor as string
+                    }}>{category.name}</div>
                 <div className='justify-between flex w-fit gap-2'>
                     <Button onClick={onPrev} variant='secondary' size='sm' icon={<ArrowLeftIcon />} className=' rounded-full bg-white  !w-fit  p-2 !min-w-fit  '
                         style={{

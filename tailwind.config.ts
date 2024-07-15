@@ -94,7 +94,7 @@ const config: Config = {
         satoshi: ['var(--font-satoshi)'],
         satoshiBlack: ['var(--font-satoshi-black)'],
         openSans: ['var(--font-open-sans)'],
-        robots: ['var(--font-robots)'],
+        roboto: ['var(--font-roboto)'],
         poppins: ['var(--font-poppins)'],
         fraunces: ['var(--font-fraunces)'],
       },

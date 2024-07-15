@@ -10,16 +10,14 @@ interface PageHeaderProps {
 export default function PageHeader({ title, description, config }: PageHeaderProps) {
     return (
         <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5'>
-            <Typography type="h1" className="font-black text-center text-[32px] leading-[110%] lg:text-5xl"
+            <Typography type="h1" className={`font-black text-center text-[32px] leading-[110%] lg:text-5xl font-${config?.primaryFont}`}
                 style={{
                     color: config?.textColor as string,
-                    fontFamily: config?.font as string
                 }}
             >{title}</Typography>
             <Typography type="p" className="text-base text-neutral-600 font-normal lg:text-xl"
                 style={{
                     color: config?.textColor as string,
-                    fontFamily: config?.font as string
                 }}
             >{description}</Typography>
 

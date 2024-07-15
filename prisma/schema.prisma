@@ -175,6 +175,8 @@ model MemberBenefitPageConfig {
   textColor                String?
   primaryFont              String?
   secondaryFont            String?
+  suggestDeal              Boolean?                   @default(true)
+  loginRequired            Boolean?                   @default(false)
   cardBackgroundColor      String?
   user                     User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt                DateTime                   @default(now())
