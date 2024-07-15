@@ -30,6 +30,7 @@ import { MemberBenefitFilter, selectMemberBenefitFilter } from '@/lib/types'
 import CategoryScroller from '../categoryscroller/CategoryScroller'
 import Divider from '../atomic/divider/Divider'
 import { PlusIcon } from '@radix-ui/react-icons'
+import { useMutation } from '@tanstack/react-query'
 interface CustomizePageContainerProps {
     benefits: SelectedMemberBenefit[]
     categories: Category[]
@@ -119,6 +120,19 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     }, [config, selectedBenefits]
     )
 
+    const updateSlugMutation = useMutation({
+        mutationFn: async (slug: string) => {
+            return await updateSlug(config.id, slug)
+        },
+        onSettled: (data) => {
+            if (data) {
+                setConfig(data)
+                customToast.success("Slug Updated Successfully")
+            } else {
+                customToast.error("This slug is already taken. Please try another one")
+            }
+        }
+    })
     return (
         <div className='bg-landing-background '>
             <div className=' px-5 py-4   lg:px-12'>
@@ -287,22 +301,10 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     onClose={() => {
                         setEmbedModalOpen(false)
                     }}
-                    loading={loading}
+                    loading={updateSlugMutation.isPending}
                     onUpdate={async (property: keyof MemberBenefitPageConfig, value: string | boolean) => {
-                        try {
-                            setLoading(true)
-                            if (property === "clientSlug") {
-                                const newConfig = await updateSlug(config.id, value as string)
-                                if (!newConfig) {
-                                    throw new Error("Failed to update slug")
-                                }
-                                setConfig(newConfig)
-                                customToast.success("Slug Updated Successfully")
-                            }
-                        } catch (error) {
-                            customToast.error("This slug is already taken. Please try another one")
-                        } finally {
-                            setLoading(false)
+                        if (property === "clientSlug") {
+                            await updateSlugMutation.mutateAsync(value as string)
                         }
                     }}
                 />

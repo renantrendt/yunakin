@@ -11,6 +11,7 @@ import Button from '@/components/atomic/button/Button';
 import BackIcon from '@/icons/BackIcon';
 import InputField from '@/components/atomic/input/InputField';
 import { MemberBenefitPageConfig } from '@prisma/client';
+import { set } from 'react-ga';
 
 interface EmbedModalProps {
     isOpen: boolean;
@@ -57,38 +58,38 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                 {!showEmbedCode && !showShareUrl && !showCustomizeUrl &&
                     <>
                         <div>
-                            <div className='flex'>
-                                <Share2Icon width={24} height={24} />
-                                <Typography type='h3'>Share</Typography>
+                            <div className='flex gap-2 items-center'>
+                                <Share2Icon width={20} height={20} />
+                                <Typography type='h3' className='text-black text-2xl'>Share</Typography>
                             </div>
-                            <Typography type='p'>Use the options below to share your perks with others.</Typography>
+                            <Typography type='p' className='text-sm text-[#5E5E5E]'>Use the options below to share your perks with others.</Typography>
                         </div>
                         <div className="list flex flex-col gap-4">
                             <div
                                 onClick={() => setShowEmbedCode(true)}
                                 className='w-full  rounded-lg bg-white cursor-pointer hover:bg-gray-100 flex gap-3 justify-start items-start p-3 border-[#EDEDED] border-[1px]'>
-                                <EmbedIcon width={24} height={24} className="relative top-[2px]" />
+                                <EmbedIcon width={20} height={20} className="flex-shrink-0" />
                                 <div className='flex flex-col  gap-2'>
                                     <Typography type='p' className='text-[#121212] font-medium'>Embed</Typography>
-                                    <Typography type='p' className='text-[#5E5E5E] font-medium'>Copy the code to embed it directly into your site.e</Typography>
+                                    <Typography type='p' className='text-[#5E5E5E] text-sm  font-medium'>Copy the code to embed it directly into your site.e</Typography>
                                 </div>
                             </div>
                             <div
                                 onClick={() => setShowShareUrl(true)}
                                 className='w-full  rounded-lg bg-white cursor-pointer hover:bg-gray-100 flex gap-3 justify-start items-start p-3 border-[#EDEDED] border-[1px]'>
-                                <ShareUrlIcon width={24} height={24} className="relative top-[2px]" />
+                                <ShareUrlIcon width={20} height={20} className="flex-shrink-0" />
                                 <div className='flex flex-col  gap-2'>
                                     <Typography type='p' className='text-[#121212] font-medium'>URL</Typography>
-                                    <Typography type='p' className='text-[#5E5E5E] font-medium'>Copy the URL to your clipboard.</Typography>
+                                    <Typography type='p' className='text-[#5E5E5E] text-sm  font-medium'>Copy the URL to your clipboard.</Typography>
                                 </div>
                             </div>
                             <div
                                 onClick={() => setShowCustomizeUrl(true)}
                                 className='w-full  rounded-lg bg-white cursor-pointer hover:bg-gray-100 flex gap-3 justify-start items-start p-3 border-[#EDEDED] border-[1px]'>
-                                <CustomizeUrlIcon width={24} height={24} className="relative top-[2px]" />
+                                <CustomizeUrlIcon width={20} height={20} className="flex-shrink-0" />
                                 <div className='flex flex-col  gap-2'>
                                     <Typography type='p' className='text-[#121212] font-medium'>Customize URL</Typography>
-                                    <Typography type='p' className='text-[#5E5E5E] font-medium'>Customize your URL according to your preference.</Typography>
+                                    <Typography type='p' className='text-[#5E5E5E] text-sm font-medium'>Customize your URL according to your preference.</Typography>
                                 </div>
                             </div>
 
@@ -96,22 +97,22 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                     </>
                 }
                 {showEmbedCode && (
-                    <>
+                    <div className='flex flex-col gap-2'>
                         <div className='flex gap-2 items-center text-[#5E5E5E] cursor-pointer rounded-lg hover:bg-gray-100 p-1  w-fit' onClick={() => setShowEmbedCode(false)} >
                             <ArrowLeftIcon />
-                            <Typography type='p'>Back</Typography>
+                            <Typography type='p' className='text-[#5E5E5E] text-sm'>Back</Typography>
                         </div>
-                        <div className='flex flex-col justify-start items-start gap-2'>
+                        <div className='flex flex-col justify-start items-start font-satoshi gap-2'>
                             <div className='flex items-center gap-2'>
                                 <CodeIcon width={24} height={24} />
-                                <Typography type='p' className='text-xl'>Embed Code</Typography>
+                                <Typography type='p' className='text-2xl text-black'>Embed</Typography>
                             </div>
-                            <Typography type='p' className='text-[#5E5E5E]'>Copy the code below to embed it directly into your site.</Typography>
+                            <Typography type='p' className='text-[#5E5E5E] text-sm'>Copy the code below to embed it directly into your site.</Typography>
 
                         </div>
                         <div className='flex flex-col items-center gap-6'>
                             <div className='bg-[#F5F5F5]  py-3 px-3 rounded-lg'>
-                                <Typography type='p' className='text-black'>{content}</Typography>
+                                <Typography type='p' className='text-black text-sm'>{content}</Typography>
                             </div>
                             <Button
                                 onClick={() => {
@@ -122,13 +123,14 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                                 size='md'
                                 label='Copy'
                                 className='w-full' />
-                        </div></>
+                        </div>
+                    </div>
                 )}
                 {showShareUrl && (
-                    <>
+                    <div className='flex flex-col gap-2'>
                         <div className='flex gap-2 items-center text-[#5E5E5E] cursor-pointer rounded-lg hover:bg-gray-100 p-1  w-fit' onClick={() => setShowShareUrl(false)} >
                             <ArrowLeftIcon />
-                            <Typography type='p'>Back</Typography>
+                            <Typography type='p' className='text-[#5E5E5E] text-sm'>Back</Typography>
                         </div>
                         <div className='flex flex-col justify-start items-start gap-2'>
                             <div className='flex items-center gap-2'>
@@ -156,20 +158,20 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                                 label='Copy'
                                 className='w-full' />
                         </div>
-                    </>
+                    </div>
                 )}
                 {showCustomizeUrl && (
-                    <>
+                    <div className='flex flex-col gap-2'>
                         <div className='flex gap-2 items-center text-[#5E5E5E] cursor-pointer rounded-lg hover:bg-gray-100 p-1  w-fit' onClick={() => setShowCustomizeUrl(false)} >
                             <ArrowLeftIcon />
-                            <Typography type='p'>Back</Typography>
+                            <Typography type='p' className='text-[#5E5E5E] text-sm'>Back</Typography>
                         </div>
                         <div className='flex flex-col justify-start items-start gap-2'>
                             <div className='flex items-center gap-2'>
                                 <CustomizeUrlIcon width={24} height={24} />
                                 <Typography type='p' className='text-xl'>Customize URL</Typography>
                             </div>
-                            <Typography type='p' className='text-[#5E5E5E]'>Feel free to customize it according to your preference.</Typography>
+                            <Typography type='p' className='text-[#5E5E5E] text-sm'>Feel free to customize it according to your preference.</Typography>
 
                         </div>
                         <div className='flex flex-col items-center gap-6 '>
@@ -181,10 +183,10 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                                         setSlug(e.target.value)
                                     }}
                                     name='customizeUrl'
-                                    className='lg:pl-[105px]'
+                                    className='pl-[105px]'
                                     error={slug === '' ? 'This field is required' : ''}
                                 />
-                                <Typography type='p' className='text-[#5E5E5E] absolute left-2 top-[12px]'>yunakin.com/</Typography>
+                                <Typography type='p' className='text-[#5E5E5E] text-base absolute left-2 top-[13px]'>yunakin.com/</Typography>
                             </div>
 
                             <Button
@@ -201,7 +203,8 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                                 size='md'
                                 label='Save'
                                 className='w-full' />
-                        </div></>
+                        </div>
+                    </div>
                 )}
             </div>
         </Modal>
