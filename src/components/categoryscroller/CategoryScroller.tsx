@@ -42,8 +42,17 @@ const CategoryScroller = ({ category, memberBenefits, config }: CategoryScroller
 
                 <div className=" text-center text-black text-sm font-semibold  uppercase tracking-[0.5px]">{category.name}</div>
                 <div className='justify-between flex w-fit gap-2'>
-                    <Button onClick={onPrev} variant='secondary' size='sm' icon={<ArrowLeftIcon />} className=' rounded-full bg-white  !w-fit  p-2 !min-w-fit  ' />
-                    <Button onClick={onNext} variant='secondary' size='sm' icon={<ArrowRightIcon />} className=' rounded-full bg-white !w-fit  p-2 !min-w-fit  ' />
+                    <Button onClick={onPrev} variant='secondary' size='sm' icon={<ArrowLeftIcon />} className=' rounded-full bg-white  !w-fit  p-2 !min-w-fit  '
+                        style={{
+                            backgroundColor: config.buttonColor as string,
+                            color: config.textColor as string
+                        }} />
+                    <Button onClick={onNext} variant='secondary' size='sm' icon={<ArrowRightIcon />} className=' rounded-full bg-white !w-fit  p-2 !min-w-fit  '
+                        style={{
+                            backgroundColor: config.buttonColor as string,
+                            color: config.textColor as string
+                        }}
+                    />
                 </div>
             </div>
 
@@ -59,7 +68,7 @@ const CategoryScroller = ({ category, memberBenefits, config }: CategoryScroller
                                 className='w-full'
                                 key={index}
                                 benefit={benefit}
-                                isEditing={pathname.includes("customized")}
+                                isEditing={pathname.includes("customize")}
                             />
                         </div>
                     ))}

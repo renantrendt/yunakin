@@ -24,11 +24,12 @@ const typography = cva("text-black", {
 interface TypographyProps extends React.HTMLAttributes<HTMLHeadingElement>, React.HTMLAttributes<HTMLParagraphElement>,
     VariantProps<typeof typography> {
     type: TypographyType
+    forwardedRef?: React.Ref<HTMLHeadingElement | HTMLParagraphElement>
 }
 type TypographyType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p"
 
 const Typography = ({ type, children, className, ...additionalProps }: TypographyProps) => {
-    return React.createElement(type, { className: cn("text-black ", typography({ type }), className), ...additionalProps }, children)
+    return React.createElement(type, { className: cn("text-black ", typography({ type }), className), ref: additionalProps.forwardedRef, ...additionalProps }, children)
 }
 
 export default Typography;

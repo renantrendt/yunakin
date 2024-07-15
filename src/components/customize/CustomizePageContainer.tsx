@@ -18,7 +18,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Input } from 'postcss'
-import React, { use, useCallback, useEffect, useState } from 'react'
+import React, { use, useCallback, useEffect, useRef, useState } from 'react'
 import _ from 'lodash'
 import { set } from 'react-ga'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
@@ -28,6 +28,7 @@ import EditFontModal from '../molecules/modals/edit-font-modal'
 import CustomizePageActions from './CustomizePageActions'
 import { MemberBenefitFilter, selectMemberBenefitFilter } from '@/lib/types'
 import CategoryScroller from '../categoryscroller/CategoryScroller'
+import Divider from '../atomic/divider/Divider'
 interface CustomizePageContainerProps {
     benefits: SelectedMemberBenefit[]
     categories: Category[]
@@ -53,6 +54,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     const [embedModalOpen, setEmbedModalOpen] = useState(false)
     const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
 
+    const titleRef = useRef<HTMLHeadingElement>(null)
     useEffect(() => {
         if (isEditing) {
 
@@ -129,12 +131,12 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     }}
                 />
             </div>
-
+            <Divider className='bg-[#DDDDDD]' dividerStyle="heavy" dividerType={"horizontal"} />
             <div style={{
                 backgroundColor: config.backgroundColor as string,
             }}>
 
-                <div className='max-w-[1440px] pb-20 lg:py-20 w-full mx-auto px-4 md:px-28'>
+                <div className='max-w-[1440px] py-8 lg:pt-20 w-full mx-auto px-4 md:px-28'>
                     <ImageUploader onImageUpload={image => {
                         setConfig({ ...config, imageURL: image })
                     }}
@@ -142,7 +144,12 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                     />
                     <div className='px-4 md:px-0'>
                         <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
-                            <Typography type="h1" contentEditable className={`font-black text-[32px] leading-[45px] lg:text-5xl font-${config.primaryFont}`}
+                            <Typography type="h1" contentEditable className={`font-black text-[32px] leading-[45px] lg:text-5xl font-${config.primaryFont}
+                                hover:border-black border-[1px] border-transparent   p-1
+                             focus:border-black
+                               focus:outline-none 
+                               min-w-[100px]
+                            `}
                                 onInput={(e: any) => {
                                     setConfig({ ...config, title: e.target.textContent })
                                 }}
@@ -150,7 +157,12 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                     color: config.textColor as string
                                 }}
                             >{memberPageConfig.title}</Typography>
-                            <Typography type="p" contentEditable className={`text-base text-neutral-600 font-normal lg:text-xl font-${config.secondaryFont}`}
+                            <Typography type="p" contentEditable className={`text-base text-neutral-600 font-normal lg:text-xl font-${config.secondaryFont}
+                             hover:border-black border-[1px] border-transparent   p-1
+                             focus:border-black
+                               focus:outline-none 
+                               min-w-[100px]
+                               `}
                                 onInput={(e: any) => {
                                     console.log(e)
                                     console.log(e.target.innerText)
@@ -163,7 +175,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                         </div>
                     </div>
                     <div>
-                        <div className='mb-40'>
+                        <div>
                             <div className="flex flex-col md:flex-row gap-4  items-start justify-between w-full  text-black md:items-center">
                                 <h1 className="text-xl lg:text-2xl font-bold" style={{
                                     color: config.textColor as string
@@ -195,6 +207,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                             category={category}
                                             memberBenefits={selectedBenefits.filter(benefit => category.id == benefit.categoryId)}
                                             config={config}
+
                                         />
                                     )
                                 })}
@@ -204,12 +217,9 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                         {selectedBenefits && selectedBenefits
                                             .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                                             .map((benefit: SelectedMemberBenefit, index: any) => (
-                                                <SelectMemberBenefitCard
-                                                    selected={benefit.selected}
-                                                    onClick={() => {
-                                                        const newSelectedBenefits = selectedBenefits.map(b => b.id === benefit.id ? { ...b, selected: !b.selected } : b)
-                                                        setSelectedBenefits(newSelectedBenefits)
-                                                    }}
+                                                <MemberBenefitCard
+                                                    isEditing={true}
+                                                    config={config}
                                                     key={index} benefit={benefit} />
                                             ))}
                                     </div>

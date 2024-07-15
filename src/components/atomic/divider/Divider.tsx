@@ -2,7 +2,7 @@ import React from 'react'
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
-const divider = cva("", {
+const divider = cva("block", {
     variants: {
         dividerType: {
             vertical: 'w-px h-full min-h-full',
@@ -23,10 +23,10 @@ interface DividerProps extends React.HTMLProps<HTMLSpanElement>, VariantProps<ty
 
 }
 
-const Divider = ({ dividerType, dividerStyle, ...aditionalProps }: DividerProps) => {
+const Divider = ({ dividerType, dividerStyle, className, ...aditionalProps }: DividerProps) => {
 
     return (
-        <span className={cn(divider({ dividerType, dividerStyle }))} {...aditionalProps}>&nbsp;</span>
+        <span className={cn(divider({ dividerType, dividerStyle }), className)} {...aditionalProps}>&nbsp;</span>
     )
 }
 

@@ -14,6 +14,7 @@ import DeviceDetector from "device-detector-js";
 import { Category, MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from '@prisma/client'
 import { MemberBenefitClickType } from '@/lib/types'
 import LocationIcon from "@/icons/landing/location-icon.svg"
+import { BookmarkIcon } from '@radix-ui/react-icons'
 import { cn } from '@/utils/cn'
 interface MemberBenefitCardProps {
     key: string
@@ -65,7 +66,7 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
     return (
         <>
 
-            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0 dark:text-white dark:bg-card-dark w-11/12 md:w-full  md:min-w-[390px]  h-full   overflow-hidden max-w-[320px] last:mr-4 lg:last:mr-0 bg-base-100 
+            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0  w-full   lg:min-w-[390px]  h-full   overflow-hidden  last:mr-4 lg:last:mr-0 bg-base-100 
 rounded-[10px] shadow-sm`, className)} style={{
                     backgroundColor: config?.cardBackgroundColor as string,
                 }}>
@@ -107,13 +108,15 @@ rounded-[10px] shadow-sm`, className)} style={{
                                 handleButtonClick(benefit.id, MemberBenefitClickType.SAVE_BENEFIT)
                                 // save analytics data
                             }}
+                            icon={<BookmarkIcon />}
                             style={{
                                 backgroundColor: config?.buttonColor as string,
                                 color: config?.textColor as string,
                             }}
+                            className='py-[6px] pl-[12px] pr-[16px] gap-1'
                             variant="secondary"
 
-                        >Save Benefit</Button>
+                        >Save Deal</Button>
 
                         {benefit.link && <a href={!isEditing && (benefit.link || "")} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'
                             style={{
