@@ -18,9 +18,9 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, className, error, id, ...additionalProps }) => {
   return (
-    <div className="form-control  w-full ">
+    <div className="form-control  w-full font-satoshi">
       {label &&
-        <label className="label text-sm text-black dark:text-white">
+        <label className="label text-sm font-medium text-black dark:text-white">
           <span className="label-text">{label}</span>
         </label>
       }
@@ -29,7 +29,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
         <input
           type={type}
           placeholder={placeholder}
-          className={cn(` outline-none  dark:bg-gray-800 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border border-solid
+          className={cn(` outline-none font-satoshi  dark:bg-gray-800 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border border-solid
                     border-grey-300 hover:border-grey-400 
                     dark:border-input-border-dark dark:text-grey-200
                     dark:placeholder:text-placeholder-dark

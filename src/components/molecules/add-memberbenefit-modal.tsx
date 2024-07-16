@@ -17,6 +17,8 @@ import Typography from '../atomic/typography/Typography';
 import Divider from '../atomic/divider/Divider';
 import RadioGroup from '../atomic/radiogroup/radiogroup';
 import CheckboxGroup from '../atomic/checkbox/CheckboxGroup';
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
+import TextArea from '../atomic/textarea/TextArea';
 
 interface AddMemberBenefitModalProps {
     onClose: () => void;
@@ -315,153 +317,133 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                     </div>
                 )}
                 {step == 2 && (
-                    <div className='flex gap-6 flex-col'>
-
-                        <Controller
-                            control={control}
-                            name="name"
-                            render={({ field: { onChange, value } }) => (
-                                <InputField
-                                    label="Name"
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    placeholder='Enter  Name'
-                                    onChange={onChange}
-                                    value={value}
-                                    error={errors.name?.message}
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name="description"
-                            render={({ field: { onChange, value } }) => (
-                                <InputField
-                                    label="Description"
-                                    type="text"
-                                    id="description"
-                                    name="description"
-                                    placeholder='Enter Description'
-                                    onChange={onChange}
-                                    value={value}
-                                    error={errors.description?.message}
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name="code"
-                            render={({ field: { onChange, value } }) => (
-                                <InputField
-                                    label="Code"
-                                    type="text"
-                                    id="code"
-                                    name="code"
-                                    placeholder='Enter Code'
-                                    onChange={onChange}
-                                    value={value}
-                                    error={errors.code?.message}
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name="offer"
-                            render={({ field: { onChange, value } }) => (
-                                <InputField
-                                    label="Offer"
-                                    type="text"
-                                    id="offer"
-                                    name="offer"
-                                    placeholder='Enter Offer'
-                                    onChange={onChange}
-                                    value={value as string}
-                                    error={errors.offer?.message}
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name="visibility"
-                            render={({ field: { onChange, value } }) => (
-                                <Dropdown
-                                    label='Visibility'
-                                    id='visibility'
-                                    name='visibility'
-                                    options={_.keys(MemberBenefitVisibility).map(key => ({ value: key, label: t(`memberbenefit.visibility.${key}`) }))}
-                                    value={value as string}
-                                    onChange={onChange}
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name="domain"
-                            render={({ field: { onChange, value } }) => (
-                                <InputField
-                                    label="Domain"
-                                    type="text"
-                                    id="domain"
-                                    name="domain"
-                                    placeholder='Enter domain'
-                                    onChange={onChange}
-                                    value={value}
-                                    error={errors.domain?.message}
-                                />
-                            )}
-                        />
-                        <div className='w-fit h-fit'>
-                            <ImageUploader onImageUpload={(image) => setValue('imageURL', image)} image={image as string} />
+                    <div className='flex flex-col gap-2'>
+                        <div className='flex gap-2 items-center text-[#5E5E5E] cursor-pointer rounded-lg hover:bg-gray-100 p-1  w-fit' onClick={() => setStep(1)} >
+                            <ArrowLeftIcon />
+                            <Typography type='p' className='text-[#5E5E5E] text-sm'>Back</Typography>
                         </div>
-                        <Controller
-                            control={control}
-                            name="categoryId"
-                            render={({ field: { onChange, value } }) => (
-                                <Dropdown
-                                    label="Category"
-                                    id="categoryId"
-                                    name="categoryId"
-                                    onChange={onChange}
-                                    value={value ?? categories[0].id}
-                                    error={errors.categoryId?.message}
-                                    options={categories.map(category => ({ label: category.name, value: category.id }))}
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name="link"
-                            render={({ field: { onChange, value } }) => (
-                                <InputField
-                                    label="link"
-                                    type="text"
-                                    id="link"
-                                    name="link"
-                                    placeholder='Enter link'
-                                    onChange={onChange}
-                                    value={value as string}
-                                    error={errors.link?.message}
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name="location"
-                            render={({ field: { onChange, value } }) => (
-                                <InputField
-                                    label="location"
-                                    type="text"
-                                    id="location"
-                                    name="location"
-                                    placeholder='Enter location'
-                                    onChange={onChange}
-                                    value={value as string}
-                                    error={errors.location?.message}
-                                />
-                            )}
-                        />
+                        <div className='flex gap-4 flex-col'>
+                            <div className='w-fit h-fit'>
+                                <ImageUploader onImageUpload={(image) => setValue('imageURL', image)} image={image as string} />
+                            </div>
+                            <Controller
+                                control={control}
+                                name="name"
+                                render={({ field: { onChange, value } }) => (
+                                    <InputField
+                                        label="Company Name"
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        placeholder='Company Name'
+                                        onChange={onChange}
+                                        value={value}
+                                        error={errors.name?.message}
+                                    />
+                                )}
+                            />
+                            <Controller
+                                control={control}
+                                name="description"
+                                render={({ field: { onChange, value } }) => (
+                                    <TextArea
+                                        label="Description"
+                                        id="description"
+                                        name="description"
+                                        placeholder='Enter Description'
+                                        onChange={onChange}
+                                        value={value}
+                                        maxLength={150}
+                                        rows={3}
+                                        error={errors.description?.message}
+                                    />
+                                )}
+                            />
+                            <Controller
+                                control={control}
+                                name="categoryId"
+                                render={({ field: { onChange, value } }) => (
+                                    <Dropdown
+                                        label="Category"
+                                        id="categoryId"
+                                        name="categoryId"
+                                        onChange={onChange}
+                                        value={value ?? categories[0].id}
+                                        error={errors.categoryId?.message}
+                                        options={categories.map(category => ({ label: category.name, value: category.id }))}
+                                    />
+                                )}
+                            />
+                            <Controller
+                                control={control}
+                                name="code"
+                                render={({ field: { onChange, value } }) => (
+                                    <InputField
+                                        label="Code"
+                                        type="text"
+                                        id="code"
+                                        name="code"
+                                        placeholder='Enter Code'
+                                        onChange={onChange}
+                                        value={value}
+                                        error={errors.code?.message}
+                                    />
+                                )}
+                            />
+                            <Controller
+                                control={control}
+                                name="offer"
+                                render={({ field: { onChange, value } }) => (
+                                    <InputField
+                                        label="Offer"
+                                        type="text"
+                                        id="offer"
+                                        name="offer"
+                                        placeholder='Enter Offer'
+                                        onChange={onChange}
+                                        value={value as string}
+                                        maxLength={23}
+                                        error={errors.offer?.message}
+                                    />
+                                )}
+                            />
+
+                            <Controller
+                                control={control}
+                                name="domain"
+                                render={({ field: { onChange, value } }) => (
+                                    <InputField
+                                        label="Website"
+                                        type="text"
+                                        id="domain"
+                                        name="domain"
+                                        placeholder='Enter Website'
+                                        onChange={onChange}
+                                        value={value}
+                                        error={errors.domain?.message}
+                                    />
+                                )}
+                            />
+
+                            <Controller
+                                control={control}
+                                name="location"
+                                render={({ field: { onChange, value } }) => (
+                                    <InputField
+                                        label="City"
+                                        type="text"
+                                        id="location"
+                                        name="location"
+                                        placeholder='Enter City'
+                                        onChange={onChange}
+                                        value={value as string}
+                                        error={errors.location?.message}
+                                    />
+                                )}
+                            />
+                        </div>
                     </div>
+
                 )}
                 <div className='button '>
                     <Button

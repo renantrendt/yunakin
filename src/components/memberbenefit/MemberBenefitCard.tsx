@@ -86,7 +86,7 @@ rounded-[10px] shadow-sm`, className)} style={{
                         style={{
                             color: config?.textColor as string,
                         }}
-                    >{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
+                    >{benefit.description}</p>}
                     <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                         <div className='flex flex-col items-start justify-start gap-4'>
 
