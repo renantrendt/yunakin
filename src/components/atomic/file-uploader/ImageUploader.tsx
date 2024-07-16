@@ -19,7 +19,7 @@ const ImageUploader = ({ onImageUpload, image }: ImageUploaderProps) => {
         if (file) {
             const type = file.name.split('.').pop();
             const url = URL.createObjectURL(file);
-            onImageUpload(url, type);
+            onImageUpload(url, type as string);
         }
     }, [])
     const { getRootProps, getInputProps } = useDropzone({ onDrop })

@@ -381,9 +381,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                             } as MemberBenefit)
                             if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
-
-                                const path = "memberbenefits_images/" + updatedMemberBenefit.id + "/" + "image.jpg"
-
+                                const random = Math.random().toString(36).substring(7)
+                                const path = "memberbenefits_images/" + updatedMemberBenefit.id + "/" + `image${random}.jpg`
                                 const file = new File([blob], "image.jpg", { type: "image/jpeg" });
                                 const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
                                 if (!isUploaded) {
@@ -426,8 +425,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                             } as MemberBenefit)
                             if (data.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
-
-                                const path = "memberbenefits_images/" + newMemberBenefit.id + "/" + "image.jpg"
+                                const random = Math.random().toString(36).substring(7)
+                                const path = "memberbenefits_images/" + newMemberBenefit.id + "/" + `image${random}.jpg`
 
                                 const file = new File([blob], "image.jpg", { type: "image/jpeg" });
                                 const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })

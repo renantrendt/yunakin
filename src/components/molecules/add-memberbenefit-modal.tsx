@@ -19,6 +19,8 @@ import RadioGroup from '../atomic/radiogroup/radiogroup';
 import CheckboxGroup from '../atomic/checkbox/CheckboxGroup';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import TextArea from '../atomic/textarea/TextArea';
+import AddMemberBenefitStepOne from './add-member-benefit-modal/AddMemberBenefitStepOne';
+import AddMemberBenefitStepTwo from './add-member-benefit-modal/AddMemberBenefitStepTwo';
 
 interface AddMemberBenefitModalProps {
     onClose: () => void;
@@ -29,90 +31,26 @@ interface AddMemberBenefitModalProps {
     loading: boolean;
 }
 
-const schema = yup.object().shape({
-    name: yup.string().required(),
-    code: yup.string().required(),
-    domain: yup.string().required(),
-    visiblity: yup.string().default(MemberBenefitVisibility.PUBLIC),
-    imageURL: yup.string().optional().nullable(),
-    offer: yup.string().optional().nullable(),
-    location: yup.string().optional().nullable(),
-    link: yup.string().optional().nullable(),
-    description: yup.string(),
-    categoryId: yup.string().required(),
-    deal_type: yup.string().required(),
-    partnership_types: yup.array().of(yup.string()).optional().nullable(),
-})
 
-interface FormValues {
-    imageURL?: string | null | undefined;
-    offer?: string | null | undefined;
-    location?: string | null | undefined;
-    link?: string | null | undefined;
-    description?: string | undefined;
-    visibility?: string | undefined;
-    name: string
-    code: string;
-    domain: string;
-    categoryId: string;
-    deal_type: string;
-    partnership_types?: string[] | null | undefined;
+
+interface FormValues extends MemberBenefit {
+    deal_type: string
+    partnership_types: string[]
+    visibility: MemberBenefitVisibility
 }
-
-
 
 
 const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefit, onUpdate, loading }: AddMemberBenefitModalProps) => {
     const { t } = useTranslation("dashboard")
     const [step, setStep] = React.useState(1)
-    const { handleSubmit, control, watch, setValue, formState: { errors } } = useForm<FormValues>(
-        {
-            resolver: yupResolver(schema),
-            defaultValues: editMemberBenefit ? {
-                name: editMemberBenefit.title,
-                code: editMemberBenefit.code,
-                domain: editMemberBenefit.domain,
-                link: editMemberBenefit.link as string,
-                location: editMemberBenefit.location as string,
-                description: editMemberBenefit.description as string,
-                categoryId: editMemberBenefit.categoryId as string,
-                imageURL: editMemberBenefit.imageURL as string,
-                offer: editMemberBenefit.offer as string,
-                visibility: editMemberBenefit.visibility,
-                deal_type: "company",
-            } : {
-                name: '',
-                code: '',
-                domain: '',
-                link: '',
-                location: '',
-                description: '',
-                categoryId: categories[0].id,
-                imageURL: '',
-                offer: '',
-                visibility: MemberBenefitVisibility.PUBLIC,
-                deal_type: "company",
-                partnership_types: ['ads', 'sponsor']
-            }
-        }
-    )
-    const image = watch('imageURL')
-    const dealType = watch('deal_type')
-    const visiBility = watch('visibility')
-    const getVisibility = () => {
-        switch (visiBility) {
-            case MemberBenefitVisibility.PRIVATE:
-                return []
-            case MemberBenefitVisibility.PUBLIC:
-                return ['public', 'public_other']
-            case MemberBenefitVisibility.OWNED_PRIVATE:
-                return ['public_other']
-            case MemberBenefitVisibility.OWNED_PUBLIC:
-                return ['public']
-            default:
-                return []
-        }
-    }
+
+    const [memberBenefit, setMemberBenefit] = React.useState<FormValues | null>({
+        deal_type: '',
+        partnership_types: [],
+        visibility: MemberBenefitVisibility.PUBLIC,
+        ...editMemberBenefit
+    } as FormValues)
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = (data: FormValues) => {
         // onTagChange(data as Tag)
@@ -121,8 +59,8 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
         if (editMemberBenefit) {
             // update
             onUpdate({
-                id: editMemberBenefit.id,
                 ...data,
+                id: editMemberBenefit.id,
             })
             return;
         }
@@ -131,7 +69,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
     return (
         <Modal isOpen={true} onClose={onClose}
         >
-            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col p-10 gap-8 '>
+            <div className='flex flex-col p-10 gap-8 '>
                 <div className='flex justify-between items-center relative'>
                     <div className='flex gap-1  lg:gap-2'>
                         <span className={cn('bg-white border-[1px] rounded-full w-6 h-6 border-[#ECECEC] text-black text-center', { "border-[#FFDD04]": step == 1 })} >
@@ -149,318 +87,58 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
 
                 </div>
 
-                {step == 1 && (
-                    <div>
-                        <div>
-                            <Typography type='h1' className='!text-base  font-medium text-black font-satoshi '>Create Deal</Typography>
-                            <Typography type='p' className='!text-sm text-[#5E5E5E]'>Publish your private or public deal.</Typography>
-                        </div>
-                        <div className='py-6'>
-                            <Divider />
-                        </div>
-                        <div>
-                            <div>
-                                <Typography type='h2' className='!text-base  font-medium text-black '>Deal Type</Typography>
-                                <Typography type='p' className='!text-sm text-[#5E5E5E]'>This deal is from your company or are you creating on behalf of a partner?</Typography>
-                            </div>
-                        </div>
-                        <div className='mt-3'>
+                {step == 1 && <AddMemberBenefitStepOne
+                    deal_type={memberBenefit?.deal_type || ''}
+                    partnership_types={memberBenefit?.partnership_types || []}
+                    visibility={memberBenefit?.visibility || MemberBenefitVisibility.PUBLIC}
+                    onSubmit={(data: any) => {
+                        setMemberBenefit({
+                            ...memberBenefit,
+                            ...data,
+                        })
+                        setStep(step + 1)
+                    }}
+                />}
 
-                            <Controller
-                                control={control}
-                                name="deal_type"
-                                render={({ field: { onChange, value } }) => (
-                                    <RadioGroup
-                                        id='dealType'
-                                        name='dealType'
-                                        className=''
-                                        options={[
-                                            {
-                                                label: <div className='flex flex-col gap-1'>
-                                                    <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>My Company</Typography>
-                                                    <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Checked you can choose who will see your deal.</Typography>
-                                                </div>,
-                                                value: 'company'
-                                            },
-                                            {
-                                                label:
-                                                    <div className='flex flex-col gap-1'>
-                                                        <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>My Partner</Typography>
-                                                        <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Checked will be visible just for your customers.</Typography>
-                                                    </div>, value: 'partner'
-                                            }
-                                        ]}
-                                        onChange={onChange}
-                                        value={value}
-                                    />
-                                )}
-                            />
-                        </div>
-
-                        {dealType == 'company' && (
-                            <>
-                                <div className='py-6'>
-                                    <Divider />
-                                </div>
-                                <div>
-                                    <div>
-                                        <Typography type='h2' className='!text-base  font-medium text-black '>Visibility</Typography>
-                                        <Typography type='p' className='!text-sm text-[#5E5E5E]'>With who this deal will be shared with?</Typography>
-                                    </div>
-                                </div>
-                                <div className='mt-3'>
-
-                                    <Controller
-                                        control={control}
-                                        name="visiblity"
-                                        render={({ field: { onChange, value } }) => (
-                                            <CheckboxGroup
-                                                id='visiblity'
-                                                name='visiblity'
-                                                className=''
-                                                options={[
-                                                    {
-                                                        label: <div className='flex flex-col gap-1'>
-                                                            <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Show to my customers</Typography>
-                                                            <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Unchecked will be hidden for your customers</Typography>
-                                                        </div>,
-                                                        value: 'public'
-                                                    },
-                                                    {
-                                                        label:
-                                                            <div className='flex flex-col gap-1'>
-                                                                <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Show on the marketplace</Typography>
-                                                                <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Unchecked will be hidden on the deals marketplace.</Typography>
-                                                            </div>, value: 'public_other'
-                                                    }
-                                                ]}
-                                                onChange={(val) => {
-                                                    console.log(val)
-                                                    if (val.includes('public')) {
-                                                        if (val.includes('public_other')) {
-                                                            setValue('visibility', MemberBenefitVisibility.PUBLIC)
-                                                        }
-                                                        else {
-                                                            setValue('visibility', MemberBenefitVisibility.OWNED_PUBLIC)
-                                                        }
-                                                    } else {
-                                                        if (val.includes('public_other')) {
-                                                            setValue('visibility', MemberBenefitVisibility.OWNED_PRIVATE)
-                                                        }
-                                                        else {
-                                                            setValue('visibility', MemberBenefitVisibility.PRIVATE)
-                                                        }
-                                                    }
-                                                }}
-                                                value={getVisibility()}
-                                            />
-                                        )}
-                                    />
-                                </div>
-                            </>
-                        )}
-                        {dealType == 'company' && (visiBility == MemberBenefitVisibility.PUBLIC || visiBility == MemberBenefitVisibility.OWNED_PRIVATE) && (
-                            <>
-                                <div className='py-6'>
-                                    <Divider />
-                                </div>
-                                <div>
-                                    <div>
-                                        <Typography type='h2' className='!text-base  font-medium text-black '>Types of partnerships</Typography>
-                                        <Typography type='p' className='!text-sm text-[#5E5E5E]'>Choose the partnerships are you open to:</Typography>
-                                    </div>
-                                </div>
-                                <div className='mt-3'>
-
-                                    <Controller
-                                        control={control}
-                                        name="partnership_types"
-                                        render={({ field: { onChange, value } }) => (
-                                            <CheckboxGroup
-                                                id='partnership_types'
-                                                name='partnership_types'
-                                                className='last:border-t last:border-[#E6E6E6] last:-mt-1 last:pt-1'
-                                                options={[
-                                                    {
-                                                        label: <div className='flex flex-col gap-1'>
-                                                            <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Ads</Typography>
-                                                            <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Receive revenue for views and click of this deal on partners dealbook.</Typography>
-                                                        </div>,
-                                                        value: 'ads'
-                                                    },
-                                                    {
-                                                        label:
-                                                            <div className='flex flex-col gap-1'>
-                                                                <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Sponsor</Typography>
-                                                                <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Partners on the marketplace can invite you to sponsorship.</Typography>
-                                                            </div>,
-                                                        value: 'sponsor'
-                                                    },
-                                                    {
-                                                        label:
-                                                            <div className='flex flex-col gap-1'>
-                                                                <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Needs approval?</Typography>
-                                                                <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Partners need your approval before publishing on their dealbook.</Typography>
-                                                            </div>,
-                                                        value: 'needs_approval'
-                                                    },
-                                                ]}
-                                                onChange={onChange}
-                                                value={(value as string[])}
-                                            />
-                                        )}
-                                    />
-                                </div>
-                            </>
-                        )}
-
-                    </div>
-                )}
-                {step == 2 && (
-                    <div className='flex flex-col gap-2'>
-                        <div className='flex gap-2 items-center text-[#5E5E5E] cursor-pointer rounded-lg hover:bg-gray-100 p-1  w-fit' onClick={() => setStep(1)} >
-                            <ArrowLeftIcon />
-                            <Typography type='p' className='text-[#5E5E5E] text-sm'>Back</Typography>
-                        </div>
-                        <div className='flex gap-4 flex-col'>
-                            <div className='w-fit h-fit'>
-                                <ImageUploader onImageUpload={(image) => setValue('imageURL', image)} image={image as string} />
-                            </div>
-                            <Controller
-                                control={control}
-                                name="name"
-                                render={({ field: { onChange, value } }) => (
-                                    <InputField
-                                        label="Company Name"
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        placeholder='Company Name'
-                                        onChange={onChange}
-                                        value={value}
-                                        error={errors.name?.message}
-                                    />
-                                )}
-                            />
-                            <Controller
-                                control={control}
-                                name="description"
-                                render={({ field: { onChange, value } }) => (
-                                    <TextArea
-                                        label="Description"
-                                        id="description"
-                                        name="description"
-                                        placeholder='Enter Description'
-                                        onChange={onChange}
-                                        value={value}
-                                        maxLength={150}
-                                        rows={3}
-                                        error={errors.description?.message}
-                                    />
-                                )}
-                            />
-                            <Controller
-                                control={control}
-                                name="categoryId"
-                                render={({ field: { onChange, value } }) => (
-                                    <Dropdown
-                                        label="Category"
-                                        id="categoryId"
-                                        name="categoryId"
-                                        onChange={onChange}
-                                        value={value ?? categories[0].id}
-                                        error={errors.categoryId?.message}
-                                        options={categories.map(category => ({ label: category.name, value: category.id }))}
-                                    />
-                                )}
-                            />
-                            <Controller
-                                control={control}
-                                name="code"
-                                render={({ field: { onChange, value } }) => (
-                                    <InputField
-                                        label="Code"
-                                        type="text"
-                                        id="code"
-                                        name="code"
-                                        placeholder='Enter Code'
-                                        onChange={onChange}
-                                        value={value}
-                                        error={errors.code?.message}
-                                    />
-                                )}
-                            />
-                            <Controller
-                                control={control}
-                                name="offer"
-                                render={({ field: { onChange, value } }) => (
-                                    <InputField
-                                        label="Offer"
-                                        type="text"
-                                        id="offer"
-                                        name="offer"
-                                        placeholder='Enter Offer'
-                                        onChange={onChange}
-                                        value={value as string}
-                                        maxLength={23}
-                                        error={errors.offer?.message}
-                                    />
-                                )}
-                            />
-
-                            <Controller
-                                control={control}
-                                name="domain"
-                                render={({ field: { onChange, value } }) => (
-                                    <InputField
-                                        label="Website"
-                                        type="text"
-                                        id="domain"
-                                        name="domain"
-                                        placeholder='Enter Website'
-                                        onChange={onChange}
-                                        value={value}
-                                        error={errors.domain?.message}
-                                    />
-                                )}
-                            />
-
-                            <Controller
-                                control={control}
-                                name="location"
-                                render={({ field: { onChange, value } }) => (
-                                    <InputField
-                                        label="City"
-                                        type="text"
-                                        id="location"
-                                        name="location"
-                                        placeholder='Enter City'
-                                        onChange={onChange}
-                                        value={value as string}
-                                        error={errors.location?.message}
-                                    />
-                                )}
-                            />
-                        </div>
-                    </div>
-
-                )}
-                <div className='button '>
-                    <Button
-                        type={step === 1 ? 'button' : 'submit'}
-                        onClick={() => {
-                            if (step === 1) {
-                                setStep(step + 1)
-                            }
-                        }}
-                        label={step === 1 ? "Next" : "Save Deal"}
-                        variant='primary'
-                        className='w-full'
-                    />
-                </div>
-
-
-            </form>
+                {step == 2 && <AddMemberBenefitStepTwo
+                    onBack={(data: any) => {
+                        setMemberBenefit({
+                            ...memberBenefit,
+                            ...data,
+                            title: data.name,
+                        })
+                        setStep(1)
+                    }}
+                    onSubmit={(data: any) => {
+                        const mergedBenefit = {
+                            ...memberBenefit,
+                            ...data,
+                        }
+                        if (editMemberBenefit) {
+                            // update
+                            onUpdate({
+                                ...data,
+                                id: editMemberBenefit.id,
+                            })
+                            return;
+                        }
+                        onCreate(data)
+                    }
+                    }
+                    data={{
+                        name: memberBenefit?.title || '',
+                        description: memberBenefit?.description || '',
+                        imageURL: memberBenefit?.imageURL || '',
+                        categoryId: memberBenefit?.categoryId || '',
+                        code: memberBenefit?.code || '',
+                        link: memberBenefit?.link || '',
+                        location: memberBenefit?.location || '',
+                        domain: memberBenefit?.domain || '',
+                        offer: memberBenefit?.offer || '',
+                    }}
+                    categories={categories}
+                />}
+            </div>
         </Modal >
     )
 }
