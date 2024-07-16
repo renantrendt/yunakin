@@ -11,28 +11,32 @@ import InboxIcon from "@/icons/inbox.svg"
 import UserGroupIcon from "@/icons/user-group.svg"
 import SettingsIcon from "@/icons/settings.svg"
 import BookOpen from "@/icons/book-open.svg"
-import AnalyticsIcon from "@/icons/analytics.svg"
-import ChatGptIcon from "@/icons/chatgpt.svg"
 import NavigationItem from '../atomic/navigation/NavigationItem'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import DashboardDarkIcon from "@/icons/dashboard-logo-dark-icon.svg"
 import { useTranslation } from '@/lib/i18n/client'
 import { useSession } from 'next-auth/react'
+
+import CustomizePageIcon from "@/icons/sidebar/customize-apperance-icon.svg"
+import StartupDealsIcon from "@/icons/sidebar/startup-deals-icon.svg"
+import AnalyticsIcon from "@/icons/sidebar/analytics-icon.svg"
+
 interface SidebarLink {
     label: string
     path: string
     iconSrc: React.ReactNode // Path to your icon images
     adminRoute?: boolean
+    hidden?: boolean
 }
 
 const sidebarLinks: SidebarLink[] = [
-    { label: 'home', path: '/dashboard', iconSrc: <HomeIcon /> },
+    { label: 'analytics', path: '/analytics', iconSrc: <AnalyticsIcon /> },
     { label: 'users', path: '/users', iconSrc: <UserGroupIcon />, adminRoute: true },
     { label: 'categories', path: '/categories', iconSrc: <UserGroupIcon />, adminRoute: true },
-    { label: 'memberBenefits', path: '/memberbenefits', iconSrc: <UserGroupIcon />, adminRoute: false },
-    { label: 'catalog', path: '/catalog', iconSrc: <UserGroupIcon />, adminRoute: false },
-    { label: 'customize', path: '/customize', iconSrc: <AnalyticsIcon /> },
+    { label: 'startup-deals', path: '/startup-deals', iconSrc: <StartupDealsIcon />, adminRoute: false },
+    { label: 'catalog', path: '/catalog', iconSrc: <UserGroupIcon />, adminRoute: false, hidden: true },
+    { label: 'customize', path: '/customize', iconSrc: <CustomizePageIcon /> },
     // Add other necessary links here
 ]
 const bottomSideBarLinks: SidebarLink[] = [
@@ -70,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showMenu, onLinkClick }: SidebarProps
                         id='search' value={search} onChange={(e) => setSearch(e.target.value)} className='bg-transparent border-none outline-none hover:border-none focus:border-none
                              py-0 !px-8 !shadow-none !mb-2 dark:!bg-transparent   ' customLeadingIconClassName='!left-[8px] !top-[14px]' /> */}
                     <div className='flex flex-col gap-[6px] mt-[6px]'>
-                        {sidebarLinks.filter(link => link.adminRoute ? session.data?.user?.role == "ADMIN" : true).map((link) => (
+                        {sidebarLinks.filter(link => link.adminRoute ? session.data?.user?.role == "ADMIN" : true && !link.hidden).map((link) => (
                             <NavigationItem
                                 title={t(`sidebar.${link.label}`)}
                                 icon={link.iconSrc}

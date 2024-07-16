@@ -11,7 +11,7 @@ import { Category, MemberBenefit } from '@prisma/client';
 import ImageUploader from '../atomic/file-uploader/ImageUploader';
 import { MemberBenefitVisibility } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n/client';
-
+import _ from 'lodash';
 
 interface AddMemberBenefitModalProps {
     onClose: () => void;

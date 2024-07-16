@@ -9,7 +9,7 @@ interface TableHeadProps {
 
 const TableHead = ({ children }: TableHeadProps) => {
     return (
-        <thead>{children}</thead>
+        <thead className=''>{children}</thead>
     )
 }
 

@@ -9,8 +9,9 @@
         "helpAndSupport": "Help & Support",
         "categories": "Categories",
         "editor": "Member Page Editor",
-        "catalog": "Benefits Catalog",
+        "catalog": "Startup Deals",
         "memberBenefits": "Published Benefits",
+        "startup-deals": "Startup Deals",
         "customize": "Customize Appearance"
     },
     "memberbenefit": {
@@ -24,6 +25,15 @@
     "pages": {
         "customize": {
             "title": "Customize Appearance"
+        },
+        "catalog": {
+            "title": "Startup Deals"
+        },
+        "startup-deals": {
+            "title": "Startup Deals"
+        },
+        "analytics": {
+            "title": "Analytics"
         }
     }
 }

@@ -32,7 +32,10 @@ import { useSearchParams } from 'next/navigation'
 import { MemberBenefitVisibility } from '@/lib/types'
 import _, { set } from 'lodash'
 import { useTranslation } from '@/lib/i18n/client'
-
+import Image from 'next/image'
+import Toggle from '../atomic/toggle/Toggle'
+import { CheckCircledIcon, Pencil2Icon, PlusIcon } from '@radix-ui/react-icons'
+import TableHeadCell from './table/TableHeadCell'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefit[]
     categories: Category[]
@@ -65,32 +68,90 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
     }
     const columns = [
         columnHelper.accessor(row => row.title, {
-            id: 'Title',
+            id: 'Image',
             cell: info => {
                 const memberBenefit = memberBenefits[info.row.index]
-                const domain = memberBenefit.domain.includes('http') ? memberBenefit.domain : `https://${memberBenefit.domain}`
-                return <a href={domain} target='_blank' className='text-blue-500 hover:underline'>{info.getValue()}</a>
+                return (
+                    <Image className='hover:scale-105  w-12 h-12 flex-shrink-0 rounded-[14px] border border-[#EBEBEB] duration-300 ease-in-out' src={`${memberBenefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' />
+                )
             },
-            header: () => <span>Title</span>,
+            header: () => <span>Image</span>,
             footer: info => info.column.id,
+            size: 50,
+            maxSize: 50
         }),
+        // columnHelper.accessor(row => row.title, {
+        //     id: 'Company Name',
+        //     cell: info => {
+        //         const memberBenefit = memberBenefits[info.row.index]
+        //         const domain = memberBenefit.domain.includes('http') ? memberBenefit.domain : `https://${memberBenefit.domain}`
+        //         return <a href={domain} target='_blank' className='text-blue-500 hover:underline'>{info.getValue()}</a>
+        //     },
+        //     header: () => <span>Title</span>,
+        //     footer: info => info.column.id,
+        // }),
 
-        columnHelper.accessor(row => row.categoryId, {
-            id: 'Category',
-            cell: info => {
-                const categoryId = info.getValue()
-                if (categoryId === null) return 'Uncategorized'
-                const category = categories.find(category => category.id === categoryId)
-                return category?.name
-            },
-            header: () => <span>Category</span>,
-            footer: info => info.column.id,
-        }),
+        // columnHelper.accessor(row => row.categoryId, {
+
+        //     id: 'Category',
+        //     cell: info => {
+        //         const categoryId = info.getValue()
+        //         if (categoryId === null) return 'Uncategorized'
+        //         const category = categories.find(category => category.id === categoryId)
+        //         return category?.name
+        //     },
+        //     header: () => <span>Category</span>,
+        //     footer: info => info.column.id,
+        // }),
         columnHelper.accessor(row => row.description, {
             id: 'Description',
-            cell: info => info.getValue(),
+            cell: info =>
+                info.getValue(),
             header: () => <span>Description</span>,
             footer: info => info.column.id,
+            size: 300,
+            minSize: 300
+        }),
+        columnHelper.accessor(row => row.description, {
+            id: 'Featured',
+            cell: info =>
+                <Toggle
+                    checked
+                    onChange={() => { }}
+
+                />,
+            header: () => <span>Featured</span>,
+            footer: info => info.column.id,
+            size: 300,
+            minSize: 300
+        }),
+        columnHelper.accessor(row => row.description, {
+            id: 'SuggestedDeal',
+            cell: info =>
+                <div className='flex gap-2 items-center'>
+                    <div className='text-[#00CE21]'>
+
+                        <CheckCircledIcon width={18} height={18} />
+                    </div>
+                    <span>Yes</span>
+                </div>,
+            header: () => <span>Suggested Deal</span>,
+            footer: info => info.column.id,
+            size: 300,
+            minSize: 300
+        }),
+        columnHelper.accessor(row => row.description, {
+            id: 'Import',
+            cell: info =>
+                <Toggle
+                    checked
+                    onChange={() => { }}
+
+                />,
+            header: () => <span>Import</span>,
+            footer: info => info.column.id,
+            size: 300,
+            minSize: 300
         }),
         columnHelper.accessor(row => row.offer, {
             id: 'Offer',
@@ -98,43 +159,37 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
             header: () => <span>Offer</span>,
             footer: info => info.column.id,
         }),
-        columnHelper.accessor(row => row.code, {
-            id: 'Code',
-            cell: info => info.getValue(),
-            header: () => <span>Code</span>,
-            footer: info => info.column.id,
-        }),
-        columnHelper.accessor(row => row.location, {
-            id: 'Visibility',
-            cell: info => {
-                const memberBenefit = memberBenefits[info.row.index]
-                if (!isBenefitCreator(memberBenefit.id)) {
-                    return <Badge size={"md"} color={"primary"} >{t(`memberbenefit.visibility.${memberBenefit.visibility}`)}</Badge>
-                }
-                return <Dropdown
-                    id='visibility'
-                    name='visibility'
-                    options={_.keys(MemberBenefitVisibility).map(key => ({ value: key, label: t(`memberbenefit.visibility.${key}`) }))}
-                    value={memberBenefit.visibility}
-                    onChange={async (value) => {
-                        try {
-                            await updateMemberBenefit({ ...memberBenefit, visibility: value })
-                            setMemberBenefits(memberBenefits.map(b => memberBenefit.id === b.id ? { ...memberBenefit, visibility: value } : b))
-                            customToast.success(`${memberBenefit.title} visibility updated to ${t(`memberbenefit.visibility.${value}`)}`)
-                        } catch (error) {
-                            customToast.error('Failed to update visibility')
-                        }
-                    }}
-                />
-            }
-        }),
+        // columnHelper.accessor(row => row.location, {
+        //     id: 'Visibility',
+        //     cell: info => {
+        //         const memberBenefit = memberBenefits[info.row.index]
+        //         if (!isBenefitCreator(memberBenefit.id)) {
+        //             return <Badge size={"md"} color={"primary"} >{t(`memberbenefit.visibility.${memberBenefit.visibility}`)}</Badge>
+        //         }
+        //         return <Dropdown
+        //             id='visibility'
+        //             name='visibility'
+        //             options={_.keys(MemberBenefitVisibility).map(key => ({ value: key, label: t(`memberbenefit.visibility.${key}`) }))}
+        //             value={memberBenefit.visibility}
+        //             onChange={async (value) => {
+        //                 try {
+        //                     await updateMemberBenefit({ ...memberBenefit, visibility: value })
+        //                     setMemberBenefits(memberBenefits.map(b => memberBenefit.id === b.id ? { ...memberBenefit, visibility: value } : b))
+        //                     customToast.success(`${memberBenefit.title} visibility updated to ${t(`memberbenefit.visibility.${value}`)}`)
+        //                 } catch (error) {
+        //                     customToast.error('Failed to update visibility')
+        //                 }
+        //             }}
+        //         />
+        //     }
+        // }),
         columnHelper.display({
             id: 'Actions',
             cell: info => {
                 const memberBenefit = memberBenefits[info.row.index]
                 const createdMemberBenefit = isBenefitCreator(memberBenefits[info.row.index].id)
                 return (<div className='flex justify-start gap-2'>
-                    {createdMemberBenefit && <Button icon={<EditIcon />} size='md' onClick={() => {
+                    {createdMemberBenefit && <Button icon={<Pencil2Icon />} size='md' onClick={() => {
 
                         setMemberBenefitModal(true)
                         setTobeEditedMemberBenefit(memberBenefit)
@@ -144,7 +199,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                     <Button icon={<DeleteIcon />} size='md' onClick={() => {
                         setModalOpen(true)
                         setToBeDeletedMemberBenefitId(memberBenefit.id)
-                    }} className='!w-fit !p-2 !min-w-fit text-red-600 border-red-300 bg-red-100 hover:bg-red-200 dark:bg-button-background-dark dark:hover:bg-profile-modal-border-dark' variant='alert' label='' />
+                    }} className='text-[#7C7C7C] bg-transparent p-0 hover:bg-transparent focus:outline-none focus:drop-shadow-none' variant='alert' label='' />
                 </div>)
             },
             header: () => <span>Actions</span>,
@@ -204,22 +259,43 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                     }} className='border-none outline-none hover:border-none focus:border-none
                              !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
             </div> */}
+            <div className=' flex flex-col justify-start items-start mt-8 mb-6 gap-4'>
+
+                {/* <Pagination
+    totalPages={Math.ceil(memberBenefits.length / 5)}
+    previousButton
+    nextButton
+    previousButtonDisabled={!table.getCanPreviousPage()}
+    nextButtonDisabled={!table.getCanNextPage()}
+    onPreviousClick={() => { table.previousPage() }}
+    onNextClick={() => { table.nextPage() }}
+    onPageClick={(pageNumber) => {
+        table.setPagination({
+            pageIndex: pageNumber - 1,
+            pageSize: 5
+        })
+    }}
+/> */}
+                <Button label='Create Deal' icon={<PlusIcon />} className='w-fit' variant='primary' onClick={() => setMemberBenefitModal(true)} />
+            </div>
             <div className='flex flex-col gap-4'>
 
                 <Table>
                     <TableHead>
                         {table.getHeaderGroups().map(headerGroup => (
                             <TableRow key={headerGroup.id}>
-                                {headerGroup.headers.map(header => (
-                                    <TableCell key={header.id}>
-                                        {header.isPlaceholder
-                                            ? null
-                                            : flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext()
-                                            )}
-                                    </TableCell>
-                                ))}
+                                {headerGroup.headers.map(header => {
+                                    return (
+                                        <TableHeadCell key={header.id} className={`${header.id.includes('Description') ? "!w-64" : "!w-20"}`}>
+                                            {header.isPlaceholder
+                                                ? null
+                                                : flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext()
+                                                )}
+                                        </TableHeadCell>
+                                    )
+                                })}
                             </TableRow>
                         ))}
                     </TableHead>
@@ -229,6 +305,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                             return (
                                 <TableRow key={row.id}>
                                     {row.getVisibleCells().map(cell => {
+                                        console.log(cell.id)
                                         return (
                                             <TableCell key={cell.id}>
                                                 {flexRender(
@@ -243,25 +320,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                         })}
                     </TableBody>
                 </Table>
-                <div className='self-end flex flex-col gap-4'>
 
-                    {/* <Pagination
-                        totalPages={Math.ceil(memberBenefits.length / 5)}
-                        previousButton
-                        nextButton
-                        previousButtonDisabled={!table.getCanPreviousPage()}
-                        nextButtonDisabled={!table.getCanNextPage()}
-                        onPreviousClick={() => { table.previousPage() }}
-                        onNextClick={() => { table.nextPage() }}
-                        onPageClick={(pageNumber) => {
-                            table.setPagination({
-                                pageIndex: pageNumber - 1,
-                                pageSize: 5
-                            })
-                        }}
-                    /> */}
-                    <Button label='Add Member Benefit' className='w-fit self-end' variant='primary' onClick={() => setMemberBenefitModal(true)} />
-                </div>
             </div>
             <ConfirmationModal
                 icon={
