@@ -65,6 +65,7 @@ const siteUrls: SiteUrls = {
         orders: '/orders',
         orderDetail: '/orders/:id',
         comingSoon: '/coming-soon',
+        analytics: '/analytics',
     }
 }
 

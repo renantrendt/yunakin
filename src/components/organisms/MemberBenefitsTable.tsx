@@ -34,7 +34,7 @@ import _, { set } from 'lodash'
 import { useTranslation } from '@/lib/i18n/client'
 import Image from 'next/image'
 import Toggle from '../atomic/toggle/Toggle'
-import { CheckCircledIcon, Pencil2Icon, PlusIcon } from '@radix-ui/react-icons'
+import { CheckCircledIcon, Pencil2Icon, PlusIcon, EyeOpenIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import TableHeadCell from './table/TableHeadCell'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefit[]
@@ -142,23 +142,29 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
         }),
         columnHelper.accessor(row => row.description, {
             id: 'Import',
-            cell: info =>
-                <Toggle
-                    checked
-                    onChange={() => { }}
-
-                />,
+            cell: info => {
+                const createdMemberBenefit = isBenefitCreator(memberBenefits[info.row.index].id)
+                if (createdMemberBenefit) {
+                    return <div></div>
+                }
+                return (
+                    <Toggle
+                        checked
+                        onChange={() => { }}
+                    />
+                )
+            },
             header: () => <span>Import</span>,
             footer: info => info.column.id,
             size: 300,
             minSize: 300
         }),
-        columnHelper.accessor(row => row.offer, {
-            id: 'Offer',
-            cell: info => info.getValue(),
-            header: () => <span>Offer</span>,
-            footer: info => info.column.id,
-        }),
+        // columnHelper.accessor(row => row.offer, {
+        //     id: 'Offer',
+        //     cell: info => info.getValue(),
+        //     header: () => <span>Offer</span>,
+        //     footer: info => info.column.id,
+        // }),
         // columnHelper.accessor(row => row.location, {
         //     id: 'Visibility',
         //     cell: info => {
@@ -189,17 +195,24 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                 const memberBenefit = memberBenefits[info.row.index]
                 const createdMemberBenefit = isBenefitCreator(memberBenefits[info.row.index].id)
                 return (<div className='flex justify-start gap-2'>
-                    {createdMemberBenefit && <Button icon={<Pencil2Icon />} size='md' onClick={() => {
+                    {createdMemberBenefit && <>
+                        <Button icon={<Pencil1Icon width={20} height={20} />} size='md' onClick={() => {
 
-                        setMemberBenefitModal(true)
-                        setTobeEditedMemberBenefit(memberBenefit)
+                            setMemberBenefitModal(true)
+                            setTobeEditedMemberBenefit(memberBenefit)
+                        }}
+                            className=' bg-transparent p-0 hover:bg-transparent focus:outline-none'
+                        />
+                        <Button icon={<DeleteIcon />} size='md' onClick={() => {
+                            setModalOpen(true)
+                            setToBeDeletedMemberBenefitId(memberBenefit.id)
+                        }} className='text-[#7C7C7C] bg-transparent p-0 hover:bg-transparent focus:outline-none focus:drop-shadow-none' variant='alert' label='' />
+                    </>}
+                    {!createdMemberBenefit && <Button icon={<EyeOpenIcon width={20} height={20} />} size='md' onClick={() => {
+
                     }}
-                        className='!p-2'
+                        className=' bg-transparent p-0 hover:bg-transparent focus:outline-none'
                     />}
-                    <Button icon={<DeleteIcon />} size='md' onClick={() => {
-                        setModalOpen(true)
-                        setToBeDeletedMemberBenefitId(memberBenefit.id)
-                    }} className='text-[#7C7C7C] bg-transparent p-0 hover:bg-transparent focus:outline-none focus:drop-shadow-none' variant='alert' label='' />
                 </div>)
             },
             header: () => <span>Actions</span>,
