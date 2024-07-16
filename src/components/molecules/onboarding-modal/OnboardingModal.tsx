@@ -25,7 +25,9 @@ const OnboardingModal = (props: OnboardingModalProps) => {
     const { t } = useTranslation('onboarding')
     const [step, setStep] = React.useState(1)
     return (
-        <Modal isOpen={props.isOpen} onClose={props.onClose} className='lg:max-w-[448px]'>
+        <Modal isOpen={props.isOpen} onClose={props.onClose} className='lg:max-w-[448px]'
+            closeOnOutsideClick={false}
+        >
             <div className='container  flex flex-col  gap-6 p-8 justify-center content'>
 
                 <div className='figure w-full  min-h-[100px] lg:min-h-[200px] h-fit bg-grey-300 rounded-lg '>

@@ -39,7 +39,7 @@ const MagicLinkForm = () => {
             }
             await signIn('resend', {
                 email: data.email,
-                callbackUrl: siteUrls.general.dashboard,
+                callbackUrl: siteUrls.general.analytics,
                 redirect: false // optional set it to true to show /magic-link-set page
             })
             setValue('email', '')

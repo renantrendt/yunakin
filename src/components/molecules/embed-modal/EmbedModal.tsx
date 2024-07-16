@@ -50,6 +50,7 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
     return (
 
         <Modal isOpen={isOpen} onClose={onClose}
+            closeOnOutsideClick={false}
         >
             <div className='flex flex-col gap-6 p-8 justify-start content font-satoshi'>
                 <div className='justify-between flex w-full'>

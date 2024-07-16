@@ -132,12 +132,10 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
                 <div className=' flex w-full lg:w-fit  flex-row gap-2'>
                     <Button variant="secondary" className='w-full' label="Share" loading={loading}
                         onClick={openShareModal}
-                        icon={<Share2Icon />}
                     />
 
                     <Button variant="primary" className='w-full' label="Publish Changes" loading={loading}
                         onClick={publishChanges}
-                        icon={<LaunchIcon />}
                     />
                 </div>
             </div >

@@ -9,9 +9,10 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose: () => void
   children: React.ReactNode | string
   modalClassName?: string
+  closeOnOutsideClick?: boolean
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className, modalClassName }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className, modalClassName, closeOnOutsideClick = true }) => {
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -25,7 +26,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className, mod
   }, [onClose])
 
   const handleClick = (e: React.MouseEvent<HTMLDialogElement>) => {
-    if (e.target === e.currentTarget) {
+    if (e.target === e.currentTarget && closeOnOutsideClick) {
       onClose()
     }
   }

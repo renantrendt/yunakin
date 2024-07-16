@@ -123,7 +123,9 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
     const [step, setStep] = React.useState(1)
 
     return (
-        <Modal isOpen={props.isOpen} onClose={props.onClose} className='w-full max-w-full' >
+        <Modal isOpen={props.isOpen} onClose={props.onClose} className='w-full max-w-full'
+            closeOnOutsideClick={false}
+        >
             <div className='justify-between flex w-full'>
                 <Button onClick={props.onClose} variant='secondary' size='sm' icon={<Cross1Icon />} className=' absolute !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
             </div>

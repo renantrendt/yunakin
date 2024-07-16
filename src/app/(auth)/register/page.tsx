@@ -86,7 +86,7 @@ export default function RegisterPage() {
                         if (result?.error) {
                             customToast.error(result.error)
                         } else {
-                            router.push('/catalog')
+                            router.push(siteUrls.general.customize)
                         }
                     } catch (error) {
                         console.error(error)

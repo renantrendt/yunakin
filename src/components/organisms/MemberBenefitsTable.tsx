@@ -140,7 +140,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
             size: 300,
             minSize: 300
         }),
-        columnHelper.accessor(row => row.description, {
+        columnHelper.accessor(row => row.domain, {
             id: 'Import',
             cell: info => {
                 const createdMemberBenefit = isBenefitCreator(memberBenefits[info.row.index].id)
@@ -201,7 +201,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                             setMemberBenefitModal(true)
                             setTobeEditedMemberBenefit(memberBenefit)
                         }}
-                            className=' bg-transparent p-0 hover:bg-transparent focus:outline-none'
+                            className=' bg-transparent p-0 hover:bg-transparent focus:outline-none text-[#7C7C7C]'
                         />
                         <Button icon={<DeleteIcon />} size='md' onClick={() => {
                             setModalOpen(true)
@@ -211,7 +211,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                     {!createdMemberBenefit && <Button icon={<EyeOpenIcon width={20} height={20} />} size='md' onClick={() => {
 
                     }}
-                        className=' bg-transparent p-0 hover:bg-transparent focus:outline-none'
+                        className=' bg-transparent p-0 hover:bg-transparent focus:outline-none text-[#7C7C7C]'
                     />}
                 </div>)
             },
@@ -299,7 +299,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map(header => {
                                     return (
-                                        <TableHeadCell key={header.id} className={`${header.id.includes('Description') ? "!w-64" : "!w-20"}`}>
+                                        <TableHeadCell key={header.id} className={`${header.id.includes('Description') ? "!min-w-64 !w-64" : "!w-20"}`}>
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
