@@ -52,7 +52,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, categories }: MemberBen
                         />
                     </div>
 
-                    <div >
+                    <div className='py-16 lg:py-6' >
                         <PageHeader
                             title={config.title}
                             description={config.description}
@@ -62,7 +62,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, categories }: MemberBen
                 </div>
                 <div>
                     <div>
-                        <div className="flex flex-col md:flex-row gap-4  items-start justify-between w-full  text-black md:items-center max-w-[1440px]  mx-auto px-4 md:px-12">
+                        <div className="flex flex-col md:flex-row gap-4  items-start mb-6 justify-between w-full  text-black md:items-center max-w-[1440px]  mx-auto px-4 md:px-28">
                             <div className='flex justify-start gap-5'>
 
                                 <h1 className="text-xl lg:text-2xl font-bold" style={{
@@ -105,7 +105,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, categories }: MemberBen
                                 })}
                             </div>
                         </div>
-                        <div>
+                        <div className=' max-w-[1440px]  mx-auto px-0 md:px-16'>
                             {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
                                 return (
                                     <CategoryScroller
