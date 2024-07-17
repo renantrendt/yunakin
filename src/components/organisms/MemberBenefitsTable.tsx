@@ -93,8 +93,9 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
             id: 'Image',
             cell: info => {
                 const memberBenefit = memberBenefits[info.row.index]
+                const image = memberBenefit.imageURL && `${memberBenefit.imageURL}` || `/images/dummy_logo.svg`
                 return (
-                    <Image className='hover:scale-105  w-12 h-12 flex-shrink-0 rounded-[14px] border border-[#EBEBEB] duration-300 ease-in-out' src={`${memberBenefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' />
+                    <Image className='hover:scale-105  w-12 h-12 flex-shrink-0 rounded-[14px] border border-[#EBEBEB] duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit=' contain' />
                 )
             },
             header: () => <span>Image</span>,
@@ -175,8 +176,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                         onChange={async (checked) => {
                             const currBenefit = memberBenefits[info.row.index]
                             try {
-                                await importBenefit(currBenefit.id, checked)
                                 setMemberBenefits(memberBenefits.map(b => b.id === currBenefit.id ? { ...currBenefit, import: checked } : b))
+                                await importBenefit(currBenefit.id, checked)
                                 if (checked) {
                                     customToast.success('Deal imported successfully')
                                 } else {
@@ -184,6 +185,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                                 }
                             } catch (error) {
                                 customToast.error('Failed to update import status')
+                                setMemberBenefits(memberBenefits.map(b => b.id === currBenefit.id ? { ...currBenefit, import: !checked } : b))
                             }
                         }}
                     />
