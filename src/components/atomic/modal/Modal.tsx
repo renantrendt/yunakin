@@ -32,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className, mod
   }
   return (
     <dialog className={cn(`modal  ${isOpen ? "modal-open" : ""} `, modalClassName)} onClick={handleClick}>
-      <div className={cn("modal-box  sm:max-w-[30px] bg-white dark:bg-card-dark min-w-[300px] md:max-w-[448px] lg:max-w-[620px] !p-0 !m-0 ", className)}>
+      <div className={cn("modal-box max-h-[80vh]  sm:max-w-[30px] bg-white dark:bg-card-dark min-w-[300px] md:max-w-[448px] lg:max-w-[620px] !p-0 !m-0 ", className)}>
         {/* <form method='dialog'>
           <Button onClick={onClose} variant='secondary' size='sm' icon={<CrossIcon />} className='absolute !w-fit !p-2 !min-w-fit  right-6 top-2' />
         </form> */}

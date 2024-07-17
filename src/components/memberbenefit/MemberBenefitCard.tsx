@@ -66,8 +66,10 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
     return (
         <>
 
-            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0  w-full   lg:min-w-[390px]    h-full   overflow-hidden  last:mr-4 lg:last:mr-0 bg-base-100 
-rounded-[10px] shadow-sm`, className)} style={{
+            <div key={key}
+                className={cn(`card relative flex font-satoshi flex-col flex-shrink-0  w-full   lg:min-w-[390px]    h-full   overflow-hidden  last:mr-4 lg:last:mr-0 bg-base-100 
+rounded-[10px] shadow-sm`, className)}
+                style={{
                     backgroundColor: config?.cardBackgroundColor as string,
                 }}>
                 <div className="p-5  flex flex-col  ">
@@ -82,7 +84,7 @@ rounded-[10px] shadow-sm`, className)} style={{
                         style={{
                             color: config?.textColor as string,
                         }}>{benefit.title}</h2>
-                    {benefit.description && <p className='text-neutral-600 dark:text-sidebar-icon-dark text-base min-h-[50px]'
+                    {benefit.description && <p className='max-w-[300px] text-base min-h-[50px]'
                         style={{
                             color: config?.textColor as string,
                         }}
