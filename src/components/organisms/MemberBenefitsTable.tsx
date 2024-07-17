@@ -116,7 +116,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
             id: 'Featured',
             cell: info =>
                 <Toggle
-                    checked
+                    checked={false}
                     onChange={() => { }}
 
                 />,
@@ -359,8 +359,10 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
             </ConfirmationModal>
             {
                 memberBenefitModal && <AddMemberBenefitModal
+                    isOpen={memberBenefitModal}
                     loading={loading}
                     categories={categories}
+
                     editMemberBenefit={tobeEditedMemberBenefit}
                     onClose={() => setMemberBenefitModal(false)}
                     onUpdate={async (data: any) => {
@@ -381,9 +383,11 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                             } as MemberBenefit)
                             if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
-                                const random = Math.random().toString(36).substring(7)
-                                const path = "memberbenefits_images/" + updatedMemberBenefit.id + "/" + `image${random}.jpg`
-                                const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+                                const random = Math.floor(Math.random() * 10)
+                                const imageType = data.imageType
+
+                                const path = "memberbenefits_images/" + updatedMemberBenefit.id + "/" + `image-${random}.${imageType ?? 'jpg'}`
+                                const file = new File([blob], `image.${imageType ?? 'jpg'}`, { type: imageType.includes('svg') ? "image/svg+xml" : "image/jpeg" });
                                 const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
                                 if (!isUploaded) {
                                     throw new Error("Failed to upload image")
@@ -425,10 +429,11 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                             } as MemberBenefit)
                             if (data.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
-                                const random = Math.random().toString(36).substring(7)
-                                const path = "memberbenefits_images/" + newMemberBenefit.id + "/" + `image${random}.jpg`
+                                const random = Math.floor(Math.random() * 10)
+                                const imageType = data.imageType
 
-                                const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+                                const path = "memberbenefits_images/" + newMemberBenefit.id + "/" + `image-${random}.${imageType ?? 'jpg'}`
+                                const file = new File([blob], `image.${imageType ?? 'jpg'}`, { type: imageType.includes('svg') ? "image/svg+xml" : "image/jpeg" });
                                 const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
                                 if (!isUploaded) {
                                     throw new Error("Failed to upload image")
@@ -440,11 +445,12 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                                 newMemberBenefit.imageURL = downloadUrl.publicUrl
                                 await updateMemberBenefit(newMemberBenefit)
                             }
-                            setMemberBenefits([...memberBenefits, newMemberBenefit])
+                            customToast.success('Member Benefit added successfully')
+                            setMemberBenefits([newMemberBenefit, ...memberBenefits])
                             setMemberBenefitModal(false)
 
                         } catch (error) {
-
+                            customToast.error('Failed to create a new member benefit')
                         } finally {
                             setLoading(false)
                         }

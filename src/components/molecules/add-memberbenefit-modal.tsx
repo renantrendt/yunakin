@@ -17,7 +17,7 @@ import Typography from '../atomic/typography/Typography';
 import Divider from '../atomic/divider/Divider';
 import RadioGroup from '../atomic/radiogroup/radiogroup';
 import CheckboxGroup from '../atomic/checkbox/CheckboxGroup';
-import { ArrowLeftIcon } from '@radix-ui/react-icons';
+import { ArrowLeftIcon, Cross1Icon } from '@radix-ui/react-icons';
 import TextArea from '../atomic/textarea/TextArea';
 import AddMemberBenefitStepOne from './add-member-benefit-modal/AddMemberBenefitStepOne';
 import AddMemberBenefitStepTwo from './add-member-benefit-modal/AddMemberBenefitStepTwo';
@@ -29,6 +29,7 @@ interface AddMemberBenefitModalProps {
     categories: Category[];
     editMemberBenefit?: MemberBenefit;
     loading: boolean;
+    isOpen?: boolean;
 }
 
 
@@ -36,18 +37,21 @@ interface AddMemberBenefitModalProps {
 interface FormValues extends MemberBenefit {
     deal_type: string
     partnership_types: string[]
+    image_type: string
     visibility: MemberBenefitVisibility
 }
 
 
-const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefit, onUpdate, loading }: AddMemberBenefitModalProps) => {
+const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefit, onUpdate, loading, isOpen }: AddMemberBenefitModalProps) => {
     const { t } = useTranslation("dashboard")
     const [step, setStep] = React.useState(1)
+
 
     const [memberBenefit, setMemberBenefit] = React.useState<FormValues | null>({
         deal_type: '',
         partnership_types: [],
         visibility: MemberBenefitVisibility.PUBLIC,
+        image_type: '',
         ...editMemberBenefit
     } as FormValues)
 
@@ -67,9 +71,13 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
         onCreate(data)
     }
     return (
-        <Modal isOpen={true} onClose={onClose}
+        <Modal isOpen={isOpen} onClose={onClose}
+            closeOnOutsideClick={false}
         >
             <div className='flex flex-col p-10 gap-8 '>
+                <div className='justify-between flex w-full'>
+                    <Button onClick={onClose} variant='secondary' size='sm' icon={<Cross1Icon />} className=' absolute !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
+                </div>
                 <div className='flex justify-between items-center relative'>
                     <div className='flex gap-1  lg:gap-2'>
                         <span className={cn('bg-white border-[1px] rounded-full w-6 h-6 border-[#ECECEC] text-black text-center', { "border-[#FFDD04]": step == 1 })} >
@@ -101,10 +109,12 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                 />}
 
                 {step == 2 && <AddMemberBenefitStepTwo
+                    loading={loading}
                     onBack={(data: any) => {
                         setMemberBenefit({
                             ...memberBenefit,
                             ...data,
+                            image_type: data.imageType,
                             title: data.name,
                         })
                         setStep(1)
@@ -113,16 +123,14 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                         const mergedBenefit = {
                             ...memberBenefit,
                             ...data,
+                            id: editMemberBenefit?.id,
                         }
                         if (editMemberBenefit) {
                             // update
-                            onUpdate({
-                                ...data,
-                                id: editMemberBenefit.id,
-                            })
+                            onUpdate(mergedBenefit)
                             return;
                         }
-                        onCreate(data)
+                        onCreate(mergedBenefit)
                     }
                     }
                     data={{
@@ -135,6 +143,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                         location: memberBenefit?.location || '',
                         domain: memberBenefit?.domain || '',
                         offer: memberBenefit?.offer || '',
+                        imageType: memberBenefit?.image_type || '',
                     }}
                     categories={categories}
                 />}

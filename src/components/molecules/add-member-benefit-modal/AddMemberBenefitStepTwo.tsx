@@ -20,6 +20,7 @@ const schema = yup.object().shape({
     link: yup.string().optional().nullable(),
     description: yup.string(),
     categoryId: yup.string().required(),
+
 })
 
 interface FormValues {
@@ -32,14 +33,16 @@ interface FormValues {
     link: string
     description: string
     categoryId: string
+    imageType?: string
 }
 interface AddMemberBenefitStepTwoProps {
     data: FormValues;
     onSubmit: (data: FormValues) => void;
     onBack: (data: any) => void;
     categories: Category[]
+    loading: boolean
 }
-const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories }: AddMemberBenefitStepTwoProps) => {
+const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }: AddMemberBenefitStepTwoProps) => {
     const { handleSubmit, control, watch, setValue, formState: { errors, dirtyFields }, getValues } = useForm<FormValues>(
         {
             resolver: yupResolver(schema),
@@ -53,6 +56,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories }: AddMemb
                 link: data.link,
                 description: data.description,
                 categoryId: data.categoryId,
+                imageType: data.imageType
             },
         }
     )
@@ -60,6 +64,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories }: AddMemb
     const onSubmitForm = (data: FormValues) => {
         onSubmit(data)
     }
+    console.log(loading)
     return (
         <form onSubmit={handleSubmit(onSubmitForm)} >
 
@@ -71,6 +76,8 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories }: AddMemb
                         acc[key] = value
                         return acc
                     }, {} as any)
+
+                    console.log(c)
                     onBack(c)
                 }} >
                     <ArrowLeftIcon />
@@ -78,7 +85,11 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories }: AddMemb
                 </div>
                 <div className='flex gap-4 flex-col'>
                     <div className='w-fit h-fit'>
-                        <ImageUploader onImageUpload={(image) => setValue('imageURL', image)} image={image as string} />
+                        <ImageUploader onImageUpload={(image, imageType) => {
+                            setValue('imageURL', image, { shouldDirty: true })
+                            setValue('imageType', imageType, { shouldDirty: true })
+                        }
+                        } image={image as string} />
                     </div>
                     <Controller
                         control={control}
@@ -199,6 +210,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories }: AddMemb
             </div>
             <div className='button my-8 '>
                 <Button
+                    loading={loading}
                     type='submit'
                     label={"Save Deal"}
                     variant='primary'
