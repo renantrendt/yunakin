@@ -37,10 +37,6 @@ interface CustomizePageContainerProps {
     memberPageConfig: MemberBenefitPageConfig
 }
 
-interface SelectedMemberBenefit extends MemberBenefit {
-    selected: boolean
-}
-
 
 
 
@@ -50,7 +46,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     const [isEditing, setIsEditing] = useState(false)
     const [loading, setLoading] = useState(false);
     const [config, setConfig] = useState(memberPageConfig)
-    const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(benefits)
+    const [selectedBenefits, setSelectedBenefits] = useState<MemberBenefit[]>(benefits)
     const pathname = usePathname()
     const searchParams = useSearchParams()
     const [embedModalOpen, setEmbedModalOpen] = useState(false)
@@ -155,7 +151,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
             <Divider className='bg-[#DDDDDD]' dividerStyle="heavy" dividerType={"horizontal"} />
             <div style={{
                 backgroundColor: config.backgroundColor as string,
-            }}>
+            }} className='pb-40'>
 
                 <div className=''>
                     <div className='max-w-[1440px] py-8 lg:pt-20 w-full mx-auto px-4 md:px-12'>
@@ -258,7 +254,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                     <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-12 mx-auto '>
                                         {selectedBenefits && selectedBenefits
                                             .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-                                            .map((benefit: SelectedMemberBenefit, index: any) => (
+                                            .map((benefit: MemberBenefit, index: any) => (
                                                 <MemberBenefitCard
                                                     isEditing={true}
                                                     config={config}

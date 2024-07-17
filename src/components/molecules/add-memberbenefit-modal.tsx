@@ -9,7 +9,7 @@ import * as yup from "yup"
 import Dropdown from '../atomic/dropdown/Dropdown';
 import { Category, MemberBenefit } from '@prisma/client';
 import ImageUploader from '../atomic/file-uploader/ImageUploader';
-import { MemberBenefitVisibility } from '@/lib/types';
+import { DealType, MemberBenefitVisibility, PartnershipType } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n/client';
 import _ from 'lodash';
 import { cn } from '@/utils/cn';
@@ -48,8 +48,8 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
 
 
     const [memberBenefit, setMemberBenefit] = React.useState<FormValues | null>({
-        deal_type: '',
-        partnership_types: ['ads', 'sponsor'],
+        deal_type: editMemberBenefit?.dealType ?? DealType.COMPANY,
+        partnership_types: editMemberBenefit?.partnershipTypes?.split(',') ?? [PartnershipType.ADS, PartnershipType.SPONSOR],
         visibility: MemberBenefitVisibility.PUBLIC,
         categoryId: categories[0]?.id || '',
         image_type: '',
@@ -124,6 +124,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                         const mergedBenefit = {
                             ...memberBenefit,
                             ...data,
+
                             id: editMemberBenefit?.id,
                         }
                         if (editMemberBenefit) {

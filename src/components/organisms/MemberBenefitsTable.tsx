@@ -21,7 +21,7 @@ import MagnifyingGlass from "@/icons/magnifying-glass.svg"
 import useDebounce from '@/hooks/useDebounce'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
 import AddCategoryModal from '../molecules/add-category-modal'
-import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, deleteOtherMemberBenefit, updateMemberBenefit } from '@/app/actions'
+import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, deleteOtherMemberBenefit, importBenefit, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
 import { Row } from '@react-email/components'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
@@ -29,7 +29,7 @@ import platformConfig from '@/config/app-config'
 
 import EditIcon from "@/icons/edit-icon.svg"
 import { useSearchParams } from 'next/navigation'
-import { MemberBenefitVisibility } from '@/lib/types'
+import { MemberBenefitVisibility, MemberBenefitWithImport } from '@/lib/types'
 import _, { set } from 'lodash'
 import { useTranslation } from '@/lib/i18n/client'
 import Image from 'next/image'
@@ -37,7 +37,7 @@ import Toggle from '../atomic/toggle/Toggle'
 import { CheckCircledIcon, Pencil2Icon, PlusIcon, EyeOpenIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import TableHeadCell from './table/TableHeadCell'
 interface MemberBenefitsTableProps {
-    memberBenefits: MemberBenefit[]
+    memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
     config?: MemberBenefitPageConfig
 }
@@ -47,7 +47,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
     const searchParams = useSearchParams()
     const session = useSession()
     const [loading, setLoading] = useState(false)
-    const [memberBenefits, setMemberBenefits] = useState<MemberBenefit[]>(defaultMemberBenefits)
+    const [memberBenefits, setMemberBenefits] = useState<MemberBenefitWithImport[]>(defaultMemberBenefits)
     const [modalOpen, setModalOpen] = useState(false)
     const [memberBenefitModal, setMemberBenefitModal] = useState(searchParams.get('openModal') === 'true' ? true : false)
     const [toBeDeletedMemberBenefitId, setToBeDeletedMemberBenefitId] = useState<string>('')
@@ -149,8 +149,21 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                 }
                 return (
                     <Toggle
-                        checked
-                        onChange={() => { }}
+                        checked={memberBenefits[info.row.index].import}
+                        onChange={async (checked) => {
+                            const currBenefit = memberBenefits[info.row.index]
+                            try {
+                                await importBenefit(currBenefit.id, checked)
+                                setMemberBenefits(memberBenefits.map(b => b.id === currBenefit.id ? { ...currBenefit, import: checked } : b))
+                                if (checked) {
+                                    customToast.success('Deal imported successfully')
+                                } else {
+                                    customToast.success('Deal removed successfully')
+                                }
+                            } catch (error) {
+                                customToast.error('Failed to update import status')
+                            }
+                        }}
                     />
                 )
             },
@@ -227,7 +240,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
         data: memberBenefits,
         debugTable: true,
         getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(), //load client-side pagination code
+        // getPaginationRowModel: getPaginationRowModel(),     //load client-side pagination code
         onPaginationChange: setPagination,
         autoResetPageIndex: false,
         state: {
@@ -379,8 +392,10 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                                 userId: session.data?.user?.id! as string,
                                 title: data.name,
                                 offer: data.offer,
-                                visibility: data.visibility
-                            } as MemberBenefit)
+                                visibility: data.visibility,
+                                dealType: data.deal_type,
+                                partnershipTypes: data.partnership_types.join(',')
+                            } as MemberBenefitWithImport)
                             if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
                                 const random = Math.floor(Math.random() * 10)
@@ -414,6 +429,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                         try {
                             setLoading(true)
                             const userId = session.data?.user?.id! as string
+
+
                             const newMemberBenefit = await createMemberBenefit({
                                 categoryId: data.categoryId,
                                 code: data.code,
@@ -425,8 +442,10 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                                 title: data.name,
                                 imageURL: data.imageURL,
                                 offer: data.offer,
-                                visibility: data.visibility
-                            } as MemberBenefit)
+                                visibility: data.visibility,
+                                dealType: data.deal_type,
+                                partnershipTypes: data.partnership_types.join(','),
+                            } as MemberBenefitWithImport)
                             if (data.imageURL) {
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
                                 const random = Math.floor(Math.random() * 10)

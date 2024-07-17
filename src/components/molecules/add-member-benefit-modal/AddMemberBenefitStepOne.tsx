@@ -3,7 +3,7 @@ import CheckboxGroup from "@/components/atomic/checkbox/CheckboxGroup";
 import Divider from "@/components/atomic/divider/Divider";
 import RadioGroup from "@/components/atomic/radiogroup/radiogroup";
 import Typography from "@/components/atomic/typography/Typography";
-import { MemberBenefitVisibility } from "@/lib/types";
+import { DealType, MemberBenefitVisibility, PartnershipType } from "@/lib/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from 'yup';
@@ -87,14 +87,14 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                                         <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>My Company</Typography>
                                         <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Checked you can choose who will see your deal.</Typography>
                                     </div>,
-                                    value: 'company'
+                                    value: DealType.COMPANY
                                 },
                                 {
                                     label:
                                         <div className='flex flex-col gap-1'>
                                             <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>My Partner</Typography>
                                             <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Checked will be visible just for your customers.</Typography>
-                                        </div>, value: 'partner'
+                                        </div>, value: DealType.PARTNER
                                 }
                             ]}
                             onChange={onChange}
@@ -105,7 +105,7 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                 />
             </div>
 
-            {dealType == 'company' && (
+            {dealType == DealType.COMPANY && (
                 <>
                     <div className='py-6'>
                         <Divider />
@@ -168,7 +168,7 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                     </div>
                 </>
             )}
-            {dealType == 'company' && (visiBility == MemberBenefitVisibility.PUBLIC || visiBility == MemberBenefitVisibility.OWNED_PRIVATE) && (
+            {dealType == DealType.COMPANY && (visiBility == MemberBenefitVisibility.PUBLIC || visiBility == MemberBenefitVisibility.OWNED_PRIVATE) && (
                 <>
                     <div className='py-6'>
                         <Divider />
@@ -195,7 +195,7 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                                                 <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Ads</Typography>
                                                 <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Receive revenue for views and click of this deal on partners dealbook.</Typography>
                                             </div>,
-                                            value: 'ads'
+                                            value: PartnershipType.ADS
                                         },
                                         {
                                             label:
@@ -203,7 +203,7 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                                                     <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Sponsor</Typography>
                                                     <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Partners on the marketplace can invite you to sponsorship.</Typography>
                                                 </div>,
-                                            value: 'sponsor'
+                                            value: PartnershipType.SPONSOR
                                         },
                                         {
                                             label:
@@ -211,7 +211,7 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                                                     <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Needs approval?</Typography>
                                                     <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Partners need your approval before publishing on their dealbook.</Typography>
                                                 </div>,
-                                            value: 'needs_approval'
+                                            value: PartnershipType.NEEDS_APPROVAL
                                         },
                                     ]}
                                     onChange={onChange}

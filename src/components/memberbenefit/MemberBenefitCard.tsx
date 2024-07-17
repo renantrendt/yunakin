@@ -67,40 +67,44 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
         <>
 
             <div key={key}
-                className={cn(`card relative flex font-satoshi flex-col flex-shrink-0  w-full   lg:min-w-[390px]    h-full   overflow-hidden  last:mr-4 lg:last:mr-0 bg-base-100 
+                className={cn(`card relative flex font-satoshi flex-col justify-between flex-shrink-0  w-full   lg:min-w-[390px]    h-full   overflow-hidden  last:mr-4 lg:last:mr-0 bg-base-100 
 rounded-[10px] shadow-sm`, className)}
                 style={{
                     backgroundColor: config?.cardBackgroundColor as string,
                 }}>
-                <div className="p-5  flex flex-col  ">
-                    <div className='flex justify-between items-start'>
-                        <figure className='relative hidden w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
-                        {benefit.offer && <div className='py-1 px-2 text-[#808080] font-bold font-satoshi leading-normal text-xs  md:text-sm bg-[#F5F5F5] rounded-[40px] ' style={{
-                            color: config?.textColor as string,
-                            backgroundColor: config?.buttonColor as string,
-                        }}>{benefit.offer?.substring(0, 30)}</div>}
-                    </div>
-                    <h2 className="card-title mt-4 text-[20px]  text-black font-satoshiBlack font-black"
-                        style={{
-                            color: config?.textColor as string,
-                        }}>{benefit.title}</h2>
-                    {benefit.description && <p className='max-w-[300px] text-base min-h-[50px]'
-                        style={{
-                            color: config?.textColor as string,
-                        }}
-                    >{benefit.description}</p>}
-                    <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
-                        <div className='flex flex-col items-start justify-start gap-4'>
+                <div className='flex p-5  flex-col  h-full  justify-between'>
 
-                            <a href={!isEditing && domain} target='_blank' className='cursor-pointer text-link-color underline'
-                                onClick={() => {
-                                    handleButtonClick(benefit.id, MemberBenefitClickType.WEBSITE_CLICK)
-                                }}
-                                style={{
-                                    color: config?.textColor as string,
-                                }}
-                            >{benefit.domain}</a>
+                    <div className=" flex flex-col  ">
+                        <div className='flex justify-between items-start'>
+                            <figure className='relative hidden w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
+                            {benefit.offer && <div className='py-1 px-2 text-[#808080] font-bold font-satoshi leading-normal text-xs  md:text-sm bg-[#F5F5F5] rounded-[40px] ' style={{
+                                color: config?.textColor as string,
+                                backgroundColor: config?.buttonColor as string,
+                            }}>{benefit.offer?.substring(0, 30)}</div>}
                         </div>
+                        <h2 className="card-title mt-4 text-[20px]  text-black font-satoshiBlack font-black"
+                            style={{
+                                color: config?.textColor as string,
+                            }}>{benefit.title}</h2>
+                        {benefit.description && <p className='max-w-[300px] text-base min-h-[50px]'
+                            style={{
+                                color: config?.textColor as string,
+                            }}
+                        >{benefit.description}</p>}
+                        <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
+                            <div className='flex flex-col items-start justify-start gap-4'>
+
+                                <a href={!isEditing && domain} target='_blank' className='cursor-pointer text-link-color underline'
+                                    onClick={() => {
+                                        handleButtonClick(benefit.id, MemberBenefitClickType.WEBSITE_CLICK)
+                                    }}
+                                    style={{
+                                        color: config?.textColor as string,
+                                    }}
+                                >{benefit.domain}</a>
+                            </div>
+                        </div>
+
                     </div>
                     <div className='flex justify-between mt-6 items-center'>
                         <Button
@@ -129,6 +133,7 @@ rounded-[10px] shadow-sm`, className)}
                             <span>{benefit.location || ""}</span></a>}
                     </div>
                 </div>
+
             </div >
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} >
                 <div className='flex flex-col  p-6 justify-center items-stretch '

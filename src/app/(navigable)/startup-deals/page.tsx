@@ -3,6 +3,7 @@ import { auth } from '@/auth';
 import CategoriesTable from '@/components/organisms/CategoriesTable';
 import MemberBenefitsTable from '@/components/organisms/MemberBenefitsTable';
 import { prisma } from '@/lib/prisma'
+import { MemberBenefitWithImport } from '@/lib/types';
 import { notFound, redirect } from 'next/navigation';
 import React from 'react'
 
@@ -25,22 +26,23 @@ const MemberBenefitsPage = async () => {
         }
     });
 
+    benefits = await prisma.memberBenefit.findMany({
+    })
 
-    if (session?.user?.role == "ADMIN") {
-        benefits = await prisma.memberBenefit.findMany()
-    } else {
-        benefits = await prisma.memberBenefit.findMany({
-            where: {
-                OR: [
-                    { userId: session?.user?.id },
-                    { id: { in: otherMemberBenefits.map(benefit => benefit.memberBenefitId) } }
-                ]
-            },
-            orderBy: {
-                updatedAt: "desc"
-            }
-        })
-    }
+    const importedBenefits: MemberBenefitWithImport[] = benefits.map(b => {
+        return {
+            ...b,
+            import: otherMemberBenefits.some(ob => ob.memberBenefitId === b.id)
+        }
+    }).sort((a, b) => {
+        if (a.userId == session?.user?.id && b.userId != session?.user?.id) {
+            return -1
+        }
+        if (a.userId != session?.user?.id && b.userId == session?.user?.id) {
+            return 1
+        }
+        return 0
+    })
 
     const categories = await prisma.category.findMany()
 
@@ -50,7 +52,9 @@ const MemberBenefitsPage = async () => {
         }
     })
     return (
-        <MemberBenefitsTable memberBenefits={benefits} categories={categories}
+        <MemberBenefitsTable
+            memberBenefits={importedBenefits}
+            categories={categories}
             config={config}
         />
     )

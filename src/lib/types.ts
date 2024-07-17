@@ -60,6 +60,18 @@ export enum MemberBenefitVisibility {
     OWNED_PUBLIC = "OWNED_PUBLIC",
 }
 
+export enum PartnershipType {
+    ADS = "ADS",
+    SPONSOR = "SPONSOR",
+    NEEDS_APPROVAL = "NEEDS_APPROVAL",
+}
+
+export enum DealType {
+    COMPANY = "COMPANY",
+    PARTNER = "PARTNER"
+}
+
+
 export const selectMemberBenefitFilter = {
     NEW: "New",
     FEATURED: "Featured",
@@ -68,4 +80,9 @@ export type MemberBenefitFilter = keyof typeof selectMemberBenefitFilter
 
 export interface SelectedMemberBenefit extends MemberBenefit {
     selected: boolean
+}
+
+
+export interface MemberBenefitWithImport extends MemberBenefit {
+    import?: boolean
 }

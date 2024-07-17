@@ -20,6 +20,8 @@ interface RadioGroupProps {
 
 }
 const RadioGroup = ({ onChange, options, error, label, id, name, className, value }: RadioGroupProps) => {
+    console.log('options', options)
+    console.log('value', value)
     return (
         <div>
             <div className='flex flex-col gap-[14px]'>
@@ -29,7 +31,9 @@ const RadioGroup = ({ onChange, options, error, label, id, name, className, valu
                         <div key={index} className='flex items-center gap-2 cursor-pointer justify-start'>
                             <input type='radio' id={option.value} name={name}
                                 className={cn("  text-primary-500  rounded-full hover:cursor-pointer duration-150 ease-in-out  shadow-sm  focus:ring-0 focus:ring-offset-0  !outline-none  border border-grey-300 dark:bg-input-dark dark:border-input-border-dark", className)}
-                                value={option.value} onChange={(e) => { onChange && onChange(e.target.value) }}
+                                value={option.value}
+
+                                onChange={(e) => { onChange && onChange(e.target.value) }}
                                 checked={option.value == value} />
                             <label className={"cursor-pointer"} htmlFor={option.value}>{option.label}</label>
                         </div>

@@ -8,30 +8,62 @@ import { notFound } from 'next/navigation';
 import OnboardingContainer from '@/components/landing/onboarding/OnboardingContainer';
 import CatalogPageContainer from '@/components/catalog/CatalogPageContainer';
 import CustomizePageContainer from '@/components/customize/CustomizePageContainer';
+import { MemberBenefitVisibility } from '@/lib/types';
 const CustomizePage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
-
-    const otherBenefits = await prisma.otherMemberBenefit.findMany({
+    let otherBenefits = await prisma.otherMemberBenefit.findMany({
         where: {
-            userId: session?.user?.id
+            userId: session?.user?.id,
+        },
+    })
+    const publicOtherBenefitsIds = await prisma.memberBenefit.findMany({
+        where: {
+            AND: [
+                {
+                    id: {
+                        in: otherBenefits.map(benefit => benefit.memberBenefitId) as string[]
+                    },
+                },
+                {
+                    OR: [
+                        {
+                            visibility: MemberBenefitVisibility.PUBLIC,
+                        },
+                        {
+                            visibility: MemberBenefitVisibility.OWNED_PRIVATE,
+                        }
+                    ]
+                }
+            ]
+        },
+        select: {
+            id: true,
         }
     })
+    otherBenefits = otherBenefits.filter(benefit => publicOtherBenefitsIds.some(b => b.id === benefit.memberBenefitId))
     const benefits = await prisma.memberBenefit.findMany({
         where: {
-            NOT: {
-                userId: session?.user?.id
-            }
+            OR: [
+                {
+                    AND: [
+                        {
+                            OR: [
+                                {
+                                    visibility: MemberBenefitVisibility.PUBLIC,
+                                },
+                                {
+                                    visibility: MemberBenefitVisibility.OWNED_PUBLIC,
+                                }
+                            ],
+                        },
+                        { userId: session?.user?.id }
+                    ]
+                },
+                { id: { in: otherBenefits.map(benefit => benefit.memberBenefitId) } }
+            ]
         }
     })
-
-    const selectedBenefits = benefits.map(b => {
-        return {
-            ...b,
-            selected: otherBenefits.some(ob => ob.memberBenefitId === b.id)
-        }
-    })
-
 
 
 
@@ -49,9 +81,9 @@ const CustomizePage = async ({ params }: { params: { clientSlug: string } }) => 
         return;
     }
     return (
-        <div className='  w-full bg-landing-background relative '>
+        <div className='  w-full bg-landing-background relative  '>
             <CustomizePageContainer
-                benefits={selectedBenefits}
+                benefits={benefits}
                 categories={categories}
                 memberPageConfig={config}
             />

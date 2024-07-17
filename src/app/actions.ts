@@ -135,7 +135,6 @@ export async function deleteCategory(id: string) {
 }
 
 export async function createMemberBenefit(memberBenefit: MemberBenefit) {
-    console.log(memberBenefit)
     const newMemberBenefit = await prisma.memberBenefit.create({
         data: {
             ...memberBenefit
@@ -306,5 +305,39 @@ export async function updateSlug(configId: string, newSlug: string) {
     } catch (error) {
         console.log(error)
         return null;
+    }
+}
+export async function importBenefit(memberBenefitId: string, imported: boolean) {
+    const session = await auth()
+
+    const userId = session?.user?.id
+    if (!userId) {
+        return null
+    }
+
+    if (imported) {
+        const otherMemberBenefit = await prisma.otherMemberBenefit.create({
+            data: {
+                memberBenefitId,
+                userId
+            }
+        })
+        return otherMemberBenefit
+    }
+    else {
+        const otherMemberBenefit = await prisma.otherMemberBenefit.findFirst({
+            where: {
+                memberBenefitId,
+                userId
+            }
+        })
+        if (otherMemberBenefit) {
+            await prisma.otherMemberBenefit.delete({
+                where: {
+                    id: otherMemberBenefit.id
+                }
+            })
+        }
+        return null
     }
 }

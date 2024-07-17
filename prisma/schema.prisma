@@ -208,6 +208,8 @@ model MemberBenefit {
   link                     String?
   userId                   String
   categoryId               String?
+  dealType                 String?                    @default("COMPANY") // COMPANY, PARTNER
+  partnershipTypes         String?                    @default("ADS,SPONSOR") // ADS, SPONSOR, NEEDS_APPROVAL
   category                 Category?                  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   user                     User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt                DateTime                   @default(now())
