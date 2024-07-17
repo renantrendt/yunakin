@@ -49,10 +49,11 @@ interface CustomizePageActionsProps {
     config: MemberBenefitPageConfig
     onUpdate: (property: keyof MemberBenefitPageConfig, value: string | boolean) => void
     openShareModal: () => void
+    disabled?: boolean
 
 }
 
-const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openShareModal }: CustomizePageActionsProps) => {
+const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openShareModal, disabled }: CustomizePageActionsProps) => {
     return (
         <div className='   bg-landing-background    rounded-xl z-30 flex flex-col gap-6 justify-start'>
             <div className='flex flex-col gap-4 lg:flex-row  w-full justify-between items-center' >
@@ -130,11 +131,13 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
                     </div>
                 </div>
                 <div className=' flex w-full lg:w-fit  flex-row gap-2'>
-                    <Button variant="secondary" className='w-full' label="Share" loading={loading}
+                    <Button variant="secondary" className='w-full' label="Share"
                         onClick={openShareModal}
                     />
 
-                    <Button variant="primary" className='w-full' label="Publish Changes" loading={loading}
+                    <Button variant="primary" className='w-full' label="Publish Changes"
+                        disabled={disabled}
+                        loading={loading}
                         onClick={publishChanges}
                     />
                 </div>

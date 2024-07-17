@@ -49,8 +49,9 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
 
     const [memberBenefit, setMemberBenefit] = React.useState<FormValues | null>({
         deal_type: '',
-        partnership_types: [],
+        partnership_types: ['ads', 'sponsor'],
         visibility: MemberBenefitVisibility.PUBLIC,
+        categoryId: categories[0]?.id || '',
         image_type: '',
         ...editMemberBenefit
     } as FormValues)

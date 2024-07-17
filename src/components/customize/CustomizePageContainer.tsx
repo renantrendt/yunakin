@@ -138,6 +138,8 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
             <div className=' px-5 py-4   lg:px-12'>
 
                 <CustomizePageActions
+
+                    disabled={!isEditing}
                     loading={loading}
                     config={config}
                     publishChanges={publishChanges}
