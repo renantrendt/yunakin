@@ -211,7 +211,7 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                                                     <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Needs approval?</Typography>
                                                     <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Partners need your approval before publishing on their dealbook.</Typography>
                                                 </div>,
-                                            value: PartnershipType.NEEDS_APPROVAL
+                                            value: PartnershipType.NEEDS_APPROVA
                                         },
                                     ]}
                                     onChange={onChange}

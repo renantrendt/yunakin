@@ -86,3 +86,23 @@ export interface SelectedMemberBenefit extends MemberBenefit {
 export interface MemberBenefitWithImport extends MemberBenefit {
     import?: boolean
 }
+
+export type MemberBenefitFilterOptions = {
+    category?: {
+        label: string; selected: boolean;
+    }[];
+    imported?: {
+        label: string; selected: boolean;
+    }[];
+    partnership_types?: {
+        label: string; selected: boolean;
+    }[];
+    location?: {
+        label: string; selected: boolean;
+    }[];
+    status?: {
+        label: string; selected: boolean;
+    }[];
+};
+
+export type Filter = { [K in keyof MemberBenefitFilterOptions]?: MemberBenefitFilterOptions[K]; };

@@ -29,13 +29,14 @@ import platformConfig from '@/config/app-config'
 
 import EditIcon from "@/icons/edit-icon.svg"
 import { useSearchParams } from 'next/navigation'
-import { MemberBenefitVisibility, MemberBenefitWithImport } from '@/lib/types'
+import { Filter, MemberBenefitVisibility, MemberBenefitWithImport, PartnershipType } from '@/lib/types'
 import _, { set } from 'lodash'
 import { useTranslation } from '@/lib/i18n/client'
 import Image from 'next/image'
 import Toggle from '../atomic/toggle/Toggle'
 import { CheckCircledIcon, Pencil2Icon, PlusIcon, EyeOpenIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import TableHeadCell from './table/TableHeadCell'
+import TableFilter from '../filter/TableFilter'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -57,7 +58,28 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
     const [searched, setSearched] = useState(false)
     const debouncedValue = useDebounce(search, 500)
 
-
+    const [filter, setFilter] = useState<Filter>({
+        category: categories.map(category => ({ label: category.name, selected: false })),
+        imported: [{ label: 'Imported', selected: false, }, { label: 'Not Imported', selected: false, }],
+        partnership_types: _.keys(PartnershipType).map(key => ({ label: key, selected: false })),
+    })
+    const onFilterChange = (filter: Filter) => {
+        let filteredBenefits = defaultMemberBenefits
+        if (filter.category) {
+            const selectedCategories = filter.category.filter(c => c.selected).map(c => c.label)
+            if (selectedCategories.length > 0) {
+                const categoryIds = categories.filter(category => selectedCategories.includes(category.name)).map(category => category.id)
+                filteredBenefits = defaultMemberBenefits.filter(b => b.categoryId && categoryIds.includes(b.categoryId))
+            }
+        }
+        if (filter.imported) {
+            const selectedImportFilter = filter.imported.filter(c => c.selected).map(c => c.label)
+            if (selectedImportFilter.length > 0) {
+                filteredBenefits = filteredBenefits.filter(b => !b.import && selectedImportFilter.some(f => f === 'Not Imported') || b.import && selectedImportFilter.some(f => f === 'Imported'))
+            }
+        }
+        setMemberBenefits(filteredBenefits)
+    }
     useEffect(() => {
 
     }, [debouncedValue])
@@ -125,21 +147,21 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
             size: 300,
             minSize: 300
         }),
-        columnHelper.accessor(row => row.description, {
-            id: 'SuggestedDeal',
-            cell: info =>
-                <div className='flex gap-2 items-center'>
-                    <div className='text-[#00CE21]'>
+        // columnHelper.accessor(row => row.description, {
+        //     id: 'SuggestedDeal',
+        //     cell: info =>
+        //         <div className='flex gap-2 items-center'>
+        //             <div className='text-[#00CE21]'>
 
-                        <CheckCircledIcon width={18} height={18} />
-                    </div>
-                    <span>Yes</span>
-                </div>,
-            header: () => <span>Suggested Deal</span>,
-            footer: info => info.column.id,
-            size: 300,
-            minSize: 300
-        }),
+        //                 <CheckCircledIcon width={18} height={18} />
+        //             </div>
+        //             <span>Yes</span>
+        //         </div>,
+        //     header: () => <span>Suggested Deal</span>,
+        //     footer: info => info.column.id,
+        //     size: 300,
+        //     minSize: 300
+        // }),
         columnHelper.accessor(row => row.domain, {
             id: 'Import',
             cell: info => {
@@ -285,7 +307,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                     }} className='border-none outline-none hover:border-none focus:border-none
                              !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
             </div> */}
-            <div className=' flex flex-col justify-start items-start mt-8 mb-6 gap-4'>
+            <div className=' flex flex-row justify-between items-start mt-8 mb-6 gap-4'>
 
                 {/* <Pagination
     totalPages={Math.ceil(memberBenefits.length / 5)}
@@ -303,6 +325,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
     }}
 /> */}
                 <Button label='Create Deal' icon={<PlusIcon />} className='w-fit' variant='primary' onClick={() => setMemberBenefitModal(true)} />
+                <TableFilter filter={filter} onFilterChange={onFilterChange} />
             </div>
             <div className='flex flex-col gap-4'>
 

@@ -7,7 +7,7 @@ import CategoryScroller from '@/components/categoryscroller/CategoryScroller'
 import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard'
 import PageHeader from '@/components/memberbenefit/PageHeader'
 import ContentSection from '@/containers/layout/ContentSection'
-import { MemberBenefitFilter, SelectedMemberBenefit, selectMemberBenefitFilter } from '@/lib/types'
+import { Filter, MemberBenefitFilter, SelectedMemberBenefit, selectMemberBenefitFilter } from '@/lib/types'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
 import { PlusIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
@@ -28,6 +28,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, categories }: MemberBen
     const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
     const image = config.imageURL || "/images/logo.svg"
 
+
     return (
         <ContentSection
             className='max-w-full md:p-0 !p-0 '
@@ -44,12 +45,6 @@ const MemberBenefitsPageContainer = ({ config, benefits, categories }: MemberBen
                         {!searchParams?.get('embedded') && <div className=" w-full text-left ">
                             <Image unoptimized src={image} alt='logo' width={100} height={100} objectFit="contain" className=" min-w-[100px] max-w-[150px]  h-auto w-fit  z-10 " />
                         </div>}
-                        <LinkButton
-                            variant="primary"
-                            className='w-fit text-black self-end' label="Add your own Benefit."
-                            href='/onboarding'
-                            target='_blank'
-                        />
                     </div>
 
                     <div className='py-16 lg:py-6' >

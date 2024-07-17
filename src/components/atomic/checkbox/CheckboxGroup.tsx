@@ -31,7 +31,7 @@ const CheckboxGroup = ({ onChange, options, error, name, className, value }: Che
                         <div key={index} className={cn('flex items-center gap-2 cursor-pointer justify-start', className)}>
                             <Checkbox
                                 label={option.label}
-                                name={name}
+                                name={option.value}
                                 required={false}
                                 id={option.value}
                                 onChange={(e) => {
