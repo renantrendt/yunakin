@@ -24,13 +24,13 @@
     },
     "pages": {
         "customize": {
-            "title": "Customize Appearance"
+            "title": "Appearance"
         },
         "catalog": {
             "title": "Startup Deals"
         },
         "startup-deals": {
-            "title": "Startup Deals"
+            "title": "Dealbook"
         },
         "analytics": {
             "title": "Analytics"
