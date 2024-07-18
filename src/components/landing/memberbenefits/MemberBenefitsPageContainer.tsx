@@ -8,7 +8,7 @@ import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard'
 import PageHeader from '@/components/memberbenefit/PageHeader'
 import ContentSection from '@/containers/layout/ContentSection'
 import { Filter, MemberBenefitFilter, SelectedMemberBenefit, selectMemberBenefitFilter } from '@/lib/types'
-import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
+import { Category, MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from '@prisma/client'
 import { PlusIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
@@ -19,10 +19,11 @@ interface MemberBenefitsPageContainerProps {
     config: MemberBenefitPageConfig
     benefits: MemberBenefit[]
     categories: Category[]
+    otherBenefits: OtherMemberBenefit[]
 }
 
 
-const MemberBenefitsPageContainer = ({ config, benefits, categories }: MemberBenefitsPageContainerProps) => {
+const mMemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categories }: MemberBenefitsPageContainerProps) => {
     const searchParams = useSearchParams()
     const [selectedBenefits, setSelectedBenefits] = useState<MemberBenefit[]>(benefits)
     const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
@@ -121,6 +122,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, categories }: MemberBen
                                                 isEditing={false}
                                                 config={config}
                                                 key={index} benefit={benefit}
+                                                otherMemberbenefit={otherBenefits.find(other => other.memberBenefitId == benefit.id) ?? undefined}
                                             />
                                         ))}
                                 </div>

@@ -35,7 +35,8 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
         const device = deviceDetector.parse(navigator.userAgent || window.navigator.userAgent)
         // Rest of the code...
 
-        const isClicked = Boolean(localStorage.getItem(`${memberBenefitId}-${event}`));
+        const isClicked = Boolean(localStorage.getItem(`${memberBenefitId}-${config?.clientSlug}-${event}`));
+
         if (isClicked) {
             return;
         }
@@ -45,13 +46,13 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
             if (trackAnalytics) {
                 await upsertMemberBenefitLinkClick({
                     memberBenefitId,
-                    otherMemberBenefitId: otherMemberbenefit?.id,
+                    otherMemberBenefitId: otherMemberbenefit?.id ?? undefined,
                     device: (device.device?.type as string),
                     browser: device.client?.name,
                     os: device.os?.name,
                     event: event
                 });
-                localStorage.setItem(`${memberBenefitId}-${event}`, 'true');
+                localStorage.setItem(`${memberBenefitId}-${config?.clientSlug}-${event}`, 'true');
             }
         } catch (error) {
 

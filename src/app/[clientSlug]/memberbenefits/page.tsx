@@ -97,6 +97,7 @@ const MemberbenefitPage = async ({ params, searchParams }: { params: { clientSlu
             benefits={benefits}
             categories={categories}
             config={config}
+            otherBenefits={otherBenefits}
         />
     )
 }
