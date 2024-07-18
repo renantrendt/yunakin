@@ -37,6 +37,7 @@ import Toggle from '../atomic/toggle/Toggle'
 import { CheckCircledIcon, Pencil2Icon, PlusIcon, EyeOpenIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import TableHeadCell from './table/TableHeadCell'
 import TableFilter from '../filter/TableFilter'
+import ViewBenefitDetailsModal from '../molecules/view-benefit-details/ViewBenefitDetailsModal'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -51,6 +52,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
     const [memberBenefits, setMemberBenefits] = useState<MemberBenefitWithImport[]>(defaultMemberBenefits)
     const [modalOpen, setModalOpen] = useState(false)
     const [memberBenefitModal, setMemberBenefitModal] = useState(searchParams.get('openModal') === 'true' ? true : false)
+    const [showBenefitDetailsModal, setShowBenefitDetailsModal] = useState<string | undefined>(undefined)
     const [toBeDeletedMemberBenefitId, setToBeDeletedMemberBenefitId] = useState<string>('')
     const [tobeEditedMemberBenefit, setTobeEditedMemberBenefit] = useState<MemberBenefit | undefined>(undefined)
     const columnHelper = createColumnHelper<MemberBenefit>()
@@ -245,9 +247,11 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                             setToBeDeletedMemberBenefitId(memberBenefit.id)
                         }} className='text-[#7C7C7C] bg-transparent p-0 hover:bg-transparent focus:outline-none focus:drop-shadow-none' variant='alert' label='' />
                     </>}
-                    {!createdMemberBenefit && <Button icon={<EyeOpenIcon width={20} height={20} />} size='md' onClick={() => {
-
-                    }}
+                    {!createdMemberBenefit && <Button
+                        icon={<EyeOpenIcon width={20} height={20} />
+                        } size='md' onClick={() => {
+                            setShowBenefitDetailsModal(memberBenefit.id)
+                        }}
                         className=' bg-transparent p-0 hover:bg-transparent focus:outline-none text-[#7C7C7C]'
                     />}
                 </div>)
@@ -329,7 +333,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                 <Button label='Create Deal' icon={<PlusIcon />} className='w-fit' variant='primary' onClick={() => setMemberBenefitModal(true)} />
                 <TableFilter filter={filter} onFilterChange={onFilterChange} />
             </div>
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col relative'>
 
                 <Table>
                     <TableHead>
@@ -499,6 +503,14 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                             setLoading(false)
                         }
                     }}
+                />
+            }
+            {
+                showBenefitDetailsModal && <ViewBenefitDetailsModal
+                    memberBenefit={memberBenefits.find(b => b.id === showBenefitDetailsModal) as MemberBenefitWithImport}
+                    isOpen={true}
+                    category={categories.find(c => c.id === memberBenefits.find(b => b.id === showBenefitDetailsModal)?.categoryId)?.name as string}
+                    onClose={() => setShowBenefitDetailsModal(undefined)}
                 />
             }
         </div >

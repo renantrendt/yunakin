@@ -58,12 +58,11 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
 
         }
     }
-    const timeStamp = new Date().getTime()
 
 
     const domain = benefit.domain.includes('http') ? benefit.domain : `https://${benefit.domain}`
 
-    const image = benefit.imageURL && `${benefit.imageURL}?${timeStamp}` || `/images/dummy_logo.svg`
+    const image = benefit.imageURL && `${benefit.imageURL}` || `/images/dummy_logo.svg`
     return (
         <>
 
@@ -77,7 +76,7 @@ rounded-[10px] shadow-sm`, className)}
 
                     <div className=" flex flex-col  ">
                         <div className='flex justify-between items-start'>
-                            <figure className='relative hidden w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
+                            <figure className='relative hidden w-20 h-20  mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105  w-20 h-20 duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                             {benefit.offer && <div className='py-1 px-2 text-[#808080] font-bold font-satoshi leading-normal text-xs  md:text-sm bg-[#F5F5F5] rounded-[40px] ' style={{
                                 color: config?.textColor as string,
                                 backgroundColor: config?.buttonColor as string,
