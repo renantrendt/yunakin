@@ -43,6 +43,8 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }:
             setLoading(false)
         }
     }
+    const image = benefit.imageURL && `${benefit.imageURL}?${timeStamp}` || `/images/dummy_logo.svg`
+
     return (
         <>
 
@@ -50,7 +52,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }:
         rounded-[10px] shadow-sm`, className)}>
                 <div className="p-5 flex-shrink-0">
                     <div className='flex justify-between items-start'>
-                        <figure className='relative  w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
+                        <figure className='relative  w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                         {benefit.offer && <div className='py-1 px-2 text-black  font-bold font-satoshi leading-normal text-xs  bg-primary rounded-[40px] '>{benefit.offer?.substring(0, 30)}</div>}
                     </div>
 

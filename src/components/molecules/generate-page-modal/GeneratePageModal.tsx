@@ -127,7 +127,7 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
             closeOnOutsideClick={false}
         >
             <div className='justify-between flex w-full'>
-                <Button onClick={props.onClose} variant='secondary' size='sm' icon={<Cross1Icon />} className=' absolute !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
+                <Cross1Icon onClick={onClose} className=' absolute cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
             </div>
             <div className='container  flex flex-col  gap-6 px-4 py-8 lg:p-8 justify-center content'>
                 <h1 className='text-base font-gelica text-xl leading-[120%] font-semibold'>Public perks page generated.</h1>

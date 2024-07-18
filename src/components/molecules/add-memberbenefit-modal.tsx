@@ -77,7 +77,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
         >
             <div className='flex flex-col p-10 gap-8 '>
                 <div className='justify-between flex w-full'>
-                    <Button onClick={onClose} variant='secondary' size='sm' icon={<Cross1Icon />} className=' absolute !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
+                    <Cross1Icon onClick={onClose} className=' absolute cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
                 </div>
                 <div className='flex justify-between items-center relative'>
                     <div className='flex gap-1  lg:gap-2'>
