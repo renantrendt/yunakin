@@ -23,7 +23,7 @@ interface MemberBenefitsPageContainerProps {
 }
 
 
-const mMemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categories }: MemberBenefitsPageContainerProps) => {
+const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categories }: MemberBenefitsPageContainerProps) => {
     const searchParams = useSearchParams()
     const [selectedBenefits, setSelectedBenefits] = useState<MemberBenefit[]>(benefits)
     const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
@@ -32,7 +32,7 @@ const mMemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categor
 
     return (
         <ContentSection
-            className='max-w-full md:p-0 !p-0 '
+            className='max-w-full md:p-0 !p-0 min-h-[100vh] '
             fullWidth style={{
                 backgroundColor: config?.backgroundColor as string,
             }}>
@@ -132,7 +132,7 @@ const mMemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categor
                 </div>
 
             </div>
-            <div className='footer flex justify-center bottom-8 mb-5'>
+            <div className='footer fixed flex justify-center bottom-8 mb-5'>
                 <Typography type='p' className='text-center flex gap-2 '
                     style={{
                         color: config?.textColor as string,

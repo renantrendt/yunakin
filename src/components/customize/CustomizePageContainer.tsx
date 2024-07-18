@@ -45,6 +45,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     const [settingsModalOpen, setSettingsModalOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [loading, setLoading] = useState(false);
+    const [defaultConfig, setDefaultConfig] = useState(memberPageConfig)
     const [config, setConfig] = useState(memberPageConfig)
     const [selectedBenefits, setSelectedBenefits] = useState<MemberBenefit[]>(benefits)
     const pathname = usePathname()
@@ -61,7 +62,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
 
 
     useEffect(() => {
-        if (_.isEqual(config, memberPageConfig)) {
+        if (_.isEqual(config, defaultConfig)) {
             setIsEditing(false)
         } else {
             setIsEditing(true)
@@ -91,6 +92,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
 
             const updatedMemberPageConfig = await updateMemberPageConfig(config)
 
+
             setLoading(false)
             if (!_.isEqual(selectedBenefits, benefits)) {
                 // update selected benefits
@@ -102,6 +104,8 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
             } else {
                 if (updatedMemberPageConfig) {
                     customToast.success("Changes Published Successfully")
+                    setConfig(updatedMemberPageConfig)
+                    setDefaultConfig(updatedMemberPageConfig)
                 } else {
                     customToast.error("Something went wrong. Please try again")
                 }
@@ -123,6 +127,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
         onSettled: (data) => {
             if (data) {
                 setConfig(data)
+                setDefaultConfig(data)
                 customToast.success("Slug Updated Successfully")
             } else {
                 customToast.error("This slug is already taken. Please try another one")
