@@ -9,6 +9,8 @@ import _ from 'lodash'
 import DealBookChartContainer from '@/components/dashboard/chart/DealbookChartContainer'
 import DealBookAnalyticsSection from '@/components/analytics/section/DealBookAnalyticsSection'
 import { DealbookDashboardCards } from '@/components/dashboard/cards/DealbookDashboardCards'
+import PartnerDealBookAnalyticsSection from '@/components/analytics/section/PartnerDealBookAnalyticsSection'
+import { t } from 'i18next'
 export default async function Dashboard() {
 
     const session = await auth()
@@ -144,6 +146,20 @@ export default async function Dashboard() {
             }
         }
     })
+
+    const partnerPageViews = await prisma.partnerPageViews.findMany({
+        where: {
+            partnerPageConfigId: config?.id
+        },
+        include: {
+            pageConfig: {
+                select: {
+                    clientSlug: true
+                }
+            }
+        }
+    })
+
     const cardStats = {
         totalClicks: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.SAVE_BENEFIT).length).reduce((a, b) => a + b, 0),
         totalClaims: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event != MemberBenefitClickType.SAVE_BENEFIT).length).reduce((a, b) => a + b, 0),
@@ -180,6 +196,44 @@ export default async function Dashboard() {
         }),
         otherCompanyClicks: clicksByCompany
     }
+
+
+
+    const partnerStats = {
+        pageViews: partnerPageViews.length,
+        totalPartners: 0,
+        totalWaitingPartners: 0
+    }
+
+    const partnerChartStats = {
+        partnerPageViews: partnerPageViews.reduce<{
+            [key: string]: number
+        }>((acc, partnerPageView) => {
+            if (acc[partnerPageView.pageConfig.clientSlug]) {
+                acc[partnerPageView.pageConfig.clientSlug]++
+            } else {
+                acc[partnerPageView.pageConfig.clientSlug] = 1
+            }
+            return acc
+        }
+            , {}),
+        clicksByDeal: [{
+            title: 'Deal 1',
+            count: 0
+        }],
+        claimsByDeal: [
+            {
+                title: 'Deal 1',
+                count: 0
+            }
+        ],
+        totalPageViews: partnerPageViews.length,
+        totalClicks: 0,
+        totalClaims: 0
+    }
+    // partner dealbook
+
+
 
     // check if no clicks yet
     let hasData = false
@@ -250,6 +304,10 @@ export default async function Dashboard() {
             <DealBookAnalyticsSection
                 cardStats={cardStats}
                 chartStats={chartStats}
+            />
+            <PartnerDealBookAnalyticsSection
+                cardStats={partnerStats}
+                stats={partnerChartStats}
             />
         </div>
     )

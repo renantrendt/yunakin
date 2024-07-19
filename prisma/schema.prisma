@@ -16,27 +16,27 @@ datasource db {
 // }
 
 model User {
-  id                      String                    @id @default(uuid())
-  email                   String                    @unique
-  name                    String
-  password                String?
-  verifyToken             String                    @default(uuid())
-  verified                Boolean
-  emailVerified           DateTime?
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
-  avatar                  String?
-  role                    String                    @default("USER")
-  provider                String
-  teams                   Team[] // A user can belong to multiple teams
-  message                 Message[]
-  chat                    Chat[]
-  accounts                Account[]
-  sessions                Session[]
-  memberBenefit           MemberBenefit[]
-  MemberBenefitPageConfig MemberBenefitPageConfig[]
-  OtherMemberBenefit      OtherMemberBenefit[]
-  MemberPageViews         MemberPageViews[]
+  id                 String                    @id @default(uuid())
+  email              String                    @unique
+  name               String
+  password           String?
+  verifyToken        String                    @default(uuid())
+  verified           Boolean
+  emailVerified      DateTime?
+  createdAt          DateTime                  @default(now())
+  updatedAt          DateTime                  @updatedAt
+  avatar             String?
+  role               String                    @default("USER")
+  provider           String
+  teams              Team[] // A user can belong to multiple teams
+  message            Message[]
+  chat               Chat[]
+  accounts           Account[]
+  sessions           Session[]
+  memberBenefit      MemberBenefit[]
+  pageConfigs        MemberBenefitPageConfig[]
+  OtherMemberBenefit OtherMemberBenefit[]
+  MemberPageViews    MemberPageViews[]
 }
 
 model Account {
@@ -183,6 +183,7 @@ model MemberBenefitPageConfig {
   updatedAt                DateTime                   @updatedAt
   onboardingMemberBenefits OnboardingMemberBenefits[]
   MemberPageViews          MemberPageViews[]
+  PartnerPageViews         PartnerPageViews[]
 
   @@index([clientSlug])
 }
@@ -208,6 +209,7 @@ model MemberBenefit {
   link                     String?
   userId                   String
   categoryId               String?
+  pageConfigId             String                     @default(uuid())
   dealType                 String?                    @default("COMPANY") // COMPANY, PARTNER
   partnershipTypes         String?                    @default("ADS,SPONSOR") // ADS, SPONSOR, NEEDS_APPROVAL
   category                 Category?                  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
@@ -265,4 +267,18 @@ model MemberPageViews {
   updatedAt                 DateTime                @default(now()) @updatedAt
   User                      User?                   @relation(fields: [userId], references: [id])
   userId                    String?
+}
+
+model PartnerPageViews {
+  id                  String                  @id @default(uuid())
+  device              String?
+  browser             String?
+  os                  String?
+  pageConfigId        String
+  partnerPageConfigId String
+  pageConfig          MemberBenefitPageConfig @relation(fields: [pageConfigId], references: [id], onDelete: Cascade)
+  createdAt           DateTime                @default(now())
+  updatedAt           DateTime                @default(now()) @updatedAt
+
+  @@index([pageConfigId])
 }

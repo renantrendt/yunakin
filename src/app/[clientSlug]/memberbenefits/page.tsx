@@ -24,6 +24,14 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string }, s
         where: {
             userId: config.userId,
         },
+        include: {
+            memberBenefit: {
+                select: {
+                    id: true,
+                    pageConfigId: true,
+                }
+            }
+        }
     })
     const publicOtherBenefitsIds = await prisma.memberBenefit.findMany({
         where: {

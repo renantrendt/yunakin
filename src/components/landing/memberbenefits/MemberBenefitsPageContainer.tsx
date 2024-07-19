@@ -6,7 +6,7 @@ import CategoryScroller from '@/components/categoryscroller/CategoryScroller'
 import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard'
 import PageHeader from '@/components/memberbenefit/PageHeader'
 import ContentSection from '@/containers/layout/ContentSection'
-import { MemberBenefitFilter, selectMemberBenefitFilter } from '@/lib/types'
+import { MemberBenefitFilter, OtherMemberBenefitWithMemberBenefit, selectMemberBenefitFilter } from '@/lib/types'
 import { Category, MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from '@prisma/client'
 import { PlusIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
@@ -18,7 +18,7 @@ interface MemberBenefitsPageContainerProps {
     config: MemberBenefitPageConfig
     benefits: MemberBenefit[]
     categories: Category[]
-    otherBenefits: OtherMemberBenefit[]
+    otherBenefits: OtherMemberBenefitWithMemberBenefit[]
 }
 
 
@@ -36,7 +36,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                 backgroundColor: config?.backgroundColor as string,
             }}>
             <div className='max-w-full pb-20 lg:pb-40 w-full '>
-                <PageTracker config={config} />
+                <PageTracker config={config} otherBenefits={otherBenefits} />
 
                 <div className=' max-w-[1440px] mx-auto   px-4 md:px-28'>
 

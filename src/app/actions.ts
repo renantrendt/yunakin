@@ -41,7 +41,25 @@ export async function upsertMemberPageView(pageView: MemberPageViewDto) {
 
     return;
 }
+export async function upsertPartnerPageView(pageView: MemberPageViewDto) {
+    // save the data to database
+    if (!pageView.partnerPageConfigIds || pageView.partnerPageConfigIds.length === 0) {
+        return
+    }
+    await prisma.partnerPageViews.createMany({
+        data: pageView.partnerPageConfigIds.map(id => {
+            return {
+                device: pageView.device,
+                browser: pageView.browser,
+                os: pageView.os,
+                pageConfigId: pageView.memberBenefitPageConfigId,
+                partnerPageConfigId: id
+            }
+        })
+    })
 
+    return;
+}
 // export async function insertMemberBenefit() {
 //     const benefits: MemberBenefit[] =
 //         [

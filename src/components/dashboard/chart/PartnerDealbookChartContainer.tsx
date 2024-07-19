@@ -10,9 +10,8 @@ import ChartCard from './ChartCard'
 interface PartnerDealbookChartContainerProps {
     stats: {
         partnerPageViews: {
-            title: string
-            count: number
-        }[]
+            [key: string]: number
+        }
         clicksByDeal: {
             title: string
             count: number
@@ -33,7 +32,9 @@ const PartnerDealbookChartContainer = ({ stats }: PartnerDealbookChartContainerP
         {
             title: 'Pageviews by Partner',
             summary: totalPageViews,
-            children: <BarChart name='Clicks' items={partnerPageViews} />
+            children: <BarChart name='Clicks' items={
+                Object.entries(partnerPageViews).map(([key, value]) => ({ title: key, count: value }))
+            } />
         },
 
         {

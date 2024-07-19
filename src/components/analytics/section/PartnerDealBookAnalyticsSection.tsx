@@ -10,24 +10,10 @@ interface PartnerDealBookAnalyticsSectionProps {
         totalWaitingPartners: number;
         pageViews: number;
     }
-    chartStats: {
-        benefitsClicks: {
-            title: string
-            count: number
-        }[]
-        benefitsClaims: {
-            title: string
-            count: number
-        }[]
-        otherCompanyClicks: {
-            [key: string]: number
-        }
-    }
     stats: {
         partnerPageViews: {
-            title: string
-            count: number
-        }[]
+            [key: string]: number
+        }
         clicksByDeal: {
             title: string
             count: number

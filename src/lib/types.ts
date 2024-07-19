@@ -1,4 +1,4 @@
-import { MemberBenefit } from "@prisma/client"
+import { MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from "@prisma/client"
 import { Message } from "ai"
 
 export interface Chat extends Record<string, any> {
@@ -41,6 +41,7 @@ export type MemberPageViewDto = {
     device?: string
     browser?: string
     os?: string
+    partnerPageConfigIds?: string[]
 }
 
 
@@ -106,3 +107,10 @@ export type MemberBenefitFilterOptions = {
 };
 
 export type Filter = { [K in keyof MemberBenefitFilterOptions]?: MemberBenefitFilterOptions[K]; };
+
+export interface OtherMemberBenefitWithMemberBenefit extends OtherMemberBenefit {
+    memberBenefit: {
+        id: string
+        pageConfigId: string | null
+    }
+}
