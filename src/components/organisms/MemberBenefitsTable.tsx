@@ -27,6 +27,8 @@ import { PlusIcon, EyeOpenIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import TableHeadCell from './table/TableHeadCell'
 import TableFilter from '../filter/TableFilter'
 import ViewBenefitDetailsModal from '../molecules/view-benefit-details/ViewBenefitDetailsModal'
+import { useMutation } from '@tanstack/react-query'
+import LoadingIcon from '@/icons/LoadingIcon'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -70,6 +72,24 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
         const memberBenefit = memberBenefits.find(memberBenefit => memberBenefit.id === memberBenefitId)
         return memberBenefit?.userId === session.data?.user?.id
     }
+
+    const importMutation = useMutation({
+        mutationFn: async (data: any) => {
+            return await importBenefit(data.benefit.id, data.importStatus)
+        },
+        onSuccess(data, variables, context) {
+            setMemberBenefits(memberBenefits.map(b => b.id === variables.benefit.id ? { ...variables.benefit, import: variables.importStatus } : b))
+            if (variables.importStatus) {
+                customToast.success('Deal imported successfully')
+            } else {
+                customToast.success('Deal removed successfully')
+            }
+        },
+        onError: () => {
+            customToast.error('Failed to update import status')
+        }
+    })
+
     const columns = [
         columnHelper.accessor(row => row.title, {
             id: 'Image',
@@ -153,24 +173,16 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                     return <div></div>
                 }
                 return (
-                    <Toggle
-                        checked={memberBenefits[info.row.index].import ?? false}
-                        onChange={async (checked) => {
-                            const currBenefit = memberBenefits[info.row.index]
-                            try {
-                                setMemberBenefits(memberBenefits.map(b => b.id === currBenefit.id ? { ...currBenefit, import: checked } : b))
-                                await importBenefit(currBenefit.id, checked)
-                                if (checked) {
-                                    customToast.success('Deal imported successfully')
-                                } else {
-                                    customToast.success('Deal removed successfully')
-                                }
-                            } catch (error) {
-                                customToast.error('Failed to update import status')
-                                setMemberBenefits(memberBenefits.map(b => b.id === currBenefit.id ? { ...currBenefit, import: !checked } : b))
-                            }
-                        }}
-                    />
+                    <>
+                        <Toggle
+                            checked={memberBenefits[info.row.index].import ?? false}
+                            onChange={async (checked) => {
+                                await importMutation.mutateAsync({ benefit: memberBenefits[info.row.index], importStatus: checked })
+                            }}
+                        />
+                        {importMutation.isPending && importMutation.variables.benefit.id === memberBenefits[info.row.index].id && <LoadingIcon />}
+                    </>
+
                 )
             },
             header: () => <span>Import</span>,

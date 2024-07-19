@@ -1,47 +1,10 @@
 'use server'
 import { auth } from "@/auth"
+import siteUrls from "@/config/site-config"
 import { prisma } from "@/lib/prisma"
 import { MemberBenefitLinkClickDto, MemberBenefitPageConfigDto, MemberPageViewDto } from "@/lib/types"
 import { MemberBenefit, MemberBenefitPageConfig } from "@prisma/client"
-
-export async function getChat(id: string, userId: string) {
-    const chat = await prisma.chat.findFirst({
-        where: {
-            id: id
-        },
-        include: {
-            messages: true
-        }
-    })
-
-    if (!chat || (userId && chat.userId !== userId)) {
-        return null
-    }
-    return chat
-}
-
-export async function getChats(userId: string) {
-    const chats = await prisma.chat.findMany({
-        where: {
-            userId: userId
-        },
-    })
-    return chats;
-}
-
-export async function deleteChat(id: string) {
-    await prisma.message.deleteMany({
-        where: {
-            chatId: id
-        }
-    });
-    const chats = await prisma.chat.delete({
-        where: {
-            id: id
-        }
-    })
-    return chats;
-}
+import { revalidatePath } from "next/cache"
 
 
 export async function checkUserExists(email: string) {
@@ -139,6 +102,7 @@ export async function createMemberBenefit(memberBenefit: MemberBenefit) {
             ...memberBenefit
         }
     })
+    revalidatePath(siteUrls.general.customize)
     return newMemberBenefit
 }
 export async function updateMemberBenefit(memberBenefit: MemberBenefit) {
@@ -150,6 +114,7 @@ export async function updateMemberBenefit(memberBenefit: MemberBenefit) {
             ...memberBenefit
         }
     })
+    revalidatePath(siteUrls.general.customize)
     return updatedMemberBenefit
 }
 export async function deleteMemberBenefit(id: string) {
@@ -158,6 +123,7 @@ export async function deleteMemberBenefit(id: string) {
             id: id
         }
     })
+    revalidatePath(siteUrls.general.customize)
 }
 
 
@@ -222,6 +188,7 @@ export async function deleteOtherMemberBenefit(memberBenefitId: string, userId: 
             id: otherMemberBenefitId.id
         }
     })
+    revalidatePath(siteUrls.general.customize)
 }
 
 
@@ -321,6 +288,7 @@ export async function importBenefit(memberBenefitId: string, imported: boolean) 
                 userId
             }
         })
+        revalidatePath(siteUrls.general.customize)
         return otherMemberBenefit
     }
     else {
@@ -337,6 +305,7 @@ export async function importBenefit(memberBenefitId: string, imported: boolean) 
                 }
             })
         }
+        revalidatePath(siteUrls.general.customize)
         return null
     }
 }
