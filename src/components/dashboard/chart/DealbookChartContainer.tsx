@@ -7,7 +7,7 @@ import PieChart from './pie/PieChart'
 import ChartCard from './ChartCard'
 
 
-interface ChartContainerProps {
+interface DealBookChartContainerProps {
     benefitClicks: {
         title: string
         count: number
@@ -29,23 +29,23 @@ interface ChartContainerProps {
     totalCompanyClicks: number
 }
 
-const ChartContainer = ({ benefitClicks, companyClicks, totalClicks, totalCompanyClicks, totalClaims, beenfitsClaims }: ChartContainerProps) => {
+const DealBookChartContainer = ({ benefitClicks, companyClicks, totalClicks, totalCompanyClicks, totalClaims, beenfitsClaims }: DealBookChartContainerProps) => {
     const charts = [
         {
-            title: 'Benefits that your members are saving at your members benefits public page',
-            summary: totalClicks,
-            children: <BarChart name='Clicks' items={benefitClicks} />
+            title: 'Clicks by Deal',
+            summary: totalClaims,
+            children: <BarChart name='Clicks' items={beenfitsClaims} />
         },
 
         {
-            title: 'Benefits listed from my company that was saved at other companies public members page',
-            summary: totalCompanyClicks,
-            children: <BarChart name='All Member Benefit Clicks' items={companyClicks} />
+            title: 'Saved Deals',
+            summary: totalClicks,
+            children: <BarChart name='All Member Benefit Clicks' items={benefitClicks} />
         },
         {
-            title: 'Clicks on the website of the benefits listed on my public members page',
-            summary: totalClaims,
-            children: <BarChart name='Benefit Claims' items={beenfitsClaims} />
+            title: 'Live Ads',
+            summary: 2122,
+            children: <PieChart name='whatever' items={beenfitsClaims} />
         },
     ]
     return (
@@ -59,4 +59,4 @@ const ChartContainer = ({ benefitClicks, companyClicks, totalClicks, totalCompan
     )
 }
 
-export default ChartContainer
+export default DealBookChartContainer

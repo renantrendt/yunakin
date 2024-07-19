@@ -1,14 +1,14 @@
 import React from 'react'
-import ChartContainer from '@/components/dashboard/chart/ChartContainer'
-import { DashboardCards } from '@/components/dashboard/cards/DashboardCards'
 import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import { auth } from '@/auth'
 import { MemberBenefitClickType, PartnershipType } from '@/lib/types'
 import Typography from '@/components/atomic/typography/Typography'
 import WarningIcon from "@/icons/toast/warning-icon.svg"
-import TableFilter from '@/components/filter/TableFilter'
 import _ from 'lodash'
+import DealBookChartContainer from '@/components/dashboard/chart/DealbookChartContainer'
+import DealBookAnalyticsSection from '@/components/analytics/section/DealBookAnalyticsSection'
+import { DealbookDashboardCards } from '@/components/dashboard/cards/DealbookDashboardCards'
 export default async function Dashboard() {
 
     const session = await auth()
@@ -246,55 +246,11 @@ export default async function Dashboard() {
                 <Typography type='p' className='text-black font-semibold font-satoshiBlack text-sm leading-normal'>This is a demo screen. The analytics on this page are not real. It will be updated after you start receiving the first click.</Typography>
             </div>
             }
-            <div className='flex w-full justify-between flex-row'>
-                <Typography type='h2' className='text-black font-semibold !text-2xl lg-!text-2xl font-satoshi'>Dealbook Performance</Typography>
-                {/* <TableFilter
-                    filter={
-                        {}
-                    }
-                    onFilterChange={() => { }}
-                /> */}
-            </div>
-            <div className='dealbook p-6 my-6 bg-[#F3F1F1] flex flex-col gap-8 rounded-2xl'>
-                <div className='flex w-full justify-between flex-row'>
-                    <Typography type='h3' className='text-black font-semibold !text-lg font-satoshi'>Dealbook</Typography>
 
-                </div>
-                <DashboardCards cardStats={cardStats} />
-                <ChartContainer benefitClicks={chartStats.benefitsClicks}
-                    totalClicks={cardStats.totalClicks}
-                    totalClaims={cardStats.totalClaims}
-                    beenfitsClaims={chartStats.benefitsClaims}
-                    companyClicks={Object.keys(chartStats.otherCompanyClicks).map(key => {
-                        return {
-                            title: key,
-                            count: chartStats.otherCompanyClicks[key]
-                        }
-                    })}
-                    totalCompanyClicks={Object.keys(chartStats.otherCompanyClicks).map(key => chartStats.otherCompanyClicks[key]).reduce((a, b) => a + b, 0)}
-
-                />
-            </div>
-            <div className='dealbook p-6 my-6 bg-[#F3F1F1] flex flex-col gap-8 rounded-2xl'>
-                <div className='flex w-full justify-between flex-row'>
-                    <Typography type='h3' className='text-black font-semibold !text-lg font-satoshi'>Partner&apos;s Dealbook</Typography>
-
-                </div>
-                <DashboardCards cardStats={cardStats} />
-                <ChartContainer benefitClicks={chartStats.benefitsClicks}
-                    totalClicks={cardStats.totalClicks}
-                    totalClaims={cardStats.totalClaims}
-                    beenfitsClaims={chartStats.benefitsClaims}
-                    companyClicks={Object.keys(chartStats.otherCompanyClicks).map(key => {
-                        return {
-                            title: key,
-                            count: chartStats.otherCompanyClicks[key]
-                        }
-                    })}
-                    totalCompanyClicks={Object.keys(chartStats.otherCompanyClicks).map(key => chartStats.otherCompanyClicks[key]).reduce((a, b) => a + b, 0)}
-
-                />
-            </div>
+            <DealBookAnalyticsSection
+                cardStats={cardStats}
+                chartStats={chartStats}
+            />
         </div>
     )
 }

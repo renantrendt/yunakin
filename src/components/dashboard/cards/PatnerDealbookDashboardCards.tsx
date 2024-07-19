@@ -1,18 +1,18 @@
 import React from 'react'
 import DashboardCard from './DashboardCard'
 
-interface DashboardCardsProps {
+interface PartnerDealbookDashboardCardsProps {
 
     cardStats: {
-        totalBenefits: number;
-        totalWaitingBenefits: number;
+        totalPartners: number;
+        totalWaitingPartners: number;
         pageViews: number;
     }
 
 }
 
-export const DashboardCards = ({ cardStats }: DashboardCardsProps) => {
-    const { totalWaitingBenefits, totalBenefits } = cardStats;
+export const PartnerDealbookDashboardCards = ({ cardStats }: PartnerDealbookDashboardCardsProps) => {
+    const { totalPartners, pageViews, totalWaitingPartners } = cardStats;
     const data = [
         {
             title: "Page Views",
@@ -21,13 +21,13 @@ export const DashboardCards = ({ cardStats }: DashboardCardsProps) => {
         },
 
         {
-            title: "Live Deals",
-            quantity: totalBenefits,
+            title: "Partners",
+            quantity: totalPartners,
             increase: 21
         },
         {
-            title: "Deals Waiting Your Approval",
-            quantity: totalWaitingBenefits,
+            title: "Waiting Approval",
+            quantity: totalWaitingPartners,
             increase: 21
         },
     ]

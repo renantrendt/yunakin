@@ -1,19 +1,22 @@
 'use client'
 import React from 'react'
 import Chart from 'react-apexcharts'
-
-const PieChart = () => {
+interface PieChartOptions {
+    items: {
+        title: string
+        count: number
+    }[]
+    name: string
+}
+const PieChart = ({ items, name }: PieChartOptions) => {
     const state = {
-
-        series: [44, 55, 13, 43, 22],
+        series: items.map(d => Math.floor(Math.random() * 100)),
         options: {
-            colors: ['#5C37EB', '#705AF8', '#5C37EB'],
-
             chart: {
                 width: 380,
-                type: 'pie',
+                type: 'donut',
             },
-            labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+            labels: items.map(d => d.title),
             responsive: [{
                 breakpoint: 480,
                 options: {
