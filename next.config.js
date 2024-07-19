@@ -10,7 +10,7 @@ const nextConfig = {
         ignoreBuildErrors: true,
     },
     eslint: {
-        ignoreDuringBuilds: true,
+        ignoreDuringBuilds: false,
     },
     webpack(config) {
         // Grab the existing rule that handles SVG imports

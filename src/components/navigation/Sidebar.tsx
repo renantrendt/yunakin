@@ -3,14 +3,9 @@
 import React from 'react'
 import Link from 'next/link'
 import siteUrls from '@/config/site-config'
-import InputField from '../atomic/input/InputField'
-import MagnifyingGlass from "@/icons/magnifying-glass.svg"
 import DashboardLogoIcon from "@/icons/dashboard-logo.svg"
-import HomeIcon from "@/icons/home.svg"
-import InboxIcon from "@/icons/inbox.svg"
 import UserGroupIcon from "@/icons/user-group.svg"
 import SettingsIcon from "@/icons/settings.svg"
-import BookOpen from "@/icons/book-open.svg"
 import NavigationItem from '../atomic/navigation/NavigationItem'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'

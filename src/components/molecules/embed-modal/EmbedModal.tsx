@@ -8,10 +8,8 @@ import EmbedIcon from '@/icons/editor/embed-icon.svg'
 import CustomizeUrlIcon from '@/icons/editor/customize-url-icon.svg'
 import ShareUrlIcon from '@/icons/editor/share-url-icon.svg'
 import Button from '@/components/atomic/button/Button';
-import BackIcon from '@/icons/BackIcon';
 import InputField from '@/components/atomic/input/InputField';
 import { MemberBenefitPageConfig } from '@prisma/client';
-import { set } from 'react-ga';
 
 interface EmbedModalProps {
     isOpen: boolean;

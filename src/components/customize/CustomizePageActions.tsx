@@ -10,8 +10,6 @@ import FontColorIcon from "@/icons/editor/font-color-icon.svg"
 import ButtonColorIcon from "@/icons/editor/button-color-icon.svg"
 import PageBackgroundColorIcon from "@/icons/editor/background-color-icon.svg"
 import CardBackgroundColorIcon from "@/icons/editor/card-bacground-color-icon.svg"
-import { Share2Icon } from '@radix-ui/react-icons'
-import LaunchIcon from "@/icons/editor/launch-icon.svg"
 interface ColorInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     icon: React.ReactNode
 }
@@ -67,7 +65,7 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
                                 onUpdate('primaryFont', e)
                             }}
                             className='min-w-[150px]'
-                            value={config.primaryFont}
+                            value={config.primaryFont as string}
                             options={[{
                                 label: 'Open Sans',
                                 value: 'openSans'
@@ -94,14 +92,14 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
 
                             <ColorInput
                                 icon={<FontColorIcon className="w-5 h-5 lg:w-7 lg:h-7" />}
-                                value={config.textColor}
+                                value={config.textColor as string}
                                 onChange={(e) => {
                                     onUpdate('textColor', e.target.value)
                                 }}
                             />
                             <ColorInput
                                 icon={<ButtonColorIcon className="w-5 h-5 lg:w-7 lg:h-7" />}
-                                value={config.buttonColor}
+                                value={config.buttonColor as string}
                                 onChange={(e) => {
                                     onUpdate('buttonColor', e.target.value)
                                 }}
@@ -109,14 +107,14 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
                             />
                             <ColorInput
                                 icon={<PageBackgroundColorIcon className="w-5 h-5 lg:w-7 lg:h-7" />}
-                                value={config.backgroundColor}
+                                value={config.backgroundColor as string}
                                 onChange={(e) => {
                                     onUpdate('backgroundColor', e.target.value)
                                 }}
                             />
                             <ColorInput
                                 icon={<CardBackgroundColorIcon className="w-5 h-5 lg:w-7 lg:h-7" />}
-                                value={config.cardBackgroundColor}
+                                value={config.cardBackgroundColor as string}
                                 onChange={(e) => {
                                     onUpdate('cardBackgroundColor', e.target.value)
                                 }}

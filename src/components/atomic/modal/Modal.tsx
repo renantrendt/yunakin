@@ -1,7 +1,5 @@
 // components/Modal.tsx
 import React, { useEffect } from 'react'
-import Button from '@/components/atomic/button/Button'
-import CrossIcon from "@/icons/cross-icon.svg"
 import { cn } from '@/utils/cn'
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,7 +13,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className, modalClassName, closeOnOutsideClick = true }) => {
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && closeOnOutsideClick) {
         onClose()
       }
     }

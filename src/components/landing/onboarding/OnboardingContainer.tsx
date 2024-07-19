@@ -1,13 +1,7 @@
 'use client'
-import { createMemberPageConfigWithoutUser, getMemberPageConfigByClientSlug } from '@/app/actions'
-import Badge from '@/components/atomic/badge/Badge'
 import Button from '@/components/atomic/button/Button'
-import ImageUploader from '@/components/atomic/file-uploader/ImageUploader'
-import InputField from '@/components/atomic/input/InputField'
 import customToast from '@/components/atomic/toast/customToast'
 import Typography from '@/components/atomic/typography/Typography'
-import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard'
-import PageHeader from '@/components/memberbenefit/PageHeader'
 import SelectMemberBenefitCard from '@/components/memberbenefit/SelectMemberBenefitCard'
 import OnboardingModal from '@/components/molecules/onboarding-modal/OnboardingModal'
 import siteUrls from '@/config/site-config'
@@ -19,13 +13,10 @@ import { Category, MemberBenefit } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Input } from 'postcss'
 import React, { useState } from 'react'
-import { HamburgerMenuIcon, Cross1Icon, ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons'
 import GeneratePageModal from '@/components/molecules/generate-page-modal/GeneratePageModal'
 import SelectCategoryScroller from '@/components/categoryscroller/SelectCategoryScroller'
 import { v4 } from "uuid";
-import useMediaQuery from '@/hooks/useMediaQuery'
 interface OnboardingContainerProps {
     benefits: MemberBenefit[]
     categories: Category[]
@@ -105,9 +96,10 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                         </div>
                         <div className='mb-40 '>
                             <>
-                                {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
+                                {/* {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
                                     return (
                                         <SelectCategoryScroller
+                                            key={category.id}
                                             category={category}
                                             selectedBenefits={selectedBenefits.filter((benefit: SelectedMemberBenefit) => benefit.categoryId === category.id)}
                                             setSelectedBenefits={(categorySelectedBenefits) => {
@@ -123,7 +115,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                             }}
                                         />
                                     )
-                                })}
+                                })} */}
 
                                 {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
                                     <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-28 mx-auto '>

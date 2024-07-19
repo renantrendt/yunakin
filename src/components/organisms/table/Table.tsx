@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import TableHead from './TableHead'
 import TableBody from './TableBody';
-import { useMotionValueEvent, useScroll } from 'framer-motion';
 
 interface TableProps {
     children: (React.ReactElement<typeof TableHead> | React.ReactElement<typeof TableBody>)[];

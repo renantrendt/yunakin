@@ -2,7 +2,6 @@
 import LoadingIcon from '@/icons/LoadingIcon'
 import { useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
-import Script from 'next/script'
 import React from 'react'
 
 interface AuthProps {
@@ -24,8 +23,8 @@ const Auth = ({ children }: AuthProps) => {
         return <></>
     }
     if (status == 'authenticated') {
-        if (window.clarity && data?.user) {
-            window.clarity("identify", data.user?.email, data.user?.email, pathname, data.user?.clientSlug)
+        if ((window as any).clarity && data?.user) {
+            (window as any).clarity("identify", data.user?.email, data.user?.email, pathname, data.user?.clientSlug)
         }
     }
     return <div>

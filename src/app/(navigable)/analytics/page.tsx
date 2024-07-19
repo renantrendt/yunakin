@@ -1,5 +1,4 @@
 import React from 'react'
-import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import ChartContainer from '@/components/dashboard/chart/ChartContainer'
 import { DashboardCards } from '@/components/dashboard/cards/DashboardCards'
 import { prisma } from '@/lib/prisma'
@@ -32,7 +31,7 @@ export default async function Dashboard() {
         }
 
     } catch (error) {
-
+        // silent catch
     }
     const memberBenefits = await prisma.memberBenefit.findMany({
         where: {

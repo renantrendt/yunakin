@@ -1,13 +1,12 @@
 'use client'
 import PageTracker from '@/components/analytics/pagetracker/PageTracker'
 import Button from '@/components/atomic/button/Button'
-import LinkButton from '@/components/atomic/button/LinkButton'
 import Typography from '@/components/atomic/typography/Typography'
 import CategoryScroller from '@/components/categoryscroller/CategoryScroller'
 import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard'
 import PageHeader from '@/components/memberbenefit/PageHeader'
 import ContentSection from '@/containers/layout/ContentSection'
-import { Filter, MemberBenefitFilter, SelectedMemberBenefit, selectMemberBenefitFilter } from '@/lib/types'
+import { MemberBenefitFilter, selectMemberBenefitFilter } from '@/lib/types'
 import { Category, MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from '@prisma/client'
 import { PlusIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
@@ -102,7 +101,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                             </div>
                         </div>
                         <div className=' max-w-[1440px]  mx-auto px-0 md:px-16'>
-                            {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
+                            {/* {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
                                 return (
                                     <CategoryScroller
                                         category={category}
@@ -111,7 +110,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
 
                                     />
                                 )
-                            })}
+                            })} */}
 
                             {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
                                 <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-12 mx-auto '>
@@ -138,7 +137,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                         color: config?.textColor as string,
                     }}
                 >
-                    <span> Powered by </span><a href='https://www.yunakin.com/' target='_blank' className='text-blue-500 underline'>Yunakin.com</a>
+                    <span> Powered by </span><a href='https://www.yunakin.com/' rel="noreferrer" target='_blank' className='text-blue-500 underline'>Yunakin.com</a>
                 </Typography>
 
                 {searchParams?.get('embedded') === 'true' && (

@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import ExclamationIcon from '@/icons/exclamation-circle.svg'
 import { cn } from '@/utils/cn';
 import ExclmationIcon from '@/icons/exclamation-circle.svg'
 
@@ -19,7 +18,7 @@ interface RadioGroupProps {
     value: string;
 
 }
-const RadioGroup = ({ onChange, options, error, label, id, name, className, value }: RadioGroupProps) => {
+const RadioGroup = ({ onChange, options, error, name, className, value }: RadioGroupProps) => {
     console.log('options', options)
     console.log('value', value)
     return (

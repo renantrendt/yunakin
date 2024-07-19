@@ -1,3 +1,4 @@
+import React from 'react'
 import Button from "@/components/atomic/button/Button";
 import CheckboxGroup from "@/components/atomic/checkbox/CheckboxGroup";
 import Divider from "@/components/atomic/divider/Divider";
@@ -13,12 +14,7 @@ const schema = yup.object().shape({
     partnership_types: yup.array().of(yup.string()).required(),
     visibility: yup.string().required()
 })
-interface FormValues {
-    visibility?: string | undefined;
-    deal_type?: string;
-    partnership_types?: string[] | null | undefined;
-}
-
+interface FormValues extends yup.Asserts<typeof schema> { }
 interface AddMemberBenefitStepOneProps {
     deal_type: string;
     partnership_types: string[];
@@ -98,7 +94,7 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                                 }
                             ]}
                             onChange={onChange}
-                            value={value}
+                            value={value as string}
                             error={errors.deal_type?.message}
                         />
                     )}
@@ -120,11 +116,11 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
 
                         <Controller
                             control={control}
-                            name="visiblity"
+                            name="visibility"
                             render={({ field: { onChange, value } }) => (
                                 <CheckboxGroup
-                                    id='visiblity'
-                                    name='visiblity'
+                                    id='visibility'
+                                    name='visibility'
                                     className=''
                                     options={[
                                         {
@@ -211,7 +207,7 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                                                     <Typography type='h3' className='font-satoshi text-sm lg:text-sm leading-normal !text-black !font-medium'>Needs approval?</Typography>
                                                     <Typography type='p' className='!text-sm lg:!text-sm font-regular text-[#5E5E5E]'>Partners need your approval before publishing on their dealbook.</Typography>
                                                 </div>,
-                                            value: PartnershipType.NEEDS_APPROVA
+                                            value: PartnershipType.NEEDS_APPROVAL
                                         },
                                     ]}
                                     onChange={onChange}

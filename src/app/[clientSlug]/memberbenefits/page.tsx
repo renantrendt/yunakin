@@ -1,20 +1,10 @@
-import PageHeader from '@/components/memberbenefit/PageHeader';
 import React from 'react'
-import Image from 'next/image';
-import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard';
 import { prisma } from '@/lib/prisma';
-import { auth } from '@/auth';
 import { notFound } from 'next/navigation';
 import { MemberBenefit } from '@prisma/client';
-import ContentSection from '@/containers/layout/ContentSection';
-import Typography from '@/components/atomic/typography/Typography';
-import LinkButton from '@/components/atomic/button/LinkButton';
-import PageTracker from '@/components/analytics/pagetracker/PageTracker';
-import { MemberBenefitVisibility, selectMemberBenefitFilter } from '@/lib/types';
-import Script from 'next/script';
-import CategoryScroller from '@/components/categoryscroller/CategoryScroller';
+import { MemberBenefitVisibility } from '@/lib/types';
 import MemberBenefitsPageContainer from '@/components/landing/memberbenefits/MemberBenefitsPageContainer';
-const MemberbenefitPage = async ({ params, searchParams }: { params: { clientSlug: string }, searchParams?: { [key: string]: string | string[] | undefined } }) => {
+const MemberbenefitPage = async ({ params }: { params: { clientSlug: string }, searchParams?: { [key: string]: string | string[] | undefined } }) => {
     const config = await prisma.memberBenefitPageConfig.findUnique({
         where: {
             clientSlug: params.clientSlug

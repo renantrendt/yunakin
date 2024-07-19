@@ -2,7 +2,6 @@
 import Button from '@/components/atomic/button/Button'
 import Modal from '@/components/atomic/modal/Modal'
 import Typography from '@/components/atomic/typography/Typography'
-import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard'
 import { useTranslation } from '@/lib/i18n/client'
 import { SelectedMemberBenefit } from '@/lib/types'
 import { cn } from '@/utils/cn'
@@ -10,23 +9,14 @@ import { MemberBenefit, MemberBenefitPageConfig, OtherMemberBenefit } from '@pri
 import Image from 'next/image'
 import React, { useState } from 'react'
 import LocationIcon from '@/icons/landing/location-icon.svg'
-import { CheckIcon, Cross1Icon, Cross2Icon, CrossCircledIcon } from '@radix-ui/react-icons'
-interface DotProps {
-    selected: boolean
-}
-
-
-const Dot = ({ selected }: DotProps) => {
-    return (
-        <div className={cn('dot w-2 h-2 rounded-full bg-[#DBDBDB]', { 'bg-[#121212]': selected })}></div>
-    )
-}
+import { CheckIcon, Cross1Icon } from '@radix-ui/react-icons'
 
 interface GeneratePageModalProps {
     isOpen: boolean;
     onClose: () => void;
     onClick: () => void;
     selectedBenefits: SelectedMemberBenefit[]
+    config?: MemberBenefitPageConfig
 }
 interface MinifiedMemberBenefitCardProps {
     key: string
@@ -39,7 +29,7 @@ interface MinifiedMemberBenefitCardProps {
 
 }
 
-const MinifiedMemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnalytics = true, className }: MinifiedMemberBenefitCardProps) => {
+const MinifiedMemberBenefitCard = ({ key, benefit, config, className }: MinifiedMemberBenefitCardProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     return (
@@ -127,7 +117,7 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
             closeOnOutsideClick={false}
         >
             <div className='justify-between flex w-full'>
-                <Cross1Icon onClick={onClose} className=' absolute cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
+                <Cross1Icon onClick={props.onClose} className=' absolute cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
             </div>
             <div className='container  flex flex-col  gap-6 px-4 py-8 lg:p-8 justify-center content'>
                 <h1 className='text-base font-gelica text-xl leading-[120%] font-semibold'>Public perks page generated.</h1>

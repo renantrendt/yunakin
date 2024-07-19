@@ -2,7 +2,7 @@
 import { upsertMemberPageView } from '@/app/actions'
 import { MemberBenefitPageConfig } from '@prisma/client'
 import DeviceDetector from 'device-detector-js'
-import React, { use, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 interface PageTrackerProps {
     config: MemberBenefitPageConfig
@@ -21,6 +21,7 @@ const PageTracker = ({ config }: PageTrackerProps) => {
                     os: device.os?.name,
                 });
             } catch (error) {
+                // console.error(error)
             }
         })();
     }, [])

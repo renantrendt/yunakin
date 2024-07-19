@@ -1,5 +1,3 @@
-import Footer from '@/components/footer/Footer'
-import Navbar from '@/components/section/navbar/navbar'
 import React from 'react'
 
 

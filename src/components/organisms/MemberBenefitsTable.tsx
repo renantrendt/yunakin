@@ -1,51 +1,38 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Button from '@/components/atomic/button/Button'
-import Dropdown from '@/components/atomic/dropdown/Dropdown'
 import Table from '@/components/organisms/table/Table'
 import TableBody from '@/components/organisms/table/TableBody'
 import TableCell from '@/components/organisms/table/TableCell'
 import TableHead from '@/components/organisms/table/TableHead'
 import TableRow from '@/components/organisms/table/TableRow'
 import DeleteIcon from "@/icons/trash-icon.svg"
-import { changeUserRole, deleteUser, searchUsers } from '@/app/actions/users'
 import customToast from '../atomic/toast/customToast'
 import ConfirmationModal from '../molecules/confirmation-modal/ConfirmationModal'
-import Pagination from '../molecules/pagination/Pagination'
-import { useReactTable, getCoreRowModel, getPaginationRowModel, PaginationState, flexRender, createColumnHelper } from '@tanstack/react-table';
-import Badge from '../atomic/badge/Badge'
+import { useReactTable, getCoreRowModel, PaginationState, flexRender, createColumnHelper } from '@tanstack/react-table';
 import { useSession } from 'next-auth/react'
-import AddUserModal from '../molecules/add-user-modal'
-import InputField from '../atomic/input/InputField'
-import MagnifyingGlass from "@/icons/magnifying-glass.svg"
 import useDebounce from '@/hooks/useDebounce'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
-import AddCategoryModal from '../molecules/add-category-modal'
-import { createCategory, createMemberBenefit, deleteCategory, deleteMemberBenefit, deleteOtherMemberBenefit, importBenefit, updateMemberBenefit } from '@/app/actions'
+import { createMemberBenefit, deleteMemberBenefit, deleteOtherMemberBenefit, importBenefit, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
-import { Row } from '@react-email/components'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import platformConfig from '@/config/app-config'
 
-import EditIcon from "@/icons/edit-icon.svg"
 import { useSearchParams } from 'next/navigation'
-import { Filter, MemberBenefitVisibility, MemberBenefitWithImport, PartnershipType } from '@/lib/types'
-import _, { set } from 'lodash'
-import { useTranslation } from '@/lib/i18n/client'
+import { Filter, MemberBenefitWithImport, PartnershipType } from '@/lib/types'
+import _ from 'lodash'
 import Image from 'next/image'
 import Toggle from '../atomic/toggle/Toggle'
-import { CheckCircledIcon, Pencil2Icon, PlusIcon, EyeOpenIcon, Pencil1Icon } from '@radix-ui/react-icons'
+import { PlusIcon, EyeOpenIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import TableHeadCell from './table/TableHeadCell'
 import TableFilter from '../filter/TableFilter'
 import ViewBenefitDetailsModal from '../molecules/view-benefit-details/ViewBenefitDetailsModal'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
-    config?: MemberBenefitPageConfig
 }
 
-const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, categories }: MemberBenefitsTableProps) => {
-    const { t } = useTranslation('dashboard')
+const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories }: MemberBenefitsTableProps) => {
     const searchParams = useSearchParams()
     const session = useSession()
     const [loading, setLoading] = useState(false)
@@ -56,10 +43,6 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
     const [toBeDeletedMemberBenefitId, setToBeDeletedMemberBenefitId] = useState<string>('')
     const [tobeEditedMemberBenefit, setTobeEditedMemberBenefit] = useState<MemberBenefit | undefined>(undefined)
     const columnHelper = createColumnHelper<MemberBenefit>()
-    const [search, setSearch] = useState('')
-    const [searched, setSearched] = useState(false)
-    const debouncedValue = useDebounce(search, 500)
-
     const [filter, setFilter] = useState<Filter>({
         category: categories.map(category => ({ label: category.name, selected: false })),
         imported: [{ label: 'Imported', selected: false, }, { label: 'Not Imported', selected: false, }],
@@ -82,9 +65,6 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
         }
         setMemberBenefits(filteredBenefits)
     }
-    useEffect(() => {
-
-    }, [debouncedValue])
 
     const isBenefitCreator = (memberBenefitId: string) => {
         const memberBenefit = memberBenefits.find(memberBenefit => memberBenefit.id === memberBenefitId)
@@ -174,7 +154,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, config, ca
                 }
                 return (
                     <Toggle
-                        checked={memberBenefits[info.row.index].import}
+                        checked={memberBenefits[info.row.index].import ?? false}
                         onChange={async (checked) => {
                             const currBenefit = memberBenefits[info.row.index]
                             try {

@@ -4,7 +4,6 @@ import Image from "next/image"
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { UploadIcon } from "@radix-ui/react-icons"
-import Typography from "../typography/Typography"
 import { cn } from "@/utils/cn"
 
 interface ImageUploaderProps {

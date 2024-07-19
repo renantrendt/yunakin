@@ -20,7 +20,7 @@ interface CheckboxGroupProps {
     value: string[] | null | undefined;
 
 }
-const CheckboxGroup = ({ onChange, options, error, name, className, value }: CheckboxGroupProps) => {
+const CheckboxGroup = ({ onChange, options, error, className, value }: CheckboxGroupProps) => {
     const [selected, setSelected] = React.useState(value || [])
     return (
         <div>

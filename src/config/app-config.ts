@@ -141,4 +141,4 @@ const platformConfig = {
   }
 }
 
-export default platformConfig
+export default platformConfig 

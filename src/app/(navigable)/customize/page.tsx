@@ -1,12 +1,7 @@
-import PageHeader from '@/components/memberbenefit/PageHeader';
 import React from 'react'
-import Image from 'next/image';
-import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
 import { notFound } from 'next/navigation';
-import OnboardingContainer from '@/components/landing/onboarding/OnboardingContainer';
-import CatalogPageContainer from '@/components/catalog/CatalogPageContainer';
 import CustomizePageContainer from '@/components/customize/CustomizePageContainer';
 import { MemberBenefitVisibility } from '@/lib/types';
 const CustomizePage = async ({ params }: { params: { clientSlug: string } }) => {
@@ -64,11 +59,6 @@ const CustomizePage = async ({ params }: { params: { clientSlug: string } }) => 
             ]
         }
     })
-
-
-
-
-
     const categories = await prisma.category.findMany()
     const config = await prisma.memberBenefitPageConfig.findFirst({
         where: {

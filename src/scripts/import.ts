@@ -3,7 +3,7 @@ import * as  fs from 'fs'
 import * as path from 'path'
 import * as Paparse from 'papaparse'
 (async () => {
-    let csv = fs.readFileSync(path.join(__dirname, "../", 'data.csv'), 'utf-8')
+    const csv = fs.readFileSync(path.join(__dirname, "../", 'data.csv'), 'utf-8')
 
     Paparse.parse(csv, {
         header: true,
@@ -12,7 +12,7 @@ import * as Paparse from 'papaparse'
 
             const userId = "60c8a5d3-9941-4ede-8936-e694df6d6340"
             const categories = await prisma.category.findMany()
-            let memberBenefits = results.data.map((benefit: any) => {
+            const memberBenefits = results.data.map((benefit: any) => {
                 return {
                     domain: benefit.domain,
                     code: benefit.code,
@@ -34,7 +34,7 @@ import * as Paparse from 'papaparse'
 })()
 
 function getcategoryId(categoryName: string, categories: any[]) {
-    let category = categories.find(category => category.name === categoryName)
+    const category = categories.find(category => category.name === categoryName)
     if (!category) {
         console.log("Category not found", categoryName)
     }

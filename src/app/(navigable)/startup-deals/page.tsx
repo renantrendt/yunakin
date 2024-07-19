@@ -1,10 +1,9 @@
 
 import { auth } from '@/auth';
-import CategoriesTable from '@/components/organisms/CategoriesTable';
 import MemberBenefitsTable from '@/components/organisms/MemberBenefitsTable';
 import { prisma } from '@/lib/prisma'
 import { MemberBenefitWithImport } from '@/lib/types';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import React from 'react'
 
 const MemberBenefitsPage = async () => {
@@ -55,7 +54,6 @@ const MemberBenefitsPage = async () => {
         <MemberBenefitsTable
             memberBenefits={importedBenefits}
             categories={categories}
-            config={config}
         />
     )
 }

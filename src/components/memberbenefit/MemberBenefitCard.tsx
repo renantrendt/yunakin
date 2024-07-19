@@ -55,7 +55,7 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                 localStorage.setItem(`${memberBenefitId}-${config?.clientSlug}-${event}`, 'true');
             }
         } catch (error) {
-
+            // console.error(error)
         }
     }
 
@@ -94,7 +94,7 @@ rounded-[10px] shadow-sm`, className)}
                         <div className='flex  items-center justify-start my-4 text-category-card-autor dark:text-sidebar-icon-dark text-xs'>
                             <div className='flex flex-col items-start justify-start gap-4'>
 
-                                <a href={!isEditing && domain} target='_blank' className='cursor-pointer text-link-color underline'
+                                <a href={!isEditing ? domain : undefined} target='_blank' rel="noreferrer" className='cursor-pointer text-link-color underline'
                                     onClick={() => {
                                         handleButtonClick(benefit.id, MemberBenefitClickType.WEBSITE_CLICK)
                                     }}
@@ -124,7 +124,7 @@ rounded-[10px] shadow-sm`, className)}
 
                         >Save Deal</Button>
 
-                        {benefit.link && <a href={!isEditing && (benefit.link || "")} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'
+                        {benefit.link && <a href={!isEditing ? domain : undefined} target='_blank' rel="noreferrer" className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'
                             style={{
                                 color: config?.textColor as string,
                             }}

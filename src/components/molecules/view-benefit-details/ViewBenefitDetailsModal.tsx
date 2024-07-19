@@ -1,20 +1,10 @@
 "use client";
-import Button from '@/components/atomic/button/Button';
-import InputField from '@/components/atomic/input/InputField';
 import Modal from '@/components/atomic/modal/Modal';
-import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react'
-import { Controller, useForm } from 'react-hook-form';
-import * as yup from "yup"
-import { Category, MemberBenefit } from '@prisma/client';
-import { DealType, MemberBenefitVisibility, MemberBenefitWithImport, PartnershipType } from '@/lib/types';
+import { MemberBenefitWithImport, } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n/client';
 import _ from 'lodash';
-import { cn } from '@/utils/cn';
-import { ArrowLeftIcon, CheckCircledIcon, Cross1Icon } from '@radix-ui/react-icons';
-import TextArea from '../atomic/textarea/TextArea';
-import AddMemberBenefitStepOne from './add-member-benefit-modal/AddMemberBenefitStepOne';
-import AddMemberBenefitStepTwo from './add-member-benefit-modal/AddMemberBenefitStepTwo';
+import { CheckCircledIcon, Cross1Icon } from '@radix-ui/react-icons';
 import Image from 'next/image';
 import Typography from '@/components/atomic/typography/Typography';
 import LocationIcon from "@/icons/landing/location-icon.svg"
@@ -56,7 +46,7 @@ const ViewBenefitDetailsModal = ({ onClose, memberBenefit, isOpen, category }: V
                         <div className='details flex justify-between'>
                             <div className='flex flex-col gap-2'>
                                 <Typography type='p'>Website</Typography>
-                                <a href={memberBenefit.domain} target='_blank' className='cursor-pointer font-satoshi text-sm text-link-color underline'>{memberBenefit.domain}</a>
+                                <a href={memberBenefit.domain} rel="noreferrer" target='_blank' className='cursor-pointer font-satoshi text-sm text-link-color underline'>{memberBenefit.domain}</a>
                             </div>
                             {memberBenefit.location && <div className='flex flex-col gap-2'>
                                 <Typography type='p'>Location</Typography>

@@ -1,22 +1,15 @@
 'use client'
 import { useMutation } from '@tanstack/react-query'
 import React, { useEffect } from 'react'
-
-import ComingSoonIcon from '@/icons/coming-soon/icon'
 import { cn } from '@/utils/cn';
-
-
-
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import customToast from '@/components/atomic/toast/customToast';
-import Meteors from '@/components/atomic/meteor/Meteor';
 import { NextFont } from 'next/dist/compiled/@next/font'
 import Image from 'next/image';
 import InputField from '../atomic/input/InputField';
 import Button from '../atomic/button/Button';
-import { error } from 'console';
 import Typography from '../atomic/typography/Typography';
 
 const schema = yup.object({

@@ -1,38 +1,25 @@
 'use client'
-import { createMemberPageConfigWithoutUser, getMemberPageConfigByClientSlug, updateMemberPageConfig, updateOtherMemberBenefits, updateSlug } from '@/app/actions'
-import Badge from '@/components/atomic/badge/Badge'
+import { updateMemberPageConfig, updateOtherMemberBenefits, updateSlug } from '@/app/actions'
 import Button from '@/components/atomic/button/Button'
 import ImageUploader from '@/components/atomic/file-uploader/ImageUploader'
-import InputField from '@/components/atomic/input/InputField'
 import customToast from '@/components/atomic/toast/customToast'
 import Typography from '@/components/atomic/typography/Typography'
 import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard'
-import PageHeader from '@/components/memberbenefit/PageHeader'
-import SelectMemberBenefitCard from '@/components/memberbenefit/SelectMemberBenefitCard'
 import platformConfig from '@/config/app-config'
-import siteUrls from '@/config/site-config'
-import ContentSection from '@/containers/layout/ContentSection'
-import { cn } from '@/utils/cn'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Input } from 'postcss'
-import React, { use, useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import _ from 'lodash'
-import { set } from 'react-ga'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import CustomizePageModal from '../molecules/customize-page-modal'
 import EmbedModal from '../molecules/embed-modal/EmbedModal'
-import EditFontModal from '../molecules/modals/edit-font-modal'
 import CustomizePageActions from './CustomizePageActions'
-import { MemberBenefitFilter, selectMemberBenefitFilter } from '@/lib/types'
+import { MemberBenefitFilter, SelectedMemberBenefit, selectMemberBenefitFilter } from '@/lib/types'
 import CategoryScroller from '../categoryscroller/CategoryScroller'
 import Divider from '../atomic/divider/Divider'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { useMutation } from '@tanstack/react-query'
 interface CustomizePageContainerProps {
-    benefits: SelectedMemberBenefit[]
+    benefits: MemberBenefit[]
     categories: Category[]
     memberPageConfig: MemberBenefitPageConfig
 }
@@ -41,25 +28,15 @@ interface CustomizePageContainerProps {
 
 
 const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: CustomizePageContainerProps) => {
-    const router = useRouter()
     const [settingsModalOpen, setSettingsModalOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [loading, setLoading] = useState(false);
     const [defaultConfig, setDefaultConfig] = useState(memberPageConfig)
     const [config, setConfig] = useState(memberPageConfig)
     const [selectedBenefits, setSelectedBenefits] = useState<MemberBenefit[]>(benefits)
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
     const [embedModalOpen, setEmbedModalOpen] = useState(false)
     const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
     const [imageType, setImageType] = useState<string>("")
-    const titleRef = useRef<HTMLHeadingElement>(null)
-    useEffect(() => {
-        if (isEditing) {
-
-        }
-    }, [pathname, searchParams])
-
 
     useEffect(() => {
         if (_.isEqual(config, defaultConfig)) {
@@ -92,24 +69,30 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
 
             const updatedMemberPageConfig = await updateMemberPageConfig(config)
 
-
-            setLoading(false)
-            if (!_.isEqual(selectedBenefits, benefits)) {
-                // update selected benefits
-                const toBeCreatedOtherMemberBenefits = selectedBenefits.filter(b => b.selected && benefits.some(benefit => benefit.id === b.id && !benefit.selected)).map(
-                    b => b.id
-                )
-                const toBeDeletedOtherMemberBenefits = selectedBenefits.filter(b => !b.selected && benefits.some(benefit => benefit.id === b.id && benefit.selected)).map(b => b.id)
-                await updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits, toBeDeletedOtherMemberBenefits)
+            if (updatedMemberPageConfig) {
+                customToast.success("Changes Published Successfully")
+                setConfig(updatedMemberPageConfig)
+                setDefaultConfig(updatedMemberPageConfig)
             } else {
-                if (updatedMemberPageConfig) {
-                    customToast.success("Changes Published Successfully")
-                    setConfig(updatedMemberPageConfig)
-                    setDefaultConfig(updatedMemberPageConfig)
-                } else {
-                    customToast.error("Something went wrong. Please try again")
-                }
+                customToast.error("Something went wrong. Please try again")
             }
+            // setLoading(false)
+            // if (!_.isEqual(selectedBenefits, benefits)) {
+            //     // update selected benefits
+            //     const toBeCreatedOtherMemberBenefits = selectedBenefits.filter(b => b.selected && benefits.some(benefit => benefit.id === b.id && !benefit.selected)).map(
+            //         b => b.id
+            //     )
+            //     const toBeDeletedOtherMemberBenefits = selectedBenefits.filter(b => !b.selected && benefits.some(benefit => benefit.id === b.id && benefit.selected)).map(b => b.id)
+            //     await updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits, toBeDeletedOtherMemberBenefits)
+            // } else {
+            //     if (updatedMemberPageConfig) {
+            //         customToast.success("Changes Published Successfully")
+            //         setConfig(updatedMemberPageConfig)
+            //         setDefaultConfig(updatedMemberPageConfig)
+            //     } else {
+            //         customToast.error("Something went wrong. Please try again")
+            //     }
+            // }
         } catch (error) {
             console.log(error)
             customToast.error("Something went wrong. Please try again")
@@ -244,16 +227,17 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                 </div>
                             </div>
                             <div>
-                                {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
+                                {/* {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
                                     return (
                                         <CategoryScroller
+                                            key={category.id}
                                             category={category}
                                             memberBenefits={selectedBenefits.filter(benefit => category.id == benefit.categoryId)}
                                             config={config}
 
                                         />
                                     )
-                                })}
+                                })} */}
 
                                 {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
                                     <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-12 mx-auto '>
@@ -291,9 +275,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                             customToast.success("Settings Updated Successfully")
                         } catch (error) {
                             customToast.error("Something went wrong. Please try again")
-                        } finally {
                         }
-
 
                     }}
                 />

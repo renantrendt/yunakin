@@ -64,8 +64,8 @@ export const authOptions: NextAuthConfig = {
                     return null
                 }
 
-                let credEmail = credentials.email as string
-                let credPassword = credentials.password as string
+                const credEmail = credentials.email as string
+                const credPassword = credentials.password as string
                 const user = (await prisma.user.findUnique({
                     where: {
                         email: credEmail

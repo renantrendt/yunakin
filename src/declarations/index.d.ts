@@ -25,3 +25,9 @@ declare namespace NodeJS {
         NEXT_PUBLIC_STRIPE_ADVANCED_PLAN_ID: string;
     }
 }
+
+declare global {
+    interface Window {
+        clarity: any;
+    }
+}

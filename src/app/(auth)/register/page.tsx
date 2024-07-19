@@ -6,16 +6,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import InputField from '@/components/atomic/input/InputField'
 import Button from '@/components/atomic/button/Button'
-import Link from 'next/link'
 import siteUrls from '@/config/site-config'
 import customToast from '@/components/atomic/toast/customToast'
 import { notFound, useRouter, useSearchParams } from 'next/navigation'
-import PasswordInputField from '@/components/atomic/input/PasswordInputField'
-import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
-import AuthButton from '@/components/molecules/auth-button/AuthButton'
-import Checkbox from '@/components/atomic/checkbox/Checkbox'
-import GoogleIcon from "@/icons/google-icon.svg"
 import EnvelopeIcon from '@/icons/envelope-icon.svg'
 import FormContainer from '@/components/form/FormContainer'
 import { useTranslation } from '@/lib/i18n/client'
@@ -31,8 +25,6 @@ export default function RegisterPage() {
     const clientId = searchParams.get('clientId')
     const selectedBenefits = searchParams.get('selectedBenefits')?.split(",")
     const { t } = useTranslation('auth')
-    const { t: onboardingT } = useTranslation('onboarding')
-    const { data: session } = useSession()
     const router = useRouter()
     const [loading, setIsLoading] = useState(false)
     const schema = yup.object({

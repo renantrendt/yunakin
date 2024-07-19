@@ -1,4 +1,3 @@
-{ }
 import Button from '@/components/atomic/button/Button';
 import InputField from '@/components/atomic/input/InputField';
 import Modal from '@/components/atomic/modal/Modal';
@@ -7,8 +6,7 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from "yup"
 import Dropdown from '../atomic/dropdown/Dropdown';
-import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client';
-import ImageUploader from '../atomic/file-uploader/ImageUploader';
+import { MemberBenefitPageConfig } from '@prisma/client';
 
 
 interface CustomizePageModalProps {
@@ -18,20 +16,17 @@ interface CustomizePageModalProps {
     loading: boolean;
 }
 
+
 const schema = yup.object().shape({
     backgroundColor: yup.string(),
     textColor: yup.string(),
+    buttonColor: yup.string(),
     font: yup.string(),
     slug: yup.string().required(),
 })
 
-interface FormValues {
-    backgroundColor: string;
-    buttonColor: string;
-    textColor: string;
-    font: string;
-    slug: string;
-}
+
+interface FormValues extends yup.Asserts<typeof schema> { }
 
 
 const CustomizePageModal = ({ onClose, config, onUpdate, loading }: CustomizePageModalProps) => {
@@ -44,7 +39,7 @@ const CustomizePageModal = ({ onClose, config, onUpdate, loading }: CustomizePag
                 backgroundColor: config?.backgroundColor || '',
                 textColor: config?.textColor || '',
                 buttonColor: config?.buttonColor || '',
-                font: config?.font || '',
+                font: config?.primaryFont || '',
                 slug: config?.clientSlug || '',
             }
         }
@@ -138,7 +133,7 @@ const CustomizePageModal = ({ onClose, config, onUpdate, loading }: CustomizePag
                                 name="font"
                                 options={[{ value: 'Arial', label: 'Arial' }, { value: 'Roboto', label: 'Roboto' }, { value: 'Open Sans', label: 'Open Sans' }]}
                                 onChange={onChange}
-                                value={value}
+                                value={value as string}
                             />
                         )}
                     />

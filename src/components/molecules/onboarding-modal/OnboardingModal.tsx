@@ -41,7 +41,7 @@ const OnboardingModal = (props: OnboardingModalProps) => {
 
                 <div className="dots flex gap-3 justify-center mt-2">
                     {Array(4).fill(0).map((_, index) => (
-                        <Dot selected={index + 1 <= step} />
+                        <Dot selected={index + 1 <= step} key={index} />
                     ))}
                 </div>
                 <div className="buttons flex justify-center w-full gap-2 mt-4">

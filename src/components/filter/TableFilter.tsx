@@ -45,13 +45,13 @@ const TableFilter = ({ filter: defaultFilter, onFilterChange }: TableFilterProps
                                     <CheckboxGroup
                                         name={key}
                                         id={key}
-                                        value={filter[key].filter((f: any) => f.selected).map((f: any) => f.label)}
-                                        options={filter[key].map((f: any) => ({ label: f.label, value: f.label }))}
+                                        value={filter[key as keyof Filter]?.filter((f: any) => f.selected).map((f: any) => f.label)}
+                                        options={filter[key as keyof Filter]?.map((f: any) => ({ label: f.label, value: f.label })) || []}
                                         onChange={(selected) => {
                                             console.log(selected)
                                             setFilter({
                                                 ...filter,
-                                                [key]: filter[key].map((f: any) => ({
+                                                [key]: filter[key as keyof Filter]?.map((f: any) => ({
                                                     ...f,
                                                     selected: selected.includes(f.label)
                                                 }))

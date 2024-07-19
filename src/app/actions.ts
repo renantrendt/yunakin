@@ -2,8 +2,7 @@
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { MemberBenefitLinkClickDto, MemberBenefitPageConfigDto, MemberPageViewDto } from "@/lib/types"
-import { Category, MemberBenefit, MemberBenefitClick, MemberBenefitPageConfig } from "@prisma/client"
-import exp from "constants"
+import { MemberBenefit, MemberBenefitPageConfig } from "@prisma/client"
 
 export async function getChat(id: string, userId: string) {
     const chat = await prisma.chat.findFirst({
@@ -57,7 +56,7 @@ export async function checkUserExists(email: string) {
 export async function upsertMemberBenefitLinkClick(memberBenefitClick: MemberBenefitLinkClickDto) {
 
     // save the data to database
-    const clickAdded = await prisma.memberBenefitClick.create({
+    await prisma.memberBenefitClick.create({
         data: {
             ...memberBenefitClick
         }
@@ -68,7 +67,7 @@ export async function upsertMemberBenefitLinkClick(memberBenefitClick: MemberBen
 
 export async function upsertMemberPageView(pageView: MemberPageViewDto) {
     // save the data to database
-    const clickAdded = await prisma.memberPageViews.create({
+    await prisma.memberPageViews.create({
         data: {
             device: pageView.device,
             browser: pageView.browser,
@@ -177,7 +176,7 @@ export async function createMemberPageConfigWithoutUser(memberPageConfig: Member
             }
         })
         if (newMemberPageConfig) {
-            const onboardingMemberBenefits = await prisma.onboardingMemberBenefits.createMany({
+            await prisma.onboardingMemberBenefits.createMany({
                 data:
                     memberBenefitIds.map(id => {
                         return {

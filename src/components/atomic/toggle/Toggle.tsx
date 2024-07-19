@@ -1,5 +1,5 @@
 import { cn } from '@/utils/cn'
-import React, { useState } from 'react'
+import React from 'react'
 
 interface ToggleProps {
     label?: string

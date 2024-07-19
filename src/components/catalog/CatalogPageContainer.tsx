@@ -1,27 +1,16 @@
 'use client'
-import { createMemberPageConfigWithoutUser, getMemberPageConfigByClientSlug, updateMemberPageConfig, updateOtherMemberBenefits } from '@/app/actions'
-import Badge from '@/components/atomic/badge/Badge'
+import { updateOtherMemberBenefits } from '@/app/actions'
 import Button from '@/components/atomic/button/Button'
-import ImageUploader from '@/components/atomic/file-uploader/ImageUploader'
-import InputField from '@/components/atomic/input/InputField'
 import customToast from '@/components/atomic/toast/customToast'
 import Typography from '@/components/atomic/typography/Typography'
-import MemberBenefitCard from '@/components/memberbenefit/MemberBenefitCard'
-import PageHeader from '@/components/memberbenefit/PageHeader'
 import SelectMemberBenefitCard from '@/components/memberbenefit/SelectMemberBenefitCard'
 import platformConfig from '@/config/app-config'
-import siteUrls from '@/config/site-config'
 import ContentSection from '@/containers/layout/ContentSection'
 import { cn } from '@/utils/cn'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
-import Image from 'next/image'
-import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Input } from 'postcss'
-import React, { use, useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import _ from 'lodash'
-import { set } from 'react-ga'
-import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import { useTranslation } from '@/lib/i18n/client'
 interface CatalogPageContainerProps {
     benefits: SelectedMemberBenefit[]
@@ -37,74 +26,53 @@ interface SelectedMemberBenefit extends MemberBenefit {
 const CatalogPageContainer = ({ benefits, categories, memberPageConfig }: CatalogPageContainerProps) => {
     const { t } = useTranslation('onboarding')
     const router = useRouter()
-    const [isEditing, setIsEditing] = useState(false)
-    const [loading, setLoading] = useState(false);
-    const [config, setConfig] = useState(memberPageConfig)
+    const [config] = useState(memberPageConfig)
     const [selectedBenefits, setSelectedBenefits] = useState<SelectedMemberBenefit[]>(benefits)
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
-
-    useEffect(() => {
-        if (isEditing) {
-
-        }
-    }, [pathname, searchParams])
 
 
-    useEffect(() => {
-        if (_.isEqual(config, memberPageConfig)) {
-            setIsEditing(false)
-        } else {
-            setIsEditing(true)
-        }
-    }, [config])
+    // const publishChanges = useCallback(async () => {
 
-    const publishChanges = useCallback(async () => {
+    //     if (config.imageURL && config.imageURL !== memberPageConfig.imageURL) {
+    //         const blob = await fetch(config.imageURL).then(r => r.blob());
 
-        if (config.imageURL && config.imageURL !== memberPageConfig.imageURL) {
-            const blob = await fetch(config.imageURL).then(r => r.blob());
+    //         const path = "memberbenefit_logo/" + config.id + "/" + "image.jpg"
 
-            const path = "memberbenefit_logo/" + config.id + "/" + "image.jpg"
+    //         const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+    //         const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
+    //         if (!isUploaded) {
+    //             throw new Error("Failed to upload image")
+    //         }
+    //         const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
+    //         if (!downloadUrl) {
+    //             throw new Error("Failed to get download url")
+    //         }
+    //         config.imageURL = downloadUrl.publicUrl
+    //     }
+    //     try {
+    //         const updatedMemberPageConfig = await updateMemberPageConfig(config)
 
-            const file = new File([blob], "image.jpg", { type: "image/jpeg" });
-            const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
-            if (!isUploaded) {
-                throw new Error("Failed to upload image")
-            }
-            const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
-            if (!downloadUrl) {
-                throw new Error("Failed to get download url")
-            }
-            config.imageURL = downloadUrl.publicUrl
-        }
-        setLoading(true)
-        try {
-            const updatedMemberPageConfig = await updateMemberPageConfig(config)
+    //         if (!_.isEqual(selectedBenefits, benefits)) {
+    //             // update selected benefits
+    //             const toBeCreatedOtherMemberBenefits = selectedBenefits.filter(b => b.selected && benefits.some(benefit => benefit.id === b.id && !benefit.selected)).map(
+    //                 b => b.id
+    //             )
+    //             const toBeDeletedOtherMemberBenefits = selectedBenefits.filter(b => !b.selected && benefits.some(benefit => benefit.id === b.id && benefit.selected)).map(b => b.id)
+    //             await updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits, toBeDeletedOtherMemberBenefits)
+    //         } else {
+    //             if (updatedMemberPageConfig) {
+    //                 customToast.success("Changes Published Successfully")
+    //             } else {
+    //                 customToast.error("Something went wrong. Please try again")
+    //             }
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //         customToast.error("Something went wrong. Please try again")
+    //     } finally {
+    //     }
 
-            setLoading(false)
-            if (!_.isEqual(selectedBenefits, benefits)) {
-                // update selected benefits
-                const toBeCreatedOtherMemberBenefits = selectedBenefits.filter(b => b.selected && benefits.some(benefit => benefit.id === b.id && !benefit.selected)).map(
-                    b => b.id
-                )
-                const toBeDeletedOtherMemberBenefits = selectedBenefits.filter(b => !b.selected && benefits.some(benefit => benefit.id === b.id && benefit.selected)).map(b => b.id)
-                await updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits, toBeDeletedOtherMemberBenefits)
-            } else {
-                if (updatedMemberPageConfig) {
-                    customToast.success("Changes Published Successfully")
-                } else {
-                    customToast.error("Something went wrong. Please try again")
-                }
-            }
-        } catch (error) {
-            console.log(error)
-            customToast.error("Something went wrong. Please try again")
-        } finally {
-            setLoading(false)
-        }
-
-    }, [config, selectedBenefits]
-    )
+    // }, [config, selectedBenefits]
+    // )
 
     const handleBenefitClick = async (id: string, selected: boolean) => {
 

@@ -1,6 +1,5 @@
 import Button from '@/components/atomic/button/Button';
 import Dropdown from '@/components/atomic/dropdown/Dropdown';
-import InputField from '@/components/atomic/input/InputField';
 import Modal from '@/components/atomic/modal/Modal';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MemberBenefitPageConfig } from '@prisma/client';
@@ -16,13 +15,13 @@ interface EditFontModalProps {
 }
 
 const schema = yup.object().shape({
-    priamryFont: yup.string().optional(),
+    primaryFont: yup.string().optional(),
     secondaryFont: yup.string().optional(),
 })
 
 interface FormValues {
-    primaryFont: string;
-    secondaryFont: string;
+    primaryFont?: string;
+    secondaryFont?: string;
 }
 
 const EditFontModal = ({ onClose, onUpdate, config }: EditFontModalProps) => {
@@ -58,7 +57,7 @@ const EditFontModal = ({ onClose, onUpdate, config }: EditFontModalProps) => {
                                 id="primaryFont"
                                 name="primaryFont"
                                 onChange={onChange}
-                                value={value}
+                                value={value as string}
                                 error={errors.primaryFont?.message}
                                 options={[{
                                     label: 'Open Sans',
@@ -87,7 +86,7 @@ const EditFontModal = ({ onClose, onUpdate, config }: EditFontModalProps) => {
                                 id="secondaryFont"
                                 name="secondaryFont"
                                 onChange={onChange}
-                                value={value}
+                                value={value as string}
                                 error={errors.secondaryFont?.message}
                                 options={[{
                                     label: 'Open Sans',

@@ -20,21 +20,10 @@ const schema = yup.object().shape({
     link: yup.string().optional().nullable(),
     description: yup.string(),
     categoryId: yup.string().required(),
-
+    imageType: yup.string().optional().nullable()
 })
+interface FormValues extends yup.Asserts<typeof schema> { }
 
-interface FormValues {
-    name: string
-    code: string
-    domain: string
-    imageURL: string
-    offer: string
-    location: string
-    link: string
-    description: string
-    categoryId: string
-    imageType?: string
-}
 interface AddMemberBenefitStepTwoProps {
     data: FormValues;
     onSubmit: (data: FormValues) => void;

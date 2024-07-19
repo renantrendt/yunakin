@@ -1,15 +1,10 @@
 'use client'
-import { BlogsViewModel } from '@/app/(landing)/blogs/page'
-import { formatDate } from '@/utils/format'
-import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-import siteUrls from '@/config/site-config'
 import Button from '@/components/atomic/button/Button'
 import Modal from '../atomic/modal/Modal'
 import { useState } from 'react'
 import CheckIcon from "@/icons/check-icon.svg"
-import { upsertMemberBenefitLinkClick } from '@/app/actions'
 import DeviceDetector from "device-detector-js";
 import { PlusIcon } from '@radix-ui/react-icons'
 import { MemberBenefit } from '@prisma/client'
@@ -43,7 +38,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }:
             setLoading(false)
         }
     }
-    const image = benefit.imageURL && `${benefit.imageURL}?${timeStamp}` || `/images/dummy_logo.svg`
+    const image = benefit.imageURL && `${benefit.imageURL}` || `/images/dummy_logo.svg`
 
     return (
         <>
@@ -60,7 +55,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }:
                     {benefit.description && <p className='text-black mt-2 text-sm min-h-[50px]'>{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
                     <div className='flex  items-center justify-start mb-4 mt-4 text-category-card-autor '>
                         <div className='flex flex-col items-start justify-start gap-4'>
-                            <a href={`https://${benefit.domain}`} target='_blank' className='cursor-pointer text-sm text-link-color underline'>{benefit.domain}</a>
+                            <a href={`https://${benefit.domain}`} rel="noreferrer" target='_blank' className='cursor-pointer text-sm text-link-color underline'>{benefit.domain}</a>
 
                         </div>
                     </div>
@@ -73,7 +68,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }:
                             className='py-[6px] pl-[12px] pr-[16px] gap-1'
                         >{selected ? "Added" : "Add to list"}</Button>
 
-                        {benefit.link && <a href={benefit.link || ""} target='_blank' className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  items-end flex-row flex gap-1'>
+                        {benefit.link && <a href={benefit.link || ""} target='_blank' rel="noreferrer" className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  items-end flex-row flex gap-1'>
                             <LocationIcon width="20" height="20" />
                             <span>{benefit.location || ""}</span></a>}
                     </div>

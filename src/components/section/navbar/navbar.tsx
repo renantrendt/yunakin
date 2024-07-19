@@ -12,12 +12,7 @@ import TopbarNavigationItem from '@/components/atomic/navigation/TopbarNavigatio
 import { usePathname } from 'next/navigation'
 import { cn } from '@/utils/cn'
 import ContentSection from '@/containers/layout/ContentSection'
-import { ThemeSwitcher } from '@/components/atomic/theme/ThemeSwitcher'
-import AccountModal from '@/components/molecules/account-modal/AccountModal'
-import { useSession } from 'next-auth/react'
-import Avatar from '@/components/atomic/avatar/Avatar'
 import { useTranslation } from '@/lib/i18n/client'
-import ChangeLocale from '@/components/locale/ChangeLocale'
 export default function Navbar() {
     const { t } = useTranslation('landing')
     const pathName = usePathname()
@@ -25,8 +20,6 @@ export default function Navbar() {
     const [showMenu, setShowMenu] = React.useState(false)
     const [border, setBorder] = React.useState(false)
     const navRef = React.useRef<HTMLDivElement>(null)
-    const { data: session, status } = useSession()
-    const [show, setShow] = React.useState(false)
     const changeNavBg = () => {
         if (!navRef.current) {
             return;

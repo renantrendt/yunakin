@@ -1,24 +1,12 @@
 "use client";
-import Button from '@/components/atomic/button/Button';
-import InputField from '@/components/atomic/input/InputField';
 import Modal from '@/components/atomic/modal/Modal';
-import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react'
-import { Controller, useForm } from 'react-hook-form';
-import * as yup from "yup"
-import Dropdown from '../atomic/dropdown/Dropdown';
 import { Category, MemberBenefit } from '@prisma/client';
-import ImageUploader from '../atomic/file-uploader/ImageUploader';
 import { DealType, MemberBenefitVisibility, PartnershipType } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n/client';
 import _ from 'lodash';
 import { cn } from '@/utils/cn';
-import Typography from '../atomic/typography/Typography';
-import Divider from '../atomic/divider/Divider';
-import RadioGroup from '../atomic/radiogroup/radiogroup';
-import CheckboxGroup from '../atomic/checkbox/CheckboxGroup';
-import { ArrowLeftIcon, Cross1Icon } from '@radix-ui/react-icons';
-import TextArea from '../atomic/textarea/TextArea';
+import { Cross1Icon } from '@radix-ui/react-icons';
 import AddMemberBenefitStepOne from './add-member-benefit-modal/AddMemberBenefitStepOne';
 import AddMemberBenefitStepTwo from './add-member-benefit-modal/AddMemberBenefitStepTwo';
 
@@ -29,7 +17,7 @@ interface AddMemberBenefitModalProps {
     categories: Category[];
     editMemberBenefit?: MemberBenefit;
     loading: boolean;
-    isOpen?: boolean;
+    isOpen: boolean;
 }
 
 
@@ -43,7 +31,6 @@ interface FormValues extends MemberBenefit {
 
 
 const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefit, onUpdate, loading, isOpen }: AddMemberBenefitModalProps) => {
-    const { t } = useTranslation("dashboard")
     const [step, setStep] = React.useState(1)
 
 

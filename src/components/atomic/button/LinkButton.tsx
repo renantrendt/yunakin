@@ -59,7 +59,7 @@ interface LinkButtonProps extends Omit<React.HTMLProps<HTMLAnchorElement>, "size
     trailing?: boolean
 
 }
-const LinkButton: React.FC<LinkButtonProps> = ({ icon = null, children, variant = 'primary', disabled, label, onClick, type, className, size, loading, trailing, ...props }) => {
+const LinkButton: React.FC<LinkButtonProps> = ({ icon = null, children, variant = 'primary', label, onClick, type, className, size, loading, trailing, ...props }) => {
 
     const content = label ? label : children;
 

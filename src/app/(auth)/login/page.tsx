@@ -1,5 +1,5 @@
 'use client'
-import { signIn, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -8,12 +8,8 @@ import siteUrls from '@/config/site-config'
 
 import Image from 'next/image'
 import Typography from '@/components/atomic/typography/Typography'
-import AuthButton from '@/components/molecules/auth-button/AuthButton'
-import GoogleIcon from "@/icons/google-icon.svg"
 import FormContainer from '@/components/form/FormContainer'
 import { useTranslation } from '@/lib/i18n/client'
-import TabItem from '@/components/atomic/tabs/TabItem'
-import SignInForm from '@/components/login/SignInForm'
 import MagicLinkForm from '@/components/login/MagicLinkForm'
 
 
@@ -21,13 +17,13 @@ enum AuthType {
     MAGICLINK = 'magiclink',
     EMAIL = 'email'
 }
-const appendParams = (searchParams: URLSearchParams) => {
-    const callbackUrl = searchParams.get('callbackUrl')
-    if (callbackUrl) {
-        return `?callbackUrl=${callbackUrl}`
-    }
-    return ''
-}
+// const appendParams = (searchParams: URLSearchParams) => {
+//     const callbackUrl = searchParams.get('callbackUrl')
+//     if (callbackUrl) {
+//         return `?callbackUrl=${callbackUrl}`
+//     }
+//     return ''
+// }
 
 export default function LoginPage() {
     const { t } = useTranslation('auth')
@@ -35,7 +31,7 @@ export default function LoginPage() {
     const router = useRouter()
     const searchParams = useSearchParams()
 
-    const [selectedAuth, setSelectedAuth] = React.useState<AuthType>(AuthType.MAGICLINK)
+    const [selectedAuth] = React.useState<AuthType>(AuthType.MAGICLINK)
 
     if (session && new URLSearchParams(searchParams).get('callbackUrl') === null) {
         return (
