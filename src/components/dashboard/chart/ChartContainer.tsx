@@ -49,7 +49,7 @@ const ChartContainer = ({ benefitClicks, companyClicks, totalClicks, totalCompan
         },
     ]
     return (
-        <div className='chart-container grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2'>
+        <div className='chart-container grid grid-cols-1 lg:grid-cols-2 gap-x-8 lg:gap-y-8 mt-2'>
             {charts.map((chart, index) => (
                 <ChartCard key={index} title={chart.title} summary={chart.summary}>
                     {chart.children}

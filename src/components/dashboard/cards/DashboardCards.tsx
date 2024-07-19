@@ -4,37 +4,35 @@ import DashboardCard from './DashboardCard'
 interface DashboardCardsProps {
 
     cardStats: {
-        totalClicks: number;
-        totalMobileClicks: number;
-        totalDesktopClicks: number;
-        totalClaims: number;
+        totalBenefits: number;
+        totalWaitingBenefits: number;
         pageViews: number;
     }
 
 }
 
 export const DashboardCards = ({ cardStats }: DashboardCardsProps) => {
-    const { totalClicks, totalMobileClicks, totalDesktopClicks, totalClaims } = cardStats;
+    const { totalWaitingBenefits, totalBenefits } = cardStats;
     const data = [
-        {
-            title: "Total Clicks",
-            quantity: totalClicks,
-            increase: 21
-        },
-        {
-            title: "Total Claims",
-            quantity: totalClaims,
-            increase: 21
-        },
         {
             title: "Page Views",
             quantity: cardStats.pageViews,
             increase: 21
-        }
+        },
 
+        {
+            title: "Live Deals",
+            quantity: totalBenefits,
+            increase: 21
+        },
+        {
+            title: "Deals Waiting Your Approval",
+            quantity: totalWaitingBenefits,
+            increase: 21
+        },
     ]
     return (
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 mb-8 '>
+        <div className='grid grid-cols-2 md:grid-cols-3  gap-x-6 mb-8 '>
             {data.map((item, index) => (
                 <DashboardCard key={index} title={item.title} quantity={item.quantity} increase={item.increase} />
             ))}

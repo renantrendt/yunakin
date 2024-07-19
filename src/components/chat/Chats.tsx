@@ -6,7 +6,6 @@ import { useMutation } from '@tanstack/react-query'
 import customToast from '../atomic/toast/customToast'
 import { useRouter } from 'next/navigation'
 import DeleteIcon from "@/icons/trash-icon.svg"
-import { deleteChat } from '@/app/actions'
 import Button from '../atomic/button/Button'
 interface ChatsProps {
     chats: Chat[]
@@ -54,7 +53,6 @@ const Chats = ({ chats }: ChatsProps) => {
                             <h1 className='card-title w-32'>{chat.title}</h1>
                             <div className='absolute top-4 right-2 text-red-700' onClick={async (e) => {
                                 e.stopPropagation()
-                                await deleteChat(chat.id)
                                 setPageChats(pageChats.filter((c) => c.id !== chat.id))
                                 customToast.success("Chat deleted")
                             }}>
