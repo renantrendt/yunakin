@@ -31,11 +31,11 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
 
     return (
         <ContentSection
-            className='max-w-full md:p-0 !p-0 min-h-[100vh] '
+            className='max-w-full md:p-0 !p-0 min-h-[100vh] relative pb-40 '
             fullWidth style={{
                 backgroundColor: config?.backgroundColor as string,
             }}>
-            <div className='max-w-full pb-20 w-full '>
+            <div className='max-w-full pb-20 lg:pb-40 w-full '>
                 <PageTracker config={config} />
 
                 <div className=' max-w-[1440px] mx-auto   px-4 md:px-28'>
@@ -131,7 +131,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                 </div>
 
             </div>
-            <div className='footer fixed flex justify-center bottom-8 mb-5'>
+            <div className='footer absolute flex justify-center bottom-8 lg:mb-3'>
                 <Typography type='p' className='text-center flex gap-2 '
                     style={{
                         color: config?.textColor as string,
