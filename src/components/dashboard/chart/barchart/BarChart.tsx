@@ -11,10 +11,14 @@ interface BarChartProps {
 }
 const BarChart = ({ items, name }: BarChartProps) => {
     const state = {
+
         options: {
             colors: ['rgba(255, 221, 4, 1)', 'rgba(255, 221, 4, 1)', 'rgba(255, 221, 4, 1)'],
             chart: {
-                id: 'apexchart-example'
+                id: 'apexchart-example',
+                toolbar: {
+                    show: false
+                }
             },
             xaxis: {
                 categories: items.map(d => d.title)

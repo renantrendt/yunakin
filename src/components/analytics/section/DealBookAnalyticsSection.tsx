@@ -6,13 +6,14 @@ import React from 'react'
 
 interface DealBookAnalyticsSectionProps {
     cardStats: {
-        totalClicks: number;
-        totalClaims: number;
         totalBenefits: number;
         totalWaitingBenefits: number;
         pageViews: number;
     }
     chartStats: {
+        totalSaves: number;
+        totalClicks: number;
+        totalClaims: number;
         benefitsClicks: {
             title: string
             count: number
@@ -21,9 +22,14 @@ interface DealBookAnalyticsSectionProps {
             title: string
             count: number
         }[]
-        otherCompanyClicks: {
-            [key: string]: number
-        }
+        benefitsSaves: {
+            title: string
+            count: number
+        }[]
+        benefitsLiveAds: {
+            title: string
+            count: number
+        }[]
     }
 }
 
@@ -35,17 +41,8 @@ const DealBookAnalyticsSection = ({ cardStats, chartStats }: DealBookAnalyticsSe
 
             </div>
             <DealbookDashboardCards cardStats={cardStats} />
-            <DealBookChartContainer benefitClicks={chartStats.benefitsClicks}
-                totalClicks={cardStats.totalClicks}
-                totalClaims={cardStats.totalClaims}
-                beenfitsClaims={chartStats.benefitsClaims}
-                companyClicks={Object.keys(chartStats.otherCompanyClicks).map(key => {
-                    return {
-                        title: key,
-                        count: chartStats.otherCompanyClicks[key]
-                    }
-                })}
-                totalCompanyClicks={Object.keys(chartStats.otherCompanyClicks).map(key => chartStats.otherCompanyClicks[key]).reduce((a, b) => a + b, 0)}
+            <DealBookChartContainer
+                chartStats={chartStats}
             />
         </div>
     )

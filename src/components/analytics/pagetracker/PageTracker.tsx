@@ -11,7 +11,6 @@ interface PageTrackerProps {
 }
 const PageTracker = ({ config, otherBenefits }: PageTrackerProps) => {
     const deviceDetector = new DeviceDetector()
-
     useEffect(() => {
         (async function () {
             const device = deviceDetector.parse(navigator.userAgent || window.navigator.userAgent)

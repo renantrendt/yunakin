@@ -8,44 +8,52 @@ import ChartCard from './ChartCard'
 
 
 interface DealBookChartContainerProps {
-    benefitClicks: {
-        title: string
-        count: number
-    }[]
-    beenfitsClaims: {
-        title: string
-        count: number
-    }[]
-    companyClicks: {
-        title: string
-        count: number
-    }[]
-    // benefitsByOs: {
-    //     title: string
-    //     count: number
-    // }[]
-    totalClicks: number
-    totalClaims: number
-    totalCompanyClicks: number
+    chartStats: {
+        totalSaves: number;
+        totalClicks: number;
+        totalClaims: number;
+        benefitsClicks: {
+            title: string
+            count: number
+        }[]
+        benefitsClaims: {
+            title: string
+            count: number
+        }[]
+        benefitsSaves: {
+            title: string
+            count: number
+        }[]
+        benefitsLiveAds: {
+            title: string
+            count: number
+        }[]
+    }
 }
 
-const DealBookChartContainer = ({ benefitClicks, companyClicks, totalClicks, totalCompanyClicks, totalClaims, beenfitsClaims }: DealBookChartContainerProps) => {
+const DealBookChartContainer = ({ chartStats }: DealBookChartContainerProps) => {
+    const { totalClaims, totalClicks, totalSaves, benefitsClaims, benefitsLiveAds, benefitsSaves, benefitsClicks } = chartStats
     const charts = [
         {
             title: 'Clicks by Deal',
-            summary: totalClaims,
-            children: <BarChart name='Clicks' items={beenfitsClaims} />
+            summary: totalClicks,
+            children: <BarChart name='Clicks' items={benefitsClicks} />
         },
 
         {
             title: 'Saved Deals',
-            summary: totalClicks,
-            children: <BarChart name='All Member Benefit Clicks' items={benefitClicks} />
+            summary: totalSaves,
+            children: <BarChart name='All Member Benefit Saves' items={benefitsSaves} />
+        },
+        {
+            title: 'Claimed Deals',
+            summary: totalClaims,
+            children: <BarChart name='All Member Benefit Claims' items={benefitsClaims} />
         },
         {
             title: 'Live Ads',
-            summary: 2122,
-            children: <PieChart name='whatever' items={beenfitsClaims} />
+            summary: benefitsLiveAds.reduce((acc, curr) => acc + curr.count, 0),
+            children: <PieChart name='whatever' items={benefitsLiveAds} />
         },
     ]
     return (

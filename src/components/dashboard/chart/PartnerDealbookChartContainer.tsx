@@ -10,8 +10,9 @@ import ChartCard from './ChartCard'
 interface PartnerDealbookChartContainerProps {
     stats: {
         partnerPageViews: {
-            [key: string]: number
-        }
+            title: string
+            count: number
+        }[]
         clicksByDeal: {
             title: string
             count: number
@@ -20,21 +21,28 @@ interface PartnerDealbookChartContainerProps {
             title: string
             count: number
         }[]
+        savesByDeal: {
+            title: string
+            count: number
+        }[]
+        revenueByAds: {
+            title: string
+            count: number
+        }[]
         totalPageViews: number
         totalClicks: number
         totalClaims: number
+        totalSaves: number
     }
 }
 
 const PartnerDealbookChartContainer = ({ stats }: PartnerDealbookChartContainerProps) => {
-    const { partnerPageViews, clicksByDeal, claimsByDeal, totalClaims, totalClicks, totalPageViews } = stats
+    const { partnerPageViews, clicksByDeal, claimsByDeal, totalClaims, totalClicks, revenueByAds, totalSaves, savesByDeal, totalPageViews } = stats
     const charts = [
         {
             title: 'Pageviews by Partner',
             summary: totalPageViews,
-            children: <BarChart name='Clicks' items={
-                Object.entries(partnerPageViews).map(([key, value]) => ({ title: key, count: value }))
-            } />
+            children: <BarChart name='Clicks' items={partnerPageViews} />
         },
 
         {
@@ -44,9 +52,19 @@ const PartnerDealbookChartContainer = ({ stats }: PartnerDealbookChartContainerP
         },
         {
             title: 'Saved Deals',
-            summary: totalClaims,
-            children: <BarChart name='All Member Benefit Clicks' items={claimsByDeal} />
+            summary: totalSaves,
+            children: <BarChart name='All Member Benefit Clicks' items={savesByDeal} />
         },
+        {
+            title: "Claimed Deals",
+            summary: totalClaims,
+            children: <BarChart name="All Member Benefit claims" items={claimsByDeal} />
+        },
+        {
+            title: 'Revenue by Ads',
+            summary: revenueByAds.reduce((acc, curr) => acc + curr.count, 0),
+            children: <PieChart name='Revenue' items={revenueByAds} />
+        }
     ]
     return (
         <div className='chart-container grid grid-cols-1 lg:grid-cols-2 gap-x-8 lg:gap-y-8 mt-2'>

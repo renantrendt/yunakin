@@ -10,11 +10,18 @@ interface PieChartOptions {
 }
 const PieChart = ({ items, name }: PieChartOptions) => {
     const state = {
-        series: items.map(d => Math.floor(Math.random() * 100)),
+        series: items.map(d => d.count),
         options: {
             chart: {
                 width: 380,
                 type: 'donut',
+            },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: "105%"
+                    }
+                }
             },
             labels: items.map(d => d.title),
             responsive: [{

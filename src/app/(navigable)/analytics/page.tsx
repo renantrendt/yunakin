@@ -46,7 +46,13 @@ export default async function Dashboard() {
         include: {
             OtherMemberBenefit: {
                 select: {
-                    userId: true
+                    userId: true,
+                    memberBenefit: {
+                        select: {
+                            id: true,
+                            pageConfigId: true
+                        }
+                    }
                 }
             }
         }
@@ -92,6 +98,7 @@ export default async function Dashboard() {
             }
         }
     })
+
     const otherMemberBenefitClicks = await prisma.memberBenefitClick.findMany({
         where: {
             AND: [
@@ -109,9 +116,7 @@ export default async function Dashboard() {
 
         },
     });
-    const clicksByCompany: {
-        [key: string]: any
-    } = {};
+
 
     const otherMemberBenefits = await prisma.otherMemberBenefit.findMany({
         where: {
@@ -135,17 +140,43 @@ export default async function Dashboard() {
             userId: true
         }
     })
-    otherMemberBenefitClicks.filter(f => f.event == MemberBenefitClickType.SAVE_BENEFIT).forEach(click => {
+    const clicksByCompany: {
+        [key: string]: any
+    } = {};
+    const savesByCompany: {
+        [key: string]: any
+    } = {};
+    const claimsByCompany: {
+        [key: string]: any
+    } = {};
+    otherMemberBenefitClicks.forEach(click => {
+
         const userId = otherMemberBenefits.find(benefit => benefit.id == click.otherMemberBenefitId)?.userId
         const slug = slugs.find(slug => slug.userId == userId)?.clientSlug
         if (slug && slug !== config?.clientSlug) {
-            if (clicksByCompany[slug]) {
-                clicksByCompany[slug]++
-            } else {
-                clicksByCompany[slug] = 1
+            if (click.event == MemberBenefitClickType.CLAIM_BENEFIT) {
+                if (claimsByCompany[slug]) {
+                    claimsByCompany[slug]++
+                } else {
+                    claimsByCompany[slug] = 1
+                }
+            } else if (click.event == MemberBenefitClickType.SAVE_BENEFIT) {
+                if (savesByCompany[slug]) {
+                    savesByCompany[slug]++
+                } else {
+                    savesByCompany[slug] = 1
+                }
+            } else if (click.event == MemberBenefitClickType.WEBSITE_CLICK) {
+                if (clicksByCompany[slug]) {
+                    clicksByCompany[slug]++
+                } else {
+                    clicksByCompany[slug] = 1
+                }
             }
         }
     })
+
+    // partner stats
 
     const partnerPageViews = await prisma.partnerPageViews.findMany({
         where: {
@@ -159,80 +190,87 @@ export default async function Dashboard() {
             }
         }
     })
-
     const cardStats = {
-        totalClicks: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.SAVE_BENEFIT).length).reduce((a, b) => a + b, 0),
-        totalClaims: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event != MemberBenefitClickType.SAVE_BENEFIT).length).reduce((a, b) => a + b, 0),
+        totalSaves: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.SAVE_BENEFIT).length).reduce((a, b) => a + b, 0),
+        totalClicks: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.WEBSITE_CLICK).length).reduce((a, b) => a + b, 0),
+        totalClaims: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.CLAIM_BENEFIT).length).reduce((a, b) => a + b, 0),
         pageViews,
         totalBenefits: memberBenefits.length,
         totalWaitingBenefits: memberBenefits.filter(benefit => benefit.partnershipTypes?.includes(PartnershipType.NEEDS_APPROVAL)).length,
     }
     const chartStats = {
-        benefitsClicks: memberBenefitsWithClicks.map(memberBenefit => {
+        benefitsClicks: memberBenefitsWithClicks.filter(c => c.clicks.length > 0).map(memberBenefit => {
+            return {
+                title: memberBenefit.title,
+                count: memberBenefit.clicks.filter(m => m.event == MemberBenefitClickType.WEBSITE_CLICK).length,
+            }
+        }),
+        benefitsSaves: memberBenefitsWithClicks.filter(c => c.clicks.length > 0).map(memberBenefit => {
             return {
                 title: memberBenefit.title,
                 count: memberBenefit.clicks.filter(m => m.event == MemberBenefitClickType.SAVE_BENEFIT).length,
             }
         }),
-        benefitsByOs: memberBenefitsWithClicks.reduce<{
-            [key: string]: number
-        }>((acc, memberBenefit) => {
-            memberBenefit.clicks.forEach(click => {
-                if (click.os) {
-                    if (acc[click.os]) {
-                        acc[click.os]++
-                    } else {
-                        acc[click.os] = 1
-                    }
-                }
-            })
-            return acc;
-        }, {}),
-        benefitsClaims: memberBenefitsWithClicks.map(memberBenefit => {
+        benefitClaims: memberBenefitsWithClicks.filter(c => c.clicks.length > 0).map(memberBenefit => {
             return {
                 title: memberBenefit.title,
-                count: memberBenefit.clicks.filter(m => m.event != MemberBenefitClickType.SAVE_BENEFIT).length,
+                count: memberBenefit.clicks.filter(m => m.event == MemberBenefitClickType.CLAIM_BENEFIT).length,
             }
         }),
-        otherCompanyClicks: clicksByCompany
+        benefitAds: [] as {
+            title: string,
+            count: number
+        }[],
     }
 
 
 
     const partnerStats = {
         pageViews: partnerPageViews.length,
-        totalPartners: 0,
-        totalWaitingPartners: 0
+        totalPartners: _.keys(clicksByCompany).length,
+        totalWaitingPartners: 0,
+        totalPageViews: partnerPageViews.length,
+        totalSaves: _.reduce(savesByCompany, (acc, value) => acc + value, 0),
+        totalClicks: _.reduce(clicksByCompany, (acc, value) => acc + value, 0),
+        totalClaims: _.reduce(claimsByCompany, (acc, value) => acc + value, 0)
     }
+    const partnerPageViewsReduced = partnerPageViews.reduce<{
+        [key: string]: number
+    }>((acc, partnerPageView) => {
+        if (acc[partnerPageView.pageConfig.clientSlug]) {
+            acc[partnerPageView.pageConfig.clientSlug]++
+        } else {
+            acc[partnerPageView.pageConfig.clientSlug] = 1
+        }
+        return acc
+    }, {})
 
     const partnerChartStats = {
-        partnerPageViews: partnerPageViews.reduce<{
-            [key: string]: number
-        }>((acc, partnerPageView) => {
-            if (acc[partnerPageView.pageConfig.clientSlug]) {
-                acc[partnerPageView.pageConfig.clientSlug]++
-            } else {
-                acc[partnerPageView.pageConfig.clientSlug] = 1
-            }
-            return acc
-        }
-            , {}),
-        clicksByDeal: [{
-            title: 'Deal 1',
-            count: 0
-        }],
-        claimsByDeal: [
-            {
-                title: 'Deal 1',
-                count: 0
-            }
-        ],
-        totalPageViews: partnerPageViews.length,
-        totalClicks: 0,
-        totalClaims: 0
+        partnerPageViews: _.keys(partnerPageViewsReduced).map(key => ({
+            title: key,
+            count: partnerPageViewsReduced[key]
+        })
+        ),
+        clicksByDeal: _.keys(clicksByCompany).map(key => ({
+            title: key,
+            count: clicksByCompany[key]
+        }),
+        ),
+        claimsByDeal: _.keys(claimsByCompany).map(key => ({
+            title: key,
+            count: claimsByCompany[key]
+        })),
+        savesByDeal: _.keys(savesByCompany).map(key => ({
+            title: key,
+            count: savesByCompany[key]
+        })),
+        revenueFromAds: [] as {
+            title: string,
+            count: number
+        }[],
+
     }
     // partner dealbook
-
 
 
     // check if no clicks yet
@@ -240,74 +278,94 @@ export default async function Dashboard() {
     _.keys(cardStats).forEach(key => {
         if (cardStats[key as keyof typeof cardStats] > 0) {
             hasData = true
-
         }
+
     })
     if (!hasData) {
-        chartStats.benefitsClicks.forEach(click => {
-            if (click.count > 0) {
+        _.keys(partnerStats).forEach(key => {
+            if (partnerStats[key as keyof typeof partnerStats] > 0) {
                 hasData = true
             }
         })
-        if (!hasData) {
-            chartStats.benefitsClaims.forEach(click => {
-                if (click.count > 0) {
-                    hasData = true
-                }
-            })
-        }
-        if (!hasData) {
-            _.keys(chartStats.otherCompanyClicks).forEach(key => {
-                if (chartStats.otherCompanyClicks[key] > 0) {
-                    hasData = true
-                }
-            })
-        }
+    }
+
+    if (!hasData) {
+        _.keys(chartStats).forEach(key => {
+            if (chartStats[key as keyof typeof chartStats].length > 0) {
+                hasData = true
+            }
+        })
+    }
+    if (!hasData) {
+        _.keys(partnerChartStats).forEach(key => {
+            if (partnerChartStats[key as keyof typeof partnerChartStats].length > 0) {
+                hasData = true
+            }
+        })
     }
 
     // if no data randomize the values for the demo
     if (!hasData) {
-        cardStats.totalClicks = Math.floor(Math.random() * 1000)
-        cardStats.totalClaims = Math.floor(Math.random() * 1000)
-        cardStats.pageViews = Math.floor(Math.random() * 10000)
-        cardStats.totalBenefits = Math.floor(Math.random() * 100)
-        cardStats.totalWaitingBenefits = Math.floor(Math.random() * 100)
-        chartStats.benefitsClicks = Array.from({ length: 5 }, (_, k) => ({
-            title: 'Benefit ' + (k + 1),
-            count: Math.floor(Math.random() * 100)
+        console.log('randomizing')
+        // randomize the values
+        _.keys(cardStats).forEach(key => {
+            cardStats[key as keyof typeof cardStats] = Math.floor(Math.random() * 100)
         })
-        )
-        chartStats.benefitsClaims = Array.from({ length: 5 }, () => ({
-            title: 'Benefit',
-            count: Math.floor(Math.random() * 100)
+        _.keys(chartStats).forEach((key, index) => {
+            chartStats[key as keyof typeof chartStats] = _.times(5, () => {
+                return {
+                    title: `Deal ${Math.floor(Math.random() * 5 + 1)}`,
+                    count: Math.floor(Math.random() * 100)
+                }
+            })
         })
-        )
-        chartStats.otherCompanyClicks = {
-            'Company 1': Math.floor(Math.random() * 100),
-            'Company 2': Math.floor(Math.random() * 100),
-            'Company 3': Math.floor(Math.random() * 100),
-            'Company 4': Math.floor(Math.random() * 100),
-            'Company 5': Math.floor(Math.random() * 100),
-        }
+        _.keys(partnerStats).forEach((key) => {
+            partnerStats[key as keyof typeof partnerStats] = Math.floor(Math.random() * 100)
+        })
+        _.keys(partnerChartStats).forEach((key, index) => {
+            partnerChartStats[key as keyof typeof partnerChartStats] = _.times(5, () => {
+                return {
+                    title: `Partner ${Math.floor(Math.random() * 5 + 1)}`,
+                    count: Math.floor(Math.random() * 100)
+                }
+            })
+        })
     }
-
 
 
     return (
         <div className=' px-5 py-4   lg:px-12'>
             {!hasData && <div className='warning bg-white py-3 px-4 flex gap-2 flex-row items-center mb-7'>
                 <WarningIcon />
-                <Typography type='p' className='text-black font-semibold font-satoshiBlack text-sm leading-normal'>This is a demo screen. The analytics on this page are not real. It will be updated after you start receiving the first click.</Typography>
+                <Typography type='p' className='text-black font-semibold font-satoshi text-sm leading-normal'>This is a demo screen. The analytics on this page are not real. It will be updated after you start receiving the first click.</Typography>
             </div>
             }
 
             <DealBookAnalyticsSection
                 cardStats={cardStats}
-                chartStats={chartStats}
+                chartStats={{
+                    totalSaves: cardStats.totalSaves,
+                    totalClicks: cardStats.totalClicks,
+                    totalClaims: cardStats.totalClaims,
+                    benefitsClicks: chartStats.benefitsClicks,
+                    benefitsClaims: chartStats.benefitClaims,
+                    benefitsSaves: chartStats.benefitsSaves,
+                    benefitsLiveAds: chartStats.benefitAds
+                }}
             />
             <PartnerDealBookAnalyticsSection
                 cardStats={partnerStats}
-                stats={partnerChartStats}
+                stats={{
+                    partnerPageViews: partnerChartStats.partnerPageViews,
+                    clicksByDeal: partnerChartStats.clicksByDeal,
+                    claimsByDeal: partnerChartStats.claimsByDeal,
+                    savesByDeal: partnerChartStats.savesByDeal,
+                    revenueByAds: partnerChartStats.revenueFromAds,
+                    totalPageViews: partnerStats.pageViews,
+                    totalClicks: partnerStats.totalClicks,
+                    totalClaims: partnerStats.totalClaims,
+                    totalSaves: partnerStats.totalSaves
+                }}
             />
         </div>
     )

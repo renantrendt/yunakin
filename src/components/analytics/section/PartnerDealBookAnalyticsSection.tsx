@@ -12,8 +12,9 @@ interface PartnerDealBookAnalyticsSectionProps {
     }
     stats: {
         partnerPageViews: {
-            [key: string]: number
-        }
+            title: string
+            count: number
+        }[]
         clicksByDeal: {
             title: string
             count: number
@@ -22,9 +23,18 @@ interface PartnerDealBookAnalyticsSectionProps {
             title: string
             count: number
         }[]
+        savesByDeal: {
+            title: string
+            count: number
+        }[]
+        revenueByAds: {
+            title: string
+            count: number
+        }[]
         totalPageViews: number
         totalClicks: number
         totalClaims: number
+        totalSaves: number
     }
 }
 
