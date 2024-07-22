@@ -76,7 +76,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
 
                 <div className=' py-20 w-full mx-auto '>
                     <div className='max-w-[1200px] px-4 md:px-28 mx-auto lg:mt-40'>
-                        <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 lg:gap-5 text-center'>
+                        <div className=' my-10 lg:my-20 flex flex-col justify-center items-center gap-3 md:gap-5 text-center'>
                             <Typography type="h1" className="font-black" >{t(`step${step}.title`)}</Typography>
                             <Typography type="h6" className="text-xl lg:text-2xl" >{t(`step${step}.description`)}</Typography>
                         </div>
@@ -84,7 +84,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                     <div className='pt-8 lg:pt-20  '>
                         <div className="flex flex-col md:flex-row gap-4   items-start justify-between w-full  text-black md:items-center  max-w-[1440px] px-4 md:px-28 mx-auto">
                             <h1 className="text-xl lg:text-2xl font-bold">Perks</h1>
-                            <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'>
+                            <div className='tabs bg-[#F0F0F0]  p-1  w-full md:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'>
 
                                 {Object.keys(selectMemberBenefitFilter).map((key: string, index) => {
                                     return (
@@ -97,7 +97,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                         </div>
                         <div className='mb-40 '>
                             <>
-                                {/* {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
+                                {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
                                     return (
                                         <SelectCategoryScroller
                                             key={category.id}
@@ -116,9 +116,9 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                             }}
                                         />
                                     )
-                                })} */}
+                                })}
 
-                                {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
+                                {[selectMemberBenefitFilter.NEW].includes(selectedDisplayType) && (
                                     <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-28 mx-auto '>
                                         {selectedBenefits && selectedBenefits
                                             .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -129,7 +129,9 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                                         const newSelectedBenefits = selectedBenefits.map(b => b.id === benefit.id ? { ...b, selected: !b.selected } : b)
                                                         setSelectedBenefits(newSelectedBenefits)
                                                     }}
-                                                    key={index} benefit={benefit} />
+                                                    key={index} benefit={benefit}
+                                                    className='w-full min-w-32 max-w-full md:min-w-32 md:max-w-full'
+                                                />
                                             ))}
                                     </div>
                                 )}

@@ -76,6 +76,7 @@ export enum DealType {
 export const selectMemberBenefitFilter = {
     NEW: "New",
     // FEATURED: "Featured",
+    CATEGORY: "Category"
 }
 export type MemberBenefitFilter = keyof typeof selectMemberBenefitFilter
 

@@ -43,7 +43,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }:
     return (
         <>
 
-            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0  lg:min-w-[390px]  h-full   overflow-hidden lg:max-w-[320px]  bg-base-100 
+            <div key={key} className={cn(`card flex font-satoshi flex-col flex-shrink-0 max-w-[310px] min-w-[310px] md:max-w-[340px] md:min-w-[340px] w-10/12    h-full   overflow-hidden  bg-base-100 
         rounded-[10px] shadow-sm`, className)}>
                 <div className="p-5 flex-shrink-0">
                     <div className='flex justify-between items-start'>

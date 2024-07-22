@@ -40,9 +40,9 @@ interface PartnerDealBookAnalyticsSectionProps {
 
 const PartnerDealBookAnalyticsSection = ({ cardStats, stats }: PartnerDealBookAnalyticsSectionProps) => {
     return (
-        <div className='dealbook p-6 my-6 bg-[#F3F1F1] flex flex-col gap-8 rounded-2xl'>
+        <div className='dealbook p-3 lg:p-6 my-6 bg-[#F3F1F1] flex flex-col gap-4 lg:gap-8 rounded-2xl'>
             <div className='flex w-full justify-between flex-row'>
-                <Typography type='h3' className='text-black font-semibold !text-lg font-satoshi'>Dealbook</Typography>
+                <Typography type='h3' className='text-black font-semibold !text-lg font-satoshi'>Partner Dealbook</Typography>
 
             </div>
             <PartnerDealbookDashboardCards cardStats={cardStats} />

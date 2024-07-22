@@ -32,7 +32,7 @@ export const PartnerDealbookDashboardCards = ({ cardStats }: PartnerDealbookDash
         },
     ]
     return (
-        <div className='grid grid-cols-2 md:grid-cols-3  gap-x-6 mb-8 '>
+        <div className='grid grid-cols-2 md:grid-cols-3  gap-x-6 gap-y-6 mb-4 lg:mb-8 '>
             {data.map((item, index) => (
                 <DashboardCard key={index} title={item.title} quantity={item.quantity} increase={item.increase} />
             ))}

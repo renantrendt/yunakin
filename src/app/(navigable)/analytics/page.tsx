@@ -334,10 +334,12 @@ export default async function Dashboard() {
 
 
     return (
-        <div className=' px-5 py-4   lg:px-12'>
-            {!hasData && <div className='warning bg-white py-3 px-4 flex gap-2 flex-row items-center mb-7'>
-                <WarningIcon />
-                <Typography type='p' className='text-black font-semibold font-satoshi text-sm leading-normal'>This is a demo screen. The analytics on this page are not real. It will be updated after you start receiving the first click.</Typography>
+        <div className='  py-4   lg:px-12'>
+            {!hasData && <div className='warning mx-3 lg:mx-0  bg-white py-3 px-4 flex gap-2 flex-row items-center mb-7'>
+                <div className='w-fit flex-shrink-0'>
+                    <WarningIcon />
+                </div>
+                <Typography type='p' className='text-black font-medium font-satoshi text-sm leading-normal'>This is a demo screen. The analytics on this page are not real. It will be updated after you start receiving the first click.</Typography>
             </div>
             }
 

@@ -30,7 +30,8 @@ const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center item
           'focus:shadow-focus-primary'
           , 'hover:bg-grey-200',
           'shadow-sm',
-          'text-black'
+          'text-black',
+          "disabled:bg-grey-300 "
         ],
       tertiary: ['bg-grey-200', 'border-none', 'disabled:bg-grey-200', 'focus:shadow-focus-primary', 'hover:bg-grey-300', 'text-black'],
       alert: ['bg-red-500', 'disabled:bg-red-200', 'focus:shadow-focus-red', 'hover:bg-red-600', 'text-white'],

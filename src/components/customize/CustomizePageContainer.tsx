@@ -230,7 +230,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                 </div>
                             </div>
                             <div>
-                                {/* {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
+                                {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
                                     return (
                                         <CategoryScroller
                                             key={category.id}
@@ -240,9 +240,9 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
 
                                         />
                                     )
-                                })} */}
+                                })}
 
-                                {[selectMemberBenefitFilter.NEW, selectMemberBenefitFilter.FEATURED].includes(selectedDisplayType) && (
+                                {[selectMemberBenefitFilter.NEW].includes(selectedDisplayType) && (
                                     <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-12 mx-auto '>
                                         {selectedBenefits && selectedBenefits
                                             .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
