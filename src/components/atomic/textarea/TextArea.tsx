@@ -11,9 +11,10 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
     error?: string
     additionalProps?: any
+    showCounter?: boolean
 }
 
-const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange, error, id, ...additionalProps }) => {
+const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange, error, id, showCounter, ...additionalProps }) => {
     return (
         <div className="form-control">
             {label &&
@@ -35,9 +36,11 @@ const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange,
                 placeholder={placeholder}
                 name={name}
                 id={id}
+                maxLength={additionalProps.maxLength}
                 onChange={onChange}
                 rows={4}
                 {...additionalProps}></textarea>
+            {!error && additionalProps.maxLength && showCounter && <p className='text-sm text-gray-400 text-right'> {`${additionalProps.value?.length}/${additionalProps.maxLength}`} </p>}
             {error &&
                 <div className='flex justify-start gap-2 text-red-600 items-center mt-2'>
                     <ExclamationIcon />

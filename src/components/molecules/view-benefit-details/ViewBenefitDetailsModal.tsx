@@ -10,29 +10,33 @@ import Typography from '@/components/atomic/typography/Typography';
 import LocationIcon from "@/icons/landing/location-icon.svg"
 import Toggle from '@/components/atomic/toggle/Toggle';
 import Badge from '@/components/atomic/badge/Badge';
-
+import LoadingIcon from '@/icons/LoadingIcon';
+import Tooltip from '@/components/atomic/tooltip/Tooltip';
+import { InfoCircledIcon } from "@radix-ui/react-icons"
 interface ViewBenefitDetailsModalProps {
     onClose: () => void;
     memberBenefit: MemberBenefitWithImport;
     isOpen: boolean;
     category: string;
+    handleImportBenefit: (checked: boolean) => void;
+    isloading: boolean;
 }
 
-const ViewBenefitDetailsModal = ({ onClose, memberBenefit, isOpen, category }: ViewBenefitDetailsModalProps) => {
+const ViewBenefitDetailsModal = ({ onClose, memberBenefit, isOpen, category, handleImportBenefit, isloading }: ViewBenefitDetailsModalProps) => {
     const { t } = useTranslation("dashboard")
 
     const image = memberBenefit.imageURL && `${memberBenefit.imageURL}` || `/images/dummy_logo.svg`
     return (
         <Modal isOpen={isOpen} onClose={onClose}
             closeOnOutsideClick={false}
-            className='lg:max-w-[935px] w-full p-0 max-h-[100vh] rounded-none lg:rounded-xl '
+            className='lg:max-w-[935px] w-11/12   rounded-xl '
         >
             <div className='flex flex-col '>
                 <div className='justify-between flex w-full'>
                     <Cross1Icon onClick={onClose} className=' absolute cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-3 top-3 lg:right-8 lg:top-8' />
                 </div>
                 <div className='grid grid-cols-1 lg:grid-cols-2 '>
-                    <div className='flex flex-col justify-between gap-12 h-full p-10'>
+                    <div className='flex flex-col justify-between gap-12 h-full py-10 px-4 lg:p-10'>
                         <div className='flex flex-col'>
                             <div className='flex justify-between items-start'>
                                 <Image className='hover:scale-105  w-20 h-20 flex-shrink-0 rounded-[14px] border border-[#EBEBEB] duration-300 ease-in-out' src={image} alt="Benefit" width={80} height={80} objectFit=' contain' />
@@ -59,18 +63,24 @@ const ViewBenefitDetailsModal = ({ onClose, memberBenefit, isOpen, category }: V
 
                         </div>
                     </div>
-                    <div className='grid grid-cols-2 gap-x-10 gap-y-10 p-10 bg-[#F8F7F7] font-satoshi'>
+                    <div className='grid grid-cols-2 gap-x-10 gap-y-10 py-10 px-4 lg:p-10 bg-[#F8F7F7] font-satoshi'>
                         <div className='flex flex-col items-start gap-10'>
                             <div className='flex flex-col gap-2'>
                                 <Typography type='p'>Category</Typography>
                                 <Typography type='p' className='text-sm'>{category}</Typography>
                             </div>
                             <div className='flex flex-col gap-2'>
-                                <Typography type='p'>Featured</Typography>
+                                <div className='flex gap-1 items-center'>
+                                    <Typography type='p'>Featured</Typography>
+                                    <Tooltip content={"Feature under development."} trigger={<InfoCircledIcon />} />
+                                </div>
                                 <Toggle onChange={() => { }} checked={true} />
                             </div>
                             <div className='flex flex-col gap-2'>
-                                <Typography type='p'>Suggested Deal</Typography>
+                                <div className='flex gap-1 items-center'>
+                                    <Typography type='p'>Suggested Deal</Typography>
+                                    <Tooltip content={"Feature under development."} trigger={<InfoCircledIcon />} />
+                                </div>
                                 <div className='flex gap-2 items-start'>
                                     <div className='text-[#00CE21]'>
 
@@ -86,11 +96,25 @@ const ViewBenefitDetailsModal = ({ onClose, memberBenefit, isOpen, category }: V
                         </div>
                         <div className='flex flex-col items-start gap-10'>
                             <div className='flex flex-col gap-2'>
-                                <Typography type='p'>Import</Typography>
-                                <Toggle onChange={() => { }} checked={memberBenefit.import ?? false} />
+                                <div className='flex gap-1 items-center'>
+                                    <Typography type='p'>Import</Typography>
+                                    <Tooltip content={"Show this deal on your dealbook."} trigger={<InfoCircledIcon />} />
+                                </div>
+                                <div>
+                                    <Toggle
+                                        checked={memberBenefit.import ?? false}
+                                        onChange={async (checked) => {
+                                            handleImportBenefit(checked)
+                                        }}
+                                    />
+                                    {isloading && <LoadingIcon />}
+                                </div>
                             </div>
                             <div className='flex flex-col gap-2'>
-                                <Typography type='p'>Needs Approval</Typography>
+                                <div className='flex gap-1 items-center'>
+                                    <Typography type='p'>Needs Approval</Typography>
+                                    <Tooltip content={"Feature under development."} trigger={<InfoCircledIcon />} />
+                                </div>
                                 <div className='flex gap-2  flex-row items-center'>
                                     <div className='text-[#00CE21]'>
 
@@ -101,10 +125,15 @@ const ViewBenefitDetailsModal = ({ onClose, memberBenefit, isOpen, category }: V
                                 </div>
                             </div>
                             <div className='flex flex-col gap-2'>
-                                <Typography type='p'>Partnership Types</Typography>
+                                <div className='flex gap-1  items-center'>
+                                    <Typography type='p'>Partnerships</Typography>
+                                    <Tooltip content={"Feature under development."} trigger={<InfoCircledIcon />} />
+
+                                </div>
+
                                 <div className='flex gap-2 items-start'>
                                     {memberBenefit.partnershipTypes?.split(',').map((type, index) => (
-                                        <Badge key={index} color='green' type={'filled'} className='text-xs'>{type}</Badge>
+                                        <Badge key={index} color='grey' type={'outline'} className='text-xs'>{type}</Badge>
                                     ))}
                                 </div>
                             </div>

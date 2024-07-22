@@ -11,14 +11,14 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 const schema = yup.object().shape({
-    name: yup.string().required(),
+    name: yup.string().required().max(50, 'Company Name must be less than 50 characters'),
     code: yup.string().required(),
     domain: yup.string().required(),
     imageURL: yup.string().optional().nullable(),
     offer: yup.string().optional().nullable(),
-    location: yup.string().optional().nullable(),
+    location: yup.string().optional().nullable().max(20, 'City must be less than 20 characters'),
     link: yup.string().optional().nullable(),
-    description: yup.string(),
+    description: yup.string().max(150, 'Description must be less than 150 characters').required(),
     categoryId: yup.string().required(),
     imageType: yup.string().optional().nullable()
 })
@@ -90,6 +90,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                                 id="name"
                                 name="name"
                                 placeholder='Company Name'
+                                maxLength={50}
                                 onChange={onChange}
                                 value={value}
                                 error={errors.name?.message}
@@ -108,6 +109,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                                 onChange={onChange}
                                 value={value}
                                 maxLength={150}
+                                showCounter
                                 rows={3}
                                 error={errors.description?.message}
                             />
@@ -189,6 +191,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                                 id="location"
                                 name="location"
                                 placeholder='Enter City'
+                                maxLength={20}
                                 onChange={onChange}
                                 value={value as string}
                                 error={errors.location?.message}

@@ -46,7 +46,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
         />
         {trailingIcon && <div className='absolute right-4 top-[15px]  text-black dark:text-placeholder-dark'>{trailingIcon}</div>}
       </div>
-
+      {!error && additionalProps.maxLength && <p className='text-sm text-gray-400 text-right'> {`${additionalProps.value?.length}/${additionalProps.maxLength}`} </p>}
       {error &&
         <div className='flex justify-start gap-2 text-red-600 items-center mt-2'>
           <ExclmationIcon />

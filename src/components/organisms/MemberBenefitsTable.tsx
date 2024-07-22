@@ -23,12 +23,15 @@ import { Filter, MemberBenefitWithImport, PartnershipType } from '@/lib/types'
 import _ from 'lodash'
 import Image from 'next/image'
 import Toggle from '../atomic/toggle/Toggle'
-import { PlusIcon, EyeOpenIcon, Pencil1Icon } from '@radix-ui/react-icons'
+import { PlusIcon, EyeOpenIcon, Pencil1Icon, InfoCircledIcon } from '@radix-ui/react-icons'
 import TableHeadCell from './table/TableHeadCell'
 import TableFilter from '../filter/TableFilter'
 import ViewBenefitDetailsModal from '../molecules/view-benefit-details/ViewBenefitDetailsModal'
 import { useMutation } from '@tanstack/react-query'
 import LoadingIcon from '@/icons/LoadingIcon'
+import { cn } from '@/utils/cn'
+import Tooltip from '../atomic/tooltip/Tooltip'
+import Typography from '../atomic/typography/Typography'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -145,7 +148,10 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                     onChange={() => { }}
 
                 />,
-            header: () => <span>Featured</span>,
+            header: () => <div className='flex gap-1 items-center'>
+                <span>Featured</span>
+                <Tooltip content={"Feature under development."} trigger={<InfoCircledIcon />} />
+            </div>,
             footer: info => info.column.id,
             size: 300,
             minSize: 300
@@ -185,7 +191,10 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
 
                 )
             },
-            header: () => <span>Import</span>,
+            header: () => <div className='flex gap-1 items-center'>
+                <span>Import</span>
+                <Tooltip content={"Show this deal on your dealbook."} trigger={<InfoCircledIcon />} />
+            </div>,
             footer: info => info.column.id,
             size: 300,
             minSize: 300
@@ -333,7 +342,10 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map(header => {
                                     return (
-                                        <TableHeadCell key={header.id} className={`${header.id.includes('Description') ? "!min-w-64 !w-64" : "!w-20"}`}>
+                                        <TableHeadCell key={header.id} className={cn("w-20",
+                                            { "!min-w-64 w-64": header.id.includes('Description') },
+                                            { "!min-w-32 w-32": header.id.includes('Import') },
+                                        )}>
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
@@ -499,6 +511,11 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
             }
             {
                 showBenefitDetailsModal && <ViewBenefitDetailsModal
+
+                    handleImportBenefit={async (checked) => {
+                        await importMutation.mutateAsync({ benefit: memberBenefits.find(b => b.id === showBenefitDetailsModal) as MemberBenefitWithImport, importStatus: checked })
+                    }}
+                    isloading={importMutation.isPending && importMutation.variables.benefit.id === showBenefitDetailsModal}
                     memberBenefit={memberBenefits.find(b => b.id === showBenefitDetailsModal) as MemberBenefitWithImport}
                     isOpen={true}
                     category={categories.find(c => c.id === memberBenefits.find(b => b.id === showBenefitDetailsModal)?.categoryId)?.name as string}

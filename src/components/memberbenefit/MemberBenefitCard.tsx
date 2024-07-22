@@ -124,7 +124,7 @@ rounded-[10px] shadow-sm`, className)}
 
                         >Save Deal</Button>
 
-                        {benefit.link && <a href={!isEditing ? domain : undefined} target='_blank' rel="noreferrer" className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'
+                        {benefit.location && <a href={!isEditing ? domain : undefined} target='_blank' rel="noreferrer" className='cursor-pointer text-[#8C8C8C] text-xs  md:text-sm  flex gap-1'
                             style={{
                                 color: config?.textColor as string,
                             }}

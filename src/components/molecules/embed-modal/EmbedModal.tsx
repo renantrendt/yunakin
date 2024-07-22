@@ -52,7 +52,7 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
         >
             <div className='flex flex-col gap-6 p-8 justify-start content font-satoshi'>
                 <div className='justify-between flex w-full'>
-                    <Button onClick={onClose} variant='secondary' size='sm' icon={<Cross1Icon />} className=' absolute !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
+                    <Cross1Icon onClick={onClose} className=' absolute cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
                 </div>
                 {!showEmbedCode && !showShareUrl && !showCustomizeUrl &&
                     <>

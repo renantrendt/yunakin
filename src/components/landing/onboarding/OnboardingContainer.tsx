@@ -44,6 +44,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
             }
         })
     )
+
     return (
         <div className=''>
             <ContentSection fullWidth additionalClassName={cn(' fixed  bg-landing-background z-50 top-0 pt-8 lg:pt-10 pb-2 lg:pb-4')}>

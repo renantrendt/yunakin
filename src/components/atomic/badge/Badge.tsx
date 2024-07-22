@@ -31,7 +31,7 @@ export interface BadgeProps extends Omit<React.HtmlHTMLAttributes<HTMLDivElement
 const Badge = ({ size = "md", children, type, color, ...additionalProps }: BadgeProps) => {
 
     return (
-        <div className={cn(badge({ type, color, size }))} {...additionalProps} >{children}</div>
+        <div  {...additionalProps} className={cn(badge({ type, color, size }), additionalProps.className)} >{children}</div>
     )
 }
 

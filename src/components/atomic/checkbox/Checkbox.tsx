@@ -16,10 +16,10 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Checkbox = ({ checked, label, onChange, className, id, name, required, error, ...additionalProps }: CheckboxProps) => {
     return (
         <div>
-            <div className='flex flex-row items-center justify-start gap-2 '>
+            <div className='flex flex-row items-center justify-start gap-2 text-black '>
                 <input name={name} required={required} type="checkbox" id={id} onChange={onChange} checked={checked}
                     {...additionalProps}
-                    className={cn("  text-primary-500 hover:cursor-pointer duration-150 ease-in-out accent-green-500  shadow-sm  focus:ring-0 focus:ring-offset-0  !outline-none rounded-[4px] border border-grey-300 appearance-none accent-black ", className)} />
+                    className={cn("  text-primary-500 hover:cursor-pointer duration-150 ease-in-out   shadow-sm  focus:ring-0 focus:ring-offset-0  !outline-none rounded-[4px] border border-grey-300 appearance-none accent-black ", className)} />
                 <label htmlFor={id} className='  text-sm leading-5  hover:cursor-pointer dark:text-white'>{label}</label>
             </div>
             {error &&
