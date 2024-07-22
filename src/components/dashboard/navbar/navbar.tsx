@@ -10,7 +10,7 @@ const DashboardNavbar = ({ onClick }: { onClick: () => void }): JSX.Element => {
     return (
         <header className="sticky top-0 z-40 flex w-full bg-white dark:bg-black ">
             <div className='flex flex-grow items-center justify-between px-4 py-2 shadow-2 md:px-6 2xl:px-10'>
-                <div className=' block rounded-full hover:bg-gray-100  p-1.5 shadow-sm dark:border-stroke   lg:hidden'
+                <div className=' block rounded-full hover:bg-gray-100  p-1.5    lg:hidden'
                     onClick={onClick}>
                     <HamburgerIcon />
                 </div>

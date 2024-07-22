@@ -13,7 +13,7 @@ const ChartCard = ({ title, summary, children }: ChartCardProps) => {
                 <Typography type='h3' className='text-sm  text-grey-600 leading-5'>{title}</Typography>
                 {summary && <Typography type='p' className='text-2xl leading-8  text-black dark:text-white'>{summary}</Typography>}
             </div>
-            <div className='mx-auto lg:mx-0 '>
+            <div className='  '>
                 {children}
             </div>
         </div>

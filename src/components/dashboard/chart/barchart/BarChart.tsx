@@ -31,7 +31,7 @@ const BarChart = ({ items, name }: BarChartProps) => {
     }
 
     return (
-        <Chart options={state.options} series={state.series} type="bar" height={300} />
+        <Chart options={state.options} series={state.series} type="bar" height={300} width={"100%"} />
     )
 }
 

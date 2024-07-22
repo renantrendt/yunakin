@@ -35,10 +35,10 @@ const Topbar = () => {
                     />
                 </div> */}
                 <div className='relative' onMouseLeave={() => setShow(false)}>
-                    <Avatar onMouseEnter={() => setShow(true)} onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "/images/default-avatar.jpeg"} name={session?.user?.name ?? ""} />
+                    <Avatar onMouseEnter={() => setShow(true)} onClick={() => { setShow(!show) }} tabIndex={0} role="button" image={session?.user?.avatar || "/images/dummy_logo.svg"} name={session?.user?.name ?? ""} />
                     {show && <AccountModal email={session?.user?.email as string}
                         name={session?.user?.name ?? ""}
-                        image={session?.user?.avatar || "/images/default-avatar.jpeg"} shown={show}
+                        image={session?.user?.avatar || "/images/dummy_logo.svg"} shown={show}
                     />}
                 </div>
             </div>
