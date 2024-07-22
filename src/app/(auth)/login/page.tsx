@@ -35,7 +35,7 @@ export default function LoginPage() {
 
     if (session && new URLSearchParams(searchParams).get('callbackUrl') === null) {
         return (
-            router.push('/dashboard')
+            router.push('/analytics')
         )
     }
 

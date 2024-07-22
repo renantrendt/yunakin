@@ -1,16 +1,26 @@
 import React from 'react'
 import { prisma } from '@/lib/prisma';
 import OnboardingContainer from '@/components/landing/onboarding/OnboardingContainer';
-import { MemberBenefitVisibility } from '@/lib/types';
+import { DealType, MemberBenefitVisibility } from '@/lib/types';
+import { auth } from '@/auth';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const benefits = await prisma.memberBenefit.findMany({
         where: {
-            OR: [
+            AND: [
                 {
-                    visibility: MemberBenefitVisibility.PUBLIC
+                    OR: [
+                        {
+                            visibility: MemberBenefitVisibility.PUBLIC
+                        },
+                        {
+                            visibility: MemberBenefitVisibility.OWNED_PRIVATE,
+                        },
+                    ]
                 },
                 {
-                    visibility: MemberBenefitVisibility.OWNED_PRIVATE,
+                    dealType: {
+                        not: DealType.PARTNER
+                    }
                 }
             ]
         }

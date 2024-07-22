@@ -47,7 +47,10 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     }, [config])
 
     const publishChanges = useCallback(async () => {
-
+        if (!isEditing) {
+            window.open(`/${config.clientSlug}/memberbenefits`, "_blank")
+            return
+        }
         if (config.imageURL && config.imageURL !== memberPageConfig.imageURL) {
             const blob = await fetch(config.imageURL).then(r => r.blob());
             const randomNumber = Math.floor(Math.random() * 10)
@@ -100,7 +103,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
             setLoading(false)
         }
 
-    }, [config, selectedBenefits]
+    }, [config, selectedBenefits, isEditing]
     )
 
     const updateSlugMutation = useMutation({

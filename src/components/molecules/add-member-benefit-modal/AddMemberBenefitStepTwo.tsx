@@ -13,7 +13,7 @@ import * as yup from 'yup'
 const schema = yup.object().shape({
     name: yup.string().required().max(50, 'Company Name must be less than 50 characters'),
     code: yup.string().required(),
-    domain: yup.string().required(),
+    domain: yup.string().required().max(50, 'Website must be less than 50 characters'),
     imageURL: yup.string().optional().nullable(),
     offer: yup.string().optional().nullable(),
     location: yup.string().optional().nullable().max(20, 'City must be less than 20 characters'),
@@ -174,6 +174,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                                 id="domain"
                                 name="domain"
                                 placeholder='Enter Website'
+                                maxLength={50}
                                 onChange={onChange}
                                 value={value}
                                 error={errors.domain?.message}

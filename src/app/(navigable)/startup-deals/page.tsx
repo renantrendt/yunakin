@@ -2,7 +2,7 @@
 import { auth } from '@/auth';
 import MemberBenefitsTable from '@/components/organisms/MemberBenefitsTable';
 import { prisma } from '@/lib/prisma'
-import { MemberBenefitWithImport } from '@/lib/types';
+import { DealType, MemberBenefitWithImport } from '@/lib/types';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
@@ -26,6 +26,25 @@ const MemberBenefitsPage = async () => {
     });
 
     benefits = await prisma.memberBenefit.findMany({
+        where: {
+            OR: [
+                {
+                    dealType: {
+                        not: DealType.PARTNER
+                    }
+                },
+                {
+                    AND: [
+                        {
+                            dealType: DealType.PARTNER
+                        },
+                        {
+                            userId: session?.user?.id
+                        }
+                    ]
+                }
+            ]
+        }
     })
 
     const importedBenefits: MemberBenefitWithImport[] = benefits.map(b => {

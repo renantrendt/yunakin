@@ -66,7 +66,7 @@ const SignInForm = () => {
                         } else {
                             customToast.success(t("loginPage.emailVerified"))
                             setTimeout(() => {
-                                router.push('/dashboard')
+                                router.push('/analytics')
                             }, 1000)
                         }
                     } else {
@@ -74,7 +74,7 @@ const SignInForm = () => {
                         return router.push('/')
                     }
                 } else {
-                    return router.push('/dashboard')
+                    return router.push('/analytics')
                 }
             }
         } catch (error) {

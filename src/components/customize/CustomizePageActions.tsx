@@ -133,8 +133,7 @@ const CustomizePageActions = ({ loading, publishChanges, config, onUpdate, openS
                         onClick={openShareModal}
                     />
 
-                    <Button variant="primary" className='w-full' label="Publish Changes"
-                        disabled={disabled}
+                    <Button variant="primary" className='w-full' label={disabled ? `See it live` : `Publish Changes`}
                         loading={loading}
                         onClick={publishChanges}
                     />

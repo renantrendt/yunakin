@@ -285,6 +285,21 @@ export async function updateSlug(configId: string, newSlug: string) {
                 clientSlug: newSlug
             }
         })
+        try {
+            if (updatedConfig) {
+                await prisma.user.update({
+                    where: {
+                        id: updatedConfig.userId as string
+                    },
+                    data: {
+                        name: newSlug
+                    }
+                })
+            }
+        } catch (e) {
+            console.error(e)
+        }
+
         return updatedConfig
     } catch (error) {
         console.log(error)
