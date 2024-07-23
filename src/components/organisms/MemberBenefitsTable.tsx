@@ -430,6 +430,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                                 partnershipTypes: data.partnership_types.join(',')
                             } as MemberBenefitWithImport)
                             if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
+                                console.log('uploading image')
+                                console.log(data.imageURL)
                                 const blob = await fetch(data.imageURL).then(r => r.blob());
                                 const random = Math.floor(Math.random() * 10)
                                 const imageType = data.imageType

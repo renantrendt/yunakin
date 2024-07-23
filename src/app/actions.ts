@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma"
 import { AnalyticsResponse, MemberBenefitClickType, MemberBenefitLinkClickDto, MemberBenefitPageConfigDto, MemberPageViewDto, PartnershipType } from "@/lib/types"
 import { MemberBenefit, MemberBenefitPageConfig } from "@prisma/client"
 import { revalidatePath } from "next/cache"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import _ from 'lodash'
 import { cookies } from "next/headers"
 
@@ -352,7 +352,7 @@ export async function fetchAnalyticsData(values?: { from: Date, to: Date }) {
     console.log(initialDateFrom, initialDateTo)
     const session = await auth()
     if (!session?.user) {
-        throw notFound()
+        redirect(siteUrls.general.login)
     }
     const config = await prisma.memberBenefitPageConfig.findFirst({
         where: {
