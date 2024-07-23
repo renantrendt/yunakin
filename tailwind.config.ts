@@ -10,6 +10,13 @@ const config: Config = {
   darkMode: ['selector'],
 
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
         'primary': '#FFDD04',
@@ -64,7 +71,7 @@ const config: Config = {
         'primary-300': "#B7B4FE",
         'primary-400': "#8E76FE",
         'primary-500': "#FFDD04",
-        'primary-600': " #FFDD04",
+        'primary-600': " #ffdd0499",
         "faq-color": "#0E0E0E",
         'disabled': "#FFEB6B",
         'landing-dark-background': "#1A191F",
@@ -106,7 +113,9 @@ const config: Config = {
       animation: {
         scroll:
           "infinite-scroll var(--animation-duration, 20s) var(--animation-direction, forwards) linear infinite",
-        "meteor-effect": "meteor 5s linear infinite"
+        "meteor-effect": "meteor 5s linear infinite",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
       keyframes: {
         'infinite-scroll': {
@@ -119,6 +128,14 @@ const config: Config = {
             transform: "rotate(215deg) translateX(-500px)",
             opacity: "0",
           },
+        },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       padding: {
@@ -171,7 +188,7 @@ const config: Config = {
       '2xl': "0px 16px 32px -16px rgba(0, 0, 0, 0.08), 0px 12px 24px -12px rgba(0, 0, 0, 0.12)"
     }
   },
-  plugins: [require("daisyui"), require('@tailwindcss/typography'), require("@tailwindcss/forms"), addVariablesForColors],
+  plugins: [require("daisyui"), require('@tailwindcss/typography'), require("@tailwindcss/forms"), require("tailwindcss-animate"), addVariablesForColors],
   daisyui: {
     themes: [{
       light: {

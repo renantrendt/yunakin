@@ -11,6 +11,8 @@ import DealBookAnalyticsSection from '@/components/analytics/section/DealBookAna
 import { DealbookDashboardCards } from '@/components/dashboard/cards/DealbookDashboardCards'
 import PartnerDealBookAnalyticsSection from '@/components/analytics/section/PartnerDealBookAnalyticsSection'
 import { t } from 'i18next'
+import { DateRangePicker } from '@/components/date-range/date-range-input'
+import AnalyticsPageContainer from '@/components/analytics/AnalyticsPageContainer'
 export default async function Dashboard() {
 
     const session = await auth()
@@ -268,7 +270,6 @@ export default async function Dashboard() {
             title: string,
             count: number
         }[],
-
     }
     // partner dealbook
 
@@ -334,41 +335,30 @@ export default async function Dashboard() {
 
 
     return (
-        <div className='  py-4   lg:px-12'>
-            {!hasData && <div className='warning mx-3 lg:mx-0  bg-white py-3 px-4 flex gap-2 flex-row items-center mb-7'>
-                <div className='w-fit flex-shrink-0'>
-                    <WarningIcon />
-                </div>
-                <Typography type='p' className='text-black font-medium font-satoshi text-sm leading-normal'>This is a demo screen. The analytics on this page are not real. It will be updated after you start receiving the first click.</Typography>
-            </div>
-            }
-
-            <DealBookAnalyticsSection
-                cardStats={cardStats}
-                chartStats={{
-                    totalSaves: cardStats.totalSaves,
-                    totalClicks: cardStats.totalClicks,
-                    totalClaims: cardStats.totalClaims,
-                    benefitsClicks: chartStats.benefitsClicks,
-                    benefitsClaims: chartStats.benefitClaims,
-                    benefitsSaves: chartStats.benefitsSaves,
-                    benefitsLiveAds: chartStats.benefitAds
-                }}
-            />
-            <PartnerDealBookAnalyticsSection
-                cardStats={partnerStats}
-                stats={{
-                    partnerPageViews: partnerChartStats.partnerPageViews,
-                    clicksByDeal: partnerChartStats.clicksByDeal,
-                    claimsByDeal: partnerChartStats.claimsByDeal,
-                    savesByDeal: partnerChartStats.savesByDeal,
-                    revenueByAds: partnerChartStats.revenueFromAds,
-                    totalPageViews: partnerStats.pageViews,
-                    totalClicks: partnerStats.totalClicks,
-                    totalClaims: partnerStats.totalClaims,
-                    totalSaves: partnerStats.totalSaves
-                }}
-            />
-        </div>
+        <AnalyticsPageContainer
+            hasData={hasData}
+            cardStats={cardStats}
+            chartStats={{
+                totalSaves: cardStats.totalSaves,
+                totalClicks: cardStats.totalClicks,
+                totalClaims: cardStats.totalClaims,
+                benefitsClicks: chartStats.benefitsClicks,
+                benefitsClaims: chartStats.benefitClaims,
+                benefitsSaves: chartStats.benefitsSaves,
+                benefitsLiveAds: chartStats.benefitAds
+            }}
+            partnerCardStats={partnerStats}
+            partnerStats={{
+                partnerPageViews: partnerChartStats.partnerPageViews,
+                clicksByDeal: partnerChartStats.clicksByDeal,
+                claimsByDeal: partnerChartStats.claimsByDeal,
+                savesByDeal: partnerChartStats.savesByDeal,
+                revenueByAds: partnerChartStats.revenueFromAds,
+                totalPageViews: partnerStats.totalPageViews,
+                totalClicks: partnerStats.totalClicks,
+                totalClaims: partnerStats.totalClaims,
+                totalSaves: partnerStats.totalSaves
+            }}
+        />
     )
 }

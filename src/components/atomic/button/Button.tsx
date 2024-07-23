@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 
 
-const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-satoshi font-normal leading-[20px]  ", {
+const buttonVariants = cva("min-w-fit <w-fit></w-fit> cursor-pointer rounded-lg flex justify-center items-center gap-2 duration-150 ease-in-out  text-[14px] font-satoshi font-normal leading-[20px]  ", {
   variants: {
     variant: {
       primary: [
@@ -51,8 +51,9 @@ const button = cva("min-w-fit cursor-pointer rounded-lg flex justify-center item
   },
 });
 
+export { buttonVariants }
 
-interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, "size">, VariantProps<typeof button> {
+interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, "size">, VariantProps<typeof buttonVariants> {
   onClick?: () => void
   type?: 'button' | 'reset' | 'submit' | undefined
   loading?: boolean
@@ -65,7 +66,7 @@ const Button: React.FC<ButtonProps> = ({ icon = null, children, variant = 'prima
   const content = label ? label : children;
 
   return (
-    <button disabled={disabled || loading} className={cn(button({ variant, size }), className)} onClick={onClick} type={type} {...props}>
+    <button disabled={disabled || loading} className={cn(buttonVariants({ variant, size }), className)} onClick={onClick} type={type} {...props}>
       {loading ? <LoadingIcon /> : null} {trailing ? <>{content ? <span className='mr-0'>{content}</span> : null}  {icon} </> : <>{!loading && icon} {content && <span className='ml-0'> {content} </span>}</>}
     </button>
   )
