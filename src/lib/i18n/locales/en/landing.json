@@ -1,7 +1,7 @@
 {
     "heroSection": {
-        "title": "Scale Customer Acquisition",
-        "description": "Offer perks for companies to use in their customer retention strategies.",
+        "title": "Scale Deals, Not Headcount",
+        "description": "A free startup dealbook that shares real-time data with partners and sponsors to scale revenue, customer acquisition, and retention.",
         "usedByCopy": "Used by <b>100+</b> developers",
         "cta": "Start Now Free",
         "watchVideo": "Join Crash Course",
@@ -24,7 +24,7 @@
                 "avatar": "/images/used-by/fourth.jpeg"
             }
         ],
-        "locked": "No login required"
+        "locked": "No login required."
     },
     "navbar": {
         "pricing": "Pricing",
@@ -35,12 +35,12 @@
         "watchVideo": "Join Crash Course",
         "login": "Login",
         "getStarted": "Start Now Free",
-        "aboutUs": "About Us",
-        "memberPerks": "My Perks"
+        "aboutUs": "About",
+        "memberPerks": "Dealbook"
     },
     "metadata": {
         "title": "Yunakin",
-        "description": "Your benefits"
+        "description": "Scale Deals, Not Headcount. A free dealbook that shares real-time data with partners and sponsors to scale revenue, customer acquisition, and retention."
     },
     "usedBy": {
         "title": "Used By"
@@ -48,9 +48,9 @@
     "ctaSection": {
         "clients": "Customers",
         "mycompany": "My company",
-        "othercompany": "Other company",
-        "title": "Retain Customers",
-        "description": "Create and manage the perks your customers can access. Share your login-free perks page in seconds.",
+        "othercompany": "Partners",
+        "title": "Turn Partners into Advertisers and Sponsors",
+        "description": "Publish deals in partner’s dealbooks. Pay to get featured and sponsor the top performers.",
         "reasons": [
             {
                 "metric": "40%",
@@ -68,30 +68,30 @@
         "compliance": "SOC2 and GDPR by design."
     },
     "acquisitionSection": {
-        "title": "Free to Use",
-        "description": "Attract leads and retain customers by sharing one perk with akin companies' customers."
+        "title": "Allow Customers to Add Deals to Your Dealbook",
+        "description": "Leverage customer success by connecting their deals."
     },
     "features": {
         "features": [
             {
                 "title": "One Click Partnerships",
-                "description": "Companies can select your perks to offer to their customers through their perks page. You can choose perks to benefit your customers with products and services from other companies."
+                "description": "Create custom deals with partners and sponsors or select from the marketplace, all without the hassle of meetings."
             },
             {
                 "title": "AI Audience Targeting",
-                "description": "Acquire customers with predictable costs by distributing your perks to customers of other companies based on companies preferences and customers behavior."
+                "description": "Get recommendations on which partner dealbooks to feature your deals and increase customer acquisition with predictable costs."
             },
             {
-                "title": "Perks Pages",
-                "description": "Increase your reach by having companies display your perks on their perks pages, attracting qualified leads to your offerings while prioritizing customers privacy."
+                "title": "Centralized Dealbook",
+                "description": "All your custom partner and sponsor deals in one dealbook. Companies can select your deals to offer to their customers through their dealbook while prioritizing customer privacy."
             },
             {
-                "title": "Customized Perks Page",
-                "description": "Without any coding skills, customize in minutes every detail of your branding, including the domain URL, to reflect your brand's identity."
+                "title": "Customized Dealbook",
+                "description": "Without coding skills, customize every detail of your branding in minutes, including the domain URL."
             },
             {
-                "title": "Embed Perks Page",
-                "description": "Integrate your perks page seamlessly into your site or app without coding skills."
+                "title": "Embed Dealbook",
+                "description": "Integrate your dealbook into your login-based portal without coding skills."
             }
         ],
         "learn-more": "Start Now"
@@ -143,7 +143,7 @@
         "year": "Year"
     },
     "footer": {
-        "description": "(pronounced “you-and-akin”) a native word for village with shared identity, coined by the Ramaytush Ohlone, the original peoples of the San Francisco Peninsula.",
+        "description": "(“you-and-akin”) a native word for village with shared identity, coined by the Ramaytush Ohlone, the original peoples of the San Francisco Peninsula.",
         "footnote": "© %Date% Yunakin® 1007 N Orange St. 4th Floor, Wilmington, DE 19801, U.S. +1 (650) 441-6511",
         "links": [
             {
