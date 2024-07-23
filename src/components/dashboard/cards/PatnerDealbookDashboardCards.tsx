@@ -1,13 +1,9 @@
 import React from 'react'
 import DashboardCard from './DashboardCard'
+import { AnalyticsPartnerCardStats } from '@/lib/types';
 
 interface PartnerDealbookDashboardCardsProps {
-
-    cardStats: {
-        totalPartners: number;
-        totalWaitingPartners: number;
-        pageViews: number;
-    }
+    cardStats: AnalyticsPartnerCardStats
 
 }
 
@@ -16,7 +12,7 @@ export const PartnerDealbookDashboardCards = ({ cardStats }: PartnerDealbookDash
     const data = [
         {
             title: "Page Views",
-            quantity: cardStats.pageViews,
+            quantity: pageViews,
             increase: 21
         },
 

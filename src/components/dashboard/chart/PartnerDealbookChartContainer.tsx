@@ -5,39 +5,17 @@ import LineChart from './linechart/LineChart'
 import AreaChart from './area/AreaChart'
 import PieChart from './pie/PieChart'
 import ChartCard from './ChartCard'
+import { AnalyticsPartnerChartNumberStats, AnalyticsPartnerChartStats } from '@/lib/types'
 
 
 interface PartnerDealbookChartContainerProps {
-    stats: {
-        partnerPageViews: {
-            title: string
-            count: number
-        }[]
-        clicksByDeal: {
-            title: string
-            count: number
-        }[]
-        claimsByDeal: {
-            title: string
-            count: number
-        }[]
-        savesByDeal: {
-            title: string
-            count: number
-        }[]
-        revenueByAds: {
-            title: string
-            count: number
-        }[]
-        totalPageViews: number
-        totalClicks: number
-        totalClaims: number
-        totalSaves: number
-    }
+    partnerChartStats: AnalyticsPartnerChartStats
+    partnerChartNumberStats: AnalyticsPartnerChartNumberStats
 }
 
-const PartnerDealbookChartContainer = ({ stats }: PartnerDealbookChartContainerProps) => {
-    const { partnerPageViews, clicksByDeal, claimsByDeal, totalClaims, totalClicks, revenueByAds, totalSaves, savesByDeal, totalPageViews } = stats
+const PartnerDealbookChartContainer = ({ partnerChartStats, partnerChartNumberStats }: PartnerDealbookChartContainerProps) => {
+    const { partnerPageViews, clicksByDeal, claimsByDeal, revenueByAds, savesByDeal } = partnerChartStats
+    const { totalClaims, totalClicks, totalSaves, totalPageViews } = partnerChartNumberStats
     const charts = [
         {
             title: 'Pageviews by Partner',

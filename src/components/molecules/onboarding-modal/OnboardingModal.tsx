@@ -3,6 +3,7 @@ import Modal from '@/components/atomic/modal/Modal'
 import { useTranslation } from '@/lib/i18n/client'
 import { cn } from '@/utils/cn'
 import { Cross1Icon } from '@radix-ui/react-icons'
+import Image from 'next/image'
 import React from 'react'
 
 interface DotProps {
@@ -31,7 +32,7 @@ const OnboardingModal = (props: OnboardingModalProps) => {
             <div className='container  flex flex-col  gap-6 p-8 justify-center content'>
 
                 <div className='figure w-full  min-h-[100px] lg:min-h-[200px] h-fit  rounded-lg '>
-                    {<img src={`/images/onboarding/modal/part${step}.svg`} alt='illustration' className='w-full h-full object-contain' />}
+                    {<Image src={`/images/onboarding/modal/part${step}.svg`} alt='illustration' className='w-full h-full object-contain' />}
                 </div>
                 <div className="content flex justify-center flex-col items-center">
                     <h1 className='title text-black font-bold text-[18px] leading-[150%]'>{t(`onboardingModal.step${step}.title`)}</h1>

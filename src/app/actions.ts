@@ -2,10 +2,12 @@
 import { auth } from "@/auth"
 import siteUrls from "@/config/site-config"
 import { prisma } from "@/lib/prisma"
-import { MemberBenefitLinkClickDto, MemberBenefitPageConfigDto, MemberPageViewDto } from "@/lib/types"
+import { AnalyticsResponse, MemberBenefitClickType, MemberBenefitLinkClickDto, MemberBenefitPageConfigDto, MemberPageViewDto, PartnershipType } from "@/lib/types"
 import { MemberBenefit, MemberBenefitPageConfig } from "@prisma/client"
 import { revalidatePath } from "next/cache"
-
+import { notFound } from "next/navigation"
+import _ from 'lodash'
+import { cookies } from "next/headers"
 
 export async function checkUserExists(email: string) {
     const user = await prisma.user.findFirst({
@@ -341,4 +343,337 @@ export async function importBenefit(memberBenefitId: string, imported: boolean) 
         revalidatePath(siteUrls.general.customize)
         return null
     }
+}
+
+export async function fetchAnalyticsData(values?: { from: Date, to: Date }) {
+
+    const initialDateFrom = values?.from || new Date(new Date().setDate(new Date().getDate() - 7))
+    const initialDateTo = values?.to || new Date()
+    console.log(initialDateFrom, initialDateTo)
+    const session = await auth()
+    if (!session?.user) {
+        throw notFound()
+    }
+    const config = await prisma.memberBenefitPageConfig.findFirst({
+        where: {
+            userId: session.user.id
+        }
+    })
+
+    let pageViews = 0
+    try {
+        if (config) {
+            const result = await prisma.memberPageViews.aggregate({
+                _count: true,
+                where: {
+                    AND: [
+                        {
+                            createdAt: {
+                                gte: initialDateFrom
+                            }
+                        },
+                        {
+                            createdAt: {
+                                lte: initialDateTo
+                            }
+                        },
+                        {
+                            memberBenefitPageConfigId: config.id
+                        }
+                    ]
+                }
+            })
+            pageViews = result._count
+        }
+
+    } catch (error) {
+        // silent catch
+    }
+    const memberBenefits = await prisma.memberBenefit.findMany({
+        where: {
+            userId: session.user.id
+        },
+        include: {
+            OtherMemberBenefit: {
+                select: {
+                    userId: true,
+                    memberBenefit: {
+                        select: {
+                            id: true,
+                            pageConfigId: true
+                        }
+                    }
+                }
+            }
+        }
+    })
+
+
+    const memberBenefitIds = memberBenefits.map(benefit => benefit.id)
+
+    const otherMemberBenefitIds = await prisma.otherMemberBenefit.findMany({
+        where: {
+            userId: session.user.id
+        }, select: {
+            userId: true,
+            id: true,
+            memberBenefitId: true
+        }
+    })
+
+    const memberBenefitsWithClicks = await prisma.memberBenefit.findMany({
+        where: {
+            OR: [
+                { id: { in: memberBenefitIds } },
+                { id: { in: otherMemberBenefitIds.map(benefit => benefit.memberBenefitId) } }
+            ]
+        },
+        include: {
+            clicks: {
+                where: {
+                    AND: [
+                        {
+                            createdAt: {
+                                gte: initialDateFrom
+                            }
+                        },
+                        {
+                            createdAt: {
+                                lte: initialDateTo
+                            }
+                        },
+                        {
+                            OR: [
+                                {
+                                    memberBenefitId: {
+                                        in: memberBenefitIds.map(benefit => benefit)
+
+                                    }
+                                },
+                                {
+                                    otherMemberBenefitId: {
+                                        in: otherMemberBenefitIds.map(benefit => benefit.id)
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    })
+
+    const otherMemberBenefitClicks = await prisma.memberBenefitClick.findMany({
+        where: {
+            AND: [
+                {
+                    memberBenefitId: {
+                        in: memberBenefitIds
+                    },
+                },
+                {
+                    otherMemberBenefitId: {
+                        not: null
+                    }
+                }
+            ]
+        },
+    });
+
+
+    const otherMemberBenefits = await prisma.otherMemberBenefit.findMany({
+        where: {
+            id: {
+                in: otherMemberBenefitClicks.filter(f => f !== null).map(click => click.otherMemberBenefitId) as string[]
+            },
+
+        }, select: {
+            userId: true,
+            id: true
+        }
+    })
+    const slugs = await prisma.memberBenefitPageConfig.findMany({
+        where: {
+            userId: {
+                in: otherMemberBenefits.map(benefit => benefit.userId)
+            }
+        },
+        select: {
+            clientSlug: true,
+            userId: true
+        }
+    })
+    const clicksByCompany: {
+        [key: string]: any
+    } = {};
+    const savesByCompany: {
+        [key: string]: any
+    } = {};
+    const claimsByCompany: {
+        [key: string]: any
+    } = {};
+    otherMemberBenefitClicks.forEach(click => {
+
+        const userId = otherMemberBenefits.find(benefit => benefit.id == click.otherMemberBenefitId)?.userId
+        const slug = slugs.find(slug => slug.userId == userId)?.clientSlug
+        if (slug && slug !== config?.clientSlug) {
+            if (click.event == MemberBenefitClickType.CLAIM_BENEFIT) {
+                if (claimsByCompany[slug]) {
+                    claimsByCompany[slug]++
+                } else {
+                    claimsByCompany[slug] = 1
+                }
+            } else if (click.event == MemberBenefitClickType.SAVE_BENEFIT) {
+                if (savesByCompany[slug]) {
+                    savesByCompany[slug]++
+                } else {
+                    savesByCompany[slug] = 1
+                }
+            } else if (click.event == MemberBenefitClickType.WEBSITE_CLICK) {
+                if (clicksByCompany[slug]) {
+                    clicksByCompany[slug]++
+                } else {
+                    clicksByCompany[slug] = 1
+                }
+            }
+        }
+    })
+
+    // partner stats
+
+    const partnerPageViews = await prisma.partnerPageViews.findMany({
+        where: {
+            AND: [
+                {
+                    createdAt: {
+                        gte: initialDateFrom
+                    }
+                },
+                {
+                    createdAt: {
+                        lte: initialDateTo
+                    }
+                },
+                {
+                    partnerPageConfigId: config?.id
+                }
+            ]
+        },
+        include: {
+            pageConfig: {
+                select: {
+                    clientSlug: true
+                }
+            }
+        }
+    })
+    const cardStats = {
+        totalSaves: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.SAVE_BENEFIT).length).reduce((a, b) => a + b, 0),
+        totalClicks: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.WEBSITE_CLICK).length).reduce((a, b) => a + b, 0),
+        totalClaims: memberBenefitsWithClicks.map(memberBenefitWithClick => memberBenefitWithClick.clicks.filter(c => c.event == MemberBenefitClickType.CLAIM_BENEFIT).length).reduce((a, b) => a + b, 0),
+        pageViews,
+        totalBenefits: memberBenefits.length,
+        totalWaitingBenefits: memberBenefits.filter(benefit => benefit.partnershipTypes?.includes(PartnershipType.NEEDS_APPROVAL)).length,
+    }
+    const chartStats = {
+        benefitsClicks: memberBenefitsWithClicks.filter(c => c.clicks.length > 0).map(memberBenefit => {
+            return {
+                title: memberBenefit.title,
+                count: memberBenefit.clicks.filter(m => m.event == MemberBenefitClickType.WEBSITE_CLICK).length,
+            }
+        }),
+        benefitsSaves: memberBenefitsWithClicks.filter(c => c.clicks.length > 0).map(memberBenefit => {
+            return {
+                title: memberBenefit.title,
+                count: memberBenefit.clicks.filter(m => m.event == MemberBenefitClickType.SAVE_BENEFIT).length,
+            }
+        }),
+        benefitClaims: memberBenefitsWithClicks.filter(c => c.clicks.length > 0).map(memberBenefit => {
+            return {
+                title: memberBenefit.title,
+                count: memberBenefit.clicks.filter(m => m.event == MemberBenefitClickType.CLAIM_BENEFIT).length,
+            }
+        }),
+        benefitAds: [] as {
+            title: string,
+            count: number
+        }[],
+    }
+
+
+
+    const partnerCardStats = {
+        pageViews: partnerPageViews.length,
+        totalPartners: _.keys(clicksByCompany).length,
+        totalWaitingPartners: 0,
+        totalPageViews: partnerPageViews.length,
+        totalSaves: _.reduce(savesByCompany, (acc, value) => acc + value, 0),
+        totalClicks: _.reduce(clicksByCompany, (acc, value) => acc + value, 0),
+        totalClaims: _.reduce(claimsByCompany, (acc, value) => acc + value, 0)
+    }
+    const partnerPageViewsReduced = partnerPageViews.reduce<{
+        [key: string]: number
+    }>((acc, partnerPageView) => {
+        if (acc[partnerPageView.pageConfig.clientSlug]) {
+            acc[partnerPageView.pageConfig.clientSlug]++
+        } else {
+            acc[partnerPageView.pageConfig.clientSlug] = 1
+        }
+        return acc
+    }, {})
+
+    const partnerChartStats = {
+        partnerPageViews: _.keys(partnerPageViewsReduced).map(key => ({
+            title: key,
+            count: partnerPageViewsReduced[key]
+        })
+        ),
+        clicksByDeal: _.keys(clicksByCompany).map(key => ({
+            title: key,
+            count: clicksByCompany[key]
+        }),
+        ),
+        claimsByDeal: _.keys(claimsByCompany).map(key => ({
+            title: key,
+            count: claimsByCompany[key]
+        })),
+        savesByDeal: _.keys(savesByCompany).map(key => ({
+            title: key,
+            count: savesByCompany[key]
+        })),
+        revenueFromAds: [] as {
+            title: string,
+            count: number
+        }[],
+    }
+    const analytics: AnalyticsResponse = {
+        cardStats,
+        chartStats: {
+
+            benefitsClicks: chartStats.benefitsClicks,
+            benefitsClaims: chartStats.benefitClaims,
+            benefitsSaves: chartStats.benefitsSaves,
+            benefitsLiveAds: chartStats.benefitAds
+        },
+        chartNumberStats: {
+            totalSaves: cardStats.totalSaves,
+            totalClicks: cardStats.totalClicks,
+            totalClaims: cardStats.totalClaims,
+        },
+        partnerChartStats: {
+            partnerPageViews: partnerChartStats.partnerPageViews,
+            clicksByDeal: partnerChartStats.clicksByDeal,
+            claimsByDeal: partnerChartStats.claimsByDeal,
+            savesByDeal: partnerChartStats.savesByDeal,
+            revenueByAds: partnerChartStats.revenueFromAds,
+        },
+        partnerChartNumberStats: {
+            totalPageViews: partnerCardStats.totalPageViews,
+            totalClicks: partnerCardStats.totalClicks,
+            totalClaims: partnerCardStats.totalClaims,
+            totalSaves: partnerCardStats.totalSaves
+        },
+        partnerCardStats: partnerCardStats
+    }
+    return analytics;
 }

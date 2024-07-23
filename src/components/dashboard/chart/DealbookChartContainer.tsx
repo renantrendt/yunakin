@@ -5,34 +5,17 @@ import LineChart from './linechart/LineChart'
 import AreaChart from './area/AreaChart'
 import PieChart from './pie/PieChart'
 import ChartCard from './ChartCard'
+import { AnalyticsChartNumberStats, AnalyticsChartStats } from '@/lib/types'
 
 
 interface DealBookChartContainerProps {
-    chartStats: {
-        totalSaves: number;
-        totalClicks: number;
-        totalClaims: number;
-        benefitsClicks: {
-            title: string
-            count: number
-        }[]
-        benefitsClaims: {
-            title: string
-            count: number
-        }[]
-        benefitsSaves: {
-            title: string
-            count: number
-        }[]
-        benefitsLiveAds: {
-            title: string
-            count: number
-        }[]
-    }
+    chartStats: AnalyticsChartStats
+    chartNumberStats: AnalyticsChartNumberStats
 }
 
-const DealBookChartContainer = ({ chartStats }: DealBookChartContainerProps) => {
-    const { totalClaims, totalClicks, totalSaves, benefitsClaims, benefitsLiveAds, benefitsSaves, benefitsClicks } = chartStats
+const DealBookChartContainer = ({ chartStats, chartNumberStats }: DealBookChartContainerProps) => {
+    const { benefitsClaims, benefitsLiveAds, benefitsSaves, benefitsClicks } = chartStats
+    const { totalClaims, totalClicks, totalSaves } = chartNumberStats
     const charts = [
         {
             title: 'Clicks by Deal',

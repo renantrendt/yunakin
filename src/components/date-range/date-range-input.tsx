@@ -17,6 +17,7 @@ import { Switch } from './switch'
 import { ChevronUpIcon, ChevronDownIcon, CheckIcon } from '@radix-ui/react-icons'
 import { cn } from '@/lib/utils'
 import { Button } from './button'
+import { default as PlatformButton } from "@/components/atomic/button/Button";
 
 export interface DateRangePickerProps {
     /** Click handler for applying the updates from DateRangePicker. */
@@ -35,6 +36,12 @@ export interface DateRangePickerProps {
     locale?: string
     /** Option for showing compare feature */
     showCompare?: boolean
+
+    /** Loading boolean  when onchangedate operation is ongoing */
+    loading?: boolean
+
+    /** Boolean to show popover */
+    success?: boolean
 }
 
 const formatDate = (date: Date, locale: string = 'en-us'): string => {
@@ -90,7 +97,9 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
     initialDateTo,
     initialCompareFrom,
     initialCompareTo,
+    loading,
     onUpdate,
+    success,
     align = 'end',
     locale = 'en-US',
     showCompare = true
@@ -136,6 +145,12 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
                 window.removeEventListener('resize', handleResize)
             }
         }, [])
+
+        useEffect(() => {
+            if (success) {
+                setIsOpen(false)
+            }
+        }, [success])
 
         const getPresetRange = (presetName: string): DateRange => {
             const preset = PRESETS.find(({ name }) => name === presetName)
@@ -536,9 +551,8 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
                         >
                             Cancel
                         </Button>
-                        <Button
+                        <PlatformButton
                             onClick={() => {
-                                setIsOpen(false)
                                 if (
                                     !areRangesEqual(range, openedRangeRef.current) ||
                                     !areRangesEqual(rangeCompare, openedRangeCompareRef.current)
@@ -546,9 +560,11 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
                                     onUpdate?.({ range, rangeCompare })
                                 }
                             }}
+                            variant={'primary'}
+                            loading={loading}
+                            label='Update'
                         >
-                            Update
-                        </Button>
+                        </PlatformButton>
                     </div>
                 </PopoverContent>
             </Popover>

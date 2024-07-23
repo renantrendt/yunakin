@@ -2,38 +2,16 @@ import Typography from '@/components/atomic/typography/Typography';
 import { DealbookDashboardCards } from '@/components/dashboard/cards/DealbookDashboardCards';
 import { PartnerDealbookDashboardCards } from '@/components/dashboard/cards/PatnerDealbookDashboardCards';
 import DealBookChartContainer from '@/components/dashboard/chart/DealbookChartContainer';
+import { AnalyticsCardStats, AnalyticsChartNumberStats, AnalyticsChartStats } from '@/lib/types';
 import React from 'react'
 
 interface DealBookAnalyticsSectionProps {
-    cardStats: {
-        totalBenefits: number;
-        totalWaitingBenefits: number;
-        pageViews: number;
-    }
-    chartStats: {
-        totalSaves: number;
-        totalClicks: number;
-        totalClaims: number;
-        benefitsClicks: {
-            title: string
-            count: number
-        }[]
-        benefitsClaims: {
-            title: string
-            count: number
-        }[]
-        benefitsSaves: {
-            title: string
-            count: number
-        }[]
-        benefitsLiveAds: {
-            title: string
-            count: number
-        }[]
-    }
+    cardStats: AnalyticsCardStats
+    chartNumberStats: AnalyticsChartNumberStats
+    chartStats: AnalyticsChartStats
 }
 
-const DealBookAnalyticsSection = ({ cardStats, chartStats }: DealBookAnalyticsSectionProps) => {
+const DealBookAnalyticsSection = ({ cardStats, chartStats, chartNumberStats }: DealBookAnalyticsSectionProps) => {
     return (
         <div className='dealbook p-3  lg:p-6 my-6 mt-4 bg-[#F3F1F1] flex flex-col gap-4 lg:gap-8 rounded-2xl'>
             <div className='flex w-full justify-between flex-row'>
@@ -42,6 +20,7 @@ const DealBookAnalyticsSection = ({ cardStats, chartStats }: DealBookAnalyticsSe
             <DealbookDashboardCards cardStats={cardStats} />
             <DealBookChartContainer
                 chartStats={chartStats}
+                chartNumberStats={chartNumberStats}
             />
         </div>
     )

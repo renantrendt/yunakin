@@ -115,3 +115,76 @@ export interface OtherMemberBenefitWithMemberBenefit extends OtherMemberBenefit 
         pageConfigId: string | null
     }
 }
+
+export interface AnalyticsCardStats {
+    totalBenefits: number;
+    totalWaitingBenefits: number;
+    pageViews: number;
+}
+export interface AnalyticsChartNumberStats {
+    totalSaves: number;
+    totalClicks: number;
+    totalClaims: number;
+}
+export interface AnalyticsChartStats {
+    benefitsClicks: {
+        title: string
+        count: number
+    }[]
+    benefitsClaims: {
+        title: string
+        count: number
+    }[]
+    benefitsSaves: {
+        title: string
+        count: number
+    }[]
+    benefitsLiveAds: {
+        title: string
+        count: number
+    }[]
+}
+
+export interface AnalyticsPartnerCardStats {
+    totalPartners: number;
+    totalWaitingPartners: number;
+    pageViews: number;
+
+}
+export interface AnalyticsPartnerChartNumberStats {
+    totalPageViews: number
+    totalClicks: number
+    totalClaims: number
+    totalSaves: number
+}
+
+export interface AnalyticsPartnerChartStats {
+    partnerPageViews: {
+        title: string
+        count: number
+    }[]
+    clicksByDeal: {
+        title: string
+        count: number
+    }[]
+    claimsByDeal: {
+        title: string
+        count: number
+    }[]
+    savesByDeal: {
+        title: string
+        count: number
+    }[]
+    revenueByAds: {
+        title: string
+        count: number
+    }[]
+}
+export interface AnalyticsResponse {
+    cardStats: AnalyticsCardStats
+    chartNumberStats: AnalyticsChartNumberStats
+    chartStats: AnalyticsChartStats
+    partnerCardStats: AnalyticsPartnerCardStats
+    partnerChartStats: AnalyticsPartnerChartStats
+    partnerChartNumberStats: AnalyticsPartnerChartNumberStats
+}
