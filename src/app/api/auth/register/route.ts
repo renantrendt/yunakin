@@ -44,7 +44,7 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
         const memberPageConfig = await getMemberPageConfigByClientSlug(clientId);
 
         if (!memberPageConfig) {
-          throw new Error("Member Page Config Not Found")
+          throw new Error("Dealbook Config Not Found")
         }
 
 
@@ -78,7 +78,7 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
           }
         })
       } catch (error) {
-        throw { message: "Member Page Config Not Found", statusCode: 400 }
+        throw { message: "Dealbook Config Not Found", statusCode: 400 }
       }
 
       return user;

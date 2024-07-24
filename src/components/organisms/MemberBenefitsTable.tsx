@@ -285,7 +285,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const handleDelete = async (memberBenefitId: string) => {
         try {
 
-            // check if the user is the creator of the member benefit
+            // check if the user is the creator of the deal
             const memberBenefit = memberBenefits.find(memberBenefit => memberBenefit.id === memberBenefitId)
             if (memberBenefit?.userId !== session.data?.user?.id) {
                 await deleteOtherMemberBenefit(memberBenefitId, session.data?.user?.id! as string)
@@ -293,10 +293,10 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
             } else {
                 await deleteMemberBenefit(memberBenefitId)
                 setMemberBenefits(memberBenefits.filter(memberBenefit => memberBenefit.id !== memberBenefitId))
-                customToast.success('Member Beenfit deleted successfully')
+                customToast.success('Deal deleted successfully')
             }
         } catch (error) {
-            customToast.error('Failed to delete member benefit')
+            customToast.error('Failed to delete deal')
         }
         finally {
             setToBeDeletedMemberBenefitId('')
@@ -389,14 +389,14 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                     </div>
                 }
                 isOpen={modalOpen} onClose={() => setModalOpen(false)} title={
-                    isBenefitCreator(toBeDeletedMemberBenefitId) ? 'Delete Member Benefit?' : 'Hide this benefit for your members'
+                    isBenefitCreator(toBeDeletedMemberBenefitId) ? 'Delete Deal?' : 'Hide this deal from your customers'
                 } description={
-                    isBenefitCreator(toBeDeletedMemberBenefitId) ? 'This action is irreversible' : 'You can show again by selecting on the catalog'}>
+                    isBenefitCreator(toBeDeletedMemberBenefitId) ? 'This action is irreversible' : 'You can show again by importing from the marketplace'}>
                 <>
                     <Button variant='secondary' label='Cancel' onClick={() => setModalOpen(false)} />
                     <Button variant='alert' label={
                         isBenefitCreator(toBeDeletedMemberBenefitId) ?
-                            'Delete Member Benefit' : 'Hide Member Benefit'} onClick={() => {
+                            'Delete Deal' : 'Hide Deal'} onClick={() => {
                                 handleDelete(toBeDeletedMemberBenefitId)
                                 setModalOpen(false)
                             }}
@@ -450,9 +450,9 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                             setMemberBenefits(memberBenefits.map(memberBenefit => memberBenefit.id === updatedMemberBenefit.id ? updatedMemberBenefit : memberBenefit))
                             setMemberBenefitModal(false)
                             setTobeEditedMemberBenefit(undefined)
-                            customToast.success('Member Benefit updated successfully')
+                            customToast.success('Deal updated successfully')
                         } catch (error) {
-                            customToast.error('Failed to update member benefit')
+                            customToast.error('Failed to update deal')
                         } finally {
                             setLoading(false)
                         }
@@ -497,12 +497,12 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                                 newMemberBenefit.imageURL = downloadUrl.publicUrl
                                 await updateMemberBenefit(newMemberBenefit)
                             }
-                            customToast.success('Member Benefit added successfully')
+                            customToast.success('Deal added successfully')
                             setMemberBenefits([newMemberBenefit, ...memberBenefits])
                             setMemberBenefitModal(false)
 
                         } catch (error) {
-                            customToast.error('Failed to create a new member benefit')
+                            customToast.error('Failed to create a new deal')
                         } finally {
                             setLoading(false)
                         }

@@ -1,32 +1,32 @@
 {
     "step1": {
-        "title": "Choose the benefits you want to offer",
-        "description": "Then generate a custom domain for your company"
+        "title": "Choose some deals to your customers",
+        "description": "Then generate your dealbook."
     },
     "step2": {
-        "title": "Members benefit",
-        "description": "You can customize this page and add your own benefit after saving it"
+        "title": "Dealbook",
+        "description": "You can customize this page and add your own deals on the next step."
     },
     "catalog": {
-        "title": "Catalog of benefits",
-        "description": "Save the benefits you want to offer to your members"
+        "title": "Dealbook",
+        "description": "Choose some deals for your customers."
     },
     "onboardingModal": {
         "step1": {
-            "title": "Increase Retention",
-            "description": "Choose some perks for your customers."
+            "title": "Create your dealbook",
+            "description": "Choose some deals from the marketplace for your customers."
         },
         "step2": {
             "title": "Look & Feel",
-            "description": "Like what you see? Publish it."
+            "description": "Customize your dealbook and embed it in your portal."
         },
         "step3": {
-            "title": "Scale Acquisition",
-            "description": "Create your own perks for other companies to share."
+            "title": "Custom deals",
+            "description": "Publish your deals in the marketplace for partners include in their dealbooks."
         },
         "step4": {
-            "title": "Analytics",
-            "description": "Track acquisition and retention performance of your perks."
+            "title": "Featured",
+            "description": "Feature your deals on top performers' dealbooks."
         }
     }
 }

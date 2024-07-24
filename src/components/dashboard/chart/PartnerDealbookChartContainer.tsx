@@ -26,17 +26,17 @@ const PartnerDealbookChartContainer = ({ partnerChartStats, partnerChartNumberSt
         {
             title: 'Clicks by Deal',
             summary: totalClicks,
-            children: <BarChart name='All Member Benefit Clicks' items={clicksByDeal} />
+            children: <BarChart name='All Deals Clicks' items={clicksByDeal} />
         },
         {
             title: 'Saved Deals',
             summary: totalSaves,
-            children: <BarChart name='All Member Benefit Clicks' items={savesByDeal} />
+            children: <BarChart name='All Deals Clicks' items={savesByDeal} />
         },
         {
             title: "Claimed Deals",
             summary: totalClaims,
-            children: <BarChart name="All Member Benefit claims" items={claimsByDeal} />
+            children: <BarChart name="All Deals claims" items={claimsByDeal} />
         },
         {
             title: 'Revenue by Ads',
