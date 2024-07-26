@@ -33,10 +33,8 @@ const AnalyticsPageContainer = ({ hasData, analyticsData }: AnalyticsPageContain
                 console.log('error', error)
         },
         onSuccess(data, variables, context) {
-            console.log('data', data)
             if (data) {
                 setAnalytics(_.cloneDeep(data))
-                customToast.success('Analytics data fetched successfully')
             }
         },
         networkMode: 'online'

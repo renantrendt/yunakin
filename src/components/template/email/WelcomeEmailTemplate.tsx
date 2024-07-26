@@ -94,7 +94,7 @@ export const VerificationEmail = ({
                     </Container>
                     <Container className=" !w-full min-w-full min-h-[250px] mx-auto">
                         <Section className="mt-4 text-center mb-4">
-                            <Row>
+                            {/* <Row>
                                 <Img
                                     src={`${baseUrl}/images/email-footer-logo.png?t=${new Date().getTime()}`}
 
@@ -103,7 +103,7 @@ export const VerificationEmail = ({
                                     width={"142"}
                                     height={"35"}
                                 />
-                            </Row>
+                            </Row> */}
                         </Section>
                         <Section className=" text-center">
                             <Row className="mx-auto">
