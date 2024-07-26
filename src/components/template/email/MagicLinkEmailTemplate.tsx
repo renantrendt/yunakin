@@ -84,7 +84,7 @@ export const MagicLinkEmail = ({
                                 <Img
                                     src={`${baseUrl}/images/email-footer-logo.png`}
 
-                                    alt={`${organizationName} Logo`}
+                                    alt={`${organizationName}`}
                                     className="my-0  mx-auto"
                                     width={"140"}
                                     height={"30"}
@@ -109,8 +109,8 @@ export const MagicLinkEmail = ({
 };
 
 MagicLinkEmail.PreviewProps = {
-    magicLink: "https://yunakin.com/confirm/1234567890",
-    organizationName: "Yunakin",
+    magicLink: "https://youakin.com/confirm/1234567890",
+    organizationName: "Youakin",
 } as MagicLinkEmailProps;
 
 export default MagicLinkEmail;

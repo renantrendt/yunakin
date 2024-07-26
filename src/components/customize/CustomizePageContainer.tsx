@@ -114,9 +114,9 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
             if (data) {
                 setConfig(data)
                 setDefaultConfig(data)
-                customToast.success("Slug Updated Successfully")
+                customToast.success("URL Updated Successfully")
             } else {
-                customToast.error("This slug is already taken. Please try another one")
+                customToast.error("This URL is already taken. Please try another one")
             }
         }
     })

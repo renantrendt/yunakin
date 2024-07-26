@@ -137,14 +137,14 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                         color: config?.textColor as string,
                     }}
                 >
-                    <span> Powered by </span><a href='https://www.yunakin.com/' rel="noreferrer" target='_blank' className='text-blue-500 underline'>Yunakin.com</a>
+                    <span> Powered by </span><a href='https://www.youakin.com/' rel="noreferrer" target='_blank' className='text-blue-500 underline'>Youakin.com</a>
                 </Typography>
 
                 {searchParams?.get('embedded') === 'true' && (
                     <Script
                         dangerouslySetInnerHTML={{
                             __html: `
-                         window.parent.postMessage({ type: 'yunakin_iframeHeight', height: document.body.scrollHeight }, '*')
+                         window.parent.postMessage({ type: 'youakin_iframeHeight', height: document.body.scrollHeight }, '*')
                     `}}
                     />
                 )}

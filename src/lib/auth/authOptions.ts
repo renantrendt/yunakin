@@ -27,7 +27,7 @@ export const authOptions: NextAuthConfig = {
         Resend({
             apiKey: platformConfig.variables.RESEND_API_KEY!,
             secret: platformConfig.variables.NEXT_AUTH_SECRET!,
-            from: "no-reply@yunakin.com",
+            from: "no-reply@youakin.com",
 
             async sendVerificationRequest(params) {
                 const email = params.identifier;
@@ -41,7 +41,7 @@ export const authOptions: NextAuthConfig = {
                     throw { message: "User not found", statusCode: 404 }
                 }
 
-                const res = await sendMagicLinkEmail({ to: params.identifier, subject: 'Sign in to Yunakin', magicLink: params.url });
+                const res = await sendMagicLinkEmail({ to: params.identifier, subject: 'Sign in to Youakinn', magicLink: params.url });
                 if (!res.success) {
                     throw { message: res.error, statusCode: 500 }
                 }

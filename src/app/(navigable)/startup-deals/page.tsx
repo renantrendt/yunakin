@@ -17,7 +17,7 @@ const MemberBenefitsPage = async () => {
     }
 
     let benefits = []
-    // check if we have other member benefits
+    // check if we have other deals
 
     const otherMemberBenefits = await prisma.otherMemberBenefit.findMany({
         where: {

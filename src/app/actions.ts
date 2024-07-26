@@ -201,7 +201,7 @@ export async function deleteOtherMemberBenefit(memberBenefitId: string, userId: 
         }
     })
     if (!otherMemberBenefitId) {
-        throw new Error("Other Member Benefit Not Found");
+        throw new Error("Other Deal Not Found");
     }
     await prisma.otherMemberBenefit.delete({
         where: {
@@ -257,7 +257,7 @@ export async function updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits: 
         })
 
         console.log('deleted')
-        // create the other member benefits
+        // create the other deal
         console.log(toBeCreatedOtherMemberBenefits)
         await prisma.otherMemberBenefit.createMany({
             data: toBeCreatedOtherMemberBenefits.map(id => {

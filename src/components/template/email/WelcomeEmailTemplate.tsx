@@ -124,8 +124,8 @@ export const VerificationEmail = ({
 
 VerificationEmail.PreviewProps = {
     name: "Renan",
-    confirmationEmail: "https://yunakin.com/confirm",
-    organizationName: "Yunakin",
+    confirmationEmail: "https://youakin.com/confirm",
+    organizationName: "Youakin",
 } as VerificationEmailProps;
 
 export default VerificationEmail;

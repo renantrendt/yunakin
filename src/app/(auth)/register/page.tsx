@@ -46,14 +46,14 @@ export default function RegisterPage() {
 
             const newMemberPageConfig = await createMemberPageConfigWithoutUser({
                 clientSlug: clientId,
-                title: "Member Benefits",
-                description: "Enjoy your benefits",
+                title: "Click here to edit the tittle: Dealbook",
+                description: "Click here to customize the description: Enjoy your exclusive deals.",
                 imageURL: "/images/logo.svg",
             }, selectedBenefits)
 
 
             if (newMemberPageConfig) {
-                customToast.success("Member Benefit Page Generated Successfully")
+                customToast.success("Dealbook Generated Successfully")
                 const password = Math.random().toString(10).slice(-8);
 
                 const register = await fetch('/api/auth/register', {

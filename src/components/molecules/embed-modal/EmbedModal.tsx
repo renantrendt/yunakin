@@ -34,8 +34,8 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
         </div>
         <script data-client-slug="${clientSlug}" >
             window.addEventListener('message', (event) => {
-                    if (event.data && event.data.type === 'yunakin_iframeHeight') {
-                        const iframe = document.getElementById('yunakin_frame');
+                    if (event.data && event.data.type === 'youakin_iframeHeight') {
+                        const iframe = document.getElementById('youakin_frame');
                         if (iframe) {
                             iframe.style.height = event.data.height + 'px';
                         }
@@ -186,7 +186,7 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                                     className='pl-[105px]'
                                     error={slug === '' ? 'This field is required' : ''}
                                 />
-                                <Typography type='p' className='text-[#5E5E5E] text-base absolute left-2 top-[13px]'>yunakin.com/</Typography>
+                                <Typography type='p' className='text-[#5E5E5E] text-base absolute left-2 top-[13px]'>youakin.com/</Typography>
                             </div>
 
                             <Button

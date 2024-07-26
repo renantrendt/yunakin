@@ -26,12 +26,12 @@ const DealBookChartContainer = ({ chartStats, chartNumberStats }: DealBookChartC
         {
             title: 'Saved Deals',
             summary: totalSaves,
-            children: <BarChart name='All Member Benefit Saves' items={benefitsSaves} />
+            children: <BarChart name='All Deals Saved' items={benefitsSaves} />
         },
         {
             title: 'Claimed Deals',
             summary: totalClaims,
-            children: <BarChart name='All Member Benefit Claims' items={benefitsClaims} />
+            children: <BarChart name='All Deals Claims' items={benefitsClaims} />
         },
         {
             title: 'Live Ads',
