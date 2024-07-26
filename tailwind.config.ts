@@ -112,7 +112,7 @@ const config: Config = {
       },
       animation: {
         scroll:
-          "infinite-scroll var(--animation-duration, 20s) var(--animation-direction, forwards) linear infinite",
+          "infinite-scroll var(--animation-duration, 50s) var(--animation-direction, forwards) linear infinite",
         "meteor-effect": "meteor 5s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
