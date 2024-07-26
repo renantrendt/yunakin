@@ -38,7 +38,7 @@ export default function SettingsPage() {
     }
     return (
         <div>
-            <div className="flex justify-start w-full">
+            <div className="flex justify-start w-full px-5 py-4   lg:px-12">
                 <div role="tablist" className="flex flex-row gap-2">
                     {tabs.map((t, index) => {
                         return <TabItem selected={t.name == tab.name} key={index} onClick={() => setTab(t)} label={t.name} />

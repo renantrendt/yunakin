@@ -32,7 +32,7 @@ const OnboardingModal = (props: OnboardingModalProps) => {
             <div className='container  flex flex-col  gap-6 p-8 justify-center content'>
 
                 <div className='figure w-full  min-h-[100px] lg:min-h-[200px] h-fit  rounded-lg '>
-                    {<Image src={`/images/onboarding/modal/part${step}.svg`} alt='illustration' className='w-full h-full object-contain' />}
+                    {<Image src={`/images/onboarding/modal/part${step}.svg`} alt='illustration' width={80} height={80} className='w-full h-full object-contain' />}
                 </div>
                 <div className="content flex justify-center flex-col items-center">
                     <h1 className='title text-black font-bold text-[18px] leading-[150%]'>{t(`onboardingModal.step${step}.title`)}</h1>

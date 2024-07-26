@@ -20,6 +20,7 @@ interface EmbedModalProps {
 }
 
 
+const domain = process.env.NEXT_PUBLIC_NEXT_URL
 
 const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedModalProps) => {
 
@@ -28,8 +29,8 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
     const [showCustomizeUrl, setShowCustomizeUrl] = React.useState(false);
     const [slug, setSlug] = React.useState(clientSlug)
     const content = `
-        <div class="youakin-iframe-container" style="width:100%">
-            <iframe id="youakin_frame" src='https://youakin.com/${clientSlug}/memberbenefits?embedded=true' width='100%' height='1000' frameborder='0' scrolling='no'></iframe>
+        <div class="yunakin-iframe-container" style="width:100%">
+            <iframe id="yunakin_frame" src='${domain}/${clientSlug}/memberbenefits?embedded=true' width='100%' height='1000' frameborder='0' scrolling='no'></iframe>
         </div>
         <script data-client-slug="${clientSlug}" >
             window.addEventListener('message', (event) => {
@@ -143,13 +144,13 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                             <InputField
                                 disabled
                                 id='shareurl'
-                                value={`https://youakin.com/${clientSlug}/memberbenefits`}
+                                value={`${domain}/${clientSlug}/memberbenefits`}
                                 onChange={() => { }}
                                 name='shareurl'
                             />
                             <Button
                                 onClick={() => {
-                                    handleClick(`https://youakin.com/${clientSlug}/memberbenefits`)
+                                    handleClick(`${domain}/${clientSlug}/memberbenefits`)
                                 }}
                                 icon={<CopyIcon />}
                                 variant='primary'

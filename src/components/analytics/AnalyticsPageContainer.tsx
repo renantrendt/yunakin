@@ -29,14 +29,12 @@ const AnalyticsPageContainer = ({ hasData, analyticsData }: AnalyticsPageContain
             return analytics
         },
         onError: (error, values, context) => {
-            customToast.error('Failed to fetch analytics data   '),
+            customToast.error('Failed to fetch analytics data'),
                 console.log('error', error)
         },
         onSuccess(data, variables, context) {
-            console.log('data', data)
             if (data) {
                 setAnalytics(_.cloneDeep(data))
-                customToast.success('Analytics data fetched successfully')
             }
         },
         networkMode: 'online'

@@ -79,10 +79,10 @@ export const MagicLinkEmail = ({
                         </Section>
                     </Container>
                     <Container className=" !w-full min-w-full min-h-[250px] mx-auto">
-                        <Section className="mt-4 text-center mb-4">
+                        {/* <Section className="mt-4 text-center mb-4">
                             <Row>
                                 <Img
-                                    src={`${baseUrl}/images/email-footer-logo.png`}
+                                    src={`${baseUrl}/images/email-footer-logo.png?t=${new Date().getTime()}`}
 
                                     alt={`${organizationName}`}
                                     className="my-0  mx-auto"
@@ -90,7 +90,7 @@ export const MagicLinkEmail = ({
                                     height={"30"}
                                 />
                             </Row>
-                        </Section>
+                        </Section> */}
                         <Section className=" text-center">
                             <Row className="mx-auto">
                                 <Column>

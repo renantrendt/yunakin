@@ -50,3 +50,4 @@ public/robots.txt
 /storybook-static
 
 .env
+.env.development

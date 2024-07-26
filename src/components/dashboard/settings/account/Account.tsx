@@ -7,9 +7,9 @@ const AccountSettings = () => {
             <div className='col-span-12 md:col-span-6 w-full'>
                 <EditProfile />
             </div>
-            <div className='col-span-12 md:col-span-6 w-full'>
+            {/* <div className='col-span-12 md:col-span-6 w-full'>
                 <EditPassword />
-            </div>
+            </div> */}
         </div >
     )
 }
