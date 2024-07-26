@@ -82,7 +82,7 @@ export const MagicLinkEmail = ({
                         <Section className="mt-4 text-center mb-4">
                             <Row>
                                 <Img
-                                    src={`${baseUrl}/images/email-footer-logo.png`}
+                                    src={`${baseUrl}/images/email-footer-logo.png?t=${new Date().getTime()}`}
 
                                     alt={`${organizationName}`}
                                     className="my-0  mx-auto"
