@@ -15,8 +15,8 @@ export async function generateMetadata(props: any): Promise<Metadata> {
       title: t('heroSection.title'),
       description: t('heroSection.description'),
       locale: props.searchParams.locale ?? getLocale(),
-      siteName: 'Yunakin',
-      url: 'www.yunakin.com',
+      siteName: 'Youakin',
+      url: 'www.youakin.com',
       images: [`${platformConfig.variables.NEXT_URL}/images/og-image.png`],
 
     },

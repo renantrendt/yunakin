@@ -91,7 +91,7 @@ export const WelcomeWaitingListEmailTemplate = ({
 
 
 WelcomeWaitingListEmailTemplate.PreviewProps = {
-    organizationName: "Yunakin",
+    organizationName: "Youakin",
 } as WelcomeWaitingListEmailTemplateProps;
 
 export default WelcomeWaitingListEmailTemplate;

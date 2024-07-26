@@ -19,7 +19,7 @@ export default function Footer(): JSX.Element {
                     <Image src="/images/logo-dark.svg" alt="logo" width={150} height={50} className='hidden dark:block' />
                 </Link>
                 <p className='mt-4' >
-                    <span className='font-bold'>Yunakin</span>
+                    <span className='font-bold'>Youakin</span>
                     <span> {t("footer.description")}</span>
                 </p>
 

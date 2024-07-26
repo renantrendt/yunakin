@@ -28,13 +28,13 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
     const [showCustomizeUrl, setShowCustomizeUrl] = React.useState(false);
     const [slug, setSlug] = React.useState(clientSlug)
     const content = `
-        <div class="yunakin-iframe-container" style="width:100%">
-            <iframe id="yunakin_frame" src='https://yunakin.com/${clientSlug}/memberbenefits?embedded=true' width='100%' height='1000' frameborder='0' scrolling='no'></iframe>
+        <div class="youakin-iframe-container" style="width:100%">
+            <iframe id="youakin_frame" src='https://youakin.com/${clientSlug}/memberbenefits?embedded=true' width='100%' height='1000' frameborder='0' scrolling='no'></iframe>
         </div>
         <script data-client-slug="${clientSlug}" >
             window.addEventListener('message', (event) => {
-                    if (event.data && event.data.type === 'yunakin_iframeHeight') {
-                        const iframe = document.getElementById('yunakin_frame');
+                    if (event.data && event.data.type === 'youakin_iframeHeight') {
+                        const iframe = document.getElementById('youakin_frame');
                         if (iframe) {
                             iframe.style.height = event.data.height + 'px';
                         }
@@ -143,13 +143,13 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                             <InputField
                                 disabled
                                 id='shareurl'
-                                value={`https://yunakin.com/${clientSlug}/memberbenefits`}
+                                value={`https://youakin.com/${clientSlug}/memberbenefits`}
                                 onChange={() => { }}
                                 name='shareurl'
                             />
                             <Button
                                 onClick={() => {
-                                    handleClick(`https://yunakin.com/${clientSlug}/memberbenefits`)
+                                    handleClick(`https://youakin.com/${clientSlug}/memberbenefits`)
                                 }}
                                 icon={<CopyIcon />}
                                 variant='primary'
@@ -185,7 +185,7 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                                     className='pl-[105px]'
                                     error={slug === '' ? 'This field is required' : ''}
                                 />
-                                <Typography type='p' className='text-[#5E5E5E] text-base absolute left-2 top-[13px]'>yunakin.com/</Typography>
+                                <Typography type='p' className='text-[#5E5E5E] text-base absolute left-2 top-[13px]'>youakin.com/</Typography>
                             </div>
 
                             <Button

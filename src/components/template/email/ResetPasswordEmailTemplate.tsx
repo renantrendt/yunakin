@@ -118,8 +118,8 @@ export const ResetPasswordEmail = ({
 
 ResetPasswordEmail.PreviewProps = {
     name: "Fortan",
-    resetPasswordLink: "https://yunakin.com/confirm/1234567890",
-    organizationName: "Yunakin",
+    resetPasswordLink: "https://youakin.com/confirm/1234567890",
+    organizationName: "Youakin",
 } as ResetPasswordEmailProps;
 
 export default ResetPasswordEmail;

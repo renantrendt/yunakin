@@ -109,8 +109,8 @@ export const MagicLinkEmail = ({
 };
 
 MagicLinkEmail.PreviewProps = {
-    magicLink: "https://yunakin.com/confirm/1234567890",
-    organizationName: "Yunakin",
+    magicLink: "https://youakin.com/confirm/1234567890",
+    organizationName: "Youakin",
 } as MagicLinkEmailProps;
 
 export default MagicLinkEmail;
