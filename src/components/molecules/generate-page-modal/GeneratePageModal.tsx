@@ -120,12 +120,12 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
                 <Cross1Icon onClick={props.onClose} className=' absolute cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
             </div>
             <div className='container  flex flex-col  gap-6 px-4 py-8 lg:p-8 justify-center content'>
-                <h1 className='text-base font-gelica text-xl leading-[120%] font-semibold'>Dealbook created</h1>
-                <p className='text-sm leading-[150%]'>Sign up to create your custom deal and share your dealbook.</p>
+                <h1 className='text-base font-gelica text-xl leading-[120%] font-semibold'>Dealbook Created</h1>
+                <p className='text-sm leading-[150%]'>Sign up to add your custom deals on the marketplace, customize and share your dealbook.</p>
                 <div className='figure w-full h-[280px] lg:h-[436px] bg-landing-background overflow-hidden rounded-[18px]   '>
                     <div className='justify-between flex scale-100  w-full px-8 pt-4'>
                         <Image src="/images/logo.svg" alt="logo" width={100} height={20} className='w-[75px] h-[15px] lg:w-[100px] lg:h-[20px]' />
-                        <Button label={`Create your perks`} className=' text-[8px] rounded-sm lg:rounded-lg lg:text-[10px] px-1.5 py-[3px] lg:py-[6px] lg:px-3' size={"sm"} />
+                        <Button label={`Suggest a deal`} className=' text-[8px] rounded-sm lg:rounded-lg lg:text-[10px] px-1.5 py-[3px] lg:py-[6px] lg:px-3' size={"sm"} />
                     </div>
                     <div className='px-4 pt-3.5 lg:pt-4 '>
                         <div className='  flex flex-col justify-center items-center gap-0 lg:gap-3 text-center'>

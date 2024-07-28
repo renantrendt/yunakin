@@ -78,7 +78,7 @@ export default function RegisterPage() {
                         if (result?.error) {
                             customToast.error(result.error)
                         } else {
-                            router.push(siteUrls.general.customize)
+                            router.push(siteUrls.general.analytics)
                         }
                     } catch (error) {
                         console.error(error)

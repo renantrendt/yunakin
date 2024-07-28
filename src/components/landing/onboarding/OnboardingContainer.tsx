@@ -56,13 +56,13 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                     </Link>
                     <div >
                         <Button
-                            label={`Generate Page ${selectedBenefits.filter(s => s.selected).length > 0 ? `(${selectedBenefits.filter(s => s.selected).length})` : ""}`}
+                            label={`Generate Dealbook ${selectedBenefits.filter(s => s.selected).length > 0 ? `(${selectedBenefits.filter(s => s.selected).length})` : ""}`}
                             size={'sm'}
                             className='py-[6px] px-3 lg:py-[14px] lg:px-5'
                             onClick={() => {
                                 // router.push(`/register?clientId=${clientSlug}&selectedBenefits=${encodeURIComponent(`${selectedBenefits.filter(s => s.selected).map(b => b.id).join(",")}`)}`)
                                 if (selectedBenefits.filter(s => s.selected).length == 0) {
-                                    customToast.warn("Please select at least one benefit")
+                                    customToast.warn("Please select at least one deal.")
                                     return
                                 }
                                 setShowGeneratePageModal(true)
