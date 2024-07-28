@@ -22,7 +22,7 @@ const tabs = [
     {
         name: "Account",
 
-        component: <div><AccountSsttings /> </div>
+        component: <div><AccountSettings /> </div>
     },
 ]
 export default function SettingsPage() {
