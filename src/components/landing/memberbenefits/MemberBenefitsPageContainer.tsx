@@ -13,6 +13,7 @@ import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 import React, { useState } from 'react'
+import siteUrls from '@/config/site-config'
 
 interface MemberBenefitsPageContainerProps {
     config: MemberBenefitPageConfig
@@ -71,7 +72,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                                         }}
                                         onClick={() => {
                                             // to be implemented
-                                            // window.open(siteUrls.general.onboarding, "_blank")
+                                         window.open(siteUrls.general.onboarding, "_blank")
                                         }}
                                         icon={<PlusIcon />}
                                         className='text-[#7A7A7A] bg-[#EDEDED] rounded-[38px]'
