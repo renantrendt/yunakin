@@ -11,8 +11,8 @@
         "editor": "Dealbook Editor",
         "catalog": "Startup Deals",
         "memberBenefits": "Published Benefits",
-        "startup-deals": "Startup Deals",
-        "customize": "Customize Appearance"
+        "startup-deals": "Dealbook",
+        "customize": "Appearance"
     },
     "memberbenefit": {
         "visibility": {
