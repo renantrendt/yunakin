@@ -10,10 +10,11 @@ import CompanyLogo6 from '@/icons/company-icons/logo-ipsum6.svg'
 import CompanyLogo7 from '@/icons/company-icons/logo-ipsum7.svg'
 import CompanyLogo8 from '@/icons/company-icons/logo-ipsum8.svg'
 import CompanyLogo9 from '@/icons/company-icons/logo-ipsum9.svg'
+import CompanyLogo10 from '@/icons/company-icons/logo-ipsum10.svg'
 
 import ParallaxText from "../animated/ParallaxText";
 const items = [
-    CompanyLogo1, CompanyLogo2, CompanyLogo3, CompanyLogo4, CompanyLogo5, CompanyLogo6, CompanyLogo7, CompanyLogo8, CompanyLogo9
+    CompanyLogo1, CompanyLogo2, CompanyLogo3, CompanyLogo4, CompanyLogo5, CompanyLogo6, CompanyLogo7, CompanyLogo8, CompanyLogo9, CompanyLogo10
 ]
 export const InfiniteMovingCards = () => {
     return (
