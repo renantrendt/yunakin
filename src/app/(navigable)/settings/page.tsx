@@ -3,7 +3,7 @@ import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import AccountSsttings from "@/components/dashboard/settings/account/Account";
+import AccountSettings from "@/components/dashboard/settings/account/Account";
 import TabItem from "@/components/atomic/tabs/TabItem";
 
 const validationSchema = yup.object({
@@ -20,8 +20,6 @@ interface FormValues {
 
 const tabs = [
     {
-        name: "Account",
-
         component: <div><AccountSettings /> </div>
     },
 ]
