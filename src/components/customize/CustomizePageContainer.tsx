@@ -199,8 +199,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                                 backgroundColor: config.cardBackgroundColor as string
                                             }}
                                             onClick={() => {
-                                                // to be implemented
-                                                // window.open(siteUrls.general.onboarding, "_blank")
+                                                window.open(siteUrls.general.onboarding, "_blank")
                                             }}
                                             icon={<PlusIcon />}
                                             className='text-[#7A7A7A] bg-[#EDEDED] rounded-[38px]'
