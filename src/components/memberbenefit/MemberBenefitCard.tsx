@@ -158,7 +158,7 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
                         <p className='text-center text-sm text-grey-600 '
                             style={{
                                 color: config?.textColor as string,
-                            }}>Apply the code: {benefit.code} on checkout</p>
+                            }}>{benefit.code}</p>
                     </div>
                     <div className='flex flex-col gap-2'>
                         <Button
