@@ -51,12 +51,12 @@ export const VerificationEmail = ({
                 <Body className="bg-[#FAFAFA] font-sans  pt-[60px] ">
                     <Container className=" bg-white  px-[5vw] pt-[36px] pb-[24px] rounded-[10px]    mx-auto  flex flex-col justify-center    min-w-[250px] max-w-[565px]">
                         <Text className="text-black text-2xl font-bold leading-[24px]">
-                            Hi {name},
+                            Hi{/* {name} */},
                         </Text>
                         <Text className="text-black text-[14px] leading-[24px]">
-                            You recently created an account and requested that the confirmation email is resend.
+                            You recently created an account.
                         </Text>
-                        <Text>
+                     { /* <Text>
                             Click the button below to confirm the account,
                         </Text>
                         <Section className="text-left mt-[32px] mb-[32px]">
@@ -74,7 +74,7 @@ export const VerificationEmail = ({
                             <Link href={confirmationEmail} className="text-blue-600 no-underline">
                                 {confirmationEmail}
                             </Link>
-                        </Text>
+                        </Text> */}
                         <Section className="text-left mt-[-10px] mb-[32px]">
                             <Text>
                                 If you did not create an account please ignore this email or reply to let us know.

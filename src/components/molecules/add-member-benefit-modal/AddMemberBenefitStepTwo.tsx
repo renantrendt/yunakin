@@ -135,11 +135,11 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                         name="code"
                         render={({ field: { onChange, value } }) => (
                             <InputField
-                                label="Code"
+                                label="Deal Code"
                                 type="text"
                                 id="code"
                                 name="code"
-                                placeholder='Enter Code'
+                                placeholder='Enter code and instructions on how to redeem'
                                 onChange={onChange}
                                 value={value}
                                 error={errors.code?.message}
