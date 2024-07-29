@@ -32,6 +32,7 @@ import LoadingIcon from '@/icons/LoadingIcon'
 import { cn } from '@/utils/cn'
 import Tooltip from '../atomic/tooltip/Tooltip'
 import Typography from '../atomic/typography/Typography'
+import { uploadImage } from '@/lib/utils'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -430,23 +431,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                                 partnershipTypes: data.partnership_types.join(',')
                             } as MemberBenefitWithImport)
                             if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
-                                console.log('uploading image')
-                                console.log(data.imageURL)
-                                const blob = await fetch(data.imageURL).then(r => r.blob());
-                                const random = Math.floor(Math.random() * 10)
-                                const imageType = data.imageType
-
-                                const path = "memberbenefits_images/" + updatedMemberBenefit.id + "/" + `image-${random}.${imageType ?? 'jpg'}`
-                                const file = new File([blob], `image.${imageType ?? 'jpg'}`, { type: imageType.includes('svg') ? "image/svg+xml" : "image/jpeg" });
-                                const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
-                                if (!isUploaded) {
-                                    throw new Error("Failed to upload image")
-                                }
-                                const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
-                                if (!downloadUrl) {
-                                    throw new Error("Failed to get download url")
-                                }
-                                updatedMemberBenefit.imageURL = downloadUrl.publicUrl
+                                const response = await uploadImage(data, updatedMemberBenefit)
+                                updatedMemberBenefit.imageURL = response.downloadUrl?.publicUrl ?? ""
                                 await updateMemberBenefit(updatedMemberBenefit)
                             }
                             setMemberBenefits(memberBenefits.map(memberBenefit => memberBenefit.id === updatedMemberBenefit.id ? updatedMemberBenefit : memberBenefit))
@@ -482,21 +468,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                                 partnershipTypes: data.partnership_types.join(','),
                             } as MemberBenefitWithImport)
                             if (data.imageURL) {
-                                const blob = await fetch(data.imageURL).then(r => r.blob());
-                                const random = Math.floor(Math.random() * 10)
-                                const imageType = data.imageType
-
-                                const path = "memberbenefits_images/" + newMemberBenefit.id + "/" + `image-${random}.${imageType ?? 'jpg'}`
-                                const file = new File([blob], `image.${imageType ?? 'jpg'}`, { type: imageType.includes('svg') ? "image/svg+xml" : "image/jpeg" });
-                                const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
-                                if (!isUploaded) {
-                                    throw new Error("Failed to upload image")
-                                }
-                                const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
-                                if (!downloadUrl) {
-                                    throw new Error("Failed to get download url")
-                                }
-                                newMemberBenefit.imageURL = downloadUrl.publicUrl
+                                const response = await uploadImage(data, newMemberBenefit)
+                                newMemberBenefit.imageURL = response.downloadUrl?.publicUrl ?? ""
                                 await updateMemberBenefit(newMemberBenefit)
                             }
                             customToast.success('Deal added successfully')
