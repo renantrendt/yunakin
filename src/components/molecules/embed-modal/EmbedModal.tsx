@@ -29,8 +29,8 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
     const [showCustomizeUrl, setShowCustomizeUrl] = React.useState(false);
     const [slug, setSlug] = React.useState(clientSlug)
     const content = `
-        <div class="yunakin-iframe-container" style="width:100%">
-            <iframe id="yunakin_frame" src='${domain}/${clientSlug}/memberbenefits?embedded=true' width='100%' height='1000' frameborder='0' scrolling='no'></iframe>
+        <div class="youakin-iframe-container" style="width:100%">
+            <iframe id="youakin_frame" src='${domain}/${clientSlug}/memberbenefits?embedded=true' width='100%' height='1000' frameborder='0' scrolling='no'></iframe>
         </div>
         <script data-client-slug="${clientSlug}" >
             window.addEventListener('message', (event) => {
