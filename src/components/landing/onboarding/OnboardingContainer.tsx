@@ -83,7 +83,7 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                     </div>
                     <div className='pt-8 lg:pt-20  '>
                         <div className="flex flex-col md:flex-row gap-4   items-start justify-between w-full  text-black md:items-center  max-w-[1440px] px-4 md:px-28 mx-auto">
-                            <h1 className="text-xl lg:text-2xl font-bold">Perks</h1>
+                            <h1 className="text-xl lg:text-2xl font-bold">Deals</h1>
                             <div className='tabs bg-[#F0F0F0]  p-1  w-full md:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'>
 
                                 {Object.keys(selectMemberBenefitFilter).map((key: string, index) => {

@@ -98,7 +98,7 @@ const ComingSoonClient = ({ monaSans }: ComingSoonClientProps) => {
                 </div>
                 <div className='flex flex-col gap-5'>
                     <Typography type='h1' className='max-w-full text-[44px] w-full text-center leading-[110%]'>Coming Soon...</Typography>
-                    <Typography type='h6' className='text-[18px] font-medium leading-[150%]  max-w-[500px] text-center text-[#757575]' >Offer perks for companies to use in their customer retention strategies.</Typography>
+                    <Typography type='h6' className='text-[18px] font-medium leading-[150%]  max-w-[500px] text-center text-[#757575]' >Offer deals for companies to use in their customer retention strategies.</Typography>
 
                 </div>
 

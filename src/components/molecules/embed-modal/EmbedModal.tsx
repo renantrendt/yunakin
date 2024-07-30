@@ -62,7 +62,7 @@ const EmbedModal = ({ clientSlug, isOpen, onClose, onUpdate, loading }: EmbedMod
                                 <Share2Icon width={20} height={20} />
                                 <Typography type='h3' className='text-black text-2xl'>Share</Typography>
                             </div>
-                            <Typography type='p' className='text-sm text-[#5E5E5E]'>Use the options below to share your perks with others.</Typography>
+                            <Typography type='p' className='text-sm text-[#5E5E5E]'>Use the options below to share your deals with others.</Typography>
                         </div>
                         <div className="list flex flex-col gap-4">
                             <div

@@ -63,7 +63,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
 
                                 <h1 className="text-xl lg:text-2xl font-bold" style={{
                                     color: config.textColor as string
-                                }}>Perks</h1>
+                                }}>Deals</h1>
                                 {config.suggestDeal && (
                                     <Button
                                         style={{
