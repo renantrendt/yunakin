@@ -101,7 +101,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                 const memberBenefit = memberBenefits[info.row.index]
                 const image = memberBenefit.imageURL && `${memberBenefit.imageURL}` || `/images/dummy_logo.svg`
                 return (
-                    <Image className='hover:scale-105  w-12 h-12 flex-shrink-0 rounded-[14px] border border-[#EBEBEB] duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit=' contain' />
+                    <Image className=' min-w-12 min-h-12 w-12 h-12 flex-shrink-0 rounded-[14px] border border-[#EBEBEB] duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit='cover' />
                 )
             },
             header: () => <span>Image</span>,

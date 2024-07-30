@@ -82,7 +82,7 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string }, s
                             visibility: MemberBenefitVisibility.PUBLIC,
                         },
                         {
-                            visibility: MemberBenefitVisibility.OWNED_PRIVATE,
+                            visibility: MemberBenefitVisibility.OWNED_PUBLIC,
                         }
                     ]
                 }
@@ -104,7 +104,7 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string }, s
                                     visibility: MemberBenefitVisibility.PUBLIC,
                                 },
                                 {
-                                    visibility: MemberBenefitVisibility.OWNED_PUBLIC,
+                                    visibility: MemberBenefitVisibility.OWNED_PRIVATE,
                                 }
                             ],
                         },

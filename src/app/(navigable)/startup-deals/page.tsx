@@ -2,7 +2,7 @@
 import { auth } from '@/auth';
 import MemberBenefitsTable from '@/components/organisms/MemberBenefitsTable';
 import { prisma } from '@/lib/prisma'
-import { DealType, MemberBenefitWithImport } from '@/lib/types';
+import { DealType, MemberBenefitVisibility, MemberBenefitWithImport } from '@/lib/types';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
@@ -29,9 +29,44 @@ const MemberBenefitsPage = async () => {
         where: {
             OR: [
                 {
-                    dealType: {
-                        not: DealType.PARTNER
-                    }
+                    AND: [
+                        {
+                            dealType: {
+                                not: DealType.PARTNER
+                            },
+                        },
+                        {
+                            OR: [
+                                {
+                                    visibility: MemberBenefitVisibility.PUBLIC,
+                                },
+                                {
+                                    visibility: MemberBenefitVisibility.OWNED_PUBLIC
+                                },
+                                {
+                                    AND: [
+                                        {
+                                            visibility: MemberBenefitVisibility.OWNED_PRIVATE
+                                        },
+                                        {
+                                            userId: session?.user?.id
+                                        }
+                                    ],
+
+                                },
+                                {
+                                    AND: [
+                                        {
+                                            visibility: MemberBenefitVisibility.PRIVATE
+                                        },
+                                        {
+                                            userId: session?.user?.id
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     AND: [
@@ -40,10 +75,13 @@ const MemberBenefitsPage = async () => {
                         },
                         {
                             userId: session?.user?.id
-                        }
+                        },
+
                     ]
-                }
+                },
+
             ]
+
         }
     })
 

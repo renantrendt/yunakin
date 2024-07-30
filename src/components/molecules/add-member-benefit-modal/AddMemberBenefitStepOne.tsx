@@ -41,9 +41,9 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
             case MemberBenefitVisibility.PUBLIC:
                 return ['public', 'public_other']
             case MemberBenefitVisibility.OWNED_PRIVATE:
-                return ['public_other']
-            case MemberBenefitVisibility.OWNED_PUBLIC:
                 return ['public']
+            case MemberBenefitVisibility.OWNED_PUBLIC:
+                return ['public_other']
             default:
                 return []
         }
@@ -145,11 +145,11 @@ const AddMemberBenefitStepOne = ({ deal_type, partnership_types, visibility, onS
                                                 setValue('visibility', MemberBenefitVisibility.PUBLIC)
                                             }
                                             else {
-                                                setValue('visibility', MemberBenefitVisibility.OWNED_PUBLIC)
+                                                setValue('visibility', MemberBenefitVisibility.OWNED_PRIVATE)
                                             }
                                         } else {
                                             if (val.includes('public_other')) {
-                                                setValue('visibility', MemberBenefitVisibility.OWNED_PRIVATE)
+                                                setValue('visibility', MemberBenefitVisibility.OWNED_PUBLIC)
                                             }
                                             else {
                                                 setValue('visibility', MemberBenefitVisibility.PRIVATE)
