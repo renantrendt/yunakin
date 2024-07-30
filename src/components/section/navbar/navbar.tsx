@@ -92,7 +92,7 @@ export default function Navbar() {
                                         className=' !min-w-[150px] !w-full  text-white '
                                         label='Get Started'
                                         size='md'
-                                        onClick={() => router.push(siteUrls.general.comingSoon)}
+                                        onClick={() => router.push(siteUrls.general.onboarding)}
                                     />
                                 </li>
 
@@ -129,7 +129,7 @@ export default function Navbar() {
                                 className='  !min-w-[120px] '
                                 label={t('navbar.getStarted')}
                                 size='lg'
-                                onClick={() => router.push(siteUrls.general.comingSoon)}
+                                onClick={() => router.push(siteUrls.general.onboarding)}
                             />
                         </div>
 

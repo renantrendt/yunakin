@@ -41,7 +41,7 @@ export default function Hero() {
                                 className='w-fit'
                                 label={t('heroSection.cta')}
                                 onClick={() => {
-                                    router.push(siteUrls.general.comingSoon)
+                                    router.push(siteUrls.general.onboarding)
                                 }}
                             />
                             <div className='flex justify-center gap-1 items-center'>
