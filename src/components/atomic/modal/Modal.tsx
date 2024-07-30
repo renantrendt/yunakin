@@ -15,7 +15,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, showCloseButton = true, className, modalClassName, closeOnOutsideClick = true }) => {
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && closeOnOutsideClick) {
+      if (e.key === 'Escape') {
         onClose()
       }
     }
@@ -37,12 +37,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, showCloseButto
           <Button onClick={onClose} variant='secondary' size='sm' icon={<CrossIcon />} className='absolute !w-fit !p-2 !min-w-fit  right-6 top-2' />
         </form> */}
         {showCloseButton &&
-          <div className='justify-between flex mb-4  flex-row-reverse w-full text-right  z-30  bg-white'>
-            <Cross1Icon onClick={onClose} className='  relative cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-4' />
+          <div className='justify-between flex  flex-row-reverse w-fit  text-right  z-30  bg-transparent bg-white p-2 rounded-full   right-8 top-4 absolute '>
+            <Cross1Icon onClick={onClose} className='  relative cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  ' />
           </div>
         }
         <div className={cn('overflow-scroll max-h-[80vh]', {
-          'my-4 pb-10': showCloseButton,
+          'my-0 pb-10': showCloseButton,
         })}>
           {children}
         </div>

@@ -389,7 +389,10 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                         <DeleteIcon />
                     </div>
                 }
-                isOpen={modalOpen} onClose={() => setModalOpen(false)} title={
+                isOpen={modalOpen} onClose={() =>
+                    setModalOpen(false)
+
+                } title={
                     isBenefitCreator(toBeDeletedMemberBenefitId) ? 'Delete Deal?' : 'Hide this deal from your customers'
                 } description={
                     isBenefitCreator(toBeDeletedMemberBenefitId) ? 'This action is irreversible' : 'You can show again by importing from the marketplace'}>
@@ -411,7 +414,11 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                     categories={categories}
 
                     editMemberBenefit={tobeEditedMemberBenefit}
-                    onClose={() => setMemberBenefitModal(false)}
+                    onClose={() => {
+                        setMemberBenefitModal(false)
+                        setTobeEditedMemberBenefit(undefined)
+                    }
+                    }
                     onUpdate={async (data: any) => {
                         try {
                             setLoading(true)
@@ -460,7 +467,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                                 description: data.description,
                                 link: data.link,
                                 userId: userId,
-                                title: data.name,
+                                title: data.title,
                                 imageURL: data.imageURL,
                                 offer: data.offer,
                                 visibility: data.visibility,
@@ -475,6 +482,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                             customToast.success('Deal added successfully')
                             setMemberBenefits([newMemberBenefit, ...memberBenefits])
                             setMemberBenefitModal(false)
+                            setTobeEditedMemberBenefit(undefined)
 
                         } catch (error) {
                             customToast.error('Failed to create a new deal')

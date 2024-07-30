@@ -12,7 +12,7 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 const schema = yup.object().shape({
-    name: yup.string().required().max(50, 'Company Name must be less than 50 characters'),
+    title: yup.string().required().max(50, 'Company Name must be less than 50 characters'),
     code: yup.string().required(),
     domain: yup.string().required().max(50, 'Website must be less than 50 characters'),
     imageURL: yup.string().optional().nullable(),
@@ -37,7 +37,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
         {
             resolver: yupResolver(schema),
             defaultValues: {
-                name: data.name,
+                title: data.title,
                 code: data.code,
                 domain: data.domain,
                 imageURL: data.imageURL,
@@ -54,7 +54,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
     const onSubmitForm = (data: FormValues) => {
         onSubmit(data)
     }
-    console.log(loading)
+    console.log(errors)
     return (
         <form onSubmit={handleSubmit(onSubmitForm)} >
             <div className='flex flex-col gap-2'>
@@ -86,19 +86,19 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                     <Divider dividerStyle={"light"} dividerType={"horizontal"} />
                     <Controller
                         control={control}
-                        name="name"
+                        name="title"
                         render={({ field: { onChange, value } }) => (
                             <InputField
                                 label="Company Name"
                                 description='Insert the company name.'
                                 type="text"
-                                id="name"
-                                name="name"
+                                id="title"
+                                name="title"
                                 placeholder='Company Name'
                                 maxLength={50}
                                 onChange={onChange}
                                 value={value}
-                                error={errors.name?.message}
+                                error={errors.title?.message}
                                 required
                             />
                         )}

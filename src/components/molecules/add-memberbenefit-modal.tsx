@@ -104,7 +104,6 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                             ...memberBenefit,
                             ...data,
                             image_type: data.imageType,
-                            title: data.name,
                         })
                         setStep(1)
                     }}
@@ -112,9 +111,10 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                         const mergedBenefit = {
                             ...memberBenefit,
                             ...data,
-
+                            title: data.title,
                             id: editMemberBenefit?.id,
                         }
+                        console.log(mergedBenefit)
                         if (editMemberBenefit) {
                             // update
                             onUpdate(mergedBenefit)
@@ -124,7 +124,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                     }
                     }
                     data={{
-                        name: memberBenefit?.title || '',
+                        title: memberBenefit?.title || '',
                         description: memberBenefit?.description || '',
                         imageURL: memberBenefit?.imageURL || '',
                         categoryId: memberBenefit?.categoryId || '',

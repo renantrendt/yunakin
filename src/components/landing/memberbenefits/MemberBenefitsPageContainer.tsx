@@ -138,7 +138,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                         color: config?.textColor as string,
                     }}
                 >
-                    <span> Powered by </span><a href='https://www.youakin.com/' rel="noreferrer" target='_blank' className='text-blue-500 underline'>Youakin.com</a>
+                    <span className='font-satoshi font-regular'> Powered by </span><a href='https://www.youakin.com/' rel="noreferrer" target='_blank' className='text-blue-500 underline'>Youakin.com</a>
                 </Typography>
 
                 {searchParams?.get('embedded') === 'true' && (
