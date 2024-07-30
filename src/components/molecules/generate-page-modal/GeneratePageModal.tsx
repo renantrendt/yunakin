@@ -129,7 +129,7 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
                     </div>
                     <div className='px-4 pt-3.5 lg:pt-4 '>
                         <div className='  flex flex-col justify-center items-center gap-0 lg:gap-3 text-center'>
-                            <Typography type="h1" className="font-black max-w-[200px] text-xs  lg:!text-xl leading-[133%]" >{t(`step${step}.title`)}</Typography>
+                            <Typography type="h1" className="font-black max-w-[200px] text-xs  lg:!text-xl leading-[133%]" >My Company Dealbook</Typography>
                             <Typography type="h6" className=" text-[8px] max-w-[200px] lg:!text-xs" >{t(`step${step}.description`)}</Typography>
                         </div>
                     </div>
