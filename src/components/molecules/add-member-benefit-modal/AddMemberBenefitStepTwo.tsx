@@ -57,7 +57,6 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
     console.log(loading)
     return (
         <form onSubmit={handleSubmit(onSubmitForm)} >
-
             <div className='flex flex-col gap-2'>
                 <div className='flex gap-2 items-center text-[#5E5E5E] cursor-pointer rounded-lg hover:bg-gray-100 p-1  w-fit' onClick={() => {
                     const c = Object.keys(dirtyFields).reduce((acc, key) => {

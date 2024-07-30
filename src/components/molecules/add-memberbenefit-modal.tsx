@@ -61,12 +61,12 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
     return (
         <Modal isOpen={isOpen} onClose={onClose}
             closeOnOutsideClick={false}
+            className='relative scale-100'
         >
-            <div className='flex flex-col p-10 pb-0 pt-8 gap-8 '>
-                <div className='justify-between flex w-full'>
-                    <Cross1Icon onClick={onClose} className=' absolute cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
-                </div>
-                <div className='flex justify-between items-center relative'>
+
+            <div className='flex flex-col p-10 pb-0 pt-0 gap-8  relative overflow-scroll '>
+
+                <div className='flex justify-between  pt-10 items-center relative'>
                     <div className='flex gap-1  lg:gap-2'>
                         {step == 1 && <span className={cn('bg-white border-[1px] rounded-full w-6 h-6 border-[#ECECEC] text-black text-center', { "border-[#FFDD04]": step == 1 })} >
                             1

@@ -28,6 +28,7 @@ const OnboardingModal = (props: OnboardingModalProps) => {
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose} className='lg:max-w-[448px]'
             closeOnOutsideClick={false}
+            showCloseButton={false}
         >
             <div className='container  flex flex-col  gap-6 p-8 justify-center content'>
 

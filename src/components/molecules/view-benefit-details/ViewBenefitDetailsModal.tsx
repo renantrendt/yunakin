@@ -29,6 +29,7 @@ const ViewBenefitDetailsModal = ({ onClose, memberBenefit, isOpen, category, han
     return (
         <Modal isOpen={isOpen} onClose={onClose}
             closeOnOutsideClick={false}
+            showCloseButton={false}
             className='lg:max-w-[935px] w-11/12   rounded-xl '
         >
             <div className='flex flex-col '>

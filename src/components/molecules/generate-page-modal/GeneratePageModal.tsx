@@ -116,9 +116,7 @@ const GeneratePageModal = (props: GeneratePageModalProps) => {
         <Modal isOpen={props.isOpen} onClose={props.onClose} className='w-full max-w-full'
             closeOnOutsideClick={false}
         >
-            <div className='justify-between flex w-full'>
-                <Cross1Icon onClick={props.onClose} className=' absolute cursor-pointer !w-fit !p-0 bg-transparent border-none hover:bg-transparent !min-w-fit  right-8 top-8' />
-            </div>
+
             <div className='container  flex flex-col  gap-6 px-4 py-8 lg:p-8 justify-center content'>
                 <h1 className='text-base font-gelica text-xl leading-[120%] font-semibold'>Dealbook Created</h1>
                 <p className='text-sm leading-[150%]'>Sign up to add your custom deals on the marketplace, customize and share your dealbook.</p>
