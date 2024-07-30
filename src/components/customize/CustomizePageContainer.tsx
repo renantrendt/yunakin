@@ -18,6 +18,7 @@ import CategoryScroller from '../categoryscroller/CategoryScroller'
 import Divider from '../atomic/divider/Divider'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { useMutation } from '@tanstack/react-query'
+import siteUrls from '@/config/site-config'
 interface CustomizePageContainerProps {
     benefits: MemberBenefit[]
     categories: Category[]
@@ -145,7 +146,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
             }} className='pb-40'>
 
                 <div className=''>
-                    <div className='max-w-[1440px] py-8 lg:pt-20 w-full mx-auto px-4 md:px-12'>
+                    <div className='max-w-[1440px] py-8 lg:pt-20 w-full px-4 md:px-12'>
                         <ImageUploader onImageUpload={(image, type) => {
                             setConfig({ ...config, imageURL: image, })
                             setImageType(type)
@@ -249,6 +250,8 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                                 <MemberBenefitCard
                                                     isEditing={true}
                                                     config={config}
+                                                    className='w-full min-w-32 max-w-full md:min-w-32 md:max-w-full'
+
                                                     key={index} benefit={benefit} />
                                             ))}
                                     </div>

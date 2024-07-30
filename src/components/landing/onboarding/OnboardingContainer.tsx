@@ -111,7 +111,6 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                                             category={category}
                                             selectedBenefits={selectedBenefits.filter((benefit: SelectedMemberBenefit) => benefit.categoryId === category.id)}
                                             setSelectedBenefits={(categorySelectedBenefits) => {
-
                                                 setSelectedBenefits(selectedBenefits.map(benefit => {
                                                     const categoryBenefit = categorySelectedBenefits.find(cb => cb.id === benefit.id)
                                                     if (categoryBenefit) {

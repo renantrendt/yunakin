@@ -93,7 +93,7 @@ const ImageUploader = ({ onImageUpload, image, useCrop = true, comment }: ImageU
                 </div>
 
             </Modal>}
-            <div className="flex gap-6 justify-center items-center">
+            <div className="flex w-fit gap-6 justify-center items-center">
                 <div  {...getRootProps()} id="ImageUpload" className={cn(`relative  cursor-pointer  border  border-grey-300 bg-white 
    focus:shadow-focus-primary focus:border-solid w-20 h-20  rounded-[10px] overflow-hidden
         border-dashed
