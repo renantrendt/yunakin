@@ -42,7 +42,7 @@ const ViewBenefitDetailsModal = ({ onClose, memberBenefit, isOpen, category, han
                                 <Image className='hover:scale-105  w-20 h-20 flex-shrink-0 rounded-[14px] border border-[#EBEBEB] duration-300 ease-in-out' src={image} alt="Benefit" width={80} height={80} objectFit=' contain' />
                                 {memberBenefit.offer && <div className='py-1 px-2 text-[#808080] font-bold font-satoshi leading-normal text-xs  md:text-sm bg-[#F5F5F5] rounded-[40px] ' >{memberBenefit.offer?.substring(0, 30)}</div>}
                             </div>
-                            <h2 className="card-title mt-4 text-[20px]  text-black font-satoshiBlack font-black"
+                            <h2 className="card-title mt-4 text-[20px]  text-black font-satoshi font-black"
                             >{memberBenefit.title}</h2>
                             {memberBenefit.description && <p className='max-w-[300px] text-sm mt-6 min-h-[50px]'
                             >{memberBenefit.description}</p>}

@@ -1,4 +1,5 @@
 import Button from '@/components/atomic/button/Button'
+import Divider from '@/components/atomic/divider/Divider'
 import Dropdown from '@/components/atomic/dropdown/Dropdown'
 import ImageUploader from '@/components/atomic/file-uploader/ImageUploader'
 import InputField from '@/components/atomic/input/InputField'
@@ -74,18 +75,23 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                 </div>
                 <div className='flex gap-4 flex-col'>
                     <div className='w-fit h-fit'>
+                        <Typography type='h6' className='text-black mb-1 !text-sm'>Company Logo</Typography>
+                        <Typography type='p' className='text-[#5E5E5E] !text-xs mb-2'>Insert or change the company logo.</Typography>
                         <ImageUploader onImageUpload={(image, imageType) => {
                             setValue('imageURL', image, { shouldDirty: true })
                             setValue('imageType', imageType, { shouldDirty: true })
                         }
-                        } image={image as string} />
+                        } image={image as string}
+                            comment='Upload a screenshot of the avatar of Linkedin, Instagram or Company Website' />
                     </div>
+                    <Divider dividerStyle={"light"} dividerType={"horizontal"} />
                     <Controller
                         control={control}
                         name="name"
                         render={({ field: { onChange, value } }) => (
                             <InputField
                                 label="Company Name"
+                                description='Insert the company name.'
                                 type="text"
                                 id="name"
                                 name="name"
@@ -94,6 +100,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                                 onChange={onChange}
                                 value={value}
                                 error={errors.name?.message}
+                                required
                             />
                         )}
                     />
@@ -105,6 +112,8 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                                 label="Description"
                                 id="description"
                                 name="description"
+                                required
+                                description='Insert a brief description of the deal.'
                                 placeholder='Enter Description'
                                 onChange={onChange}
                                 value={value}
@@ -119,15 +128,18 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                         control={control}
                         name="categoryId"
                         render={({ field: { onChange, value } }) => (
-                            <Dropdown
-                                label="Category"
-                                id="categoryId"
-                                name="categoryId"
-                                onChange={onChange}
-                                value={value ?? categories[0].id}
-                                error={errors.categoryId?.message}
-                                options={categories.map(category => ({ label: category.name, value: category.id }))}
-                            />
+                            <div className='my-4'>
+                                <Dropdown
+                                    label="Category"
+                                    id="categoryId"
+                                    name="categoryId"
+                                    onChange={onChange}
+                                    value={value ?? categories[0].id}
+                                    error={errors.categoryId?.message}
+                                    options={categories.map(category => ({ label: category.name, value: category.id }))}
+                                />
+                            </div>
+
                         )}
                     />
                     <Controller
@@ -138,6 +150,8 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                                 label="Deal Code"
                                 type="text"
                                 id="code"
+                                required
+                                description='Describe the details on how to redeem the code.'
                                 name="code"
                                 placeholder='Enter code and instructions on how to redeem'
                                 onChange={onChange}
@@ -149,10 +163,12 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                     <Controller
                         control={control}
                         name="offer"
+
                         render={({ field: { onChange, value } }) => (
                             <InputField
                                 label="Offer"
                                 type="text"
+                                description='Insert the offer that will be highlighted on top of the card.'
                                 id="offer"
                                 name="offer"
                                 placeholder='Enter Offer'
@@ -171,7 +187,9 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                             <InputField
                                 label="Website"
                                 type="text"
+                                required
                                 id="domain"
+                                description='Insert the link of the website or from a custom landing page.'
                                 name="domain"
                                 placeholder='Enter Website'
                                 maxLength={50}
@@ -191,6 +209,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                                 type="text"
                                 id="location"
                                 name="location"
+                                description='If the deal is for a specific location, insert the name of the city.'
                                 placeholder='Enter City'
                                 maxLength={20}
                                 onChange={onChange}

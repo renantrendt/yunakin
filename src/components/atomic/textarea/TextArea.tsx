@@ -12,16 +12,24 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
     error?: string
     additionalProps?: any
     showCounter?: boolean
+    description?: string
+    required?: boolean
 }
 
-const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange, error, id, showCounter, ...additionalProps }) => {
+const TextArea: React.FC<TextAreaProps> = ({ label, name, placeholder, onChange, required, description, error, id, showCounter, ...additionalProps }) => {
     return (
         <div className="form-control">
-            {label &&
-                <label className="label text-sm text-black dark:text-white">
-                    <span className="label-text">{label}</span>
-                </label>
-            }
+            <div className='flex flex-col gap-2  '>
+                {label &&
+                    <label className={cn(" text-sm text-black dark:text-white",
+                        { "after:content-['*'] after:text-red-700 after:pl-1": required }
+                    )}>
+                        <span className="label-text">{label}</span>
+                    </label>
+                }
+                {description && <p className='text-sm font-satoshi font-regular  text-[#5E5E5E] pb-2 '>{description}</p>}
+            </div>
+
             <textarea className={cn(`
             outline-none bg-white text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-3 border border-solid
             border-grey-300 hover:border-grey-400 

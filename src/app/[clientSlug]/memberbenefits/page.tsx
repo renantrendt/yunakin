@@ -4,6 +4,41 @@ import { notFound } from 'next/navigation';
 import { MemberBenefit } from '@prisma/client';
 import { MemberBenefitVisibility } from '@/lib/types';
 import MemberBenefitsPageContainer from '@/components/landing/memberbenefits/MemberBenefitsPageContainer';
+import { createTranslation, getLocale } from '@/lib/i18n/server';
+import getSeoMetadata from '@/lib/seo/metadata';
+import { Metadata } from 'next';
+import platformConfig from '@/config/app-config';
+export async function generateMetadata(props: any): Promise<Metadata> {
+
+    const slug = props.params.clientSlug;
+    const config = await prisma.memberBenefitPageConfig.findUnique({
+        where: {
+            clientSlug: slug
+        }
+    })
+    console.log(config)
+    const { t } = await createTranslation('landing', props.searchParams.locale);
+    const siteMetadata = {
+        title: config?.title,
+        description: config?.description,
+        openGraph: {
+            title: config?.title,
+            description: config?.description,
+            locale: props.searchParams.locale ?? getLocale(),
+            siteName: 'Youakin',
+            url: 'www.youakin.com',
+            images: [config?.imageURL ?? `${platformConfig.variables.NEXT_URL}/images/og-image.png`],
+
+        },
+        twitter: {
+            description: config?.description,
+            title: config?.title,
+            locale: props.searchParams.locale ?? getLocale(),
+            images: [config?.imageURL ?? `${platformConfig.variables.NEXT_URL}/images/og-image.png`],
+        },
+    }
+    return getSeoMetadata(siteMetadata);
+}
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string }, searchParams?: { [key: string]: string | string[] | undefined } }) => {
     const config = await prisma.memberBenefitPageConfig.findUnique({
         where: {

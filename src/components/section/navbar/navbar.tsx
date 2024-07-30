@@ -88,10 +88,17 @@ export default function Navbar() {
                                 </div> */}
                                 <li>
                                     <Button
+                                        variant='secondary'
+                                        className='  !min-w-[100px] '
+                                        label={t('navbar.login')}
+                                        size='lg'
+                                        onClick={() => router.push(siteUrls.general.login)}
+                                    />
+                                    <Button
                                         variant='primary'
-                                        className=' !min-w-[150px] !w-full  text-white '
-                                        label='Get Started'
-                                        size='md'
+                                        className='  !min-w-[120px] '
+                                        label={t('navbar.getStarted')}
+                                        size='lg'
                                         onClick={() => router.push(siteUrls.general.onboarding)}
                                     />
                                 </li>
@@ -117,13 +124,13 @@ export default function Navbar() {
                                    
                                 )
                             } */}
-                            {/* <Button
+                            <Button
                                 variant='secondary'
                                 className='  !min-w-[100px] '
                                 label={t('navbar.login')}
                                 size='lg'
                                 onClick={() => router.push(siteUrls.general.login)}
-                            /> */}
+                            />
                             <Button
                                 variant='primary'
                                 className='  !min-w-[120px] '

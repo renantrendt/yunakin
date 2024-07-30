@@ -53,7 +53,7 @@ export default function RootLayoutClient({
             </head>
             <body >
                 <Providers>
-                    <div className={cn(inter.className, params.gelica.variable, params.monaSans.variable, params.satoshi.variable, params.satoshiBlack.variable,
+                    <div className={cn(inter.className, params.gelica.variable, params.monaSans.variable, params.satoshi.variable,
                         open_sans.variable,
                         roboto.variable,
                         poppins.variable,

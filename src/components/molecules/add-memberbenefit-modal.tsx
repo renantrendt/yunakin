@@ -6,7 +6,7 @@ import { DealType, MemberBenefitVisibility, PartnershipType } from '@/lib/types'
 import { useTranslation } from '@/lib/i18n/client';
 import _ from 'lodash';
 import { cn } from '@/utils/cn';
-import { Cross1Icon } from '@radix-ui/react-icons';
+import { CheckIcon, Cross1Icon } from '@radix-ui/react-icons';
 import AddMemberBenefitStepOne from './add-member-benefit-modal/AddMemberBenefitStepOne';
 import AddMemberBenefitStepTwo from './add-member-benefit-modal/AddMemberBenefitStepTwo';
 
@@ -68,9 +68,10 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                 </div>
                 <div className='flex justify-between items-center relative'>
                     <div className='flex gap-1  lg:gap-2'>
-                        <span className={cn('bg-white border-[1px] rounded-full w-6 h-6 border-[#ECECEC] text-black text-center', { "border-[#FFDD04]": step == 1 })} >
+                        {step == 1 && <span className={cn('bg-white border-[1px] rounded-full w-6 h-6 border-[#ECECEC] text-black text-center', { "border-[#FFDD04]": step == 1 })} >
                             1
-                        </span>
+                        </span>}
+                        {step == 2 && <CheckIcon className='bg-[#FFDD04] rounded-full w-6 h-6' />}
                         <p>Deal</p>
                     </div>
                     <span className=' left-0 right-2 mx-auto  w-[40%] lg:w-[60%] h-px  bg-[#CECECE]'>&nbsp;</span>

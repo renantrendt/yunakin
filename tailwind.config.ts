@@ -99,7 +99,6 @@ const config: Config = {
         monaSans: ['var(--font-coming-soon)'],
         gelica: ['var(--font-gelica)'],
         satoshi: ['var(--font-satoshi)'],
-        satoshiBlack: ['var(--font-satoshi-black)'],
         openSans: ['var(--font-open-sans)'],
         roboto: ['var(--font-roboto)'],
         poppins: ['var(--font-poppins)'],

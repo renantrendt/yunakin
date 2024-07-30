@@ -75,13 +75,13 @@ const MemberBenefitCard = ({ key, benefit, config, otherMemberbenefit, trackAnal
 
                     <div className=" flex flex-col  ">
                         <div className='flex justify-between items-start'>
-                            <figure className='relative hidden w-20 h-20  mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105  w-20 h-20 duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
+                            <figure className='relative hidden w-20 h-20  mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='  w-20 h-20 duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                             {benefit.offer && <div className='py-1 px-2 text-[#808080] font-bold font-satoshi leading-normal text-xs  md:text-sm bg-[#F5F5F5] rounded-[40px] ' style={{
                                 color: config?.textColor as string,
                                 backgroundColor: config?.buttonColor as string,
                             }}>{benefit.offer?.substring(0, 30)}</div>}
                         </div>
-                        <h2 className="card-title mt-4 text-[20px]  text-black font-satoshiBlack font-black"
+                        <h2 className="card-title mt-4 text-[20px]  text-black font-satoshi font-black"
                             style={{
                                 color: config?.textColor as string,
                             }}>{benefit.title}</h2>

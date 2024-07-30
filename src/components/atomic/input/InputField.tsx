@@ -14,16 +14,24 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   leadingIcon?: React.ReactNode
   trailingIcon?: React.ReactNode
   customLeadingIconClassName?: string
+  required?: boolean
+  description?: string
 }
 
-const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, className, error, id, ...additionalProps }) => {
+const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', leadingIcon, trailingIcon, placeholder, onChange, description, className, required, error, id, ...additionalProps }) => {
   return (
     <div className="form-control  w-full font-satoshi">
-      {label &&
-        <label className="label text-sm font-medium text-black dark:text-white">
-          <span className="label-text">{label}</span>
-        </label>
-      }
+      <div className='flex justify-between flex-col gap-2  '>
+
+        {label &&
+          <label className={cn(" text-sm font-medium w-fit text-black dark:text-white ", {
+            "after:content-['*'] after:text-red-700 after:pl-1": required
+          })}>
+            <span className=" label-text">{label}</span>
+          </label>
+        }
+        {description && <p className='text-sm font-satoshi font-regular  text-[#5E5E5E] pb-2'>{description}</p>}
+      </div>
       <div className='flex relative'>
         {leadingIcon && <div className={cn('absolute left-[16px] top-[11px] text-black dark:text-placeholder-dark ', additionalProps.customLeadingIconClassName)}>{leadingIcon}</div>}
         <input
@@ -46,7 +54,8 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, type = 'text', lea
         />
         {trailingIcon && <div className='absolute right-4 top-[15px]  text-black dark:text-placeholder-dark'>{trailingIcon}</div>}
       </div>
-      {!error && additionalProps.maxLength && <p className='text-sm text-gray-400 text-right'> {`${additionalProps.value?.length}/${additionalProps.maxLength}`} </p>}
+      {!error && additionalProps.maxLength && <p className='text-sm  right-10  text-gray-400 leading-none  pt-2 text-right'> {`${additionalProps.value?.length}/${additionalProps.maxLength}`} </p>}
+      {!error && !additionalProps.maxLength && <p className='text-sm  '>&nbsp;</p>}
       {error &&
         <div className='flex justify-start gap-2 text-red-600 items-center mt-2'>
           <ExclmationIcon />

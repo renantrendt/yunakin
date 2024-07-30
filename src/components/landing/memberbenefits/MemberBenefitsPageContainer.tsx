@@ -32,7 +32,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
 
     return (
         <ContentSection
-            className='max-w-full md:p-0 !p-0 min-h-[100vh] relative pb-40 '
+            className='max-w-full md:p-0 !p-0 min-h-[100vh] relative pb-40   !py-2 !md:py-6'
             fullWidth style={{
                 backgroundColor: config?.backgroundColor as string,
             }}>
@@ -72,7 +72,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                                         }}
                                         onClick={() => {
                                             // to be implemented
-                                         window.open(siteUrls.general.onboarding, "_blank")
+                                            window.open(siteUrls.general.onboarding, "_blank")
                                         }}
                                         icon={<PlusIcon />}
                                         className='text-[#7A7A7A] bg-[#EDEDED] rounded-[38px]'

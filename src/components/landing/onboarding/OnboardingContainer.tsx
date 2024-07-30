@@ -25,11 +25,11 @@ interface OnboardingContainerProps {
 
 
 const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps) => {
-
     const [showGeneratePageModal, setShowGeneratePageModal] = useState(false)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showOnboardingModal, setShowOnboardingModal] = useState<boolean>(true)
     const { t } = useTranslation('onboarding')
+    const { t: landingT } = useTranslation('landing')
     const router = useRouter()
     const [step, setStep] = useState<number>(1)
     const [loading, setLoading] = useState(false);
@@ -54,7 +54,14 @@ const OnboardingContainer = ({ benefits, categories }: OnboardingContainerProps)
                         <Image src="/images/logo.svg" alt="logo" width={150} height={50} className='w-[118px] h-[25px] lg:w-[150px] lg:h-[50px]' />
 
                     </Link>
-                    <div >
+                    <div className='flex gap-2' >
+                        <Button
+                            variant='secondary'
+                            className='py-[6px] px-3 lg:py-[14px] lg:px-5  !min-w-[100px]'
+                            label={landingT('navbar.login')}
+                            size='sm'
+                            onClick={() => router.push(siteUrls.general.login)}
+                        />
                         <Button
                             label={`Generate Dealbook ${selectedBenefits.filter(s => s.selected).length > 0 ? `(${selectedBenefits.filter(s => s.selected).length})` : ""}`}
                             size={'sm'}

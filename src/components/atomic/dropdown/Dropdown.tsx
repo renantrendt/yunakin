@@ -21,20 +21,25 @@ interface DropdownProps {
 const Dropdown = ({ onChange, options, error, label, id, name, className, value }: DropdownProps) => {
     return (
         <div>
-            {label &&
-                <label className="label text-sm text-black dark:text-white">
-                    <span className="label-text">{label}</span>
-                </label>
-            }
+            <div className='flex flex-col gap-2'>
+
+                {label &&
+                    <label className=" text-sm text-black dark:text-white mb-1">
+                        <span className="label-text">{label}</span>
+                    </label>
+                }
+            </div>
+
             <select id={id} name={name} onChange={(e) => { onChange && onChange(e.target.value) }}
                 className={cn(` min-w-[100px] outline-none  
                 text-black placeholder:text-grey-400 rounded-lg w-full px-4 py-[10px] border border-solid
                 border-grey-300 hover:border-grey-400 
-                disabled:bg-grey-100 text-sm
+                disabled:bg-grey-100 
                 dark:bg-input-dark
                 dark:border-input-border-dark
                 dark:text-grey-200
                 dark:placeholder:text-placeholder-dark
+                text-sm
                 shadow-sm focus:border-primary-500 focus:shadow-focus-primary  duration-150 ease-in-out 
                          `, { "!border-red-500": error }, className)}
                 value={value}

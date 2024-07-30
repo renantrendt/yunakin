@@ -18,18 +18,18 @@ interface SiteUrls {
 const siteUrls: SiteUrls = {
     navbar: {
 
-        aboutUs: {
-            label: "navbar.aboutUs",
-            url: "/",
-        },
+        // aboutUs: {
+        //     label: "navbar.aboutUs",
+        //     url: "/",
+        // },
         memberPerks: {
             label: "navbar.memberPerks",
-            url: "/",
+            url: "/benefits",
         },
-        pricing: {
-            label: "navbar.pricing",
-            url: "/"
-        }
+        // pricing: {
+        //     label: "navbar.pricing",
+        //     url: "/"
+        // }
     },
     general: {
         home: '/',

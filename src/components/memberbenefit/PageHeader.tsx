@@ -15,7 +15,7 @@ export default function PageHeader({ title, description, config }: PageHeaderPro
                     color: config?.textColor as string,
                 }}
             >{title}</Typography>
-            <Typography type="p" className="text-base text-neutral-600 font-normal lg:text-xl"
+            <Typography type="p" className="text-base text-center text-neutral-600 font-normal lg:text-xl"
                 style={{
                     color: config?.textColor as string,
                 }}

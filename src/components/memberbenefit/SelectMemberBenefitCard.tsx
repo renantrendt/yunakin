@@ -47,11 +47,11 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }:
         rounded-[10px] shadow-sm`, className)}>
                 <div className="p-5 flex-shrink-0">
                     <div className='flex justify-between items-start'>
-                        <figure className='relative  w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
+                        <figure className='relative  w-20 h-20 flex-shrink-0 mb-4 rounded-[14px] border border-[#EBEBEB]'><Image className='duration-300 ease-in-out' src={image} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                         {benefit.offer && <div className='py-1 px-2 text-black  font-bold font-satoshi leading-normal text-xs  bg-primary rounded-[40px] '>{benefit.offer?.substring(0, 30)}</div>}
                     </div>
 
-                    <h2 className="card-title mt-4 text-[20px]  text-black font-satoshiBlack font-black">{benefit.title}</h2>
+                    <h2 className="card-title mt-4 text-[20px]  text-black font-satoshi font-black">{benefit.title}</h2>
                     {benefit.description && <p className='text-black mt-2 text-sm min-h-[50px]'>{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
                     <div className='flex  items-center justify-start mb-4 mt-4 text-category-card-autor '>
                         <div className='flex flex-col items-start justify-start gap-4'>

@@ -41,7 +41,7 @@ const MinifiedMemberBenefitCard = ({ key, benefit, config, className }: Minified
                         <figure className='relative hidden w-6 h-6 lg:w-10 lg:h-10 flex-shrink-0  rounded-[14px] border border-[#EBEBEB]'><Image className='hover:scale-105 duration-300 ease-in-out' src={`${benefit.imageURL || "https://images.pexels.com/photos/19560953/pexels-photo-19560953/free-photo-of-white-cherry-blossoms.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}`} alt="Benefit" width={520} height={360} objectFit=' contain' /></figure>
                         {benefit.offer && <div className='py-1 px-2 text-[#808080] text-[7px] lg:text-[8px] font-bold font-satoshi leading-normal    bg-[#F5F5F5] rounded-[40px] '>{benefit.offer?.substring(0, 30)}</div>}
                     </div>
-                    <h2 className="card-title mt-0 text-xs  lg:text-[16px]   text-black font-satoshiBlack font-black">{benefit.title}</h2>
+                    <h2 className="card-title mt-0 text-xs  lg:text-[16px]   text-black font-satoshi font-black">{benefit.title}</h2>
                     {benefit.description && <p className='text-[8px] lg:text-[10px] min-h-[35px] lg:min-h-[50px]'>{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
                     <p className='cursor-pointer text-[8px] min-h-[25px] lg:text-[9px] text-link-color underline'
                         onClick={(e) => {

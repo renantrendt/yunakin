@@ -9,9 +9,36 @@ import type { Viewport } from 'next'
 import { getLocale } from '@/lib/i18n/server'
 import { LocaleProvider } from '@/hooks/useLocale'
 
-const gelica = localFont({ src: './fonts/Fontspring-DEMO-gelica-semibold.otf', variable: "--font-gelica" });
-const satoshi = localFont({ src: './fonts/Satoshi-Medium.otf', variable: "--font-satoshi" });
-const satoshiBlack = localFont({ src: './fonts/Satoshi-Black.otf', variable: "--font-satoshi-black" });
+const gelica = localFont({
+  src: [{
+    path: './fonts/Fontspring-DEMO-gelica-semibold.otf',
+    weight: '600',
+  }], variable: "--font-gelica"
+});
+const satoshi = localFont({
+  src: [
+    {
+      path: './fonts/Satoshi-Regular.otf',
+      weight: '400',
+    },
+    {
+      path: './fonts/Satoshi-Light.otf',
+      weight: '300',
+    },
+    {
+      path: './fonts/Satoshi-Medium.otf',
+      weight: '500',
+    },
+    {
+      path: './fonts/Satoshi-Bold.otf',
+      weight: '700',
+    },
+    {
+      path: './fonts/Satoshi-Black.otf',
+      weight: '900',
+    }
+  ], variable: "--font-satoshi"
+});
 
 
 export const viewport: Viewport = {
@@ -32,7 +59,7 @@ export default function RootLayout({
   const locale = getLocale();
 
   return (
-    <RootLayoutClient params={{ ...params, monaSans, locale, gelica, satoshi, satoshiBlack }}>
+    <RootLayoutClient params={{ ...params, monaSans, locale, gelica, satoshi }}>
       <LocaleProvider value={locale}>
         {children}
       </LocaleProvider>

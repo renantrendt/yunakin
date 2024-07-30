@@ -12,9 +12,10 @@ interface ImageUploaderProps {
     onImageUpload: (image: string, type: string) => void
     image?: string
     useCrop?: boolean
+    comment?: string
 }
 
-const ImageUploader = ({ onImageUpload, image, useCrop = true }: ImageUploaderProps) => {
+const ImageUploader = ({ onImageUpload, image, useCrop = true, comment }: ImageUploaderProps) => {
     const [imageURL, setImageURL] = React.useState<string | null>(null)
     const imageRef = React.useRef<HTMLImageElement>(null)
     const [imageType, setImageType] = React.useState<string | null>(null)
@@ -77,7 +78,6 @@ const ImageUploader = ({ onImageUpload, image, useCrop = true }: ImageUploaderPr
         <>
             {imageURL && useCrop && <Modal isOpen={true} onClose={() => setImageURL(null)}>
                 <div className="p-3 flex flex-col gap-3">
-
                     <ReactCrop
                         crop={crop}
                         onChange={newCrop => setCrop(newCrop)}
@@ -93,24 +93,27 @@ const ImageUploader = ({ onImageUpload, image, useCrop = true }: ImageUploaderPr
                 </div>
 
             </Modal>}
-            <div  {...getRootProps()} id="ImageUpload" className={cn(`relative  cursor-pointer  border border-dashed border-grey-300 bg-white 
-        hover:border-primary-500 focus:shadow-focus-primary focus:border-solid w-20 h-20 md:w-28 md:h-28 overflow-hidden
-            dark:border-image-uploader-border-dark
-            dark:bg-image-uploader-dark
+            <div className="flex gap-6 justify-center items-center">
+                <div  {...getRootProps()} id="ImageUpload" className={cn(`relative  cursor-pointer  border  border-grey-300 bg-white 
+   focus:shadow-focus-primary focus:border-solid w-20 h-20  rounded-[10px] overflow-hidden
+        border-dashed
             flex justify-center items-center
         `,
-            )}>
-                {image && <Image alt="Image" src={image} width={100} height={100} className="w-full h-full  z-10  absolute  left-0 rounded-full" />}
+                )}>
+                    {image && <Image alt="Image" src={image} width={100} height={100} className="w-full h-full  z-10  absolute  left-0 rounded-full" />}
 
-                <input {...getInputProps()} type="file" accept="image/*" className="hidden z-10 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none" />
+                    <input {...getInputProps()} type="file" accept="image/*" className="hidden z-10 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none" />
 
-                <div className="flex flex-col items-center justify-center ">
-                    <div className="z-20 text-black bg-white dark:text-white dark:bg-black rounded-full p-1">
-                        <DocumentIcon />
+                    <div className="flex flex-col items-center justify-center ">
+                        <div className="z-20 text-black bg-white dark:text-white dark:bg-black rounded-full p-1">
+                            <DocumentIcon />
+                        </div>
                     </div>
-                </div>
 
-            </div >
+                </div >
+                {comment && <p className="text-[#5E5E5E] text-xs font-inter max-w-[230px] text-left">{comment}</p>}
+            </div>
+
         </>
 
     )
