@@ -64,7 +64,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
             className='relative scale-100'
         >
 
-            <div className='flex flex-col p-10 pb-0 pt-0 gap-8  relative overflow-scroll '>
+            <div className='flex  flex-col w-full px-10 gap-8   '>
 
                 <div className='flex justify-between  pt-10 items-center relative'>
                     <div className='flex gap-1  lg:gap-2'>
