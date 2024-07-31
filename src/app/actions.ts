@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache"
 import { notFound, redirect } from "next/navigation"
 import _ from 'lodash'
 import { cookies } from "next/headers"
-import { embedAndStoreDocument, embedAndUpdateDocument } from "@/utils/embedAndStoreDocuments"
+import { embedAndStoreDocument, embedAndUpdateDocument, semanticSearch } from "@/utils/embedAndStoreDocuments"
 
 export async function checkUserExists(email: string) {
     const user = await prisma.user.findFirst({
@@ -743,4 +743,10 @@ export async function updateMemberBenefitOrder(benefits: MemberBenefitWithImport
         })
 
     }
+}
+
+
+export async function searchBenefitsSemantically(query: string) {
+    const result = await semanticSearch(query);
+    return result;
 }

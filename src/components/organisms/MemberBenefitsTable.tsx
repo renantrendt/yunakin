@@ -13,7 +13,7 @@ import { useReactTable, getCoreRowModel, PaginationState, flexRender, createColu
 import { useSession } from 'next-auth/react'
 import useDebounce from '@/hooks/useDebounce'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
-import { createMemberBenefit, deleteMemberBenefit, deleteOtherMemberBenefit, importBenefit, updateMemberBenefit } from '@/app/actions'
+import { createMemberBenefit, deleteMemberBenefit, deleteOtherMemberBenefit, importBenefit, searchBenefitsSemantically, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import platformConfig from '@/config/app-config'
@@ -35,6 +35,7 @@ import Typography from '../atomic/typography/Typography'
 import { uploadImage } from '@/lib/utils'
 import InputField from '../atomic/input/InputField'
 import MagnifyingGlass from '@/icons/magnifying-glass.svg'
+import { set } from 'react-ga'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -58,6 +59,25 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
         imported: [{ label: 'Imported', selected: false, }, { label: 'Not Imported', selected: false, }],
         partnership_types: _.keys(PartnershipType).map(key => ({ label: key, selected: false })),
     })
+
+    const debouncedValue = useDebounce(search)
+    useEffect(() => {
+        (async () => {
+            if (!searched) {
+                if (!debouncedValue && debouncedValue === '') {
+                    setMemberBenefits(defaultMemberBenefits)
+                    return
+                }
+                const filteredBenefitIds = await searchBenefitsSemantically(debouncedValue)
+                if (filteredBenefitIds.length > 0) {
+                    setMemberBenefits(memberBenefits.filter(f => filteredBenefitIds.includes(f.id)))
+                }
+                // setPagination({ pageIndex: 0, pageSize: 10 })
+                // setTools(filteredTools)
+                setSearched(true)
+            }
+        })()
+    }, [debouncedValue])
     const onFilterChange = (filter: Filter) => {
         let filteredBenefits = defaultMemberBenefits
         if (filter.category) {

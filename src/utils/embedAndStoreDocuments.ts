@@ -45,3 +45,24 @@ export async function embedAndUpdateDocument(documentId: string, content: string
         console.error('Error embedding and storing document:', error);
     }
 }
+
+export async function semanticSearch(query: string) {
+    try {
+        const embeddingResponse = await openai.embeddings.create({
+            model: 'text-embedding-ada-002',
+            input: query,
+        });
+        const embedding = embeddingResponse.data[0].embedding;
+        const records = await pc.index(APP_CONSTANTS.PINECONE_INDEX).query({
+            vector: embedding,
+            topK: 3,
+            includeValues: true,
+            includeMetadata: true
+        })
+        const matchedIds = records.matches.map(d => d.id);
+        return matchedIds;
+    } catch (error) {
+        console.error('Error searching for documents:', error);
+        return [];
+    }
+}
