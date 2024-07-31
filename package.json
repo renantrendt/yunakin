@@ -6,6 +6,7 @@
     "prod": "env-cmd -f .env  next dev  -p 3002",
     "dev": "env-cmd -f .env.development  next dev -p 3002",
     "prisma-migrate-dev": " env-cmd -f .env.development npx prisma migrate dev ",
+    "prisma-migrate-prod": " env-cmd -f .env npx prisma migrate dev ",
     "dev-email": "email dev --dir ./src/components/template/email --port 3001",
     "build": "contentlayer build && NODE_ENV='production' && npx prisma generate && next build",
     "init": "cp .env.example .env && npx prisma generate",

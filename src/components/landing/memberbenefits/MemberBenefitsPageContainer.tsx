@@ -116,7 +116,6 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                         {[selectMemberBenefitFilter.NEW].includes(selectedDisplayType) && (
                             <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-28 mx-auto '>
                                 {selectedBenefits && selectedBenefits
-                                    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                                     .map((benefit: MemberBenefit, index: any) => (
                                         <MemberBenefitCard
                                             isEditing={false}

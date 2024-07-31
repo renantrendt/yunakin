@@ -22,6 +22,7 @@ import siteUrls from '@/config/site-config'
 
 import '/node_modules/react-grid-layout/css/styles.css'
 import '/node_modules/react-resizable/css/styles.css'
+import './override.css'
 import GridLayout from "react-grid-layout";
 interface CustomizePageContainerProps {
     benefits: MemberBenefitWithImport[]
@@ -42,6 +43,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     const [embedModalOpen, setEmbedModalOpen] = useState(false)
     const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
     const [imageType, setImageType] = useState<string>("")
+    const [orderChanged, setOrderChanged] = useState(false)
     useEffect(() => {
         if (_.isEqual(config, defaultConfig)) {
             setIsEditing(false)
@@ -49,6 +51,14 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
             setIsEditing(true)
         }
     }, [config])
+
+    useEffect(() => {
+        if (_.isEqual(benefits, selectedBenefits)) {
+            setOrderChanged(false)
+        } else {
+            setOrderChanged(true)
+        }
+    }, [selectedBenefits])
 
     useEffect(() => {
 
@@ -60,63 +70,79 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     console.log(selectedBenefits)
 
     const publishChanges = useCallback(async () => {
-        if (!isEditing) {
+        if (!isEditing && !orderChanged) {
             window.open(`/${config.clientSlug}/memberbenefits`, "_blank")
             return
         }
-        if (config.imageURL && config.imageURL !== memberPageConfig.imageURL) {
-            const blob = await fetch(config.imageURL).then(r => r.blob());
-            const randomNumber = Math.floor(Math.random() * 10)
-            const path = "memberbenefit_logo/" + config.id + "/" + `image-${randomNumber}.${imageType ?? 'jpg'}`
 
-            const file = new File([blob], `image.${imageType ?? 'jpg'}`, { type: imageType.includes('svg') ? "image/svg+xml" : "image/jpeg" });
-            const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
-            if (!isUploaded) {
-                throw new Error("Failed to upload image")
+        if (orderChanged) {
+            try {
+                setLoading(true)
+                await updateMemberBenefitOrder(selectedBenefits)
+                setOrderChanged(false)
+            } catch (error) {
+                customToast.error("Could not update orders")
+            } finally {
+                setOrderChanged(false)
+                setLoading(false)
             }
-            const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
-            if (!downloadUrl) {
-                throw new Error("Failed to get download url")
-            }
-            config.imageURL = downloadUrl.publicUrl
+
         }
-        setLoading(true)
-        try {
+        if (isEditing) {
+            if (config.imageURL && config.imageURL !== memberPageConfig.imageURL) {
+                const blob = await fetch(config.imageURL).then(r => r.blob());
+                const randomNumber = Math.floor(Math.random() * 10)
+                const path = "memberbenefit_logo/" + config.id + "/" + `image-${randomNumber}.${imageType ?? 'jpg'}`
 
-            const updatedMemberPageConfig = await updateMemberPageConfig(config)
+                const file = new File([blob], `image.${imageType ?? 'jpg'}`, { type: imageType.includes('svg') ? "image/svg+xml" : "image/jpeg" });
+                const isUploaded = await uploadFile(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path, file, { cacheControl: '3600', upsert: true })
+                if (!isUploaded) {
+                    throw new Error("Failed to upload image")
+                }
+                const downloadUrl = await getDownloadUrl(platformConfig.variables.SUPABASE_BUCKET_NAME as string, path)
+                if (!downloadUrl) {
+                    throw new Error("Failed to get download url")
+                }
+                config.imageURL = downloadUrl.publicUrl
+            }
+            setLoading(true)
+            try {
+                const updatedMemberPageConfig = await updateMemberPageConfig(config)
 
-            if (updatedMemberPageConfig) {
-                customToast.success("Changes Published Successfully")
-                setConfig(updatedMemberPageConfig)
-                setDefaultConfig(updatedMemberPageConfig)
-            } else {
+                if (updatedMemberPageConfig) {
+                    customToast.success("Changes Published Successfully")
+                    setConfig(updatedMemberPageConfig)
+                    setDefaultConfig(updatedMemberPageConfig)
+                } else {
+                    customToast.error("Something went wrong. Please try again")
+                }
+                // setLoading(false)
+                // if (!_.isEqual(selectedBenefits, benefits)) {
+                //     // update selected benefits
+                //     const toBeCreatedOtherMemberBenefits = selectedBenefits.filter(b => b.selected && benefits.some(benefit => benefit.id === b.id && !benefit.selected)).map(
+                //         b => b.id
+                //     )
+                //     const toBeDeletedOtherMemberBenefits = selectedBenefits.filter(b => !b.selected && benefits.some(benefit => benefit.id === b.id && benefit.selected)).map(b => b.id)
+                //     await updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits, toBeDeletedOtherMemberBenefits)
+                // } else {
+                //     if (updatedMemberPageConfig) {
+                //         customToast.success("Changes Published Successfully")
+                //         setConfig(updatedMemberPageConfig)
+                //         setDefaultConfig(updatedMemberPageConfig)
+                //     } else {
+                //         customToast.error("Something went wrong. Please try again")
+                //     }
+                // }
+            } catch (error) {
+                console.log(error)
                 customToast.error("Something went wrong. Please try again")
+            } finally {
+                setLoading(false)
             }
-            // setLoading(false)
-            // if (!_.isEqual(selectedBenefits, benefits)) {
-            //     // update selected benefits
-            //     const toBeCreatedOtherMemberBenefits = selectedBenefits.filter(b => b.selected && benefits.some(benefit => benefit.id === b.id && !benefit.selected)).map(
-            //         b => b.id
-            //     )
-            //     const toBeDeletedOtherMemberBenefits = selectedBenefits.filter(b => !b.selected && benefits.some(benefit => benefit.id === b.id && benefit.selected)).map(b => b.id)
-            //     await updateOtherMemberBenefits(toBeCreatedOtherMemberBenefits, toBeDeletedOtherMemberBenefits)
-            // } else {
-            //     if (updatedMemberPageConfig) {
-            //         customToast.success("Changes Published Successfully")
-            //         setConfig(updatedMemberPageConfig)
-            //         setDefaultConfig(updatedMemberPageConfig)
-            //     } else {
-            //         customToast.error("Something went wrong. Please try again")
-            //     }
-            // }
-        } catch (error) {
-            console.log(error)
-            customToast.error("Something went wrong. Please try again")
-        } finally {
-            setLoading(false)
         }
 
-    }, [config, selectedBenefits, isEditing]
+
+    }, [config, selectedBenefits, isEditing, orderChanged]
     )
     const updateSlugMutation = useMutation({
         mutationFn: async (slug: string) => {
@@ -138,7 +164,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
 
                 <CustomizePageActions
 
-                    disabled={!isEditing}
+                    disabled={!isEditing && !orderChanged}
                     loading={loading}
                     config={config}
                     publishChanges={publishChanges}
@@ -271,8 +297,8 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                                     }
                                                 })
                                             // console.log(newSelectedBenefits)
-                                            await updateMemberBenefitOrder(newSelectedBenefits)
-                                            // setSelectedBenefits(newSelectedBenefits)
+                                            // await updateMemberBenefitOrder(newSelectedBenefits)
+                                            setSelectedBenefits(newSelectedBenefits)
                                         }}
                                         compactType="horizontal"
                                         isBounded={true}

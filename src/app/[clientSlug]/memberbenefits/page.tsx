@@ -2,7 +2,7 @@ import React from 'react'
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import { MemberBenefit } from '@prisma/client';
-import { MemberBenefitVisibility } from '@/lib/types';
+import { MemberBenefitVisibility, MemberBenefitWithImport } from '@/lib/types';
 import MemberBenefitsPageContainer from '@/components/landing/memberbenefits/MemberBenefitsPageContainer';
 import { createTranslation, getLocale } from '@/lib/i18n/server';
 import getSeoMetadata from '@/lib/seo/metadata';
@@ -124,10 +124,27 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string }, s
     })
 
 
+    const orderBenefits: MemberBenefitWithImport[] = benefits.map(b => {
+        const otherBenefit = otherBenefits.find(ob => ob.memberBenefitId === b.id)
+        if (otherBenefit) {
+            return {
+                ...b,
+                order: otherBenefit.order,
+                import: true,
+                otherMemberBenefitId: otherBenefit.id
+            }
+        }
+        return b
+    })
+    orderBenefits.sort((a, b) => {
+        return a.order - b.order
+    })
+
+
 
     return (
         <MemberBenefitsPageContainer
-            benefits={benefits}
+            benefits={orderBenefits}
             categories={categories}
             config={config}
             otherBenefits={otherBenefits}
