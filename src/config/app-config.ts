@@ -142,4 +142,8 @@ const platformConfig = {
   }
 }
 
+export const APP_CONSTANTS = {
+  PINECONE_INDEX: "YUNAKIN_DEALS",
+}
+
 export default platformConfig 
