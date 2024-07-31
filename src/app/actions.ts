@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache"
 import { notFound, redirect } from "next/navigation"
 import _ from 'lodash'
 import { cookies } from "next/headers"
-import { embedAndStoreDocument } from "@/utils/embedAndStoreDocuments"
+import { embedAndStoreDocument, embedAndUpdateDocument } from "@/utils/embedAndStoreDocuments"
 
 export async function checkUserExists(email: string) {
     const user = await prisma.user.findFirst({
@@ -149,6 +149,20 @@ export async function updateMemberBenefit(memberBenefit: MemberBenefit) {
             ...memberBenefit
         }
     })
+    try {
+        await embedAndUpdateDocument(updatedMemberBenefit.id, updatedMemberBenefit.description as string, {
+            title: updatedMemberBenefit.title,
+            description: updatedMemberBenefit.description,
+            domain: updatedMemberBenefit.domain,
+            location: updatedMemberBenefit.location,
+            code: updatedMemberBenefit.code,
+            link: updatedMemberBenefit.link
+        })
+    } catch (error) {
+        console.error('an error happened')
+        console.error(error)
+
+    }
     revalidatePath(siteUrls.general.customize)
     return updatedMemberBenefit
 }

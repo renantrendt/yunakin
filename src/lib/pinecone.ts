@@ -26,8 +26,8 @@ pc.listIndexes()
     .then((exists) => {
         if (!exists) {
             pc.createIndex({
-                name: 'quickstart',
-                dimension: 8, // Replace with your model dimensions
+                name: APP_CONSTANTS.PINECONE_INDEX,
+                dimension: 1536, // Replace with your model dimensions
                 metric: 'euclidean', // Replace with your model metric
                 spec: {
                     serverless: {
