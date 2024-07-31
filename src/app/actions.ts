@@ -2,7 +2,7 @@
 import { auth } from "@/auth"
 import siteUrls from "@/config/site-config"
 import { prisma } from "@/lib/prisma"
-import { AnalyticsResponse, MemberBenefitClickType, MemberBenefitLinkClickDto, MemberBenefitPageConfigDto, MemberPageViewDto, PartnershipType } from "@/lib/types"
+import { AnalyticsResponse, MemberBenefitClickType, MemberBenefitLinkClickDto, MemberBenefitPageConfigDto, MemberBenefitWithImport, MemberPageViewDto, PartnershipType } from "@/lib/types"
 import { MemberBenefit, MemberBenefitPageConfig } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 import { notFound, redirect } from "next/navigation"
@@ -676,4 +676,42 @@ export async function fetchAnalyticsData(values?: { from: Date, to: Date }) {
         partnerCardStats: partnerCardStats
     }
     return analytics;
+}
+
+
+export async function updateMemberBenefitOrder(benefits: MemberBenefitWithImport[]) {
+    if (!benefits || benefits.length === 0) {
+        return;
+    }
+
+    const otherBenefits = benefits.filter(b => b.import)
+
+    for (let i = 0; i < otherBenefits.length; i++) {
+        const otherBenefit = otherBenefits[i];
+        await prisma.otherMemberBenefit.update({
+            where: {
+                id: otherBenefit.otherMemberBenefitId
+            },
+            data: {
+                order: otherBenefit.order
+            }
+        })
+    }
+
+    const createdBenefits = benefits.filter(b => !b.import)
+
+    console.log('created benefits')
+    console.log(createdBenefits)
+    for (let i = 0; i < createdBenefits.length; i++) {
+        const element = createdBenefits[i];
+        await prisma.memberBenefit.update({
+            where: {
+                id: element.id,
+            },
+            data: {
+                order: element.order
+            }
+        })
+
+    }
 }

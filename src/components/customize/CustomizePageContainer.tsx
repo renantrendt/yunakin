@@ -1,5 +1,5 @@
 'use client'
-import { updateMemberPageConfig, updateOtherMemberBenefits, updateSlug } from '@/app/actions'
+import { updateMemberBenefitOrder, updateMemberPageConfig, updateOtherMemberBenefits, updateSlug } from '@/app/actions'
 import Button from '@/components/atomic/button/Button'
 import ImageUploader from '@/components/atomic/file-uploader/ImageUploader'
 import customToast from '@/components/atomic/toast/customToast'
@@ -13,14 +13,18 @@ import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import CustomizePageModal from '../molecules/customize-page-modal'
 import EmbedModal from '../molecules/embed-modal/EmbedModal'
 import CustomizePageActions from './CustomizePageActions'
-import { MemberBenefitFilter, SelectedMemberBenefit, selectMemberBenefitFilter } from '@/lib/types'
+import { MemberBenefitFilter, MemberBenefitWithImport, SelectedMemberBenefit, selectMemberBenefitFilter } from '@/lib/types'
 import CategoryScroller from '../categoryscroller/CategoryScroller'
 import Divider from '../atomic/divider/Divider'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { useMutation } from '@tanstack/react-query'
 import siteUrls from '@/config/site-config'
+
+import '/node_modules/react-grid-layout/css/styles.css'
+import '/node_modules/react-resizable/css/styles.css'
+import GridLayout from "react-grid-layout";
 interface CustomizePageContainerProps {
-    benefits: MemberBenefit[]
+    benefits: MemberBenefitWithImport[]
     categories: Category[]
     memberPageConfig: MemberBenefitPageConfig
 }
@@ -34,11 +38,10 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
     const [loading, setLoading] = useState(false);
     const [defaultConfig, setDefaultConfig] = useState(memberPageConfig)
     const [config, setConfig] = useState(memberPageConfig)
-    const [selectedBenefits, setSelectedBenefits] = useState<MemberBenefit[]>(benefits)
+    const [selectedBenefits, setSelectedBenefits] = useState<MemberBenefitWithImport[]>(benefits)
     const [embedModalOpen, setEmbedModalOpen] = useState(false)
     const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
     const [imageType, setImageType] = useState<string>("")
-
     useEffect(() => {
         if (_.isEqual(config, defaultConfig)) {
             setIsEditing(false)
@@ -46,6 +49,15 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
             setIsEditing(true)
         }
     }, [config])
+
+    useEffect(() => {
+
+        // order items
+        const sortedBenefits = selectedBenefits.sort((a, b) => a.order - b.order)
+        setSelectedBenefits(sortedBenefits)
+    }, [])
+
+    console.log(selectedBenefits)
 
     const publishChanges = useCallback(async () => {
         if (!isEditing) {
@@ -106,7 +118,6 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
 
     }, [config, selectedBenefits, isEditing]
     )
-
     const updateSlugMutation = useMutation({
         mutationFn: async (slug: string) => {
             return await updateSlug(config.id, slug)
@@ -243,19 +254,44 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                 })}
 
                                 {[selectMemberBenefitFilter.NEW].includes(selectedDisplayType) && (
-                                    <div className='grid grid-cols-1  justify-items-stretch lg:justify-items-center md:grid-cols-2 lg:grid-cols-3  gap-x-5 gap-y-5 mt-8  max-w-[1440px] px-4 md:px-12 mx-auto '>
-                                        {selectedBenefits && selectedBenefits
-                                            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-                                            .map((benefit: MemberBenefit, index: any) => (
-                                                <MemberBenefitCard
-                                                    isEditing={true}
-                                                    config={config}
-                                                    className='w-full min-w-32 max-w-full md:min-w-32 md:max-w-full'
+                                    <GridLayout
+                                        className="layout mt-8  max-w-[1440px] px-4 md:px-12 mx-auto"
+                                        cols={3}
+                                        rowHeight={380}
+                                        width={1200}
+                                        isDroppable={true}
+                                        isResizable={false}
+                                        onDragStop={async (layout: any) => {
+                                            const sortedArray = layout.sort((a: any, b: any) => a.y - b.y || a.x - b.x);
+                                            const newSelectedBenefits = sortedArray.map((item: any) => selectedBenefits.find(f => f.id == item.i))
+                                                .map((benefit: any, index: any) => {
+                                                    return {
+                                                        ...benefit,
+                                                        order: index
+                                                    }
+                                                })
+                                            // console.log(newSelectedBenefits)
+                                            await updateMemberBenefitOrder(newSelectedBenefits)
+                                            // setSelectedBenefits(newSelectedBenefits)
+                                        }}
+                                        compactType="horizontal"
+                                        isBounded={true}
 
-                                                    key={index} benefit={benefit} />
+                                    >
+                                        {selectedBenefits && selectedBenefits
+                                            .map((benefit: MemberBenefit, index: any) => (
+                                                <div key={benefit.id} className='cursor-grab' data-grid={{ x: index % 3, y: Math.floor(index / 3), w: 1, h: 1, }}>
+                                                    <MemberBenefitCard
+                                                        isEditing={true}
+                                                        config={config}
+                                                        className='w-full min-w-32 max-w-full md:min-w-32 md:max-w-full'
+
+                                                        key={index} benefit={benefit} />
+                                                </div>
                                             ))}
-                                    </div>
+                                    </GridLayout>
                                 )}
+
                             </div>
                         </div>
                     </div>

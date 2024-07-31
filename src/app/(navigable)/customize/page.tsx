@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
 import { notFound } from 'next/navigation';
 import CustomizePageContainer from '@/components/customize/CustomizePageContainer';
-import { MemberBenefitVisibility } from '@/lib/types';
+import { MemberBenefitVisibility, MemberBenefitWithImport } from '@/lib/types';
 const CustomizePage = async ({ params }: { params: { clientSlug: string } }) => {
     const session = await auth()
 
@@ -70,10 +70,30 @@ const CustomizePage = async ({ params }: { params: { clientSlug: string } }) => 
         notFound()
         return;
     }
+
+    const orderBenefits: MemberBenefitWithImport[] = benefits.map(b => {
+        const otherBenefit = otherBenefits.find(ob => ob.memberBenefitId === b.id)
+        if (otherBenefit) {
+            return {
+                ...b,
+                order: otherBenefit.order,
+                import: true,
+                otherMemberBenefitId: otherBenefit.id
+            }
+        }
+        return b
+    })
+
+    orderBenefits.sort((a, b) => {
+        return a.order - b.order
+    })
+
+    console.log(orderBenefits)
+
     return (
         <div className='  w-full bg-landing-background relative  '>
             <CustomizePageContainer
-                benefits={benefits}
+                benefits={orderBenefits}
                 categories={categories}
                 memberPageConfig={config}
             />

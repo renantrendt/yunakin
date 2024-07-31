@@ -2,6 +2,7 @@ import React from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import './globals.css'
 
+
 import RootLayoutClient from '@/containers/layout/RootLayoutClient'
 import localFont from 'next/font/local'
 const monaSans = localFont({ src: './fonts/Mona-Sans-Light.otf', variable: "--font-coming-soon" });

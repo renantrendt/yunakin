@@ -209,6 +209,7 @@ model MemberBenefit {
   link                     String?
   userId                   String
   categoryId               String?
+  order                    Int                        @default(-1)
   pageConfigId             String                     @default(uuid())
   dealType                 String?                    @default("COMPANY") // COMPANY, PARTNER
   partnershipTypes         String?                    @default("ADS,SPONSOR") // ADS, SPONSOR, NEEDS_APPROVAL
@@ -239,6 +240,7 @@ model OtherMemberBenefit {
   id                 String               @id @default(uuid())
   memberBenefitId    String
   userId             String
+  order              Int                  @default(-1)
   memberBenefit      MemberBenefit        @relation(fields: [memberBenefitId], references: [id], onDelete: Cascade)
   user               User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt          DateTime             @default(now())

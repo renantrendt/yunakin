@@ -87,6 +87,7 @@ export interface SelectedMemberBenefit extends MemberBenefit {
 
 export interface MemberBenefitWithImport extends MemberBenefit {
     import?: boolean
+    otherMemberBenefitId?: string
 }
 
 export type MemberBenefitFilterOptions = {
