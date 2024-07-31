@@ -52,7 +52,7 @@ const SelectMemberBenefitCard = ({ key, benefit, onClick, selected, className }:
                     </div>
 
                     <h2 className="card-title mt-4 text-[20px]  text-black font-satoshi font-black">{benefit.title}</h2>
-                    {benefit.description && <p className='text-black mt-2 text-sm min-h-[50px]'>{benefit.description?.length > 60 ? `${benefit.description.substring(0, 60)}...` : benefit.description}</p>}
+                    {benefit.description && <p className='text-black mt-2 text-sm min-h-[50px]'>{benefit.description}</p>}
                     <div className='flex  items-center justify-start mb-4 mt-4 text-category-card-autor '>
                         <div className='flex flex-col items-start justify-start gap-4'>
                             <a href={`https://${benefit.domain}`} rel="noreferrer" target='_blank' className='cursor-pointer text-sm text-link-color underline'>{benefit.domain}</a>

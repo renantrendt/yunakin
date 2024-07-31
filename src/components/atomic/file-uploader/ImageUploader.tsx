@@ -76,8 +76,10 @@ const ImageUploader = ({ onImageUpload, image, useCrop = true, comment }: ImageU
     const { getRootProps, getInputProps } = useDropzone({ onDrop })
     return (
         <>
-            {imageURL && useCrop && <Modal isOpen={true} onClose={() => setImageURL(null)}>
-                <div className="p-3 flex flex-col gap-3">
+            {imageURL && useCrop && <Modal
+                closeOnOutsideClick={false}
+                isOpen={true} onClose={() => setImageURL(null)}>
+                <div className="p-3 pt-16 flex flex-col gap-6 justify-between ">
                     <ReactCrop
                         crop={crop}
                         onChange={newCrop => setCrop(newCrop)}
