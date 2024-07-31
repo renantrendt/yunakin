@@ -41,7 +41,7 @@ export const authOptions: NextAuthConfig = {
                     throw { message: "User not found", statusCode: 404 }
                 }
 
-                const res = await sendMagicLinkEmail({ to: params.identifier, subject: 'Sign in to Youakinn', magicLink: params.url });
+                const res = await sendMagicLinkEmail({ to: params.identifier, subject: 'Sign in to Youakin', magicLink: params.url });
                 if (!res.success) {
                     throw { message: res.error, statusCode: 500 }
                 }
