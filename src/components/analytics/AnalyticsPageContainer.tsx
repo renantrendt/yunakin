@@ -52,7 +52,7 @@ const AnalyticsPageContainer = ({ hasData, analyticsData }: AnalyticsPageContain
                 <Typography type='p' className='text-black font-medium font-satoshi text-sm leading-normal'>This is a demo screen. The analytics on this page are not real. It will be updated after you start receiving the first click.</Typography>
             </div>
             }
-            <div className='flex gap-3 justify-between'>
+            <div className='flex gap-3 justify-between flex-col items-start lg:items-center lg:py-4 px-4 lg:px-0 lg:flex-row'>
                 <div className='flex w-full justify-between flex-row'>
                     <Typography type='h3' className='text-black font-semibold !text-lg font-satoshi'>Dealbook Performance</Typography>
                 </div>
