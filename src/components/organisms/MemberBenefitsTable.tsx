@@ -13,7 +13,7 @@ import { useReactTable, getCoreRowModel, PaginationState, flexRender, createColu
 import { useSession } from 'next-auth/react'
 import useDebounce from '@/hooks/useDebounce'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
-import { createMemberBenefit, deleteMemberBenefit, deleteOtherMemberBenefit, importBenefit, updateMemberBenefit } from '@/app/actions'
+import { createMemberBenefit, deleteMemberBenefit, deleteOtherMemberBenefit, importBenefit, searchBenefitsSemantically, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
 import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
 import platformConfig from '@/config/app-config'
@@ -33,6 +33,9 @@ import { cn } from '@/utils/cn'
 import Tooltip from '../atomic/tooltip/Tooltip'
 import Typography from '../atomic/typography/Typography'
 import { uploadImage } from '@/lib/utils'
+import InputField from '../atomic/input/InputField'
+import MagnifyingGlass from '@/icons/magnifying-glass.svg'
+import { set } from 'react-ga'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -48,12 +51,31 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const [showBenefitDetailsModal, setShowBenefitDetailsModal] = useState<string | undefined>(undefined)
     const [toBeDeletedMemberBenefitId, setToBeDeletedMemberBenefitId] = useState<string>('')
     const [tobeEditedMemberBenefit, setTobeEditedMemberBenefit] = useState<MemberBenefit | undefined>(undefined)
+    const [search, setSearch] = useState('')
+    const [searched, setSearched] = useState(false)
     const columnHelper = createColumnHelper<MemberBenefit>()
     const [filter, setFilter] = useState<Filter>({
         category: categories.map(category => ({ label: category.name, selected: false })),
         imported: [{ label: 'Imported', selected: false, }, { label: 'Not Imported', selected: false, }],
         partnership_types: _.keys(PartnershipType).map(key => ({ label: key, selected: false })),
     })
+
+    const debouncedValue = useDebounce(search)
+    useEffect(() => {
+        (async () => {
+            if (!searched) {
+                if (!debouncedValue && debouncedValue === '') {
+                    setMemberBenefits(defaultMemberBenefits)
+                    return
+                }
+                const filteredBenefitIds = await searchBenefitsSemantically(debouncedValue)
+                if (filteredBenefitIds.length > 0) {
+                    setMemberBenefits(memberBenefits.filter(f => filteredBenefitIds.includes(f.id)))
+                }
+                setSearched(true)
+            }
+        })()
+    }, [debouncedValue])
     const onFilterChange = (filter: Filter) => {
         let filteredBenefits = defaultMemberBenefits
         if (filter.category) {
@@ -307,14 +329,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
 
     return (
         <div className='h-full min-h-[100vh]  px-5 py-4   lg:px-12'>
-            {/* <div className='flex w-full justify-end my-4 '>
-                <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
-                    id='search' value={search} onChange={(e) => {
-                        setSearched(false)
-                        setSearch(e.target.value)
-                    }} className='border-none outline-none hover:border-none focus:border-none
-                             !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
-            </div> */}
+
             <div className=' flex flex-row justify-between items-start mt-8 mb-6 gap-4'>
 
                 {/* <Pagination
@@ -334,6 +349,15 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
 /> */}
                 <Button label='Create Deal' icon={<PlusIcon />} className='w-fit' variant='primary' onClick={() => setMemberBenefitModal(true)} />
                 <TableFilter filter={filter} onFilterChange={onFilterChange} />
+
+            </div>
+            <div className='flex w-full justify-end  '>
+                <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
+                    id='search' value={search} onChange={(e) => {
+                        setSearched(false)
+                        setSearch(e.target.value)
+                    }} className='border-none outline-none hover:border-none focus:border-none
+                             !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
             </div>
             <div className='flex flex-col relative'>
 

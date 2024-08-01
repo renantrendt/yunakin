@@ -20,6 +20,7 @@ interface FormValues {
 
 const tabs = [
     {
+        name: 'Account',
         component: <div><AccountSettings /> </div>
     },
 ]
