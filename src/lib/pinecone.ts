@@ -17,11 +17,13 @@ pc.listIndexes()
         if (!indexes.indexes) {
             return false;
         }
+        let exists = false;
         indexes.indexes.forEach((index) => {
             if (index.name === APP_CONSTANTS.PINECONE_INDEX) {
-                return true;
+                exists = true;
             }
         });
+        return exists;
     })
     .then((exists) => {
         if (!exists) {

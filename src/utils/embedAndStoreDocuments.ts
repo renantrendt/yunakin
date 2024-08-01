@@ -35,12 +35,12 @@ export async function embedAndUpdateDocument(documentId: string, content: string
 
         console.log(embedding);
         // Store the embedding in Pinecone
-        await pc.index(APP_CONSTANTS.PINECONE_INDEX).update({
+        await pc.index(APP_CONSTANTS.PINECONE_INDEX).upsert([{
             id: documentId,
             values: embedding,
             metadata,
-        });
-        console.log('Document embedded and stored successfully');
+        }]);
+        console.log('Document embedded and updated successfully');
     } catch (error) {
         console.error('Error embedding and storing document:', error);
     }
@@ -55,11 +55,12 @@ export async function semanticSearch(query: string) {
         const embedding = embeddingResponse.data[0].embedding;
         const records = await pc.index(APP_CONSTANTS.PINECONE_INDEX).query({
             vector: embedding,
-            topK: 3,
+            topK: 5,
             includeValues: true,
             includeMetadata: true
         })
         const matchedIds = records.matches.map(d => d.id);
+        console.log(matchedIds);
         return matchedIds;
     } catch (error) {
         console.error('Error searching for documents:', error);

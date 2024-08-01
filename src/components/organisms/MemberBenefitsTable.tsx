@@ -72,8 +72,6 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                 if (filteredBenefitIds.length > 0) {
                     setMemberBenefits(memberBenefits.filter(f => filteredBenefitIds.includes(f.id)))
                 }
-                // setPagination({ pageIndex: 0, pageSize: 10 })
-                // setTools(filteredTools)
                 setSearched(true)
             }
         })()
