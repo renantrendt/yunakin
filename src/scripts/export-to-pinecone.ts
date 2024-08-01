@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { embedAndStoreDocument } from "@/utils/embedAndStoreDocuments";
+import { createEmbeddingAndStore } from "@/utils/embedAndStoreDocuments";
+import { MemberBenefit } from "@prisma/client";
 async function main() {
     const memberBenefits = await prisma.memberBenefit.findMany({
 
@@ -7,11 +8,11 @@ async function main() {
 
 
 
-    memberBenefits.forEach(async (memberBenefit: any) => {
-        console.log(`Embedding and storing tool: ${memberBenefit.name}`);
+    memberBenefits.forEach(async (memberBenefit: MemberBenefit) => {
+        console.log(`Embedding and storing benefit: ${memberBenefit.title}`);
         try {
             // Store the embedding in Pinecone
-            await embedAndStoreDocument(memberBenefit.id, memberBenefit.description, {
+            await createEmbeddingAndStore(memberBenefit.id, memberBenefit.description as string, {
                 ...memberBenefit
             });
             await new Promise(resolve => setTimeout(resolve, 1000));

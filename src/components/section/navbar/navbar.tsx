@@ -86,7 +86,7 @@ export default function Navbar() {
                                 {/* <div className='flex flex-row justify-start gap-3'>
                                     <ThemeSwitcher />
                                 </div> */}
-                                <li>
+                                <li className='flex flex-col gap-3 justify-start items-start'>
                                     <Button
                                         variant='secondary'
                                         className='  !min-w-[100px] '

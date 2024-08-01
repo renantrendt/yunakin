@@ -5,7 +5,8 @@
   "scripts": {
     "prod": "env-cmd -f .env  next dev  -p 3002",
     "dev": "env-cmd -f .env.development  next dev -p 3002",
-    "export-pinecone": "npx env-cmd -f .env.development npx tsx  ./src/scripts/export-to-picone.ts ",
+    "export-pinecone-dev": "npx env-cmd -f .env.development npx tsx  ./src/scripts/export-to-pinecone.ts ",
+    "export-pinecone-prod": "npx env-cmd -f .env npx tsx  ./src/scripts/export-to-pinecone.ts ",
     "prisma-migrate-dev": " env-cmd -f .env.development npx prisma migrate dev ",
     "prisma-migrate-prod": " env-cmd -f .env npx prisma migrate dev ",
     "dev-email": "email dev --dir ./src/components/template/email --port 3001",
