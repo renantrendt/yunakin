@@ -2,7 +2,7 @@ import { APP_CONSTANTS } from "@/config/app-config";
 import openai from "@/lib/openai";
 import pc from "@/lib/pinecone";
 
-export async function embedAndStoreDocument(documentId: string, content: string, metadata: Record<string, any>) {
+export async function createEmbeddingAndStore(documentId: string, content: string, metadata: Record<string, any>) {
     try {
         // Generate embedding using OpenAI
         const embeddingResponse = await openai.embeddings.create({

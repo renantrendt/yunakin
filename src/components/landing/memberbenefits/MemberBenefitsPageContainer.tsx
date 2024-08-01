@@ -12,8 +12,12 @@ import { PlusIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import Script from 'next/script'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import siteUrls from '@/config/site-config'
+import InputField from '@/components/atomic/input/InputField'
+import useDebounce from '@/hooks/useDebounce'
+import { searchBenefitsSemantically } from '@/app/actions'
+import MagnifyingGlass from '@/icons/magnifying-glass.svg'
 
 interface MemberBenefitsPageContainerProps {
     config: MemberBenefitPageConfig
@@ -28,7 +32,26 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
     const [selectedBenefits, setSelectedBenefits] = useState<MemberBenefit[]>(benefits)
     const [selectedDisplayType, setSelectedDisplayType] = useState<string>(selectMemberBenefitFilter.NEW)
     const image = config.imageURL || "/images/logo.svg"
+    const [search, setSearch] = useState('')
+    const [searched, setSearched] = useState(false)
+    const debouncedValue = useDebounce(search)
 
+
+    useEffect(() => {
+        (async () => {
+            if (!searched) {
+                if (!debouncedValue && debouncedValue === '') {
+                    setSelectedBenefits(benefits)
+                    return
+                }
+                const filteredBenefitIds = await searchBenefitsSemantically(debouncedValue)
+                if (filteredBenefitIds.length > 0) {
+                    setSelectedBenefits(selectedBenefits.filter(f => filteredBenefitIds.includes(f.id)))
+                }
+                setSearched(true)
+            }
+        })()
+    }, [debouncedValue])
 
     return (
         <ContentSection
@@ -99,6 +122,19 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                                 )
                             })}
                         </div>
+                    </div>
+                    <div className='flex w-full justify-end mx-auto max-w-[1440px] md:px-28  '>
+                        <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
+                            id='search' value={search} onChange={(e) => {
+                                setSearched(false)
+                                setSearch(e.target.value)
+                            }} className='border-none outline-none hover:border-none focus:border-none
+                             !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] '
+                            style={{
+                                backgroundColor: config.cardBackgroundColor as string,
+                                color: config.textColor as string,
+                                borderColor: config.textColor as string,
+                            }} />
                     </div>
                     <div className=' w-full '>
                         {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {

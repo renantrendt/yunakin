@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache"
 import { notFound, redirect } from "next/navigation"
 import _ from 'lodash'
 import { cookies } from "next/headers"
-import { embedAndStoreDocument, embedAndUpdateDocument, semanticSearch } from "@/utils/embedAndStoreDocuments"
+import { createEmbeddingAndStore, embedAndUpdateDocument, semanticSearch } from "@/utils/embedAndStoreDocuments"
 
 export async function checkUserExists(email: string) {
     const user = await prisma.user.findFirst({
@@ -124,7 +124,7 @@ export async function createMemberBenefit(memberBenefit: MemberBenefit) {
         }
     })
     try {
-        await embedAndStoreDocument(newMemberBenefit.id, newMemberBenefit.description as string, {
+        await createEmbeddingAndStore(newMemberBenefit.id, newMemberBenefit.description as string, {
             title: newMemberBenefit.title,
             description: newMemberBenefit.description,
             domain: newMemberBenefit.domain,

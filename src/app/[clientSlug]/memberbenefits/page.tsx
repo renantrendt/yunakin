@@ -8,6 +8,7 @@ import { createTranslation, getLocale } from '@/lib/i18n/server';
 import getSeoMetadata from '@/lib/seo/metadata';
 import { Metadata } from 'next';
 import platformConfig from '@/config/app-config';
+
 export async function generateMetadata(props: any): Promise<Metadata> {
 
     const slug = props.params.clientSlug;
