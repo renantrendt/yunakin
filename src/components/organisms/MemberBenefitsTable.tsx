@@ -51,15 +51,15 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const [showBenefitDetailsModal, setShowBenefitDetailsModal] = useState<string | undefined>(undefined)
     const [toBeDeletedMemberBenefitId, setToBeDeletedMemberBenefitId] = useState<string>('')
     const [tobeEditedMemberBenefit, setTobeEditedMemberBenefit] = useState<MemberBenefit | undefined>(undefined)
-    const [search, setSearch] = useState('')
-    const [searched, setSearched] = useState(false)
+
     const columnHelper = createColumnHelper<MemberBenefit>()
     const [filter, setFilter] = useState<Filter>({
         category: categories.map(category => ({ label: category.name, selected: false })),
         imported: [{ label: 'Imported', selected: false, }, { label: 'Not Imported', selected: false, }],
         partnership_types: _.keys(PartnershipType).map(key => ({ label: key, selected: false })),
     })
-
+    const [search, setSearch] = useState('')
+    const [searched, setSearched] = useState(false)
     const debouncedValue = useDebounce(search)
     useEffect(() => {
         (async () => {

@@ -103,7 +103,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                             )}
                         </div>
 
-                        <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'
+                        {/* <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'
                             style={{
                                 backgroundColor: config.cardBackgroundColor as string
                             }}
@@ -121,7 +121,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                                     </div>
                                 )
                             })}
-                        </div>
+                        </div> */}
                     </div>
                     <div className='flex w-full justify-end mx-auto max-w-[1440px] md:px-28  '>
                         <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}

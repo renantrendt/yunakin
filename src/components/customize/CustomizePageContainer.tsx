@@ -23,7 +23,7 @@ import siteUrls from '@/config/site-config'
 import '/node_modules/react-grid-layout/css/styles.css'
 import '/node_modules/react-resizable/css/styles.css'
 import './override.css'
-import GridLayout from "react-grid-layout";
+import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 interface CustomizePageContainerProps {
     benefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -246,7 +246,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                     )}
                                 </div>
 
-                                <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'
+                                {/* <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'
                                     style={{
                                         backgroundColor: config.cardBackgroundColor as string
                                     }}
@@ -264,7 +264,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                             </div>
                                         )
                                     })}
-                                </div>
+                                </div> */}
                             </div>
                             <div>
                                 {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
@@ -280,11 +280,12 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                 })}
 
                                 {[selectMemberBenefitFilter.NEW].includes(selectedDisplayType) && (
-                                    <GridLayout
-                                        className="layout mt-8  max-w-[1440px] px-4 md:px-12 mx-auto"
-                                        cols={3}
+                                    <ResponsiveGridLayout
+                                        className=" mt-8  max-w-[1440px]  mx-auto ga[=] lg:px-8"
+                                        breakpoints={{ lg: 1024, md: 768, sm: 640, xs: 480, xxs: 0 }}
+                                        cols={{ lg: 3, md: 1, sm: 1, xs: 1, xxs: 1 }}
                                         rowHeight={380}
-                                        width={1200}
+                                        width={1440}
                                         isDroppable={true}
                                         isResizable={false}
                                         onDragStop={async (layout: any) => {
@@ -310,12 +311,12 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                                                     <MemberBenefitCard
                                                         isEditing={true}
                                                         config={config}
-                                                        className='w-full min-w-32 max-w-full md:min-w-32 md:max-w-full'
+                                                        className='w-[340px]   lg:min-w-32 md:max-w-full max-w-full md:min-w-32 md:!w-full'
 
                                                         key={index} benefit={benefit} />
                                                 </div>
                                             ))}
-                                    </GridLayout>
+                                    </ResponsiveGridLayout>
                                 )}
 
                             </div>
