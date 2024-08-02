@@ -70,7 +70,8 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                 }
                 const filteredBenefitIds = await searchBenefitsSemantically(debouncedValue)
                 if (filteredBenefitIds.length > 0) {
-                    setMemberBenefits(memberBenefits.filter(f => filteredBenefitIds.includes(f.id)))
+                    console.log(defaultMemberBenefits)
+                    setMemberBenefits(defaultMemberBenefits.filter(f => filteredBenefitIds.includes(f.id)))
                 }
                 setSearched(true)
             }
@@ -358,6 +359,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                         setSearch(e.target.value)
                     }} className='border-none outline-none hover:border-none focus:border-none
                              !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
+
             </div>
             <div className='flex flex-col relative pb-28 lg:pb-0'>
 

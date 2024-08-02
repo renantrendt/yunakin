@@ -5,6 +5,9 @@ import { DealType, MemberBenefitVisibility } from '@/lib/types';
 import { auth } from '@/auth';
 const MemberbenefitPage = async ({ params }: { params: { clientSlug: string } }) => {
     const benefits = await prisma.memberBenefit.findMany({
+        orderBy: {
+            createdAt: 'asc'
+        },
         where: {
             AND: [
                 {

@@ -106,11 +106,11 @@ const ImageUploader = ({ onImageUpload, image, useCrop = true, comment }: ImageU
 
                     <input {...getInputProps()} type="file" accept="image/*" className="hidden z-10 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none" />
 
-                    <div className="flex flex-col items-center justify-center ">
+                    {!image && <div className="flex flex-col items-center justify-center ">
                         <div className="z-20 text-black bg-white dark:text-white dark:bg-black rounded-full p-1">
                             <DocumentIcon />
                         </div>
-                    </div>
+                    </div>}
 
                 </div >
                 {comment && <p className="text-[#5E5E5E] text-xs font-inter max-w-[230px] text-left">{comment}</p>}
