@@ -36,6 +36,7 @@ import { uploadImage } from '@/lib/utils'
 import InputField from '../atomic/input/InputField'
 import MagnifyingGlass from '@/icons/magnifying-glass.svg'
 import { set } from 'react-ga'
+import Loading from '@/app/(navigable)/loading'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -61,6 +62,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const [search, setSearch] = useState('')
     const [searched, setSearched] = useState(false)
     const debouncedValue = useDebounce(search)
+    const [searchLoading, setSearchLoading] = useState(false)
     useEffect(() => {
         (async () => {
             if (!searched) {
@@ -68,12 +70,15 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                     setMemberBenefits(defaultMemberBenefits)
                     return
                 }
+
+                setSearchLoading(true)
                 const filteredBenefitIds = await searchBenefitsSemantically(debouncedValue)
                 if (filteredBenefitIds.length > 0) {
                     console.log(defaultMemberBenefits)
                     setMemberBenefits(defaultMemberBenefits.filter(f => filteredBenefitIds.includes(f.id)))
                 }
                 setSearched(true)
+                setSearchLoading(false)
             }
         })()
     }, [debouncedValue])
@@ -353,12 +358,12 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
 
             </div>
             <div className='flex w-full justify-end  '>
-                <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
+                <InputField placeholder='Search' name='search' leadingIcon={searchLoading ? <LoadingIcon size='xs' /> : <MagnifyingGlass />}
                     id='search' value={search} onChange={(e) => {
                         setSearched(false)
                         setSearch(e.target.value)
                     }} className='border-none outline-none hover:border-none focus:border-none
-                             !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
+                             !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[13px] !mr-2 ' />
 
             </div>
             <div className='flex flex-col relative pb-28 lg:pb-0'>

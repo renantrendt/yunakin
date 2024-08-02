@@ -24,7 +24,7 @@ function LoadingIcon({ size = 'lg' }: LoadingIconProps): JSX.Element {
             sizeStyle = 'w-8'
     }
     return (
-        <span className="loading loading-spinner text-primar-500 bg-primary-500 loading-lg"></span>
+        <span className="loading loading-spinner text-primary-500 bg-primary-500 loading-lg"></span>
     )
 }
 
