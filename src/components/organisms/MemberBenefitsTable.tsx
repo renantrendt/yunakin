@@ -328,7 +328,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
 
 
     return (
-        <div className='h-full min-h-[100vh]  px-5 py-4 pb-20 lg:pb-0  lg:px-12'>
+        <div className='h-full min-h-[100vh]  px-5 py-4 pb-20 lg:pb-4  lg:px-12'>
 
             <div className=' flex flex-row justify-between items-start mt-8 mb-6 gap-4'>
 
@@ -359,7 +359,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                     }} className='border-none outline-none hover:border-none focus:border-none
                              !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] ' />
             </div>
-            <div className='flex flex-col relative'>
+            <div className='flex flex-col relative pb-28 lg:pb-0'>
 
                 <Table>
                     <TableHead>
