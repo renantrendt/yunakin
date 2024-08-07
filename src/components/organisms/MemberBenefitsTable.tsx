@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Button from '@/components/atomic/button/Button'
 import Table from '@/components/organisms/table/Table'
 import TableBody from '@/components/organisms/table/TableBody'
@@ -35,8 +35,6 @@ import Typography from '../atomic/typography/Typography'
 import { uploadImage } from '@/lib/utils'
 import InputField from '../atomic/input/InputField'
 import MagnifyingGlass from '@/icons/magnifying-glass.svg'
-import { set } from 'react-ga'
-import Loading from '@/app/(navigable)/loading'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
@@ -65,23 +63,24 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const [searchLoading, setSearchLoading] = useState(false)
     useEffect(() => {
         (async () => {
-            if (!searched) {
-                if (!debouncedValue && debouncedValue === '') {
-                    setMemberBenefits(defaultMemberBenefits)
-                    return
-                }
-
-                setSearchLoading(true)
-                const filteredBenefitIds = await searchBenefitsSemantically(debouncedValue)
-                if (filteredBenefitIds.length > 0) {
-                    console.log(defaultMemberBenefits)
-                    setMemberBenefits(defaultMemberBenefits.filter(f => filteredBenefitIds.includes(f.id)))
-                }
-                setSearched(true)
-                setSearchLoading(false)
+            if (!debouncedValue) {
+                setMemberBenefits(defaultMemberBenefits)
             }
         })()
     }, [debouncedValue])
+    const handleSearch = useCallback(async () => {
+
+        setSearchLoading(true)
+        const filteredBenefitIds = await searchBenefitsSemantically(debouncedValue)
+        if (filteredBenefitIds.length > 0) {
+            console.log(defaultMemberBenefits)
+            setMemberBenefits(defaultMemberBenefits.filter(f => filteredBenefitIds.includes(f.id)))
+        } else {
+            setMemberBenefits([])
+        }
+        setSearched(true)
+        setSearchLoading(false)
+    }, [setSearchLoading, searched, search])
     const onFilterChange = (filter: Filter) => {
         let filteredBenefits = defaultMemberBenefits
         if (filter.category) {
@@ -357,13 +356,24 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                 <TableFilter filter={filter} onFilterChange={onFilterChange} />
 
             </div>
-            <div className='flex w-full justify-end  '>
+            <div className='flex w-full justify-end relative  '>
                 <InputField placeholder='Search' name='search' leadingIcon={searchLoading ? <LoadingIcon size='xs' /> : <MagnifyingGlass />}
                     id='search' value={search} onChange={(e) => {
                         setSearched(false)
                         setSearch(e.target.value)
                     }} className='border-none outline-none hover:border-none focus:border-none
-                             !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[13px] !mr-2 ' />
+                             !px-8 !shadow-none !mb-2'
+                    customLeadingIconClassName='!left-[8px] !top-[13px] !mr-2 ' />
+
+                <Button
+                    className=' absolute right-3 top-1'
+                    size={"md"}
+                    variant={"primary"}
+                    onClick={() => {
+                        handleSearch();
+                    }}
+                    label='Search'
+                />
 
             </div>
             <div className='flex flex-col relative pb-28 lg:pb-0'>

@@ -17,7 +17,7 @@ export default function Navbar() {
     const { t } = useTranslation('landing')
     const pathName = usePathname()
     const router = useRouter()
-    const [showMenu, setShowMenu] = React.useState(false)
+    const [showMenu, setShowMenu] = React.useState(sessionStorage.getItem('showMenu') ? JSON.parse(sessionStorage.getItem('showMenu') as string) : false)
     const [border, setBorder] = React.useState(false)
     const navRef = React.useRef<HTMLDivElement>(null)
     const changeNavBg = () => {
@@ -32,6 +32,7 @@ export default function Navbar() {
         document.addEventListener('click', (e) => {
             if (e.target instanceof HTMLElement && !e.target.closest('.dropdown')) {
                 setShowMenu(false)
+                sessionStorage.removeItem('showMenu')
             }
         });
         window.addEventListener('scroll', changeNavBg);
@@ -69,7 +70,10 @@ export default function Navbar() {
                         <div className="dropdown flex justify-end w-full lg:hidden">
 
                             <div className='text-black dark:text-white font-black'>
-                                <IconButton icon={<HamburgerIcon />} onClick={() => { setShowMenu(!showMenu) }} className='w-8 h-8' />
+                                <IconButton icon={<HamburgerIcon />} onClick={() => {
+                                    setShowMenu(!showMenu)
+                                    sessionStorage.setItem('showMenu', JSON.stringify(!showMenu))
+                                }} className='w-8 h-8' />
                             </div>
                             <ul tabIndex={0} className={cn(showMenu ? " absolute flex" : "hidden", "  mt-8 z-[1] p-8 shadow bg-base-100 dark:bg-card-dark dark:text-profile-modal-text-dark rounded-box w-72  flex-col gap-4")}>
                                 {_.keys(siteUrls.navbar).map((key: string) => {

@@ -55,12 +55,19 @@ export async function semanticSearch(query: string) {
         const embedding = embeddingResponse.data[0].embedding;
         const records = await pc.index(APP_CONSTANTS.PINECONE_INDEX).query({
             vector: embedding,
-            topK: 5,
-            includeValues: true,
+            topK: 10,
+
             includeMetadata: true
         })
-        const matchedIds = records.matches.map(d => d.id);
-        console.log(matchedIds);
+
+        const filteredRecords = records.matches
+        console.log('filteredRecords')
+        console.log(filteredRecords)
+        const matchedIds = filteredRecords.map(d => {
+            return d.id;
+        });
+
+        console.log(matchedIds)
         return matchedIds;
     } catch (error) {
         console.error('Error searching for documents:', error);
