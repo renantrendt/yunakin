@@ -675,6 +675,7 @@ export async function fetchAnalyticsData(values?: { from: Date, to: Date }) {
             count: number
         }[],
     }
+    console.log(partnerChartStats)
     const analytics: AnalyticsResponse = {
         cardStats,
         chartStats: {

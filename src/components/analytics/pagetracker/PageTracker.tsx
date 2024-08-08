@@ -23,9 +23,11 @@ const PageTracker = ({ config, otherBenefits }: PageTrackerProps) => {
                 });
             } catch (error) {
                 // console.error(error)
+                console.error('error', error)
             }
             try {
                 const otherPageConfigIds = [...new Set(otherBenefits.map(benefit => benefit.memberBenefit.pageConfigId).filter(id => !!id))]
+                console.log(otherBenefits)
                 console.log(otherPageConfigIds)
                 await upsertPartnerPageView({
                     memberBenefitPageConfigId: config.id,

@@ -82,7 +82,11 @@ export async function POST(req: Request): Promise<NextResponse<unknown>> {
       }
 
       return user;
-    });
+    },
+      {
+        maxWait: 5000, // 5 seconds max wait to connect to prisma
+        timeout: 20000, // 20 seconds
+      });
     // update memberpage config
 
     await sendVerificationEmail({

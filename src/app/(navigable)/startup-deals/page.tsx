@@ -111,6 +111,7 @@ const MemberBenefitsPage = async () => {
         <MemberBenefitsTable
             memberBenefits={importedBenefits}
             categories={categories}
+            config={config}
         />
     )
 }

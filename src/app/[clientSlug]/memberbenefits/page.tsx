@@ -142,7 +142,7 @@ const MemberbenefitPage = async ({ params }: { params: { clientSlug: string }, s
     })
 
 
-
+    console.log('otherBenefits', otherBenefits)
     return (
         <MemberBenefitsPageContainer
             benefits={orderBenefits}

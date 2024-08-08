@@ -15,8 +15,6 @@ import useDebounce from '@/hooks/useDebounce'
 import { Category, MemberBenefit, MemberBenefitPageConfig } from '@prisma/client'
 import { createMemberBenefit, deleteMemberBenefit, deleteOtherMemberBenefit, importBenefit, searchBenefitsSemantically, updateMemberBenefit } from '@/app/actions'
 import AddMemberBenefitModal from '../molecules/add-memberbenefit-modal'
-import { getDownloadUrl, uploadFile } from '@/lib/storage/storage'
-import platformConfig from '@/config/app-config'
 
 import { useSearchParams } from 'next/navigation'
 import { Filter, MemberBenefitWithImport, PartnershipType } from '@/lib/types'
@@ -38,9 +36,10 @@ import MagnifyingGlass from '@/icons/magnifying-glass.svg'
 interface MemberBenefitsTableProps {
     memberBenefits: MemberBenefitWithImport[]
     categories: Category[]
+    config: MemberBenefitPageConfig
 }
 
-const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories }: MemberBenefitsTableProps) => {
+const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories, config }: MemberBenefitsTableProps) => {
     const searchParams = useSearchParams()
     const session = useSession()
     const [loading, setLoading] = useState(false)
@@ -61,6 +60,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
     const [searched, setSearched] = useState(false)
     const debouncedValue = useDebounce(search)
     const [searchLoading, setSearchLoading] = useState(false)
+
     useEffect(() => {
         (async () => {
             if (!debouncedValue) {
@@ -476,6 +476,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                                 offer: data.offer,
                                 visibility: data.visibility,
                                 dealType: data.deal_type,
+                                pageConfigId: config.id,
                                 partnershipTypes: data.partnership_types.join(',')
                             } as MemberBenefitWithImport)
                             if (data.imageURL && data.imageURL !== updatedMemberBenefit.imageURL) {
@@ -488,6 +489,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                             setTobeEditedMemberBenefit(undefined)
                             customToast.success('Deal updated successfully')
                         } catch (error) {
+                            console.log(error)
                             customToast.error('Failed to update deal')
                         } finally {
                             setLoading(false)
@@ -514,6 +516,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                                 visibility: data.visibility,
                                 dealType: data.deal_type,
                                 partnershipTypes: data.partnership_types.join(','),
+                                pageConfigId: config.id
                             } as MemberBenefitWithImport)
                             if (data.imageURL) {
                                 const response = await uploadImage(data, newMemberBenefit)
