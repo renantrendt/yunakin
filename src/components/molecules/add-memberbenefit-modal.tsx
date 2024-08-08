@@ -127,7 +127,7 @@ const AddMemberBenefitModal = ({ onClose, onCreate, categories, editMemberBenefi
                         title: memberBenefit?.title || '',
                         description: memberBenefit?.description || '',
                         imageURL: memberBenefit?.imageURL || '',
-                        categoryId: memberBenefit?.categoryId || '',
+                        // categoryId: memberBenefit?.categoryId || '',
                         code: memberBenefit?.code || '',
                         link: memberBenefit?.link || '',
                         location: memberBenefit?.location || '',

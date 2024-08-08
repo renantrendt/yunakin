@@ -20,7 +20,6 @@ const schema = yup.object().shape({
     location: yup.string().optional().nullable().max(20, 'City must be less than 20 characters'),
     link: yup.string().optional().nullable(),
     description: yup.string().max(150, 'Description must be less than 150 characters').required(),
-    categoryId: yup.string().required(),
     imageType: yup.string().optional().nullable()
 })
 interface FormValues extends yup.Asserts<typeof schema> { }
@@ -45,7 +44,6 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                 location: data.location,
                 link: data.link,
                 description: data.description,
-                categoryId: data.categoryId,
                 imageType: data.imageType
             },
         }
@@ -123,7 +121,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                             />
                         )}
                     />
-                    <Controller
+                    {/* <Controller
                         control={control}
                         name="categoryId"
                         render={({ field: { onChange, value } }) => (
@@ -140,7 +138,7 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                             </div>
 
                         )}
-                    />
+                    /> */}
                     <Controller
                         control={control}
                         name="code"

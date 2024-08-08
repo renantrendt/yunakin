@@ -465,7 +465,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
                             setLoading(true)
                             const updatedMemberBenefit = await updateMemberBenefit({
                                 id: data.id,
-                                categoryId: data.categoryId,
+                                categoryId: categories[0].id,
                                 code: data.code,
                                 domain: data.domain,
                                 location: data.location,
@@ -503,7 +503,7 @@ const MemberBenefitsTable = ({ memberBenefits: defaultMemberBenefits, categories
 
 
                             const newMemberBenefit = await createMemberBenefit({
-                                categoryId: data.categoryId,
+                                categoryId: categories[0].id,
                                 code: data.code,
                                 domain: data.domain,
                                 location: data.location,
