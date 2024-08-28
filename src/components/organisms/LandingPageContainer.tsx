@@ -13,7 +13,7 @@ const LandingPageContainer = () => {
         <>
             <Hero />
             <UsedBy />
-            <Cta />
+            {/*<Cta />*/}
             <Acquisition />
             <Features />
             {/* <Testimonial />

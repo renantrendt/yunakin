@@ -1,9 +1,9 @@
 {
     "heroSection": {
-        "title": "Scale Deals, Not Headcount",
-        "description": "A free startup dealbook that shares real-time data with partners and sponsors to scale revenue, customer acquisition, and retention.",
+        "title": "Manage Partnerships at Scale",
+        "description": "Track and benchmark their performance in an unified view.",
         "usedByCopy": "Used by <b>100+</b> developers",
-        "cta": "Start Now Free",
+        "cta": "Join Free",
         "watchVideo": "Join Crash Course",
         "image": "/images/hero-image.jpeg",
         "usedBy": [
@@ -24,7 +24,7 @@
                 "avatar": "/images/used-by/fourth.jpeg"
             }
         ],
-        "locked": "No login required."
+        "locked": "Try now, no login required."
     },
     "navbar": {
         "pricing": "Pricing",
@@ -40,7 +40,7 @@
     },
     "metadata": {
         "title": "Youakin",
-        "description": "Scale Deals, Not Headcount. A free dealbook that shares real-time data with partners and sponsors to scale revenue, customer acquisition, and retention."
+        "description": "Manage partnerships at scale. Find new partners, track and benchmark their performance."
     },
     "usedBy": {
         "title": "Used By"
@@ -49,8 +49,8 @@
         "clients": "Customers",
         "mycompany": "My company",
         "othercompany": "Partners",
-        "title": "Turn Partners into Advertisers and Sponsors",
-        "description": "Publish deals in partner’s dealbooks. Pay to get featured and sponsor the top performers.",
+        "title": "",
+        "description": "",
         "reasons": [
             {
                 "metric": "40%",
@@ -68,22 +68,22 @@
         "compliance": "SOC2 and GDPR by design."
     },
     "acquisitionSection": {
-        "title": "Allow Customers to Add Deals to Your Dealbook",
-        "description": "Leverage customer success by connecting their deals."
+        "title": "Pay Per Click",
+        "description": "Your partners are your best sales person, get paid to feature your selected partners in your dealbook."
     },
     "features": {
         "features": [
             {
                 "title": "One Click Partnerships",
-                "description": "Create custom deals with partners and sponsors or select from the marketplace, all without the hassle of meetings."
+                "description": "Add your customized partnerships. Select partners from the marketplace."
             },
             {
                 "title": "AI Audience Targeting",
-                "description": "Get recommendations on which partner dealbooks to feature your deals and increase customer acquisition with predictable costs."
+                "description": "Get recommendations on the best-performing partners, reduce your acquisition costs, and scale predictably."
             },
             {
                 "title": "Centralized Dealbook",
-                "description": "All your custom partner and sponsor deals in one dealbook. Companies can select your deals to offer to their customers through their dealbook while prioritizing customer privacy."
+                "description": "All your custom deals and partners in one place. Expand your reach while prioritizing data privacy."
             },
             {
                 "title": "Customized Dealbook",
@@ -144,7 +144,7 @@
     },
     "footer": {
         "description": "– use it for free or make recurring donations that support Indigenous-led organizations preserving native culture and the environment.",
-        "footnote": "© %Date% Youakin® 1007 N Orange St. 4th Floor, Wilmington, DE 19801, U.S. +1 (650) 441-6511",
+        "footnote": "© %Date% Youakin® 1007 N Orange St. 4th Floor, Wilmington, DE 19801, U.S. +1 (650) 441-6511 – renan@youakin.com",
         "links": [
             {
                 "title": "Services",
