@@ -12,12 +12,13 @@ import { PlusIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import Script from 'next/script'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import siteUrls from '@/config/site-config'
 import InputField from '@/components/atomic/input/InputField'
 import useDebounce from '@/hooks/useDebounce'
 import { searchBenefitsSemantically } from '@/app/actions'
 import MagnifyingGlass from '@/icons/magnifying-glass.svg'
+import LoadingIcon from '@/icons/LoadingIcon'
 
 interface MemberBenefitsPageContainerProps {
     config: MemberBenefitPageConfig
@@ -35,24 +36,29 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
     const [search, setSearch] = useState('')
     const [searched, setSearched] = useState(false)
     const debouncedValue = useDebounce(search)
+    const [searchLoading, setSearchLoading] = useState(false)
 
 
     useEffect(() => {
         (async () => {
-            if (!searched) {
-                if (!debouncedValue && debouncedValue === '') {
-                    setSelectedBenefits(benefits)
-                    return
-                }
-                const filteredBenefitIds = await searchBenefitsSemantically(debouncedValue)
-                if (filteredBenefitIds.length > 0) {
-                    setSelectedBenefits(selectedBenefits.filter(f => filteredBenefitIds.includes(f.id)))
-                }
-                setSearched(true)
+            if (!debouncedValue) {
+                setSelectedBenefits(benefits)
             }
         })()
     }, [debouncedValue])
+    const handleSearch = useCallback(async () => {
 
+        setSearchLoading(true)
+        const filteredBenefitIds = await searchBenefitsSemantically(debouncedValue)
+        if (filteredBenefitIds.length > 0) {
+            console.log(benefits)
+            setSelectedBenefits(benefits.filter(f => filteredBenefitIds.includes(f.id)))
+        } else {
+            setSelectedBenefits([])
+        }
+        setSearched(true)
+        setSearchLoading(false)
+    }, [setSearchLoading, searched, search])
     return (
         <ContentSection
             className='max-w-full md:p-0 !p-0 min-h-[100vh] relative pb-40   !py-2 !md:py-6'
@@ -123,18 +129,24 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                             })}
                         </div> */}
                     </div>
-                    <div className='flex w-full justify-end mx-auto max-w-[1440px] md:px-28  '>
-                        <InputField placeholder='Search' name='search' leadingIcon={<MagnifyingGlass />}
+                    <div className='flex w-full justify-end mx-auto relative max-w-[1440px] px-4 md:px-28  '>
+                        <InputField placeholder='Search' name='search' leadingIcon={searchLoading ? <LoadingIcon size='xs' /> : <MagnifyingGlass />}
                             id='search' value={search} onChange={(e) => {
                                 setSearched(false)
                                 setSearch(e.target.value)
                             }} className='border-none outline-none hover:border-none focus:border-none
-                             !px-8 !shadow-none !mb-2' customLeadingIconClassName='!left-[8px] !top-[14px] '
-                            style={{
-                                backgroundColor: config.cardBackgroundColor as string,
-                                color: config.textColor as string,
-                                borderColor: config.textColor as string,
-                            }} />
+                             !px-8 !shadow-none !mb-2'
+                            customLeadingIconClassName='!left-[8px] !top-[13px] !mr-2 ' />
+
+                        <Button
+                            className=' absolute right-6 md:right-[120px] top-1'
+                            size={"md"}
+                            variant={"primary"}
+                            onClick={() => {
+                                handleSearch();
+                            }}
+                            label='Search'
+                        />
                     </div>
                     <div className=' w-full '>
                         {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
