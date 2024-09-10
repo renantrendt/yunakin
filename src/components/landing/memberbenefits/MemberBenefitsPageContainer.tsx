@@ -75,6 +75,21 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                         {!searchParams?.get('embedded') && <div className=" w-full text-left ">
                             <Image unoptimized src={image} alt='logo' width={100} height={100} objectFit="contain" className=" min-w-[100px] max-w-[150px]  h-auto w-fit  z-10 " />
                         </div>}
+                        {config.suggestDeal && (
+                            <Button
+                                style={{
+                                    color: config.textColor as string,
+                                    backgroundColor: config.cardBackgroundColor as string
+                                }}
+                                onClick={() => {
+                                    // to be implemented
+                                    window.open(siteUrls.general.onboarding, "_blank")
+                                }}
+                                icon={<PlusIcon />}
+                                className='text-[#7A7A7A] bg-[#EDEDED] rounded-[38px] px-2 py-2 lg:py-[10px] lg:px-4'
+
+                                label="Suggest a Deal" variant="tertiary" />
+                        )}
                     </div>
 
                     <div className='py-16 lg:py-6' >
@@ -86,49 +101,6 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                     </div>
                 </div>
                 <div className='w-full'>
-                    <div className="flex flex-col md:flex-row gap-4  items-start mb-6 justify-between w-full  text-black md:items-center max-w-[1440px]  mx-auto px-4 md:px-28">
-                        <div className='flex justify-start gap-5'>
-
-                            <h1 className="text-xl lg:text-2xl font-bold" style={{
-                                color: config.textColor as string
-                            }}>Deals</h1>
-                            {config.suggestDeal && (
-                                <Button
-                                    style={{
-                                        color: config.textColor as string,
-                                        backgroundColor: config.cardBackgroundColor as string
-                                    }}
-                                    onClick={() => {
-                                        // to be implemented
-                                        window.open(siteUrls.general.onboarding, "_blank")
-                                    }}
-                                    icon={<PlusIcon />}
-                                    className='text-[#7A7A7A] bg-[#EDEDED] rounded-[38px]'
-
-                                    label="Suggest a Deal" variant="tertiary" />
-                            )}
-                        </div>
-
-                        {/* <div className='tabs bg-[#F0F0F0]  p-1  w-full lg:w-fit flex flex-shrink-0 justify-between lg:justify-center  gap-2 rounded-[10px]'
-                            style={{
-                                backgroundColor: config.cardBackgroundColor as string
-                            }}
-                        >
-
-                            {Object.keys(selectMemberBenefitFilter).map((key: string, index) => {
-                                return (
-                                    <div key={index} className={`px-4  py-2 text-[#5E5E5E] w-full text-center font-satoshiBold font-medium text-sm lg:text-base rounded-lg cursor-pointer ${selectedDisplayType === selectMemberBenefitFilter[key as MemberBenefitFilter] ? 'bg-white' : ''}`} onClick={() => setSelectedDisplayType(selectMemberBenefitFilter[key as MemberBenefitFilter])}
-                                        style={{
-                                            backgroundColor: selectedDisplayType === selectMemberBenefitFilter[key as MemberBenefitFilter] ? config.buttonColor as string : config.cardBackgroundColor as string,
-                                            color: config.textColor as string
-                                        }}
-                                    >
-                                        {selectMemberBenefitFilter[key as MemberBenefitFilter]}
-                                    </div>
-                                )
-                            })}
-                        </div> */}
-                    </div>
                     <div className='flex w-full justify-end mx-auto relative max-w-[1440px] px-4 md:px-28  '>
                         <InputField placeholder='Search' name='search' leadingIcon={searchLoading ? <LoadingIcon size='xs' /> : <MagnifyingGlass />}
                             id='search' value={search} onChange={(e) => {
@@ -145,9 +117,15 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                             onClick={() => {
                                 handleSearch();
                             }}
+                            style={{
+                                backgroundColor: config?.buttonColor as string,
+                                color: config?.textColor as string,
+                            }}
                             label='Search'
                         />
                     </div>
+
+
                     <div className=' w-full '>
                         {selectedDisplayType == selectMemberBenefitFilter.CATEGORY && categories.filter(category => selectedBenefits.filter(benefit => category.id == benefit.categoryId).length > 0).map((category) => {
                             return (

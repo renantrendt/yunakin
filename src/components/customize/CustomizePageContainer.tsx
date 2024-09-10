@@ -189,6 +189,7 @@ const CustomizePageContainer = ({ benefits, categories, memberPageConfig }: Cust
                             setImageType(type)
                         }}
                             image={config.imageURL}
+                            useCrop={false}
                         />
                     </div>
 

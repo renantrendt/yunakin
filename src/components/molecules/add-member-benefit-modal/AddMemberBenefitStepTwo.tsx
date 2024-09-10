@@ -13,7 +13,7 @@ import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 const schema = yup.object().shape({
     title: yup.string().required().max(50, 'Company Name must be less than 50 characters'),
-    code: yup.string().required(),
+    code: yup.string().optional(),
     domain: yup.string().required().max(50, 'Website must be less than 50 characters'),
     imageURL: yup.string().optional().nullable(),
     offer: yup.string().optional().nullable(),

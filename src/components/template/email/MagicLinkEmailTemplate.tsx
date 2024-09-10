@@ -26,7 +26,7 @@ export const MagicLinkEmail = ({
     magicLink,
     organizationName
 }: MagicLinkEmailProps) => {
-    const previewText = `Reset password for  account on ${organizationName}`;
+    const previewText = `Login to ${organizationName}`;
 
     return (
         <Html>
