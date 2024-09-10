@@ -1,4 +1,3 @@
-
 import OpenAI from 'openai';// Initialize OpenAI client
 
 if (!process.env.OPENAI_API_KEY) {

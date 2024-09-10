@@ -1,11 +1,13 @@
 // icon:loading | Ant Design Icons https://ant.design/components/icon/ | Ant Design
+import { cn } from '@/utils/cn'
 import * as React from 'react'
 
 interface LoadingIconProps {
     size?: 'xs' | 'sm' | 'md' | 'lg'
+    className?: string
 }
 
-function LoadingIcon({ size = 'lg' }: LoadingIconProps): JSX.Element {
+function LoadingIcon({ size = 'lg', className }: LoadingIconProps): JSX.Element {
     let sizeStyle = ''
     switch (size) {
         case 'xs':
@@ -24,7 +26,7 @@ function LoadingIcon({ size = 'lg' }: LoadingIconProps): JSX.Element {
             sizeStyle = 'w-8'
     }
     return (
-        <span className="loading loading-spinner text-primary-500 bg-primary-500 loading-lg"></span>
+        <span className={cn("loading loading-spinner text-primary-500 bg-primary-500 loading-lg", className)}></span>
     )
 }
 

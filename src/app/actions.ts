@@ -9,6 +9,7 @@ import { notFound, redirect } from "next/navigation"
 import _ from 'lodash'
 import { cookies } from "next/headers"
 import { createEmbeddingAndStore, embedAndUpdateDocument, semanticSearch } from "@/utils/embedAndStoreDocuments"
+import openai from "@/lib/openai"
 
 export async function checkUserExists(email: string) {
     const user = await prisma.user.findFirst({
@@ -750,4 +751,26 @@ export async function updateMemberBenefitOrder(benefits: MemberBenefitWithImport
 export async function searchBenefitsSemantically(query: string) {
     const result = await semanticSearch(query);
     return result;
+}
+export async function generateDescription(websiteLink: string) {
+    if (!websiteLink) {
+        throw new Error("Please enter website link to generate a description")
+    }
+
+    const response = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+            {
+                role: "system",
+                content: "You are a helpful assistant that extracts information from the website."
+            },
+            {
+                role: "user",
+                content: `Please provide a brief description (max 150 characters) from what is written on this website: ${websiteLink}`
+            }
+        ],
+        max_tokens: 100
+    })
+
+    return response.choices[0].message.content || ""
 }

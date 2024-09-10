@@ -1,16 +1,21 @@
+'use client'
+import { generateDescription } from '@/app/actions'
 import Button from '@/components/atomic/button/Button'
 import Divider from '@/components/atomic/divider/Divider'
 import Dropdown from '@/components/atomic/dropdown/Dropdown'
 import ImageUploader from '@/components/atomic/file-uploader/ImageUploader'
 import InputField from '@/components/atomic/input/InputField'
 import TextArea from '@/components/atomic/textarea/TextArea'
+import customToast from '@/components/atomic/toast/customToast'
 import Typography from '@/components/atomic/typography/Typography'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Category } from '@prisma/client'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
+import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
+
 const schema = yup.object().shape({
     title: yup.string().required().max(50, 'Company Name must be less than 50 characters'),
     code: yup.string().optional(),
@@ -49,10 +54,28 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
         }
     )
     const image = watch('imageURL')
+    const websiteLink = watch('domain')
     const onSubmitForm = (data: FormValues) => {
         onSubmit(data)
     }
-    console.log(errors)
+
+    const generateDescriptionMutation = useMutation({
+        mutationFn: () => generateDescription(websiteLink),
+        onSuccess: (description: string) => {
+            if (description) {
+                setValue('description', description.slice(0, 150), { shouldDirty: true })
+            }
+        },
+        onError: (error: Error) => {
+            console.error("Error generating description:", error)
+            customToast.error("Failed to generate description")
+        }
+    })
+
+    const handleGenerateDescription = () => {
+        generateDescriptionMutation.mutate()
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmitForm)} >
             <div className='flex flex-col gap-2'>
@@ -101,6 +124,26 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                             />
                         )}
                     />
+
+                    <Controller
+                        control={control}
+                        name="domain"
+                        render={({ field: { onChange, value } }) => (
+                            <InputField
+                                label="Website"
+                                type="text"
+                                required
+                                id="domain"
+                                description='Insert the link of the website or from a custom landing page.'
+                                name="domain"
+                                placeholder='Enter Website'
+                                maxLength={50}
+                                onChange={onChange}
+                                value={value}
+                                error={errors.domain?.message}
+                            />
+                        )}
+                    />
                     <Controller
                         control={control}
                         name="description"
@@ -120,6 +163,15 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                                 error={errors.description?.message}
                             />
                         )}
+                    />
+                    <Button
+                        label="Generate Description"
+                        variant="primary"
+                        className='w-full'
+                        type='button'
+                        onClick={handleGenerateDescription}
+                        loading={generateDescriptionMutation.isPending}
+                        disabled={generateDescriptionMutation.isPending || !websiteLink}
                     />
                     {/* <Controller
                         control={control}
@@ -177,25 +229,6 @@ const AddMemberBenefitStepTwo = ({ data, onSubmit, onBack, categories, loading }
                         )}
                     />
 
-                    <Controller
-                        control={control}
-                        name="domain"
-                        render={({ field: { onChange, value } }) => (
-                            <InputField
-                                label="Website"
-                                type="text"
-                                required
-                                id="domain"
-                                description='Insert the link of the website or from a custom landing page.'
-                                name="domain"
-                                placeholder='Enter Website'
-                                maxLength={50}
-                                onChange={onChange}
-                                value={value}
-                                error={errors.domain?.message}
-                            />
-                        )}
-                    />
 
                     <Controller
                         control={control}

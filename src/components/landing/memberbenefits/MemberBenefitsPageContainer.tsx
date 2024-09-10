@@ -102,7 +102,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                 </div>
                 <div className='w-full'>
                     <div className='flex w-full justify-end mx-auto relative max-w-[1440px] px-4 md:px-28  '>
-                        <InputField placeholder='Search' name='search' leadingIcon={searchLoading ? <LoadingIcon size='xs' /> : <MagnifyingGlass />}
+                        <InputField placeholder='' name='search' leadingIcon={searchLoading ? <LoadingIcon size='xs' className='text-black bg-black loading-sm' /> : <MagnifyingGlass />}
                             id='search' value={search} onChange={(e) => {
                                 setSearched(false)
                                 setSearch(e.target.value)
@@ -121,7 +121,7 @@ const MemberBenefitsPageContainer = ({ config, benefits, otherBenefits, categori
                                 backgroundColor: config?.buttonColor as string,
                                 color: config?.textColor as string,
                             }}
-                            label='Search'
+                            label='Search with AI'
                         />
                     </div>
 
